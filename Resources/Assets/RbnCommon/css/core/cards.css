@@ -1,0 +1,309 @@
+/* ==========================================================================
+   RBN CORE: CARDS & SURFACE PANELS (core/cards.css) 🃏
+   %100 Sovereign Token-Driven Card & Stat Engine (Powered by rbn-colors.css)
+   ========================================================================== */
+
+/* 1. Base Card Structure */
+.rbn-card {
+    background: var(--rbn-bg-surface, #ffffff);
+    border: var(--rbn-border-width, 1px) solid var(--rbn-border, #e2e8f0);
+    border-radius: var(--rbn-radius-md, 12px);
+    padding: var(--rbn-space-6, 1.5rem);
+    box-shadow: var(--rbn-shadow-card, 0 1px 3px rgba(0, 0, 0, 0.05));
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+/* 2. Structured Card Sub-Elements */
+.rbn-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: var(--rbn-space-4, 1rem);
+    border-bottom: 1px solid var(--rbn-border-subtle, #f1f5f9);
+    margin-bottom: var(--rbn-space-4, 1rem);
+}
+
+.rbn-card-title {
+    font-family: var(--rbn-font-display, inherit);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--rbn-text-display, #0f172a);
+    margin: 0;
+}
+
+.rbn-card-body {
+    flex: 1 1 auto;
+}
+
+.rbn-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--rbn-space-4, 1rem);
+    border-top: 1px solid var(--rbn-border-subtle, #f1f5f9);
+    margin-top: var(--rbn-space-4, 1rem);
+}
+
+/* 3. Interactive & Hover Elevations */
+.rbn-card-interactive {
+    cursor: pointer;
+}
+
+.rbn-card-interactive:hover {
+    border-color: var(--rbn-border-strong, #cbd5e1);
+    box-shadow: var(--rbn-shadow-hover, 0 10px 25px -5px rgba(0, 0, 0, 0.08));
+    transform: translateY(-3px);
+}
+
+/* 4. Sovereign Stat & Metric Cards (Strict .rbn-stat-* Engine) */
+.rbn-stat-card {
+    background: var(--rbn-bg-surface, #ffffff);
+    border: 1px solid var(--rbn-border, #e2e8f0);
+    border-radius: var(--rbn-radius-lg, 14px);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 1px 3px rgba(16, 24, 40, 0.05);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.rbn-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -4px rgba(15, 23, 42, 0.08);
+    border-color: #cbd5e1;
+}
+
+.rbn-stat-icon {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--rbn-radius-md, 10px);
+    font-size: 1.35rem;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.rbn-stat-card:hover .rbn-stat-icon {
+    transform: scale(1.08);
+}
+
+.rbn-stat-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--rbn-text-muted, #64748b);
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.rbn-stat-value {
+    font-size: 1.65rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--rbn-text-primary, #0f172a);
+    line-height: 1.1;
+    margin: 0;
+}
+
+/* ==========================================================================
+   5. EVRENSEL RBN PALETTE STAT KART RENK VARYANTLARI (rbn-colors.css Entegresi)
+   ========================================================================== */
+
+/* 🔵 Blue / Primary */
+.rbn-stat-primary .rbn-stat-icon,
+.rbn-stat-blue .rbn-stat-icon {
+    background: var(--rbn-blue-50, #eff6ff);
+    color: var(--rbn-blue-600, #2563eb);
+    border: 1px solid var(--rbn-blue-100, #dbeafe);
+}
+
+/* 🏺 Terracotta / Clay */
+.rbn-stat-clay .rbn-stat-icon,
+.rbn-stat-terracotta .rbn-stat-icon {
+    background: var(--rbn-clay-50, #FAF3E7);
+    color: var(--rbn-clay-500, #C56A3C);
+    border: 1px solid var(--rbn-clay-200, #EADCC6);
+}
+
+/* 🌿 Green / Emerald / Success */
+.rbn-stat-success .rbn-stat-icon,
+.rbn-stat-green .rbn-stat-icon,
+.rbn-stat-emerald .rbn-stat-icon {
+    background: var(--rbn-green-50, #ecfdf5);
+    color: var(--rbn-green-500, #10b981);
+    border: 1px solid var(--rbn-green-100, #d1fae5);
+}
+
+/* 👑 Amber / Gold / Warning */
+.rbn-stat-warning .rbn-stat-icon,
+.rbn-stat-amber .rbn-stat-icon,
+.rbn-stat-gold .rbn-stat-icon,
+.rbn-stat-bronze .rbn-stat-icon {
+    background: var(--rbn-amber-50, #fffbeb);
+    color: var(--rbn-amber-500, #f59e0b);
+    border: 1px solid var(--rbn-amber-100, #fef3c7);
+}
+
+/* 🔴 Red / Rose / Danger */
+.rbn-stat-danger .rbn-stat-icon,
+.rbn-stat-red .rbn-stat-icon {
+    background: var(--rbn-red-50, #fef2f2);
+    color: var(--rbn-red-500, #ef4444);
+    border: 1px solid var(--rbn-red-100, #fee2e2);
+}
+
+/* 💜 Indigo / Violet */
+.rbn-stat-indigo .rbn-stat-icon,
+.rbn-stat-violet .rbn-stat-icon {
+    background: var(--rbn-indigo-50, #eef2ff);
+    color: var(--rbn-indigo-500, #6366f1);
+    border: 1px solid var(--rbn-indigo-100, #e0e7ff);
+}
+
+/* 🔮 Purple */
+.rbn-stat-purple .rbn-stat-icon {
+    background: var(--rbn-purple-light, #f3e8ff);
+    color: var(--rbn-purple, #8b5cf6);
+    border: 1px solid var(--rbn-purple-border, #e9d5ff);
+}
+
+/* 🌸 Pink / Fuchsia */
+.rbn-stat-pink .rbn-stat-icon {
+    background: var(--rbn-pink-light, #fce7f3);
+    color: var(--rbn-pink, #db2777);
+    border: 1px solid var(--rbn-pink-border, #fbcfe8);
+}
+.rbn-stat-fuchsia .rbn-stat-icon {
+    background: var(--rbn-fuchsia-light, #fae8ff);
+    color: var(--rbn-fuchsia, #d946ef);
+    border: 1px solid var(--rbn-fuchsia-border, #f5d0fe);
+}
+
+/* 🌊 Cyan / Teal / Sky */
+.rbn-stat-cyan .rbn-stat-icon {
+    background: var(--rbn-cyan-light, #e0f7fa);
+    color: var(--rbn-cyan, #00acc1);
+    border: 1px solid var(--rbn-cyan-border, #b2ebf2);
+}
+.rbn-stat-teal .rbn-stat-icon {
+    background: var(--rbn-teal-light, #ccfbf1);
+    color: var(--rbn-teal, #0d9488);
+    border: 1px solid var(--rbn-teal-border, #99f6e4);
+}
+.rbn-stat-sky .rbn-stat-icon {
+    background: var(--rbn-sky-light, #e0f2fe);
+    color: var(--rbn-sky, #0284c7);
+    border: 1px solid var(--rbn-sky-border, #bae6fd);
+}
+
+/* 🍊 Coral / Orange */
+.rbn-stat-coral .rbn-stat-icon,
+.rbn-stat-orange .rbn-stat-icon {
+    background: var(--rbn-coral-light, #ffedd5);
+    color: var(--rbn-coral, #ea580c);
+    border: 1px solid var(--rbn-coral-border, #fed7aa);
+}
+
+/* 🍋 Lime */
+.rbn-stat-lime .rbn-stat-icon {
+    background: var(--rbn-lime-light, #f7fee7);
+    color: var(--rbn-lime, #65a30d);
+    border: 1px solid var(--rbn-lime-border, #d9f99d);
+}
+
+/* 🌫️ Slate / Charcoal / Secondary / Dark */
+.rbn-stat-secondary .rbn-stat-icon,
+.rbn-stat-slate .rbn-stat-icon {
+    background: var(--rbn-slate-100, #f1f5f9);
+    color: var(--rbn-slate-600, #475569);
+    border: 1px solid var(--rbn-slate-200, #e2e8f0);
+}
+.rbn-stat-charcoal .rbn-stat-icon,
+.rbn-stat-dark .rbn-stat-icon {
+    background: var(--rbn-slate-900, #0f172a);
+    color: #ffffff;
+    border: 1px solid var(--rbn-slate-800, #1e293b);
+}
+.rbn-stat-navy .rbn-stat-icon {
+    background: var(--rbn-blue-100, #dbeafe);
+    color: var(--rbn-blue-900, #1a365d);
+    border: 1px solid var(--rbn-blue-200, #bfdbfe);
+}
+
+/* 🪨 Stone */
+.rbn-stat-stone .rbn-stat-icon {
+    background: var(--rbn-stone-100, #F4F4F1);
+    color: var(--rbn-stone-700, #3F3F38);
+    border: 1px solid var(--rbn-stone-300, #E2E2DC);
+}
+
+/* 6. Sovereign Action Cards (.rbn-action-card) */
+.rbn-action-card {
+    display: flex;
+    align-items: center;
+    gap: var(--rbn-space-4, 16px);
+    padding: var(--rbn-space-4, 16px) var(--rbn-space-5, 20px);
+    background: var(--rbn-bg-surface, #ffffff);
+    border: 1px solid var(--rbn-border, #e2e8f0);
+    border-radius: var(--rbn-radius-md, 12px);
+    text-decoration: none;
+    color: var(--rbn-text-primary, #0f172a);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 1px 3px rgba(16, 24, 40, 0.05);
+}
+
+.rbn-action-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--rbn-border-strong, #cbd5e1);
+    box-shadow: 0 8px 20px -4px rgba(15, 23, 42, 0.08);
+    color: var(--rbn-text-display, #0f172a);
+}
+
+.rbn-action-card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--rbn-radius-md, 10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: #ffffff;
+    flex-shrink: 0;
+}
+
+.rbn-action-card-content {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.rbn-action-card-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--rbn-text-display, #0f172a);
+    margin-bottom: 2px;
+}
+
+.rbn-action-card-desc {
+    font-size: 0.78rem;
+    color: var(--rbn-text-muted, #64748b);
+}
+
+.rbn-action-card-arrow {
+    color: var(--rbn-text-muted, #94a3b8);
+    font-size: 1.1rem;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.rbn-action-card:hover .rbn-action-card-arrow {
+    transform: translateX(3px);
+    color: var(--rbn-text-primary, #0f172a);
+}

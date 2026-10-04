@@ -1,0 +1,618 @@
+/* ==========================================================================
+   RBN CORE: SOVEREIGN DASHBOARD SKELETON (core/dashboard.css) 🏛️📊
+   Saf, Evrensel ve Eksiksiz .rbn-dash-* Motoru (Layout, Sidebar, Navbar, Header, Footer)
+   ========================================================================== */
+
+/* 1. DYNAMIC THEME ENGINE (Değişkenler) */
+:root {
+    --rbn-dash-sidebar-width: 260px;
+    --rbn-dash-sidebar-collapsed: 70px;
+    --rbn-dash-navbar-height: 64px;
+    --rbn-dash-footer-height: 54px;
+
+    /* Theme Tokens */
+    --rbn-dash-bg-canvas: var(--rbn-bg-canvas, #f8fafc);
+    --rbn-dash-sidebar-bg: var(--sidebar-bg, var(--rbn-slate-900, #0f172a));
+    --rbn-dash-sidebar-border: var(--sidebar-border, rgba(255, 255, 255, 0.08));
+    --rbn-dash-sidebar-text: var(--sidebar-text, rgba(255, 255, 255, 0.7));
+    --rbn-dash-sidebar-active-bg: var(--sidebar-active-bg, rgba(255, 255, 255, 0.14));
+    --rbn-dash-sidebar-active-text: var(--sidebar-active-text, #ffffff);
+    --rbn-dash-sidebar-accent: var(--rbn-accent, var(--rbn-primary, #f59e0b));
+
+    --rbn-dash-navbar-bg: var(--navbar-bg, rgba(255, 255, 255, 0.85));
+    --rbn-dash-navbar-border: var(--navbar-border, var(--rbn-border, #eaecf0));
+}
+
+/* 2. BASE SHELL (.rbn-dash-layout) */
+.rbn-dash-layout {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background: var(--rbn-dash-bg-canvas);
+}
+
+.rbn-dash-content {
+    margin-left: var(--rbn-dash-sidebar-width);
+    padding-top: var(--rbn-dash-navbar-height);
+    padding-bottom: 0;
+    background: var(--rbn-dash-bg-canvas);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    flex: 1;
+    min-width: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* 3. SIDEBAR (.rbn-dash-sidebar) */
+.rbn-dash-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: var(--rbn-dash-sidebar-width);
+    height: 100vh;
+    background: var(--rbn-dash-sidebar-bg);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-right: 1px solid var(--rbn-dash-sidebar-border);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Sayfa yüklendikten sonra pürüzsüz animasyon için */
+body.rbn-ready .rbn-dash-sidebar {
+    transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s ease;
+}
+
+body.rbn-ready .rbn-dash-content {
+    transition: margin-left 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rbn-dash-sidebar.collapsed {
+    width: var(--rbn-dash-sidebar-collapsed);
+}
+
+.rbn-dash-sidebar-header {
+    height: var(--rbn-dash-navbar-height);
+    padding: 0 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--rbn-dash-sidebar-border);
+    flex-shrink: 0;
+}
+
+.rbn-dash-sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+    cursor: pointer;
+}
+
+.rbn-dash-sidebar-brand i {
+    font-size: 1.6rem;
+    color: var(--rbn-dash-sidebar-accent) !important;
+    flex-shrink: 0;
+}
+
+.rbn-dash-sidebar-brand span {
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    color: #ffffff;
+}
+
+.rbn-dash-sidebar-nav {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.rbn-dash-sidebar-nav::-webkit-scrollbar {
+    width: 4px;
+}
+.rbn-dash-sidebar-nav::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+}
+
+.rbn-dash-category {
+    margin-bottom: 0.5rem;
+}
+
+.rbn-dash-category.closed .rbn-dash-category-menus {
+    display: none !important;
+}
+
+.rbn-dash-category.closed .rbn-dash-arrow {
+    transform: rotate(-90deg) !important;
+}
+
+.rbn-dash-section-header {
+    padding: 0.75rem 1.25rem 0.375rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: color 0.15s ease;
+    user-select: none;
+}
+
+.rbn-dash-section-header:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.rbn-dash-nav-item {
+    margin: 3px 0.75rem;
+}
+
+.rbn-dash-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.625rem 0.875rem;
+    color: var(--rbn-dash-sidebar-text);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: var(--rbn-radius-md, 8px);
+    transition: all 0.15s ease;
+    position: relative;
+    border: 1px solid transparent;
+}
+
+.rbn-dash-nav-link:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--rbn-dash-sidebar-active-text);
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+.rbn-dash-nav-link.active {
+    background: var(--rbn-dash-sidebar-active-bg);
+    color: var(--rbn-dash-sidebar-active-text) !important;
+    font-weight: 600;
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.rbn-dash-nav-link i {
+    font-size: 1.15rem;
+    flex-shrink: 0;
+    opacity: 0.85;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.rbn-dash-nav-link:hover i {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.rbn-dash-nav-link.active i {
+    opacity: 1;
+    color: #ffffff;
+}
+
+.rbn-dash-nav-link span {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.rbn-dash-arrow {
+    transition: transform 0.2s ease;
+    font-size: 1rem;
+    opacity: 0.6;
+}
+
+.rbn-dash-dropdown.active .rbn-dash-arrow {
+    transform: rotate(180deg);
+    opacity: 1;
+}
+
+/* 4. SIDEBAR DROPDOWN */
+.rbn-dash-dropdown-menu {
+    display: none;
+    padding: 0.25rem 0 0.25rem 1.25rem;
+    list-style: none;
+}
+
+.rbn-dash-dropdown.active > .rbn-dash-dropdown-menu,
+.rbn-dash-dropdown.show > .rbn-dash-dropdown-menu {
+    display: block !important;
+}
+
+.rbn-dash-dropdown-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.75rem;
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.65);
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.15s ease;
+}
+
+.rbn-dash-dropdown-link:hover,
+.rbn-dash-dropdown-link.active {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* 5. NAVBAR (.rbn-dash-navbar) */
+.rbn-dash-navbar {
+    position: fixed;
+    top: 0;
+    left: var(--rbn-dash-sidebar-width);
+    right: 0;
+    height: var(--rbn-dash-navbar-height);
+    background: var(--rbn-dash-navbar-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rbn-dash-navbar-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    z-index: 1050;
+    transition: left 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 1px 3px rgba(16, 24, 40, 0.05);
+}
+
+.rbn-dash-navbar-left,
+.rbn-dash-navbar-actions,
+.rbn-dash-navbar-center {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.rbn-dash-toggle-btn {
+    display: flex;
+    width: 38px;
+    height: 38px;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border: 1px solid var(--rbn-border, #e2e8f0);
+    border-radius: var(--rbn-radius-md, 8px);
+    color: var(--rbn-text-secondary, #475467);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-decoration: none;
+    font-size: 1.15rem;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+}
+
+.rbn-dash-toggle-btn:hover {
+    background: var(--rbn-slate-900, #0f172a);
+    border-color: var(--rbn-slate-900, #0f172a);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.12);
+}
+
+/* 6. NAVBAR ACTION BUTTONS & BADGES */
+.rbn-dash-navbar-btn {
+    display: flex;
+    width: 38px;
+    height: 38px;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border: 1px solid var(--rbn-border, #e2e8f0);
+    border-radius: var(--rbn-radius-md, 8px);
+    color: var(--rbn-text-secondary, #475467);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-decoration: none;
+    position: relative;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+}
+
+.rbn-dash-navbar-btn:hover {
+    background: var(--rbn-slate-900, #0f172a);
+    border-color: var(--rbn-slate-900, #0f172a);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.12);
+}
+
+.rbn-dash-navbar-btn::after {
+    display: none !important;
+}
+
+.rbn-dash-navbar-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.15rem 0.35rem;
+    border-radius: 9999px;
+    background: #ef4444;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    line-height: 1;
+}
+
+/* 7. NAVBAR DROPDOWN OVERRIDES (Special min-width & position tweaks) */
+.rbn-dash-navbar .rbn-dropdown-menu,
+.rbn-dash-navbar .dropdown-menu {
+    min-width: 260px;
+    margin-top: 8px !important;
+}
+
+/* 8. UNIVERSAL CONTENT HEADER & BREADCRUMB (.rbn-dash-header) */
+.rbn-dash-header {
+    background: transparent;
+    padding-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.rbn-dash-header-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border: 1px solid var(--rbn-border, #e2e8f0);
+    border-radius: var(--rbn-radius-md, 10px);
+    color: var(--rbn-primary, #f59e0b);
+    font-size: 1.35rem;
+    box-shadow: 0 1px 3px rgba(16, 24, 40, 0.05);
+    flex-shrink: 0;
+}
+
+.rbn-dash-page-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--rbn-text-primary, #0f172a);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.rbn-dash-page-desc {
+    font-size: 0.8125rem;
+    color: var(--rbn-text-secondary, #64748b);
+    margin-top: 0.25rem;
+    margin-bottom: 0;
+}
+
+.rbn-dash-breadcrumb ol,
+.rbn-dash-breadcrumb ul {
+    list-style: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    margin: 0 !important;
+    padding: 0.35rem 0.75rem !important;
+    background: #ffffff !important;
+    border: 1px solid var(--rbn-border, #e2e8f0) !important;
+    border-radius: 9999px !important;
+    font-size: 0.775rem !important;
+    color: var(--rbn-text-secondary, #64748b) !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03) !important;
+}
+
+.rbn-dash-breadcrumb li {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+}
+
+.rbn-dash-breadcrumb li+li::before {
+    content: '/' !important;
+    color: var(--rbn-border, #cbd5e1) !important;
+    font-size: 0.7rem !important;
+}
+
+.rbn-dash-breadcrumb a {
+    color: var(--rbn-text-secondary, #64748b) !important;
+    text-decoration: none !important;
+    transition: color 0.15s ease !important;
+}
+
+.rbn-dash-breadcrumb a:hover {
+    color: var(--rbn-primary, #f59e0b) !important;
+}
+
+.rbn-dash-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.75rem;
+    background: #ffffff;
+    border: 1px solid var(--rbn-border, #e2e8f0);
+    border-radius: 9999px;
+    font-size: 0.775rem;
+    font-weight: 600;
+    color: var(--rbn-text-secondary, #475467);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+}
+
+.rbn-dash-action-btn:hover {
+    background: var(--rbn-slate-900, #0f172a);
+    border-color: var(--rbn-slate-900, #0f172a);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.12);
+}
+
+/* 9. FOOTER (.rbn-dash-footer) */
+.rbn-dash-footer {
+    height: var(--rbn-dash-footer-height);
+    background: #ffffff;
+    border-top: 1px solid var(--rbn-border, #eaecf0);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    font-size: 0.85rem;
+    color: var(--rbn-text-muted, #64748b);
+    flex-shrink: 0;
+    box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.02);
+}
+
+/* 10. COLLAPSED SIDEBAR RULES */
+.rbn-dash-sidebar.collapsed .rbn-dash-sidebar-brand span,
+.rbn-dash-sidebar.collapsed .rbn-dash-sidebar-brand small,
+.rbn-dash-sidebar.collapsed .rbn-dash-section-header,
+.rbn-dash-sidebar.collapsed .rbn-dash-nav-link span,
+.rbn-dash-sidebar.collapsed .rbn-dash-arrow,
+.rbn-dash-sidebar.collapsed .rbn-dash-sidebar-text {
+    display: none !important;
+}
+
+.rbn-dash-sidebar.collapsed .rbn-dash-sidebar-brand {
+    justify-content: center !important;
+    width: 100% !important;
+    padding: 0 !important;
+}
+
+.rbn-dash-sidebar.collapsed,
+.rbn-dash-sidebar.collapsed .rbn-dash-sidebar-nav,
+.rbn-dash-sidebar.collapsed .rbn-dash-category,
+.rbn-dash-sidebar.collapsed .rbn-dash-nav-item {
+    overflow: visible !important;
+}
+
+.rbn-dash-sidebar.collapsed .rbn-dash-nav-link {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    max-width: 44px !important;
+    margin: 6px auto !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
+    position: relative !important;
+}
+
+/* Kapalı Sidebar Tooltipleri: Sağa Doğru Çıksın & Kırpılmasın 🧭 */
+.rbn-dash-sidebar.collapsed [data-tooltip]::before {
+    bottom: auto !important;
+    left: calc(100% + 12px) !important;
+    top: 50% !important;
+    transform: translateY(-50%) translateX(-4px) !important;
+    z-index: 99999 !important;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4) !important;
+}
+
+.rbn-dash-sidebar.collapsed [data-tooltip]::after {
+    bottom: auto !important;
+    left: calc(100% + 4px) !important;
+    top: 50% !important;
+    transform: translateY(-50%) translateX(-4px) !important;
+    border-top-color: transparent !important;
+    border-bottom-color: transparent !important;
+    border-left-color: transparent !important;
+    border-right-color: #0f172a !important;
+    z-index: 99999 !important;
+}
+
+.rbn-dash-sidebar.collapsed [data-tooltip]:hover::before,
+.rbn-dash-sidebar.collapsed [data-tooltip]:hover::after {
+    transform: translateY(-50%) translateX(0) !important;
+}
+
+.rbn-dash-sidebar.collapsed .rbn-dash-nav-link i {
+    font-size: 1.25rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.rbn-dash-sidebar.collapsed ~ .rbn-dash-content {
+    margin-left: var(--rbn-dash-sidebar-collapsed);
+}
+
+.rbn-dash-sidebar.collapsed ~ .rbn-dash-content .rbn-dash-navbar {
+    left: var(--rbn-dash-sidebar-collapsed);
+}
+
+/* 11. MOBILE RESPONSIVENESS (Universal .rbn-dash-* Mobile Engine) 📱 */
+@media (max-width: 768px) {
+    .rbn-dash-sidebar {
+        transform: translateX(-100%);
+        z-index: 10000 !important;
+        transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    .rbn-dash-sidebar.show {
+        transform: translateX(0);
+    }
+
+    .rbn-dash-content {
+        margin-left: 0 !important;
+    }
+
+    .rbn-dash-navbar {
+        left: 0 !important;
+        padding: 0.5rem 0.85rem !important;
+        height: auto !important;
+        min-height: 56px !important;
+    }
+
+    .rbn-dash-navbar-left {
+        gap: 0.5rem !important;
+    }
+
+    .rbn-dash-toggle-btn {
+        width: 36px !important;
+        height: 36px !important;
+    }
+
+    .rbn-dash-navbar-actions {
+        gap: 0.35rem !important;
+    }
+
+    .rbn-dash-navbar-btn {
+        width: 36px !important;
+        height: 36px !important;
+    }
+
+    /* Mobilde dropdown menülerin sağa taşmasını engelle */
+    .rbn-dash-navbar .rbn-dropdown-menu,
+    .rbn-dash-navbar .dropdown-menu {
+        max-width: calc(100vw - 2rem) !important;
+        right: 0 !important;
+        left: auto !important;
+    }
+
+    .rbn-dash-footer {
+        left: 0 !important;
+        width: 100% !important;
+        padding: 0 1rem;
+        font-size: 0.75rem;
+    }
+}

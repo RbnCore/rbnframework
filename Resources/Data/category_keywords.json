@@ -1,0 +1,47 @@
+{
+  "isdunyasi": [
+    "iş dünyası", "holding", "ihracat", "ithalat", "ekonomi", "ceo", "patron", "şirket yatırımı",
+    "sektör", "finans", "sanayi", "ticaret", "ekonomik büyüme", "enflasyon", "istihdam", "girişim", "startup",
+    "bütçe", "vergi", "merkez bankası", "kredi"
+  ],
+  "teknoloji-haberleri": [
+    "teknoloji", "akıllı telefon", "apple", "iphone", "samsung", "xiaomi", "huawei",
+    "donanım", "ekran", "işlemci", "intel", "amd", "nvidia", "gadget", "uzay", "spacex", "nasa",
+    "batarya", "şarj", "giyilebilir teknoloji", "akıllı saat", "kulaklık"
+  ],
+  "oyun-haberleri": [
+    "oyun", "game", "gamer", "gta", "gta 6", "playstation", "ps5", "xbox", "steam", "epic games",
+    "nintendo", "csgo", "valorant", "pubg", "league of legends", "lol", "fortnite", "roblox", "espor",
+    "game pass", "ekran kartı", "gaming", "yama", "oyun dünyası", "konsol"
+  ],
+  "rehberler": [
+    "rehber", "nasıl yapılır", "nedir", "nasıl kullanılır", "çözümü", "yöntemi", "ipucu", "taktik",
+    "adım adım", "kılavuz", "ayarlar", "püf noktası", "nasıl çözülür", "kolay yolu"
+  ],
+  "borsakripto": [
+    "borsa", "kripto", "hisse", "altcoin", "bitcoin", "ethereum", "btc", "eth", "bist100", "bist",
+    "tcmb", "faiz oranı", "dolar kuru", "euro kuru", "dolar/tl", "euro/tl", "usd/try", "eur/try", "döviz kuru", "altın fiyatı", "fon", "temettü", "binance", "coin",
+    "grafik", "analiz", "boğa piyasası", "boga piyasasi", "boğa", "boga", "ayı piyasası", "ayi piyasasi", "bull market", "bear market", "portföy", "yatırımcı", "spx", "s&p", "s&p 500", "s&p500", "sp500", "nasdaq", "dow jones", "wall street", "fed", "endeks"
+  ],
+  "otomobil-haberleri": [
+    "otomobil", "araba", "araç", "togg", "tesla", "bmw", "mercedes", "audi", "porsche", "ford",
+    "toyota", "motor", "elektrikli araç", "suv", "sedan", "otonom sürüş", "fiyat listesi", "lpg",
+    "hibrid", "beygir", "tork", "şanzıman", "sürüş"
+  ],
+  "yazilim-cozumleri": [
+    "yazılım", "yazılımcı", "kodlama", "python", "php", "laravel", "javascript", "react",
+    "vue", "node.js", "docker", "github", "siber güvenlik", "veritabanı", "sql", "api", "backend",
+    "frontend", "geliştirici", "framework", "güncelleme", "bug", "patch"
+  ],
+  "film-dizi": [
+    "film", "dizi", "sinema", "netflix", "disney", "marvel", "dc", "punisher", "predator", "batman",
+    "spiderman", "avengers", "hbo", "blutv", "gain", "dizi oyuncusu", "film oyuncusu", "sezon", "bölüm",
+    "fragman", "vizyon", "vizyona girdi", "box office", "oscar", "sinema salonu", "yönetmen", "senaryo",
+    "imdb", "inceleme", "izle", "bölüm rehberi"
+  ],
+  "yapay-zeka": [
+    "yapay zeka", "ai", "gemini", "chatgpt", "openai", "claude", "anthropic", "midjourney", "sora",
+    "deepmind", "llm", "derin öğrenme", "makine öğrenimi", "prompts", "prompt", "prompting", "copilot", "robot",
+    "otomasyon", "üretken ai", "generative ai", "yapay zeka modeli"
+  ]
+}

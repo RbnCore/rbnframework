@@ -1,0 +1,733 @@
+/* ==========================================================================
+   RBN CORE: UI ELEMENTS, ANIMATIONS & INTERACTIVE SUITE (core/elements.css) 🎛️✨
+   100% Sovereign Token-Driven Universal UI Components Engine
+   ========================================================================== */
+
+/* ==========================================================================
+   BÖLÜM 1: SAYFA BAŞLIKLARI, ALTYAZILAR & BÖLÜCÜLER 🏷️📐
+   ========================================================================== */
+.rbn-page-eyebrow {
+    font-family: var(--rbn-font-mono);
+    font-size: 0.72rem;
+    color: var(--rbn-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    margin-bottom: var(--rbn-space-2);
+    display: flex;
+    align-items: center;
+    gap: var(--rbn-space-2);
+}
+
+.rbn-page-title {
+    font-size: 1.95rem;
+    color: var(--rbn-text-display);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.rbn-page-subtitle {
+    font-size: 0.9rem;
+    color: var(--rbn-text-secondary);
+    margin-top: var(--rbn-space-2);
+    max-width: 620px;
+    line-height: 1.6;
+}
+
+.rbn-section-divider {
+    display: flex;
+    align-items: center;
+    gap: var(--rbn-space-4, 1rem);
+    margin-top: var(--rbn-space-8, 2rem) !important;
+    margin-bottom: var(--rbn-space-5, 1.25rem) !important;
+    padding-top: var(--rbn-space-2, 0.5rem);
+}
+
+.rbn-section-divider-line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: var(--rbn-border-subtle, #e2e8f0);
+}
+
+
+/* ==========================================================================
+   BÖLÜM 2: SAYFALAMA MOTORU (PAGINATION) 📄✨
+   ========================================================================== */
+.pagination,
+.rbn-pagination {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: var(--rbn-space-1, 4px) !important;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.page-item,
+.rbn-page-item {
+    display: inline-block !important;
+    list-style: none !important;
+}
+
+.page-link,
+.rbn-page-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    padding: 0 var(--rbn-space-2, 8px) !important;
+    font-family: var(--rbn-font-mono, monospace) !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    color: var(--rbn-text-primary, #1e1b18) !important;
+    background: var(--rbn-bg-surface, #ffffff) !important;
+    background-color: var(--rbn-bg-surface, #ffffff) !important;
+    border: 1px solid var(--rbn-border, #e5ded3) !important;
+    border-radius: var(--rbn-radius-md, 8px) !important;
+    text-decoration: none !important;
+    transition: all 0.18s ease-in-out !important;
+    cursor: pointer !important;
+    user-select: none !important;
+}
+
+.page-link:hover,
+.rbn-page-link:hover {
+    color: var(--rbn-primary, #3b82f6) !important;
+    border-color: var(--rbn-primary, #3b82f6) !important;
+    background: var(--rbn-primary-subtle, rgba(59, 130, 246, 0.08)) !important;
+    background-color: var(--rbn-primary-subtle, rgba(59, 130, 246, 0.08)) !important;
+    transform: translateY(-1px) !important;
+}
+
+.page-item.active .page-link,
+.rbn-page-item.active .rbn-page-link,
+.page-link.active,
+.rbn-page-link.active {
+    color: #ffffff !important;
+    background: var(--rbn-primary, #3b82f6) !important;
+    background-color: var(--rbn-primary, #3b82f6) !important;
+    border-color: var(--rbn-primary, #3b82f6) !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    cursor: default !important;
+}
+
+.page-item.disabled .page-link,
+.rbn-page-item.disabled .rbn-page-link {
+    color: var(--rbn-text-muted, #79716b) !important;
+    background: var(--rbn-bg-canvas, #f3e9d8) !important;
+    background-color: var(--rbn-bg-canvas, #f3e9d8) !important;
+    border-color: var(--rbn-border-subtle, #e5ded3) !important;
+    cursor: not-allowed !important;
+    opacity: 0.5 !important;
+    pointer-events: none !important;
+}
+
+
+/* ==========================================================================
+   BÖLÜM 3: OFFCANVAS & ÇEKMECELER (DRAWER) 🪟
+   ========================================================================== */
+.offcanvas {
+    position: fixed;
+    bottom: 0;
+    z-index: 1045;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    color: var(--rbn-text-primary, #0f172a);
+    visibility: hidden;
+    background-color: var(--rbn-bg-surface, #ffffff);
+    background-clip: padding-box;
+    outline: 0;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+}
+
+.offcanvas-end {
+    top: 0;
+    right: 0;
+    width: 340px;
+    border-left: 1px solid var(--rbn-border, #e2e8f0);
+    transform: translateX(100%);
+}
+
+.offcanvas.show {
+    transform: none;
+    visibility: visible;
+}
+
+.offcanvas-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--rbn-space-4, 16px) var(--rbn-space-5, 20px);
+    border-bottom: 1px solid var(--rbn-border-subtle, #f1f5f9);
+}
+
+.offcanvas-body {
+    flex-grow: 1;
+    padding: var(--rbn-space-4, 16px) var(--rbn-space-5, 20px);
+    overflow-y: auto;
+}
+
+
+/* ==========================================================================
+   BÖLÜM 4: AKORDİYON & DARALTMA PANELLERİ (ACCORDION & COLLAPSE) 🪗⚡
+   ========================================================================== */
+.collapse:not(.show),
+.rbn-collapse:not(.show) {
+    display: none !important;
+}
+
+.collapse.show,
+.rbn-collapse.show {
+    display: block !important;
+}
+
+.collapsing,
+.rbn-collapsing {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.35s ease;
+}
+
+.rbn-accordion,
+.accordion {
+    display: flex;
+    flex-direction: column;
+    gap: var(--rbn-space-3, 12px);
+    width: 100%;
+}
+
+.rbn-accordion-item,
+.accordion-item {
+    background-color: var(--rbn-bg-surface, #ffffff);
+    border: 1px solid var(--rbn-border, #e2e8f0);
+    border-radius: var(--rbn-radius-md, 12px);
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rbn-accordion-item:hover,
+.accordion-item:hover {
+    border-color: var(--rbn-border-strong, #cbd5e1);
+}
+
+.rbn-accordion-item.is-open,
+.accordion-item.is-open {
+    border-color: var(--rbn-primary, #2563eb);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.06);
+}
+
+.rbn-accordion-header,
+.accordion-header {
+    margin: 0;
+}
+
+.rbn-accordion-button,
+.accordion-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--rbn-space-4, 16px) var(--rbn-space-5, 20px);
+    font-family: var(--rbn-font-sans, inherit);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--rbn-text-display, #0f172a);
+    text-align: left;
+    background-color: var(--rbn-bg-surface, #ffffff);
+    border: 0;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+    user-select: none;
+}
+
+.rbn-accordion-button:hover,
+.accordion-button:hover {
+    background-color: var(--rbn-bg-surface-hover, #f8fafc);
+}
+
+.rbn-accordion-button::after,
+.accordion-button::after {
+    content: '';
+    width: 18px;
+    height: 18px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 18px;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    flex-shrink: 0;
+    margin-left: auto;
+}
+
+.rbn-accordion-item.is-open .rbn-accordion-button::after,
+.accordion-item.is-open .accordion-button::after,
+.accordion-button:not(.collapsed)::after {
+    transform: rotate(-180deg);
+}
+
+.rbn-accordion-body,
+.accordion-body {
+    padding: 0 var(--rbn-space-5, 20px) var(--rbn-space-5, 20px);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--rbn-text-primary, #334155);
+}
+
+.rbn-accordion-collapse,
+.accordion-collapse {
+    display: none;
+}
+
+.rbn-accordion-collapse.show,
+.accordion-collapse.show,
+.rbn-accordion-item.is-open .rbn-accordion-collapse {
+    display: block;
+    animation: rbnFadeIn 0.2s ease;
+}
+
+
+/* ==========================================================================
+   BÖLÜM 5: DURUM NOKTALARI & RADAR DALGALARI (INDICATORS & PULSE) 🟢📡⚡
+   ========================================================================== */
+.rbn-status-dot,
+.status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    position: relative;
+    flex-shrink: 0;
+    vertical-align: middle;
+}
+
+.rbn-status-dot-sm { width: 6px; height: 6px; }
+.rbn-status-dot-md { width: 8px; height: 8px; }
+.rbn-status-dot-lg { width: 10px; height: 10px; }
+.rbn-status-dot-xl { width: 12px; height: 12px; }
+
+/* Status Dot Renk Varyantları */
+.rbn-status-dot-emerald,
+.rbn-status-dot-green,
+.rbn-status-dot-success,
+.status-dot.status-operational {
+    background: var(--rbn-green-500, #10b981);
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+.rbn-status-dot-amber,
+.rbn-status-dot-gold,
+.rbn-status-dot-warning,
+.status-dot.status-pending {
+    background: var(--rbn-amber-500, #f59e0b);
+    box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+}
+
+.rbn-status-dot-red,
+.rbn-status-dot-danger,
+.status-dot.status-offline {
+    background: var(--rbn-red-500, #ef4444);
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+}
+
+.rbn-status-dot-blue,
+.rbn-status-dot-primary {
+    background: var(--rbn-blue-600, #2563eb);
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+.rbn-status-dot-terracotta,
+.rbn-status-dot-clay {
+    background: var(--rbn-clay-500, #C56A3C);
+    box-shadow: 0 0 0 2px rgba(197, 106, 60, 0.2);
+}
+
+.rbn-status-dot-purple {
+    background: var(--rbn-purple, #8b5cf6);
+    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.25);
+}
+
+.rbn-status-dot-cyan {
+    background: var(--rbn-cyan, #00acc1);
+    box-shadow: 0 0 0 2px rgba(0, 172, 193, 0.25);
+}
+
+.rbn-status-dot-teal {
+    background: var(--rbn-teal, #0d9488);
+    box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.25);
+}
+
+.rbn-status-dot-slate,
+.rbn-status-dot-secondary {
+    background: var(--rbn-slate-400, #94a3b8);
+    box-shadow: 0 0 0 2px rgba(148, 163, 184, 0.2);
+}
+
+.rbn-status-pulse,
+.rbn-pulse {
+    position: relative;
+}
+
+.rbn-status-pulse::after,
+.rbn-pulse::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: inherit;
+    animation: rbnRadarPulse 2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+    z-index: -1;
+}
+
+@keyframes rbnRadarPulse {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    70% { transform: scale(2.6); opacity: 0; }
+    100% { transform: scale(2.8); opacity: 0; }
+}
+
+
+/* ==========================================================================
+   BÖLÜM 6: İLERLEME ÇUBUKLARI & METRELER (PROGRESS BARS) 📊⚡
+   ========================================================================== */
+.rbn-progress {
+    display: flex;
+    height: 8px;
+    overflow: hidden;
+    font-size: 0.65rem;
+    background: var(--rbn-slate-100, #f1f5f9);
+    border-radius: var(--rbn-radius-pill, 9999px);
+    border: 1px solid var(--rbn-border-subtle, #e2e8f0);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+    position: relative;
+    width: 100%;
+}
+
+.rbn-progress-xs { height: 4px; }
+.rbn-progress-sm { height: 6px; }
+.rbn-progress-md { height: 10px; }
+.rbn-progress-lg { height: 16px; font-weight: 700; }
+.rbn-progress-xl { height: 22px; font-weight: 800; }
+
+.rbn-progress-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    color: #ffffff;
+    text-align: center;
+    white-space: nowrap;
+    background: var(--rbn-blue-600, #2563eb);
+    transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: var(--rbn-radius-pill, 9999px);
+    height: 100%;
+    position: relative;
+}
+
+.rbn-progress-bar-primary,
+.rbn-progress-bar-blue { background: var(--rbn-blue-600, #2563eb); }
+.rbn-progress-bar-clay,
+.rbn-progress-bar-terracotta { background: var(--rbn-clay-500, #C56A3C); }
+.rbn-progress-bar-success,
+.rbn-progress-bar-green,
+.rbn-progress-bar-emerald { background: var(--rbn-green-500, #10b981); }
+.rbn-progress-bar-warning,
+.rbn-progress-bar-amber,
+.rbn-progress-bar-gold { background: var(--rbn-amber-500, #f59e0b); }
+.rbn-progress-bar-danger,
+.rbn-progress-bar-red { background: var(--rbn-red-500, #ef4444); }
+.rbn-progress-bar-indigo,
+.rbn-progress-bar-violet { background: var(--rbn-indigo-600, #4f46e5); }
+.rbn-progress-bar-purple { background: var(--rbn-purple, #8b5cf6); }
+.rbn-progress-bar-pink { background: var(--rbn-pink, #db2777); }
+.rbn-progress-bar-fuchsia { background: var(--rbn-fuchsia, #d946ef); }
+.rbn-progress-bar-cyan { background: var(--rbn-cyan, #00acc1); }
+.rbn-progress-bar-teal { background: var(--rbn-teal, #0d9488); }
+.rbn-progress-bar-sky { background: var(--rbn-sky, #0284c7); }
+.rbn-progress-bar-coral,
+.rbn-progress-bar-orange { background: var(--rbn-coral, #ea580c); }
+.rbn-progress-bar-lime { background: var(--rbn-lime, #65a30d); }
+.rbn-progress-bar-dark,
+.rbn-progress-bar-charcoal { background: var(--rbn-slate-900, #0f172a); }
+
+.rbn-progress-striped .rbn-progress-bar {
+    background-image: linear-gradient(45deg, 
+        rgba(255, 255, 255, 0.15) 25%, transparent 25%, 
+        transparent 50%, rgba(255, 255, 255, 0.15) 50%, 
+        rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-size: 1rem 1rem;
+}
+
+.rbn-progress-animated .rbn-progress-bar {
+    animation: rbnProgressStripes 1s linear infinite;
+}
+
+@keyframes rbnProgressStripes {
+    0% { background-position: 1rem 0; }
+    100% { background-position: 0 0; }
+}
+
+.rbn-progress-glow .rbn-progress-bar {
+    box-shadow: 0 0 10px currentColor;
+}
+
+
+/* ==========================================================================
+   BÖLÜM 7: SKELETON LOADERS & YÜKLEME İSKELETLERİ (SKELETON) 💀✨
+   ========================================================================== */
+.rbn-skeleton,
+.skeleton {
+    display: block;
+    background: linear-gradient(
+        90deg,
+        var(--rbn-slate-100, #f1f5f9) 25%,
+        var(--rbn-slate-200, #e2e8f0) 37%,
+        var(--rbn-slate-100, #f1f5f9) 63%
+    );
+    background-size: 400% 100%;
+    animation: rbnSkeletonShimmer 1.4s ease infinite;
+    border-radius: var(--rbn-radius-sm, 6px);
+    pointer-events: none;
+    user-select: none;
+}
+
+.rbn-skeleton-text {
+    height: 14px;
+    margin-bottom: 8px;
+    width: 100%;
+    border-radius: 4px;
+}
+.rbn-skeleton-text-sm { height: 10px; }
+.rbn-skeleton-text-lg { height: 20px; }
+
+.rbn-skeleton-title {
+    height: 24px;
+    width: 60%;
+    margin-bottom: 14px;
+    border-radius: 6px;
+}
+
+.rbn-skeleton-avatar,
+.rbn-skeleton-circle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.rbn-skeleton-btn {
+    height: 42px;
+    width: 120px;
+    border-radius: var(--rbn-radius-sm, 8px);
+}
+
+.rbn-skeleton-card {
+    height: 180px;
+    width: 100%;
+    border-radius: var(--rbn-radius-md, 12px);
+}
+
+.rbn-skeleton-table-row {
+    height: 48px;
+    width: 100%;
+    margin-bottom: 8px;
+    border-radius: 6px;
+}
+
+@keyframes rbnSkeletonShimmer {
+    0% { background-position: 100% 50%; }
+    100% { background-position: 0 50%; }
+}
+
+
+/* ==========================================================================
+   BÖLÜM 8: MİKRO ANİMASYONLAR, SPINNERLAR & EFEKTLER (ANIMATIONS) 🎬✨
+   ========================================================================== */
+.rbn-fade-in {
+    animation: rbnFadeIn 0.25s ease-out;
+}
+
+@keyframes rbnFadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.rbn-slide-up {
+    animation: rbnSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes rbnSlideUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.rbn-pulse {
+    animation: rbnPulse 2s ease-in-out infinite;
+}
+
+@keyframes rbnPulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.15); opacity: 0.8; }
+}
+
+.rbn-glass {
+    background: var(--rbn-glass-bg, rgba(255, 255, 255, 0.85));
+    backdrop-filter: blur(var(--rbn-glass-blur, 12px));
+    -webkit-backdrop-filter: blur(var(--rbn-glass-blur, 12px));
+    border: 1px solid var(--rbn-glass-border, rgba(255, 255, 255, 0.15));
+}
+
+.rbn-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--rbn-glow-color, rgba(56, 189, 248, 0.2)) 0%, transparent 70%);
+    filter: blur(10px);
+    animation: rbnPulse 2s ease-in-out infinite;
+}
+
+.rbn-loading {
+    opacity: 0.6 !important;
+    pointer-events: none !important;
+    cursor: wait !important;
+}
+
+.rbn-spinner-box {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 24px;
+}
+
+.rbn-spinner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: var(--rbn-primary, #38bdf8);
+    border-bottom-color: var(--rbn-primary, #38bdf8);
+    animation: rbnSpin 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+}
+
+.rbn-spinner-inner {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-left-color: var(--rbn-accent, #a855f7);
+    border-right-color: var(--rbn-accent, #a855f7);
+    animation: rbnSpinReverse 2s linear infinite;
+}
+
+@keyframes rbnSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes rbnSpinReverse {
+    0% { transform: rotate(360deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.rbn-progress-line {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--rbn-primary, #38bdf8), var(--rbn-accent, #a855f7));
+    border-radius: 2px;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 3.5s cubic-bezier(0.1, 0.8, 0.1, 1);
+}
+
+/* 8. YÖNLENDİRME EKRANI & LOADER (REDIRECT SCREEN) 🚀✨ */
+.rbn-redirect-screen {
+    font-family: var(--rbn-font-sans, system-ui, -apple-system, sans-serif);
+    background: radial-gradient(circle at center, #24201c 0%, #151311 100%);
+    color: #fbf9f5;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99999;
+}
+
+.rbn-redirect-card {
+    text-align: center;
+    max-width: 440px;
+    width: 90%;
+    padding: 40px 32px;
+    border-radius: 20px;
+    background: rgba(36, 32, 28, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(229, 222, 211, 0.12);
+    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    animation: rbnFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rbn-redirect-card h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #fbf9f5;
+    letter-spacing: -0.02em;
+}
+
+.rbn-redirect-card p {
+    font-size: 0.88rem;
+    color: #b39f82;
+    font-weight: 400;
+    line-height: 1.55;
+    margin: 0;
+}
+
+.rbn-redirect-card .rbn-spinner {
+    border-top-color: var(--rbn-craft-russet, #c56a3c) !important;
+    border-bottom-color: var(--rbn-craft-russet, #c56a3c) !important;
+}
+
+.rbn-redirect-card .rbn-spinner-inner {
+    border-left-color: #d97706 !important;
+    border-right-color: #d97706 !important;
+}
+
+.rbn-redirect-card .rbn-glow {
+    background: radial-gradient(circle, rgba(197, 106, 60, 0.3) 0%, transparent 70%) !important;
+}
+
+.rbn-redirect-card .rbn-progress-bar {
+    background: rgba(255, 255, 255, 0.08);
+    height: 4px;
+    border-radius: 9999px;
+    margin-top: 24px;
+    overflow: hidden;
+    position: relative;
+}
+
+.rbn-redirect-card .rbn-progress-line {
+    background: linear-gradient(90deg, #c56a3c, #f59e0b) !important;
+    height: 100%;
+    width: 100%;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}

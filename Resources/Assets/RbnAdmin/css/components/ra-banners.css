@@ -1,0 +1,214 @@
+/* ==========================================================================
+   RBN ADMIN HERO BANNER COMPONENT (components/ra-banners.css) 🏛️🏺
+   Terracotta Editorial Banner with Warm Surfaces & Ambient Shadows
+   ========================================================================== */
+
+/* 1. HERO BANNER MAIN CARD */
+.ra-hero-banner,
+.ra-banner {
+    position: relative;
+    background: var(--rbn-admin-surface, #fbf9f5) !important;
+    border: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+    border-radius: 16px !important;
+    padding: 2rem 2.25rem !important;
+    box-shadow: 0 4px 20px -2px rgba(60, 50, 40, 0.06), 0 1px 3px rgba(60, 50, 40, 0.03) !important;
+    overflow: hidden !important;
+    z-index: 1 !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ra-hero-banner:hover,
+.ra-banner:hover {
+    border-color: var(--rbn-admin-border-strong, #d5cbbf) !important;
+    box-shadow: 0 8px 24px -4px rgba(60, 50, 40, 0.08) !important;
+}
+
+/* 2. BACKGROUND AMBIENT PATTERN */
+.ra-hero-pattern {
+    display: block !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-image: radial-gradient(rgba(60, 50, 40, 0.04) 1.5px, transparent 1.5px) !important;
+    background-size: 20px 20px !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+    border-radius: 16px !important;
+}
+
+.ra-hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.ra-hero-left {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1.25rem !important;
+}
+
+.ra-hero-text-wrap {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    min-width: 0 !important;
+}
+
+/* 3. HERO ICON BADGE (Terracotta Craft Icon) */
+.ra-hero-icon-outer {
+    background: var(--rbn-craft-russet, #c56a3c) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 3px;
+    width: 58px;
+    height: 58px;
+    border-radius: 13px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(197, 106, 60, 0.24) !important;
+    flex-shrink: 0;
+    z-index: 2;
+    align-self: center !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ra-hero-icon-outer:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(197, 106, 60, 0.34) !important;
+}
+
+.ra-hero-icon-inner {
+    width: 100%;
+    height: 100%;
+    background: transparent !important;
+    border-radius: 11px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff !important;
+}
+
+.ra-hero-icon-inner i {
+    font-size: 1.65rem !important;
+    color: #ffffff !important;
+}
+
+/* 4. EDITORIAL TYPOGRAPHY */
+.ra-hero-title {
+    font-family: var(--rbn-font-display, "DM Serif Display", serif) !important;
+    font-size: 1.65rem !important;
+    font-weight: 400 !important;
+    color: var(--rbn-admin-text-display, #111827) !important;
+    letter-spacing: -0.015em;
+    line-height: 1.1 !important;
+    margin: 0 !important;
+}
+
+.ra-hero-desc {
+    font-size: 0.85rem !important;
+    color: var(--rbn-admin-text-muted, #79716b) !important;
+    line-height: 1.3 !important;
+    margin-top: 0.25rem !important;
+    margin-bottom: 0 !important;
+}
+
+/* 5. DOMAIN & STATUS BADGES */
+.ra-badge-domain {
+    background: #ffffff !important;
+    color: var(--rbn-admin-text-muted, #79716b) !important;
+    border: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+    font-weight: 600 !important;
+    font-size: 0.725rem !important;
+    padding: 0.25rem 0.65rem !important;
+    border-radius: 9999px !important;
+    box-shadow: 0 1px 3px rgba(60, 50, 40, 0.03);
+}
+
+.ra-badge-status {
+    background: #ffffff !important;
+    color: var(--rbn-admin-text-body, #1e1b18) !important;
+    border: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    padding: 0.35rem 0.8rem !important;
+    border-radius: 9999px !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    box-shadow: 0 1px 3px rgba(60, 50, 40, 0.04) !important;
+}
+
+/* Emerald Green Status Pulse */
+.ra-status-dot {
+    width: 7px;
+    height: 7px;
+    background-color: #16a34a !important;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.5);
+    animation: raStatusPulse 2s infinite;
+}
+
+@keyframes raStatusPulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.5);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 6px rgba(22, 163, 74, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(22, 163, 74, 0);
+    }
+}
+
+/* 6. MOBILE RESPONSIVE ENHANCEMENTS (📱 Ekranlar İçin Özel Uyumluluk) */
+@media (max-width: 767.98px) {
+    .ra-hero-banner,
+    .ra-banner {
+        padding: 1.25rem 1.25rem !important;
+        border-radius: 12px !important;
+    }
+
+    .ra-hero-content {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 1rem !important;
+    }
+
+    .ra-hero-left {
+        width: 100% !important;
+        gap: 0.85rem !important;
+    }
+
+    .ra-hero-icon-outer {
+        width: 48px !important;
+        height: 48px !important;
+        border-radius: 10px !important;
+    }
+
+    .ra-hero-icon-inner i {
+        font-size: 1.35rem !important;
+    }
+
+    .ra-hero-title {
+        font-size: 1.35rem !important;
+    }
+
+    .ra-hero-desc {
+        font-size: 0.8rem !important;
+    }
+
+    .ra-hero-right {
+        width: 100% !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        border-top: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+        padding-top: 0.75rem !important;
+        margin-top: 0.25rem !important;
+    }
+}

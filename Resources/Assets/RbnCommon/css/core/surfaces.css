@@ -1,0 +1,211 @@
+/* ==========================================================================
+   RBN CORE: SURFACE BOXES, CALLOUTS & AVATARS (core/surfaces.css) 🪟🏷️
+   %100 Sovereign Token-Driven Surface & Avatar Engine (Powered by rbn-colors.css)
+   ========================================================================== */
+
+/* ==========================================================================
+   1. SOFT SURFACES & CALLOUT BOXES (.rbn-surface-*)
+   ========================================================================== */
+.rbn-surface {
+    padding: var(--rbn-space-4, 1rem) var(--rbn-space-5, 1.25rem);
+    border-radius: var(--rbn-radius-md, 12px);
+    border: 1px solid var(--rbn-border, transparent);
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    background: var(--rbn-bg-surface);
+    color: var(--rbn-text-primary);
+}
+
+/* ⚪ Neutral / Token Driven Inset Surface */
+.rbn-surface-subtle,
+.bg-surface-subtle {
+    background: var(--rbn-bg-surface-subtle, var(--rbn-bg-inset)) !important;
+    border-color: var(--rbn-border) !important;
+    color: var(--rbn-text-primary) !important;
+}
+
+/* 🔵 Blue / Primary Soft Surface */
+.rbn-surface-primary,
+.rbn-surface-blue {
+    background: var(--rbn-blue-50, #eff6ff);
+    border-color: var(--rbn-blue-200, #bfdbfe);
+    color: var(--rbn-blue-950, #0f2137);
+}
+
+/* 🏺 Terracotta / Clay Soft Surface */
+.rbn-surface-terracotta,
+.rbn-surface-clay {
+    background: var(--rbn-clay-50, #FAF3E7);
+    border-color: var(--rbn-clay-200, #EADCC6);
+    color: var(--rbn-clay-900, #2C221E);
+}
+
+/* 🌿 Green / Emerald Soft Surface */
+.rbn-surface-success,
+.rbn-surface-emerald,
+.rbn-surface-green {
+    background: var(--rbn-green-50, #ecfdf5);
+    border-color: var(--rbn-green-200, #a7f3d0);
+    color: var(--rbn-green-950, #022c22);
+}
+
+/* 👑 Amber / Gold Soft Surface */
+.rbn-surface-warning,
+.rbn-surface-amber,
+.rbn-surface-gold {
+    background: var(--rbn-amber-50, #fffbeb);
+    border-color: var(--rbn-amber-200, #fde68a);
+    color: var(--rbn-amber-950, #451a03);
+}
+
+/* 🔴 Red / Danger Soft Surface */
+.rbn-surface-danger,
+.rbn-surface-red {
+    background: var(--rbn-red-50, #fef2f2);
+    border-color: var(--rbn-red-200, #fecaca);
+    color: var(--rbn-red-950, #450a0a);
+}
+
+/* 💜 Indigo / Purple Soft Surface */
+.rbn-surface-indigo {
+    background: var(--rbn-indigo-50, #eef2ff);
+    border-color: var(--rbn-indigo-200, #c7d2fe);
+    color: var(--rbn-indigo-950, #1e1b4b);
+}
+.rbn-surface-purple {
+    background: var(--rbn-purple-light, #f3e8ff);
+    border-color: var(--rbn-purple-border, #e9d5ff);
+    color: var(--rbn-purple-dark, #5b21b6);
+}
+
+/* 🌊 Cyan / Teal / Sky Soft Surface */
+.rbn-surface-cyan {
+    background: var(--rbn-cyan-light, #e0f7fa);
+    border-color: var(--rbn-cyan-border, #b2ebf2);
+    color: var(--rbn-cyan-dark, #006064);
+}
+.rbn-surface-teal {
+    background: var(--rbn-teal-light, #ccfbf1);
+    border-color: var(--rbn-teal-border, #99f6e4);
+    color: var(--rbn-teal-dark, #0f766e);
+}
+.rbn-surface-sky {
+    background: var(--rbn-sky-light, #e0f2fe);
+    border-color: var(--rbn-sky-border, #bae6fd);
+    color: var(--rbn-sky-dark, #0369a1);
+}
+
+/* 🌫️ Slate / Dark / Neutral Soft Surface */
+.rbn-surface-slate,
+.rbn-surface-secondary {
+    background: var(--rbn-slate-100, #f1f5f9);
+    border-color: var(--rbn-slate-200, #e2e8f0);
+    color: var(--rbn-slate-900, #0f172a);
+}
+.rbn-surface-dark {
+    background: var(--rbn-slate-900, #0f172a);
+    border-color: var(--rbn-slate-800, #1e293b);
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   2. USER AVATARS & INITIALS ROZETLERİ (.rbn-avatar-*)
+   ========================================================================== */
+.rbn-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    line-height: 1;
+    border-radius: 50%;
+    user-select: none;
+    flex-shrink: 0;
+    text-transform: uppercase;
+    position: relative;
+    border: 1px solid transparent;
+}
+
+/* Scale Variants */
+.rbn-avatar-xs { width: 24px; height: 24px; font-size: 0.65rem; }
+.rbn-avatar-sm { width: 32px; height: 32px; font-size: 0.775rem; }
+.rbn-avatar-md { width: 40px; height: 40px; font-size: 0.9rem; }
+.rbn-avatar-lg { width: 48px; height: 48px; font-size: 1.1rem; }
+.rbn-avatar-xl { width: 64px; height: 64px; font-size: 1.5rem; }
+
+/* Square Variant */
+.rbn-avatar-square { border-radius: var(--rbn-radius-md, 10px); }
+
+/* Avatar Color Themes */
+.rbn-avatar-blue,
+.rbn-avatar-primary {
+    background: var(--rbn-blue-100, #dbeafe);
+    color: var(--rbn-blue-700, #1d4ed8);
+    border-color: var(--rbn-blue-200, #bfdbfe);
+}
+
+.rbn-avatar-terracotta,
+.rbn-avatar-clay {
+    background: var(--rbn-clay-100, #F3E9D8);
+    color: var(--rbn-clay-600, #AA552B);
+    border-color: var(--rbn-clay-300, #DECBB0);
+}
+
+.rbn-avatar-green,
+.rbn-avatar-success,
+.rbn-avatar-emerald {
+    background: var(--rbn-green-100, #d1fae5);
+    color: var(--rbn-green-700, #047857);
+    border-color: var(--rbn-green-200, #a7f3d0);
+}
+
+.rbn-avatar-amber,
+.rbn-avatar-gold,
+.rbn-avatar-warning {
+    background: var(--rbn-amber-100, #fef3c7);
+    color: var(--rbn-amber-700, #b45309);
+    border-color: var(--rbn-amber-200, #fde68a);
+}
+
+.rbn-avatar-red,
+.rbn-avatar-danger {
+    background: var(--rbn-red-100, #fee2e2);
+    color: var(--rbn-red-700, #b91c1c);
+    border-color: var(--rbn-red-200, #fecaca);
+}
+
+.rbn-avatar-purple {
+    background: var(--rbn-purple-light, #f3e8ff);
+    color: var(--rbn-purple-dark, #5b21b6);
+    border-color: var(--rbn-purple-border, #e9d5ff);
+}
+
+.rbn-avatar-indigo {
+    background: var(--rbn-indigo-100, #e0e7ff);
+    color: var(--rbn-indigo-700, #4338ca);
+    border-color: var(--rbn-indigo-200, #c7d2fe);
+}
+
+.rbn-avatar-cyan {
+    background: var(--rbn-cyan-light, #e0f7fa);
+    color: var(--rbn-cyan-dark, #006064);
+    border-color: var(--rbn-cyan-border, #b2ebf2);
+}
+
+.rbn-avatar-pink {
+    background: var(--rbn-pink-light, #fce7f3);
+    color: var(--rbn-pink-dark, #831843);
+    border-color: var(--rbn-pink-border, #fbcfe8);
+}
+
+.rbn-avatar-slate,
+.rbn-avatar-secondary {
+    background: var(--rbn-slate-200, #e2e8f0);
+    color: var(--rbn-slate-700, #334155);
+    border-color: var(--rbn-slate-300, #cbd5e1);
+}
+
+.rbn-avatar-dark {
+    background: var(--rbn-slate-900, #0f172a);
+    color: #ffffff;
+    border-color: var(--rbn-slate-700, #334155);
+}

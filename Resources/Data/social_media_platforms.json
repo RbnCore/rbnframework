@@ -1,0 +1,140 @@
+{
+    "facebook": {
+        "title": "Facebook",
+        "bi_icon": "bi-facebook",
+        "fa_icon": "fab fa-facebook-f",
+        "ri_icon": "ri-facebook-fill",
+        "color": "#1877F2",
+        "order": 1,
+        "share_class": "fb",
+        "share_url": "https://www.facebook.com/sharer/sharer.php?u={url}"
+    },
+    "twitter": {
+        "title": "Twitter",
+        "bi_icon": "bi-twitter-x",
+        "fa_icon": "fab fa-twitter",
+        "ri_icon": "ri-twitter-x-line",
+        "color": "#000000",
+        "order": 2,
+        "share_class": "tw",
+        "share_url": "https://twitter.com/intent/tweet?url={url}&text={title}"
+    },
+    "instagram": {
+        "title": "Instagram",
+        "bi_icon": "bi-instagram",
+        "fa_icon": "fab fa-instagram",
+        "ri_icon": "ri-instagram-line",
+        "color": "#E4405F",
+        "order": 3
+    },
+    "linkedin": {
+        "title": "LinkedIn",
+        "bi_icon": "bi-linkedin",
+        "fa_icon": "fab fa-linkedin-in",
+        "ri_icon": "ri-linkedin-box-fill",
+        "color": "#0A66C2",
+        "order": 4
+    },
+    "youtube": {
+        "title": "YouTube",
+        "bi_icon": "bi-youtube",
+        "fa_icon": "fab fa-youtube",
+        "ri_icon": "ri-youtube-fill",
+        "color": "#FF0000",
+        "order": 5
+    },
+    "github": {
+        "title": "GitHub",
+        "bi_icon": "bi-github",
+        "fa_icon": "fab fa-github",
+        "ri_icon": "ri-github-fill",
+        "color": "#181717",
+        "order": 6
+    },
+    "tiktok": {
+        "title": "TikTok",
+        "bi_icon": "bi-tiktok",
+        "fa_icon": "fab fa-tiktok",
+        "ri_icon": "ri-tiktok-fill",
+        "color": "#000000",
+        "order": 7
+    },
+    "whatsapp": {
+        "title": "WhatsApp",
+        "bi_icon": "bi-whatsapp",
+        "fa_icon": "fab fa-whatsapp",
+        "ri_icon": "ri-whatsapp-fill",
+        "color": "#25D366",
+        "order": 8,
+        "share_class": "wa",
+        "share_url": "https://api.whatsapp.com/send?text={title}%20{url}"
+    },
+    "telegram": {
+        "title": "Telegram",
+        "bi_icon": "bi-telegram",
+        "fa_icon": "fab fa-telegram-plane",
+        "ri_icon": "ri-telegram-fill",
+        "color": "#26A5E4",
+        "order": 9,
+        "share_class": "tg",
+        "share_url": "https://t.me/share/url?url={url}&text={title}"
+    },
+    "pinterest": {
+        "title": "Pinterest",
+        "bi_icon": "bi-pinterest",
+        "fa_icon": "fab fa-pinterest-p",
+        "ri_icon": "ri-pinterest-fill",
+        "color": "#E60023",
+        "order": 10
+    },
+    "discord": {
+        "title": "Discord",
+        "bi_icon": "bi-discord",
+        "fa_icon": "fab fa-discord",
+        "ri_icon": "ri-discord-fill",
+        "color": "#5865F2",
+        "order": 11
+    },
+    "reddit": {
+        "title": "Reddit",
+        "bi_icon": "bi-reddit",
+        "fa_icon": "fab fa-reddit",
+        "ri_icon": "ri-reddit-fill",
+        "color": "#FF4500",
+        "order": 12
+    },
+    "snapchat": {
+        "title": "Snapchat",
+        "bi_icon": "bi-snapchat",
+        "fa_icon": "fab fa-snapchat",
+        "ri_icon": "ri-snapchat-fill",
+        "color": "#FFFC00",
+        "order": 13
+    },
+    "twitch": {
+        "title": "Twitch",
+        "bi_icon": "bi-twitch",
+        "fa_icon": "fab fa-twitch",
+        "ri_icon": "ri-twitch-fill",
+        "color": "#9146FF",
+        "order": 14
+    },
+    "email": {
+        "title": "E-Posta",
+        "bi_icon": "bi-envelope-fill",
+        "fa_icon": "fas fa-envelope",
+        "ri_icon": "ri-mail-send-line",
+        "color": "#6c757d",
+        "order": 15,
+        "share_class": "mail",
+        "share_url": "mailto:?subject={title}&body={url}"
+    },
+    "sahibinden": {
+        "title": "Sahibinden",
+        "bi_icon": "bi-shop",
+        "fa_icon": "fas fa-store",
+        "ri_icon": "ri-store-2-fill",
+        "color": "#ffe800",
+        "order": 16
+    }
+}

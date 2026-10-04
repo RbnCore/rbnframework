@@ -1,0 +1,338 @@
+/* ==========================================================================
+   RBN ADMIN MASTER COMPONENTS ENGINE (components/ra-elements.css) 🏛️🏺
+   1. rbn-master Override'ları (rbn-btn, rbn-badge, form-control)
+   2. Panele Özel Özgün Bileşenler (ra-stat-*, ra-pass-toggle-btn, ra-badge-craft)
+   ========================================================================== */
+
+/* ==========================================================================
+   1. RBN-MASTER OVERRIDE'LARI (Çekirdekten Ezilen Standart Sınıflar) 🔄
+   ========================================================================== */
+
+/* Form Inputları & Select (rbn-master & bootstrap override) */
+.rbn-form-input,
+.form-control,
+.form-select {
+    background-color: var(--rbn-admin-surface, #fbf9f5) !important;
+    border: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+    color: var(--rbn-admin-text-display, #111827) !important;
+    border-radius: 8px !important;
+    padding: 0.65rem 1rem !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 1px 2px rgba(60, 50, 40, 0.02) inset !important;
+}
+
+.rbn-form-input:focus,
+.form-control:focus,
+.form-select:focus {
+    background-color: #ffffff !important;
+    border-color: var(--rbn-craft-russet, #c56a3c) !important;
+    box-shadow: 0 0 0 3px rgba(197, 106, 60, 0.18) !important;
+    outline: none !important;
+}
+
+/* Form Checkbox & Switch Terracotta Tema Renklendirmesi 🎚️ */
+.rbn-form-check-input,
+.form-check-input {
+    background-color: var(--rbn-admin-surface, #fbf9f5) !important;
+    border-color: var(--rbn-admin-border-strong, #d5cbbf) !important;
+}
+
+.rbn-form-check-input:focus,
+.form-check-input:focus {
+    border-color: var(--rbn-craft-russet, #c56a3c) !important;
+    box-shadow: 0 0 0 3px rgba(197, 106, 60, 0.18) !important;
+}
+
+.rbn-form-check-input[type="checkbox"]:not([role="switch"]):checked,
+.form-check-input[type="checkbox"]:not([role="switch"]):checked {
+    background-color: var(--rbn-craft-russet, #c56a3c) !important;
+    border-color: var(--rbn-craft-russet, #c56a3c) !important;
+}
+
+.rbn-form-switch .rbn-form-check-input,
+.form-switch .form-check-input {
+    background-color: var(--rbn-admin-border-strong, #d5cbbf) !important;
+}
+
+.rbn-form-switch .rbn-form-check-input:checked,
+.form-switch .form-check-input:checked,
+.rbn-form-check-input[role="switch"]:checked,
+.form-check-input[role="switch"]:checked {
+    background-color: #16a34a !important;
+    border-color: transparent !important;
+    box-shadow: 0 2px 8px rgba(22, 163, 74, 0.25) !important;
+}
+
+
+
+
+
+/* Butonlar (rbn-master override) */
+.rbn-btn-primary,
+.rbn-btn-russet,
+.rbn-btn-terracotta {
+    background: var(--rbn-craft-russet, #c56a3c) !important;
+    border-color: var(--rbn-craft-russet, #c56a3c) !important;
+    color: #ffffff !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 2px 8px rgba(197, 106, 60, 0.3) !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.rbn-btn-primary:hover,
+.rbn-btn-russet:hover,
+.rbn-btn-terracotta:hover {
+    background: var(--rbn-craft-russet-hover, #b0572b) !important;
+    border-color: var(--rbn-craft-russet-hover, #b0572b) !important;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(197, 106, 60, 0.4) !important;
+}
+
+.rbn-btn-secondary,
+.rbn-btn-taupe {
+    background: var(--rbn-craft-taupe, #a89f91) !important;
+    border-color: var(--rbn-craft-taupe, #a89f91) !important;
+    color: #ffffff !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 2px 6px rgba(168, 159, 145, 0.25) !important;
+}
+
+.rbn-btn-secondary:hover,
+.rbn-btn-taupe:hover {
+    background: var(--rbn-craft-taupe-hover, #8f8576) !important;
+    border-color: var(--rbn-craft-taupe-hover, #8f8576) !important;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+}
+
+.rbn-btn-outline,
+.btn-outline-secondary {
+    background: var(--rbn-admin-surface, #fbf9f5) !important;
+    border: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+    color: var(--rbn-admin-text-display, #1e1b18) !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 1px 2px rgba(60, 50, 40, 0.03) !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.rbn-btn-outline:hover,
+.rbn-btn-outline:focus,
+.rbn-btn-outline[aria-expanded="true"],
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus,
+.btn-outline-secondary[aria-expanded="true"] {
+    background: #ffffff !important;
+    border-color: var(--rbn-craft-russet, #c56a3c) !important;
+    color: var(--rbn-craft-russet, #c56a3c) !important;
+    box-shadow: 0 2px 8px rgba(197, 106, 60, 0.15) !important;
+    transform: translateY(-1px);
+}
+
+/* Standart Rozetler (rbn-master override) */
+.rbn-badge-sage,
+.rbn-badge-soft-success {
+    background: var(--rbn-craft-sage-bg, #e2f5e8) !important;
+    color: var(--rbn-craft-sage, #16a34a) !important;
+    border: 1px solid var(--rbn-craft-sage-border, #bbf0cb) !important;
+    border-radius: 9999px !important;
+    padding: 0.3rem 0.75rem !important;
+    font-weight: 700 !important;
+    font-size: 0.75rem !important;
+}
+
+.rbn-badge-mustard,
+.rbn-badge-soft-warning {
+    background: #fef3c7 !important;
+    color: #92400e !important;
+    border: 1px solid #fde68a !important;
+    border-radius: 9999px !important;
+    padding: 0.3rem 0.75rem !important;
+    font-weight: 700 !important;
+    font-size: 0.75rem !important;
+}
+
+.rbn-badge-rose,
+.rbn-badge-soft-danger {
+    background: var(--rbn-craft-rose-bg, #ffe4e6) !important;
+    color: var(--rbn-craft-rose, #be123c) !important;
+    border: 1px solid #fecdd3 !important;
+    border-radius: 9999px !important;
+    padding: 0.3rem 0.75rem !important;
+    font-weight: 700 !important;
+    font-size: 0.75rem !important;
+}
+
+
+/* ==========================================================================
+   2. PANELE ÖZEL ÖZGÜN BİLEŞENLER (Sadece Admin'e Özel: ra-* Standardı) 💎
+   ========================================================================== */
+
+/* Şifre Göster/Gizle Butonu */
+.ra-pass-toggle-btn,
+.password-toggle-btn {
+    background: var(--rbn-admin-surface, #fbf9f5) !important;
+    border: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+    border-radius: 8px !important;
+    color: var(--rbn-admin-text-body, #1e1b18) !important;
+    height: 42px !important;
+    width: 42px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.2s ease !important;
+}
+
+.ra-pass-toggle-btn:hover,
+.password-toggle-btn:hover {
+    background: var(--rbn-craft-russet, #c56a3c) !important;
+    border-color: var(--rbn-craft-russet, #c56a3c) !important;
+    color: #ffffff !important;
+}
+
+/* Stat & Metrik Kartları */
+.ra-stat-card {
+    background: var(--rbn-admin-surface, #fbf9f5) !important;
+    border: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+    border-radius: 12px !important;
+    padding: 1.25rem 1.5rem !important;
+    box-shadow: 0 2px 6px rgba(60, 50, 40, 0.03) !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.ra-stat-card:hover {
+    transform: translateY(-2px) !important;
+    border-color: var(--rbn-admin-border-strong, #d5cbbf) !important;
+    box-shadow: 0 8px 20px -4px rgba(60, 50, 40, 0.08) !important;
+}
+
+.ra-stat-label {
+    font-family: var(--rbn-font-mono, "JetBrains Mono", monospace) !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    color: var(--rbn-admin-text-muted, #79716b) !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+}
+
+.ra-stat-value {
+    font-family: var(--rbn-font-mono, "JetBrains Mono", monospace) !important;
+    font-size: 1.85rem !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.04em !important;
+    line-height: 1.15 !important;
+    margin: 0.25rem 0 !important;
+}
+
+/* Renkli Rakam Varyantları */
+.ra-stat-primary .ra-stat-value,
+.ra-stat-blue .ra-stat-value {
+    color: var(--rbn-craft-blue, #1d4ed8) !important;
+}
+
+.ra-stat-warning .ra-stat-value,
+.ra-stat-amber .ra-stat-value {
+    color: var(--rbn-craft-mustard, #d97706) !important;
+}
+
+.ra-stat-success .ra-stat-value,
+.ra-stat-green .ra-stat-value {
+    color: var(--rbn-craft-sage, #16a34a) !important;
+}
+
+.ra-stat-danger .ra-stat-value,
+.ra-stat-red .ra-stat-value {
+    color: var(--rbn-craft-red, #dc2626) !important;
+}
+
+.ra-stat-terracotta .ra-stat-value {
+    color: var(--rbn-craft-russet, #c56a3c) !important;
+}
+
+.ra-stat-navy .ra-stat-value {
+    color: #1a365d !important;
+}
+
+.ra-stat-charcoal .ra-stat-value {
+    color: #111827 !important;
+}
+
+.ra-stat-cyan .ra-stat-value {
+    color: #0891b2 !important;
+}
+
+.ra-stat-secondary .ra-stat-value {
+    color: #64748b !important;
+}
+
+.ra-stat-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: rgba(60, 50, 40, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+    color: var(--rbn-craft-russet, #c56a3c);
+    flex-shrink: 0;
+}
+
+
+/* Stat Card Alt Çizgi & Bilgi Alanı Nefes Payı 🌿 */
+.ra-stat-card .border-top {
+    margin-top: 0.85rem !important;
+    padding-top: 0.75rem !important;
+    font-size: 0.775rem !important;
+}
+
+/* Zanaat Rozeti (Noktalı Rozet) */
+.ra-badge-craft {
+    background: #eae2d5 !important;
+    border: 1px solid #ddd2c1 !important;
+    border-radius: 9999px !important;
+    padding: 0.4rem 1rem !important;
+    color: #3b4d61 !important;
+    font-size: 0.8125rem !important;
+    font-weight: 600 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    box-shadow: 0 1px 2px rgba(60, 50, 40, 0.03) !important;
+}
+
+.ra-badge-craft::before {
+    content: "" !important;
+    display: inline-block !important;
+    width: 8px !important;
+    height: 8px !important;
+    border-radius: 50% !important;
+    background: var(--rbn-craft-russet, #c56a3c) !important;
+}
+
+/* 3. Panel Kart Başlığı & Güvenlik Kartı 🏷️ */
+.ra-card-header-equal {
+    min-height: 52px;
+    padding-bottom: 1.25rem !important;
+}
+
+.ra-security-tip-alert {
+    background: rgba(197, 106, 60, 0.08) !important;
+    border: none !important;
+    border-radius: 10px !important;
+}
+
+/* ==========================================================================
+   5. EVRENSEL BÖLÜM VE BAŞLIK AYRACI TEMA ENTEGRASYONU 🏺
+   rbn-core üzerindeki .rbn-section-divider çizgisini Terracotta border rengine bağlar.
+   ========================================================================== */
+.rbn-section-divider-line {
+    background-color: var(--rbn-admin-border-subtle, #e5ded3) !important;
+}
+
+

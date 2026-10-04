@@ -1,0 +1,707 @@
+/* ==========================================================================
+   Hallmark · component: rbn-table · genre: modern-minimal
+   Tactile & Precision Data Table Design System
+   ========================================================================== */
+
+/* Container & Wrapper */
+.rbn-table-container,
+.rbn-table-wrap {
+    background: var(--rbn-bg-surface, #ffffff);
+    border: var(--rbn-border-width, 1px) solid var(--rbn-border, #eaecf0);
+    border-radius: var(--rbn-radius-md, 8px);
+    overflow-x: auto;
+    overflow-y: visible !important;
+    box-shadow: var(--rbn-shadow-card, 0 1px 3px rgba(60, 50, 40, 0.04));
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    overflow-y: visible !important;
+    width: 100%;
+}
+
+.rbn-card > .table-responsive {
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+}
+
+/* Base Table */
+.rbn-table,
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--rbn-text-primary, #101828);
+}
+
+/* Header Styling */
+.rbn-table thead th,
+.table thead th,
+.table th {
+    background: var(--rbn-table-th-bg, var(--rbn-bg-surface-subtle, #eae2d5));
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding: 0.875rem 1.25rem;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--rbn-table-th-color, var(--rbn-text-muted, #3b4d61));
+    border-bottom: var(--rbn-border-width, 1px) solid var(--rbn-border, #ddd2c1);
+    text-align: left;
+    white-space: nowrap;
+    transition: background-color 0.15s ease;
+}
+
+/* Fixed Layout Modifier 📐⚓ */
+.rbn-table.rbn-table-fixed {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.rbn-table.rbn-table-fixed thead th {
+    white-space: normal !important;
+    word-break: break-word !important;
+}
+
+.rbn-table.rbn-table-fixed tbody td {
+    overflow: hidden;
+}
+
+.rbn-table thead th:hover {
+    background: var(--rbn-table-th-hover, #e2d8c9);
+}
+
+/* Body Styling */
+.rbn-table tbody tr,
+.table tbody tr {
+    transition: background-color 0.15s ease-in-out;
+    background: var(--rbn-bg-surface, #ffffff);
+}
+
+.rbn-table tbody td,
+.table tbody td,
+.table td {
+    padding: 0.75rem 1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--rbn-border-line, rgba(20, 17, 12, 0.1));
+    color: var(--rbn-text-primary, #101828);
+    font-size: 0.84rem;
+}
+
+.rbn-table tbody tr:last-child td,
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Row Hover Interaction */
+.rbn-table tbody tr:hover,
+.table tbody tr:hover,
+.rbn-table-hover tbody tr:hover,
+.table-hover tbody tr:hover {
+    background-color: var(--rbn-bg-surface-hover, var(--rbn-table-row-hover, #f4ede2));
+}
+
+/* Striped & Bordered Variants */
+.rbn-table-striped tbody tr:nth-of-type(odd),
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.015);
+}
+
+.rbn-table-bordered td, .rbn-table-bordered th,
+.table-bordered td, .table-bordered th {
+    border: 1px solid var(--rbn-border-subtle, #e2e8f0);
+}
+
+.rbn-table-sm td, .rbn-table-sm th,
+.table-sm td, .table-sm th {
+    padding: var(--rbn-space-2, 0.4rem) var(--rbn-space-3, 0.65rem);
+    font-size: 0.82rem;
+}
+
+/* Numeric & Alignment Utilities */
+.rbn-td-numeric {
+    text-align: right !important;
+    font-family: var(--rbn-font-mono, monospace);
+    font-variant-numeric: tabular-nums;
+}
+
+.rbn-td-actions {
+    text-align: right !important;
+    white-space: nowrap;
+}
+
+/* Row Selected State */
+.rbn-table tbody tr.row-selected {
+    background-color: #fffbeb;
+    box-shadow: inset 3px 0 0 0 var(--rbn-primary, var(--theme-600, #f59e0b));
+}
+
+.rbn-table tbody tr.row-selected:hover {
+    background-color: #fef3c7;
+}
+
+/* Checkbox Theme Styling */
+.rbn-table .form-check-input {
+    border-radius: 4px;
+    border: 1px solid #d0d5dd;
+    cursor: pointer;
+}
+
+.rbn-table .form-check-input:checked {
+    background-color: var(--theme-600, #f59e0b);
+    border-color: var(--theme-600, #f59e0b);
+}
+
+.rbn-table .form-check-input:focus {
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+    border-color: var(--theme-400, #fcd34d);
+}
+
+.rbn-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Monospace & Tabular Data */
+.rbn-table .font-monospace {
+    font-family: var(--font-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+    letter-spacing: -0.01em;
+    font-weight: 500;
+    color: #344054;
+}
+
+/* Badges */
+.rbn-table .badge {
+    padding: 0.35rem 0.65rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.01em;
+}
+
+/* ==========================================================================
+   RBN STUDIO · SQUARE METRIC TILE (MODERN CMS DESIGN)
+   ========================================================================== */
+.rbn-table .rbn-metric-tile {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid #d0d5dd;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 2px;
+    position: relative;
+    user-select: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.rbn-table .rbn-metric-tile:hover {
+    border-color: #94a3b8;
+    box-shadow: 0 4px 8px -1px rgba(15, 23, 42, 0.1);
+    transform: translateY(-1px);
+}
+
+.rbn-table .rbn-metric-tile .tile-version {
+    font-family: var(--font-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+    font-size: 0.82rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: #b45309;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.rbn-table .rbn-metric-tile .tile-version.v2 {
+    color: #059669;
+}
+
+.rbn-table .rbn-metric-tile .tile-version.v2::after {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 5px #10b981;
+}
+
+.rbn-table .rbn-metric-tile .tile-divider {
+    width: 32px;
+    height: 1px;
+    background: #e2e8f0;
+    margin: 4px 0 3px 0;
+}
+
+.rbn-table .rbn-metric-tile .tile-views {
+    font-family: var(--font-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+    font-size: 0.78rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.rbn-table .rbn-metric-tile .tile-views i {
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
+/* Filters & Search Bar */
+.rbn-table-filters {
+    position: relative;
+    margin-bottom: 1.25rem;
+}
+
+.rbn-table-filters input,
+.rbn-table-filters .rbn-form-input,
+.rbn-table-filters [data-rbn-table-search],
+.rbn-filter-dropdown .dropdown-toggle {
+    width: 100%;
+    height: 36px !important;
+    padding: 0.375rem 0.75rem !important;
+    background: var(--rbn-bg-surface, #ffffff) !important;
+    border: var(--rbn-border-width, 1px) solid var(--rbn-border, #14110c) !important;
+    border-radius: var(--rbn-radius-sm, 6px) !important;
+    outline: none;
+    transition: all 0.15s ease;
+    font-size: 0.84rem;
+    color: var(--rbn-text-primary, #14110c);
+}
+
+.rbn-table-filters input,
+.rbn-table-filters .rbn-form-input,
+.rbn-table-filters [data-rbn-table-search] {
+    padding-left: 2.75rem !important;
+}
+
+.rbn-filter-dropdown .dropdown-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+}
+
+.rbn-filter-dropdown .dropdown-toggle::after {
+    display: none;
+}
+
+.rbn-table-filters input:focus,
+.rbn-filter-dropdown .dropdown-toggle:hover,
+.rbn-filter-dropdown .dropdown-toggle[aria-expanded="true"] {
+    border-color: var(--rbn-theme-focus, #b39f82) !important;
+    box-shadow: 0 0 0 3px rgba(179, 159, 130, 0.2) !important;
+    background: var(--rbn-admin-surface, #ffffff) !important;
+}
+
+.rbn-table-filters i.search-icon,
+.rbn-table-filters .search-icon {
+    position: absolute !important;
+    left: 1rem !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    color: var(--rbn-theme-focus, #b39f82) !important;
+    pointer-events: none !important;
+    transition: color 0.15s ease;
+    z-index: 5 !important;
+    font-size: 1.15rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+}
+
+.rbn-table-filters input:focus~i.search-icon,
+.rbn-table-filters input:focus~.search-icon {
+    color: var(--rbn-theme-focus, #b39f82) !important;
+}
+
+/* Filter Dropdown Menu (Craft Terracotta Standard) */
+.rbn-filter-dropdown .dropdown-menu {
+    background-color: var(--rbn-admin-surface, #ffffff) !important;
+    border: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+    box-shadow: 0 10px 25px -4px rgba(60, 50, 40, 0.12), 0 4px 10px -2px rgba(60, 50, 40, 0.06) !important;
+    border-radius: 12px !important;
+    padding: 0.5rem !important;
+    z-index: 1050;
+    min-width: 100%;
+}
+
+.rbn-filter-dropdown .dropdown-item {
+    transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    font-size: 0.84rem !important;
+    padding: 0.55rem 0.85rem !important;
+    color: var(--rbn-admin-text-body, #1e1b18) !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.rbn-filter-dropdown .dropdown-item:hover,
+.rbn-filter-dropdown .dropdown-item:focus {
+    background-color: rgba(197, 106, 60, 0.08) !important;
+    color: var(--rbn-primary, #c56a3c) !important;
+    transform: translateX(2px);
+}
+
+.rbn-filter-dropdown .dropdown-item.active,
+.rbn-filter-dropdown .dropdown-item:active {
+    background-color: var(--rbn-primary, #c56a3c) !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+
+.rbn-filter-dropdown .dropdown-item.active i,
+.rbn-filter-dropdown .dropdown-item:active i {
+    color: #ffffff !important;
+}
+
+/* ===============================================
+   Table Tabs Integration (.rbn-table-tabs / .rbn-tab-pills)
+   Zanaatkar Segmented Pill Tab Motoru (Token-Driven)
+   =============================================== */
+.rbn-table-tabs,
+.rbn-tab-pills {
+    display: inline-flex;
+    align-items: center;
+    background: var(--rbn-btn-ghost-bg, rgba(60, 50, 40, 0.05));
+    padding: 4px;
+    border-radius: 9999px;
+    gap: 4px;
+    margin: 0;
+    border: 1px solid var(--rbn-border-subtle, #e5ded3);
+    list-style: none;
+    box-shadow: 0 1px 3px rgba(60, 50, 40, 0.03) inset;
+}
+
+.rbn-table-tabs::-webkit-scrollbar,
+.rbn-tab-pills::-webkit-scrollbar {
+    display: none;
+}
+
+.rbn-table-tabs .nav-item,
+.rbn-tab-pills .nav-item {
+    margin: 0;
+}
+
+.rbn-table-tabs .nav-link,
+.rbn-tab-pills .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 1rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--rbn-text-muted, #79716b);
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 9999px;
+    background: transparent;
+    transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    transform: none !important;
+}
+
+.rbn-table-tabs .nav-link::before,
+.rbn-table-tabs .nav-link::after,
+.rbn-tab-pills .nav-link::before,
+.rbn-tab-pills .nav-link::after {
+    display: none !important;
+    content: none !important;
+}
+
+.rbn-table-tabs .nav-link:hover,
+.rbn-tab-pills .nav-link:hover {
+    color: var(--rbn-text-primary, #1e1b18);
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.rbn-table-tabs .nav-link.active,
+.rbn-tab-pills .nav-link.active {
+    color: var(--rbn-text-primary, #1e1b18) !important;
+    background: var(--rbn-bg-surface, #ffffff) !important;
+    font-weight: 600;
+    border-color: var(--rbn-border-subtle, #e5ded3) !important;
+    box-shadow: 0 2px 6px rgba(60, 50, 40, 0.06), 0 1px 2px rgba(60, 50, 40, 0.04) !important;
+}
+
+/* Tab Badge / Counter Chip */
+.rbn-table-tabs .nav-link .badge,
+.rbn-tab-pills .nav-link .badge,
+.rbn-table-tabs .nav-link .tab-count,
+.rbn-tab-pills .nav-link .tab-count {
+    padding: 2px 8px;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    border-radius: 9999px;
+    background: rgba(60, 50, 40, 0.06);
+    color: var(--rbn-text-muted, #79716b);
+    transition: all 0.15s ease;
+    border: none;
+}
+
+.rbn-table-tabs .nav-link.active .badge,
+.rbn-tab-pills .nav-link.active .badge,
+.rbn-table-tabs .nav-link.active .tab-count,
+.rbn-tab-pills .nav-link.active .tab-count {
+    background: var(--rbn-primary, #c56a3c);
+    color: #ffffff !important;
+    box-shadow: 0 1px 4px rgba(197, 106, 60, 0.3);
+}
+
+/* Sortable & Drag Handling */
+.rbn-table-sortable-handle,
+.rbn-sortable-handle {
+    cursor: grab;
+    user-select: none;
+    transition: opacity 0.15s ease;
+}
+
+.rbn-table-sortable-handle:active,
+.rbn-sortable-handle:active {
+    cursor: grabbing;
+}
+
+.rbn-table-sortable-placeholder,
+.rbn-sortable-placeholder {
+    background: #f0f6ff;
+    border: 2px dashed #93c5fd;
+    height: 52px;
+    visibility: visible;
+    border-radius: 8px;
+    margin: 0.25rem 0;
+}
+
+.ui-sortable-helper {
+    background: #ffffff;
+    box-shadow: 0 10px 25px -5px rgba(16, 24, 40, 0.15);
+    border-radius: 8px;
+    display: table;
+    width: 100%;
+    opacity: 0.95;
+}
+
+/* Header Actions Holder (Fixed Height to Prevent Layout Shifts) */
+.rbn-table-header-actions {
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* ==========================================================================
+   Universal Table Action Buttons (.rbn-table-btn / .ra-table-btn) ⚡
+   Kare, mikro-etkileşimli, tamamen Token-Driven tablo işlem butonları.
+   ========================================================================== */
+.rbn-table-btn,
+.ra-table-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: var(--rbn-radius-sm, 6px);
+    background: var(--rbn-bg-surface-subtle, #f8f5ee);
+    border: 1px solid var(--rbn-border-line, rgba(20, 17, 12, 0.15));
+    color: var(--rbn-text-secondary, #4a453e);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    transition: all 0.15s ease;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    user-select: none;
+}
+
+.rbn-table-btn:hover,
+.ra-table-btn:hover {
+    background: var(--rbn-primary, #ffc400);
+    border-color: var(--rbn-border, #14110c);
+    color: var(--rbn-primary-text, #14110c) !important;
+    transform: translate(-1px, -1px);
+    box-shadow: 2px 2px 0px var(--rbn-border, #14110c);
+}
+
+.rbn-table-btn-danger,
+.ra-table-btn-danger {
+    color: var(--rbn-text-muted, #787168);
+}
+
+.rbn-table-btn-danger:hover,
+.ra-table-btn-danger:hover {
+    background: var(--rbn-red, #dc2626) !important;
+    border-color: var(--rbn-border, #14110c) !important;
+    color: #ffffff !important;
+    transform: translate(-1px, -1px);
+    box-shadow: 2px 2px 0px var(--rbn-border, #14110c);
+}
+
+/* Reusable Column Width Helpers */
+.rbn-table th.col-w-xs,
+.rbn-table td.col-w-xs {
+    width: 80px;
+    min-width: 80px;
+    text-align: center;
+}
+
+.rbn-table th.col-w-sm,
+.rbn-table td.col-w-sm {
+    width: 110px;
+    min-width: 110px;
+    text-align: center;
+}
+
+.rbn-table th.col-w-md,
+.rbn-table td.col-w-md {
+    width: 140px;
+    min-width: 140px;
+    text-align: center;
+}
+
+.rbn-table th.col-w-lg,
+.rbn-table td.col-w-lg {
+    width: 165px;
+    min-width: 165px;
+    text-align: center;
+}
+
+.rbn-table th.col-w-xl,
+.rbn-table td.col-w-xl {
+    width: 200px;
+    min-width: 200px;
+    text-align: center;
+}
+
+.rbn-table th.col-actions,
+.rbn-table td.col-actions {
+    width: 160px;
+    min-width: 160px;
+    text-align: right;
+}
+
+/* Evrensel Metin Kırpma ve Başlık/Slug Sınırlandırma (Truncation Suite) ✂️ */
+.rbn-table .col-truncate,
+.rbn-table-truncate {
+    max-width: 725px;
+    min-width: 250px;
+}
+
+.rbn-table-title {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+}
+
+.rbn-table-slug {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Status Badges */
+.rbn-table .badge-status-success {
+    background-color: #ecfdf3;
+    color: #027a48;
+    border: 1px solid #abefc6;
+}
+
+.rbn-table .badge-status-failed {
+    background-color: #fef3f2;
+    color: #b42318;
+    border: 1px solid #fecdca;
+}
+
+/* ==========================================================================
+   Tooltips & Stacking Context Layering (Universal Table Engine) 🛡️
+   Tabloların, dropdown menülerin ve tooltip baloncuklarının kırpılmasını ve 
+   alt satırların altında kalmasını önleyen evrensel katman yönetimi.
+   ========================================================================== */
+.rbn-table-wrap,
+.rbn-table-container,
+.table-responsive {
+    overflow-x: auto !important;
+    overflow-y: visible;
+    position: relative;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+}
+
+.rbn-table-wrap::-webkit-scrollbar,
+.rbn-table-container::-webkit-scrollbar,
+.table-responsive::-webkit-scrollbar {
+    height: 6px;
+}
+
+.rbn-table-wrap::-webkit-scrollbar-track,
+.rbn-table-container::-webkit-scrollbar-track,
+.table-responsive::-webkit-scrollbar-track {
+    background: var(--rbn-bg-surface-subtle, #f8f5ee);
+}
+
+.rbn-table-wrap::-webkit-scrollbar-thumb,
+.rbn-table-container::-webkit-scrollbar-thumb,
+.table-responsive::-webkit-scrollbar-thumb {
+    background: var(--rbn-border, #14110c);
+    border-radius: 4px;
+}
+
+.rbn-table tbody tr {
+    position: relative;
+    z-index: 1;
+}
+
+.rbn-table tbody tr:hover {
+    position: relative;
+    z-index: 100 !important;
+}
+
+.rbn-table tbody tr:hover td {
+    position: relative;
+    z-index: 100 !important;
+}
+
+.rbn-table-wrap .border-top,
+.rbn-table-container .border-top,
+.pagination,
+.rbn-pagination {
+    position: relative;
+    z-index: 500 !important;
+}
+
+.pagination .page-item,
+.rbn-pagination .rbn-page-item {
+    position: relative;
+}
+
+.pagination .page-item:hover,
+.rbn-pagination .rbn-page-item:hover,
+.pagination .page-link:hover,
+.rbn-pagination .rbn-page-link:hover {
+    z-index: 1000 !important;
+}
+
+.rbn-table [data-tooltip]::before,
+.rbn-table [data-tooltip]::after {
+    z-index: 999999 !important;
+}

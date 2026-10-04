@@ -1,0 +1,110 @@
+{
+    "TRY": {
+        "name": "Türk Lirası",
+        "symbol": "₺",
+        "html_entity": "&#8378;",
+        "decimals": 2
+    },
+    "USD": {
+        "name": "Amerikan Doları",
+        "symbol": "$",
+        "html_entity": "&#36;",
+        "decimals": 2
+    },
+    "EUR": {
+        "name": "Euro",
+        "symbol": "€",
+        "html_entity": "&#8364;",
+        "decimals": 2
+    },
+    "GBP": {
+        "name": "İngiliz Sterlini",
+        "symbol": "£",
+        "html_entity": "&pound;",
+        "decimals": 2
+    },
+    "RUB": {
+        "name": "Rus Rublesi",
+        "symbol": "₽",
+        "html_entity": "&#8381;",
+        "decimals": 2
+    },
+    "JPY": {
+        "name": "Japon Yeni",
+        "symbol": "¥",
+        "html_entity": "&yen;",
+        "decimals": 0
+    },
+    "CNY": {
+        "name": "Çin Yuanı",
+        "symbol": "¥",
+        "html_entity": "&yen;",
+        "decimals": 2
+    },
+    "CHF": {
+        "name": "İsviçre Frangı",
+        "symbol": "CHF",
+        "html_entity": "CHF",
+        "decimals": 2
+    },
+    "CAD": {
+        "name": "Kanada Doları",
+        "symbol": "C$",
+        "html_entity": "C$",
+        "decimals": 2
+    },
+    "AUD": {
+        "name": "Avustralya Doları",
+        "symbol": "A$",
+        "html_entity": "A$",
+        "decimals": 2
+    },
+    "AZN": {
+        "name": "Azerbaycan Manatı",
+        "symbol": "₼",
+        "html_entity": "&#8380;",
+        "decimals": 2
+    },
+    "SEK": {
+        "name": "İsveç Kronu",
+        "symbol": "kr",
+        "html_entity": "kr",
+        "decimals": 2
+    },
+    "NOK": {
+        "name": "Norveç Kronu",
+        "symbol": "kr",
+        "html_entity": "kr",
+        "decimals": 2
+    },
+    "DKK": {
+        "name": "Danimarka Kronu",
+        "symbol": "kr",
+        "html_entity": "kr",
+        "decimals": 2
+    },
+    "SAR": {
+        "name": "Suudi Arabistan Riyali",
+        "symbol": "SR",
+        "html_entity": "SR",
+        "decimals": 2
+    },
+    "AED": {
+        "name": "Birleşik Arap Emirlikleri Dirhemi",
+        "symbol": "د.إ",
+        "html_entity": "د.إ",
+        "decimals": 2
+    },
+    "INR": {
+        "name": "Hindistan Rupisi",
+        "symbol": "₹",
+        "html_entity": "&#8377;",
+        "decimals": 2
+    },
+    "BRL": {
+        "name": "Brezilya Reali",
+        "symbol": "R$",
+        "html_entity": "R$",
+        "decimals": 2
+    }
+}

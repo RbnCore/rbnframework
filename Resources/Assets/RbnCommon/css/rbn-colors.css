@@ -1,0 +1,175 @@
+/* ==========================================================================
+   RBN MASTER COLOR PALETTE (rbn-colors.css) 🎨🌈
+   Universal, curated color system for all RBN Framework projects.
+   ========================================================================== */
+
+:root {
+    /* 🌊 1. Safir, Kurumsal & Gece Mavileri (Blues & Navies) */
+    --rbn-blue-50:       #eff6ff;
+    --rbn-blue-100:      #dbeafe;
+    --rbn-blue-200:      #bfdbfe;
+    --rbn-blue-300:      #93c5fd;
+    --rbn-blue-400:      #60a5fa;
+    --rbn-blue-500:      #3b82f6;
+    --rbn-blue-600:      #2563eb;  /* Kurumsal Safir */
+    --rbn-blue-700:      #1d4ed8;
+    --rbn-blue-800:      #1e40af;
+    --rbn-blue-900:      #1a365d;  /* Mina Derin Gece Mavisi */
+    --rbn-blue-950:      #0f2137;  /* Okyanus Çukuru */
+
+    /* 🏺 2. Terracotta, Kiremit & Sıcak Toprak (Terracotta & Clay) */
+    --rbn-clay-50:       #FAF3E7;  /* TypeUI Terracotta Krem Zemin */
+    --rbn-clay-100:      #F3E9D8;  /* Sıcak Kum */
+    --rbn-clay-200:      #EADCC6;  /* Keten */
+    --rbn-clay-300:      #DECBB0;  /* İnce Sınır */
+    --rbn-clay-400:      #D4A373;  /* Karamel */
+    --rbn-clay-500:      #C56A3C;  /* TypeUI Terracotta Kiremit */
+    --rbn-clay-600:      #AA552B;  /* Koyu Kiremit */
+    --rbn-clay-700:      #8F3E1C;  /* Yanık Toprak */
+    --rbn-clay-800:      #5C2B14;
+    --rbn-clay-900:      #2C221E;  /* Mürekkep Kahve */
+    --rbn-clay-950:      #1C1411;
+
+    /* 🌿 3. Zümrüt & Doğa Yeşilleri (Emeralds & Mints) */
+    --rbn-green-50:      #ecfdf5;
+    --rbn-green-100:     #d1fae5;
+    --rbn-green-200:     #a7f3d0;
+    --rbn-green-300:     #6ee7b7;
+    --rbn-green-400:     #34d399;
+    --rbn-green-500:     #10b981;  /* Gelir / Aktif Zümrüt */
+    --rbn-green-600:     #059669;
+    --rbn-green-700:     #047857;
+    --rbn-green-800:     #065f46;
+    --rbn-green-900:     #064e3b;
+    --rbn-green-950:     #022c22;
+
+    /* 👑 4. Altın, Kehribar & Hardal (Amber & Gold) */
+    --rbn-amber-50:      #fffbeb;
+    --rbn-amber-100:     #fef3c7;
+    --rbn-amber-200:     #fde68a;
+    --rbn-amber-300:     #fcd34d;
+    --rbn-amber-400:     #fbbf24;
+    --rbn-amber-500:     #f59e0b;  /* Sıcak Altın */
+    --rbn-amber-600:     #d97706;  /* Akdeniz Hardalı */
+    --rbn-amber-700:     #b45309;
+    --rbn-amber-800:     #92400e;
+    --rbn-amber-900:     #78350f;
+    --rbn-amber-950:     #451a03;
+
+    /* 🔴 5. Mercan, Gül & Alarm Kırmızısı (Rose & Coral Red) */
+    --rbn-red-50:        #fef2f2;
+    --rbn-red-100:       #fee2e2;
+    --rbn-red-200:       #fecaca;
+    --rbn-red-300:       #fca5a5;
+    --rbn-red-400:       #f87171;
+    --rbn-red-500:       #ef4444;  /* Gider / Çıkış Mercan */
+    --rbn-red-600:       #dc2626;
+    --rbn-red-700:       #b91c1c;
+    --rbn-red-800:       #991b1b;
+    --rbn-red-900:       #7f1d1d;
+    --rbn-red-950:       #450a0a;
+
+    /* 💜 6. İndigo & Asil Menekşe (Indigo & Violet) */
+    --rbn-indigo-50:     #eef2ff;
+    --rbn-indigo-100:    #e0e7ff;
+    --rbn-indigo-200:    #c7d2fe;
+    --rbn-indigo-300:    #a5b4fc;
+    --rbn-indigo-400:    #818cf8;
+    --rbn-indigo-500:    #6366f1;
+    --rbn-indigo-600:    #4f46e5;
+    --rbn-indigo-700:    #4338ca;
+    --rbn-indigo-800:    #3730a3;
+    --rbn-indigo-900:    #312c85;  /* Minimax İndigo */
+    --rbn-indigo-950:    #1e1b4b;
+
+    /* 🖤 7. Minimal Taş, Keten & Kömür Nötrleri (Warm Stone & Charcoal) */
+    --rbn-stone-50:      #FAF9F5;  /* Porselen Beyaz */
+    --rbn-stone-100:     #F4F4F1;  /* Minimal Taş Zemin */
+    --rbn-stone-200:     #EAEAE5;  /* Açık Taş */
+    --rbn-stone-300:     #E2E2DC;  /* İnce Taş Sınırı */
+    --rbn-stone-400:     #C4C4BA;
+    --rbn-stone-500:     #8C8C82;  /* Pasif Etiket */
+    --rbn-stone-600:     #5A5A52;  /* Gövde İkincil */
+    --rbn-stone-700:     #3F3F38;
+    --rbn-stone-800:     #262622;
+    --rbn-stone-900:     #1C1C18;  /* Koyu Gövde */
+    --rbn-stone-950:     #0C0C09;  /* Kömür Karası Başlık */
+
+    /* 🌫️ 8. Soğuk Arduvaz & Titanyum (Slate & Zinc) */
+    --rbn-slate-50:      #f8fafc;
+    --rbn-slate-100:     #f1f5f9;
+    --rbn-slate-200:     #e2e8f0;
+    --rbn-slate-300:     #cbd5e1;
+    --rbn-slate-400:     #94a3b8;
+    --rbn-slate-500:     #64748b;
+    --rbn-slate-600:     #475569;
+    --rbn-slate-700:     #334155;
+    --rbn-slate-800:     #1e293b;
+    --rbn-slate-900:     #0f172a;
+    --rbn-slate-950:     #020617;
+
+    /* 🌈 9. RBN Sovereign 24 Rainbow Color Pairs (From RbnAdmin Heritage) */
+    --rbn-cyan:          #00acc1;
+    --rbn-cyan-light:    #e0f7fa;
+    --rbn-cyan-dark:     #006064;
+    --rbn-cyan-border:   #b2ebf2;
+
+    --rbn-teal:          #0d9488;
+    --rbn-teal-light:    #ccfbf1;
+    --rbn-teal-dark:     #0f766e;
+    --rbn-teal-border:   #99f6e4;
+
+    --rbn-rose:          #e11d48;
+    --rbn-rose-light:    #ffe4e6;
+    --rbn-rose-dark:     #9f1239;
+    --rbn-rose-border:   #fecdd3;
+
+    --rbn-lime:          #65a30d;
+    --rbn-lime-light:    #f7fee7;
+    --rbn-lime-dark:     #4d7c0f;
+    --rbn-lime-border:   #d9f99d;
+
+    --rbn-purple:        #8b5cf6;
+    --rbn-purple-light:  #f3e8ff;
+    --rbn-purple-dark:   #5b21b6;
+    --rbn-purple-border: #e9d5ff;
+
+    --rbn-coral:         #ea580c;
+    --rbn-coral-light:   #ffedd5;
+    --rbn-coral-dark:    #c2410c;
+    --rbn-coral-border:  #fed7aa;
+
+    --rbn-fuchsia:       #d946ef;
+    --rbn-fuchsia-light: #fae8ff;
+    --rbn-fuchsia-dark:  #86198f;
+    --rbn-fuchsia-border:#f5d0fe;
+
+    --rbn-sky:           #0284c7;
+    --rbn-sky-light:     #e0f2fe;
+    --rbn-sky-dark:      #0369a1;
+    --rbn-sky-border:    #bae6fd;
+
+    --rbn-pink:          #db2777;
+    --rbn-pink-light:    #fce7f3;
+    --rbn-pink-dark:     #831843;
+    --rbn-pink-border:   #fbcfe8;
+
+    /* 🍷 Crimson / Tok Kiremit */
+    --rbn-crimson-50:    #fdf2f2;
+    --rbn-crimson-100:   #fde8e8;
+    --rbn-crimson-200:   #fbd5d5;
+    --rbn-crimson-300:   #f8b4b4;
+    --rbn-crimson-400:   #f98080;
+    --rbn-crimson-500:   #991b1b;
+    --rbn-crimson-600:   #7f1d1d;
+    --rbn-crimson-700:   #5b1414;
+    --rbn-crimson:       #991b1b;
+    --rbn-crimson-light: #fde8e8;
+    --rbn-crimson-dark:  #7f1d1d;
+    --rbn-crimson-border:#fbd5d5;
+
+    /* ⚪⚫ 10. Mutlak Saf Renkler */
+    --rbn-white:         #ffffff;
+    --rbn-black:         #000000;
+    --rbn-transparent:   transparent;
+}

@@ -1,0 +1,129 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * RBN Framework CLI Tool - Modular Edition
+ * Version 2.2 (Paths-Powered)
+ */
+
+define('RBN_CLI', true);
+
+// 1. Initial Discovery (To find the autoloader)
+$basePath = __DIR__;
+$autoloader = $basePath . '/vendor/autoload.php';
+
+if (!file_exists($autoloader)) {
+    die("\e[31m[Critical Error]\e[0m RBN Autoloader not found at: {$autoloader}\n");
+}
+
+// 2. Load Environment & Paths
+require_once $autoloader;
+
+use Rbn\Framework\Core\System\Paths\Paths;
+use Rbn\Framework\Core\Base\Services\BaseService;
+use Rbn\Framework\Core\System\Kernel\Stages\Autoload;
+use Rbn\Framework\Core\System\Kernel\Stages\ProjectDiscovery;
+use Rbn\Framework\Core\System\Config\Env;
+
+// 3. Early Framework Initialization (Always initialize Paths first)
+$frameworkDir = Paths::frameworkRoot();
+
+// 4. Parse Args
+$projectKey = null;
+$isMasterMode = false;
+
+foreach ($argv as $arg) {
+    if (strpos($arg, '--project=') === 0) {
+        $projectKey = substr($arg, 10);
+    }
+    if ($arg === '--master') {
+        $isMasterMode = true;
+    }
+}
+
+// 5. Determine Command Type & Automatic Master Mode
+$command = $argv[1] ?? 'list';
+$masterCommands = [
+    'list',
+    '--help',
+    '-h',
+    'system:cron',
+    'project:list',
+    'db:info',
+    'db:query',
+    'db:schema',
+    'db:tables',
+    'cache:clear',
+    'logs:clear',
+    'tmp:clear',
+    'system:doctor',
+    'doctor',
+    // [FW-LICENCE] Master migration komutlari master DB'sine baglanir.
+    'master:migrate',
+    'master:migrate:status'
+];
+
+if (in_array($command, $masterCommands)) {
+    $isMasterMode = true;
+}
+
+try {
+    // 6. Autoritative Path Resolution (Single Authority Standards) 🏺⚖️🛡️⚓
+    $workspace = Paths::workspace();
+    $projectRoot = null;
+    $publicPath = null;
+
+    if ($projectKey) {
+        $pData = ProjectDiscovery::getProjectData(null, $projectKey);
+        if (empty($pData)) {
+            echo "\e[31m[Hata]\e[0m '{$projectKey}' adında bir proje bulunamadı!\n";
+            echo "Lütfen geçerli bir project_key belirtin (Örn: --project=rbncore, --project=rbnbilisim)\n";
+            exit(1);
+        }
+
+        if (!empty($pData['custom_path'])) {
+            $projectRoot = $workspace . DIRECTORY_SEPARATOR . 'projects' . DIRECTORY_SEPARATOR . ltrim($pData['custom_path'], './\\');
+        } else {
+            $projectRoot = $workspace . DIRECTORY_SEPARATOR . 'projects' . DIRECTORY_SEPARATOR . $projectKey;
+        }
+        $publicPath = $projectRoot;
+    } else {
+        $cwd = getcwd();
+        if (basename($cwd) === 'public') {
+            $publicPath = $cwd;
+            $projectRoot = dirname($cwd);
+        } else {
+            $projectRoot = $workspace . DIRECTORY_SEPARATOR . 'tmp';
+            $publicPath = $frameworkDir;
+        }
+    }
+
+    // Always initialize Paths with the identified (or fallback) project root
+    Paths::init($projectRoot, $publicPath);
+
+    // [RBN 3.5 SSoT] Boot project & framework autoloader via Kernel Autoload stage
+    Autoload::boot();
+
+    require_once $frameworkDir . '/Core/Support/Bridges/Helpers/rbn_helpers.php';
+    $cli = BaseService::get()->service('rbncli');
+    if (!$cli) {
+        throw new \Exception("RbnCli service not registered in Engine.");
+    }
+    $cli->run($argv);
+    exit(0);
+
+} catch (\Throwable $e) {
+    echo "\e[31m[CLI Error]\e[0m " . $e->getMessage() . "\n";
+
+    // Log exception to cli
+    $logs = BaseService::get()->logs();
+    if ($logs) {
+        $logs->channel('cli')->logException($e, "CLI Master Exception");
+    }
+
+    // [FW-ENV-KAYIT-160] TEK okuyucu: `Env::string('APP_ENV')`.
+    if (Env::string('APP_ENV') === 'development') {
+        echo "Source: " . $e->getFile() . ":" . $e->getLine() . "\n";
+    }
+    exit(1);
+}

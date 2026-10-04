@@ -1,0 +1,799 @@
+/* 1. ADMIN CRAFT WARM NAVBAR & STATUS WIDGETS */
+.rbn-dash-navbar {
+    background: var(--rbn-admin-canvas, #f3e9d8) !important;
+    border-bottom: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+    box-shadow: 0 1px 6px rgba(60, 50, 40, 0.04) !important;
+}
+
+.rbn-dash-toggle-btn,
+.rbn-dash-navbar-btn {
+    background: var(--rbn-admin-surface, #fbf9f5) !important;
+    border: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+    border-radius: 9999px !important;
+    color: var(--rbn-admin-text-body, #3c3834) !important;
+    box-shadow: 0 1px 3px rgba(60, 50, 40, 0.04) !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.rbn-dash-toggle-btn:hover,
+.rbn-dash-navbar-btn:hover {
+    background: #b39f82 !important;
+    border-color: #b39f82 !important;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(179, 159, 130, 0.4) !important;
+}
+
+.rbn-admin-status-group {
+    background: var(--rbn-admin-surface, #fbf9f5) !important;
+    border: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+    border-radius: 9999px;
+    height: 36px;
+    padding: 0 4px;
+    box-shadow: 0 1px 3px rgba(60, 50, 40, 0.03);
+}
+
+.rbn-admin-status-indicator,
+.rbn-admin-time-indicator {
+    display: flex;
+    align-items: center;
+    color: var(--rbn-admin-text-muted, #79716b) !important;
+    font-size: 0.8125rem;
+    font-weight: 500;
+}
+
+.rbn-admin-site-pill {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(179, 159, 130, 0.18) !important;
+    border: 1px solid rgba(179, 159, 130, 0.35) !important;
+    border-radius: 9999px;
+    color: #8c785d !important;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 700;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    height: 28px;
+    padding: 0 0.85rem;
+}
+
+.rbn-admin-site-pill:hover {
+    background: #b39f82 !important;
+    color: #ffffff !important;
+    border-color: #b39f82 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(179, 159, 130, 0.35);
+}
+
+/* 2. ADMIN PROJECT SWITCHER PILL (Craft Terracotta Selector) */
+.rbn-admin-project-switcher-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.45rem 1.15rem;
+    background: var(--rbn-admin-surface, #fbf9f5) !important;
+    border: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+    border-radius: 9999px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--rbn-admin-text-display, #1e1b18) !important;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 1px 3px rgba(60, 50, 40, 0.04);
+}
+
+.rbn-admin-project-switcher-btn i {
+    color: #b39f82 !important;
+}
+
+.rbn-admin-project-switcher-btn:hover {
+    border-color: #b39f82 !important;
+    background: #ffffff !important;
+    color: #b39f82 !important;
+    box-shadow: 0 4px 12px rgba(179, 159, 130, 0.25);
+    transform: translateY(-1px);
+}
+
+.rbn-admin-project-switcher-btn::after {
+    display: none !important;
+}
+
+/* 3. ADMIN USER PROFILE PILL */
+.rbn-admin-user-profile {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.3rem 0.85rem 0.3rem 0.4rem;
+    background: var(--rbn-admin-surface, #fbf9f5) !important;
+    border: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    color: var(--rbn-admin-text-display, #1e1b18) !important;
+    font-size: 0.8125rem;
+    box-shadow: 0 1px 3px rgba(60, 50, 40, 0.04);
+}
+
+.rbn-admin-user-profile:hover {
+    border-color: #b39f82 !important;
+    background: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(179, 159, 130, 0.25);
+    transform: translateY(-1px);
+}
+
+.rbn-admin-user-profile::after {
+    display: none !important;
+}
+
+.rbn-admin-user-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #b39f82 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.rbn-admin-avatar-username {
+    font-weight: 600;
+    color: var(--rbn-admin-text-display, #1e1b18) !important;
+}
+
+/* 4. ADMIN CRAFT DROPDOWNS & NOTIFICATION ITEMS */
+.rbn-dropdown-menu,
+.dropdown-menu {
+    background: var(--rbn-admin-surface, #fbf9f5) !important;
+    border: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 10px 30px -5px rgba(60, 50, 40, 0.12), 0 0 0 1px rgba(60, 50, 40, 0.04) !important;
+    padding: 8px !important;
+    min-width: 240px !important;
+    max-height: none !important;
+    overflow-y: visible !important;
+    z-index: 1060 !important;
+}
+
+/* Yalnızca çok uzun liste içeren bildirim ve mesaj açılır menülerinde dikey kaydırmaya izin ver */
+.rbn-dropdown-menu.has-scroll,
+.dropdown-menu[aria-labelledby="notificationDropdown"],
+.dropdown-menu[aria-labelledby="messagesDropdown"] {
+    max-height: 380px !important;
+    overflow-y: auto !important;
+}
+
+.rbn-dropdown-menu.dropdown-menu-end,
+.dropdown-menu.dropdown-menu-end {
+    left: auto !important;
+    right: 0 !important;
+}
+
+.rbn-dropdown-header,
+.dropdown-header {
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    color: var(--rbn-admin-text-muted, #79716b) !important;
+    padding: 8px 12px 6px 12px !important;
+}
+
+.rbn-dropdown-item,
+.dropdown-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 8px 12px !important;
+    border-radius: 10px !important;
+    color: var(--rbn-admin-text-display, #1e1b18) !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    transition: all 0.15s ease !important;
+    white-space: normal !important;
+}
+
+.rbn-dropdown-item > i,
+.dropdown-item > i {
+    font-size: 1.25rem !important;
+    flex-shrink: 0 !important;
+    width: 28px !important;
+    height: 28px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 8px !important;
+    background: var(--rbn-terracotta-subtle, rgba(197, 106, 60, 0.1)) !important;
+    color: var(--rbn-terracotta, #c56a3c) !important;
+}
+
+.rbn-dropdown-item:hover,
+.dropdown-item:hover {
+    background: var(--rbn-terracotta-subtle, rgba(197, 106, 60, 0.1)) !important;
+    color: var(--rbn-terracotta, #c56a3c) !important;
+    transform: translateX(2px);
+}
+
+/* Navbar Exlusive Dropdown Hover (Warm Taupe Style) */
+.rbn-dash-navbar .rbn-dropdown-item:hover,
+.rbn-dash-navbar .dropdown-item:hover,
+.rbn-admin-navbar .rbn-dropdown-item:hover,
+.rbn-admin-navbar .dropdown-item:hover {
+    background: rgba(179, 159, 130, 0.18) !important;
+    color: #8c785d !important;
+    transform: translateX(2px);
+}
+
+.rbn-dash-navbar .rbn-dropdown-item:hover > i,
+.rbn-dash-navbar .dropdown-item:hover > i,
+.rbn-admin-navbar .rbn-dropdown-item:hover > i,
+.rbn-admin-navbar .dropdown-item:hover > i {
+    background: #b39f82 !important;
+    color: #ffffff !important;
+}
+
+.rbn-dropdown-item.active,
+.dropdown-item.active {
+    background: #b39f82 !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    border-radius: 10px !important;
+}
+
+.rbn-dropdown-item.active span,
+.dropdown-item.active span {
+    color: #ffffff !important;
+}
+
+.rbn-dropdown-item.active i,
+.dropdown-item.active i {
+    color: #ffffff !important;
+    background: transparent !important;
+}
+
+.rbn-dropdown-item.active .ri-check-line,
+.dropdown-item.active .ri-check-line {
+    background: rgba(0, 0, 0, 0.12) !important;
+    color: #ffffff !important;
+    width: 24px !important;
+    height: 24px !important;
+    border-radius: 6px !important;
+    font-size: 1rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Notification & Message Dropdown Components (Exact Match with User Dropdown) */
+.notification-icon {
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 8px !important;
+    background: var(--rbn-terracotta-subtle, rgba(197, 106, 60, 0.1)) !important;
+    color: var(--rbn-terracotta, #c56a3c) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    font-size: 1.1rem !important;
+    transition: all 0.2s ease !important;
+}
+
+.notification-content {
+    flex: 1;
+}
+
+.rbn-dropdown-item:hover .notification-icon,
+.dropdown-item:hover .notification-icon {
+    background: #b39f82 !important;
+    color: #ffffff !important;
+}
+
+/* Empty State inside Dropdowns */
+.dropdown-item-text.empty-state {
+    padding: 1.5rem 1rem !important;
+    text-align: center !important;
+    color: var(--rbn-admin-text-muted, #79716b) !important;
+}
+
+.dropdown-item-text.empty-state i {
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 10px !important;
+    background: var(--rbn-terracotta-subtle, rgba(197, 106, 60, 0.1)) !important;
+    color: var(--rbn-terracotta, #c56a3c) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.35rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.dropdown-item-text.empty-state p {
+    margin: 0 !important;
+    font-size: 0.8125rem !important;
+    font-weight: 500 !important;
+    color: var(--rbn-admin-text-muted, #79716b) !important;
+}
+
+.rbn-dropdown-item .item-title,
+.dropdown-item .item-title {
+    font-weight: 600 !important;
+    font-size: 0.86rem !important;
+    color: var(--rbn-admin-text-display, #1e1b18) !important;
+}
+
+.rbn-dropdown-item .item-desc,
+.dropdown-item .item-desc {
+    font-size: 0.75rem !important;
+    color: var(--rbn-admin-text-muted, #79716b) !important;
+    margin-top: 1px !important;
+}
+
+.rbn-dropdown-divider,
+.dropdown-divider {
+    border-color: var(--rbn-admin-border-subtle, #e5ded3) !important;
+    margin: 6px 0 !important;
+}
+
+/* 5. ADMIN THEME CUSTOMIZER DRAWER PANEL */
+.rbn-theme-customizer-panel {
+    width: 320px !important;
+    background: #ffffff;
+    border-left: 1px solid #eaecf0;
+    box-shadow: -10px 0 30px rgba(15, 23, 42, 0.1);
+}
+
+.rbn-preset-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.rbn-preset-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #f8fafc;
+    position: relative;
+}
+
+.rbn-preset-card:hover {
+    border-color: var(--rbn-primary, #f59e0b);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.rbn-preset-card.active {
+    border-color: var(--rbn-primary, #f59e0b);
+    background: #ffffff;
+    box-shadow: 0 0 0 2px var(--rbn-primary, #f59e0b);
+}
+
+.rbn-preset-card.active::after {
+    content: '✓';
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--rbn-primary, #f59e0b);
+}
+
+.rbn-preset-card .rbn-color-split {
+    display: flex;
+    height: 24px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 6px;
+}
+
+.rbn-preset-card .p-color,
+.rbn-preset-card .s-color {
+    flex: 1;
+    height: 100%;
+}
+
+.rbn-preset-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--rbn-text-primary, #0f172a);
+}
+
+.rbn-theme-color-picker {
+    width: 48px !important;
+    height: 38px !important;
+    padding: 2px !important;
+    border-radius: var(--rbn-radius-md, 8px) !important;
+    border: 1px solid var(--rbn-border, #e2e8f0) !important;
+    cursor: pointer;
+    background: transparent;
+}
+
+.rbn-theme-hex-input {
+    font-family: var(--rbn-font-mono, monospace);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.rbn-btn-close {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    color: var(--rbn-text-muted, #94a3b8);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+}
+
+.rbn-btn-close:hover {
+    background: #f1f5f9;
+    color: var(--rbn-text-primary, #0f172a);
+}
+
+/* 5. ADMIN SIDEBAR FOOTER ACTIONS */
+.rbn-admin-sidebar-footer {
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid var(--rbn-dash-sidebar-border, rgba(255, 255, 255, 0.08));
+}
+
+.rbn-admin-theme-toggle {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.85);
+    border-radius: var(--rbn-radius-md, 8px);
+    padding: 0.5rem 0.75rem;
+    font-size: 0.825rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.rbn-admin-theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+.rbn-admin-dev-group {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: 4px;
+}
+
+.rbn-admin-dev-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    border-radius: var(--rbn-radius-md, 8px);
+    text-decoration: none;
+    font-size: 1.05rem;
+    transition: all 0.2s ease;
+}
+
+.rbn-admin-dev-btn:hover,
+.rbn-admin-dev-btn.active {
+    background: var(--rbn-terracotta, #c56a3c) !important;
+    border-color: var(--rbn-terracotta, #c56a3c) !important;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(197, 106, 60, 0.4) !important;
+}
+
+/* Collapsed Sidebar Rules for Footer Actions */
+.rbn-dash-sidebar.collapsed .rbn-admin-sidebar-footer {
+    padding: 0.75rem 0.5rem !important;
+}
+
+.rbn-dash-sidebar.collapsed .rbn-admin-theme-toggle {
+    padding: 0.5rem 0;
+    justify-content: center !important;
+}
+
+.rbn-dash-sidebar.collapsed .rbn-admin-dev-group {
+    flex-direction: column !important;
+    gap: 0.4rem !important;
+}
+
+.rbn-dash-sidebar.collapsed .rbn-admin-dev-btn {
+    width: 100% !important;
+    height: 34px;
+}
+
+/* 6. ADMIN CRAFT & TERRACOTTA SIDEBAR STYLING */
+.rbn-dash-sidebar {
+    background: var(--rbn-admin-sidebar-bg, #1a1d24) !important;
+    border-right: 1px solid var(--rbn-admin-sidebar-border, rgba(255, 255, 255, 0.08)) !important;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+.rbn-dash-sidebar-header {
+    background: transparent !important;
+    border-bottom: 1px solid var(--rbn-admin-sidebar-border, rgba(255, 255, 255, 0.08)) !important;
+    padding: 1.25rem 1.5rem !important;
+}
+
+.rbn-dash-sidebar-brand {
+    color: #ffffff !important;
+    font-weight: 800 !important;
+    font-size: 1.15rem !important;
+    letter-spacing: -0.01em;
+}
+
+.rbn-dash-sidebar-brand i {
+    color: var(--rbn-terracotta, #c56a3c) !important;
+}
+
+.rbn-dash-section-header {
+    color: #838d9e !important;
+    font-size: 0.6875rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    padding: 0.85rem 1.25rem 0.35rem 1.25rem !important;
+}
+
+.rbn-dash-nav-link {
+    color: var(--rbn-admin-sidebar-text, #9ba3af) !important;
+    font-weight: 500 !important;
+    font-size: 0.86rem !important;
+    border-radius: 9999px !important;
+    margin: 3px 12px !important;
+    padding: 0.65rem 1.1rem !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.rbn-dash-nav-link i {
+    font-size: 1.15rem !important;
+    color: #788294 !important;
+    transition: color 0.2s ease, transform 0.2s ease !important;
+    margin-right: 0.65rem !important;
+}
+
+.rbn-dash-nav-link:hover {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    transform: translateX(3px);
+}
+
+.rbn-dash-nav-link:hover i {
+    color: #ffffff !important;
+    transform: scale(1.08);
+}
+
+.rbn-dash-nav-link.active {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    background: var(--rbn-admin-sidebar-pill-bg, #c56a3c) !important;
+    box-shadow: 0 4px 14px rgba(197, 106, 60, 0.4) !important;
+    border: none !important;
+}
+
+.rbn-dash-nav-link.active i {
+    color: #ffffff !important;
+}
+
+/* 7. ADMIN CRAFT CANVAS & FLOATING NAVBAR */
+.rbn-dash-content {
+    background: var(--rbn-admin-canvas, #f3e9d8) !important;
+    background-image: 
+        radial-gradient(rgba(60, 50, 40, 0.04) 1px, transparent 1px) !important;
+    background-size: 24px 24px !important;
+    height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+}
+
+.rbn-dash-main-scroll {
+    flex: 1 1 auto;
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+    min-height: 0;
+}
+
+.rbn-dash-navbar {
+    background: rgba(243, 238, 230, 0.88) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border-bottom: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+    box-shadow: 0 1px 4px rgba(60, 50, 40, 0.04) !important;
+}
+
+/* 8. ADMIN CRAFT EDITORIAL HEADINGS */
+.rbn-dash-header-icon {
+    width: 46px !important;
+    height: 46px !important;
+    background: var(--rbn-admin-surface, #fbf9f5) !important;
+    border: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+    border-radius: 10px !important;
+    color: var(--rbn-craft-russet, #c56a3c) !important;
+    box-shadow: 0 1px 3px rgba(60, 50, 40, 0.04) !important;
+}
+
+.rbn-dash-header-icon i {
+    color: var(--rbn-craft-russet, #c56a3c) !important;
+}
+
+.rbn-dash-page-title {
+    font-family: var(--rbn-font-display, "DM Serif Display", serif) !important;
+    font-size: 2.15rem !important;
+    font-weight: 400 !important;
+    color: var(--rbn-admin-text-display, #111827) !important;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+}
+
+.rbn-dash-page-desc {
+    color: var(--rbn-admin-text-muted, #79716b) !important;
+    font-size: 0.875rem !important;
+}
+
+/* 9. ADMIN CARDS BASE (Surface Layout - 8pt Grid) */
+.rbn-card,
+.card {
+    background: var(--rbn-admin-surface, #fbf9f5) !important;
+    border: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 6px rgba(60, 50, 40, 0.03) !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.rbn-card:hover,
+.card:hover {
+    border-color: var(--rbn-admin-border-strong, #d5cbbf) !important;
+    box-shadow: 0 8px 20px -4px rgba(60, 50, 40, 0.08) !important;
+    transform: translateY(-2px);
+}
+
+.rbn-card-title,
+.card-title,
+.rbn-card h5,
+.rbn-card h6,
+.card h5,
+.card h6 {
+    font-family: var(--rbn-font-display, "DM Serif Display", serif) !important;
+    font-size: 1.25rem !important;
+    font-weight: 400 !important;
+    color: var(--rbn-admin-text-display, #111827) !important;
+    letter-spacing: -0.01em !important;
+    line-height: 1.3 !important;
+}
+
+.rbn-card h6 i,
+.card h6 i,
+.rbn-card h5 i,
+.card h5 i {
+    font-size: 1.35rem !important;
+    vertical-align: -2px !important;
+}
+
+/* 10. ADMIN CRAFT BREADCRUMB */
+.rbn-dash-breadcrumb ol,
+.rbn-dash-breadcrumb ul {
+    background: var(--rbn-admin-surface, #fbf9f5) !important;
+    border: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+    border-radius: 9999px !important;
+    padding: 0.4rem 0.95rem !important;
+    box-shadow: 0 1px 3px rgba(60, 50, 40, 0.04) !important;
+    color: var(--rbn-admin-text-muted, #79716b) !important;
+    list-style: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    margin: 0 !important;
+}
+
+.rbn-dash-breadcrumb li {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.rbn-dash-breadcrumb a {
+    color: var(--rbn-admin-text-muted, #79716b) !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    transform: none !important;
+    transition: color 0.15s ease !important;
+}
+
+.rbn-dash-breadcrumb a:hover {
+    color: var(--rbn-craft-russet, #c56a3c) !important;
+}
+
+.rbn-dash-breadcrumb li.active,
+.rbn-dash-breadcrumb li:last-child,
+.rbn-dash-breadcrumb span {
+    color: var(--rbn-admin-text-display, #111827) !important;
+    font-weight: 600 !important;
+    background: transparent !important;
+}
+
+/* 11. ADMIN CRAFT ACTION BUTTONS (Yenile, Geri Dön vb.) */
+.rbn-dash-action-btn {
+    background: var(--rbn-admin-surface, #fbf9f5) !important;
+    border: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+    border-radius: 8px !important;
+    color: var(--rbn-admin-text-body, #1e1b18) !important;
+    height: 34px !important;
+    padding: 0 0.95rem !important;
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    line-height: 1 !important;
+    box-shadow: 0 1px 3px rgba(60, 50, 40, 0.04) !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    text-decoration: none !important;
+}
+
+.rbn-dash-action-btn:hover {
+    background: var(--rbn-craft-russet, #c56a3c) !important;
+    border-color: var(--rbn-craft-russet, #c56a3c) !important;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(197, 106, 60, 0.3) !important;
+}
+
+.rbn-dash-action-btn i {
+    color: var(--rbn-craft-russet, #c56a3c) !important;
+    font-size: 0.9rem !important;
+    transition: color 0.2s ease !important;
+}
+
+.rbn-dash-action-btn:hover i {
+    color: #ffffff !important;
+}
+
+/* 12. ADMIN FOOTER & DEVELOPER LINK 📜 */
+.rbn-dash-footer {
+    background: var(--rbn-admin-surface, #fbf9f5) !important;
+    border-top: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+    color: var(--rbn-admin-text-muted, #79716b) !important;
+    padding: 1rem 1.5rem !important;
+    margin-top: auto !important;
+    width: 100% !important;
+    flex-shrink: 0 !important;
+    box-shadow: 0 -1px 3px rgba(60, 50, 40, 0.03) !important;
+}
+
+.rbn-footer-developer {
+    color: var(--rbn-admin-text-muted, #79716b) !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    transition: color 0.15s ease !important;
+}
+
+.rbn-footer-developer:hover {
+    color: var(--rbn-craft-russet, #c56a3c) !important;
+}
+
+/* 13. ADMIN SPECIFIC MOBILE PROFILE OVERRIDES */
+@media (max-width: 767.98px) {
+    .rbn-admin-user-profile {
+        padding: 2px !important;
+        border-radius: 50% !important;
+    }
+}

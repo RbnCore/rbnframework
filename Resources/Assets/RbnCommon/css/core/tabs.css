@@ -1,0 +1,152 @@
+/* ==========================================================================
+   RBN CORE: TABS & NAVIGATION (core/tabs.css) 🗂️⚡
+   %100 Sovereign Token-Driven Tabs Engine (Line & Pill Styles)
+   ========================================================================== */
+
+/* 1. Base Nav Container */
+.rbn-nav,
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+    gap: var(--rbn-space-2, 8px);
+}
+
+.rbn-nav-item,
+.nav-item {
+    display: inline-block;
+}
+
+/* 2. Base Nav Link */
+.rbn-nav .rbn-nav-link,
+.nav .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--rbn-space-2, 8px);
+    padding: var(--rbn-space-3, 10px) var(--rbn-space-4, 16px);
+    font-family: var(--rbn-font-sans, inherit);
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--rbn-text-secondary, #64748b);
+    text-decoration: none;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--rbn-radius-sm, 8px);
+    transition: all 0.16s ease;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+}
+
+/* Nav Link Hover - Yalnızca Tab/Nav bileşenleri içindeyken (Navbar dışındayken) zemin uygular */
+.nav:not(.navbar-nav) .nav-link:hover,
+.rbn-nav:not(.navbar-nav) .rbn-nav-link:hover {
+    color: var(--rbn-primary, #2563eb);
+    background: var(--rbn-bg-surface-hover, #f8fafc);
+}
+
+.navbar-nav .nav-link,
+.navbar-nav .rbn-nav-link {
+    background: transparent !important;
+}
+
+.rbn-nav-link:disabled,
+.nav-link.disabled {
+    color: var(--rbn-text-muted, #94a3b8);
+    pointer-events: none;
+    cursor: default;
+}
+
+/* ==========================================================================
+   3. UNDERLINE TABS (.rbn-nav-tabs & .nav-tabs)
+   ========================================================================== */
+.rbn-nav-tabs,
+.nav-tabs {
+    border-bottom: 1px solid var(--rbn-border, #e2e8f0);
+    gap: var(--rbn-space-4, 16px);
+}
+
+.rbn-nav-tabs .rbn-nav-link,
+.nav-tabs .nav-link {
+    border-radius: 0;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: var(--rbn-space-3, 12px) var(--rbn-space-2, 8px);
+    margin-bottom: -1px;
+    background: transparent;
+}
+
+.rbn-nav-tabs .rbn-nav-link:hover,
+.nav-tabs .nav-link:hover {
+    color: var(--rbn-text-primary, #0f172a);
+    border-bottom-color: var(--rbn-border-strong, #cbd5e1);
+    background: transparent;
+}
+
+.rbn-nav-tabs .rbn-nav-link.active,
+.nav-tabs .nav-link.active {
+    color: var(--rbn-primary, #2563eb);
+    border-bottom-color: var(--rbn-primary, #2563eb);
+    font-weight: 700;
+    background: transparent;
+}
+
+/* ==========================================================================
+   4. PILL TABS (.rbn-nav-pills & .nav-pills)
+   ========================================================================== */
+.rbn-nav-pills,
+.nav-pills {
+    background: var(--rbn-bg-inset, var(--rbn-slate-100, #f1f5f9));
+    border: 1px solid var(--rbn-border, transparent);
+    padding: 4px;
+    border-radius: var(--rbn-radius-md, 10px);
+    display: inline-flex;
+    gap: 4px;
+}
+
+.rbn-nav-pills .rbn-nav-item,
+.nav-pills .nav-item {
+    display: flex;
+}
+
+.rbn-nav-pills .rbn-nav-link,
+.nav-pills .nav-link {
+    border-radius: var(--rbn-radius-sm, 6px);
+    padding: 8px 16px;
+    font-size: 0.86rem;
+    font-weight: 600;
+    justify-content: center;
+    text-align: center;
+    border: none;
+    background: transparent;
+    color: var(--rbn-text-muted, #8C8C82);
+    transition: all 0.15s ease;
+}
+
+.rbn-nav-pills .rbn-nav-link:hover,
+.nav-pills .nav-link:hover {
+    color: var(--rbn-text-primary, #FAF9F5);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.rbn-nav-pills .rbn-nav-link.active,
+.nav-pills .nav-link.active {
+    color: var(--rbn-text-primary, #0f172a);
+    background: var(--rbn-bg-surface, #ffffff);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    font-weight: 700;
+}
+
+/* 5. Tab Content Panes */
+.rbn-tab-content > .rbn-tab-pane,
+.tab-content > .tab-pane {
+    display: none;
+}
+
+.rbn-tab-content > .rbn-tab-pane.active,
+.tab-content > .tab-pane.active {
+    display: block;
+    animation: rbnFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}

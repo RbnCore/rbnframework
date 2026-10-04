@@ -1,0 +1,388 @@
+:root {
+    --rbn-modal-radius: var(--rbn-radius-lg, 1.25rem);
+    --rbn-modal-bg: var(--rbn-bg-surface, #ffffff);
+    --rbn-modal-header-bg: var(--rbn-bg-muted, #f8fafc);
+    --rbn-modal-footer-bg: var(--rbn-bg-subtle, #f8fafc);
+    --rbn-modal-border: var(--rbn-border, #eaecf0);
+    --rbn-modal-text-display: var(--rbn-text-display, #101828);
+    --rbn-modal-text-body: var(--rbn-text-body, #475467);
+    --rbn-modal-accent: var(--rbn-primary, #c56a3c);
+    --rbn-modal-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+/* Base Modal Container */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1055;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline: 0;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.22s ease, visibility 0.22s ease;
+}
+
+.modal.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+}
+
+.modal-dialog {
+    position: relative;
+    width: 100%;
+    max-width: 580px;
+    margin: auto;
+    pointer-events: none;
+}
+
+.modal-dialog.modal-sm { max-width: 400px; }
+.modal-dialog.modal-md { max-width: 580px; }
+.modal-dialog.modal-lg { max-width: 800px; }
+.modal-dialog.modal-xl { max-width: 1020px; }
+
+.modal-dialog .modal-content {
+    pointer-events: auto;
+}
+
+/* The Container */
+.modal .modal-content {
+    border: 1px solid var(--rbn-modal-border);
+    border-radius: 20px !important;
+    box-shadow: var(--rbn-modal-shadow);
+    background: var(--rbn-modal-bg);
+    overflow: visible !important;
+    position: relative;
+}
+
+/* Modal Header - Elegant & Minimal */
+.modal .modal-header {
+    border-bottom: 1px solid var(--rbn-modal-border);
+    background: var(--rbn-modal-header-bg);
+    padding: 1.1rem 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top-left-radius: 19px !important;
+    border-top-right-radius: 19px !important;
+}
+
+.modal .modal-title {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--rbn-modal-text-display);
+    display: flex;
+    align-items: center;
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+.modal .modal-title::before {
+    content: '';
+    width: 4px;
+    height: 18px;
+    background: var(--rbn-modal-accent);
+    margin-right: 10px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+/* Close Button */
+.modal .btn-close {
+    background-color: transparent;
+    opacity: 0.6;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='18' height='18' fill='%23666666'%3E%3Cpath d='M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z'%3E%3C/path%3E%3C/svg%3E");
+    background-size: 1.1rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 32px;
+    height: 32px;
+}
+
+.modal .btn-close:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+    opacity: 1;
+    transform: rotate(90deg);
+}
+
+/* Modal Body */
+.modal .modal-body {
+    padding: 1.5rem 1.6rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--rbn-modal-text-body);
+    background: var(--rbn-modal-bg);
+}
+
+.modal .modal-content > .modal-body {
+    padding: 0 !important;
+    background: transparent !important;
+}
+
+.modal .modal-body > form > .modal-body {
+    padding: 1.5rem 1.6rem !important;
+    background: transparent !important;
+}
+
+/* Modal Footer */
+.modal .modal-footer,
+.modal form > .modal-footer {
+    border-top: 1px solid var(--rbn-modal-border) !important;
+    padding: 1.1rem 1.6rem !important;
+    background: var(--rbn-modal-footer-bg, #f4ede2) !important;
+    border-bottom-left-radius: var(--rbn-modal-radius, 19px) !important;
+    border-bottom-right-radius: var(--rbn-modal-radius, 19px) !important;
+    margin: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Modal Action Buttons */
+.modal .modal-footer .rbn-btn-outline {
+    background: var(--rbn-alert-btn-cancel-bg, #ffffff) !important;
+    border: 1px solid var(--rbn-alert-btn-cancel-border, #d5cbbf) !important;
+    color: var(--rbn-alert-btn-cancel-text, #574e44) !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+}
+
+.modal .modal-footer .rbn-btn-outline:hover {
+    background: var(--rbn-alert-btn-cancel-hover, #e5ded3) !important;
+}
+
+.modal .modal-footer .rbn-btn-primary {
+    background: var(--rbn-alert-btn-confirm-bg, var(--rbn-primary, #c56a3c)) !important;
+    border-color: var(--rbn-alert-btn-confirm-border, var(--rbn-primary, #c56a3c)) !important;
+    color: var(--rbn-alert-btn-confirm-text, #ffffff) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.modal .modal-footer .rbn-btn-primary:hover {
+    background: var(--rbn-primary-hover, #b05c30) !important;
+    border-color: var(--rbn-primary-hover, #b05c30) !important;
+    transform: translateY(-1px);
+}
+
+/* Animations & Transitions (Clean, Fast & Crisp) */
+.modal {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.16s cubic-bezier(0, 0, 0.2, 1), visibility 0.16s ease;
+}
+
+.modal.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.modal .modal-dialog {
+    transform: scale(0.97) translateY(8px);
+    transition: transform 0.16s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.modal.show .modal-dialog {
+    transform: scale(1) translateY(0) !important;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1050;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(30, 25, 20, 0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.16s ease;
+}
+
+.modal-backdrop.show {
+    opacity: 1 !important;
+}
+
+/* Custom Scrollbar for Modal Body */
+#universalRbnModal .modal-body::-webkit-scrollbar,
+.rbn-universal-modal .modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* ===============================================
+   Standardized Premium Dropdowns for Modals
+   =============================================== */
+.rbn-modal-dropdown .dropdown-toggle {
+    width: 100%;
+    padding: 0.6rem 1.25rem;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 0.5rem !important;
+    /* Standart inputlarla aynı (No Pill) */
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #374151;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.rbn-modal-dropdown .dropdown-toggle:hover,
+.rbn-modal-dropdown .dropdown-toggle[aria-expanded="true"] {
+    border-color: var(--rbn-modal-accent) !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.rbn-modal-dropdown .dropdown-toggle::after {
+    display: none !important;
+    /* Çift ok sorununu çözer */
+}
+
+.rbn-modal-dropdown .dropdown-menu {
+    background-color: var(--rbn-modal-bg, #fbf9f5) !important;
+    border: 2px solid var(--rbn-modal-border, #14110c) !important;
+    box-shadow: var(--rbn-modal-shadow, 6px 6px 0px #14110c) !important;
+    border-radius: var(--rbn-modal-radius, 8px) !important;
+    padding: 0.35rem !important;
+    min-width: 100%;
+    max-height: 280px !important;
+    overflow-y: auto !important;
+    z-index: 999999 !important;
+    position: absolute !important;
+}
+
+.rbn-modal-dropdown .dropdown-item {
+    padding: 0.5rem 0.8rem !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    color: var(--rbn-modal-text-display, #14110c) !important;
+    border-radius: var(--rbn-radius-sm, 4px) !important;
+    transition: all 0.15s ease !important;
+}
+
+.rbn-modal-dropdown .dropdown-item:hover {
+    background-color: var(--rbn-bg-surface-hover, rgba(255, 196, 0, 0.15)) !important;
+    color: var(--rbn-modal-text-display, #14110c) !important;
+}
+
+.rbn-modal-dropdown .dropdown-item.active {
+    background-color: var(--rbn-primary, #ffc400) !important;
+    color: var(--rbn-primary-text, #14110c) !important;
+    font-weight: 700 !important;
+}
+
+/* Modal specific inputs */
+.modal .form-control,
+.modal .form-select,
+.rbn-modal-dropdown .form-control {
+    border-radius: var(--rbn-radius-sm, 4px) !important;
+    padding: 0.5rem 0.85rem !important;
+    border: 2px solid var(--rbn-modal-border, #14110c) !important;
+    font-size: 0.875rem !important;
+    background-color: var(--rbn-bg-input, #f2ece1) !important;
+    color: var(--rbn-text-primary, #14110c) !important;
+    transition: all 0.15s ease !important;
+}
+
+.modal .form-control:focus,
+.modal .form-select:focus,
+.rbn-modal-dropdown .form-control:focus {
+    border-color: var(--rbn-modal-border, #14110c) !important;
+    box-shadow: 3px 3px 0px var(--rbn-primary, #ffc400) !important;
+    background-color: #ffffff !important;
+    outline: none !important;
+}
+
+.modal .rbn-alert {
+    background: var(--rbn-bg-muted, #f8fafc) !important;
+    border: 1px solid var(--rbn-modal-border, #eaecf0) !important;
+    border-radius: var(--rbn-radius-md, 12px) !important;
+    color: var(--rbn-modal-text-display, #101828) !important;
+}
+
+.modal .rbn-alert i {
+    color: var(--rbn-modal-accent, var(--rbn-primary, #3b82f6)) !important;
+}
+
+/* ==========================================================================
+   Universal Modal Type Cards & Token-Driven Radio Engine 🪟🔘
+   ========================================================================== */
+.rbn-modal-type-card {
+    background: var(--rbn-modal-bg, #ffffff);
+    border: 1.5px solid var(--rbn-modal-border, #eaecf0) !important;
+    border-radius: var(--rbn-radius-md, 12px) !important;
+    transition: all 0.2s ease !important;
+    user-select: none;
+}
+
+.rbn-modal-type-card:hover {
+    border-color: var(--rbn-modal-accent, var(--rbn-primary, #3b82f6)) !important;
+    background: var(--rbn-bg-subtle, rgba(0, 0, 0, 0.02)) !important;
+}
+
+.rbn-modal-type-card.active {
+    border-color: var(--rbn-modal-accent, var(--rbn-primary, #3b82f6)) !important;
+    background: var(--rbn-bg-muted, rgba(0, 0, 0, 0.04)) !important;
+    box-shadow: 0 0 0 1px var(--rbn-modal-accent, var(--rbn-primary, #3b82f6)) inset, 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+}
+
+.rbn-modal-type-card input[type="radio"].form-check-input {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: 50% !important;
+    border: 2px solid var(--rbn-modal-border, #d0d5dd) !important;
+    background: var(--rbn-modal-bg, #ffffff) !important;
+    outline: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transition: all 0.15s ease-in-out !important;
+    box-shadow: none !important;
+}
+
+.rbn-modal-type-card input[type="radio"].form-check-input::before {
+    content: "" !important;
+    display: block !important;
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 50% !important;
+    transform: scale(0) !important;
+    transition: 0.15s transform ease-in-out !important;
+    background: var(--rbn-modal-accent, var(--rbn-primary, #3b82f6)) !important;
+}
+
+.rbn-modal-type-card.active input[type="radio"].form-check-input,
+.rbn-modal-type-card input[type="radio"].form-check-input:checked {
+    border-color: var(--rbn-modal-accent, var(--rbn-primary, #3b82f6)) !important;
+    background: var(--rbn-modal-bg, #ffffff) !important;
+}
+
+.rbn-modal-type-card.active input[type="radio"].form-check-input::before,
+.rbn-modal-type-card input[type="radio"].form-check-input:checked::before {
+    transform: scale(1) !important;
+}

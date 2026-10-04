@@ -1,0 +1,93 @@
+/* ==========================================================================
+   🏛️ RBN ADMIN PANEL MASTER CSS ENGINE (rbnAdmin.css) 💎⚡
+   --------------------------------------------------------------------------
+   MİMARİ GELİŞTİRME & CSS STANDART KURALLARI (STRICT ARCHITECTURE RULES):
+   
+   1. SAF İSKELET AYRIMI (SOVEREIGN SKELETON):
+      - Dashboard temel yerleşimi, sidebar, navbar, header, breadcrumb, dropdown
+        ve genel iskelet kodları daima 'core/dashboard.css' içinde (.rbn-dash-*)
+        olarak yer alır. Buraya projeye özel renk veya genel iskelet kodu yazılmaz.
+   
+   2. PREFIX & İSİM ALANI ZORUNLULUĞU (STRICT NAMESPACING):
+      - Admin paneline özel tüm stiller, butonlar, drawer paneller ve widgetlar
+        kesinlikle '.rbn-admin-*' prefixi ile yazılmalıdır.
+      - Asla genel prefixsiz (.btn, .nav-link, .status-group vb.) isim kullanılamaz.
+   
+   3. VIEW İÇİ CSS YASAĞI (NO INLINE / IN-VIEW CSS):
+      - .rbn.php view dosyaları içerisine asla <style> blokları veya inline CSS
+        yazılamaz. Tüm görsel kurallar ilgili CSS dosyasına scoped olarak eklenir.
+   
+   4. MODÜLER CSS KATMAN SIRASI (CSS CASCADE HIERARCHY):
+      - rbn_master.css  -> Evrensel CSS Değişkenleri ve Reset Motoru
+      - dashboard.css   -> Saf .rbn-dash-* İskelet Yapısı
+      - rbnAdmin.css    -> Admin Paneline Özel Tema, Renkler ve Özel Bileşenler
+   ========================================================================== */
+
+/* 1. Admin Foundation & Layout */
+@import url('ra-variables.css');
+@import url('ra-global.css');
+@import url('ra-layout.css');
+
+/* 2. Unified Admin Components & Widgets */
+@import url('components/ra-elements.css');
+@import url('components/ra-banners.css');
+
+/* 3. Page & Module Scoped Custom Styles */
+@import url('custom/ra-settings.css');
+
+/* ==========================================================================
+   4. RBN ADMIN SCROLL TO TOP FLOATING BUTTON 🚀
+   ========================================================================== */
+.rbn-scroll-top-btn {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--rbn-craft-russet, #c56a3c);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 6px 18px rgba(197, 106, 60, 0.35), 0 2px 6px rgba(0, 0, 0, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1040;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(16px) scale(0.9);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    outline: none;
+}
+
+.rbn-scroll-top-btn i {
+    font-size: 1.35rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.rbn-scroll-top-btn.show,
+.rbn-scroll-top-btn.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.rbn-scroll-top-btn:hover {
+    background-color: var(--rbn-craft-russet-hover, #b0572b);
+    color: #ffffff;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 24px rgba(197, 106, 60, 0.45), 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.rbn-scroll-top-btn:active {
+    transform: translateY(0) scale(0.95);
+}
+
+.rbn-scroll-top-btn:hover i {
+    transform: translateY(-2px);
+}

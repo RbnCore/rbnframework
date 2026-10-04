@@ -1,0 +1,4730 @@
+{
+    "Akseki": {
+        "Akşahap Köyü": {
+            "tkgm_id": 43512,
+            "lat": 37.081225,
+            "lng": 31.707169
+        },
+        "Akseki\/Boğaz": {
+            "tkgm_id": 44226,
+            "lat": 37.047337,
+            "lng": 31.798288
+        },
+        "Akseki\/Demirciler": {
+            "tkgm_id": 44282,
+            "lat": 37.03848,
+            "lng": 31.790192
+        },
+        "Akseki\/Fakilar": {
+            "tkgm_id": 44193,
+            "lat": 37.048924,
+            "lng": 31.788778
+        },
+        "Akseki\/Haciilyas": {
+            "tkgm_id": 44216,
+            "lat": 37.056691,
+            "lng": 31.791324
+        },
+        "Alaçeşme Köyü": {
+            "tkgm_id": 44298,
+            "lat": 36.96888,
+            "lng": 31.737704
+        },
+        "Aşağiaşiklar Köyü": {
+            "tkgm_id": 43820,
+            "lat": 36.945414,
+            "lng": 31.744931
+        },
+        "Bademli\/Atatürk": {
+            "tkgm_id": 43964,
+            "lat": 37.319992,
+            "lng": 31.702025
+        },
+        "Bademli\/Fatih": {
+            "tkgm_id": 44230,
+            "lat": 37.343325,
+            "lng": 31.737466
+        },
+        "Belenalan Köyü": {
+            "tkgm_id": 43675,
+            "lat": 37.009636,
+            "lng": 31.784171
+        },
+        "Bucakalan Köyü": {
+            "tkgm_id": 43949,
+            "lat": 36.994753,
+            "lng": 31.773516
+        },
+        "Bucakkişla Köyü": {
+            "tkgm_id": 43561,
+            "lat": 37.061197,
+            "lng": 31.738681
+        },
+        "Büyükalan Köyü": {
+            "tkgm_id": 44217,
+            "lat": 37.005614,
+            "lng": 31.743999
+        },
+        "Çaltiliçukur Köyü": {
+            "tkgm_id": 44086,
+            "lat": 36.860178,
+            "lng": 31.859303
+        },
+        "Çanakpinar Köyü": {
+            "tkgm_id": 44159,
+            "lat": 36.979638,
+            "lng": 31.86823
+        },
+        "Ceceler Köyü": {
+            "tkgm_id": 43839,
+            "lat": 37.183905,
+            "lng": 31.836723
+        },
+        "Cemerler Köyü": {
+            "tkgm_id": 43726,
+            "lat": 36.942178,
+            "lng": 31.762818
+        },
+        "Cendeve Köyü": {
+            "tkgm_id": 43420,
+            "lat": 36.98728,
+            "lng": 31.711703
+        },
+        "Cevizli\/Atatürk": {
+            "tkgm_id": 137977,
+            "lat": 37.184747,
+            "lng": 31.773626
+        },
+        "Cevizli\/Fevzi Çakmak": {
+            "tkgm_id": 135478,
+            "lat": 37.191161,
+            "lng": 31.776367
+        },
+        "Çimi Köyü": {
+            "tkgm_id": 135100,
+            "lat": 37.019934,
+            "lng": 31.937351
+        },
+        "Çinardibi Köyü": {
+            "tkgm_id": 44056,
+            "lat": 37.18539,
+            "lng": 31.710972
+        },
+        "Çukurköy Köyü": {
+            "tkgm_id": 43267,
+            "lat": 36.865171,
+            "lng": 31.813268
+        },
+        "Değirmenlik Köyü": {
+            "tkgm_id": 43216,
+            "lat": 37.26566,
+            "lng": 31.785823
+        },
+        "Dikmen Köyü": {
+            "tkgm_id": 43997,
+            "lat": 36.964858,
+            "lng": 31.789839
+        },
+        "Dutluca Köyü": {
+            "tkgm_id": 43639,
+            "lat": 37.029004,
+            "lng": 31.809266
+        },
+        "Emiraşiklar Köyü": {
+            "tkgm_id": 44051,
+            "lat": 37.042492,
+            "lng": 31.719102
+        },
+        "Erenyaka Köyü": {
+            "tkgm_id": 44241,
+            "lat": 36.92121,
+            "lng": 31.752773
+        },
+        "Geriş Köyü": {
+            "tkgm_id": 43673,
+            "lat": 36.957736,
+            "lng": 31.728969
+        },
+        "Güçlüköy Köyü": {
+            "tkgm_id": 135046,
+            "lat": 36.825252,
+            "lng": 31.745169
+        },
+        "Güçlüköy\/Bariş": {
+            "tkgm_id": 204436,
+            "lat": null,
+            "lng": null
+        },
+        "Güçlüköy\/Özgürlük": {
+            "tkgm_id": 204435,
+            "lat": null,
+            "lng": null
+        },
+        "Gümüşdamla Köyü": {
+            "tkgm_id": 43976,
+            "lat": 37.19912,
+            "lng": 31.624125
+        },
+        "Güneykaya Köyü": {
+            "tkgm_id": 136466,
+            "lat": 36.890656,
+            "lng": 31.717692
+        },
+        "Günyaka Köyü": {
+            "tkgm_id": 44180,
+            "lat": 37.15024,
+            "lng": 31.746253
+        },
+        "Güzelsu Köyü": {
+            "tkgm_id": 43689,
+            "lat": 36.897214,
+            "lng": 31.852253
+        },
+        "Hocaköy Köyü": {
+            "tkgm_id": 44299,
+            "lat": 36.894915,
+            "lng": 31.661843
+        },
+        "Hüsamettin Köyü": {
+            "tkgm_id": 133780,
+            "lat": 37.019985,
+            "lng": 31.814231
+        },
+        "Karakişla Köyü": {
+            "tkgm_id": 44119,
+            "lat": 37.185118,
+            "lng": 31.870045
+        },
+        "Kepez Köyü": {
+            "tkgm_id": 44027,
+            "lat": 36.934124,
+            "lng": 31.613078
+        },
+        "Kepezbeleni Köyü": {
+            "tkgm_id": 44127,
+            "lat": 36.895775,
+            "lng": 31.582408
+        },
+        "Kuyucak\/Cumhuriyet": {
+            "tkgm_id": 43485,
+            "lat": 37.22706,
+            "lng": 31.660325
+        },
+        "Kuyucak\/Fatih": {
+            "tkgm_id": 44052,
+            "lat": 37.257731,
+            "lng": 31.612309
+        },
+        "Mahmutlu Köyü": {
+            "tkgm_id": 44290,
+            "lat": 36.916984,
+            "lng": 31.78273
+        },
+        "Menteşbey Köyü": {
+            "tkgm_id": 44239,
+            "lat": 37.013372,
+            "lng": 31.653148
+        },
+        "Minareli Köyü": {
+            "tkgm_id": 43927,
+            "lat": 36.996762,
+            "lng": 31.691927
+        },
+        "Pinarbaşi Köyü": {
+            "tkgm_id": 43888,
+            "lat": 36.893102,
+            "lng": 31.904403
+        },
+        "Sadiklar Köyü": {
+            "tkgm_id": 43878,
+            "lat": 36.940319,
+            "lng": 31.828612
+        },
+        "Salihler Köyü": {
+            "tkgm_id": 44463,
+            "lat": 37.235445,
+            "lng": 31.710541
+        },
+        "Sarihacilar Köyü": {
+            "tkgm_id": 42995,
+            "lat": 37.020105,
+            "lng": 31.764971
+        },
+        "Sarihaliller Köyü": {
+            "tkgm_id": 44206,
+            "lat": 37.031279,
+            "lng": 31.712828
+        },
+        "Sinanhoca Köyü": {
+            "tkgm_id": 43967,
+            "lat": 36.973253,
+            "lng": 31.630848
+        },
+        "Süleymaniye\/Cumhuriyet": {
+            "tkgm_id": 43448,
+            "lat": 37.278295,
+            "lng": 31.753503
+        },
+        "Süleymaniye\/Saray": {
+            "tkgm_id": 134128,
+            "lat": 37.31266,
+            "lng": 31.787155
+        },
+        "Susuzşahap Köyü": {
+            "tkgm_id": 44525,
+            "lat": 37.238623,
+            "lng": 31.828611
+        },
+        "Taşlica Köyü": {
+            "tkgm_id": 43924,
+            "lat": 36.881756,
+            "lng": 31.775285
+        },
+        "Yarpuz Köyü": {
+            "tkgm_id": 43694,
+            "lat": null,
+            "lng": null
+        }
+    },
+    "Aksu": {
+        "Alayli Köyü": {
+            "tkgm_id": 135171,
+            "lat": 37.065016,
+            "lng": 30.886538
+        },
+        "Altintaş": {
+            "tkgm_id": 205035,
+            "lat": 36.897165,
+            "lng": 30.832818
+        },
+        "Atatürk": {
+            "tkgm_id": 202634,
+            "lat": 36.953917,
+            "lng": 30.782591
+        },
+        "Barbaros": {
+            "tkgm_id": 203344,
+            "lat": 36.962116,
+            "lng": 30.864745
+        },
+        "Boztepe Köyü": {
+            "tkgm_id": 43827,
+            "lat": 36.916166,
+            "lng": 30.902398
+        },
+        "Çalkaya": {
+            "tkgm_id": 203481,
+            "lat": 36.921769,
+            "lng": 30.873286
+        },
+        "Çamköy Köyü": {
+            "tkgm_id": 135666,
+            "lat": 36.964847,
+            "lng": 30.797299
+        },
+        "Cihadiye Köyü": {
+            "tkgm_id": 137036,
+            "lat": 36.938025,
+            "lng": 30.803316
+        },
+        "Cumhuriyet": {
+            "tkgm_id": 205036,
+            "lat": 36.957812,
+            "lng": 30.815852
+        },
+        "Dumanlar Köyü": {
+            "tkgm_id": 133663,
+            "lat": 36.993476,
+            "lng": 30.905554
+        },
+        "Fatih": {
+            "tkgm_id": 203345,
+            "lat": 36.976748,
+            "lng": 30.827233
+        },
+        "Fettahli Köyü": {
+            "tkgm_id": 136433,
+            "lat": 36.990655,
+            "lng": 30.809941
+        },
+        "Gökdere Köyü": {
+            "tkgm_id": 203601,
+            "lat": 37.027286,
+            "lng": 30.905662
+        },
+        "Güloluk Köyü": {
+            "tkgm_id": 139746,
+            "lat": 37.093479,
+            "lng": 30.866556
+        },
+        "Güzelyurt": {
+            "tkgm_id": 203480,
+            "lat": 36.918637,
+            "lng": 30.813713
+        },
+        "Hacialiler": {
+            "tkgm_id": 203482,
+            "lat": 36.93046,
+            "lng": 30.839493
+        },
+        "Ihsaniye Köyü": {
+            "tkgm_id": 135840,
+            "lat": 36.983683,
+            "lng": 30.8705
+        },
+        "Karaçali Köyü": {
+            "tkgm_id": 137930,
+            "lat": 36.893578,
+            "lng": 30.867537
+        },
+        "Karaöz": {
+            "tkgm_id": 206117,
+            "lat": 37.188319,
+            "lng": 30.785662
+        },
+        "Kayadibi Köyü": {
+            "tkgm_id": 134565,
+            "lat": 37.21213,
+            "lng": 30.820653
+        },
+        "Kemerağzi Köyü": {
+            "tkgm_id": 137035,
+            "lat": 36.875988,
+            "lng": 30.863352
+        },
+        "Konak": {
+            "tkgm_id": 203346,
+            "lat": 36.954379,
+            "lng": 30.829318
+        },
+        "Kumköy Köyü": {
+            "tkgm_id": 43607,
+            "lat": 36.87816,
+            "lng": 30.938983
+        },
+        "Kundu Köyü": {
+            "tkgm_id": 137450,
+            "lat": 36.887095,
+            "lng": 30.907245
+        },
+        "Kurşunlu Köyü": {
+            "tkgm_id": 136350,
+            "lat": 37.066732,
+            "lng": 30.83676
+        },
+        "Macun Köyü": {
+            "tkgm_id": 136225,
+            "lat": 36.960903,
+            "lng": 30.837901
+        },
+        "Mandirlar Köyü": {
+            "tkgm_id": 138214,
+            "lat": 36.909751,
+            "lng": 30.847441
+        },
+        "Murtuna": {
+            "tkgm_id": 203602,
+            "lat": 37.029308,
+            "lng": 30.870481
+        },
+        "Pinarli Köyü": {
+            "tkgm_id": 200756,
+            "lat": 36.947834,
+            "lng": 30.806594
+        },
+        "Soğucaksu": {
+            "tkgm_id": 202637,
+            "lat": 36.945767,
+            "lng": 30.821738
+        },
+        "Solak Köyü": {
+            "tkgm_id": 136819,
+            "lat": 36.957929,
+            "lng": 30.901576
+        },
+        "Topalli Köyü": {
+            "tkgm_id": 135885,
+            "lat": 37.037594,
+            "lng": 30.800862
+        },
+        "Yeni Dumanlar Köyü": {
+            "tkgm_id": 135529,
+            "lat": 36.977491,
+            "lng": 30.909193
+        },
+        "Yeşilkaraman Köyü": {
+            "tkgm_id": 135567,
+            "lat": 37.099314,
+            "lng": 30.815399
+        },
+        "Yurtpinar Köyü": {
+            "tkgm_id": 134302,
+            "lat": 36.998,
+            "lng": 30.858902
+        }
+    },
+    "Alanya": {
+        "Akçati Köyü": {
+            "tkgm_id": 136098,
+            "lat": 36.597401,
+            "lng": 32.158002
+        },
+        "Akdam Köyü": {
+            "tkgm_id": 136830,
+            "lat": 36.645948,
+            "lng": 31.812175
+        },
+        "Alacami(Dimalacami) Köyü": {
+            "tkgm_id": 136820,
+            "lat": 36.611949,
+            "lng": 32.330304
+        },
+        "Alara Köyü": {
+            "tkgm_id": 135336,
+            "lat": 36.67683,
+            "lng": 31.726448
+        },
+        "Aliefendi Köyü": {
+            "tkgm_id": 139574,
+            "lat": 36.44338,
+            "lng": 32.191176
+        },
+        "Asmaca Köyü": {
+            "tkgm_id": 135670,
+            "lat": 36.610428,
+            "lng": 32.04888
+        },
+        "Avsallar Köyü": {
+            "tkgm_id": 137618,
+            "lat": 36.653821,
+            "lng": 31.772962
+        },
+        "Bademağaci Köyü": {
+            "tkgm_id": 135103,
+            "lat": 36.754147,
+            "lng": 32.311037
+        },
+        "Basirli Köyü": {
+            "tkgm_id": 135965,
+            "lat": 36.549142,
+            "lng": 32.065928
+        },
+        "Başköy Köyü": {
+            "tkgm_id": 136494,
+            "lat": 36.461023,
+            "lng": 32.36539
+        },
+        "Bayir Köyü": {
+            "tkgm_id": 169292,
+            "lat": 36.756686,
+            "lng": 31.942006
+        },
+        "Bayirkozağaci Köyü": {
+            "tkgm_id": 170512,
+            "lat": 36.712439,
+            "lng": 31.994256
+        },
+        "Bektaş": {
+            "tkgm_id": 134872,
+            "lat": 36.57011,
+            "lng": 32.010635
+        },
+        "Beldibi Köyü": {
+            "tkgm_id": 135114,
+            "lat": 36.458885,
+            "lng": 32.327106
+        },
+        "Beyreli Köyü": {
+            "tkgm_id": 137990,
+            "lat": 36.436089,
+            "lng": 32.220545
+        },
+        "Biçakci Köyü": {
+            "tkgm_id": 135786,
+            "lat": 36.559307,
+            "lng": 32.170639
+        },
+        "Bucak Köyü": {
+            "tkgm_id": 133819,
+            "lat": 36.574848,
+            "lng": 32.269277
+        },
+        "Burçaklar Köyü": {
+            "tkgm_id": 170513,
+            "lat": 36.676894,
+            "lng": 31.89443
+        },
+        "Büyükhasbahçe": {
+            "tkgm_id": 138000,
+            "lat": 36.559576,
+            "lng": 32.013283
+        },
+        "Çakallar Köyü": {
+            "tkgm_id": 134019,
+            "lat": 36.693662,
+            "lng": 31.742649
+        },
+        "Çamlica Köyü": {
+            "tkgm_id": 136182,
+            "lat": 36.43426,
+            "lng": 32.270261
+        },
+        "Çarşi": {
+            "tkgm_id": 136018,
+            "lat": 36.537823,
+            "lng": 31.99372
+        },
+        "Cikcilli Köyü": {
+            "tkgm_id": 136264,
+            "lat": 36.615485,
+            "lng": 32.265225
+        },
+        "Çiplakli Köyü": {
+            "tkgm_id": 137037,
+            "lat": 36.562247,
+            "lng": 32.048782
+        },
+        "Cumhuriyet": {
+            "tkgm_id": 136275,
+            "lat": 36.540899,
+            "lng": 32.028001
+        },
+        "Değirmendere Köyü": {
+            "tkgm_id": 134287,
+            "lat": 36.57688,
+            "lng": 32.063769
+        },
+        "Demirtaş Köyü": {
+            "tkgm_id": 169293,
+            "lat": 36.410903,
+            "lng": 32.196399
+        },
+        "Deretürbelinas Köyü": {
+            "tkgm_id": 139582,
+            "lat": 36.669829,
+            "lng": 32.076236
+        },
+        "Dinek": {
+            "tkgm_id": 205791,
+            "lat": 36.563311,
+            "lng": 31.956234
+        },
+        "Elikesik Köyü": {
+            "tkgm_id": 136077,
+            "lat": 36.586735,
+            "lng": 31.926441
+        },
+        "Emişbeleni Köyü": {
+            "tkgm_id": 181490,
+            "lat": 36.628799,
+            "lng": 31.886183
+        },
+        "Fakircali Köyü": {
+            "tkgm_id": 134997,
+            "lat": 36.473299,
+            "lng": 32.296507
+        },
+        "Gözübüyük Köyü": {
+            "tkgm_id": 170514,
+            "lat": 36.686569,
+            "lng": 31.873679
+        },
+        "Gözüküçüklü Köyü": {
+            "tkgm_id": 136468,
+            "lat": 36.493277,
+            "lng": 32.183485
+        },
+        "Gümüşgöze Köyü": {
+            "tkgm_id": 170591,
+            "lat": 36.682471,
+            "lng": 31.938573
+        },
+        "Gümüşkavak(Kababeledan) Köyü": {
+            "tkgm_id": 135671,
+            "lat": 36.556546,
+            "lng": 32.24318
+        },
+        "Güneyköy Köyü": {
+            "tkgm_id": 170515,
+            "lat": 36.676239,
+            "lng": 31.879152
+        },
+        "Güzelbağ Fatih Köyü": {
+            "tkgm_id": 134527,
+            "lat": 36.726396,
+            "lng": 31.91618
+        },
+        "Güzelbağ Zafer": {
+            "tkgm_id": 170193,
+            "lat": 36.739791,
+            "lng": 31.870641
+        },
+        "Hacet": {
+            "tkgm_id": 133781,
+            "lat": 36.551585,
+            "lng": 32.007252
+        },
+        "Hacikerimler Köyü": {
+            "tkgm_id": 135832,
+            "lat": 36.643151,
+            "lng": 31.958469
+        },
+        "Hacimehmetli Köyü": {
+            "tkgm_id": 135918,
+            "lat": 36.565364,
+            "lng": 31.959523
+        },
+        "Hisariçi": {
+            "tkgm_id": 139581,
+            "lat": 36.532318,
+            "lng": 31.992271
+        },
+        "Hocalar Köyü": {
+            "tkgm_id": 134915,
+            "lat": 36.385352,
+            "lng": 32.246574
+        },
+        "Imamli Köyü": {
+            "tkgm_id": 135102,
+            "lat": 36.611913,
+            "lng": 32.460226
+        },
+        "Incekum Köyü": {
+            "tkgm_id": 169294,
+            "lat": 36.657044,
+            "lng": 31.738882
+        },
+        "Isbatli Köyü": {
+            "tkgm_id": 136031,
+            "lat": 36.443222,
+            "lng": 32.16708
+        },
+        "Ishakli Köyü": {
+            "tkgm_id": 138032,
+            "lat": 36.432991,
+            "lng": 32.162278
+        },
+        "Kadipaşa": {
+            "tkgm_id": 135546,
+            "lat": 36.547945,
+            "lng": 31.996617
+        },
+        "Karakocali Köyü": {
+            "tkgm_id": 134447,
+            "lat": 36.537702,
+            "lng": 32.0669
+        },
+        "Karamanlar Köyü": {
+            "tkgm_id": 169295,
+            "lat": 36.710642,
+            "lng": 31.814685
+        },
+        "Karapinar Köyü": {
+            "tkgm_id": 137591,
+            "lat": 36.559445,
+            "lng": 32.431724
+        },
+        "Kargicak Köyü": {
+            "tkgm_id": 138196,
+            "lat": 36.466053,
+            "lng": 32.152436
+        },
+        "Kayabaşi Köyü": {
+            "tkgm_id": 135725,
+            "lat": 36.654221,
+            "lng": 31.935176
+        },
+        "Kellerpinari": {
+            "tkgm_id": 136216,
+            "lat": 36.546552,
+            "lng": 32.014276
+        },
+        "Keşefli Köyü": {
+            "tkgm_id": 134873,
+            "lat": 36.400173,
+            "lng": 32.186395
+        },
+        "Kestel Köyü": {
+            "tkgm_id": 136589,
+            "lat": 36.52439,
+            "lng": 32.085018
+        },
+        "Kizilcaşehir Köyü": {
+            "tkgm_id": 135175,
+            "lat": 36.560398,
+            "lng": 32.082997
+        },
+        "Kocaoğlanli Köyü": {
+            "tkgm_id": 136590,
+            "lat": 36.623476,
+            "lng": 32.422069
+        },
+        "Küçükhasbahçe": {
+            "tkgm_id": 134566,
+            "lat": 36.558177,
+            "lng": 32.005392
+        },
+        "Kuzyaka Köyü": {
+            "tkgm_id": 137646,
+            "lat": 36.540625,
+            "lng": 32.150243
+        },
+        "Mahmutlar Köyü": {
+            "tkgm_id": 136618,
+            "lat": 36.502146,
+            "lng": 32.135062
+        },
+        "Mahmutseydi Köyü": {
+            "tkgm_id": 134639,
+            "lat": 36.629417,
+            "lng": 32.013317
+        },
+        "Oba Köyü": {
+            "tkgm_id": 125353,
+            "lat": 36.553756,
+            "lng": 32.058919
+        },
+        "Obaalacami Köyü": {
+            "tkgm_id": 133804,
+            "lat": 36.637717,
+            "lng": 32.138969
+        },
+        "Okurcalar Köyü": {
+            "tkgm_id": 137628,
+            "lat": 36.658021,
+            "lng": 31.689127
+        },
+        "Orhanköy Köyü": {
+            "tkgm_id": 170516,
+            "lat": 36.697058,
+            "lng": 31.850975
+        },
+        "Öteköy Köyü": {
+            "tkgm_id": 137932,
+            "lat": 36.596083,
+            "lng": 32.233887
+        },
+        "Özvadi Köyü": {
+            "tkgm_id": 135903,
+            "lat": 36.614804,
+            "lng": 32.43733
+        },
+        "Paşaköy Köyü": {
+            "tkgm_id": 133650,
+            "lat": 36.607956,
+            "lng": 31.983339
+        },
+        "Payallar Köyü": {
+            "tkgm_id": 135842,
+            "lat": 36.616976,
+            "lng": 31.858752
+        },
+        "Saburlar Köyü": {
+            "tkgm_id": 134155,
+            "lat": 36.718886,
+            "lng": 31.777169
+        },
+        "Sapadere Köyü": {
+            "tkgm_id": 134789,
+            "lat": 36.503232,
+            "lng": 32.340981
+        },
+        "Saray": {
+            "tkgm_id": 136860,
+            "lat": 36.552717,
+            "lng": 31.983044
+        },
+        "Şekerhane": {
+            "tkgm_id": 139760,
+            "lat": 36.548754,
+            "lng": 32.001121
+        },
+        "Seki Köyü": {
+            "tkgm_id": 136117,
+            "lat": 36.437253,
+            "lng": 32.153432
+        },
+        "Şihlar Köyü": {
+            "tkgm_id": 135555,
+            "lat": 36.708041,
+            "lng": 32.423787
+        },
+        "Soğukpinar Köyü": {
+            "tkgm_id": 137943,
+            "lat": 36.655216,
+            "lng": 31.87371
+        },
+        "Sugözü": {
+            "tkgm_id": 139761,
+            "lat": 36.558119,
+            "lng": 31.993494
+        },
+        "Süleymanlar Köyü": {
+            "tkgm_id": 138148,
+            "lat": 36.686072,
+            "lng": 32.015814
+        },
+        "Taşbaşi Köyü": {
+            "tkgm_id": 135761,
+            "lat": 36.609692,
+            "lng": 32.280596
+        },
+        "Telatiye Köyü": {
+            "tkgm_id": 135494,
+            "lat": 36.587785,
+            "lng": 31.892637
+        },
+        "Tepe": {
+            "tkgm_id": 133903,
+            "lat": 36.574342,
+            "lng": 31.994887
+        },
+        "Tirilar Köyü": {
+            "tkgm_id": 136628,
+            "lat": 36.490359,
+            "lng": 32.27811
+        },
+        "Tophane": {
+            "tkgm_id": 139562,
+            "lat": 36.534386,
+            "lng": 31.996471
+        },
+        "Toslak Köyü": {
+            "tkgm_id": 136118,
+            "lat": 36.62338,
+            "lng": 31.898258
+        },
+        "Tosmur Köyü": {
+            "tkgm_id": 134755,
+            "lat": 36.531491,
+            "lng": 32.056852
+        },
+        "Türkler Köyü": {
+            "tkgm_id": 136263,
+            "lat": 36.622619,
+            "lng": 31.816566
+        },
+        "Türktaş Köyü": {
+            "tkgm_id": 134459,
+            "lat": 36.665729,
+            "lng": 31.969248
+        },
+        "Uğrak Köyü": {
+            "tkgm_id": 135504,
+            "lat": 36.604661,
+            "lng": 32.474844
+        },
+        "Uğurlu(Kirvasil) Köyü": {
+            "tkgm_id": 135902,
+            "lat": 36.628315,
+            "lng": 32.206856
+        },
+        "Ulugüney Köyü": {
+            "tkgm_id": 200764,
+            "lat": 36.672745,
+            "lng": 31.707156
+        },
+        "Üzümlü Köyü": {
+            "tkgm_id": 135952,
+            "lat": 36.595133,
+            "lng": 32.20827
+        },
+        "Uzunöz Köyü": {
+            "tkgm_id": 136319,
+            "lat": 36.537575,
+            "lng": 32.199129
+        },
+        "Yalçi Köyü": {
+            "tkgm_id": 137778,
+            "lat": 36.565436,
+            "lng": 32.326211
+        },
+        "Yasirali Köyü": {
+            "tkgm_id": 202526,
+            "lat": 36.585294,
+            "lng": 31.963173
+        },
+        "Yaylakonak Köyü": {
+            "tkgm_id": 135537,
+            "lat": 36.500102,
+            "lng": 32.249878
+        },
+        "Yaylali Köyü": {
+            "tkgm_id": 135843,
+            "lat": 36.521136,
+            "lng": 32.106599
+        },
+        "Yenice Köyü": {
+            "tkgm_id": 170517,
+            "lat": 36.690691,
+            "lng": 31.907854
+        },
+        "Yeniköy Köyü": {
+            "tkgm_id": 139563,
+            "lat": 36.62526,
+            "lng": 31.946164
+        },
+        "Yeşilöz Köyü": {
+            "tkgm_id": 134288,
+            "lat": 36.384531,
+            "lng": 32.208522
+        }
+    },
+    "Demre": {
+        "Alakent": {
+            "tkgm_id": 205990,
+            "lat": null,
+            "lng": null
+        },
+        "Belören(Muskar)": {
+            "tkgm_id": 135257,
+            "lat": 36.34217,
+            "lng": 29.958112
+        },
+        "Beymelek": {
+            "tkgm_id": 43863,
+            "lat": 36.275382,
+            "lng": 30.048017
+        },
+        "Beymelek\/Akdam": {
+            "tkgm_id": 203973,
+            "lat": 36.273142,
+            "lng": 30.023553
+        },
+        "Beymelek\/Iskele": {
+            "tkgm_id": 203974,
+            "lat": 36.286472,
+            "lng": 30.062101
+        },
+        "Beymelek\/Kumtepesi": {
+            "tkgm_id": 203975,
+            "lat": 36.262165,
+            "lng": 30.032934
+        },
+        "Büyük Kum": {
+            "tkgm_id": 207524,
+            "lat": null,
+            "lng": null
+        },
+        "Çağman": {
+            "tkgm_id": 43533,
+            "lat": 36.373429,
+            "lng": 29.953225
+        },
+        "Çevreli(Tirmisin)": {
+            "tkgm_id": 141318,
+            "lat": 36.211771,
+            "lng": 29.833582
+        },
+        "Davazlar": {
+            "tkgm_id": 43544,
+            "lat": 36.279521,
+            "lng": 29.867172
+        },
+        "Gökyazi": {
+            "tkgm_id": 207522,
+            "lat": null,
+            "lng": null
+        },
+        "Gürses": {
+            "tkgm_id": 43113,
+            "lat": 36.270614,
+            "lng": 29.953435
+        },
+        "Kapakli": {
+            "tkgm_id": 42963,
+            "lat": 36.225624,
+            "lng": 29.89575
+        },
+        "Karabucak": {
+            "tkgm_id": 205991,
+            "lat": 36.248729,
+            "lng": 29.953009
+        },
+        "Kayaalti": {
+            "tkgm_id": 207521,
+            "lat": null,
+            "lng": null
+        },
+        "Köşkerler": {
+            "tkgm_id": 43278,
+            "lat": 36.28892,
+            "lng": 29.94712
+        },
+        "Küçük Kum": {
+            "tkgm_id": 207523,
+            "lat": null,
+            "lng": null
+        },
+        "Üçağiz": {
+            "tkgm_id": 139069,
+            "lat": 36.198199,
+            "lng": 29.85783
+        },
+        "Yavu": {
+            "tkgm_id": 43550,
+            "lat": 36.240486,
+            "lng": 29.87058
+        },
+        "Yayla Kaya": {
+            "tkgm_id": 207525,
+            "lat": null,
+            "lng": null
+        },
+        "Zümrütkaya": {
+            "tkgm_id": 137486,
+            "lat": 36.242649,
+            "lng": 29.976925
+        }
+    },
+    "Döşemealti": {
+        "Ahirtaş": {
+            "tkgm_id": 138126,
+            "lat": 37.20813,
+            "lng": 30.729276
+        },
+        "Akkoç": {
+            "tkgm_id": 135545,
+            "lat": 37.135199,
+            "lng": 30.469035
+        },
+        "Altinkale": {
+            "tkgm_id": 205026,
+            "lat": 37.007496,
+            "lng": 30.614838
+        },
+        "Aşağioba": {
+            "tkgm_id": 134014,
+            "lat": 37.116382,
+            "lng": 30.632089
+        },
+        "Ayanlar": {
+            "tkgm_id": 202643,
+            "lat": 37.048818,
+            "lng": 30.564035
+        },
+        "Aydinlar": {
+            "tkgm_id": 202642,
+            "lat": 37.028486,
+            "lng": 30.520425
+        },
+        "Bademağaci": {
+            "tkgm_id": 134199,
+            "lat": 37.218278,
+            "lng": 30.478106
+        },
+        "Bahçeyaka": {
+            "tkgm_id": 205027,
+            "lat": 37.010342,
+            "lng": 30.584864
+        },
+        "Biyikli": {
+            "tkgm_id": 136857,
+            "lat": 37.105242,
+            "lng": 30.59524
+        },
+        "Camili": {
+            "tkgm_id": 137401,
+            "lat": 37.173977,
+            "lng": 30.658458
+        },
+        "Çiğlik": {
+            "tkgm_id": 123823,
+            "lat": 37.035232,
+            "lng": 30.559853
+        },
+        "Çiplakli": {
+            "tkgm_id": 134845,
+            "lat": 37.052614,
+            "lng": 30.626658
+        },
+        "Dereli": {
+            "tkgm_id": 135527,
+            "lat": 37.131488,
+            "lng": 30.650192
+        },
+        "Düzlercami": {
+            "tkgm_id": 205028,
+            "lat": 37.004153,
+            "lng": 30.552916
+        },
+        "Ekşili": {
+            "tkgm_id": 134445,
+            "lat": 37.154009,
+            "lng": 30.663427
+        },
+        "Ilica": {
+            "tkgm_id": 138018,
+            "lat": 37.165149,
+            "lng": 30.639081
+        },
+        "Karadon": {
+            "tkgm_id": 136074,
+            "lat": 37.124637,
+            "lng": 30.607948
+        },
+        "Karaman": {
+            "tkgm_id": 205029,
+            "lat": 36.956241,
+            "lng": 30.4963
+        },
+        "Karataş": {
+            "tkgm_id": 134583,
+            "lat": 37.148083,
+            "lng": 30.622995
+        },
+        "Karaveliler": {
+            "tkgm_id": 135857,
+            "lat": 37.204536,
+            "lng": 30.65481
+        },
+        "Kevşirler": {
+            "tkgm_id": 135528,
+            "lat": 37.134015,
+            "lng": 30.668976
+        },
+        "Killik": {
+            "tkgm_id": 133646,
+            "lat": 37.219319,
+            "lng": 30.679186
+        },
+        "Kirkgöz Yeniköy": {
+            "tkgm_id": 139781,
+            "lat": 37.025723,
+            "lng": 30.586938
+        },
+        "Kömürcüler": {
+            "tkgm_id": 133901,
+            "lat": 37.086277,
+            "lng": 30.60937
+        },
+        "Kovanlik": {
+            "tkgm_id": 134329,
+            "lat": 37.136329,
+            "lng": 30.589295
+        },
+        "Mellidağ": {
+            "tkgm_id": 137256,
+            "lat": 37.201079,
+            "lng": 30.51049
+        },
+        "Mellidağ\/Cami": {
+            "tkgm_id": 204187,
+            "lat": 37.172951,
+            "lng": 30.508462
+        },
+        "Mellidağ\/Cumhuriyet": {
+            "tkgm_id": 204189,
+            "lat": 37.219975,
+            "lng": 30.551261
+        },
+        "Mellidağ\/Emniyet": {
+            "tkgm_id": 204188,
+            "lat": 37.195918,
+            "lng": 30.50189
+        },
+        "Nebiler": {
+            "tkgm_id": 205030,
+            "lat": 36.955312,
+            "lng": 30.592946
+        },
+        "Orta": {
+            "tkgm_id": 202640,
+            "lat": 37.031653,
+            "lng": 30.549496
+        },
+        "Tomalar": {
+            "tkgm_id": 205031,
+            "lat": 37.001813,
+            "lng": 30.586829
+        },
+        "Yağca": {
+            "tkgm_id": 134496,
+            "lat": 37.069513,
+            "lng": 30.573438
+        },
+        "Yalinli": {
+            "tkgm_id": 205032,
+            "lat": 36.968902,
+            "lng": 30.601879
+        },
+        "Yeşilbayir": {
+            "tkgm_id": 136446,
+            "lat": 36.973966,
+            "lng": 30.62681
+        }
+    },
+    "Elmali": {
+        "Afşar Köyü": {
+            "tkgm_id": 136393,
+            "lat": 36.556312,
+            "lng": 29.757779
+        },
+        "Ahatli Köyü": {
+            "tkgm_id": 137022,
+            "lat": 36.618343,
+            "lng": 29.71503
+        },
+        "Akçaeniş Köyü": {
+            "tkgm_id": 137826,
+            "lat": 36.623391,
+            "lng": 29.836864
+        },
+        "Akçay Köyü": {
+            "tkgm_id": 134987,
+            "lat": 36.603342,
+            "lng": 29.753239
+        },
+        "Armutlu Köyü": {
+            "tkgm_id": 134936,
+            "lat": 36.586252,
+            "lng": 29.775692
+        },
+        "Bayindir Köyü": {
+            "tkgm_id": 136598,
+            "lat": 36.777332,
+            "lng": 29.950685
+        },
+        "Bayralar Köyü": {
+            "tkgm_id": 138021,
+            "lat": 36.631962,
+            "lng": 29.902334
+        },
+        "Beyler Köyü": {
+            "tkgm_id": 135709,
+            "lat": 36.65239,
+            "lng": 29.861312
+        },
+        "Bozhüyük Köyü": {
+            "tkgm_id": 133726,
+            "lat": 36.755731,
+            "lng": 30.0077
+        },
+        "Büyüksöğle Köyü": {
+            "tkgm_id": 137797,
+            "lat": 36.698232,
+            "lng": 30.068902
+        },
+        "Camiatik": {
+            "tkgm_id": 135602,
+            "lat": 36.744595,
+            "lng": 29.910418
+        },
+        "Camicedit": {
+            "tkgm_id": 135726,
+            "lat": null,
+            "lng": null
+        },
+        "Çaybaşi Köyü": {
+            "tkgm_id": 133820,
+            "lat": 36.614452,
+            "lng": 29.794212
+        },
+        "Çobansa Köyü": {
+            "tkgm_id": 135871,
+            "lat": 36.854209,
+            "lng": 30.0203
+        },
+        "Çukurelma Köyü": {
+            "tkgm_id": 134420,
+            "lat": 36.826053,
+            "lng": 30.008412
+        },
+        "Dereköy Köyü": {
+            "tkgm_id": 134590,
+            "lat": 36.839211,
+            "lng": 29.851029
+        },
+        "Düdenköy Köyü": {
+            "tkgm_id": 135481,
+            "lat": 36.687679,
+            "lng": 29.91106
+        },
+        "Eskihisar Köyü": {
+            "tkgm_id": 136469,
+            "lat": 36.788492,
+            "lng": 29.814736
+        },
+        "Eymir Köyü": {
+            "tkgm_id": 136555,
+            "lat": 36.682216,
+            "lng": 29.887061
+        },
+        "Geçit Köyü": {
+            "tkgm_id": 135338,
+            "lat": 36.729387,
+            "lng": 29.809779
+        },
+        "Geçmen Köyü": {
+            "tkgm_id": 134902,
+            "lat": 36.691783,
+            "lng": 29.998329
+        },
+        "Gökpinar Köyü": {
+            "tkgm_id": 135727,
+            "lat": 36.750697,
+            "lng": 29.957278
+        },
+        "Göltarla Köyü": {
+            "tkgm_id": 138141,
+            "lat": 36.562139,
+            "lng": 29.960662
+        },
+        "Gümüşyaka Köyü": {
+            "tkgm_id": 137235,
+            "lat": 36.848294,
+            "lng": 29.965485
+        },
+        "Gündoğan": {
+            "tkgm_id": 137061,
+            "lat": 36.74282,
+            "lng": 29.930255
+        },
+        "Hacimusalar Köyü": {
+            "tkgm_id": 203743,
+            "lat": 36.64989,
+            "lng": 29.830715
+        },
+        "Haciyusuflar Köyü": {
+            "tkgm_id": 134756,
+            "lat": 36.862078,
+            "lng": 29.903125
+        },
+        "Ilyaği Köyü": {
+            "tkgm_id": 134102,
+            "lat": 36.900268,
+            "lng": 30.012562
+        },
+        "Imircik Köyü": {
+            "tkgm_id": 133948,
+            "lat": 36.738296,
+            "lng": 29.790627
+        },
+        "Iplikpazari": {
+            "tkgm_id": 137251,
+            "lat": 36.743721,
+            "lng": 29.915512
+        },
+        "Islamlar Köyü": {
+            "tkgm_id": 138178,
+            "lat": 36.634634,
+            "lng": 29.757108
+        },
+        "Kapmescit": {
+            "tkgm_id": 136019,
+            "lat": 36.746386,
+            "lng": 29.919684
+        },
+        "Karagöl Köyü": {
+            "tkgm_id": 134874,
+            "lat": 36.713735,
+            "lng": 29.83702
+        },
+        "Karaköy Köyü": {
+            "tkgm_id": 134332,
+            "lat": 36.844635,
+            "lng": 30.067221
+        },
+        "Karamik Köyü": {
+            "tkgm_id": 135031,
+            "lat": 36.602036,
+            "lng": 29.917031
+        },
+        "Karyağdi": {
+            "tkgm_id": 136285,
+            "lat": 36.736081,
+            "lng": 29.896352
+        },
+        "Kişlaköy Köyü": {
+            "tkgm_id": 135384,
+            "lat": 36.743205,
+            "lng": 29.853777
+        },
+        "Kizilca Köyü": {
+            "tkgm_id": 133821,
+            "lat": 36.660399,
+            "lng": 29.806871
+        },
+        "Kocapinar Köyü": {
+            "tkgm_id": 136646,
+            "lat": 36.701636,
+            "lng": 29.951674
+        },
+        "Küçüksöğle Köyü": {
+            "tkgm_id": 133805,
+            "lat": 36.67145,
+            "lng": 30.065298
+        },
+        "Kuzköy Köyü": {
+            "tkgm_id": 136842,
+            "lat": 36.69491,
+            "lng": 29.788434
+        },
+        "Macun Köyü": {
+            "tkgm_id": 135569,
+            "lat": 36.845522,
+            "lng": 29.886303
+        },
+        "Müren Köyü": {
+            "tkgm_id": 138022,
+            "lat": 36.805458,
+            "lng": 30.019958
+        },
+        "Mursal Köyü": {
+            "tkgm_id": 134166,
+            "lat": 36.6823,
+            "lng": 29.820198
+        },
+        "Ovacik Köyü": {
+            "tkgm_id": 137592,
+            "lat": null,
+            "lng": null
+        },
+        "Özdemir Köyü": {
+            "tkgm_id": 137432,
+            "lat": 36.900021,
+            "lng": 30.038901
+        },
+        "Pirhasanlar Köyü": {
+            "tkgm_id": 137245,
+            "lat": 36.679262,
+            "lng": 29.85979
+        },
+        "Salur Köyü": {
+            "tkgm_id": 135859,
+            "lat": 36.773717,
+            "lng": 29.783727
+        },
+        "Sarilar Köyü": {
+            "tkgm_id": 136448,
+            "lat": 36.633528,
+            "lng": 29.8244
+        },
+        "Tahtamescit": {
+            "tkgm_id": 136619,
+            "lat": 36.745624,
+            "lng": 29.912736
+        },
+        "Tavullar Köyü": {
+            "tkgm_id": 134734,
+            "lat": 36.670776,
+            "lng": 29.834538
+        },
+        "Tekke Köyü": {
+            "tkgm_id": 136556,
+            "lat": 36.61874,
+            "lng": 29.865922
+        },
+        "Toklular": {
+            "tkgm_id": 133941,
+            "lat": 36.747559,
+            "lng": 29.912042
+        },
+        "Yakaçiftlik Köyü": {
+            "tkgm_id": 137846,
+            "lat": 36.644312,
+            "lng": 29.929098
+        },
+        "Yalnizdam Köyü": {
+            "tkgm_id": 133947,
+            "lat": 36.763033,
+            "lng": 29.825628
+        },
+        "Yaprakli Köyü": {
+            "tkgm_id": 137605,
+            "lat": 36.841083,
+            "lng": 29.802452
+        },
+        "Yenimahalle": {
+            "tkgm_id": 135104,
+            "lat": 36.718521,
+            "lng": 29.921962
+        },
+        "Yilmazli Köyü": {
+            "tkgm_id": 136344,
+            "lat": 36.788032,
+            "lng": 29.789241
+        },
+        "Yörenler Köyü": {
+            "tkgm_id": 137779,
+            "lat": 36.827071,
+            "lng": 29.833109
+        },
+        "Yuva Köyü": {
+            "tkgm_id": 137069,
+            "lat": 36.714232,
+            "lng": 29.780371
+        },
+        "Yuva\/Çaybaşi": {
+            "tkgm_id": 204329,
+            "lat": 36.711279,
+            "lng": 29.800913
+        },
+        "Zümrütova Köyü": {
+            "tkgm_id": 135887,
+            "lat": 36.588533,
+            "lng": 29.821504
+        }
+    },
+    "Finike": {
+        "Akçaalan Köyü": {
+            "tkgm_id": 133796,
+            "lat": 36.500216,
+            "lng": 30.175241
+        },
+        "Alacadağ Köyü": {
+            "tkgm_id": 137982,
+            "lat": 36.387711,
+            "lng": 30.070776
+        },
+        "Arif Köyü": {
+            "tkgm_id": 137451,
+            "lat": 36.502065,
+            "lng": 30.072004
+        },
+        "Asarönü Köyü": {
+            "tkgm_id": 135022,
+            "lat": 36.35636,
+            "lng": 30.08662
+        },
+        "Bağyaka": {
+            "tkgm_id": 135796,
+            "lat": 36.336557,
+            "lng": 30.149476
+        },
+        "Boldağ Köyü": {
+            "tkgm_id": 138117,
+            "lat": 36.292601,
+            "lng": 30.108752
+        },
+        "Çamlibel": {
+            "tkgm_id": 208300,
+            "lat": null,
+            "lng": null
+        },
+        "Çavdir": {
+            "tkgm_id": 136394,
+            "lat": 36.366015,
+            "lng": 30.139559
+        },
+        "Dağbağ Köyü": {
+            "tkgm_id": 136381,
+            "lat": 36.430896,
+            "lng": 29.920912
+        },
+        "Ernez Köyü": {
+            "tkgm_id": 135273,
+            "lat": 36.445943,
+            "lng": 29.892172
+        },
+        "Eskimahalle": {
+            "tkgm_id": 134528,
+            "lat": 36.299047,
+            "lng": 30.141217
+        },
+        "Gökbük Köyü": {
+            "tkgm_id": 135374,
+            "lat": 36.452659,
+            "lng": 30.114309
+        },
+        "Gökçeyaka Köyü": {
+            "tkgm_id": 132402,
+            "lat": 36.422768,
+            "lng": 30.071892
+        },
+        "Hallaç": {
+            "tkgm_id": 136078,
+            "lat": 36.331351,
+            "lng": 30.130635
+        },
+        "Hasyurt": {
+            "tkgm_id": 206142,
+            "lat": 36.338724,
+            "lng": 30.22617
+        },
+        "Incirağaci": {
+            "tkgm_id": 134233,
+            "lat": 36.346238,
+            "lng": 30.184684
+        },
+        "Iskele": {
+            "tkgm_id": 134722,
+            "lat": 36.317705,
+            "lng": 30.139428
+        },
+        "Kale": {
+            "tkgm_id": 137789,
+            "lat": 36.291934,
+            "lng": 30.145102
+        },
+        "Karşiyaka": {
+            "tkgm_id": 181647,
+            "lat": 36.289391,
+            "lng": 30.141446
+        },
+        "Kizilca": {
+            "tkgm_id": 135047,
+            "lat": 36.292948,
+            "lng": 30.137858
+        },
+        "Sahilkent Köyü": {
+            "tkgm_id": 200767,
+            "lat": 36.334021,
+            "lng": 30.183191
+        },
+        "Saklisu": {
+            "tkgm_id": 205987,
+            "lat": 36.352663,
+            "lng": 30.168815
+        },
+        "Turunçova": {
+            "tkgm_id": 205989,
+            "lat": 36.352469,
+            "lng": 30.140663
+        },
+        "Yalniz Köyü": {
+            "tkgm_id": 140135,
+            "lat": 36.477087,
+            "lng": 30.141988
+        },
+        "Yazir Köyü": {
+            "tkgm_id": 137393,
+            "lat": 36.469466,
+            "lng": 29.964356
+        },
+        "Yenimahalle": {
+            "tkgm_id": 136196,
+            "lat": 36.303939,
+            "lng": 30.14445
+        },
+        "Yeşilköy Köyü": {
+            "tkgm_id": 137118,
+            "lat": 36.467691,
+            "lng": 30.029495
+        },
+        "Yeşilyurt": {
+            "tkgm_id": 205988,
+            "lat": 36.396717,
+            "lng": 30.073115
+        },
+        "Yeşilyurt\/Arif": {
+            "tkgm_id": 203991,
+            "lat": null,
+            "lng": null
+        },
+        "Yeşilyurt\/Köşklükavak": {
+            "tkgm_id": 203992,
+            "lat": null,
+            "lng": null
+        },
+        "Yuvalar Köyü": {
+            "tkgm_id": 138948,
+            "lat": 36.346163,
+            "lng": 30.155126
+        }
+    },
+    "Gazipaşa": {
+        "Akoluk Köyü": {
+            "tkgm_id": 44599,
+            "lat": 36.293635,
+            "lng": 32.580066
+        },
+        "Aydin": {
+            "tkgm_id": 207304,
+            "lat": 36.278641,
+            "lng": 32.330543
+        },
+        "Aydincik Köyü": {
+            "tkgm_id": 43659,
+            "lat": 36.302063,
+            "lng": 32.31497
+        },
+        "Bakilar": {
+            "tkgm_id": 43662,
+            "lat": 36.254754,
+            "lng": 32.314979
+        },
+        "Beyobasi Köyü": {
+            "tkgm_id": 43655,
+            "lat": 36.288858,
+            "lng": 32.311888
+        },
+        "Beyrebucak Köyü": {
+            "tkgm_id": 44501,
+            "lat": 36.218944,
+            "lng": 32.381131
+        },
+        "Burhan": {
+            "tkgm_id": 204669,
+            "lat": 36.32269,
+            "lng": 32.274957
+        },
+        "Çakmak Köyü": {
+            "tkgm_id": 43960,
+            "lat": 36.313267,
+            "lng": 32.393497
+        },
+        "Çalipinar Köyü": {
+            "tkgm_id": 44538,
+            "lat": 36.494548,
+            "lng": 32.43425
+        },
+        "Çamlica Köyü": {
+            "tkgm_id": 43923,
+            "lat": 36.398941,
+            "lng": 32.458716
+        },
+        "Çiğlik Köyü": {
+            "tkgm_id": 44283,
+            "lat": 36.32159,
+            "lng": 32.52907
+        },
+        "Çile Köyü": {
+            "tkgm_id": 44380,
+            "lat": 36.240573,
+            "lng": 32.45465
+        },
+        "Çimenbağ Köyü": {
+            "tkgm_id": 136132,
+            "lat": 36.272197,
+            "lng": 32.481267
+        },
+        "Çobanlar Köyü": {
+            "tkgm_id": 44366,
+            "lat": 36.247663,
+            "lng": 32.371169
+        },
+        "Çörüş Köyü": {
+            "tkgm_id": 44258,
+            "lat": null,
+            "lng": null
+        },
+        "Cumhuriyet": {
+            "tkgm_id": 206545,
+            "lat": 36.276819,
+            "lng": 32.288928
+        },
+        "Doğanca Köyü": {
+            "tkgm_id": 44252,
+            "lat": 36.246432,
+            "lng": 32.519453
+        },
+        "Ekmel": {
+            "tkgm_id": 43792,
+            "lat": 36.248079,
+            "lng": 32.333122
+        },
+        "Esenpinar Köyü": {
+            "tkgm_id": 44562,
+            "lat": 36.284346,
+            "lng": 32.53815
+        },
+        "Esentepe": {
+            "tkgm_id": 207305,
+            "lat": 36.284796,
+            "lng": 32.325926
+        },
+        "Gazi": {
+            "tkgm_id": 207303,
+            "lat": 36.279535,
+            "lng": 32.309756
+        },
+        "Göçük Köyü": {
+            "tkgm_id": 44375,
+            "lat": 36.188445,
+            "lng": 32.464905
+        },
+        "Gökçebelen Köyü": {
+            "tkgm_id": 200769,
+            "lat": 36.150027,
+            "lng": 32.502208
+        },
+        "Gökçesaray Köyü": {
+            "tkgm_id": 44098,
+            "lat": 36.261381,
+            "lng": 32.570096
+        },
+        "Güneyköy Köyü": {
+            "tkgm_id": 44203,
+            "lat": 36.162681,
+            "lng": 32.434871
+        },
+        "Gürçam Köyü": {
+            "tkgm_id": 44011,
+            "lat": 36.207457,
+            "lng": 32.500658
+        },
+        "Hasdere Köyü": {
+            "tkgm_id": 43687,
+            "lat": 36.260588,
+            "lng": 32.370909
+        },
+        "Ilica Köyü": {
+            "tkgm_id": 43695,
+            "lat": 36.404686,
+            "lng": 32.36284
+        },
+        "Inal Köyü": {
+            "tkgm_id": 43457,
+            "lat": 36.156992,
+            "lng": 32.546367
+        },
+        "Inceğiz Köyü": {
+            "tkgm_id": 44174,
+            "lat": 36.344374,
+            "lng": 32.357636
+        },
+        "Istiklal": {
+            "tkgm_id": 43798,
+            "lat": 36.279367,
+            "lng": 32.323662
+        },
+        "Karaçukur Köyü": {
+            "tkgm_id": 44849,
+            "lat": 36.271425,
+            "lng": 32.401332
+        },
+        "Karalar Köyü": {
+            "tkgm_id": 43215,
+            "lat": 36.340401,
+            "lng": 32.310878
+        },
+        "Karatepe Köyü": {
+            "tkgm_id": 44028,
+            "lat": 36.494336,
+            "lng": 32.419736
+        },
+        "Kirahmetler": {
+            "tkgm_id": 43413,
+            "lat": 36.197624,
+            "lng": 32.425877
+        },
+        "Kizilgüney Köyü": {
+            "tkgm_id": 43582,
+            "lat": 36.371122,
+            "lng": 32.300314
+        },
+        "Koru": {
+            "tkgm_id": 43334,
+            "lat": 36.244267,
+            "lng": 32.308151
+        },
+        "Korubaşi Köyü": {
+            "tkgm_id": 43723,
+            "lat": 36.274683,
+            "lng": 32.352688
+        },
+        "Küçüklü Köyü": {
+            "tkgm_id": 42934,
+            "lat": 36.306591,
+            "lng": 32.354454
+        },
+        "Macar Köyü": {
+            "tkgm_id": 43115,
+            "lat": 36.227197,
+            "lng": 32.349079
+        },
+        "Muzkent Köyü": {
+            "tkgm_id": 43791,
+            "lat": 36.179314,
+            "lng": 32.406229
+        },
+        "Öznurtepe Köyü": {
+            "tkgm_id": 43558,
+            "lat": 36.353048,
+            "lng": 32.396289
+        },
+        "Pazarci": {
+            "tkgm_id": 43543,
+            "lat": 36.26849,
+            "lng": 32.294722
+        },
+        "Şahinler Köyü": {
+            "tkgm_id": 43576,
+            "lat": 36.51387,
+            "lng": 32.499419
+        },
+        "Sariağaç": {
+            "tkgm_id": 204668,
+            "lat": 36.302858,
+            "lng": 32.294708
+        },
+        "Sugözü Köyü": {
+            "tkgm_id": 43567,
+            "lat": 36.423662,
+            "lng": 32.455009
+        },
+        "Üçkonak Köyü": {
+            "tkgm_id": 43534,
+            "lat": 36.268444,
+            "lng": 32.513398
+        },
+        "Yakacik Köyü": {
+            "tkgm_id": 43221,
+            "lat": 36.111409,
+            "lng": 32.559651
+        },
+        "Yeni": {
+            "tkgm_id": 134229,
+            "lat": 36.266919,
+            "lng": 32.327154
+        },
+        "Yenigüney Köyü": {
+            "tkgm_id": 44117,
+            "lat": 36.270782,
+            "lng": 32.449179
+        },
+        "Yeniköy Köyü": {
+            "tkgm_id": 43806,
+            "lat": 36.421186,
+            "lng": 32.341021
+        },
+        "Yeşilyurt Köyü": {
+            "tkgm_id": 43832,
+            "lat": 36.343179,
+            "lng": 32.4616
+        },
+        "Zeytinada Köyü": {
+            "tkgm_id": 43456,
+            "lat": 36.127783,
+            "lng": 32.488873
+        }
+    },
+    "Gündoğmuş": {
+        "Akyari(Balur) Köyü": {
+            "tkgm_id": 135886,
+            "lat": 36.775711,
+            "lng": 32.240458
+        },
+        "Balkaya(Semet) Köyü": {
+            "tkgm_id": 137931,
+            "lat": 36.752591,
+            "lng": 32.101809
+        },
+        "Bedan Köyü": {
+            "tkgm_id": 137588,
+            "lat": 36.780978,
+            "lng": 32.27239
+        },
+        "Çalti Köyü": {
+            "tkgm_id": 43815,
+            "lat": 36.698748,
+            "lng": 32.179449
+        },
+        "Çamlialan(Belistir) Köyü": {
+            "tkgm_id": 134770,
+            "lat": 36.737413,
+            "lng": 32.282441
+        },
+        "Çayirözü(Sindirfe) Köyü": {
+            "tkgm_id": 135045,
+            "lat": 36.809008,
+            "lng": 32.068628
+        },
+        "Çiçekoluk(Sünbüle) Köyü": {
+            "tkgm_id": 139572,
+            "lat": 36.823784,
+            "lng": 31.845452
+        },
+        "Eskibağ Köyü": {
+            "tkgm_id": 43464,
+            "lat": 36.744151,
+            "lng": 32.14523
+        },
+        "Fatih": {
+            "tkgm_id": 43705,
+            "lat": 36.794917,
+            "lng": 31.997147
+        },
+        "Güneycik Köyü": {
+            "tkgm_id": 43619,
+            "lat": 36.765268,
+            "lng": 31.765684
+        },
+        "Güneyyaka Köyü": {
+            "tkgm_id": 44122,
+            "lat": 36.858803,
+            "lng": 31.926777
+        },
+        "Kalecik(Marnas) Köyü": {
+            "tkgm_id": 136554,
+            "lat": 36.78795,
+            "lng": 31.847631
+        },
+        "Kaplan": {
+            "tkgm_id": 44104,
+            "lat": 36.888822,
+            "lng": 32.107785
+        },
+        "Karabul Köyü": {
+            "tkgm_id": 43784,
+            "lat": 36.802161,
+            "lng": 31.882567
+        },
+        "Karadere(Kizilbağ) Köyü": {
+            "tkgm_id": 137059,
+            "lat": 36.839114,
+            "lng": 31.941995
+        },
+        "Karaisa Köyü": {
+            "tkgm_id": 43693,
+            "lat": 36.794691,
+            "lng": 31.908108
+        },
+        "Karaköy Köyü": {
+            "tkgm_id": 43174,
+            "lat": 36.74815,
+            "lng": 32.263518
+        },
+        "Kayabükü(Çündüre) Köyü": {
+            "tkgm_id": 134226,
+            "lat": 36.779406,
+            "lng": 32.186914
+        },
+        "Köprülü-Merkez Yazlar Köyü": {
+            "tkgm_id": 170712,
+            "lat": 36.728948,
+            "lng": 32.187968
+        },
+        "Köprülü-Pinargözü Köyü": {
+            "tkgm_id": 170713,
+            "lat": 36.708908,
+            "lng": 32.230334
+        },
+        "Merkez Kozağaci Köyü": {
+            "tkgm_id": 136607,
+            "lat": 36.856207,
+            "lng": 32.001564
+        },
+        "Naraağci Köyü": {
+            "tkgm_id": 134015,
+            "lat": 36.794132,
+            "lng": 32.080671
+        },
+        "Ortakonuş Köyü": {
+            "tkgm_id": 43879,
+            "lat": 36.750819,
+            "lng": 32.047133
+        },
+        "Ortaköy-Bademli Köyü": {
+            "tkgm_id": 170796,
+            "lat": 36.830302,
+            "lng": 32.13065
+        },
+        "Ortaköy-Merkez Köyü": {
+            "tkgm_id": 170795,
+            "lat": 36.814851,
+            "lng": 32.149535
+        },
+        "Özügür": {
+            "tkgm_id": 135841,
+            "lat": 36.811356,
+            "lng": 31.99834
+        },
+        "Pembelik Köyü": {
+            "tkgm_id": 136195,
+            "lat": 36.849614,
+            "lng": 32.076567
+        },
+        "Senir Köyü": {
+            "tkgm_id": 43698,
+            "lat": 36.795157,
+            "lng": 31.955161
+        },
+        "Serinyaka(Serhenk) Köyü": {
+            "tkgm_id": 134457,
+            "lat": 36.794749,
+            "lng": 31.815627
+        },
+        "Ümitli Köyü": {
+            "tkgm_id": 135030,
+            "lat": 36.7739,
+            "lng": 32.011071
+        },
+        "Yeniköy Köyü": {
+            "tkgm_id": 43813,
+            "lat": 36.737291,
+            "lng": 32.240023
+        }
+    },
+    "Ibradi": {
+        "Ardiçpinar": {
+            "tkgm_id": 43275,
+            "lat": null,
+            "lng": null
+        },
+        "Aşağimahalle": {
+            "tkgm_id": 138415,
+            "lat": 37.086958,
+            "lng": 31.611198
+        },
+        "Başlar": {
+            "tkgm_id": 42486,
+            "lat": null,
+            "lng": null
+        },
+        "Çukurviran": {
+            "tkgm_id": 43114,
+            "lat": 37.160271,
+            "lng": 31.510545
+        },
+        "Düzlen": {
+            "tkgm_id": 43570,
+            "lat": 37.066299,
+            "lng": 31.649179
+        },
+        "Maşat": {
+            "tkgm_id": 43436,
+            "lat": 37.163366,
+            "lng": 31.586014
+        },
+        "Ormana": {
+            "tkgm_id": 139236,
+            "lat": 37.092657,
+            "lng": 31.525381
+        },
+        "Ürünlü": {
+            "tkgm_id": 43032,
+            "lat": 37.012065,
+            "lng": 31.600474
+        },
+        "Üzümdere": {
+            "tkgm_id": 43175,
+            "lat": 37.139981,
+            "lng": 31.691801
+        },
+        "Yukarimahalle": {
+            "tkgm_id": 139171,
+            "lat": 37.210997,
+            "lng": 31.530868
+        }
+    },
+    "Kaş": {
+        "Ağullu": {
+            "tkgm_id": 135986,
+            "lat": 36.573775,
+            "lng": 29.688825
+        },
+        "Ahatli": {
+            "tkgm_id": 42461,
+            "lat": 36.254818,
+            "lng": 29.724643
+        },
+        "Aklar": {
+            "tkgm_id": 43889,
+            "lat": 36.420014,
+            "lng": 29.422732
+        },
+        "Akörü": {
+            "tkgm_id": 43870,
+            "lat": 36.488546,
+            "lng": 29.622917
+        },
+        "Bayindir": {
+            "tkgm_id": 171414,
+            "lat": 36.150964,
+            "lng": 29.616218
+        },
+        "Beldibi": {
+            "tkgm_id": 43837,
+            "lat": null,
+            "lng": null
+        },
+        "Belenli": {
+            "tkgm_id": 171409,
+            "lat": 36.160006,
+            "lng": 29.697935
+        },
+        "Belkonak": {
+            "tkgm_id": 43181,
+            "lat": null,
+            "lng": null
+        },
+        "Bezirgan": {
+            "tkgm_id": 43903,
+            "lat": null,
+            "lng": null
+        },
+        "Boğazcik": {
+            "tkgm_id": 44084,
+            "lat": 36.16856,
+            "lng": 29.747198
+        },
+        "Çamliköy": {
+            "tkgm_id": 43877,
+            "lat": 36.452855,
+            "lng": 29.460024
+        },
+        "Çamliova": {
+            "tkgm_id": 139385,
+            "lat": null,
+            "lng": null
+        },
+        "Çataloluk": {
+            "tkgm_id": 43855,
+            "lat": 36.325359,
+            "lng": 29.654433
+        },
+        "Çavdir": {
+            "tkgm_id": 43816,
+            "lat": 36.36128,
+            "lng": 29.359435
+        },
+        "Çayköy": {
+            "tkgm_id": 43850,
+            "lat": 36.432685,
+            "lng": 29.532275
+        },
+        "Cemre": {
+            "tkgm_id": 135813,
+            "lat": 36.518803,
+            "lng": 29.648153
+        },
+        "Çerler": {
+            "tkgm_id": 43422,
+            "lat": 36.291104,
+            "lng": 29.765321
+        },
+        "Çeşme": {
+            "tkgm_id": 142913,
+            "lat": 36.417825,
+            "lng": 29.720949
+        },
+        "Çukurbağ": {
+            "tkgm_id": 43183,
+            "lat": 36.557007,
+            "lng": 29.649331
+        },
+        "Dereköy": {
+            "tkgm_id": 43947,
+            "lat": 36.267949,
+            "lng": 29.669631
+        },
+        "Dirgenler": {
+            "tkgm_id": 43735,
+            "lat": 36.35571,
+            "lng": 29.800986
+        },
+        "Doğantaş": {
+            "tkgm_id": 43589,
+            "lat": null,
+            "lng": null
+        },
+        "Gelemiş": {
+            "tkgm_id": 43301,
+            "lat": null,
+            "lng": null
+        },
+        "Gökçeören": {
+            "tkgm_id": 43846,
+            "lat": 36.184986,
+            "lng": 29.547903
+        },
+        "Gökçeyazi": {
+            "tkgm_id": 43423,
+            "lat": 36.291732,
+            "lng": 29.828094
+        },
+        "Gömbe": {
+            "tkgm_id": 43466,
+            "lat": 36.548883,
+            "lng": 29.67371
+        },
+        "Gömbe\/Karşiyaka": {
+            "tkgm_id": 204604,
+            "lat": 36.543871,
+            "lng": 29.676292
+        },
+        "Gömbe\/Uçarsu": {
+            "tkgm_id": 204596,
+            "lat": 36.55625,
+            "lng": 29.675927
+        },
+        "Gürsu": {
+            "tkgm_id": 44090,
+            "lat": 36.453298,
+            "lng": 29.741291
+        },
+        "Hacioğlan": {
+            "tkgm_id": 142888,
+            "lat": 36.294519,
+            "lng": 29.571387
+        },
+        "Ikizce": {
+            "tkgm_id": 43911,
+            "lat": 36.331581,
+            "lng": 29.472138
+        },
+        "Islamlar": {
+            "tkgm_id": 43968,
+            "lat": 36.311326,
+            "lng": 29.424443
+        },
+        "Kalkan": {
+            "tkgm_id": 43462,
+            "lat": 36.261735,
+            "lng": 29.410139
+        },
+        "Kalkan\/Menteşe": {
+            "tkgm_id": 204169,
+            "lat": null,
+            "lng": null
+        },
+        "Kalkan\/Yaliboyu": {
+            "tkgm_id": 204597,
+            "lat": null,
+            "lng": null
+        },
+        "Karadağ": {
+            "tkgm_id": 44025,
+            "lat": 36.350322,
+            "lng": 29.849738
+        },
+        "Kaş(Merkez) Köyü": {
+            "tkgm_id": 136967,
+            "lat": 36.198788,
+            "lng": 29.621604
+        },
+        "Kasaba": {
+            "tkgm_id": 43980,
+            "lat": 36.31971,
+            "lng": 29.744436
+        },
+        "Kemer": {
+            "tkgm_id": 141109,
+            "lat": null,
+            "lng": null
+        },
+        "Kinik": {
+            "tkgm_id": 43847,
+            "lat": 36.356998,
+            "lng": 29.324248
+        },
+        "Kinik\/Doğular": {
+            "tkgm_id": 204598,
+            "lat": 36.375205,
+            "lng": 29.325225
+        },
+        "Kinik\/Göçebeler": {
+            "tkgm_id": 204599,
+            "lat": 36.331046,
+            "lng": 29.33131
+        },
+        "Kinik\/Merkez": {
+            "tkgm_id": 204600,
+            "lat": 36.347026,
+            "lng": 29.333211
+        },
+        "Kizilağaç": {
+            "tkgm_id": 171419,
+            "lat": 36.328798,
+            "lng": 29.696024
+        },
+        "Ortabağ": {
+            "tkgm_id": 43615,
+            "lat": 36.420027,
+            "lng": 29.788803
+        },
+        "Ova": {
+            "tkgm_id": 44190,
+            "lat": 36.306045,
+            "lng": 29.304512
+        },
+        "Ova\/Merkez": {
+            "tkgm_id": 204601,
+            "lat": 36.317586,
+            "lng": 29.326087
+        },
+        "Ova\/Yeşilyurt": {
+            "tkgm_id": 204602,
+            "lat": 36.299211,
+            "lng": 29.298239
+        },
+        "Pinarbaşi": {
+            "tkgm_id": 43890,
+            "lat": 36.244127,
+            "lng": 29.693141
+        },
+        "Sahil Kilinçli": {
+            "tkgm_id": 138530,
+            "lat": 36.130596,
+            "lng": 29.751144
+        },
+        "Sahil Palamut": {
+            "tkgm_id": 171412,
+            "lat": 36.416356,
+            "lng": 29.347203
+        },
+        "Saribelen": {
+            "tkgm_id": 43535,
+            "lat": 36.240874,
+            "lng": 29.486398
+        },
+        "Sarilar": {
+            "tkgm_id": 43658,
+            "lat": 36.243826,
+            "lng": 29.763718
+        },
+        "Sinneli": {
+            "tkgm_id": 43973,
+            "lat": 36.318381,
+            "lng": 29.623677
+        },
+        "Sütleğen": {
+            "tkgm_id": 43191,
+            "lat": 36.439446,
+            "lng": 29.613416
+        },
+        "Uğrar": {
+            "tkgm_id": 43843,
+            "lat": 36.292092,
+            "lng": 29.702072
+        },
+        "Üzümlü": {
+            "tkgm_id": 43823,
+            "lat": 36.425831,
+            "lng": 29.593907
+        },
+        "Yayla Çevreli": {
+            "tkgm_id": 171416,
+            "lat": 36.535325,
+            "lng": 29.695375
+        },
+        "Yayla Kapakli": {
+            "tkgm_id": 171418,
+            "lat": 36.531583,
+            "lng": 29.677293
+        },
+        "Yayla Kilinçli": {
+            "tkgm_id": 138949,
+            "lat": 36.578987,
+            "lng": 29.707719
+        },
+        "Yayla Palamut": {
+            "tkgm_id": 142860,
+            "lat": 36.45046,
+            "lng": 29.503352
+        },
+        "Yeniköy": {
+            "tkgm_id": 44046,
+            "lat": 36.22456,
+            "lng": 29.602024
+        },
+        "Yeşilbarak": {
+            "tkgm_id": 42966,
+            "lat": 36.588387,
+            "lng": 29.680299
+        },
+        "Yeşilköy": {
+            "tkgm_id": 43419,
+            "lat": 36.271343,
+            "lng": 29.371657
+        },
+        "Yuvacik": {
+            "tkgm_id": 43210,
+            "lat": 36.419004,
+            "lng": 29.559426
+        }
+    },
+    "Kemer": {
+        "Arslanbucak": {
+            "tkgm_id": 169244,
+            "lat": 36.599281,
+            "lng": 30.529017
+        },
+        "Beldibi": {
+            "tkgm_id": 43552,
+            "lat": 36.733975,
+            "lng": 30.553955
+        },
+        "Beycik": {
+            "tkgm_id": 43538,
+            "lat": 36.505222,
+            "lng": 30.433845
+        },
+        "Çamyuva": {
+            "tkgm_id": 43584,
+            "lat": 36.576248,
+            "lng": 30.474146
+        },
+        "Göynük": {
+            "tkgm_id": 43444,
+            "lat": 36.653945,
+            "lng": 30.556814
+        },
+        "Göynük\/Değirmendere": {
+            "tkgm_id": 204170,
+            "lat": null,
+            "lng": null
+        },
+        "Göynük\/Esentepe": {
+            "tkgm_id": 204171,
+            "lat": null,
+            "lng": null
+        },
+        "Kemer": {
+            "tkgm_id": 169313,
+            "lat": 36.600014,
+            "lng": 30.560424
+        },
+        "Kiriş": {
+            "tkgm_id": 43084,
+            "lat": null,
+            "lng": null
+        },
+        "Kuzdere": {
+            "tkgm_id": 43262,
+            "lat": 36.580004,
+            "lng": 30.463931
+        },
+        "Merkez": {
+            "tkgm_id": 208301,
+            "lat": null,
+            "lng": null
+        },
+        "Ovacik": {
+            "tkgm_id": 43143,
+            "lat": 36.659089,
+            "lng": 30.439345
+        },
+        "Tekirova": {
+            "tkgm_id": 43192,
+            "lat": 36.508433,
+            "lng": 30.503286
+        },
+        "Tekirova\/Cumayeri": {
+            "tkgm_id": 204174,
+            "lat": null,
+            "lng": null
+        },
+        "Tekirova\/Merkez": {
+            "tkgm_id": 204173,
+            "lat": null,
+            "lng": null
+        },
+        "Ulupinar": {
+            "tkgm_id": 42993,
+            "lat": 36.450036,
+            "lng": 30.445807
+        },
+        "Yeni Mahalle": {
+            "tkgm_id": 208302,
+            "lat": null,
+            "lng": null
+        }
+    },
+    "Kepez": {
+        "Ahatli": {
+            "tkgm_id": 203349,
+            "lat": 36.927303,
+            "lng": 30.648276
+        },
+        "Aktoprak": {
+            "tkgm_id": 207959,
+            "lat": 36.992975,
+            "lng": 30.69824
+        },
+        "Atatürk": {
+            "tkgm_id": 205037,
+            "lat": 36.92172,
+            "lng": 30.689435
+        },
+        "Avni Tolunay": {
+            "tkgm_id": 203350,
+            "lat": 36.908629,
+            "lng": 30.630644
+        },
+        "Ayanoğlu": {
+            "tkgm_id": 205038,
+            "lat": 36.96072,
+            "lng": 30.717525
+        },
+        "Aydoğmuş": {
+            "tkgm_id": 207960,
+            "lat": 36.975901,
+            "lng": 30.697515
+        },
+        "Baraj": {
+            "tkgm_id": 205039,
+            "lat": 36.937011,
+            "lng": 30.750293
+        },
+        "Bariş": {
+            "tkgm_id": 204952,
+            "lat": 36.925532,
+            "lng": 30.682795
+        },
+        "Başköy": {
+            "tkgm_id": 134380,
+            "lat": 37.052859,
+            "lng": 30.657768
+        },
+        "Beşkonaklilar": {
+            "tkgm_id": 205040,
+            "lat": 36.930979,
+            "lng": 30.751503
+        },
+        "Çamlibel": {
+            "tkgm_id": 202656,
+            "lat": 36.936136,
+            "lng": 30.660171
+        },
+        "Çamlica": {
+            "tkgm_id": 203649,
+            "lat": 37.039332,
+            "lng": 30.731982
+        },
+        "Çankaya": {
+            "tkgm_id": 202653,
+            "lat": 36.944134,
+            "lng": 30.678618
+        },
+        "Demirel": {
+            "tkgm_id": 205041,
+            "lat": 36.983631,
+            "lng": 30.723671
+        },
+        "Duaci": {
+            "tkgm_id": 134477,
+            "lat": 36.978098,
+            "lng": 30.657189
+        },
+        "Düden": {
+            "tkgm_id": 203359,
+            "lat": 36.937985,
+            "lng": 30.759805
+        },
+        "Düdenbaşi": {
+            "tkgm_id": 205042,
+            "lat": 36.914715,
+            "lng": 30.736968
+        },
+        "Duraliler": {
+            "tkgm_id": 123822,
+            "lat": 36.905201,
+            "lng": 30.611808
+        },
+        "Emek": {
+            "tkgm_id": 205043,
+            "lat": 36.91523,
+            "lng": 30.709123
+        },
+        "Erenköy": {
+            "tkgm_id": 204953,
+            "lat": 36.928274,
+            "lng": 30.672195
+        },
+        "Esentepe": {
+            "tkgm_id": 202650,
+            "lat": 36.941094,
+            "lng": 30.668351
+        },
+        "Fabrikalar": {
+            "tkgm_id": 203351,
+            "lat": 36.909631,
+            "lng": 30.669165
+        },
+        "Fatih": {
+            "tkgm_id": 202655,
+            "lat": 36.943771,
+            "lng": 30.651437
+        },
+        "Fevzi Çakmak": {
+            "tkgm_id": 202654,
+            "lat": 36.949515,
+            "lng": 30.694997
+        },
+        "Gazi": {
+            "tkgm_id": 205096,
+            "lat": 36.941829,
+            "lng": 30.71647
+        },
+        "Gaziler": {
+            "tkgm_id": 135112,
+            "lat": 36.998107,
+            "lng": 30.7712
+        },
+        "Göçerler": {
+            "tkgm_id": 133687,
+            "lat": 36.950429,
+            "lng": 30.651803
+        },
+        "Göksu": {
+            "tkgm_id": 205044,
+            "lat": 36.91109,
+            "lng": 30.755772
+        },
+        "Gülveren": {
+            "tkgm_id": 203352,
+            "lat": 36.903089,
+            "lng": 30.645811
+        },
+        "Gündoğdu": {
+            "tkgm_id": 205045,
+            "lat": 36.929159,
+            "lng": 30.708311
+        },
+        "Güneş": {
+            "tkgm_id": 205046,
+            "lat": 36.924683,
+            "lng": 30.736617
+        },
+        "Habibler": {
+            "tkgm_id": 205047,
+            "lat": 36.950607,
+            "lng": 30.72832
+        },
+        "Kanal": {
+            "tkgm_id": 205049,
+            "lat": 36.926364,
+            "lng": 30.669405
+        },
+        "Karşiyaka": {
+            "tkgm_id": 205239,
+            "lat": 36.914766,
+            "lng": 30.702142
+        },
+        "Kazim Karabekir": {
+            "tkgm_id": 202651,
+            "lat": 36.930753,
+            "lng": 30.677322
+        },
+        "Kepez": {
+            "tkgm_id": 203353,
+            "lat": 36.940877,
+            "lng": 30.637099
+        },
+        "Kirişçiler": {
+            "tkgm_id": 134099,
+            "lat": 37.049926,
+            "lng": 30.699171
+        },
+        "Kizilli": {
+            "tkgm_id": 135359,
+            "lat": 37.104084,
+            "lng": 30.69799
+        },
+        "Koyunlar": {
+            "tkgm_id": 135126,
+            "lat": null,
+            "lng": null
+        },
+        "Kültür": {
+            "tkgm_id": 203354,
+            "lat": 36.901167,
+            "lng": 30.653691
+        },
+        "Kütükçü": {
+            "tkgm_id": 136859,
+            "lat": 36.933153,
+            "lng": 30.69639
+        },
+        "Kuzeyyaka": {
+            "tkgm_id": 205050,
+            "lat": 36.935991,
+            "lng": 30.705572
+        },
+        "Menderes": {
+            "tkgm_id": 203360,
+            "lat": 36.944518,
+            "lng": 30.771111
+        },
+        "Odabaşi": {
+            "tkgm_id": 134446,
+            "lat": 37.031025,
+            "lng": 30.667416
+        },
+        "Orta": {
+            "tkgm_id": 203361,
+            "lat": 36.929655,
+            "lng": 30.773705
+        },
+        "Özgürlük": {
+            "tkgm_id": 205052,
+            "lat": 36.913752,
+            "lng": 30.68365
+        },
+        "Şafak": {
+            "tkgm_id": 203356,
+            "lat": 36.917201,
+            "lng": 30.632586
+        },
+        "Santral": {
+            "tkgm_id": 203355,
+            "lat": 36.937177,
+            "lng": 30.630293
+        },
+        "Şelale": {
+            "tkgm_id": 205053,
+            "lat": 36.964448,
+            "lng": 30.736027
+        },
+        "Sinan": {
+            "tkgm_id": 203571,
+            "lat": 36.923659,
+            "lng": 30.77657
+        },
+        "Sütçüler": {
+            "tkgm_id": 136130,
+            "lat": 36.930163,
+            "lng": 30.740198
+        },
+        "Teomanpaşa": {
+            "tkgm_id": 205054,
+            "lat": 36.916057,
+            "lng": 30.723241
+        },
+        "Ulus": {
+            "tkgm_id": 205055,
+            "lat": 36.909552,
+            "lng": 30.686436
+        },
+        "Ünsal": {
+            "tkgm_id": 203357,
+            "lat": 36.933301,
+            "lng": 30.624999
+        },
+        "Varsak": {
+            "tkgm_id": 135404,
+            "lat": 36.976348,
+            "lng": 30.740044
+        },
+        "Varsak\/Altiayak": {
+            "tkgm_id": 203749,
+            "lat": null,
+            "lng": null
+        },
+        "Varsak\/Esentepe": {
+            "tkgm_id": 207961,
+            "lat": null,
+            "lng": null
+        },
+        "Varsak\/Karşiyaka": {
+            "tkgm_id": 203748,
+            "lat": 36.984531,
+            "lng": 30.699245
+        },
+        "Varsak\/Menderes": {
+            "tkgm_id": 203750,
+            "lat": null,
+            "lng": null
+        },
+        "Varsak\/Zeytinlik": {
+            "tkgm_id": 203747,
+            "lat": null,
+            "lng": null
+        },
+        "Yavuz Selim": {
+            "tkgm_id": 202652,
+            "lat": 36.933284,
+            "lng": 30.686188
+        },
+        "Yeni": {
+            "tkgm_id": 205056,
+            "lat": 36.921331,
+            "lng": 30.708465
+        },
+        "Yenidoğan": {
+            "tkgm_id": 203358,
+            "lat": 36.918344,
+            "lng": 30.664996
+        },
+        "Yeniemek": {
+            "tkgm_id": 205057,
+            "lat": 36.925375,
+            "lng": 30.697829
+        },
+        "Yeşiltepe": {
+            "tkgm_id": 205058,
+            "lat": 36.917931,
+            "lng": 30.680375
+        },
+        "Yeşilyurt": {
+            "tkgm_id": 205059,
+            "lat": 36.906607,
+            "lng": 30.643262
+        },
+        "Yükseliş": {
+            "tkgm_id": 205060,
+            "lat": 36.912723,
+            "lng": 30.692784
+        },
+        "Zafer": {
+            "tkgm_id": 205061,
+            "lat": 36.917262,
+            "lng": 30.688908
+        }
+    },
+    "Konyaalti": {
+        "Akdamlar": {
+            "tkgm_id": 203615,
+            "lat": 36.87199,
+            "lng": 30.512975
+        },
+        "Arapsuyu": {
+            "tkgm_id": 135962,
+            "lat": 36.883029,
+            "lng": 30.640392
+        },
+        "Aşaği Karaman Köyü": {
+            "tkgm_id": 136086,
+            "lat": 36.915134,
+            "lng": 30.581577
+        },
+        "Aydinlik": {
+            "tkgm_id": 202693,
+            "lat": 36.876445,
+            "lng": 30.554619
+        },
+        "Bahtili Köyü": {
+            "tkgm_id": 136063,
+            "lat": 36.887353,
+            "lng": 30.582785
+        },
+        "Çağlarca Köyü": {
+            "tkgm_id": 136157,
+            "lat": 36.858322,
+            "lng": 30.477564
+        },
+        "Çakirlar Köyü": {
+            "tkgm_id": 134932,
+            "lat": 36.860697,
+            "lng": 30.571507
+        },
+        "Çitdibi Köyü": {
+            "tkgm_id": 135124,
+            "lat": 36.788558,
+            "lng": 30.417101
+        },
+        "Demircilik Köyü": {
+            "tkgm_id": 202658,
+            "lat": 36.870163,
+            "lng": 30.550599
+        },
+        "Doyran": {
+            "tkgm_id": 134225,
+            "lat": 36.891022,
+            "lng": 30.452501
+        },
+        "Doyran Çamlibel": {
+            "tkgm_id": 203595,
+            "lat": 36.900739,
+            "lng": 30.54475
+        },
+        "Doyran Dağ": {
+            "tkgm_id": 203596,
+            "lat": 36.904183,
+            "lng": 30.537295
+        },
+        "Geyikbayiri Köyü": {
+            "tkgm_id": 135535,
+            "lat": 36.876658,
+            "lng": 30.446204
+        },
+        "Gökçam Köyü": {
+            "tkgm_id": 135125,
+            "lat": 36.891385,
+            "lng": 30.552073
+        },
+        "Gökdere": {
+            "tkgm_id": 202924,
+            "lat": 36.834536,
+            "lng": 30.557167
+        },
+        "Hacisekililer Köyü": {
+            "tkgm_id": 135950,
+            "lat": 36.828662,
+            "lng": 30.484443
+        },
+        "Hisarçandir Köyü": {
+            "tkgm_id": 134098,
+            "lat": 36.785991,
+            "lng": 30.486971
+        },
+        "Hurma": {
+            "tkgm_id": 56046,
+            "lat": 36.857532,
+            "lng": 30.602525
+        },
+        "Karatepe Köyü": {
+            "tkgm_id": 137603,
+            "lat": 36.885831,
+            "lng": 30.556143
+        },
+        "Kir": {
+            "tkgm_id": 205068,
+            "lat": 36.891385,
+            "lng": 30.552073
+        },
+        "Kuruçay": {
+            "tkgm_id": 202694,
+            "lat": 36.877784,
+            "lng": 30.563767
+        },
+        "Liman": {
+            "tkgm_id": 202922,
+            "lat": 36.806407,
+            "lng": 30.570249
+        },
+        "Mollayusuf": {
+            "tkgm_id": 203484,
+            "lat": 36.894355,
+            "lng": 30.619168
+        },
+        "Pinarbaşi": {
+            "tkgm_id": 203486,
+            "lat": 36.894444,
+            "lng": 30.649374
+        },
+        "Sarisu": {
+            "tkgm_id": 202923,
+            "lat": 36.842449,
+            "lng": 30.587204
+        },
+        "Siteler": {
+            "tkgm_id": 203485,
+            "lat": 36.893188,
+            "lng": 30.631608
+        },
+        "Suiçecek Köyü": {
+            "tkgm_id": 202657,
+            "lat": 36.850607,
+            "lng": 30.543099
+        },
+        "Üçoluk Köyü": {
+            "tkgm_id": 10027,
+            "lat": 36.714886,
+            "lng": 30.422851
+        },
+        "Uncali": {
+            "tkgm_id": 205073,
+            "lat": 36.881857,
+            "lng": 30.625476
+        },
+        "Yarbaşçandir Köyü": {
+            "tkgm_id": 137636,
+            "lat": 36.750121,
+            "lng": 30.402317
+        },
+        "Yenimahalle": {
+            "tkgm_id": 202692,
+            "lat": 36.865708,
+            "lng": 30.536908
+        },
+        "Zümrüt": {
+            "tkgm_id": 202691,
+            "lat": 36.871904,
+            "lng": 30.596397
+        }
+    },
+    "Korkuteli": {
+        "Akyar Köyü": {
+            "tkgm_id": 134362,
+            "lat": 37.137939,
+            "lng": 30.203189
+        },
+        "Akyar Yaylasi Köyü": {
+            "tkgm_id": 137798,
+            "lat": 37.156224,
+            "lng": 30.011711
+        },
+        "Alaaddin": {
+            "tkgm_id": 134351,
+            "lat": 37.081104,
+            "lng": 30.163284
+        },
+        "Alaaddin-Baraj": {
+            "tkgm_id": 203068,
+            "lat": 37.081703,
+            "lng": 30.168257
+        },
+        "Aşaği Karaman Yaylasi Köyü": {
+            "tkgm_id": 135406,
+            "lat": 37.023995,
+            "lng": 30.043226
+        },
+        "Aşağipazar": {
+            "tkgm_id": 136591,
+            "lat": 37.065245,
+            "lng": 30.191676
+        },
+        "Avdan Köyü": {
+            "tkgm_id": 133886,
+            "lat": 36.833682,
+            "lng": 30.201467
+        },
+        "Bahçeyaka Köyü": {
+            "tkgm_id": 134230,
+            "lat": 36.965492,
+            "lng": 29.971056
+        },
+        "Bayat Bademleri Köyü": {
+            "tkgm_id": 135060,
+            "lat": 37.059179,
+            "lng": 30.461387
+        },
+        "Bayat Köyü": {
+            "tkgm_id": 135006,
+            "lat": 37.050265,
+            "lng": 30.290973
+        },
+        "Beğiş Köyü": {
+            "tkgm_id": 137958,
+            "lat": 36.938574,
+            "lng": 30.125908
+        },
+        "Bozova Köyü": {
+            "tkgm_id": 139774,
+            "lat": 37.208948,
+            "lng": 30.278731
+        },
+        "Bozova\/Aşaği": {
+            "tkgm_id": 204373,
+            "lat": 37.218136,
+            "lng": 30.30692
+        },
+        "Bozova\/Kocaanbar": {
+            "tkgm_id": 204375,
+            "lat": 37.238628,
+            "lng": 30.283916
+        },
+        "Bozova\/Yukari": {
+            "tkgm_id": 204374,
+            "lat": 37.193207,
+            "lng": 30.268284
+        },
+        "Büyükköy Köyü": {
+            "tkgm_id": 136286,
+            "lat": 37.165835,
+            "lng": 30.298912
+        },
+        "Çaykenari Köyü": {
+            "tkgm_id": 138142,
+            "lat": 37.194144,
+            "lng": 30.358317
+        },
+        "Çiğlik Yaylasi Köyü": {
+            "tkgm_id": 134231,
+            "lat": 37.070129,
+            "lng": 29.965148
+        },
+        "Çivgalar Köyü": {
+            "tkgm_id": 10013,
+            "lat": 36.948752,
+            "lng": 29.80462
+        },
+        "Çomakli Köyü": {
+            "tkgm_id": 137847,
+            "lat": 37.302359,
+            "lng": 30.24338
+        },
+        "Çukurca Köyü": {
+            "tkgm_id": 135339,
+            "lat": 37.282632,
+            "lng": 30.403301
+        },
+        "Datköy Köyü": {
+            "tkgm_id": 135872,
+            "lat": 37.030831,
+            "lng": 30.247302
+        },
+        "Dereköy Köyü": {
+            "tkgm_id": 137377,
+            "lat": 37.118156,
+            "lng": 30.060104
+        },
+        "Dereköy Yaylasi Köyü": {
+            "tkgm_id": 136345,
+            "lat": 37.1577,
+            "lng": 30.028753
+        },
+        "Duraliler Yaylasi Köyü": {
+            "tkgm_id": 135710,
+            "lat": 36.92393,
+            "lng": 29.956452
+        },
+        "Garipçe Köyü": {
+            "tkgm_id": 134748,
+            "lat": 37.300533,
+            "lng": 30.344838
+        },
+        "Göçerler Köyü": {
+            "tkgm_id": 10010,
+            "lat": 37.015162,
+            "lng": 30.023637
+        },
+        "Güzle Köyü": {
+            "tkgm_id": 10008,
+            "lat": 36.949943,
+            "lng": 30.405703
+        },
+        "Imecik Köyü": {
+            "tkgm_id": 137637,
+            "lat": 36.854437,
+            "lng": 30.240146
+        },
+        "Imrahor Köyü": {
+            "tkgm_id": 134167,
+            "lat": 37.054204,
+            "lng": 30.228707
+        },
+        "Karabayir Köyü": {
+            "tkgm_id": 138034,
+            "lat": null,
+            "lng": null
+        },
+        "Karadin Köyü": {
+            "tkgm_id": 136226,
+            "lat": 37.052115,
+            "lng": 30.350518
+        },
+        "Karakuyu Köyü": {
+            "tkgm_id": 134539,
+            "lat": 37.226611,
+            "lng": 30.400551
+        },
+        "Karataş Köyü": {
+            "tkgm_id": 137050,
+            "lat": 37.118872,
+            "lng": 30.387188
+        },
+        "Kargalik Köyü": {
+            "tkgm_id": 170215,
+            "lat": 37.050649,
+            "lng": 30.190976
+        },
+        "Kargin Köyü": {
+            "tkgm_id": 136066,
+            "lat": 37.092061,
+            "lng": 30.358718
+        },
+        "Karşiyaka": {
+            "tkgm_id": 134448,
+            "lat": 37.05806,
+            "lng": 30.198601
+        },
+        "Kayabaş Köyü": {
+            "tkgm_id": 10014,
+            "lat": 36.975793,
+            "lng": 29.820686
+        },
+        "Kemerağzi Köyü": {
+            "tkgm_id": 136476,
+            "lat": 37.108883,
+            "lng": 30.375624
+        },
+        "Kevzer Köyü": {
+            "tkgm_id": 135571,
+            "lat": 37.177437,
+            "lng": 30.214466
+        },
+        "Kiremitli": {
+            "tkgm_id": 135977,
+            "lat": 37.066919,
+            "lng": 30.198887
+        },
+        "Kirkpinar Köyü": {
+            "tkgm_id": 134129,
+            "lat": 37.134956,
+            "lng": 29.916633
+        },
+        "Kizilaliler Köyü": {
+            "tkgm_id": 136351,
+            "lat": 36.987266,
+            "lng": 29.96588
+        },
+        "Kizilcadağ Köyü": {
+            "tkgm_id": 134653,
+            "lat": 37.012522,
+            "lng": 29.957268
+        },
+        "Köseler Köyü": {
+            "tkgm_id": 134988,
+            "lat": 37.152511,
+            "lng": 30.376639
+        },
+        "Kozağaci Köyü": {
+            "tkgm_id": 134567,
+            "lat": 36.95569,
+            "lng": 29.928458
+        },
+        "Küçükköy Köyü": {
+            "tkgm_id": 136557,
+            "lat": 37.12,
+            "lng": 30.283777
+        },
+        "Küçükköy Yaylasi Köyü": {
+            "tkgm_id": 133822,
+            "lat": 37.118072,
+            "lng": 29.965804
+        },
+        "Küçüklü Köyü": {
+            "tkgm_id": 10015,
+            "lat": 36.964347,
+            "lng": 29.768326
+        },
+        "Leylek Köyü": {
+            "tkgm_id": 134778,
+            "lat": 37.258095,
+            "lng": 30.392604
+        },
+        "Mamatlar Köyü": {
+            "tkgm_id": 134265,
+            "lat": 36.989167,
+            "lng": 29.888533
+        },
+        "Manay Köyü": {
+            "tkgm_id": 134130,
+            "lat": 37.079893,
+            "lng": 29.896118
+        },
+        "Nebiler Köyü": {
+            "tkgm_id": 134156,
+            "lat": 36.983846,
+            "lng": 30.009618
+        },
+        "Osmankalfalar Köyü": {
+            "tkgm_id": 135007,
+            "lat": 37.112483,
+            "lng": 29.878557
+        },
+        "Simandir Köyü": {
+            "tkgm_id": 134916,
+            "lat": 36.990802,
+            "lng": 30.123978
+        },
+        "Söğütçük Köyü": {
+            "tkgm_id": 200700,
+            "lat": 37.033402,
+            "lng": 30.390035
+        },
+        "Sülekler Köyü": {
+            "tkgm_id": 134886,
+            "lat": 37.145941,
+            "lng": 30.102976
+        },
+        "Taşkesiği Köyü": {
+            "tkgm_id": 134508,
+            "lat": 37.220771,
+            "lng": 30.074104
+        },
+        "Uzunoluk": {
+            "tkgm_id": 135937,
+            "lat": 37.098987,
+            "lng": 30.212096
+        },
+        "Varsak Yaylasi Köyü": {
+            "tkgm_id": 139763,
+            "lat": 37.171421,
+            "lng": 30.063356
+        },
+        "Yağca Yaylasi Köyü": {
+            "tkgm_id": 136352,
+            "lat": 37.166359,
+            "lng": 29.996614
+        },
+        "Yaka Köyü": {
+            "tkgm_id": 134232,
+            "lat": 37.232505,
+            "lng": 30.369108
+        },
+        "Yazir Köyü": {
+            "tkgm_id": 135603,
+            "lat": 36.987303,
+            "lng": 30.349245
+        },
+        "Yeleme Köyü": {
+            "tkgm_id": 135787,
+            "lat": 37.193551,
+            "lng": 30.099445
+        },
+        "Yelten Köyü": {
+            "tkgm_id": 206636,
+            "lat": null,
+            "lng": null
+        },
+        "Yelten\/Fatih Köyü": {
+            "tkgm_id": 137981,
+            "lat": 37.194131,
+            "lng": 30.247348
+        },
+        "Yelten\/Sakarya Köyü": {
+            "tkgm_id": 134875,
+            "lat": 37.234353,
+            "lng": 30.155408
+        },
+        "Yelten\/Ulus Köyü": {
+            "tkgm_id": 135570,
+            "lat": 37.208551,
+            "lng": 30.202979
+        },
+        "Yeni Mahalle": {
+            "tkgm_id": 136099,
+            "lat": 37.063679,
+            "lng": 30.209996
+        },
+        "Yeşiloba Köyü": {
+            "tkgm_id": 134278,
+            "lat": 37.032754,
+            "lng": 29.886776
+        },
+        "Yeşilyayla Köyü": {
+            "tkgm_id": 138129,
+            "lat": 37.252162,
+            "lng": 30.26772
+        },
+        "Yukari Karaman Yaylasi Köyü": {
+            "tkgm_id": 133904,
+            "lat": 37.046308,
+            "lng": 30.036892
+        }
+    },
+    "Kumluca": {
+        "Adrasan": {
+            "tkgm_id": 206836,
+            "lat": null,
+            "lng": null
+        },
+        "Adrasan(Çavuş)\/Deniz": {
+            "tkgm_id": 203982,
+            "lat": 36.424334,
+            "lng": 30.353563
+        },
+        "Adrasan(Çavuş)\/Karşiyaka": {
+            "tkgm_id": 203983,
+            "lat": 36.424334,
+            "lng": 30.353563
+        },
+        "Adrasan(Çavuş)\/Merkez": {
+            "tkgm_id": 203984,
+            "lat": 36.424334,
+            "lng": 30.353563
+        },
+        "Altinyaka Köyü": {
+            "tkgm_id": 44035,
+            "lat": 36.555797,
+            "lng": 30.361484
+        },
+        "Bağlik": {
+            "tkgm_id": 43809,
+            "lat": 36.365756,
+            "lng": 30.28307
+        },
+        "Belen Köyü": {
+            "tkgm_id": 44160,
+            "lat": 36.367161,
+            "lng": 30.394722
+        },
+        "Beşikçi Köyü": {
+            "tkgm_id": 44321,
+            "lat": 36.351454,
+            "lng": 30.341683
+        },
+        "Beykonak Köyü": {
+            "tkgm_id": 44054,
+            "lat": 36.334285,
+            "lng": 30.324623
+        },
+        "Beykonak\/Orta": {
+            "tkgm_id": 203579,
+            "lat": 36.338625,
+            "lng": 30.34032
+        },
+        "Büyükalan Köyü": {
+            "tkgm_id": 43424,
+            "lat": 36.732544,
+            "lng": 30.295701
+        },
+        "Çalti Köyü": {
+            "tkgm_id": 134630,
+            "lat": 36.575073,
+            "lng": 30.303847
+        },
+        "Çavuş Köyü": {
+            "tkgm_id": 44050,
+            "lat": 36.18227,
+            "lng": 30.409205
+        },
+        "Çayiçi Köyü": {
+            "tkgm_id": 43948,
+            "lat": 36.435186,
+            "lng": 30.221466
+        },
+        "Dere Köyü": {
+            "tkgm_id": 135905,
+            "lat": 36.796656,
+            "lng": 30.331978
+        },
+        "Erentepe Köyü": {
+            "tkgm_id": 44161,
+            "lat": 36.408753,
+            "lng": 30.353877
+        },
+        "Eskicami": {
+            "tkgm_id": 44369,
+            "lat": 36.369797,
+            "lng": 30.290082
+        },
+        "Gölcük Köyü": {
+            "tkgm_id": 44166,
+            "lat": 36.647436,
+            "lng": 30.377946
+        },
+        "Güzören Köyü": {
+            "tkgm_id": 43831,
+            "lat": 36.524367,
+            "lng": 30.357071
+        },
+        "Haciveliler Köyü": {
+            "tkgm_id": 44026,
+            "lat": 36.359024,
+            "lng": 30.266943
+        },
+        "Hizirkahya Köyü": {
+            "tkgm_id": 44368,
+            "lat": 36.353245,
+            "lng": 30.251066
+        },
+        "Incircik Köyü": {
+            "tkgm_id": 44302,
+            "lat": 36.441838,
+            "lng": 30.369262
+        },
+        "Karacaağaç Köyü": {
+            "tkgm_id": 136359,
+            "lat": 36.506397,
+            "lng": 30.331369
+        },
+        "Karacaören Köyü": {
+            "tkgm_id": 44029,
+            "lat": 36.577862,
+            "lng": 30.222416
+        },
+        "Karşiyaka": {
+            "tkgm_id": 42935,
+            "lat": 36.353056,
+            "lng": 30.30219
+        },
+        "Kasapçayiri": {
+            "tkgm_id": 44040,
+            "lat": 36.372968,
+            "lng": 30.302071
+        },
+        "Kavak Köyü": {
+            "tkgm_id": 134917,
+            "lat": 36.332441,
+            "lng": 30.254624
+        },
+        "Kuzca Köyü": {
+            "tkgm_id": 136133,
+            "lat": 36.678404,
+            "lng": 30.346125
+        },
+        "Mavikent(Yenice)\/Karaöz": {
+            "tkgm_id": 203981,
+            "lat": 36.424338,
+            "lng": 30.353562
+        },
+        "Ortaköy Köyü": {
+            "tkgm_id": 203980,
+            "lat": 36.424338,
+            "lng": 30.353562
+        },
+        "Salur Köyü": {
+            "tkgm_id": 43474,
+            "lat": 36.375985,
+            "lng": 30.236969
+        },
+        "Saricasu Köyü": {
+            "tkgm_id": 43786,
+            "lat": 36.401219,
+            "lng": 30.280297
+        },
+        "Sarikavak": {
+            "tkgm_id": 43936,
+            "lat": 36.376316,
+            "lng": 30.308602
+        },
+        "Toptaş Köyü": {
+            "tkgm_id": 43214,
+            "lat": 36.409278,
+            "lng": 30.32762
+        },
+        "Yazir Köyü": {
+            "tkgm_id": 135954,
+            "lat": 36.42733,
+            "lng": 30.349884
+        },
+        "Yenice Köyü": {
+            "tkgm_id": 134131,
+            "lat": 36.424338,
+            "lng": 30.353562
+        },
+        "Yenikişla Köyü": {
+            "tkgm_id": 43908,
+            "lat": 36.507284,
+            "lng": 30.224206
+        },
+        "Yeşilköy Köyü": {
+            "tkgm_id": 43810,
+            "lat": 36.326007,
+            "lng": 30.403462
+        }
+    },
+    "Manavgat": {
+        "Ahmetler": {
+            "tkgm_id": 136181,
+            "lat": 36.818725,
+            "lng": 31.694565
+        },
+        "Aksaz": {
+            "tkgm_id": 136815,
+            "lat": 36.778079,
+            "lng": 31.529335
+        },
+        "Altinkaya": {
+            "tkgm_id": 133794,
+            "lat": null,
+            "lng": null
+        },
+        "Aşağiişiklar": {
+            "tkgm_id": 135760,
+            "lat": 36.793302,
+            "lng": 31.497584
+        },
+        "Belenobasi": {
+            "tkgm_id": 137627,
+            "lat": 36.826029,
+            "lng": 31.585805
+        },
+        "Bereket": {
+            "tkgm_id": 137617,
+            "lat": 36.879474,
+            "lng": 31.210401
+        },
+        "Beydiğin": {
+            "tkgm_id": 139573,
+            "lat": null,
+            "lng": null
+        },
+        "Boztepe": {
+            "tkgm_id": 137263,
+            "lat": 36.674344,
+            "lng": 31.670215
+        },
+        "Bucakşeyhler": {
+            "tkgm_id": 135480,
+            "lat": 36.849059,
+            "lng": 31.475747
+        },
+        "Büklüce": {
+            "tkgm_id": 136586,
+            "lat": 36.873373,
+            "lng": 31.184032
+        },
+        "Burmahan": {
+            "tkgm_id": 134319,
+            "lat": 37.174369,
+            "lng": 31.277504
+        },
+        "Çakiş": {
+            "tkgm_id": 135328,
+            "lat": 36.91937,
+            "lng": 31.18396
+        },
+        "Çaltepe": {
+            "tkgm_id": 133964,
+            "lat": 37.32243,
+            "lng": 31.177936
+        },
+        "Çardak": {
+            "tkgm_id": 135113,
+            "lat": 36.97726,
+            "lng": 31.297388
+        },
+        "Çavuşköy": {
+            "tkgm_id": 135870,
+            "lat": 36.711202,
+            "lng": 31.602936
+        },
+        "Çayyazi": {
+            "tkgm_id": 138116,
+            "lat": 36.800679,
+            "lng": 31.452121
+        },
+        "Çeltikçi": {
+            "tkgm_id": 134914,
+            "lat": 36.792874,
+            "lng": 31.482746
+        },
+        "Çenger": {
+            "tkgm_id": 137845,
+            "lat": 36.691076,
+            "lng": 31.623334
+        },
+        "Cevizler": {
+            "tkgm_id": 139759,
+            "lat": 36.771496,
+            "lng": 31.561206
+        },
+        "Çolakli": {
+            "tkgm_id": 136358,
+            "lat": 36.8485,
+            "lng": 31.322817
+        },
+        "Değirmenözü": {
+            "tkgm_id": 137457,
+            "lat": 37.375817,
+            "lng": 31.222431
+        },
+        "Demirciler": {
+            "tkgm_id": 137431,
+            "lat": 36.785348,
+            "lng": 31.509803
+        },
+        "Denizkent": {
+            "tkgm_id": 205126,
+            "lat": 36.836012,
+            "lng": 31.196062
+        },
+        "Denizyaka": {
+            "tkgm_id": 135503,
+            "lat": 36.857724,
+            "lng": 31.193841
+        },
+        "Dikmen": {
+            "tkgm_id": 201394,
+            "lat": 36.849888,
+            "lng": 31.457339
+        },
+        "Doğançam": {
+            "tkgm_id": 138215,
+            "lat": 36.757066,
+            "lng": 31.51874
+        },
+        "Dolbazlar": {
+            "tkgm_id": 134526,
+            "lat": 36.833631,
+            "lng": 31.408067
+        },
+        "Düzağaç": {
+            "tkgm_id": 137604,
+            "lat": 37.254153,
+            "lng": 31.261294
+        },
+        "Emek": {
+            "tkgm_id": 135313,
+            "lat": 36.790637,
+            "lng": 31.469923
+        },
+        "Evren": {
+            "tkgm_id": 136584,
+            "lat": 36.835019,
+            "lng": 31.348433
+        },
+        "Evrenleryavşi": {
+            "tkgm_id": 137825,
+            "lat": 36.862019,
+            "lng": 31.420739
+        },
+        "Gaziler": {
+            "tkgm_id": 136302,
+            "lat": 37.267635,
+            "lng": 31.217694
+        },
+        "Gebece": {
+            "tkgm_id": 136312,
+            "lat": 36.838547,
+            "lng": 31.654177
+        },
+        "Gençler": {
+            "tkgm_id": 137979,
+            "lat": 36.784178,
+            "lng": 31.721259
+        },
+        "Gültepe": {
+            "tkgm_id": 207920,
+            "lat": 36.811225,
+            "lng": 31.397805
+        },
+        "Gündoğdu": {
+            "tkgm_id": 137021,
+            "lat": 36.863741,
+            "lng": 31.272217
+        },
+        "Güzelyali": {
+            "tkgm_id": 201396,
+            "lat": 36.881163,
+            "lng": 31.543943
+        },
+        "Haciali": {
+            "tkgm_id": 135601,
+            "lat": 36.777078,
+            "lng": 31.549534
+        },
+        "Haciisali": {
+            "tkgm_id": 136608,
+            "lat": 36.773721,
+            "lng": 31.57993
+        },
+        "Haciobasi": {
+            "tkgm_id": 136585,
+            "lat": 36.737491,
+            "lng": 31.579362
+        },
+        "Halitağalar": {
+            "tkgm_id": 134361,
+            "lat": 36.746087,
+            "lng": 31.674047
+        },
+        "Hatipler": {
+            "tkgm_id": 135669,
+            "lat": 36.815107,
+            "lng": 31.405588
+        },
+        "Hisar": {
+            "tkgm_id": 135964,
+            "lat": 36.790931,
+            "lng": 31.427826
+        },
+        "Hocalar": {
+            "tkgm_id": 137589,
+            "lat": 36.895676,
+            "lng": 31.270707
+        },
+        "Hocali": {
+            "tkgm_id": 134933,
+            "lat": 36.803448,
+            "lng": 31.613235
+        },
+        "Ilica": {
+            "tkgm_id": 135395,
+            "lat": 36.81835,
+            "lng": 31.368541
+        },
+        "Kadilar": {
+            "tkgm_id": 135694,
+            "lat": 36.717256,
+            "lng": 31.648027
+        },
+        "Kalemler": {
+            "tkgm_id": 134478,
+            "lat": 36.868901,
+            "lng": 31.365837
+        },
+        "Karabucak": {
+            "tkgm_id": 169291,
+            "lat": 37.093873,
+            "lng": 31.329409
+        },
+        "Karabük": {
+            "tkgm_id": 135589,
+            "lat": 37.131145,
+            "lng": 31.184026
+        },
+        "Karacalar": {
+            "tkgm_id": 134788,
+            "lat": 36.736985,
+            "lng": 31.553664
+        },
+        "Karakaya": {
+            "tkgm_id": 138176,
+            "lat": 36.707493,
+            "lng": 31.713529
+        },
+        "Karaöz": {
+            "tkgm_id": 136159,
+            "lat": 36.778512,
+            "lng": 31.516438
+        },
+        "Karavca": {
+            "tkgm_id": 136617,
+            "lat": 36.856012,
+            "lng": 31.545999
+        },
+        "Kirkkavak": {
+            "tkgm_id": 134480,
+            "lat": 37.307709,
+            "lng": 31.313102
+        },
+        "Kisalar": {
+            "tkgm_id": 137999,
+            "lat": 36.831832,
+            "lng": 31.263495
+        },
+        "Kizilağaç": {
+            "tkgm_id": 204114,
+            "lat": 36.731738,
+            "lng": 31.527461
+        },
+        "Kizildağ": {
+            "tkgm_id": 137590,
+            "lat": 37.057754,
+            "lng": 31.356639
+        },
+        "Kizilot": {
+            "tkgm_id": 135568,
+            "lat": 36.712943,
+            "lng": 31.578544
+        },
+        "Namaras": {
+            "tkgm_id": 133688,
+            "lat": 36.756655,
+            "lng": 31.716636
+        },
+        "Odaönü": {
+            "tkgm_id": 135383,
+            "lat": 36.68695,
+            "lng": 31.686847
+        },
+        "Örenşehir": {
+            "tkgm_id": 134507,
+            "lat": 36.686106,
+            "lng": 31.651764
+        },
+        "Oymapinar": {
+            "tkgm_id": 135936,
+            "lat": null,
+            "lng": null
+        },
+        "Oymapinar\/Iğrişlar": {
+            "tkgm_id": 204488,
+            "lat": 36.847737,
+            "lng": 31.513563
+        },
+        "Oymapinar\/Oba": {
+            "tkgm_id": 204486,
+            "lat": 36.898101,
+            "lng": 31.513258
+        },
+        "Oymapinar\/Seki": {
+            "tkgm_id": 204487,
+            "lat": 36.874506,
+            "lng": 31.52263
+        },
+        "Pazarci": {
+            "tkgm_id": 135668,
+            "lat": 36.777284,
+            "lng": 31.465061
+        },
+        "Perakende": {
+            "tkgm_id": 137438,
+            "lat": 36.828939,
+            "lng": 31.234519
+        },
+        "Sağrin": {
+            "tkgm_id": 135951,
+            "lat": 37.083025,
+            "lng": 31.282966
+        },
+        "Salur": {
+            "tkgm_id": 137777,
+            "lat": 36.927594,
+            "lng": 31.41004
+        },
+        "Saraçli": {
+            "tkgm_id": 134934,
+            "lat": 36.840576,
+            "lng": 31.587176
+        },
+        "Sarilar": {
+            "tkgm_id": 134733,
+            "lat": 36.810656,
+            "lng": 31.428341
+        },
+        "Seki": {
+            "tkgm_id": 136373,
+            "lat": 36.867657,
+            "lng": 31.344291
+        },
+        "Sevinç": {
+            "tkgm_id": 135101,
+            "lat": 36.960093,
+            "lng": 31.550141
+        },
+        "Seydiler": {
+            "tkgm_id": 137422,
+            "lat": 36.753411,
+            "lng": 31.531154
+        },
+        "Side(Kemer)": {
+            "tkgm_id": 135708,
+            "lat": 36.7899,
+            "lng": 31.404014
+        },
+        "Side(Selimiye)": {
+            "tkgm_id": 137376,
+            "lat": 36.783354,
+            "lng": 31.386122
+        },
+        "Sirtköy": {
+            "tkgm_id": 135349,
+            "lat": 36.996475,
+            "lng": 31.455647
+        },
+        "Şişeler": {
+            "tkgm_id": 135372,
+            "lat": 36.861943,
+            "lng": 31.403281
+        },
+        "Sorkun": {
+            "tkgm_id": 135150,
+            "lat": 36.769781,
+            "lng": 31.433656
+        },
+        "Sülek": {
+            "tkgm_id": 133940,
+            "lat": 36.757768,
+            "lng": 31.561148
+        },
+        "Taşağil": {
+            "tkgm_id": 137243,
+            "lat": 36.91761,
+            "lng": 31.238934
+        },
+        "Taşkesiği": {
+            "tkgm_id": 133649,
+            "lat": 36.766049,
+            "lng": 31.656629
+        },
+        "Tepeköy": {
+            "tkgm_id": 134018,
+            "lat": 36.795995,
+            "lng": 31.637961
+        },
+        "Tilkiler": {
+            "tkgm_id": 136422,
+            "lat": 36.922252,
+            "lng": 31.457401
+        },
+        "Ulukapi": {
+            "tkgm_id": 137250,
+            "lat": 36.818443,
+            "lng": 31.482336
+        },
+        "Uzunkale": {
+            "tkgm_id": 201397,
+            "lat": 36.761319,
+            "lng": 31.60586
+        },
+        "Uzunlar": {
+            "tkgm_id": 134479,
+            "lat": 36.732374,
+            "lng": 31.619156
+        },
+        "Yalçidibi": {
+            "tkgm_id": 134884,
+            "lat": 36.70091,
+            "lng": 31.683032
+        },
+        "Yavrudoğan": {
+            "tkgm_id": 134154,
+            "lat": 36.87014,
+            "lng": 31.307959
+        },
+        "Yaylaalan": {
+            "tkgm_id": 134228,
+            "lat": 36.969265,
+            "lng": 31.496895
+        },
+        "Yeniköy": {
+            "tkgm_id": 205125,
+            "lat": 36.860304,
+            "lng": 31.389572
+        },
+        "Yeşilbağ": {
+            "tkgm_id": 135382,
+            "lat": 37.379104,
+            "lng": 31.322274
+        },
+        "Yukari": {
+            "tkgm_id": 135327,
+            "lat": 36.790892,
+            "lng": 31.461235
+        },
+        "Yukariişiklar": {
+            "tkgm_id": 135502,
+            "lat": 36.862852,
+            "lng": 31.436928
+        }
+    },
+    "Muratpaşa": {
+        "Alan": {
+            "tkgm_id": 136075,
+            "lat": null,
+            "lng": null
+        },
+        "Bahçelievler": {
+            "tkgm_id": 125362,
+            "lat": 36.888634,
+            "lng": 30.672641
+        },
+        "Balbey": {
+            "tkgm_id": 136390,
+            "lat": 36.889445,
+            "lng": 30.707843
+        },
+        "Barbaros": {
+            "tkgm_id": 136064,
+            "lat": 36.884278,
+            "lng": 30.707326
+        },
+        "Bayindir": {
+            "tkgm_id": 204990,
+            "lat": 36.900174,
+            "lng": 30.672352
+        },
+        "Çağlayan": {
+            "tkgm_id": 204992,
+            "lat": 36.855492,
+            "lng": 30.773312
+        },
+        "Çaybaşi": {
+            "tkgm_id": 204993,
+            "lat": 36.885988,
+            "lng": 30.719362
+        },
+        "Cumhuriyet": {
+            "tkgm_id": 204991,
+            "lat": 36.902025,
+            "lng": 30.698231
+        },
+        "Demircikara": {
+            "tkgm_id": 131921,
+            "lat": 36.878009,
+            "lng": 30.722037
+        },
+        "Doğuyaka": {
+            "tkgm_id": 204995,
+            "lat": 36.901965,
+            "lng": 30.737108
+        },
+        "Dutlubahçe": {
+            "tkgm_id": 204996,
+            "lat": 36.907481,
+            "lng": 30.702551
+        },
+        "Elmali": {
+            "tkgm_id": 135334,
+            "lat": 36.888656,
+            "lng": 30.702498
+        },
+        "Ermenek": {
+            "tkgm_id": 203367,
+            "lat": 36.868235,
+            "lng": 30.812864
+        },
+        "Etiler": {
+            "tkgm_id": 204997,
+            "lat": 36.899158,
+            "lng": 30.709843
+        },
+        "Fener": {
+            "tkgm_id": 204998,
+            "lat": 36.853006,
+            "lng": 30.75504
+        },
+        "Gebizli": {
+            "tkgm_id": 204999,
+            "lat": 36.901134,
+            "lng": 30.730267
+        },
+        "Gençlik": {
+            "tkgm_id": 205000,
+            "lat": 36.875576,
+            "lng": 30.714009
+        },
+        "Güvenlik": {
+            "tkgm_id": 205001,
+            "lat": 36.901638,
+            "lng": 30.684509
+        },
+        "Güzelbağ": {
+            "tkgm_id": 203366,
+            "lat": 36.875693,
+            "lng": 30.79342
+        },
+        "Güzeloba": {
+            "tkgm_id": 136158,
+            "lat": 36.863238,
+            "lng": 30.835772
+        },
+        "Güzeloluk": {
+            "tkgm_id": 205002,
+            "lat": 36.874125,
+            "lng": 30.766266
+        },
+        "Haşimişcan": {
+            "tkgm_id": 125338,
+            "lat": 36.88223,
+            "lng": 30.708355
+        },
+        "Kilinçarslan": {
+            "tkgm_id": 138115,
+            "lat": 36.88265,
+            "lng": 30.706195
+        },
+        "Kircami": {
+            "tkgm_id": 205003,
+            "lat": 36.873522,
+            "lng": 30.743369
+        },
+        "Kişla": {
+            "tkgm_id": 136858,
+            "lat": 36.892435,
+            "lng": 30.689239
+        },
+        "Kizilarik": {
+            "tkgm_id": 205004,
+            "lat": 36.907811,
+            "lng": 30.725783
+        },
+        "Kizilsaray": {
+            "tkgm_id": 135347,
+            "lat": 36.891489,
+            "lng": 30.701127
+        },
+        "Kiziltoprak": {
+            "tkgm_id": 132158,
+            "lat": 36.892619,
+            "lng": 30.727656
+        },
+        "Konuksever": {
+            "tkgm_id": 205005,
+            "lat": 36.908801,
+            "lng": 30.710569
+        },
+        "Mehmetçik": {
+            "tkgm_id": 205006,
+            "lat": 36.893993,
+            "lng": 30.740075
+        },
+        "Meydankavaği": {
+            "tkgm_id": 205009,
+            "lat": 36.882424,
+            "lng": 30.728985
+        },
+        "Muratpaşa": {
+            "tkgm_id": 205010,
+            "lat": 36.899001,
+            "lng": 30.703762
+        },
+        "Sedir": {
+            "tkgm_id": 205011,
+            "lat": 36.90363,
+            "lng": 30.689888
+        },
+        "Selçuk": {
+            "tkgm_id": 133723,
+            "lat": 36.885345,
+            "lng": 30.70238
+        },
+        "Sinan": {
+            "tkgm_id": 133662,
+            "lat": 36.880155,
+            "lng": 30.714882
+        },
+        "Şirinyali": {
+            "tkgm_id": 205013,
+            "lat": 36.858495,
+            "lng": 30.737763
+        },
+        "Soğuksu": {
+            "tkgm_id": 205012,
+            "lat": 36.89876,
+            "lng": 30.677451
+        },
+        "Tahilpazari": {
+            "tkgm_id": 135099,
+            "lat": 36.892365,
+            "lng": 30.705365
+        },
+        "Tarim": {
+            "tkgm_id": 205014,
+            "lat": 36.88327,
+            "lng": 30.74705
+        },
+        "Topçular": {
+            "tkgm_id": 205015,
+            "lat": 36.898435,
+            "lng": 30.753061
+        },
+        "Tuzcular": {
+            "tkgm_id": 136235,
+            "lat": 36.884902,
+            "lng": 30.704622
+        },
+        "Üçgen": {
+            "tkgm_id": 205016,
+            "lat": 36.896087,
+            "lng": 30.695349
+        },
+        "Yenigöl": {
+            "tkgm_id": 203362,
+            "lat": 36.889309,
+            "lng": 30.797176
+        },
+        "Yenigün": {
+            "tkgm_id": 205018,
+            "lat": 36.897932,
+            "lng": 30.720202
+        },
+        "Yeşildere": {
+            "tkgm_id": 205020,
+            "lat": 36.908425,
+            "lng": 30.731286
+        },
+        "Yeşilköy": {
+            "tkgm_id": 205021,
+            "lat": 36.885939,
+            "lng": 30.799497
+        },
+        "Yeşilova": {
+            "tkgm_id": 205022,
+            "lat": 36.889807,
+            "lng": 30.766463
+        },
+        "Yildiz": {
+            "tkgm_id": 205023,
+            "lat": 36.89291,
+            "lng": 30.685307
+        },
+        "Yüksekalan": {
+            "tkgm_id": 123821,
+            "lat": 36.889282,
+            "lng": 30.70745
+        },
+        "Zerdalilik": {
+            "tkgm_id": 205024,
+            "lat": 36.880561,
+            "lng": 30.715643
+        },
+        "Zümrütova": {
+            "tkgm_id": 205025,
+            "lat": 36.864077,
+            "lng": 30.752613
+        }
+    },
+    "Serik": {
+        "Abdurrahmanlar": {
+            "tkgm_id": 43280,
+            "lat": 36.992846,
+            "lng": 30.933905
+        },
+        "Akbaş": {
+            "tkgm_id": 43926,
+            "lat": 37.069941,
+            "lng": 31.137394
+        },
+        "Akçapinar": {
+            "tkgm_id": 43489,
+            "lat": 37.154938,
+            "lng": 30.912249
+        },
+        "Alacami": {
+            "tkgm_id": 44097,
+            "lat": 37.011148,
+            "lng": 31.057792
+        },
+        "Aşağiçatma": {
+            "tkgm_id": 136447,
+            "lat": 36.909386,
+            "lng": 31.045752
+        },
+        "Aşağikocayatak": {
+            "tkgm_id": 44163,
+            "lat": 36.917003,
+            "lng": 30.961584
+        },
+        "Aşağioba": {
+            "tkgm_id": 43732,
+            "lat": 37.073476,
+            "lng": 30.917128
+        },
+        "Belek": {
+            "tkgm_id": 43484,
+            "lat": 36.857918,
+            "lng": 31.081789
+        },
+        "Belkis": {
+            "tkgm_id": 139782,
+            "lat": 36.933792,
+            "lng": 31.165026
+        },
+        "Belpinar": {
+            "tkgm_id": 43601,
+            "lat": 36.935469,
+            "lng": 31.111558
+        },
+        "Berendi": {
+            "tkgm_id": 43005,
+            "lat": 36.992081,
+            "lng": 31.020388
+        },
+        "Bilginler": {
+            "tkgm_id": 43086,
+            "lat": 37.005134,
+            "lng": 31.103432
+        },
+        "Boğazkent": {
+            "tkgm_id": 43818,
+            "lat": 36.856625,
+            "lng": 31.159562
+        },
+        "Bozdoğan": {
+            "tkgm_id": 43753,
+            "lat": 37.291692,
+            "lng": 30.926235
+        },
+        "Bucakköy": {
+            "tkgm_id": 138208,
+            "lat": 37.019139,
+            "lng": 31.198648
+        },
+        "Büğüş": {
+            "tkgm_id": 43187,
+            "lat": 37.042721,
+            "lng": 31.005885
+        },
+        "Burmahanci": {
+            "tkgm_id": 43081,
+            "lat": 36.939843,
+            "lng": 31.069435
+        },
+        "Çakallik": {
+            "tkgm_id": 43445,
+            "lat": 36.902035,
+            "lng": 30.979942
+        },
+        "Çanakçi": {
+            "tkgm_id": 42933,
+            "lat": 36.971378,
+            "lng": 31.012672
+        },
+        "Çandir": {
+            "tkgm_id": 42944,
+            "lat": 36.956671,
+            "lng": 31.050076
+        },
+        "Çatallar": {
+            "tkgm_id": 43767,
+            "lat": 37.130109,
+            "lng": 30.871261
+        },
+        "Cumali": {
+            "tkgm_id": 139747,
+            "lat": 36.919848,
+            "lng": 31.071826
+        },
+        "Cumhuriyet": {
+            "tkgm_id": 43055,
+            "lat": 36.922624,
+            "lng": 31.109163
+        },
+        "Demirciler": {
+            "tkgm_id": 43918,
+            "lat": 37.199201,
+            "lng": 31.047969
+        },
+        "Deniztepesi": {
+            "tkgm_id": 43848,
+            "lat": 36.996489,
+            "lng": 31.13726
+        },
+        "Dikmen": {
+            "tkgm_id": 43586,
+            "lat": 36.912546,
+            "lng": 31.004595
+        },
+        "Dorumlar": {
+            "tkgm_id": 43836,
+            "lat": 37.148766,
+            "lng": 30.888375
+        },
+        "Eminceler": {
+            "tkgm_id": 42961,
+            "lat": 36.89092,
+            "lng": 31.055333
+        },
+        "Eskiyörük": {
+            "tkgm_id": 43620,
+            "lat": 36.969598,
+            "lng": 30.978784
+        },
+        "Etler": {
+            "tkgm_id": 43208,
+            "lat": 37.051856,
+            "lng": 31.035463
+        },
+        "Gebiz(Macar)": {
+            "tkgm_id": 134432,
+            "lat": 37.101291,
+            "lng": 30.94032
+        },
+        "Gedik": {
+            "tkgm_id": 43030,
+            "lat": 36.90661,
+            "lng": 31.094457
+        },
+        "Gökçepinar": {
+            "tkgm_id": 42713,
+            "lat": 37.062277,
+            "lng": 31.07006
+        },
+        "Haciosmanlar": {
+            "tkgm_id": 43555,
+            "lat": 37.157993,
+            "lng": 30.942374
+        },
+        "Hasdümen": {
+            "tkgm_id": 43193,
+            "lat": 37.258881,
+            "lng": 31.001422
+        },
+        "Hasgebe": {
+            "tkgm_id": 43042,
+            "lat": 37.198294,
+            "lng": 30.96637
+        },
+        "Haskizilören": {
+            "tkgm_id": 43752,
+            "lat": 37.294977,
+            "lng": 30.979324
+        },
+        "Kadriye": {
+            "tkgm_id": 43033,
+            "lat": 36.878434,
+            "lng": 31.005894
+        },
+        "Karadayi": {
+            "tkgm_id": 43841,
+            "lat": 36.875204,
+            "lng": 31.124242
+        },
+        "Karataş": {
+            "tkgm_id": 43357,
+            "lat": 37.05449,
+            "lng": 31.174294
+        },
+        "Karincali": {
+            "tkgm_id": 42981,
+            "lat": 36.947374,
+            "lng": 31.022044
+        },
+        "Kayaburnu": {
+            "tkgm_id": 42485,
+            "lat": 36.930107,
+            "lng": 31.011615
+        },
+        "Kirbaş": {
+            "tkgm_id": 43117,
+            "lat": 37.171285,
+            "lng": 30.838373
+        },
+        "Kökez": {
+            "tkgm_id": 43263,
+            "lat": 36.92475,
+            "lng": 31.101864
+        },
+        "Kozağaci": {
+            "tkgm_id": 205451,
+            "lat": 36.920169,
+            "lng": 30.93398
+        },
+        "Kozan": {
+            "tkgm_id": 42495,
+            "lat": 37.192695,
+            "lng": 30.874944
+        },
+        "Kürüş": {
+            "tkgm_id": 137941,
+            "lat": 36.909802,
+            "lng": 31.136136
+        },
+        "Kuşlar": {
+            "tkgm_id": 43386,
+            "lat": 36.997438,
+            "lng": 31.082957
+        },
+        "Merkez": {
+            "tkgm_id": 43624,
+            "lat": 36.920601,
+            "lng": 31.09461
+        },
+        "Nebiler": {
+            "tkgm_id": 43363,
+            "lat": 37.025098,
+            "lng": 30.928105
+        },
+        "Pinarcik": {
+            "tkgm_id": 42882,
+            "lat": 36.999182,
+            "lng": 31.034442
+        },
+        "Sariabali": {
+            "tkgm_id": 43835,
+            "lat": 36.968634,
+            "lng": 31.159283
+        },
+        "Şatirli": {
+            "tkgm_id": 136411,
+            "lat": 36.976741,
+            "lng": 30.954483
+        },
+        "Tekke": {
+            "tkgm_id": 134114,
+            "lat": 37.025076,
+            "lng": 30.966691
+        },
+        "Töngüçlü": {
+            "tkgm_id": 133896,
+            "lat": 37.071086,
+            "lng": 30.986234
+        },
+        "Üründü": {
+            "tkgm_id": 43528,
+            "lat": 36.957874,
+            "lng": 31.111989
+        },
+        "Yanköy": {
+            "tkgm_id": 43569,
+            "lat": 36.999983,
+            "lng": 30.99723
+        },
+        "Yeni": {
+            "tkgm_id": 134913,
+            "lat": 36.911825,
+            "lng": 31.112567
+        },
+        "Yeşilvadi": {
+            "tkgm_id": 42481,
+            "lat": 37.198795,
+            "lng": 31.107018
+        },
+        "Yeşilyurt": {
+            "tkgm_id": 43374,
+            "lat": 36.974812,
+            "lng": 31.086704
+        },
+        "Yukariçatma": {
+            "tkgm_id": 136054,
+            "lat": 37.035054,
+            "lng": 30.942749
+        },
+        "Yukarikocayatak": {
+            "tkgm_id": 43844,
+            "lat": 36.94267,
+            "lng": 30.959009
+        },
+        "Yumaklar": {
+            "tkgm_id": 43238,
+            "lat": 37.129583,
+            "lng": 30.999686
+        },
+        "Zirlankaya": {
+            "tkgm_id": 43682,
+            "lat": 37.026742,
+            "lng": 31.024035
+        }
+    }
+}

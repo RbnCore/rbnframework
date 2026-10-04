@@ -1,0 +1,217 @@
+/* ==========================================================================
+   RBN ADMIN SETTINGS MODULE SCOPED CSS (custom/rbnAdmin-settings.css) ⚙️🏺
+   Terracotta Scoped Design for System Settings Page
+   ========================================================================== */
+
+.rbn-settings-nav-item {
+    background: var(--rbn-admin-surface, #fbf9f5) !important;
+    border: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+    color: var(--rbn-admin-text-body, #1e1b18) !important;
+    border-radius: 8px !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.rbn-settings-nav-item:hover {
+    background: rgba(197, 106, 60, 0.04) !important;
+    border-color: var(--rbn-craft-russet, #c56a3c) !important;
+    transform: translateX(3px);
+}
+
+.rbn-settings-nav-item.active {
+    background: rgba(197, 106, 60, 0.08) !important;
+    border-color: var(--rbn-craft-russet, #c56a3c) !important;
+    box-shadow: 0 2px 8px rgba(197, 106, 60, 0.12) !important;
+}
+
+.rbn-setting-row-box {
+    background: var(--rbn-admin-surface, #fbf9f5) !important;
+    border: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+    border-radius: 10px !important;
+    transition: all 0.2s ease !important;
+}
+
+.rbn-setting-row-box:hover {
+    background: var(--rbn-admin-surface, #fbf9f5) !important;
+    border-color: var(--rbn-admin-border-strong, #d5cbbf) !important;
+    box-shadow: 0 2px 8px rgba(60, 50, 40, 0.04) !important;
+}
+
+/* ==========================================================================
+   RBN ADMIN WEBTRAFFIC & TABLE SUITE SCOPED STYLES (ra-traffic-*)
+   ========================================================================== */
+.ra-traffic-card-header {
+    background: var(--rbn-admin-surface, #fbf9f5) !important;
+    border-bottom: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+    padding: 1.1rem 1.5rem !important;
+}
+
+.ra-traffic-card-title {
+    font-family: var(--rbn-font-sans, "Plus Jakarta Sans", sans-serif) !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    color: var(--rbn-admin-text-display, #111827) !important;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.ra-traffic-time-badge {
+    font-family: var(--rbn-font-mono, monospace) !important;
+    font-size: 0.825rem !important;
+    font-weight: 700 !important;
+    padding: 0.35rem 0.65rem !important;
+    color: var(--rbn-admin-text-body, #1e1b18) !important;
+    background: var(--rbn-admin-canvas, #f3e9d8) !important;
+    border: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+    border-radius: 6px !important;
+}
+
+.ra-traffic-browser-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    background: var(--rbn-admin-canvas, #f3e9d8);
+    border: 1px solid var(--rbn-admin-border-subtle, #e5ded3);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--rbn-admin-text-display, #1e1b18);
+    white-space: nowrap;
+}
+
+.ra-traffic-url-cell {
+    max-width: 0 !important;
+    width: 100% !important;
+    overflow: hidden !important;
+}
+
+.ra-traffic-url-text {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+.ra-traffic-legend-wrap {
+    width: 100%;
+    margin-top: 1.5rem !important;
+    padding-top: 1.25rem !important;
+    border-top: 1px solid var(--rbn-admin-border-subtle, #e5ded3) !important;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.ra-traffic-legend-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    margin: 0 auto 0.45rem auto !important;
+    display: block;
+}
+
+.ra-traffic-legend-label {
+    font-size: 0.6875rem !important;
+    font-weight: 700 !important;
+    color: var(--rbn-admin-text-muted, #79716b) !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase;
+    display: block;
+}
+
+.ra-traffic-legend-value {
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    color: var(--rbn-admin-text-display, #1e1b18) !important;
+    margin-top: 0.15rem;
+    margin-bottom: 0;
+}
+
+/* ==========================================================================
+   RBN ADMIN INTERACTIVE TURKEY MAP (ra-traffic-map-*) 🗺️🇹🇷
+   ========================================================================== */
+.ra-traffic-map-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.ra-traffic-map-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    min-height: 380px;
+}
+
+.ra-traffic-map-container svg {
+    width: 100%;
+    height: auto;
+    max-height: 520px;
+    display: block;
+    filter: drop-shadow(0 2px 8px rgba(60, 50, 40, 0.06));
+}
+
+.ra-traffic-map-container g path {
+    fill: #eae3d7;
+    stroke: #ffffff;
+    stroke-width: 1;
+    stroke-linejoin: round;
+    transition: fill 0.2s ease, stroke 0.2s ease, stroke-width 0.2s ease;
+    cursor: pointer;
+}
+
+.ra-traffic-map-container g:hover path {
+    stroke: var(--rbn-craft-russet, var(--rbn-primary, #c56a3c));
+    stroke-width: 2;
+    filter: drop-shadow(0 2px 6px rgba(197, 106, 60, 0.25));
+}
+
+.ra-traffic-map-tooltip {
+    position: absolute;
+    z-index: 9999;
+    pointer-events: none;
+    background: #1e1b18;
+    color: #ffffff;
+    padding: 0.45rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--rbn-admin-border-subtle, #e5ded3);
+    display: none;
+    transform: translate(-50%, -100%);
+    margin-top: -10px;
+}
+
+.ra-traffic-map-tooltip .tooltip-city {
+    font-size: 0.85rem;
+    color: #f6ad55;
+    margin-bottom: 0.1rem;
+    font-weight: 700;
+}
+
+.ra-traffic-map-tooltip .tooltip-hits {
+    font-size: 0.75rem;
+    color: #e2e8f0;
+}
+
+.ra-traffic-map-legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.ra-traffic-map-legend-dot.level-0 { background-color: #eae3d7; border: 1px solid #d5cbbf; }
+.ra-traffic-map-legend-dot.level-1 { background-color: rgba(197, 106, 60, 0.25); }
+.ra-traffic-map-legend-dot.level-2 { background-color: rgba(197, 106, 60, 0.6); }
+.ra-traffic-map-legend-dot.level-3 { background-color: rgba(197, 106, 60, 0.95); }
+

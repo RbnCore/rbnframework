@@ -1,0 +1,66 @@
+/* ==========================================================================
+   RBN CORE: TOKENS & SPATIAL ENGINE (core/tokens.css) 📐
+   ========================================================================== */
+
+:root {
+    /* 🏛️ Canvas & Surface Layers */
+    --rbn-bg-canvas:         var(--bg-canvas, var(--rbn-slate-50));
+    --rbn-bg-surface:        var(--bg-surface, var(--rbn-white));
+    --rbn-bg-surface-subtle: var(--bg-surface-subtle, var(--rbn-slate-100));
+    --rbn-bg-surface-hover:  var(--bg-surface-hover, var(--rbn-slate-50));
+
+    /* 🖋️ Typography & Ink */
+    --rbn-font-sans:         var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+    --rbn-font-display:      var(--font-display, var(--rbn-font-sans));
+    --rbn-font-mono:         var(--font-mono, 'JetBrains Mono', monospace);
+
+    --rbn-text-display:      var(--text-display, var(--rbn-slate-900));
+    --rbn-text-primary:      var(--text-primary, var(--rbn-slate-800));
+    --rbn-text-secondary:    var(--text-secondary, var(--rbn-slate-500));
+    --rbn-text-muted:        var(--text-muted, var(--rbn-slate-400));
+
+    /* 💎 Brand & Functional Colors */
+    --rbn-primary:           var(--primary-color, var(--rbn-blue-600));
+    --rbn-primary-hover:     var(--primary-hover, var(--rbn-blue-700));
+    --rbn-primary-subtle:    var(--primary-subtle, var(--rbn-blue-50));
+
+    --rbn-secondary:         var(--secondary-color, var(--rbn-slate-600));
+    --rbn-accent:            var(--accent-color, var(--rbn-amber-500));
+    --rbn-success:           var(--success-color, var(--rbn-green-500));
+    --rbn-warning:           var(--warning-color, var(--rbn-amber-500));
+    --rbn-danger:            var(--danger-color, var(--rbn-red-500));
+
+    /* 📐 Borders & Hairlines */
+    --rbn-border:            var(--border-color, var(--rbn-slate-200));
+    --rbn-border-subtle:     var(--border-subtle, var(--rbn-slate-100));
+    --rbn-border-strong:     var(--border-strong, var(--rbn-slate-300));
+
+    /* 📐 8-Point Spatial Grid System */
+    --rbn-space-0:           0px;
+    --rbn-space-1:           4px;
+    --rbn-space-2:           8px;
+    --rbn-space-3:           12px;
+    --rbn-space-4:           16px;
+    --rbn-space-5:           20px;
+    --rbn-space-6:           24px;
+    --rbn-space-8:           32px;
+    --rbn-space-10:          40px;
+    --rbn-space-12:          48px;
+    --rbn-space-16:          64px;
+
+    /* 📐 Geometry & Corner Radius */
+    --rbn-radius-none:       0px;
+    --rbn-radius-sm:         var(--radius-sm, 6px);
+    --rbn-radius-md:         var(--radius-md, 10px);
+    --rbn-radius-lg:         var(--radius-lg, 16px);
+    --rbn-radius-pill:       9999px;
+
+    /* 🌫️ 3-Level Elevation Shadows & Overlays */
+    --rbn-shadow-sm:         0 1px 2px rgba(0, 0, 0, 0.05);
+    --rbn-shadow-card:       var(--shadow-card, 0 1px 3px rgba(0,0,0,0.04), 0 6px 16px rgba(0,0,0,0.03));
+    --rbn-shadow-hover:      var(--shadow-hover, 0 6px 12px -2px rgba(0,0,0,0.06), 0 16px 28px -4px rgba(0,0,0,0.08));
+    --rbn-shadow-modal:      var(--shadow-modal, 0 20px 35px -5px rgba(0,0,0,0.12));
+    --rbn-bg-overlay:        var(--bg-overlay, rgba(0, 0, 0, 0.5));
+    --rbn-text-on-primary:   var(--text-on-primary, #FFFFFF);
+}
+

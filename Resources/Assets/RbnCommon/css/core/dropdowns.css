@@ -1,0 +1,160 @@
+/* ==========================================================================
+   RBN CORE: DROPDOWN MENUS (core/dropdowns.css) 🪟⚡
+   %100 Sovereign Token-Driven Dropdown Engine
+   ========================================================================== */
+
+/* 1. Base Dropdown Container */
+.rbn-dropdown,
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* 2. Dropdown Menu Card */
+.rbn-dropdown-menu,
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    z-index: 1000;
+    display: none;
+    min-width: 180px;
+    padding: 6px;
+    margin: 0;
+    font-size: 0.88rem;
+    color: var(--rbn-text-primary, #0f172a);
+    text-align: left;
+    list-style: none;
+    background-color: var(--rbn-bg-surface, #ffffff);
+    background-clip: padding-box;
+    border: 1px solid var(--rbn-border, #e2e8f0);
+    border-radius: var(--rbn-radius-md, 12px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    max-height: none;
+    overflow-y: visible;
+    scrollbar-width: thin;
+    scrollbar-color: var(--rbn-primary, #2563eb) var(--rbn-bg-surface-subtle, #f1f5f9);
+}
+
+.rbn-dropdown-menu.has-scroll,
+.dropdown-menu.has-scroll {
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.rbn-dropdown-menu::-webkit-scrollbar,
+.dropdown-menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+.rbn-dropdown-menu::-webkit-scrollbar-track,
+.dropdown-menu::-webkit-scrollbar-track {
+    background: var(--rbn-bg-surface-subtle, #f1f5f9);
+    border-radius: 4px;
+}
+
+.rbn-dropdown-menu::-webkit-scrollbar-thumb,
+.dropdown-menu::-webkit-scrollbar-thumb {
+    background: var(--rbn-primary, #2563eb);
+    border: 1px solid var(--rbn-border, #e2e8f0);
+    border-radius: 4px;
+}
+
+.rbn-dropdown-menu::-webkit-scrollbar-thumb:hover,
+.dropdown-menu::-webkit-scrollbar-thumb:hover {
+    background: var(--rbn-primary-hover, #1d4ed8);
+}
+
+.rbn-dropdown-menu.show,
+.dropdown-menu.show {
+    display: block;
+}
+
+/* Align End (Right) */
+.rbn-dropdown-menu-end,
+.dropdown-menu-end {
+    right: 0;
+    left: auto;
+}
+
+/* 3. Dropdown Items */
+.rbn-dropdown-item,
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: var(--rbn-space-2, 8px);
+    width: 100%;
+    padding: 8px 12px;
+    clear: both;
+    font-weight: 500;
+    color: var(--rbn-text-primary, #0f172a);
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    border-radius: var(--rbn-radius-sm, 8px);
+    cursor: pointer;
+    transition: background 0.12s ease, color 0.12s ease;
+    box-sizing: border-box;
+}
+
+.rbn-dropdown-item:hover,
+.dropdown-item:hover {
+    color: var(--rbn-text-display, #0f172a);
+    background-color: var(--rbn-slate-100, #f1f5f9);
+}
+
+.rbn-dropdown-item:focus,
+.dropdown-item:focus {
+    outline: none;
+    background-color: var(--rbn-slate-100, #f1f5f9);
+}
+
+.rbn-dropdown-item.active,
+.dropdown-item.active {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: var(--rbn-primary, #2563eb);
+}
+
+.rbn-dropdown-item.disabled,
+.dropdown-item.disabled {
+    color: var(--rbn-text-muted, #94a3b8);
+    pointer-events: none;
+    background-color: transparent;
+}
+
+/* 4. Dropdown Headers & Dividers */
+.rbn-dropdown-header,
+.dropdown-header {
+    display: block;
+    padding: 6px 12px 4px;
+    margin-bottom: 0;
+    font-family: var(--rbn-font-mono, monospace);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--rbn-text-muted, #94a3b8);
+    white-space: nowrap;
+}
+
+.rbn-dropdown-divider,
+.dropdown-divider {
+    height: 0;
+    margin: 4px 0;
+    overflow: hidden;
+    border-top: 1px solid var(--rbn-border-subtle, #f1f5f9);
+}
+
+@keyframes rbnDropdownSlide {
+    0% {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

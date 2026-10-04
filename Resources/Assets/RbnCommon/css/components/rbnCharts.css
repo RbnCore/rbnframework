@@ -1,0 +1,60 @@
+.chart-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+canvas.chart-canvas {
+    max-width: 100%;
+}
+
+/* Specific styling for dashboard charts */
+.card-body canvas {
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.05));
+}
+
+/* 📊 RBN Universal Interactive Chart Tooltip (Token-Driven Theme Engine) */
+.rbn-chart-tooltip {
+    position: fixed;
+    z-index: 10500;
+    pointer-events: none;
+    background: var(--rbn-admin-text-display, #1e1b18);
+    color: #ffffff;
+    padding: 0.5rem 0.85rem;
+    border-radius: var(--rbn-radius-md, 8px);
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-family: var(--rbn-font-sans, "Plus Jakarta Sans", -apple-system, sans-serif);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), 0 2px 6px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--rbn-admin-border-subtle, rgba(229, 222, 211, 0.2));
+    display: none;
+    transform: translate(-50%, -100%);
+    margin-top: -12px;
+    white-space: nowrap;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.rbn-chart-tooltip .tooltip-title {
+    font-size: 0.75rem;
+    color: var(--rbn-craft-russet, var(--rbn-primary, #c56a3c));
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+}
+
+.rbn-chart-tooltip .tooltip-value {
+    font-size: 0.9rem;
+    color: #ffffff;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.rbn-chart-tooltip .tooltip-badge {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}

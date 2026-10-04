@@ -1,0 +1,341 @@
+/* ==========================================================================
+   RBN CORE: UNIVERSAL RESPONSIVE ENGINE (core/responsive.css) 📱💻📐
+   Zero-Hardcoded Colors · 100% Token-Driven Spatial Breakpoint Matrix
+   ========================================================================== */
+
+/* ==========================================================================
+   1. TABLET & MOBILE INTERMEDIATE (max-width: 992px) 📱
+   ========================================================================== */
+@media (max-width: 992px) {
+    /* Grid Collapsing */
+    .rbn-grid-4 {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: var(--rbn-space-4);
+    }
+
+    .rbn-grid-3 {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: var(--rbn-space-4);
+    }
+
+    /* Page Header */
+    .rbn-page-header {
+        align-items: flex-start;
+        gap: var(--rbn-space-4);
+    }
+}
+
+/* ==========================================================================
+   2. MOBILE CORE (max-width: 768px) 📱
+   ========================================================================== */
+@media (max-width: 768px) {
+    /* 🏛️ Container & Padding */
+    .rbn-container, 
+    .app-container, 
+    .container {
+        padding-left: var(--rbn-space-4) !important;
+        padding-right: var(--rbn-space-4) !important;
+    }
+
+    .rbn-content-body {
+        padding: var(--rbn-space-6) 0 var(--rbn-space-10);
+    }
+
+    /* 📐 Single Column Grid Unification */
+    .rbn-grid-1,
+    .rbn-grid-2,
+    .rbn-grid-3,
+    .rbn-grid-4 {
+        grid-template-columns: 1fr !important;
+        gap: var(--rbn-space-4) !important;
+    }
+
+    /* 📄 Responsive Page Header & Titles */
+    .rbn-page-header {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: var(--rbn-space-3);
+        margin-bottom: var(--rbn-space-5);
+        padding-bottom: var(--rbn-space-4);
+    }
+
+
+    .rbn-page-title {
+        font-size: 1.5rem !important;
+        letter-spacing: -0.02em;
+    }
+
+    .rbn-page-subtitle {
+        font-size: 0.85rem !important;
+    }
+
+    /* 📊 Responsive Tables & Horizontal Scroll Assurance */
+    .rbn-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin-left: calc(var(--rbn-space-4) * -1);
+        margin-right: calc(var(--rbn-space-4) * -1);
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+    }
+
+    .rbn-table {
+        min-width: 600px;
+    }
+
+    .rbn-table th,
+    .rbn-table td {
+        padding: var(--rbn-space-3) var(--rbn-space-4);
+        font-size: 0.84rem;
+    }
+
+    /* 🔘 Buttons & Action Groups */
+    .rbn-btn-group,
+    .rbn-page-actions {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: var(--rbn-space-2);
+    }
+
+    .rbn-btn-group .rbn-btn,
+    .rbn-page-actions .rbn-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* 📄 Pagination */
+    .pagination {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--rbn-space-1);
+    }
+
+    .page-link {
+        min-width: 34px;
+        height: 34px;
+        padding: 0 var(--rbn-space-2);
+        font-size: 0.82rem;
+    }
+
+    /* 🪟 Modals on Mobile (Bottom Sheet / Full Width) */
+    .rbn-modal {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: var(--rbn-space-3);
+        border-radius: var(--rbn-radius-lg);
+    }
+}
+
+/* ==========================================================================
+   3. UNIVERSAL MOBILE DRAWER & OVERLAY ENGINE (Always Fixed / Hidden) 📱
+   ========================================================================== */
+.rbn-drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--rbn-bg-overlay);
+    backdrop-filter: blur(4px);
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.rbn-drawer-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Base Drawer Component */
+.rbn-drawer {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 300px;
+    max-width: 85vw;
+    height: 100vh;
+    background: var(--rbn-bg-surface);
+    z-index: 9999;
+    box-shadow: var(--rbn-shadow-modal);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), right 0.3s ease, left 0.3s ease, bottom 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    padding: var(--rbn-space-5);
+}
+
+.rbn-drawer.show {
+    right: 0;
+}
+
+/* 🧭 Directional Modifiers (Çoklu Drawer Yön Varyantları) */
+.rbn-drawer.rbn-drawer-left {
+    right: auto;
+    left: -100%;
+}
+.rbn-drawer.rbn-drawer-left.show {
+    left: 0;
+}
+
+.rbn-drawer.rbn-drawer-bottom {
+    top: auto;
+    bottom: -100%;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    max-width: 100vw;
+    height: auto;
+    max-height: 80vh;
+    border-top-left-radius: var(--rbn-radius-lg);
+    border-top-right-radius: var(--rbn-radius-lg);
+}
+.rbn-drawer.rbn-drawer-bottom.show {
+    bottom: 0;
+}
+
+/* 📏 Size Modifiers (Genişlik Varyantları) */
+.rbn-drawer-sm { width: 240px; }
+.rbn-drawer-lg { width: 420px; max-width: 90vw; }
+.rbn-drawer-xl { width: 560px; max-width: 95vw; }
+
+.rbn-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: var(--rbn-space-4);
+    border-bottom: 1px solid var(--rbn-border);
+    margin-bottom: var(--rbn-space-4);
+}
+
+.rbn-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--rbn-text-muted);
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: var(--rbn-space-1) var(--rbn-space-2);
+    border-radius: var(--rbn-radius-sm);
+}
+
+.rbn-drawer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--rbn-space-2);
+}
+
+.rbn-drawer-link {
+    display: flex;
+    align-items: center;
+    padding: var(--rbn-space-3) var(--rbn-space-4);
+    color: var(--rbn-text-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.92rem;
+    border-radius: var(--rbn-radius-md);
+    transition: all 0.2s ease;
+}
+
+.rbn-drawer-link:hover,
+.rbn-drawer-link.active {
+    background: var(--rbn-primary);
+    color: var(--rbn-text-on-primary);
+}
+
+.rbn-drawer-divider {
+    height: 1px;
+    background: var(--rbn-border);
+    margin: var(--rbn-space-3) 0;
+}
+
+.rbn-mobile-toggle {
+    background: transparent;
+    border: 1px solid currentColor;
+    color: inherit;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--rbn-radius-md);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0;
+}
+
+.rbn-burger-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 18px;
+    height: 14px;
+}
+
+.rbn-burger-icon span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: currentColor;
+    border-radius: var(--rbn-radius-pill);
+    transition: all 0.2s ease;
+}
+
+.rbn-mobile-toggle:hover {
+    background: var(--rbn-bg-surface-hover);
+    color: var(--rbn-primary);
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   3. SMALL MOBILE (max-width: 480px) 📱
+   ========================================================================== */
+@media (max-width: 480px) {
+    .rbn-page-title {
+        font-size: 1.35rem !important;
+    }
+
+    .rbn-card {
+        padding: var(--rbn-space-4) !important;
+    }
+
+    /* Stat Cards Value Tightening */
+    .rbn-stat-value {
+        font-size: 1.4rem !important;
+    }
+}
+
+/* ==========================================================================
+   4. UNIVERSAL RESPONSIVE DISPLAY UTILITIES 👁️
+   ========================================================================== */
+/* Hide on Mobile */
+@media (max-width: 768px) {
+    .d-mobile-none,
+    .d-sm-none {
+        display: none !important;
+    }
+
+    .w-mobile-100 {
+        width: 100% !important;
+    }
+
+    .text-mobile-center {
+        text-align: center !important;
+    }
+}
+
+/* Hide on Desktop */
+@media (min-width: 769px) {
+    .d-desktop-none,
+    .d-md-none {
+        display: none !important;
+    }
+}

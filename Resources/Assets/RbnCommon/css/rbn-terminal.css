@@ -1,0 +1,191 @@
+/* ==========================================================================
+   RBN FRAMEWORK: SOVEREIGN TERMINAL DESIGN ENGINE (rbn-terminal.css) 🖥️⚡
+   100% Token-Driven, Pure JetBrains Mono & Strict .rbn-terminal-* Standard
+   ========================================================================== */
+
+:root {
+    /* 🖥️ Terminal Sovereign Root Tokens */
+    --rbn-term-bg: #0d1117;
+    --rbn-term-header: #161b22;
+    --rbn-term-text: #e6edf3;
+    --rbn-term-text-muted: #8b949e;
+    --rbn-term-green: #3fb950;
+    --rbn-term-blue: #58a6ff;
+    --rbn-term-red: #f85149;
+    --rbn-term-yellow: #d29944;
+    --rbn-term-border: #30363d;
+    --rbn-term-scroll-track: #0d1117;
+    --rbn-term-scroll-thumb: #30363d;
+    --rbn-term-scroll-thumb-hover: #484f58;
+}
+
+/* ==========================================================================
+   1. CORE TERMINAL CONTAINERS (.rbn-terminal)
+   ========================================================================== */
+.rbn-terminal,
+.rbn-terminal-v3 {
+    width: 100%;
+    background: var(--rbn-term-bg) !important;
+    color: var(--rbn-term-text) !important;
+    font-family: var(--rbn-font-mono, 'JetBrains Mono', monospace) !important;
+    border-radius: var(--rbn-radius-md, 10px) !important;
+    border: 1px solid var(--rbn-term-border) !important;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5) !important;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Custom Scrollbar */
+.rbn-terminal::-webkit-scrollbar,
+.rbn-terminal-v3::-webkit-scrollbar,
+.rbn-terminal-content::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.rbn-terminal::-webkit-scrollbar-track,
+.rbn-terminal-v3::-webkit-scrollbar-track,
+.rbn-terminal-content::-webkit-scrollbar-track {
+    background: var(--rbn-term-scroll-track);
+}
+
+.rbn-terminal::-webkit-scrollbar-thumb,
+.rbn-terminal-v3::-webkit-scrollbar-thumb,
+.rbn-terminal-content::-webkit-scrollbar-thumb {
+    background: var(--rbn-term-scroll-thumb);
+    border-radius: 4px;
+}
+
+.rbn-terminal::-webkit-scrollbar-thumb:hover,
+.rbn-terminal-v3::-webkit-scrollbar-thumb:hover,
+.rbn-terminal-content::-webkit-scrollbar-thumb:hover {
+    background: var(--rbn-term-scroll-thumb-hover);
+}
+
+/* ==========================================================================
+   2. TERMINAL HEADER & MAC-STYLE DOTS
+   ========================================================================== */
+.rbn-terminal-header {
+    background: var(--rbn-term-header);
+    padding: 0.65rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--rbn-term-border);
+    user-select: none;
+}
+
+.rbn-terminal-dots {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.rbn-terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.rbn-terminal-dot-red {
+    background: #ff5f56;
+}
+
+.rbn-terminal-dot-yellow {
+    background: #ffbd2e;
+}
+
+.rbn-terminal-dot-green {
+    background: #27c93f;
+}
+
+.rbn-terminal-title {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--rbn-term-text-muted);
+    font-family: var(--rbn-font-mono, 'JetBrains Mono', monospace);
+}
+
+/* ==========================================================================
+   3. TERMINAL BODY, LOG LINES & PROMPTS
+   ========================================================================== */
+.rbn-terminal-content {
+    padding: 1.25rem;
+    flex-grow: 1;
+    overflow-y: auto;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    font-family: var(--rbn-font-mono, 'JetBrains Mono', monospace);
+}
+
+.rbn-terminal-line {
+    line-height: 1.6;
+    margin-bottom: 4px;
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-size: 0.85rem;
+}
+
+/* Syntax & Status Highlights */
+.rbn-terminal-prompt {
+    color: var(--rbn-term-green);
+    margin-right: 8px;
+    font-weight: 700;
+}
+
+.rbn-terminal-command {
+    color: var(--rbn-term-blue);
+}
+
+.rbn-terminal-success {
+    color: var(--rbn-term-green) !important;
+}
+
+.rbn-terminal-error {
+    color: var(--rbn-term-red) !important;
+}
+
+.rbn-terminal-warning {
+    color: var(--rbn-term-yellow) !important;
+}
+
+.rbn-terminal-info {
+    color: var(--rbn-term-blue) !important;
+}
+
+.rbn-terminal-muted {
+    color: var(--rbn-term-text-muted) !important;
+}
+
+/* Blinking Terminal Cursor */
+.rbn-terminal-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 16px;
+    background: var(--rbn-term-text);
+    animation: rbn-cursor-blink 1s infinite;
+    vertical-align: middle;
+}
+
+@keyframes rbn-cursor-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* ==========================================================================
+   4. TERMINAL INPUTS & INTERACTIVE ELEMENTS
+   ========================================================================== */
+.rbn-terminal input,
+.rbn-terminal-v3 input {
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid var(--rbn-term-border) !important;
+    color: var(--rbn-term-blue) !important;
+    outline: none !important;
+    font-family: inherit !important;
+    padding: 2px 6px;
+    font-size: 0.85rem;
+}

@@ -1,0 +1,117 @@
+{
+    "Europe/Istanbul": {
+        "name": "İstanbul (GMT+3)",
+        "offset": "+03:00",
+        "label": "Turkey Time"
+    },
+    "UTC": {
+        "name": "Coordinated Universal Time (UTC)",
+        "offset": "+00:00",
+        "label": "UTC"
+    },
+    "Europe/London": {
+        "name": "Londra (GMT/BST)",
+        "offset": "+00:00",
+        "label": "Greenwich Mean Time"
+    },
+    "Europe/Berlin": {
+        "name": "Berlin (CET/CEST)",
+        "offset": "+01:00",
+        "label": "Central European Time"
+    },
+    "Europe/Paris": {
+        "name": "Paris (CET/CEST)",
+        "offset": "+01:00",
+        "label": "Central European Time"
+    },
+    "Europe/Rome": {
+        "name": "Roma (CET/CEST)",
+        "offset": "+01:00",
+        "label": "Central European Time"
+    },
+    "Europe/Athens": {
+        "name": "Atina (EET/EEST)",
+        "offset": "+02:00",
+        "label": "Eastern European Time"
+    },
+    "Europe/Bucharest": {
+        "name": "Bükreş (EET/EEST)",
+        "offset": "+02:00",
+        "label": "Eastern European Time"
+    },
+    "Europe/Kiev": {
+        "name": "Kiev (EET/EEST)",
+        "offset": "+02:00",
+        "label": "Eastern European Time"
+    },
+    "Europe/Moscow": {
+        "name": "Moskova (MSK)",
+        "offset": "+03:00",
+        "label": "Moscow Time"
+    },
+    "America/New_York": {
+        "name": "New York (EST/EDT)",
+        "offset": "-05:00",
+        "label": "Eastern Time"
+    },
+    "America/Chicago": {
+        "name": "Chicago (CST/CDT)",
+        "offset": "-06:00",
+        "label": "Central Time"
+    },
+    "America/Denver": {
+        "name": "Denver (MST/MDT)",
+        "offset": "-07:00",
+        "label": "Mountain Time"
+    },
+    "America/Los_Angeles": {
+        "name": "Los Angeles (PST/PDT)",
+        "offset": "-08:00",
+        "label": "Pacific Time"
+    },
+    "America/Toronto": {
+        "name": "Toronto (EST/EDT)",
+        "offset": "-05:00",
+        "label": "Eastern Time"
+    },
+    "America/Sao_Paulo": {
+        "name": "Sao Paulo (BRT)",
+        "offset": "-03:00",
+        "label": "Brasilia Time"
+    },
+    "Asia/Baku": {
+        "name": "Bakü (AZT)",
+        "offset": "+04:00",
+        "label": "Azerbaijan Time"
+    },
+    "Asia/Tashkent": {
+        "name": "Taşkent (UZT)",
+        "offset": "+05:00",
+        "label": "Uzbekistan Time"
+    },
+    "Asia/Riyadh": {
+        "name": "Riyad (AST)",
+        "offset": "+03:00",
+        "label": "Arabia Standard Time"
+    },
+    "Asia/Dubai": {
+        "name": "Dubai (GST)",
+        "offset": "+04:00",
+        "label": "Gulf Standard Time"
+    },
+    "Asia/Singapore": {
+        "name": "Singapur (SGT)",
+        "offset": "+08:00",
+        "label": "Singapore Time"
+    },
+    "Asia/Tokyo": {
+        "name": "Tokyo (JST)",
+        "offset": "+09:00",
+        "label": "Japan Standard Time"
+    },
+    "Australia/Sydney": {
+        "name": "Sidney (AEST/AEDT)",
+        "offset": "+10:00",
+        "label": "Eastern Standard Time (Australia)"
+    }
+}

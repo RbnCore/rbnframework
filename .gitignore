@@ -1,0 +1,46 @@
+# RBN Framework .gitignore
+# Dependency directories
+/vendor/
+/node_modules/
+
+# Environment and sensitive configuration
+.env
+.env.*
+
+# Secrets SSOT (gercek sirlar; yalnizca sablon + README depoya girer)
+/Core/System/Config/Secrets/*
+!/Core/System/Config/Secrets/README.md
+!/Core/System/Config/Secrets/*.example.php
+# [A0-8] TEK sır dosyasi acikca da reddedilir: yukaridaka joker kural, ileride
+# gelen bir `!` istisnasiyla (orn. `!Core/.../Secrets/README.md` yazilirken
+# hatta yapilan) bu dosyanin depoya sizmasini engellemek icin.
+# Kapsam daraltilirsa bu satir olmadan sifre git gecmisine girebilir.
+# [FW-TEK-SECRETS-DOSYASI-161] Artik TEK dosya vardir: `secrets.php`.
+/Core/System/Config/Secrets/secrets.php
+!.env.example
+*.pem
+*.key
+*.cert
+
+# Cache, Storage & Temporary files
+/tmp/
+/Storage/framework/views/*
+!/Storage/framework/views/.gitkeep
+/Storage/framework/cache/*
+!/Storage/framework/cache/.gitkeep
+/Storage/logs/*
+!/Storage/logs/.gitkeep
+*.log
+*.jsonl
+
+# OS & IDE metadata
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Graphify and analysis artifacts
+graphify-out/
+.graphify*

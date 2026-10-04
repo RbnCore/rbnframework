@@ -1,0 +1,140 @@
+/* ==========================================================================
+   RBN ADMIN CRAFT & ROOTSTOCK THEME ENGINE (RbnAdmin/css/rbnVariables.css) 🏛️🏺
+   Warm Sand Canvas, Editorial Typography & Multi-Color Earth/Craft Palette
+   ========================================================================== */
+
+:root {
+    /* 🏛️ 0. CORE TOKEN ENGINE BRIDGES (RbnCommon ile %100 Uyum - Sıfır Mükerrer CSS) ⚡ */
+    --rbn-primary: #c56a3c;
+    --rbn-primary-hover: #b0572b;
+    --rbn-primary-subtle: rgba(197, 106, 60, 0.12);
+    --rbn-bg-surface: #fbf9f5;
+    --rbn-bg-canvas: #f3e9d8;
+    --rbn-border: #e5ded3;
+    --rbn-border-subtle: #f0ebe1;
+    --rbn-text-display: #111827;
+    --rbn-text-primary: #1e1b18;
+    --rbn-text-muted: #79716b;
+
+    /* 1. TypeUI Terracotta & Rootstock Earth Surfaces 📜 */
+    --rbn-admin-canvas: #f3e9d8;               /* Sun-baked Clay / Sıcak Kum Fon */
+    --rbn-admin-surface: #fbf9f5;              /* Sıcak Fildişi Kart Yüzeyi */
+    --rbn-admin-surface-white: #ffffff;        /* Saf Beyaz Yüzey */
+    --rbn-admin-border-subtle: #e5ded3;        /* İnce İpek Çerçeve */
+    --rbn-admin-border-strong: #d5cbbf;
+    --rbn-bg-surface-hover: rgba(179, 159, 130, 0.18); /* Sıcak Fildişi/Taupe Hover (Mavi Yasağı) */
+    --rbn-table-row-hover: rgba(179, 159, 130, 0.18);
+    
+    /* 2. Terracotta Editorial Typography Hierarchy 🖋️ */
+    --rbn-font-display: "DM Serif Display", serif;
+    --rbn-font-body: "Plus Jakarta Sans", sans-serif;
+    --rbn-font-mono: "JetBrains Mono", monospace;
+
+    --rbn-admin-text-display: #111827;         /* Tok Mürekkep Başlık */
+    --rbn-admin-text-body: #1e1b18;            /* Gövde Metni */
+    --rbn-admin-text-muted: #79716b;           /* İkincil Açıklamalar */
+
+    /* 🔔 RBN Alert, Modal & Toast Theme Engine (Warm Ivory & Terracotta Palette) 🏺 */
+    --rbn-alert-bg: var(--rbn-admin-surface, #fbf9f5);           /* Sıcak Fildişi Zemin */
+    --rbn-alert-border: var(--rbn-admin-border-subtle, #e5ded3); /* İnce İpek Çerçeve */
+    --rbn-alert-text: var(--rbn-admin-text-display, #111827);    /* Tok Başlık */
+    --rbn-alert-muted: var(--rbn-admin-text-muted, #79716b);     /* Açıklama Metni */
+    --rbn-alert-shadow: 0 20px 40px -10px rgba(60, 50, 40, 0.18), 0 0 0 1px rgba(60, 50, 40, 0.05);
+    
+    /* 🍞 Toast Bildirimleri (Hafif Şeffaf & Sıcak Kum/Fildişi) */
+    --rbn-toast-bg: rgba(251, 249, 245, 0.96);                   /* Fildişi Blur Zemin */
+    --rbn-toast-border: var(--rbn-admin-border-subtle, #e5ded3);
+    --rbn-toast-color: var(--rbn-admin-text-display, #111827);
+
+    /* 🔘 Alert & Onay Butonları */
+    --rbn-alert-btn-radius: 10px;                                /* Zanaatkar Hafif Köşeli */
+    --rbn-alert-btn-cancel-bg: rgba(60, 50, 40, 0.05);          /* İptal Butonu Doğal Zemin */
+    --rbn-alert-btn-cancel-border: var(--rbn-admin-border-subtle, #e5ded3);
+    --rbn-alert-btn-cancel-text: var(--rbn-admin-text-body, #1e1b18);
+    --rbn-alert-btn-danger-bg: var(--rbn-craft-rose, #be123c);   /* Gül Kurusu Kırmızı (Terracotta Rose) */
+    --rbn-alert-btn-confirm-bg: var(--rbn-craft-russet, #c56a3c);/* Sıcak Terracotta Onay Butonu */
+
+    /* 🏛️ Sovereign Modal Craft Tokens */
+    --rbn-modal-bg: var(--rbn-admin-surface, #fbf9f5);
+    --rbn-modal-header-bg: rgba(197, 106, 60, 0.05);
+    --rbn-modal-footer-bg: var(--rbn-admin-canvas, #f3e9d8);
+    --rbn-modal-border: var(--rbn-admin-border-subtle, #e5ded3);
+    --rbn-modal-text-display: var(--rbn-admin-text-display, #111827);
+    --rbn-modal-accent: var(--rbn-craft-russet, #c56a3c);
+
+    /* 3. Muted Dark / Sand Sidebar 🖤 */
+    --rbn-admin-sidebar-bg: #1a1d24;
+    --rbn-admin-sidebar-surface: #242832;
+    --rbn-admin-sidebar-border: rgba(255, 255, 255, 0.08);
+    --rbn-admin-sidebar-text: #9ba3af;
+    --rbn-admin-sidebar-text-active: #ffffff;
+    --rbn-admin-sidebar-pill-bg: #c56a3c;      /* Terracotta Primary Aktif Hap */
+
+    /* 4. Terracotta Multi-Color Metric Palette Family 🎨 (Görseldeki Zengin Rakamlar) */
+    /* 🏺 Terracotta Primary (Ana Butonlar & CTA) */
+    --rbn-craft-russet: #c56a3c;
+    --rbn-craft-russet-hover: #b0572b;
+    --rbn-craft-russet-subtle: rgba(197, 106, 60, 0.12);
+
+    /* 🪨 Warm Taupe / Earth Brown (İkincil Butonlar & Filtreler) */
+    --rbn-craft-taupe: #a89f91;
+    --rbn-craft-taupe-hover: #8f8576;
+    --rbn-craft-taupe-subtle: rgba(168, 159, 145, 0.18);
+
+    /* 🌾 Mustard Ocre / Amber Gold (Finans & KDV & İkaz) */
+    --rbn-craft-mustard: #d97706;
+    --rbn-craft-mustard-subtle: rgba(217, 119, 6, 0.15);
+
+    /* 🌿 Emerald & Sage Green (Net Kâr & Ofis Katkısı & Başarı) */
+    --rbn-craft-sage: #16a34a;
+    --rbn-craft-sage-bg: #e2f5e8;
+    --rbn-craft-sage-border: #bbf0cb;
+
+    /* 🌊 Royal / Deep Blue (Toplam Brüt Ciro & Metrikler) */
+    --rbn-craft-blue: #1d4ed8;
+    --rbn-craft-blue-bg: #eff6ff;
+
+    /* 🔴 Coral Red (Ofis Masrafları & Giderler) */
+    --rbn-craft-red: #dc2626;
+    --rbn-craft-red-bg: #fef2f2;
+
+    /* 🌹 Rose */
+    --rbn-craft-rose: #be123c;
+    --rbn-craft-rose-bg: #ffe4e6;
+
+    /* Geriye Dönük Uyumluluk */
+    --rbn-terracotta: var(--rbn-craft-russet);
+    --rbn-terracotta-hover: var(--rbn-craft-russet-hover);
+    --rbn-terracotta-subtle: var(--rbn-craft-russet-subtle);
+}
+
+/* 5. Theme Variant Presets (Admin Theme Switcher) */
+[data-theme="blue"] {
+    --rbn-theme-h: 213;
+    --rbn-theme-s: 94%;
+    --rbn-theme-l: 58%;
+}
+
+[data-theme="green"] {
+    --rbn-theme-h: 142;
+    --rbn-theme-s: 71%;
+    --rbn-theme-l: 45%;
+}
+
+[data-theme="purple"] {
+    --rbn-theme-h: 262;
+    --rbn-theme-s: 83%;
+    --rbn-theme-l: 58%;
+}
+
+[data-theme="orange"] {
+    --rbn-theme-h: 24;
+    --rbn-theme-s: 95%;
+    --rbn-theme-l: 53%;
+}
+
+[data-theme="red"] {
+    --rbn-theme-h: 0;
+    --rbn-theme-s: 84%;
+    --rbn-theme-l: 60%;
+}

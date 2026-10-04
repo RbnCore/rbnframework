@@ -1,0 +1,530 @@
+/* ==========================================================================
+   RBN CORE: BUTTONS & INTERACTION ENGINE (core/buttons.css) 🎛️
+   %100 Sovereign Token-Driven Button Engine (Powered by rbn-colors.css)
+   ========================================================================== */
+
+/* 1. Base Button Structure (WCAG 44px Target Compliance) */
+.rbn-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--rbn-space-2, 8px);
+    padding: 0 var(--rbn-space-4, 16px);
+    height: 42px;
+    font-family: var(--rbn-font-sans, inherit);
+    font-size: 0.88rem;
+    font-weight: 600;
+    line-height: 1;
+    border-radius: var(--rbn-radius-sm, 8px);
+    border: var(--rbn-border-width, 1px) solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    user-select: none;
+    transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+}
+
+.rbn-btn:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: var(--rbn-shadow-btn-hover, none);
+}
+
+.rbn-btn:disabled, .rbn-btn.disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    pointer-events: none;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+/* 2. Scale Variants */
+.rbn-btn-xs { height: 26px; padding: 0 var(--rbn-space-2, 8px); font-size: 0.72rem; border-radius: var(--rbn-radius-sm, 6px); }
+.rbn-btn-sm { height: 32px; padding: 0 var(--rbn-space-3, 12px); font-size: 0.8rem; }
+.rbn-btn-md { height: 42px; padding: 0 var(--rbn-space-4, 16px); font-size: 0.88rem; }
+.rbn-btn-lg { height: 48px; padding: 0 var(--rbn-space-6, 24px); font-size: 0.95rem; }
+.rbn-btn-xl { height: 54px; padding: 0 var(--rbn-space-8, 32px); font-size: 1.05rem; }
+
+/* ==========================================================================
+   3. SOLID BUTTON RENK VARYANTLARI (rbn-colors.css Entegresi)
+   ========================================================================== */
+
+/* 👑 Dynamic Theme & Primary Sovereign Button */
+.rbn-btn-primary,
+.rbn-btn-theme {
+    background: var(--rbn-primary, var(--rbn-theme-500, #f59e0b));
+    color: var(--rbn-primary-text, #ffffff);
+    border-color: var(--rbn-border, var(--rbn-primary, var(--rbn-theme-500, #f59e0b)));
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+.rbn-btn-primary:hover,
+.rbn-btn-theme:hover {
+    background: var(--rbn-primary-dark, var(--rbn-theme-600, #d97706));
+    border-color: var(--rbn-border, var(--rbn-primary-dark, var(--rbn-theme-600, #d97706)));
+    color: var(--rbn-primary-text, #ffffff);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 🔵 Blue / Safir */
+.rbn-btn-blue {
+    background: var(--rbn-blue-600, #2563eb);
+    color: #ffffff;
+    border-color: var(--rbn-blue-600, #2563eb);
+    box-shadow: 0 1px 3px rgba(37, 99, 235, 0.2);
+}
+.rbn-btn-blue:hover {
+    background: var(--rbn-blue-700, #1d4ed8);
+    border-color: var(--rbn-blue-700, #1d4ed8);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+/* 🏺 Terracotta / Clay / Kiremit */
+.rbn-btn-terracotta,
+.rbn-btn-clay {
+    background: var(--rbn-clay-500, #C56A3C);
+    color: #ffffff;
+    border-color: var(--rbn-clay-500, #C56A3C);
+}
+.rbn-btn-terracotta:hover,
+.rbn-btn-clay:hover {
+    background: var(--rbn-clay-600, #AA552B);
+    border-color: var(--rbn-clay-600, #AA552B);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(197, 106, 60, 0.3);
+}
+
+/* 🌿 Green / Emerald / Success */
+.rbn-btn-success,
+.rbn-btn-green,
+.rbn-btn-emerald {
+    background: var(--rbn-green-500, #10b981);
+    color: #ffffff;
+    border-color: var(--rbn-green-500, #10b981);
+}
+.rbn-btn-success:hover,
+.rbn-btn-green:hover,
+.rbn-btn-emerald:hover {
+    background: var(--rbn-green-600, #059669);
+    border-color: var(--rbn-green-600, #059669);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+}
+
+/* 👑 Amber / Gold / Warning */
+.rbn-btn-warning,
+.rbn-btn-amber,
+.rbn-btn-gold {
+    background: var(--rbn-amber-500, #f59e0b);
+    color: #ffffff;
+    border-color: var(--rbn-amber-500, #f59e0b);
+}
+.rbn-btn-warning:hover,
+.rbn-btn-amber:hover,
+.rbn-btn-gold:hover {
+    background: var(--rbn-amber-600, #d97706);
+    border-color: var(--rbn-amber-600, #d97706);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+}
+
+/* 🔴 Red / Rose / Danger */
+.rbn-btn-danger,
+.rbn-btn-red {
+    background: var(--rbn-red-500, #ef4444);
+    color: #ffffff;
+    border-color: var(--rbn-red-500, #ef4444);
+}
+.rbn-btn-danger:hover,
+.rbn-btn-red:hover {
+    background: var(--rbn-red-600, #dc2626);
+    border-color: var(--rbn-red-600, #dc2626);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3);
+}
+
+/* 🍷 Crimson / Tok Kiremit */
+.rbn-btn-crimson {
+    background: var(--rbn-crimson-500, #991b1b);
+    color: #ffffff;
+    border-color: var(--rbn-crimson-500, #991b1b);
+}
+.rbn-btn-crimson:hover {
+    background: var(--rbn-crimson-600, #7f1d1d);
+    border-color: var(--rbn-crimson-600, #7f1d1d);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(153, 27, 27, 0.3);
+}
+
+/* 💜 Indigo / Violet */
+.rbn-btn-indigo,
+.rbn-btn-violet {
+    background: var(--rbn-indigo-600, #4f46e5);
+    color: #ffffff;
+    border-color: var(--rbn-indigo-600, #4f46e5);
+}
+.rbn-btn-indigo:hover,
+.rbn-btn-violet:hover {
+    background: var(--rbn-indigo-700, #4338ca);
+    border-color: var(--rbn-indigo-700, #4338ca);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+/* 🔮 Purple */
+.rbn-btn-purple {
+    background: var(--rbn-purple, #8b5cf6);
+    color: #ffffff;
+    border-color: var(--rbn-purple, #8b5cf6);
+}
+.rbn-btn-purple:hover {
+    background: var(--rbn-purple-dark, #5b21b6);
+    border-color: var(--rbn-purple-dark, #5b21b6);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+/* 🌸 Pink / Fuchsia */
+.rbn-btn-pink {
+    background: var(--rbn-pink, #db2777);
+    color: #ffffff;
+    border-color: var(--rbn-pink, #db2777);
+}
+.rbn-btn-pink:hover {
+    background: var(--rbn-pink-dark, #831843);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+.rbn-btn-fuchsia {
+    background: var(--rbn-fuchsia, #d946ef);
+    color: #ffffff;
+    border-color: var(--rbn-fuchsia, #d946ef);
+}
+.rbn-btn-fuchsia:hover {
+    background: var(--rbn-fuchsia-dark, #86198f);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+/* 🌊 Cyan / Teal / Sky */
+.rbn-btn-cyan {
+    background: var(--rbn-cyan, #00acc1);
+    color: #ffffff;
+    border-color: var(--rbn-cyan, #00acc1);
+}
+.rbn-btn-cyan:hover {
+    background: var(--rbn-cyan-dark, #00838f);
+    border-color: var(--rbn-cyan-dark, #00838f);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(0, 172, 193, 0.35);
+}
+.rbn-btn-teal {
+    background: var(--rbn-teal, #0d9488);
+    color: #ffffff;
+    border-color: var(--rbn-teal, #0d9488);
+}
+.rbn-btn-teal:hover {
+    background: var(--rbn-teal-dark, #0f766e);
+    border-color: var(--rbn-teal-dark, #0f766e);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(13, 148, 136, 0.35);
+}
+.rbn-btn-sky {
+    background: var(--rbn-sky, #0284c7);
+    color: #ffffff;
+    border-color: var(--rbn-sky, #0284c7);
+}
+.rbn-btn-sky:hover {
+    background: var(--rbn-sky-dark, #0369a1);
+    border-color: var(--rbn-sky-dark, #0369a1);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+}
+
+/* 🍊 Coral / Orange */
+.rbn-btn-coral,
+.rbn-btn-orange {
+    background: var(--rbn-coral, #ea580c);
+    color: #ffffff;
+    border-color: var(--rbn-coral, #ea580c);
+}
+.rbn-btn-coral:hover,
+.rbn-btn-orange:hover {
+    background: #c2410c;
+    border-color: #c2410c;
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(234, 88, 12, 0.35);
+}
+
+/* 🍋 Lime */
+.rbn-btn-lime {
+    background: var(--rbn-lime, #65a30d);
+    color: #ffffff;
+    border-color: var(--rbn-lime, #65a30d);
+}
+.rbn-btn-lime:hover {
+    background: #4d7c0f;
+    border-color: #4d7c0f;
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(101, 163, 13, 0.35);
+}
+
+/* 🌫️ Slate / Secondary / Dark */
+.rbn-btn-secondary,
+.rbn-btn-slate {
+    background: var(--rbn-slate-600, #475569);
+    color: #ffffff;
+    border-color: var(--rbn-slate-600, #475569);
+}
+.rbn-btn-secondary:hover,
+.rbn-btn-slate:hover {
+    background: var(--rbn-slate-700, #334155);
+    border-color: var(--rbn-slate-700, #334155);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.rbn-btn-dark,
+.rbn-btn-charcoal {
+    background: var(--rbn-slate-900, #0f172a);
+    color: #ffffff;
+    border-color: var(--rbn-slate-900, #0f172a);
+}
+.rbn-btn-dark:hover,
+.rbn-btn-charcoal:hover {
+    background: #000000;
+    border-color: #000000;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   4. OUTLINE BUTTON VARYANTLARI
+   ========================================================================== */
+.rbn-btn-outline {
+    background: var(--rbn-bg-surface, #ffffff);
+    border: var(--rbn-border-width, 1px) solid var(--rbn-border, #14110c);
+    color: var(--rbn-text-primary, #14110c);
+}
+.rbn-btn-outline:hover {
+    border-color: var(--rbn-border, #14110c);
+    background: var(--rbn-primary, #ffc400);
+    color: var(--rbn-primary-text, #14110c);
+    transform: translate(-1px, -1px);
+    box-shadow: var(--rbn-shadow-btn-hover, 3px 3px 0px var(--rbn-border));
+}
+
+.rbn-btn-outline-primary, .rbn-btn-outline-blue {
+    background: transparent;
+    border-color: var(--rbn-blue-600, #2563eb);
+    color: var(--rbn-blue-600, #2563eb);
+}
+.rbn-btn-outline-primary:hover, .rbn-btn-outline-blue:hover {
+    background: var(--rbn-blue-600, #2563eb);
+    color: #ffffff;
+}
+
+.rbn-btn-outline-terracotta, .rbn-btn-outline-clay {
+    background: transparent;
+    border-color: var(--rbn-clay-500, #C56A3C);
+    color: var(--rbn-clay-500, #C56A3C);
+}
+.rbn-btn-outline-terracotta:hover, .rbn-btn-outline-clay:hover {
+    background: var(--rbn-clay-500, #C56A3C);
+    color: #ffffff;
+}
+
+.rbn-btn-outline-success, .rbn-btn-outline-green {
+    background: transparent;
+    border-color: var(--rbn-green-500, #10b981);
+    color: var(--rbn-green-500, #10b981);
+}
+.rbn-btn-outline-success:hover, .rbn-btn-outline-green:hover {
+    background: var(--rbn-green-500, #10b981);
+    color: #ffffff;
+}
+
+.rbn-btn-outline-danger, .rbn-btn-outline-red {
+    background: transparent;
+    border-color: var(--rbn-red-500, #ef4444);
+    color: var(--rbn-red-500, #ef4444);
+}
+.rbn-btn-outline-danger:hover, .rbn-btn-outline-red:hover {
+    background: var(--rbn-red-500, #ef4444);
+    color: #ffffff;
+}
+
+.rbn-btn-outline-crimson {
+    background: transparent;
+    border-color: var(--rbn-crimson-500, #991b1b);
+    color: var(--rbn-crimson-500, #991b1b);
+}
+.rbn-btn-outline-crimson:hover {
+    background: var(--rbn-crimson-500, #991b1b);
+    color: #ffffff;
+}
+
+.rbn-btn-outline-warning, .rbn-btn-outline-amber {
+    background: transparent;
+    border-color: var(--rbn-amber-500, #f59e0b);
+    color: var(--rbn-amber-500, #f59e0b);
+}
+.rbn-btn-outline-warning:hover, .rbn-btn-outline-amber:hover {
+    background: var(--rbn-amber-500, #f59e0b);
+    color: #ffffff;
+}
+
+.rbn-btn-outline-purple {
+    background: transparent;
+    border-color: var(--rbn-purple, #8b5cf6);
+    color: var(--rbn-purple, #8b5cf6);
+}
+.rbn-btn-outline-purple:hover {
+    background: var(--rbn-purple, #8b5cf6);
+    color: #ffffff;
+}
+
+.rbn-btn-outline-cyan {
+    background: transparent;
+    border-color: var(--rbn-cyan, #00acc1);
+    color: var(--rbn-cyan, #00acc1);
+}
+.rbn-btn-outline-cyan:hover {
+    background: var(--rbn-cyan, #00acc1);
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   5. SOFT / SUBTLE BUTTON VARYANTLARI (Soft Pill Buttons)
+   ========================================================================== */
+.rbn-btn-soft-primary, .rbn-btn-soft-blue {
+    background: var(--rbn-blue-50, #eff6ff);
+    color: var(--rbn-blue-600, #2563eb);
+    border-color: var(--rbn-blue-100, #dbeafe);
+}
+.rbn-btn-soft-primary:hover, .rbn-btn-soft-blue:hover {
+    background: var(--rbn-blue-600, #2563eb);
+    color: #ffffff;
+}
+
+.rbn-btn-soft-terracotta, .rbn-btn-soft-clay {
+    background: var(--rbn-clay-50, #FAF3E7);
+    color: var(--rbn-clay-600, #AA552B);
+    border-color: var(--rbn-clay-200, #EADCC6);
+}
+.rbn-btn-soft-terracotta:hover, .rbn-btn-soft-clay:hover {
+    background: var(--rbn-clay-500, #C56A3C);
+    color: #ffffff;
+}
+
+.rbn-btn-soft-success, .rbn-btn-soft-green {
+    background: var(--rbn-green-50, #ecfdf5);
+    color: var(--rbn-green-600, #059669);
+    border-color: var(--rbn-green-100, #d1fae5);
+}
+.rbn-btn-soft-success:hover, .rbn-btn-soft-green:hover {
+    background: var(--rbn-green-500, #10b981);
+    color: #ffffff;
+}
+
+.rbn-btn-soft-warning, .rbn-btn-soft-amber {
+    background: var(--rbn-amber-50, #fffbeb);
+    color: var(--rbn-amber-700, #b45309);
+    border-color: var(--rbn-amber-100, #fef3c7);
+}
+.rbn-btn-soft-warning:hover, .rbn-btn-soft-amber:hover {
+    background: var(--rbn-amber-500, #f59e0b);
+    color: #ffffff;
+}
+
+.rbn-btn-soft-danger, .rbn-btn-soft-red {
+    background: var(--rbn-red-50, #fef2f2);
+    color: var(--rbn-red-600, #dc2626);
+    border-color: var(--rbn-red-100, #fee2e2);
+}
+.rbn-btn-soft-danger:hover, .rbn-btn-soft-red:hover {
+    background: var(--rbn-red-500, #ef4444);
+    color: #ffffff;
+}
+
+.rbn-btn-soft-purple {
+    background: var(--rbn-purple-light, #f3e8ff);
+    color: var(--rbn-purple-dark, #5b21b6);
+    border-color: var(--rbn-purple-border, #e9d5ff);
+}
+.rbn-btn-soft-purple:hover {
+    background: var(--rbn-purple, #8b5cf6);
+    color: #ffffff;
+}
+
+.rbn-btn-soft-cyan {
+    background: var(--rbn-cyan-light, #e0f7fa);
+    color: var(--rbn-cyan-dark, #006064);
+    border-color: var(--rbn-cyan-border, #b2ebf2);
+}
+.rbn-btn-soft-cyan:hover {
+    background: var(--rbn-cyan, #00acc1);
+    color: #ffffff;
+}
+
+.rbn-btn-soft-indigo {
+    background: var(--rbn-indigo-50, #eef2ff);
+    color: var(--rbn-indigo-700, #4338ca);
+    border-color: var(--rbn-indigo-200, #c7d2fe);
+}
+.rbn-btn-soft-indigo:hover {
+    background: var(--rbn-indigo-600, #4f46e5);
+    color: #ffffff;
+}
+
+/* 6. Ghost & Subtle Variants */
+.rbn-btn-ghost {
+    background: transparent;
+    color: var(--rbn-text-secondary, #64748b);
+}
+.rbn-btn-ghost:hover {
+    background: var(--rbn-slate-100, #f1f5f9);
+    color: var(--rbn-text-primary, #0f172a);
+}
+
+/* 7. Icon Buttons & Pill Shape */
+.rbn-btn-icon {
+    padding: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: var(--rbn-radius-sm, 8px);
+}
+.rbn-btn-icon.rbn-btn-sm { width: 32px; height: 32px; }
+.rbn-btn-icon.rbn-btn-xs { width: 26px; height: 26px; }
+.rbn-btn-icon.rbn-btn-lg { width: 48px; height: 48px; }
+
+.rbn-btn-pill { border-radius: var(--rbn-radius-pill, 9999px) !important; }
+
+/* 8. Button Groups */
+.rbn-btn-group {
+    display: inline-flex;
+    align-items: center;
+    border-radius: var(--rbn-radius-sm, 8px);
+}
+.rbn-btn-group > .rbn-btn:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-left: -1px;
+}
+.rbn-btn-group > .rbn-btn:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
