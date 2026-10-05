@@ -46,6 +46,14 @@ class AssetDefinition
     public const RBN_MASTER_CSS = '@fw/RbnCommon/css/rbn-master.css';
     public const RBN_SHIELD_CSS = '@fw/RbnCommon/css/rbn-shield.css';
     public const RBN_DASHBOARD_CSS = '@fw/RbnCommon/css/core/dashboard.css';
+    public const RBN_AUTH_CSS = '@fw/RbnCommon/css/core/rbn-auth.css';
+
+    /**
+     * OPT-IN CSS PACKAGES (core/rbn-master.css kapanisina DAHIL DEGILDIR)
+     * Yalnizca proje/gorunum acikca paket adini istediginde yuklenir.
+     */
+    public const RBN_EXTENDED_UTILITIES_CSS = '@fw/RbnCommon/css/optional/rbn-utilities-extended.css';
+    public const RBN_EXTENDED_COMPONENTS_CSS = '@fw/RbnCommon/css/optional/rbn-components-extended.css';
 
     /**
      * RBN_COMMON - Core Components, Networking & Tools (@fw) 🛠️🛰️

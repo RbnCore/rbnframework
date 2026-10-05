@@ -97,11 +97,18 @@ if (!function_exists('app_name')) {
 
 if (!function_exists('app_version')) {
     /**
-     * Get the current application version
+     * Get the current application (project) version
+     *
+     * TEK KAYNAK: master DB `projects.version` -> `project_data('version')`.
+     * Cozucu TEK merkezdedir (`ProjectVersionResolver`); deger yoksa veya
+     * gecersizse standart baslangic surumu `0.1.1` doner. Iki parcali
+     * `1.0` gibi gecersiz varsayilanlar YOKTUR.
      */
     function app_version(): string
     {
-        return (string) project_data('version', '1.0');
+        return \Rbn\Framework\Core\Support\Bridges\Helpers\Library\ProjectVersionResolver::resolve(
+            project_data('version')
+        );
     }
 }
 

@@ -44,15 +44,14 @@ class SystemGuardHandler extends BaseComponent
             }
 
             // 2. Critical Path Bypass (Admin, Auth, API)
-            // [A0-2] `config()` anahtar yoksa `LogicException` attigi icin
-            // `safeConfig()` sarmalayicisi kullanilir; varsayilan deger
-            // `RouteBlueprint::DASHBOARD_PREFIX` SABITIDIR (bkz. asagida).
-            // [S-1] Eslesme de ham adres yerine YOL (`$uriPath`) uzerinde:
-            // `/login?x=/rbn-admin` gibi istekler istisnadan ETKILENMEZ.
-            $dashboardPrefix = '/' . trim((string) $this->safeConfig(
-                'project-settings.dashboard_prefix',
-                RouteBlueprint::DASHBOARD_PREFIX
-            ), '/');
+            // [A0-2] `config()` anahtar yoksa `LogicException` attigi icin `safeConfig()` kullanilir.
+            // [FW-ROUTEMAP-SSOT-2] Panel on eki TEK KAYNAK: `project-routemap.php`
+            // (`ProjectDataMapper` -> BootCache -> `project_data()`, kapisiz).
+            // Ayar dosyasindaki `dashboard_prefix` OKUNMAZ (YOK SAYILIR), varsayilan
+            // `RouteBlueprint::DASHBOARD_PREFIX`.
+            // [S-1] Eslesme YOL (`$uriPath`) uzerinde: `/login?x=/rbn-admin` ATLANMAZ.
+            $routePrefix = function_exists('project_data') ? trim((string) project_data('dashboard_prefix', ''), '/') : '';
+            $dashboardPrefix = '/' . ($routePrefix !== '' ? $routePrefix : RouteBlueprint::DASHBOARD_PREFIX);
 
             $allowedPaths = [$dashboardPrefix];
             foreach (RouteBlueprint::SYSTEM_ALLOWED_PATHS as $path) {

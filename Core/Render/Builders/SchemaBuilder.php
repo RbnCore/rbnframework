@@ -23,6 +23,13 @@ class SchemaBuilder extends BaseComponent
             '@type' => $type
         ], $data);
 
+        // [FW-ASSET-KONVANSIYON] Boş `image` alanı JSON-LD'de `"image":""`
+        // olarak basılıyordu (Google bunu geçersiz sayar). Projede og görseli
+        // yoksa alan TAMAMEN düşer — uydurma adres üretilmez.
+        if (isset($schema['image']) && (string) $schema['image'] === '') {
+            unset($schema['image']);
+        }
+
         $this->schemas[] = $schema;
         return $this;
     }

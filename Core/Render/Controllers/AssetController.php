@@ -7,6 +7,7 @@ namespace Rbn\Framework\Core\Render\Controllers;
 use Rbn\Framework\Core\Base\Web\BaseController;
 use Rbn\Framework\Core\Http\Engine\Traits\Response\RedirectTrait;
 use Rbn\Framework\Core\Render\Configs\AssetConfig;
+use Rbn\Framework\Core\Support\Definitions\Render\AssetConvention;
 
 /**
  * AssetController - High Performance Asset Proxy 🌐⚡⚓
@@ -105,6 +106,23 @@ class AssetController extends BaseController
         // İster projede ister framework'te olsun, sanal kaynakları yakalıyoruz.
         if ($isProject && str_ends_with($path, '.svg')) {
             $this->serveVirtualResource($path);
+            return;
+        }
+
+        // 🖼️ [FW-ASSET-KONVANSIYON] Sanal OpenGraph görseli:
+        // `/project-assets/og-image-<project_key>.<png|jpg|webp>`.
+        //
+        // ÖLÇÜLEN KÖK HATA (05.10): bu dal YALNIZ `.svg` uçlantısında
+        // açıldığı için raster og görseli fiziksel keşfe düşüyordu;
+        // `AssetResolver` dosyayı proje kökünde arıyor, dosya `images/`
+        // altında olduğu için "Asset not found" 404/500 dönüyordu.
+        // `og:image` meta etiketi HER sitede ölü URL üretiyordu.
+        //
+        // GÜVENLİK: ad ve yol doğrulaması TEK YERDE —
+        // `AssetConvention::resolveVirtualOgImage()`; orada `..`, mutlak yol,
+        // ters bölü ve kök dışına çıkış reddedilir ([R-14] sertliği).
+        if ($isProject && AssetConvention::isVirtualOgImageName($path)) {
+            $this->serveVirtualOgImage($path);
             return;
         }
 
@@ -343,6 +361,49 @@ class AssetController extends BaseController
         // PHP `header()` zaten CRLF'i engeller; yine de tek satirlik
         // deger garantisi veriyoruz.
         return substr($temiz, 0, 255);
+    }
+
+    /**
+     * [FW-ASSET-KONVANSIYON] Sanal OpenGraph görselini DOĞRU `Content-Type`
+     * ile sunar (`/project-assets/og-image-<key>.<png|jpg|webp>`).
+     *
+     * Önceki hâlde raster og görselleri fiziksel keşfe düşüyor ve her sitede
+     * 404/500 dönüyordu; sosyal paylaşım önizlemesi görselsiz kalıyordu.
+     *
+     * Çözümleme ve yol güvenliği TEK YERDE (`AssetConvention`); burada yalnız
+     * HTTP teslimi yapılır. Bulunamazsa 404 (uydurma görsel üretilmez).
+     */
+    private function serveVirtualOgImage(string $name): void
+    {
+        $fiziksel = AssetConvention::resolveVirtualOgImage($name);
+
+        if ($fiziksel === null) {
+            $this->abort(404, 'Asset not found: ' . $this->guvenliBaslikDegeri($name));
+            return;
+        }
+
+        $contentType = AssetConvention::ogImageMimeType($name);
+        if ($contentType === null) {
+            $this->abort(404, 'Asset not found: ' . $this->guvenliBaslikDegeri($name));
+            return;
+        }
+
+        $content = @file_get_contents($fiziksel);
+        if ($content === false || $content === '') {
+            $this->abort(404, 'Asset not found: ' . $this->guvenliBaslikDegeri($name));
+            return;
+        }
+
+        header('Content-Type: ' . $contentType);
+        header('Cache-Control: public, max-age=31536000');
+        header('Content-Length: ' . strlen($content));
+        header('X-RBN-Source: ProjectConvention');
+        // [R-14] Tanılama başlığı: ad HTTP YOLUNDAN gelir; kontrol karakteri
+        // ayıklanır ve `basename()` ile sınırlandırılır (içerik ETKİLENMEZ).
+        header('X-RBN-Resource: ' . $this->guvenliBaslikDegeri($name));
+
+        echo $content;
+        exit;
     }
 
     private function serveVirtualResource(string $name): void

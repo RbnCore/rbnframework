@@ -81,6 +81,18 @@ final class EnvKeys
     /** Proje veritabanı parolası. Kullanım: `DbProfileResolver::password()` (proje profili); çözülemezse fail-closed. */
     public const DB_PASS = 'DB_PASS';
 
+    /**
+     * [FW-DB-PROFIL] Proje DB PROFİLİ seçimi (`local` | `production`).
+     * Kullanım: `ProjectDbProfileResolver::activeProfile()`.
+     *
+     * Boş/tanımsız → ortam otomatik belirlenir (HTTP'te `is_local()`, CLI'da
+     * framework kökündeki tam `localhost` yol segmenti). Sunucu cron'ı gibi
+     * HTTP'siz ortamlarda operatörün kararı AÇIKça bildirebilmesi içindir.
+     * `Env::flag()` DEĞİL: yalnız `local`/`production` kabul edilir, diğer
+     * her değer "karar yok" sayılır (yazım hatası profili çalıştırmaz).
+     */
+    public const RBN_DB_PROFILE = 'RBN_DB_PROFILE';
+
     /* ------------------------------------------------------------------
      * KORUMA / HATA AYIKLAMA KAPILARI
      * ---------------------------------------------------------------- */
@@ -204,6 +216,7 @@ final class EnvKeys
         self::COMMON_DB_PASS,
         self::DB_USER,
         self::DB_PASS,
+        self::RBN_DB_PROFILE,
         self::RBN_GUARD_FAILCLOSED,
         self::RBN_DEBUG,
         self::RBN_DEV,

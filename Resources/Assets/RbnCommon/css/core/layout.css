@@ -160,6 +160,40 @@
 .rounded-pill { border-radius: 9999px !important; }
 .rounded-circle { border-radius: 50% !important; }
 
+/* Bootstrap uyumlu radius adlari (onceki kardesler .rounded-1..5 ile ayni olcek) */
+.rounded { border-radius: var(--rbn-radius-sm) !important; }
+.rounded-0 { border-radius: var(--rbn-radius-none) !important; }
+.rounded-md { border-radius: var(--rbn-radius-md) !important; }
+.rounded-lg { border-radius: var(--rbn-radius-lg) !important; }
+.rounded-top, .rounded-top-1 {
+    border-top-left-radius: var(--rbn-radius-sm) !important;
+    border-top-right-radius: var(--rbn-radius-sm) !important;
+}
+.rounded-top-3 {
+    border-top-left-radius: var(--rbn-radius-md) !important;
+    border-top-right-radius: var(--rbn-radius-md) !important;
+}
+.rounded-top-4 {
+    border-top-left-radius: 16px !important;
+    border-top-right-radius: 16px !important;
+}
+.rounded-bottom, .rounded-bottom-1 {
+    border-bottom-left-radius: var(--rbn-radius-sm) !important;
+    border-bottom-right-radius: var(--rbn-radius-sm) !important;
+}
+.rounded-bottom-4 {
+    border-bottom-left-radius: 16px !important;
+    border-bottom-right-radius: 16px !important;
+}
+.rounded-start {
+    border-start-start-radius: var(--rbn-radius-sm) !important;
+    border-end-start-radius: var(--rbn-radius-sm) !important;
+}
+.rounded-end {
+    border-start-end-radius: var(--rbn-radius-sm) !important;
+    border-end-end-radius: var(--rbn-radius-sm) !important;
+}
+
 .shadow-none { box-shadow: none !important; }
 .shadow-sm   { box-shadow: var(--rbn-shadow-xs) !important; }
 .shadow      { box-shadow: var(--rbn-shadow-sm) !important; }

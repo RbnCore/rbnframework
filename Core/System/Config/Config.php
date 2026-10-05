@@ -77,7 +77,15 @@ class Config
                 self::$items[$filename] = (file_exists($path)) ? (array) (include $path) : [];
 
                 // RBN 3.5 Dynamic Multi-Tenant Settings Override 🧬🛰️⚓
-                if ($filename === 'project-settings' && !empty(self::$items[$filename]['has_route_map'])) {
+                // [FW-ROUTEMAP-SSOT-2 · PATRON KARARI 05.10.2026] KAPI KALDIRILDI.
+                // Önceden `project-settings.php` içindeki `has_route_map` bayrağı bu
+                // birleştirmeyi şart koşuyordu; anahtar olmayınca `view_mapping`
+                // HİÇ UYGULANMIYORDU (canlıda `has_route_map` yazılmayan projelerde
+                // olduğu gibi). Karar: `project-routemap.php` TEK KAYNAK; kapı
+                // kaldırıldı, birleştirme AÇIK `project_key` için HER ZAMAN çalışır.
+                // GERİYE UYUM: dosyada `has_route_map` kalsa bile motor çalışır —
+                // anahtar artık OKUNMAZ, yalnız YOK SAYILIR (gövde değişmedi).
+                if ($filename === 'project-settings') {
                     $activeKey = function_exists('active_project_key') ? active_project_key() : '';
                     if (!empty($activeKey)) {
                         $instance = new class { use \Rbn\Framework\Core\Base\Concerns\Data\ResolvesProjectConfigTrait; };

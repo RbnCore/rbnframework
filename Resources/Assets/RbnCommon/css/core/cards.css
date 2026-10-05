@@ -307,3 +307,61 @@
     transform: translateX(3px);
     color: var(--rbn-text-primary, #0f172a);
 }
+
+/* ==========================================================================
+   CARD MEDIA / SUBTITLE / TEXT / LINK (D2)
+   .rbn-card-media yalniz YUZEY + ORAN tanimlar (kenarlik yok, ust koseler
+   --rbn-radius-lg, alt koseler 0). Gorsel view'da gercek <img> olarak yazilir:
+     <img class="rbn-card-media object-cover" src="..." alt="...">
+   D2 karari: aspect-ratio 16/9 kilitli (ilan/kapak kanonik);
+   -portrait (4/5) ve -square (1/1) varyantlari.
+   ========================================================================== */
+.rbn-card-media {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-top-left-radius: var(--rbn-radius-lg);
+    border-top-right-radius: var(--rbn-radius-lg);
+    border-bottom-left-radius: var(--rbn-radius-none);
+    border-bottom-right-radius: var(--rbn-radius-none);
+    background: var(--rbn-bg-surface-subtle);
+}
+
+.rbn-card-media-portrait { aspect-ratio: 4 / 5; }
+.rbn-card-media-square   { aspect-ratio: 1 / 1; }
+
+.rbn-card-subtitle {
+    margin: 0;
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--rbn-text-secondary);
+}
+
+.rbn-card-text {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--rbn-text-secondary);
+}
+
+.rbn-card-link {
+    color: var(--rbn-primary);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.rbn-card-link:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   OBJECT-FIT YARDIMCILARI (D2 destegi)
+   Gorsel kirlpmasini onler; .rbn-card-media ile birlikte kullanilir.
+   ========================================================================== */
+.object-contain { object-fit: contain; }
+.object-cover   { object-fit: cover; }
+.object-fill    { object-fit: fill; }
+.object-none    { object-fit: none; }
+.object-scale-down { object-fit: scale-down; }

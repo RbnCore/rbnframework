@@ -28,8 +28,16 @@ class SchemaPreset extends BaseComponent
         }
 
         // Auto-resolve missing or empty image parameter using SchemaResolver 🖼️
-        if (empty($data['image'])) {
-            $data['image'] = $resolver ? $resolver->resolveDefaultImage() : url('images/og-image.png');
+        // [FW-ASSET-KONVANSIYON] Çözümleme TEK YERDE (`SchemaResolver` →
+        // `AssetConvention`). Buradaki eski sabit, anahtarsız genel og adresi
+        // hiçbir projede var olmayan bir dosyayı gösteriyordu (kural ihlali).
+        // Projede og görseli yoksa `image` ALANI BOŞ BIRAKILIR: JSON-LD'de
+        // uydurma/ölü görsel adresi üretilmez.
+        if (empty($data['image']) && $resolver) {
+            $varsayilan = $resolver->resolveDefaultImage();
+            if ($varsayilan !== '') {
+                $data['image'] = $varsayilan;
+            }
         }
 
         // 2. Tipe göre şemayı akıcı (fluent) olarak inşa et

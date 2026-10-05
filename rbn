@@ -64,6 +64,9 @@ $masterCommands = [
     'tmp:clear',
     'system:doctor',
     'doctor',
+    // [FW-SURUMLEME-2] Surum komutlari master DB'ye baglanir.
+    'version:check',
+    'version:next',
     // [FW-LICENCE] Master migration komutlari master DB'sine baglanir.
     'master:migrate',
     'master:migrate:status'

@@ -6,6 +6,7 @@ namespace Rbn\Framework\Core\Services\Console\Services;
 
 use Rbn\Framework\Core\Database\Database;
 use Rbn\Framework\Core\Database\Migrations\Master\CreateLicenceAndApplicationTables;
+use Rbn\Framework\Core\Database\Migrations\Master\NormalizeProjectVersions;
 
 /**
  * MasterMigrationService - Master (sistem) veritabani migration motoru 🏛️🔑
@@ -24,6 +25,7 @@ use Rbn\Framework\Core\Database\Migrations\Master\CreateLicenceAndApplicationTab
  *   - Sira: migration adina gore sirali, uygulanmis olanlar tekrar calismaz.
  *
  * @see \Rbn\Framework\Core\Database\Migrations\Master\CreateLicenceAndApplicationTables
+ * @see \Rbn\Framework\Core\Database\Migrations\Master\NormalizeProjectVersions
  */
 class MasterMigrationService
 {
@@ -33,6 +35,9 @@ class MasterMigrationService
     /** Bekleyen migration listesi: [migration adi => sinif]. */
     private const MIGRATIONS = [
         CreateLicenceAndApplicationTables::NAME => CreateLicenceAndApplicationTables::class,
+        // [FW-SURUMLEME-2] `projects.version` degerlerini A.B.C kuralina cevirir
+        // (yedek tablo + geri alma). SEMA DEGISTIRILMEZ.
+        NormalizeProjectVersions::NAME => NormalizeProjectVersions::class,
     ];
 
     protected Database $db;

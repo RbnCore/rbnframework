@@ -109,6 +109,62 @@
 }
 
 /* ==========================================================================
+   1.1 EMPTY STATE BLOCK (.rbn-empty-state*)
+   Yapısal olarak her liste/tablo/panel ekraninda bulunur.
+   Varyant ayrimi SINIFLA degil ICERIKLE yapilir:
+     - "hiç kayıt yok"        : başlık + ikon + metin + birincil eylem
+     - "filtre sonucu yok"    : aynı yapi + "filtreleri temizle" eylemi
+   ========================================================================== */
+.rbn-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: var(--rbn-space-3);
+    padding: var(--rbn-space-12) var(--rbn-space-6);
+    background: var(--rbn-bg-surface-subtle);
+    border: 1px dashed var(--rbn-border-strong);
+    border-radius: var(--rbn-radius-lg);
+    color: var(--rbn-text-primary);
+}
+
+.rbn-empty-state-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--rbn-space-16);
+    height: var(--rbn-space-16);
+    border-radius: var(--rbn-radius-pill);
+    background: var(--rbn-bg-surface);
+    border: 1px solid var(--rbn-border);
+    color: var(--rbn-text-muted);
+    font-size: var(--rbn-space-8);
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.rbn-empty-state-title {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--rbn-text-primary);
+}
+
+.rbn-empty-state-text {
+    margin: 0;
+    max-width: 42ch;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--rbn-text-secondary);
+}
+
+.rbn-empty-state-action {
+    margin-top: var(--rbn-space-1);
+}
+
+/* ==========================================================================
    2. USER AVATARS & INITIALS ROZETLERİ (.rbn-avatar-*)
    ========================================================================== */
 .rbn-avatar {

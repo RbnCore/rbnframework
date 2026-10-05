@@ -77,7 +77,7 @@ class AuthHandler extends BaseRender
         // 🎼 Module & Site Vitals
         $data['auth_name']    = (string) FrameworkIdentity::AUTH_NAME;
         $data['auth_version'] = (string) FrameworkIdentity::AUTH_VERSION;
-        $data['siteVersion']  = (string) (function_exists('app_version') ? app_version() : project_data('version', '1.0'));
+        $data['siteVersion']  = app_version();
         $data['author']       = FrameworkIdentity::FRAMEWORK_NAME;
         $data['author_url']   = FrameworkIdentity::FRAMEWORK_URL;
 

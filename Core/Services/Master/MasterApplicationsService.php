@@ -6,6 +6,8 @@ namespace Rbn\Framework\Core\Services\Master;
 
 use Rbn\Framework\Core\Base\Services\BaseService;
 use Rbn\Framework\Core\Services\Master\Data\MasterLicenceConfig;
+use Rbn\Framework\Core\Support\Bridges\Helpers\Library\LogThrottle;
+use Rbn\Framework\Core\Support\Bridges\Helpers\Library\Version;
 
 /**
  * MasterApplicationsService - Uygulama Kayıt Servisi 📦🏛️
@@ -54,7 +56,18 @@ class MasterApplicationsService extends BaseService
             return null;
         }
 
-        return is_array($row) && $row !== [] ? $row : null;
+        if (!is_array($row) || $row === []) {
+            return null;
+        }
+
+        // [FW-SURUMLEME-2] Okuma kapisi: gecersiz surumlu kayit "yok" sayilir.
+        if ($this->versionGate($row['current_version'] ?? null) === null
+            && trim((string) ($row['current_version'] ?? '')) !== ''
+        ) {
+            return null;
+        }
+
+        return $row;
     }
 
     /**
@@ -69,7 +82,45 @@ class MasterApplicationsService extends BaseService
             return [];
         }
 
-        return is_array($rows) ? $rows : [];
+        if (!is_array($rows)) {
+            return [];
+        }
+
+        // [FW-SURUMLEME-2] Okuma kapisi: gecersiz surumlu satirlar listelenmez.
+        $gecerli = [];
+        foreach ($rows as $row) {
+            $v = is_array($row) ? trim((string) ($row['current_version'] ?? '')) : '';
+            if ($v !== '' && $this->versionGate($v) === null) {
+                continue;
+            }
+            $gecerli[] = $row;
+        }
+
+        return $gecerli;
+    }
+
+    /**
+     * [FW-SURUMLEME-2] OKUMA KAPISI: kayitli surum degeri kurala uymuyorsa
+     * `list()` bu satiri LISTELEMEZ ve `getByAppKey()` `null` doner; ayrica
+     * saatte bir uyari yazilir. Boylece "sessizce yanlis surum" durumu
+     * olusmaz, panel de bozulmaz.
+     */
+    public function versionGate(?string $version): ?string
+    {
+        if ($version === null) {
+            return null;
+        }
+
+        $v = trim($version);
+        if ($v === '' || Version::isValid($v)) {
+            return $version;
+        }
+
+        if (LogThrottle::once('master_applications_version_invalid')) {
+            $this->warn('applications tablosunda gecersiz surum degeri var (A.B.C degil); kayit gecersiz sayildi.');
+        }
+
+        return null;
     }
 
     /**
@@ -85,6 +136,22 @@ class MasterApplicationsService extends BaseService
         if ($appKey === '') {
             $failResult['errors'][] = 'Uygulama anahtarı zorunludur.';
             return $failResult;
+        }
+
+        // [FW-SURUMLEME-2] Yazma kapisi: gecersiz surum ACILK hata ile reddedilir.
+        foreach (['current_version', 'min_version'] as $alan) {
+            if (!isset($data[$alan]) || $data[$alan] === null || trim((string) $data[$alan]) === '') {
+                continue;
+            }
+            $v = trim((string) $data[$alan]);
+            if (!Version::isValid($v)) {
+                $failResult['errors'][] = sprintf(
+                    '%s gecersiz surum bicimi: "%s" (beklenen: A.B.C, orn. 0.1.1).',
+                    $alan,
+                    $v
+                );
+                return $failResult;
+            }
         }
 
         try {
@@ -129,6 +196,15 @@ class MasterApplicationsService extends BaseService
 
         if ($appKey === '' || $version === '') {
             return false;
+        }
+
+        // [FW-SURUMLEME-2] Yazma kapisi: gecersiz bicim ACILK hata ile reddedilir
+        // (sessizce bozuk surum yazilmaz).
+        if (!Version::isValid($version)) {
+            throw new \InvalidArgumentException(sprintf(
+                'Gecersiz surum bicimi: "%s" (current_version). Beklenen: A.B.C -> orn. 0.1.1 (versioning.md §1).',
+                $version
+            ));
         }
 
         try {

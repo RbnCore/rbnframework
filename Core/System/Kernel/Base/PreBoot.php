@@ -7,6 +7,7 @@ namespace Rbn\Framework\Core\System\Kernel\Base;
 use Rbn\Framework\Core\System\Paths\Paths;
 use Rbn\Framework\Core\Services\Gatekeepers\BootSentinel;
 use Rbn\Framework\Core\System\Kernel\Guards\AssetDoctor;
+use Rbn\Framework\Core\Support\Bridges\Helpers\Library\ProjectVersionResolver;
 
 /**
  * PreBoot - Initial Environment & Autoload Orchestrator 🛰️🧬⚓
@@ -352,10 +353,51 @@ class PreBoot
         define('RBN_DEBUG', $isLocal); // Default debug to local status, allows later override
         define('DEFAULT_LANGUAGE', 'tr'); // 🌍 RBN 3.5: [MASTERPIECE] Default language sync
         define('APP_NAME', 'RBN CORE'); // 🎼 App Identity
-        if (!defined('APP_VERSION')) {
-            define('APP_VERSION', '3.5.0');
-        }
+        // [FW-SURUMLEME-2] `APP_VERSION` BURADA TANIMLANMAZ.
+        // Gerekce (koddan okunarak): `detectEnvironment()` `orchestrate()` icinde
+        // 0. adimda calisir; proje veri onbellegi ise 0.5. adimde
+        // (`ProjectDiscovery::getProjectData()`) doldurulur. Yani burada
+        // `projects.version` HENUZ OKUNAMAZ. Sabit, onbellek hazir olduktan
+        // SONRA `defineAppVersion()` ile tanimlanir. Girdis noktalarinda elle
+        // `define('APP_VERSION', ...)` yazmak da ayni sebepten yasaktir.
         define('APP_URL', $isLocal ? 'http://' . $host : 'https://' . $host);
+    }
+
+    /**
+     * `APP_VERSION` sabitini PROJE surumunden turetir.
+     *
+     * [FW-SURUMLEME-2] Sabit bir KAYNAK DEGILDIR; tek kaynak master veritabani
+     * `projects.version` kolonudur (`ProjectDataMapper` -> `project_data('version')`).
+     * Burada yalnizca o deger `ProjectVersionResolver` ile guvenli hale
+     * getirilip sabit olarak muhurlenir. Deger yoksa/gecersizse standart
+     * baslangic surumu (`0.1.1`) kullanilir — iki parcali `1.0` gibi gecersiz
+     * bir varsayilan ASLA yazilmaz.
+     *
+     * ZAMANLAMA: cagrildigi nokta, proje onbellegi (`Bootstrap::appContext`)
+     * doldurulduktan SONRA olmalidir. `handleFastAssets()` ve sentinel bu
+     * adimdan sonra calisir; hicbiri `APP_VERSION` okumaz (framework genelinde
+     * yalniz sablonlar `{{APP_VERSION}}` yazar ve sablonlar daha sonra
+     * derlenir), yani gecikmis tanim guvenlidir.
+     */
+    public static function defineAppVersion(): void
+    {
+        if (defined('APP_VERSION')) {
+            return;
+        }
+
+        // Autoload henuz kurulmamis olabilir; sinif elle dahil edilir
+        // (Proje kesfi ile ayni "hayatta kalma" deseni).
+        if (!class_exists(ProjectVersionResolver::class, false)) {
+            require_once __DIR__ . '/../../../Support/Bridges/Helpers/Library/LogThrottle.php';
+            require_once __DIR__ . '/../../../Support/Bridges/Helpers/Library/Version.php';
+            require_once __DIR__ . '/../../../Support/Bridges/Helpers/Library/ProjectVersionResolver.php';
+        }
+
+        $surum = ProjectVersionResolver::resolveFromCache();
+
+        if (!defined('APP_VERSION')) {
+            define('APP_VERSION', $surum);
+        }
     }
 
     /**
@@ -394,6 +436,12 @@ class PreBoot
 
         // 1. Resolve Project DNAs (Paths) 🧬🏛️
         self::initPaths($publicPath, $config);
+
+        // 1.5 [FW-SURUMLEME-2] `APP_VERSION` = PROJE surumu.
+        // Buraya kadar projeler onbellegi doldu (0.5) ve `Paths` hazir (1), yani
+        // `Projects.version` OKUNABILIR durumda. Once `3.5.0` gibi bir sabit
+        // yaziliyordu; o kalinti kaldirildi (bkz. `defineAppVersion()`).
+        self::defineAppVersion();
 
         // 2. Register the Final Sentinel (En erken aşamada zırhı giyiyoruz) 🛡️🚨
         self::registerSentinel();

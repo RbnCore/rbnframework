@@ -1,5 +1,228 @@
 ## [Unreleased]
 
+## 0.9.2 (yayın hazırlığı — 2026-10-05)
+
+### Bu sürümde ne yapmalısınız (kısa liste)
+
+Ayrıntılı anlatım aşağıdaki başlıklarda; bu liste yalnızca sırayı gösterir.
+
+1. **Framework dosyalarını güncelleyin** (paketi değiştirin). Kırıcı değişiklik
+   **vardır** — aşağıdaki PHP 8.3, kiracı izolasyonu, form() ve bağlantı adı
+   maddeleri eski sitelerde davranış değiştirir; yayınlamadan önce hepsini okuyun.
+2. **`project-settings.php` içindeki `has_route_map` / `dashboard_prefix`
+   satırlarını silebilirsiniz.** Panel ön eki artık **tek kaynaktan**
+   (`project-routemap.php`) okunuyor; bu iki anahtar ikinci kaynak olarak kaldırıldı.
+   Dosyada kalırlar siteyi **bozmaz** (geriye uyum korundu), yani bu adım
+   **zorunlu değildir** — yalnızca kalıntıları temizler.
+3. **Proje sürümlerini master DB'den yönetin** (`projects.version`).
+   Değerler `A.B.C` kuralına çevrilmeli: migration'ı elle çalıştırın, sonra
+   önbelleği temizleyin ve `rbn version:check` ile doğrulayın.
+4. **favicon / og görseli dosya adlarını yeni kurala uydurun**
+   (`images/favicon-<project_key>.*`, `images/og-image-<project_key>.*`).
+   Anahtarsız eski adlar hâlâ çalışır (geriye uyum) ama kullanımdan kaldırıldı.
+5. **CSS paketlerini bilin:** `rbnExtended` otomatik yüklenmez; proje isterse
+   `assets => ['rbnExtended']` ile açıkça istemek zorundadır.
+
+
+### Sürümleme: `APP_VERSION` artık proje sürümüdür (tek kaynak: master DB)
+
+**Davranış değişikliği (görünür):** `APP_VERSION` sabiti `3.5.0` gibi sabit bir
+framework değeri olmaktan çıktı; artık **projenin sürümüdür** ve master DB'deki
+`projects.version` kolonundan okunur. Bu, şu çıktıları değiştirir:
+
+| Çıktı | Önce | Sonra |
+|---|---|---|
+| `{{APP_VERSION}}` (sablon) | `3.5.0` | projenin `projects.version` değeri |
+| `module-version` (`<meta name="module-version">`) | `1.0` | aynı değer |
+| `siteVersion` (giriş ekranı) / panel `app_version` | `1.0` / `1.0` | aynı değer |
+| `domains/rbnbilisim/email.rbncore.tr` | `1.17.0` (giriş noktasında sabit) | aynı değer |
+| RbnShield / RBN Admin Pro / RbnAuth / CLI sürümü | `v2.1` / `1.2` / `2.2` / `2.3` | `2.1.0` / `1.2.0` / `2.2.0` / `2.3.0` |
+
+**Geriye uyum:** Sabit **her zaman** geçerli bir `A.B.C` sürümü üretir. Kayıt
+yoksa veya bozuksa standart başlangıç sürümü `0.1.1` kullanılır; hiçbir site
+`1.0`, `1.17.0` veya `3.5.0` gibi geçersiz bir değer basmaz. `APP_VERSION`
+giriş noktasında önceden tanımlanmışsa ezilmez.
+
+**Siz yapmanız gerekenler:**
+
+1. **Giriş noktalarınızda `define('APP_VERSION', ...)` yazmayın.** Sürüm artık
+   veritabanından gelir; sabit yazmak kural ihlalidir (canlıdaki tek örnek
+   `domains/rbnbilisim/email.rbncore.tr/index.php` idi ve kaldırıldı).
+2. **Sürümü elle yazmayın.** Master hub → proje kaydındaki `version` alanını
+   güncellemek yerine `rbn version:next <project_key> --apply` kullanın
+   (varsayılan kuru koşudur). Denetim için: `rbn version:check`
+   (çıkış kodu `0` = temiz, `1` = sapma).
+3. **Veri geçişi (canlıda elle, sıra önemli):**
+   ```bash
+   php rbn master:migrate          # 1) yedek + 0.1.1'e çevir
+   php rbn cache:clear             # 2) keşif önbelleğini temizle
+   php rbn version:check           # 3) doğrula (çıkış kodu 0 olmalı)
+   php rbn master:migrate --rollback   # GERİ ALMA: yedekteki değerler geri yazılır
+   ```
+   Yedek tablo: `projects_version_backup` (geri alma sonrası **silinmez**).
+4. **Şema değişmedi.** `projects.version` kolonu `varchar(20) DEFAULT '1.0'`
+   olarak **aynen durur**; yalnız satır değerleri değişmiştir. Yeni proje kaydı
+   yazan yol artık `Version::initial()` (`0.1.1`) yazar. Kolon `DEFAULT`'unu da
+   `0.1.1` yapmak isterseniz bu **ayrı** bir şema kararıdır (patron onayı gerekir).
+
+**Ölçüm (yerel master DB, `rbncore_master`):** 19 proje, hepsi `1.0` (geçersiz)
+→ migration sonrası 19 satır `0.1.1`; yedekte 19 satır `1.0`. `applications`
+tablosu boş (0 satır); bu migration ona dokunmaz.
+
+### Favicon ve OpenGraph görseli: tek adlandırma kuralı
+
+**Yeni kural (tek kaynak: `Core\Support\Definitions\Render\AssetConvention`):**
+
+| Varlık | Kural (yeni dosyalar için) |
+|---|---|
+| Favicon | `images/favicon-<project_key>.svg` \| `.png` \| `.ico` |
+| OpenGraph | `images/og-image-<project_key>.png` \| `.jpg` \| `.webp` |
+
+`<project_key>` = `project-routemap.php` `view_mapping` anahtarıdır (örn. `ornek-proje-1`,
+`ornek-alt-site`). Framework'e proje adı **yazılmaz**; kural her proje için aynıdır.
+
+**Yapmanız gereken:** yeni bir favicon/og görseli eklerken **kural adını** kullanın.
+Örnek: `domains/customers/<site>/images/favicon-<key>.svg`.
+
+**Geriye uyum (canlıyı kırmaz):** Anahtarsız eski adlar (`images/favicon.png`,
+`images/favicon.svg`, `images/og-image.png`) canlıda çalışıyor ve **"son geri dönüş"**
+olarak korundu — kural adı bulunamazsa bunlara düşülür. Yani mevcut dosyalarınızı
+taşımak zorunda değilsiniz; taşırsanız daha temiz olur. Taşıma **isteğe bağlıdır**.
+
+**Beklenen davranış değişiklikleri:**
+
+1. `og:image` artık **çalışan** bir adres verir (daha önce her sitede 404/500 idi).
+2. `/favicon.ico`, `/og-image.png`, `/apple-touch-icon.png` gibi standart yollar artık
+   projenin **gerçek** varlık dosyasına yönlenir (uyantı yok; doğru uzantı).
+3. Projenin og görseli **yoksa** `og:image` meta etiketi **hiç üretilmez** ve JSON-LD'de
+   `image` alanı düşer. Sosyal paylaşım önizlemesi görselsiz kalır (uydurma görsel
+   gösterilmez) — bu, kuralın kendisinden gelir.
+4. `project-routemap.php` içindeki `favicon` ve `og-image` / `og_image` anahtarları
+   hâlâ **toler edilir**, ancak **öncelikli değildir** (kural önce gelir).
+   **Bu anahtarlar kaldırılabilir**; kaldırıldığında motor davranışı DEĞİŞMEZ çünkü
+   kural zaten önceliklidir. Kaldırma kararı patronundur (bu sürümde dosyalara dokunulmadı).
+
+### Panel ön eki (`dashboard_prefix`) ve `has_route_map`: tek kaynak `project-routemap.php`
+
+**Ne değişti (iki madde):**
+
+1. **`Config.php` — `has_route_map` bayrağı ARTIK OKUNMUYOR.** `project-settings.php`
+   yüklenirken, aktif `project_key` için `project-routemap.php`
+   `view_mapping[<key>]` değerleri **her zaman** `project-settings` üstüne birleşir.
+   Önceden bu birleştirme yalnızca `has_route_map` doğruysa çalışıyordu.
+2. **`SystemGuardHandler` — bakım modu muafiyeti artık `project-settings` dosyasından
+   `dashboard_prefix` OKUMAZ.** Sıra: `project-routemap.php` → BootCache →
+   `project_data('dashboard_prefix')`; o da boşsa framework sabiti
+   (`RouteBlueprint::DASHBOARD_PREFIX` = `dashboard`).
+
+**Yapmanız gereken:** **HİÇBİR ŞEY.** `project-settings.php` içinde
+`has_route_map` ve `dashboard_prefix` **kalsa bile** motor çalışır — bu iki anahtar
+artık yalnızca YOK SAYILIR, hiçbir davranışı etkilemez. **Geriye uyum bozulmadı.**
+
+**Temizlik (isteğe bağlı):** `project-settings.php` içinden bu iki satırı
+silebilirsiniz. `dashboard_prefix` siliniyorsa, silmeden önce
+`project-routemap.php` içindeki `view_mapping` bloğunda **her site için** aynı
+değerin tanımlı olduğundan emin olun. Routemap'te karşılığı olmayan bir satırı
+silmek, o projenin panel yolunu `dashboard`'a çevirir; o durumda önce tek kayda
+taşıyın (`view_mapping[<site>]['dashboard_prefix']`), sonra silin.
+
+**Beklenen davranış değişikliği:** `has_route_map` yazılmayan bir projede
+`view_mapping` artık **uygulanır** (önceden uygulanmıyordu). Canlıda değerler
+zaten `view_mapping` içinde tanımlı olduğu için yeni bir ayar değeri İCAT EDİLMEZ;
+bu, o projelerde ayarların **eksik uygulanması**nın giderilmesidir. Yayına
+almadan önce `ornek-proje-1` ve `ornek-proje-2` için ölçüm yapın.
+
+**Kırıcı değişiklik yok; imza/şema/izin/metot imzası değişmedi.**
+
+### Proje DB bilgisi: `DB_PROFILES` (local + production) — isteğe bağlı, geriye uyumlu
+
+**Ne değişti:** Her projenin `Core/Config/project-settings.php` dosyasında proje
+veritabanı bilgisi artık iki profil altında durabilir:
+
+```php
+'DB_PROFILES' => [
+    'local'      => ['DB_HOST' => …, 'DB_NAME' => …, 'DB_USER' => …, 'DB_PASS' => …, 'DB_CHARSET' => …],
+    'production' => ['DB_HOST' => …, 'DB_NAME' => …, 'DB_USER' => …, 'DB_PASS' => …, 'DB_CHARSET' => …],
+],
+```
+
+Motor çalıştığı ortama göre profili **kendisi** seçer. Amaç: dosya canlıya
+**olduğu gibi** atılabilsin, elle düzenleme gerekmesin.
+
+**Yapmanız gereken:** **HİÇBİR ŞEY.** Mevcut düz `DB_*` anahtarlarını
+kullanmaya devam eden projeler değişmeden çalışır — `DB_PROFILES` yoksa eski
+davranış birebir korunur. Yalnızca `DB_PROFILES` kullanmak isteyenler kendi
+ayar dosyasını göç eder.
+
+**Ortam nasıl seçilir (sırayla):**
+
+1. Ortam değişkeni `RBN_DB_PROFILE` = `local` veya `production`. Sunucu cron'ı
+   gibi HTTP'siz ortamlarda operatörün kararı açıkça bildirmesi içindir.
+   Başka bir değer (`yerel`, `1`, boş) **karar yok** sayılır ve sıradaki
+   kurala geçilir — yazım hatası profili çalıştırmaz.
+2. **Framework kökündeki** tam `localhost` yol segmenti (HTTP'de de CLI'de de
+   aynı ölçüm).
+
+Karar **sunucunun kimliğine** bakar, isteğe değil. `REMOTE_ADDR` / `Host` başlığı
+bilerek kullanılmaz. Belirsizlik daima `production` sayılır.
+
+> **Neden `is_local()` değil?** `is_local()` tarayıcıya dönük bir yardımcıdır;
+> robots.txt muafiyeti gibi kararlarda istemci IP'sine bakar. Veritabanı
+> seçimi böyle bir karara bağlanırsa aynı sunucuda istek kimliğine göre farklı
+> veritabanlarına bağlanılır — yerel makinede dış ağdan gelen istek üretim
+> profilini seçer, üretimde yerel profil denenir. Karar `E:/localhost` gibi
+> framework kökünden okunduğu için istekten bağımsızdır.
+
+**Sessiz düşme yoktur.** Seçilen profil yoksa, profil içinde zorunlu bir anahtar
+(`DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASS`, `DB_CHARSET`) eksikse ya da değer
+`__DOLDUR__` yer tutucusuysa site **AÇIK HATA** verir; diğer profile veya
+`root`/boş parolaya düşmez.
+
+**Önerilen göç (isteğe bağlı):** `project-settings.php` dosyanızdaki düz
+`DB_*` bloklarını `DB_PROFILES['local']` altına taşıyın ve `production` bloğunu
+gerçek canlı değerlerle doldurun. Canlı değerleri **canlıdaki mevcut dosyadan**
+programatik okuyup yerel dosyanın `production` bloğuna yazmak en güvenli yoldur
+(değerleri ekrana/loga basmayın). Göç sırasında `production` henüz dolu değilse
+`__DOLDUR__` ile bırakın: canlıda yanlışlıkla seçilirse motor bağlanmayı
+denemeden hata verir.
+
+### CSS motoru iki pakete bölündü; `rbnExtended` otomatik yüklenmez
+
+**Ne değişti:** `rbn-master.css` tek bir `@import` zinciridir ve
+`AssetBundles::STACK_MAP` üzerinden **her sayfaya** gider. Yeni işlevler buraya
+eklenince gzip bütçesi patlıyordu. Karar: **master'ın kapanışı değişmedi**, yeni
+işlevler **isteğe bağlı paketlere** kondu.
+
+| Paket | Dosya | Otomatik yüklenir mi | gzip |
+|---|---|---|---|
+| `rbnExtended` | `optional/rbn-utilities-extended.css` (312 seçici) | **HAYIR** | 8 242 B |
+| `rbnExtended` | `optional/rbn-components-extended.css` (153 seçici) | **HAYIR** | (aynı paket) |
+| `rbn_core_auth` | `core/rbn-auth.css` | evet (auth görünümü) | 2 682 B |
+
+**`rbnExtended` `STACK_MAP` içine GİRMEZEDİR** — hiçbir sayfaya kendiliğinden
+yüklenmez. Yalnızca proje/görünüm açıkça istediğinde yüklenir:
+
+```php
+// ViewMap tarafında
+'assets' => ['rbnExtended'],
+
+// Controller tarafında
+$this->addAsset('rbnExtended');
+```
+
+`AssetBuilder` hiç değiştirilmedi — `collect()` zaten bundle adını styles
+listesine çözüyordu. `core/rbn-auth.css` ile `auth_header.rbn.php` içindeki 12,5 KB'lık
+view-içi `<style>` bloğu motor dosyasına taşındı (17 sınıf); 29 sabit hex yerine
+mevcut `--rbn-*` token'ları kullanılıyor.
+
+**Uyum kanıtı:** `rbn_master` paketinin istediği dosyalar birebir aynı kaldı;
+`rbn-master.css` kapanışı **19 dosya / 47 884 B gzip olarak DEĞİŞMEDİ**. Görsel
+değişiklik yoktur.
+
+**Geri alma:** `STACK_MAP`'ten hiçbir giriş kaldırılmadığı için `rbnExtended`'i
+istemeyen projelerde hiçbir şey değişmez. Yeni paketi eklediyseniz `assets`
+listesinden çıkarırsanız eski görünüme dönersiniz.
+
 ### PHP >= 8.3 gereklidir (KIRICI — sunucu tarafı adım)
 
 **Ne degisti:** Framework artık **PHP 8.3 veya üzeri** olmayan bir sunucuda
@@ -83,7 +306,7 @@ ve bir modelin `query()` cagrisi tum kiracilarin satirini donuyordu.
 | `CronLogsModel` | `z_log_crons` | framework |
 | `RssSourceModel` | `app_rss_sources` | framework |
 | `RssBlacklistModel` | `app_rss_blacklist` | framework |
-| `AAProductModel` | `aa_products` | aritma |
+| `AAProductModel` | `aa_products` | ornek-proje-5 |
 | `IcerikModel` | `z_app_icerikler` | rbncore |
 
 `BaseModel::$scoped` **false olarak kaldı**; diger 68 somut model kapsam
@@ -95,7 +318,7 @@ disidir ve davranislari degismedi.
    `WHERE <tablo>.project_key = <aktif proje>` ekler. **Kiracinin aktif
    baglami (`active_project_key()`) veritabanindaki `project_key` degeriyle
    ayni degilse o kiracinin satirlari GORUNMEZ olur.** Coklu kiracili
-   veritabanlarinda (aritma, sefa, tuberadyo, sroweb, rbnflix, rbncore_main)
+   veritabanlarinda (ornek-proje-5, ornek-proje-6, ornek-proje-2, ornek-proje-3, ornek-proje-4, rbncore_main)
    bu bilincli bir daralmadir.
 2. **Yazma.** `create()/update()` artik `project_key` degerini **sunucu
    baglamindan** yazar; cagiranin gonderdigi deger ezilir (B-20).
@@ -564,7 +787,7 @@ Sürümlendirme: [SemVer](https://semver.org/lang/tr/). Değişiklik kaydı: [CH
 
 ## Bu sürüm
 
-- **Son sürüm:** `0.9.1` (2026-10-05) — canlı geçiş düzeltmeleri. Kırıcı değişiklik yok.
+- **Son sürüm:** `0.9.2` (2026-10-05) — canlı geçiş düzeltmeleri sonrası: tek kaynak, kural ve araç düzenlemesi. Kırıcı değişiklik **var** (aşağıdaki 0.9.2 bölümüne bakın).
 - Bu dosyaya yazılan her sürüm, o sürümün canlıya çıktığı andan itibaren geçerlidir.
 
 ---
@@ -670,7 +893,7 @@ Bu sürümde **zorunlu** adımlar aşağıdadır. Hiçbiri isteğe bağlı deği
 
 ### 0.9.0 — Adım 15 (KIRICI): CRUD girişi model beyaz listesine bağlı
 
-**Özet:** `CrudControllerTrait::create()`/`update()` artık ham istek gövdesini servis/modele aktarmıyor; veri hedef modelin `$fillable` listesine göre budanır. Altı modülün 35 yazma modeli beyaz listeye bağlandı (aritma, sroweb, rbnflix, sefa, tuberadyo, minaemlak).
+**Özet:** `CrudControllerTrait::create()`/`update()` artık ham istek gövdesini servis/modele aktarmıyor; veri hedef modelin `$fillable` listesine göre budanır. Altı modülün 35 yazma modeli beyaz listeye bağlandı (ornek-proje-5, ornek-proje-3, ornek-proje-4, ornek-proje-6, ornek-proje-2, ornek-proje-1).
 
 **Kırıcı olan taraf:** `$fillable` **tanımlayan** bir modele, listede olmayan bir alanla yazmayı deneyen özel kod artık o alanı **yazamaz** — süzgeç alanı sessizce düşürür. Panel ekranlarının gerçekten gönderdiği alanların tamamı listeye alındığı için meşru kayıtlar etkilenmiyor; bir modülün meşru yazımı kırılırsa **listeye o alanı ekleyin** (sunucu kararı olmayan, panelin gerçekten gönderdiği alan).
 

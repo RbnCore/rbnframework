@@ -112,7 +112,11 @@ class ProjectCleanupJob extends BaseCleanupHandler
         $totalDeletedRows = 0;
 
         try {
-            $dbName = $this->resolveProjectSetting('DB_NAME', $projectKey);
+            // [FW-DB-PROFIL] Veritabanı adı artık düz `DB_NAME` yerine
+            // `DB_PROFILES[local|production].DB_NAME` içinde olabilir; profil
+            // seçimi TEK çözücüde yapılır (eski düz biçim de çalışır).
+            $settings = $this->resolveProjectConfig('project-settings', $projectKey);
+            $dbName = \Rbn\Framework\Core\System\Config\Engine\Database\ProjectDbProfileResolver::resolve($settings)['DB_NAME'] ?? '';
             if (empty($dbName)) {
                 return 0;
             }

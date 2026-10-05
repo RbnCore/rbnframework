@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Rbn\Framework\Core\Services\Master;
 
 use Rbn\Framework\Core\Base\Services\BaseService;
+use Rbn\Framework\Core\Support\Bridges\Helpers\Library\Version;
 
 /**
  * MasterProjectsService - Proje Yönetimi İş Mantığı Servisi 🏛️🛰️
@@ -51,7 +52,11 @@ class MasterProjectsService extends BaseService
             'domain' => $data['domain'] ?: null,
             'status' => $data['status'] ?: 'active',
             'custom_path' => $data['custom_path'],
-            'version' => $data['version'] ?: '1.0',
+            // [FW-SURUMLEME-2] Proje surumu TEK KAYNAK: master DB `projects.version`.
+            // Burada yazilan deger master tablosunun kendisidir; gecersiz iki
+            // parcali `1.0` gibi bir varsayilan YAZILMAZ — standart baslangic
+            // surumu kullanilir (versioning.md §1).
+            'version' => $data['version'] ?: Version::initial(),
             'license_key' => $data['license_key'],
         ]);
 
@@ -109,7 +114,7 @@ class MasterProjectsService extends BaseService
             'domain' => $data['domain'] ?: null,
             'status' => $data['status'] ?: 'active',
             'custom_path' => $data['custom_path'],
-            'version' => $data['version'] ?: '1.0',
+            'version' => $data['version'] ?: Version::initial(),
             'license_key' => $data['license_key'],
         ]);
 
@@ -174,6 +179,75 @@ class MasterProjectsService extends BaseService
         }
 
         return $this->MasterProjectsProvider ? $this->MasterProjectsProvider->getProjectsByGroup($groupName) : [];
+    }
+
+    /* ==========================================================================
+       [ PROJE SURUMU: SAYAÇ ] (FW-SURUMLEME-2)
+       --------------------------------------------------------------------------
+       `projects.version` TEK kaynaktir. Surum ELLE yazilmaz: `Version::next()`
+       hesaplar. Varsayilan KURU KOSUDUR (`$apply = false`); yazma yalniz
+       acikca `--apply` ile yapilir ve yalniz repository uzerinden gecer
+       (Anayasa §8: DB'ye dogrudan erisim yok).
+       ========================================================================== */
+
+    /**
+     * Bir projenin siradaki surumunu hesaplar (ve istenirse yazar).
+     *
+     * @return array{success:bool, project_key:string, current:string, next:string, written:bool, errors:array<int,string>}
+     */
+    public function nextVersion(string $projectKey, bool $apply = false): array
+    {
+        $projectKey = trim($projectKey);
+        $sonuc = [
+            'success' => false, 'project_key' => $projectKey,
+            'current' => '', 'next' => '', 'written' => false, 'errors' => [],
+        ];
+
+        if ($projectKey === '') {
+            $sonuc['errors'][] = 'Proje anahtarı zorunludur.';
+            return $sonuc;
+        }
+
+        $repo = $this->masterProjectsRepository;
+
+        $satir = $repo->findByProjectKey($projectKey);
+        if ($satir === null) {
+            $sonuc['errors'][] = 'Proje bulunamadı: ' . $projectKey;
+            return $sonuc;
+        }
+
+        $mevcut = trim((string) ($satir['version'] ?? ''));
+        // Gecersiz kayit varsa guvenli baslangica dusulur; sayac ORADAN devam eder.
+        $sonuc['current'] = Version::isValid($mevcut) ? $mevcut : Version::initial();
+        $sonuc['next'] = Version::next($sonuc['current']);
+
+        if (!$apply) {
+            $sonuc['success'] = true;
+            return $sonuc;
+        }
+
+        try {
+            $yazildi = $repo->updateProjectVersion((int) $satir['id'], $sonuc['next']);
+        } catch (\InvalidArgumentException $e) {
+            $sonuc['errors'][] = $e->getMessage();
+            return $sonuc;
+        }
+
+        $sonuc['written'] = $yazildi;
+        $sonuc['success'] = $yazildi;
+
+        if (!$yazildi) {
+            $sonuc['errors'][] = 'Sürüm yazılamadı.';
+        } else {
+            // Onbellek temizlenir; aksi halde eski surum okunmaya devam eder.
+            $this->clearDiscoveryCache(
+                $projectKey,
+                $satir['domain'] ?? null,
+                $satir['project_group'] ?? $projectKey
+            );
+        }
+
+        return $sonuc;
     }
 
     /**

@@ -1,0 +1,376 @@
+/* ==========================================================================
+   RBN CORE: AUTH IDENTITY SUITE STYLES (core/rbn-auth.css) 🛡️🔐
+   --------------------------------------------------------------------------
+   TASIMA: bu blok `Resources/Views/RbnAuth/Layouts/auth_header.rbn.php`
+   icindeki view-içi `<style>` blogundan buraya tasindi (FW-CSS-MOTOR-2).
+   Amac: "motor-once kurali" — gorsel kurallar yalnizca `RbnCommon/css`
+   altinda yasar, view'lar stil tasimaz.
+
+   PAKET: `rbn_core_auth` bundle'i (AssetBundles::STACK_MAP['auth']).
+   YALNIZCA auth baglaminda yuklenir; panel/frontend sayfalarini etkilemez.
+
+   GORSEL KORUMU: tasima birebir yapildi. Degerler `--rbn-*` token'larina
+   baglandi (onceki `var(--token, #hex)` yazimi) ve semantik saydamlik
+   tonlari asagidaki `--rbn-auth-*` token'larina tasindi. Ölçülen
+   computed-style taban degerleri degismedi (rapor §4.2).
+   ========================================================================== */
+
+:root {
+    /* Kimlik ekrani saydam cam yuzeyleri */
+    --rbn-auth-surface-brand:    rgba(22, 29, 44, 0.75);
+    --rbn-auth-surface-card:     rgba(20, 28, 45, 0.88);
+    --rbn-auth-surface-nav:      rgba(12, 17, 28, 0.8);
+    --rbn-auth-surface-input:    rgba(16, 23, 37, 0.85);
+    --rbn-auth-surface-input-on: rgba(16, 23, 37, 0.98);
+
+    /* Ince kenarlar */
+    --rbn-auth-hairline-08: rgba(255, 255, 255, 0.08);
+    --rbn-auth-hairline-09: rgba(255, 255, 255, 0.09);
+    --rbn-auth-hairline-06: rgba(255, 255, 255, 0.06);
+    --rbn-auth-hairline-05: rgba(255, 255, 255, 0.05);
+    --rbn-auth-hairline-18: rgba(255, 255, 255, 0.18);
+
+    /* Golge ve isik halkalari */
+    --rbn-auth-shadow-brand: 0 10px 30px rgba(0, 0, 0, 0.4);
+    --rbn-auth-shadow-card:  0 30px 60px -12px rgba(0, 0, 0, 0.65), 0 0 50px rgba(245, 158, 11, 0.03);
+    --rbn-auth-shadow-btn:   0 8px 24px rgba(245, 158, 11, 0.4);
+    --rbn-auth-shadow-btn-on-hover: 0 12px 28px rgba(245, 158, 11, 0.5);
+    --rbn-auth-ring-btn:     0 4px 15px rgba(245, 158, 11, 0.4);
+    --rbn-auth-ring-input:   0 0 0 3px rgba(245, 158, 11, 0.18);
+
+    /* Marka / vurgu tonlari */
+    --rbn-auth-brand-soft:     rgba(245, 158, 11, 0.15);
+    --rbn-auth-brand-badge-bg: rgba(245, 158, 11, 0.12);
+    --rbn-auth-brand-ring:     rgba(245, 158, 11, 0.3);
+    --rbn-auth-cta-gradient:   linear-gradient(135deg, var(--rbn-amber-500, #f59e0b), var(--rbn-amber-600, #d97706));
+
+    /* Izgara dokusu + isik halesi */
+    --rbn-auth-grid-line:  rgba(255, 255, 255, 0.035);
+    --rbn-auth-halo:       radial-gradient(circle at 50% 20%, rgba(245, 158, 11, 0.16) 0%, rgba(245, 158, 11, 0.02) 45%, transparent 75%);
+    --rbn-auth-text-dim:   rgba(255, 255, 255, 0.6);
+}
+
+.rbn-auth-body {
+    background-color: var(--rbn-slate-950) !important;
+    background-image:
+        var(--rbn-auth-halo),
+        linear-gradient(var(--rbn-auth-grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--rbn-auth-grid-line) 1px, transparent 1px) !important;
+    background-size: 100% 100%, 32px 32px, 32px 32px !important;
+    color: var(--rbn-slate-100) !important;
+}
+
+.rbn-auth-brand-pill {
+    background: var(--rbn-auth-surface-brand) !important;
+    border: 1px solid var(--rbn-auth-hairline-08) !important;
+    border-radius: var(--rbn-radius-pill) !important;
+    padding: 8px 24px !important;
+    box-shadow: var(--rbn-auth-shadow-brand) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    margin-bottom: var(--rbn-space-6) !important;
+}
+
+.rbn-auth-stage-card {
+    width: 100% !important;
+    max-width: 420px !important;
+    background: var(--rbn-auth-surface-card) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    border: 1px solid var(--rbn-auth-hairline-08) !important;
+    border-radius: 24px !important;
+    padding: var(--rbn-space-7, 28px) var(--rbn-space-8, 32px) !important;
+    box-shadow: var(--rbn-auth-shadow-card) !important;
+    margin: 0 auto !important;
+}
+
+.rbn-auth-nav-pill {
+    background: var(--rbn-auth-surface-nav) !important;
+    border: 1px solid var(--rbn-auth-hairline-06) !important;
+    border-radius: 14px !important;
+    padding: 5px !important;
+    margin-bottom: var(--rbn-space-7, 28px) !important;
+}
+
+.rbn-auth-nav-link {
+    color: var(--rbn-slate-400) !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    border-radius: 10px !important;
+    padding: 10px !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease !important;
+}
+
+.rbn-auth-nav-link.active {
+    background: var(--rbn-auth-cta-gradient) !important;
+    color: var(--rbn-white) !important;
+    box-shadow: var(--rbn-auth-ring-btn) !important;
+}
+
+.rbn-auth-social {
+    background: var(--rbn-auth-hairline-05) !important;
+    border: 1px solid var(--rbn-auth-hairline-09) !important;
+    color: var(--rbn-slate-200) !important;
+    border-radius: 14px !important;
+    padding: 12px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+}
+
+.rbn-auth-social:hover {
+    background: var(--rbn-auth-hairline-08) !important;
+    border-color: var(--rbn-auth-hairline-18) !important;
+    color: var(--rbn-white) !important;
+    transform: translateY(-1px) !important;
+}
+
+.rbn-auth-divider {
+    margin: var(--rbn-space-7, 28px) 0 !important;
+}
+
+.rbn-auth-divider-line {
+    flex: 1 !important;
+    height: 1px !important;
+    background: var(--rbn-auth-hairline-09) !important;
+}
+
+.rbn-auth-divider-text {
+    font-size: 0.725rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    color: var(--rbn-slate-500) !important;
+    white-space: nowrap !important;
+}
+
+.rbn-auth-input-wrap {
+    background: var(--rbn-auth-surface-input) !important;
+    border: 1px solid var(--rbn-auth-hairline-09) !important;
+    border-radius: 14px !important;
+    padding: 8px 16px 10px 16px !important;
+    transition: all 0.2s ease !important;
+    position: relative !important;
+}
+
+.rbn-auth-input-wrap:focus-within {
+    border-color: var(--rbn-amber-500) !important;
+    box-shadow: var(--rbn-auth-ring-input) !important;
+    background: var(--rbn-auth-surface-input-on) !important;
+}
+
+.rbn-auth-input-wrap label {
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.06em !important;
+    color: var(--rbn-amber-500) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    line-height: 1.2 !important;
+    margin: 0 !important;
+}
+
+.rbn-auth-input-wrap input {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    color: var(--rbn-white) !important;
+    font-size: 0.95rem !important;
+    font-weight: 500 !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    height: 24px !important;
+    line-height: 24px !important;
+}
+
+.rbn-auth-input-wrap input:-webkit-autofill,
+.rbn-auth-input-wrap input:-webkit-autofill:hover,
+.rbn-auth-input-wrap input:-webkit-autofill:focus,
+.rbn-auth-input-wrap input:-webkit-autofill:active {
+    -webkit-text-fill-color: var(--rbn-white) !important;
+    -webkit-box-shadow: 0 0 0px 1000px var(--rbn-auth-surface-input) inset !important;
+    box-shadow: 0 0 0px 1000px var(--rbn-auth-surface-input) inset !important;
+    transition: background-color 5000s ease-in-out 0s !important;
+}
+
+.rbn-auth-input-wrap input::placeholder {
+    color: var(--rbn-slate-500) !important;
+}
+
+.rbn-auth-btn-submit {
+    background: var(--rbn-auth-cta-gradient) !important;
+    color: var(--rbn-white) !important;
+    font-weight: 700 !important;
+    border-radius: 14px !important;
+    height: 52px !important;
+    box-shadow: var(--rbn-auth-shadow-btn) !important;
+}
+
+.rbn-auth-btn-submit:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: var(--rbn-auth-shadow-btn-on-hover) !important;
+    color: var(--rbn-white) !important;
+}
+
+/* Dark Checkbox Styling */
+.rbn-auth-checkbox {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    width: 18px !important;
+    height: 18px !important;
+    background: var(--rbn-auth-surface-input) !important;
+    border: 1px solid var(--rbn-auth-hairline-18) !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+    display: inline-grid !important;
+    place-content: center !important;
+    margin: 0 !important;
+}
+
+.rbn-auth-checkbox:checked {
+    background: var(--rbn-amber-500) !important;
+    border-color: var(--rbn-amber-500) !important;
+}
+
+.rbn-auth-checkbox:checked::before {
+    content: "✓" !important;
+    font-size: 11px !important;
+    color: var(--rbn-white) !important;
+    font-weight: 900 !important;
+}
+
+/* Footer & Back Link Classes */
+.rbn-auth-back-wrap {
+    margin-top: var(--rbn-space-6) !important;
+    padding-top: var(--rbn-space-6) !important;
+    border-top: 1px solid var(--rbn-auth-hairline-08) !important;
+    text-align: center !important;
+}
+
+.rbn-auth-back-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    font-size: 0.875rem !important;
+    color: var(--rbn-slate-400) !important;
+    text-decoration: none !important;
+    transition: color 0.15s ease !important;
+}
+
+.rbn-auth-back-link:hover {
+    color: var(--rbn-white) !important;
+}
+
+.rbn-auth-features-bar {
+    gap: var(--rbn-space-6) !important;
+    font-size: 0.8rem !important;
+    color: var(--rbn-auth-text-dim) !important;
+    margin-top: var(--rbn-space-6) !important;
+    padding-top: var(--rbn-space-2) !important;
+    max-width: 850px !important;
+}
+
+.rbn-auth-feature-item {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    letter-spacing: 0.01em !important;
+}
+
+.rbn-auth-eye-icon {
+    position: absolute !important;
+    right: 14px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 28px !important;
+    height: 28px !important;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    padding: 0 !important;
+    color: var(--rbn-teal) !important;
+    cursor: pointer !important;
+    z-index: 5 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.15rem !important;
+}
+
+.rbn-auth-brand-icon {
+    width: 28px !important;
+    height: 28px !important;
+    background: var(--rbn-auth-brand-soft) !important;
+    color: var(--rbn-amber-500) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: var(--rbn-radius-pill) !important;
+}
+
+.rbn-auth-brand-badge {
+    font-size: 0.725rem !important;
+    padding: 2px 8px !important;
+    border-radius: var(--rbn-radius-pill) !important;
+    background: var(--rbn-auth-brand-badge-bg) !important;
+    color: var(--rbn-amber-500) !important;
+    font-weight: 600 !important;
+}
+
+.rbn-auth-lock-avatar {
+    width: 76px !important;
+    height: 76px !important;
+    background: var(--rbn-auth-brand-soft) !important;
+    color: var(--rbn-amber-500) !important;
+    border: 2px solid var(--rbn-auth-brand-ring) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: var(--rbn-radius-pill) !important;
+}
+
+.rbn-auth-otp-input {
+    height: 52px !important;
+    background: var(--rbn-auth-surface-input) !important;
+    border: 1px solid var(--rbn-auth-hairline-09) !important;
+    color: var(--rbn-white) !important;
+    border-radius: 12px !important;
+}
+
+.rbn-auth-title {
+    font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
+    color: var(--rbn-white) !important;
+    margin: 0 !important;
+}
+
+/* ==========================================================================
+   Responsive Mobile Breakpoints
+   ========================================================================== */
+@media (max-width: 576px) {
+    .rbn-auth-stage-card {
+        padding: var(--rbn-space-6) 18px !important;
+        border-radius: 20px !important;
+        margin-bottom: var(--rbn-space-4) !important;
+    }
+    .rbn-auth-brand-pill {
+        padding: 6px 18px !important;
+        margin-bottom: var(--rbn-space-4) !important;
+    }
+    .rbn-auth-title {
+        font-size: 1.5rem !important;
+    }
+    .rbn-auth-features-bar {
+        flex-direction: column !important;
+        gap: 10px !important;
+        margin-top: var(--rbn-space-4) !important;
+    }
+    .rbn-auth-otp-input {
+        height: 46px !important;
+        font-size: 1.25rem !important;
+    }
+}

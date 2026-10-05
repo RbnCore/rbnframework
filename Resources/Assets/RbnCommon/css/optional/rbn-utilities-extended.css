@@ -1,0 +1,399 @@
+/* ==========================================================================
+   RBN COMMON OPTIONAL: EXTENDED UTILITY LAYER
+   (optional/rbn-utilities-extended.css) 🧰➕
+   --------------------------------------------------------------------------
+   Paket: `rbnExtended` (AssetBundles::BUNDLES) — ISTEGE BAGLI (opt-in).
+   Bu dosya `rbn-master.css` kapanisina **DOKUNMAZ**; yalnizca proje/gorunum
+   acikca `assets => ['rbnExtended']` dediginde yuklenir.
+   Boylece `rbn_master` (her sayfada giden paket) BOGULMAZ.
+
+   ON EKSIZ (Katman B) KURALI: buradaki on eksiz utility'ler de
+   `core/layout.css` ve `core/utilities.css` ile ayni sozlesmeyi paylasir ->
+   `!important` KOYULUR. Aksi halde ayni ozgullukte onceki kardes kazanir ve
+   sinif "dosyada var ama tarayicida etkisiz" durumuna dusuk.
+   (bkz. design-system.md §4.2)
+
+   SAYI OLCEGI: motorun fiili olcegi (lineer DEGIL):
+   p-1=4 p-2=8 p-3=16 p-4=24 p-5=32  ->  token: space-1/2/4/6/8
+   ========================================================================== */
+
+/* ==========================================================================
+   1. IZGARA KAYDIRMA (.offset-*) — 12'lik kolon sistemi
+   ========================================================================== */
+.offset-1 { margin-left: calc(100% * 1 / 12) !important; }
+.offset-2 { margin-left: calc(100% * 2 / 12) !important; }
+.offset-3 { margin-left: calc(100% * 3 / 12) !important; }
+
+/* ==========================================================================
+   2. IZGARA OTOMATIK KOLON (.col-auto / .col-*-auto)
+   ========================================================================== */
+.col-auto { flex: 0 0 auto; width: auto; }
+
+/* ==========================================================================
+   3. SATIR-IKI KOLON SAYISI (.row-cols-*)
+   Bootstrap 5.3 ile uyumlu: .row flex tabanlidir, kacis `.row-cols-N > *`
+   kurali ile verilir.
+   ========================================================================== */
+.row-cols-1 > * { flex: 0 0 auto; width: 100%; }
+.row-cols-2 > * { flex: 0 0 auto; width: 50%; }
+.row-cols-3 > * { flex: 0 0 auto; width: 33.333333%; }
+.row-cols-4 > * { flex: 0 0 auto; width: 25%; }
+
+/* ==========================================================================
+   4. GUTTER SIFIR (.g-0) — `core/layout.css` icindeki `.g-1..5` ile ayni
+   sozlesme; sifir gutter hem `.g-*` hem `> *` tarafinda uygulanir.
+   ========================================================================== */
+.g-0 { --bs-gutter-x: var(--rbn-space-0); --bs-gutter-y: var(--rbn-space-0); margin-top: 0; margin-right: 0; margin-left: 0; }
+.g-0 > * { padding-right: 0; padding-left: 0; margin-top: 0; }
+
+/* ==========================================================================
+   5. KAPLAYICI GENISLIK VARYANTLARI (.container-md / .container-xl)
+   ========================================================================== */
+.rbn-container-md, .container-md { max-width: 960px; }
+.rbn-container-xl, .container-xl { max-width: 1400px; }
+
+/* ==========================================================================
+   6. DIZGI HIZALAMA (.align-baseline)
+   ========================================================================== */
+.align-baseline { vertical-align: baseline !important; }
+
+/* ==========================================================================
+   7. OPAKITE ALIAS (.opacity-auto) — birlik/compat ayrimi.
+   Bootstrap'ta karsiligi yoktur; burada "gecersiz/etkisiz" bir sinif birakmak
+   yerine acikca "tam opak" anlami verilir.
+   ========================================================================== */
+.opacity-auto { opacity: 1 !important; }
+
+/* ==========================================================================
+   8. METIN KIRMA (.text-wrap)
+   ========================================================================== */
+.text-wrap { white-space: normal !important; word-break: break-word; }
+
+/* ==========================================================================
+   9. KOSE YUVARAKLIK TAMAMLAMA (.rounded-sm / .rounded-xl)
+   ========================================================================== */
+.rounded-sm { border-radius: var(--rbn-radius-xs, 4px) !important; }
+.rounded-xl { border-radius: var(--rbn-radius-lg, 16px) !important; }
+
+/* ==========================================================================
+   10. GOLGE (.shadow-xs / .shadow-hover)
+   ========================================================================== */
+.shadow-xs { box-shadow: var(--rbn-shadow-xs, 0 1px 2px rgba(15, 23, 42, 0.06)) !important; }
+.shadow-hover { box-shadow: var(--rbn-shadow-hover) !important; transition: box-shadow 0.2s ease; }
+
+/* ==========================================================================
+   11. YAZI BOYUTU (.fs-xxs)
+   ========================================================================== */
+.fs-xxs { font-size: 0.65rem !important; }
+
+/* ==========================================================================
+   12. BAGLANTI (.link-*)
+   ========================================================================== */
+.link-dark { color: var(--rbn-slate-900) !important; }
+.link-dark:hover, .link-dark:focus { color: var(--rbn-slate-700) !important; }
+.link-underline { text-decoration: underline !important; }
+.link-underline:hover { text-decoration: underline !important; }
+.link-none { text-decoration: none !important; }
+.link-none:hover, .link-none:focus { text-decoration: underline !important; }
+
+/* ==========================================================================
+   13. OPASITE KATMAN TAMAMLAMA (.bg-opacity-* / .border-opacity-* / .text-opacity-*)
+   Mevcut `core/colors.css` 25/50/75 tanimliyor; 10 ve 100 burada.
+   ========================================================================== */
+.bg-opacity-10  { background-color: color-mix(in srgb, currentColor 10%, transparent) !important; }
+.bg-opacity-100 { background-color: currentColor !important; }
+.border-opacity-10  { border-color: color-mix(in srgb, var(--rbn-border) 10%, transparent) !important; }
+.border-opacity-100 { border-color: var(--rbn-border) !important; }
+.text-opacity-100 { color: currentColor !important; }
+
+/* ==========================================================================
+   14. VURGU RENKLERI (.text-*-emphasis)
+   ========================================================================== */
+.bg-black-subtle { background-color: var(--rbn-slate-800) !important; color: var(--rbn-slate-100) !important; }
+.text-danger-emphasis { color: var(--rbn-red-700) !important; }
+.text-success-emphasis { color: var(--rbn-green-700) !important; }
+.text-warning-emphasis { color: var(--rbn-amber-700) !important; }
+.text-white-emphasis   { color: var(--rbn-slate-100) !important; }
+.text-dark-emphasis    { color: var(--rbn-slate-700) !important; }
+
+/* ==========================================================================
+   15. GORUNURLUK ALIAS'LARI (.rbn-visible / .rbn-invisible / .rbn-visually-hidden)
+   `core/utilities.css` on eksiz kardesleriyle ayni degerleri paylasir.
+   ========================================================================== */
+.rbn-visible { visibility: visible !important; }
+.rbn-invisible { visibility: hidden !important; }
+.rbn-visually-hidden {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ==========================================================================
+   16. DOGRULAMA (.is-valid / .was-validated / geri bildirim)
+   `core/forms.css` icindeki `.is-invalid` ile simetrik.
+   ========================================================================== */
+.is-valid { border-color: var(--rbn-success) !important; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15) !important; }
+.rbn-was-validated .rbn-form-input:valid,
+.rbn-was-validated .form-control:valid,
+.rbn-was-validated .rbn-form-input:invalid,
+.rbn-was-validated .form-control:invalid,
+.was-validated .rbn-form-input:valid,
+.was-validated .form-control:valid { border-color: var(--rbn-success) !important; }
+.was-validated .rbn-form-input:invalid,
+.was-validated .form-control:invalid { border-color: var(--rbn-danger) !important; }
+.rbn-form-feedback-valid,
+.valid-feedback { display: none; color: var(--rbn-success); font-size: 0.75rem; margin-top: var(--rbn-space-1); font-weight: 500; }
+.rbn-form-feedback-invalid,
+.invalid-feedback { display: none; color: var(--rbn-danger); font-size: 0.75rem; margin-top: var(--rbn-space-1); font-weight: 500; }
+.is-valid ~ .rbn-form-feedback-valid,
+.was-validated .rbn-form-input:valid ~ .rbn-form-feedback-valid { display: block; }
+.rbn-form-input:invalid ~ .rbn-form-feedback-invalid,
+.was-validated .rbn-form-input:invalid ~ .rbn-form-feedback-invalid { display: block; }
+
+/* ==========================================================================
+   17. DUYARLI DIZGI VARYANTLARI (sm/md/lg/xl/xxl)
+   Kirilim noktalari `core/layout.css` ile birebir ayni:
+   sm 576 · md 768 · lg 992 · xl 1200 · xxl 1400
+   ========================================================================== */
+@media (min-width: 576px) {
+    /* Kolonlar */
+    .col-sm-1  { flex: 0 0 auto; width: 8.333333%; }
+    .col-sm-2  { flex: 0 0 auto; width: 16.666667%; }
+    .col-sm-5  { flex: 0 0 auto; width: 41.666667%; }
+    .col-sm-7  { flex: 0 0 auto; width: 58.333333%; }
+    .col-sm-9  { flex: 0 0 auto; width: 75%; }
+    .col-sm-10 { flex: 0 0 auto; width: 83.333333%; }
+    .col-sm-11 { flex: 0 0 auto; width: 91.666667%; }
+    .col-sm-auto { flex: 0 0 auto; width: auto; }
+
+    /* Satir kolonlari */
+    .row-cols-sm-1 > * { flex: 0 0 auto; width: 100%; }
+    .row-cols-sm-2 > * { flex: 0 0 auto; width: 50%; }
+    .row-cols-sm-3 > * { flex: 0 0 auto; width: 33.333333%; }
+    .row-cols-sm-4 > * { flex: 0 0 auto; width: 25%; }
+    .row-cols-sm-5 > * { flex: 0 0 auto; width: 20%; }
+    .row-cols-sm-6 > * { flex: 0 0 auto; width: 16.666667%; }
+
+    /* Izgara kaydirma */
+    .offset-sm-0  { margin-left: 0 !important; }
+    .offset-sm-1  { margin-left: calc(100% * 1 / 12) !important; }
+    .offset-sm-2  { margin-left: calc(100% * 2 / 12) !important; }
+    .offset-sm-3  { margin-left: calc(100% * 3 / 12) !important; }
+    .offset-sm-4  { margin-left: calc(100% * 4 / 12) !important; }
+    .offset-sm-5  { margin-left: calc(100% * 5 / 12) !important; }
+    .offset-sm-6  { margin-left: 50% !important; }
+    .offset-sm-7  { margin-left: calc(100% * 7 / 12) !important; }
+    .offset-sm-8  { margin-left: calc(100% * 8 / 12) !important; }
+    .offset-sm-9  { margin-left: 75% !important; }
+    .offset-sm-10 { margin-left: calc(100% * 10 / 12) !important; }
+    .offset-sm-11 { margin-left: calc(100% * 11 / 12) !important; }
+
+    /* Duzgiler */
+    .d-sm-inline        { display: inline !important; }
+    .d-sm-inline-grid   { display: inline-grid !important; }
+    .d-sm-inline-flex   { display: inline-flex !important; }
+    .d-sm-grid          { display: grid !important; }
+    .d-sm-flex-row      { flex-direction: row !important; }
+    .d-sm-flex-column   { flex-direction: column !important; }
+    .flex-sm-row-reverse { flex-direction: row-reverse !important; }
+
+    /* Gerekce (justify) */
+    .justify-start-sm, .justify-sm-start    { justify-content: flex-start !important; }
+    .justify-center-sm, .justify-sm-center  { justify-content: center !important; }
+    .justify-end-sm, .justify-sm-end        { justify-content: flex-end !important; }
+    .justify-between-sm, .justify-sm-between{ justify-content: space-between !important; }
+    .justify-around-sm, .justify-sm-around  { justify-content: space-around !important; }
+    .justify-evenly-sm, .justify-sm-evenly  { justify-content: space-evenly !important; }
+
+    /* Capalar (items) */
+    .items-start-sm, .items-sm-start    { align-items: flex-start !important; }
+    .items-center-sm, .items-sm-center  { align-items: center !important; }
+    .items-end-sm, .items-sm-end        { align-items: flex-end !important; }
+    .items-baseline-sm, .items-sm-baseline { align-items: baseline !important; }
+    .items-stretch-sm, .items-sm-stretch { align-items: stretch !important; }
+
+    /* Sira (order) */
+    .order-sm-0 { order: 0 !important; }
+    .order-sm-1 { order: 1 !important; }
+    .order-sm-2 { order: 2 !important; }
+    .order-sm-3 { order: 3 !important; }
+    .order-sm-4 { order: 4 !important; }
+    .order-sm-5 { order: 5 !important; }
+}
+
+@media (min-width: 768px) {
+    .col-md-auto { flex: 0 0 auto; width: auto; }
+
+    .row-cols-md-1 > * { flex: 0 0 auto; width: 100%; }
+    .row-cols-md-2 > * { flex: 0 0 auto; width: 50%; }
+    .row-cols-md-3 > * { flex: 0 0 auto; width: 33.333333%; }
+    .row-cols-md-4 > * { flex: 0 0 auto; width: 25%; }
+    .row-cols-md-5 > * { flex: 0 0 auto; width: 20%; }
+    .row-cols-md-6 > * { flex: 0 0 auto; width: 16.666667%; }
+
+    .offset-md-0  { margin-left: 0 !important; }
+    .offset-md-1  { margin-left: calc(100% * 1 / 12) !important; }
+    .offset-md-2  { margin-left: calc(100% * 2 / 12) !important; }
+    .offset-md-3  { margin-left: calc(100% * 3 / 12) !important; }
+    .offset-md-4  { margin-left: calc(100% * 4 / 12) !important; }
+    .offset-md-5  { margin-left: calc(100% * 5 / 12) !important; }
+    .offset-md-6  { margin-left: 50% !important; }
+    .offset-md-7  { margin-left: calc(100% * 7 / 12) !important; }
+    .offset-md-8  { margin-left: calc(100% * 8 / 12) !important; }
+    .offset-md-9  { margin-left: 75% !important; }
+    .offset-md-10 { margin-left: calc(100% * 10 / 12) !important; }
+    .offset-md-11 { margin-left: calc(100% * 11 / 12) !important; }
+
+    .d-md-inline      { display: inline !important; }
+    .d-md-inline-grid { display: inline-grid !important; }
+    .d-md-inline-block{ display: inline-block !important; }
+    .d-md-inline-flex { display: inline-flex !important; }
+    .d-md-grid        { display: grid !important; }
+    .flex-md-row          { flex-direction: row !important; }
+    .flex-md-column       { flex-direction: column !important; }
+    .flex-md-nowrap       { flex-wrap: nowrap !important; }
+    .flex-md-row-reverse  { flex-direction: row-reverse !important; }
+    .flex-md-column-reverse { flex-direction: column-reverse !important; }
+
+    .justify-start-md, .justify-md-start    { justify-content: flex-start !important; }
+    .justify-center-md, .justify-md-center  { justify-content: center !important; }
+    .justify-end-md, .justify-md-end        { justify-content: flex-end !important; }
+    .justify-between-md, .justify-md-between{ justify-content: space-between !important; }
+    .justify-around-md, .justify-md-around  { justify-content: space-around !important; }
+    .justify-evenly-md, .justify-md-evenly  { justify-content: space-evenly !important; }
+
+    .items-start-md, .items-md-start       { align-items: flex-start !important; }
+    .items-center-md, .items-md-center     { align-items: center !important; }
+    .items-end-md, .items-md-end           { align-items: flex-end !important; }
+    .items-baseline-md, .items-md-baseline{ align-items: baseline !important; }
+    .items-stretch-md, .items-md-stretch   { align-items: stretch !important; }
+
+    .order-md-0 { order: 0 !important; }
+    .order-md-1 { order: 1 !important; }
+    .order-md-2 { order: 2 !important; }
+    .order-md-3 { order: 3 !important; }
+    .order-md-4 { order: 4 !important; }
+    .order-md-5 { order: 5 !important; }
+}
+
+@media (min-width: 992px) {
+    .col-lg-auto { flex: 0 0 auto; width: auto; }
+
+    .row-cols-lg-1 > * { flex: 0 0 auto; width: 100%; }
+    .row-cols-lg-2 > * { flex: 0 0 auto; width: 50%; }
+    .row-cols-lg-3 > * { flex: 0 0 auto; width: 33.333333%; }
+    .row-cols-lg-4 > * { flex: 0 0 auto; width: 25%; }
+    .row-cols-lg-5 > * { flex: 0 0 auto; width: 20%; }
+    .row-cols-lg-6 > * { flex: 0 0 auto; width: 16.666667%; }
+
+    .offset-lg-0  { margin-left: 0 !important; }
+    .offset-lg-1  { margin-left: calc(100% * 1 / 12) !important; }
+    .offset-lg-2  { margin-left: calc(100% * 2 / 12) !important; }
+    .offset-lg-3  { margin-left: calc(100% * 3 / 12) !important; }
+    .offset-lg-4  { margin-left: calc(100% * 4 / 12) !important; }
+    .offset-lg-5  { margin-left: calc(100% * 5 / 12) !important; }
+    .offset-lg-6  { margin-left: 50% !important; }
+    .offset-lg-7  { margin-left: calc(100% * 7 / 12) !important; }
+    .offset-lg-8  { margin-left: calc(100% * 8 / 12) !important; }
+    .offset-lg-9  { margin-left: 75% !important; }
+    .offset-lg-10 { margin-left: calc(100% * 10 / 12) !important; }
+    .offset-lg-11 { margin-left: calc(100% * 11 / 12) !important; }
+
+    .d-lg-inline      { display: inline !important; }
+    .d-lg-inline-grid { display: inline-grid !important; }
+    .d-lg-inline-block{ display: inline-block !important; }
+    .d-lg-inline-flex { display: inline-flex !important; }
+    .d-lg-grid        { display: grid !important; }
+    .flex-lg-row     { flex-direction: row !important; }
+    .flex-lg-column  { flex-direction: column !important; }
+    .flex-lg-wrap    { flex-wrap: wrap !important; }
+    .flex-lg-nowrap  { flex-wrap: nowrap !important; }
+
+    .justify-start-lg, .justify-lg-start    { justify-content: flex-start !important; }
+    .justify-center-lg, .justify-lg-center  { justify-content: center !important; }
+    .justify-end-lg, .justify-lg-end        { justify-content: flex-end !important; }
+    .justify-between-lg, .justify-lg-between{ justify-content: space-between !important; }
+    .justify-around-lg, .justify-lg-around  { justify-content: space-around !important; }
+    .justify-evenly-lg, .justify-lg-evenly  { justify-content: space-evenly !important; }
+
+    .items-start-lg, .items-lg-start       { align-items: flex-start !important; }
+    .items-center-lg, .items-lg-center     { align-items: center !important; }
+    .items-end-lg, .items-lg-end           { align-items: flex-end !important; }
+    .items-baseline-lg, .items-lg-baseline{ align-items: baseline !important; }
+    .items-stretch-lg, .items-lg-stretch   { align-items: stretch !important; }
+
+    .order-lg-0 { order: 0 !important; }
+    .order-lg-1 { order: 1 !important; }
+    .order-lg-2 { order: 2 !important; }
+    .order-lg-3 { order: 3 !important; }
+    .order-lg-4 { order: 4 !important; }
+    .order-lg-5 { order: 5 !important; }
+}
+
+@media (min-width: 1200px) {
+    .col-xl-auto { flex: 0 0 auto; width: auto; }
+
+    .row-cols-xl-1 > * { flex: 0 0 auto; width: 100%; }
+    .row-cols-xl-2 > * { flex: 0 0 auto; width: 50%; }
+    .row-cols-xl-3 > * { flex: 0 0 auto; width: 33.333333%; }
+    .row-cols-xl-4 > * { flex: 0 0 auto; width: 25%; }
+    .row-cols-xl-5 > * { flex: 0 0 auto; width: 20%; }
+    .row-cols-xl-6 > * { flex: 0 0 auto; width: 16.666667%; }
+
+    .offset-xl-0  { margin-left: 0 !important; }
+    .offset-xl-1  { margin-left: calc(100% * 1 / 12) !important; }
+    .offset-xl-2  { margin-left: calc(100% * 2 / 12) !important; }
+    .offset-xl-3  { margin-left: calc(100% * 3 / 12) !important; }
+    .offset-xl-4  { margin-left: calc(100% * 4 / 12) !important; }
+    .offset-xl-5  { margin-left: calc(100% * 5 / 12) !important; }
+    .offset-xl-6  { margin-left: 50% !important; }
+    .offset-xl-7  { margin-left: calc(100% * 7 / 12) !important; }
+    .offset-xl-8  { margin-left: calc(100% * 8 / 12) !important; }
+    .offset-xl-9  { margin-left: 75% !important; }
+    .offset-xl-10 { margin-left: calc(100% * 10 / 12) !important; }
+    .offset-xl-11 { margin-left: calc(100% * 11 / 12) !important; }
+
+    .d-xl-inline      { display: inline !important; }
+    .d-xl-inline-grid { display: inline-grid !important; }
+    .d-xl-inline-block{ display: inline-block !important; }
+    .d-xl-inline-flex { display: inline-flex !important; }
+    .d-xl-grid        { display: grid !important; }
+    .flex-xl-row     { flex-direction: row !important; }
+    .flex-xl-column  { flex-direction: column !important; }
+    .flex-xl-wrap    { flex-wrap: wrap !important; }
+
+    .justify-start-xl, .justify-xl-start    { justify-content: flex-start !important; }
+    .justify-center-xl, .justify-xl-center  { justify-content: center !important; }
+    .justify-end-xl, .justify-xl-end        { justify-content: flex-end !important; }
+    .justify-between-xl, .justify-xl-between{ justify-content: space-between !important; }
+    .justify-around-xl, .justify-xl-around  { justify-content: space-around !important; }
+    .justify-evenly-xl, .justify-xl-evenly  { justify-content: space-evenly !important; }
+
+    .items-start-xl, .items-xl-start       { align-items: flex-start !important; }
+    .items-center-xl, .items-xl-center     { align-items: center !important; }
+    .items-end-xl, .items-xl-end           { align-items: flex-end !important; }
+    .items-baseline-xl, .items-xl-baseline{ align-items: baseline !important; }
+    .items-stretch-xl, .items-xl-stretch   { align-items: stretch !important; }
+
+    .order-xl-0 { order: 0 !important; }
+    .order-xl-1 { order: 1 !important; }
+    .order-xl-2 { order: 2 !important; }
+    .order-xl-3 { order: 3 !important; }
+    .order-xl-4 { order: 4 !important; }
+    .order-xl-5 { order: 5 !important; }
+}
+
+@media (min-width: 1400px) {
+    .d-xxl-block       { display: block !important; }
+    .d-xxl-inline     { display: inline !important; }
+    .d-xxl-inline-grid{ display: inline-grid !important; }
+    .d-xxl-inline-block { display: inline-block !important; }
+    .d-xxl-inline-flex{ display: inline-flex !important; }
+    .d-xxl-grid       { display: grid !important; }
+    .d-xxl-flex       { display: flex !important; }
+    .d-xxl-none       { display: none !important; }
+}

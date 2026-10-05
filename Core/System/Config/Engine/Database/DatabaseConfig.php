@@ -63,6 +63,10 @@ readonly class DatabaseConfig
 
         $category = 'database_project';
 
+        // [FW-DB-PROFIL] Proje DB profili (local/production) TEK çözücüden seçilir.
+        // `DB_PROFILES` yoksa veri aynen döner (geriye uyum).
+        $data = ProjectDbProfileResolver::resolve($data);
+
         // 2. Fetch the Source-of-Truth Mapping Dictionary 📖🛰️
         $map = Definition::get($category, 'KEYS_MAP');
 

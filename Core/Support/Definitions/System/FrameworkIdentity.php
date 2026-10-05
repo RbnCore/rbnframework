@@ -23,7 +23,7 @@ class FrameworkIdentity extends BaseConfig
     // Core Identity
     // -------------------------------------------------------------
     public const FRAMEWORK_NAME = 'RBN Core - Framework';
-    public const FRAMEWORK_VERSION = '0.9.1';
+    public const FRAMEWORK_VERSION = '0.9.2';
     public const FRAMEWORK_SLOGAN = 'The Sovereign Web Technologies & "Masterpiece" Architectures';
     public const FRAMEWORK_DESCRIPTION = 'RBN Framework provides high-performance digital transformation, enterprise software solutions, and sovereign web technologies.';
     public const FRAMEWORK_URL = 'https://rbncore.tr';
@@ -49,22 +49,27 @@ class FrameworkIdentity extends BaseConfig
     // -------------------------------------------------------------
     // CLI Version
     // -------------------------------------------------------------
-    public const FRAMEWORK_CLI_VERSION = '2.3';
+    // [FW-SURUMLEME-2] Bilesen surumleri de `.agents/rules/versioning.md`
+    // kuralina uyar: `A.B.C` uc parcali, `v` oneki YOK, B/C basamagi 9'u
+    // asmaz. Gosterim yerleri (`PanelHandler`, `AuthHandler`, `sidebar.rbn.php`,
+    // `RbnCli` basligi) bu SABITLERI okur; degerler eklendiigi icin
+    // hicbir gosterim yeri degismedi.
+    public const FRAMEWORK_CLI_VERSION = '2.3.0';
 
     // -------------------------------------------------------------
     // Bileşen kimlikleri (ad / sürüm / slogan) - TEK GÜNCELLEME YERİ
     // Okuma: `RbnSystemInfo::get('ADMIN_VERSION')` ya da bu sabitler.
     // -------------------------------------------------------------
     public const SHIELD_NAME = 'RbnShield';
-    public const SHIELD_VERSION = 'v2.1';
+    public const SHIELD_VERSION = '2.1.0';
     public const SHIELD_SLOGAN = 'Professional Error & Security Service';
 
     public const ADMIN_NAME = 'RBN Admin Pro';
-    public const ADMIN_VERSION = '1.2';
+    public const ADMIN_VERSION = '1.2.0';
     public const ADMIN_TITLE = 'Yönetim Paneli';
     public const ADMIN_SLOGAN = 'Gelişmiş Yönetim ve Kontrol Merkezi';
 
     public const AUTH_NAME = 'RbnAuth';
-    public const AUTH_VERSION = '2.2';
+    public const AUTH_VERSION = '2.2.0';
     public const AUTH_SLOGAN = 'Professional Identity Service';
 }

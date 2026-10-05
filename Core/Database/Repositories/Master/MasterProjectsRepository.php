@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Rbn\Framework\Core\Database\Repositories\Master;
 
 use Rbn\Framework\Core\Base\Data\BaseRepository;
+use Rbn\Framework\Core\Support\Bridges\Helpers\Library\Version;
 
 /**
  * MasterProjectsRepository - Master Projects Data Access & Query Repository 🌍🏛️⚓
@@ -93,5 +94,67 @@ class MasterProjectsRepository extends BaseRepository
         return (bool) $this->model('master.projects')
             ->authorizeFields(['license_key', 'status'])
             ->update($id, $data);
+    }
+
+    /* ==========================================================================
+       [ PROJE SURUMU: TEK YAZMA YOLU ] 📦
+       --------------------------------------------------------------------------
+       `projects.version` proje surumunun TEK kaynagidir (versioning.md §4).
+       Elle sayi yazilmaz; `rbn version:next` bu yoldan `Version::next()`
+       sonucunu yazar. Sema degistirilmez, korumali alan (`license_key`,
+       `status`) bu yoldan ETKILENMEZ.
+       ========================================================================== */
+
+    /** Proje anahtarıyla kayıt arar (bulunamazsa null). */
+    public function findByProjectKey(string $projectKey): ?array
+    {
+        $projectKey = trim($projectKey);
+        if ($projectKey === '') {
+            return null;
+        }
+
+        $satir = $this->model('master.projects')->where('project_key', $projectKey)->first();
+        if ($satir === null) {
+            return null;
+        }
+
+        return is_array($satir) ? $satir : (array) $satir;
+    }
+
+    /** Kayıtlı proje sürümünü döner (yoksa null). */
+    public function findVersionByProjectKey(string $projectKey): ?string
+    {
+        $satir = $this->findByProjectKey($projectKey);
+        if ($satir === null) {
+            return null;
+        }
+
+        $v = trim((string) ($satir['version'] ?? ''));
+
+        return $v === '' ? null : $v;
+    }
+
+    /**
+     * Proje sürümünü yazar (yalnız `version` kolonu). 🔐
+     *
+     * @throws \InvalidArgumentException Geçersiz `A.B.C` biçiminde.
+     */
+    public function updateProjectVersion(int $id, string $version): bool
+    {
+        if ($id <= 0) {
+            return false;
+        }
+
+        $v = trim($version);
+        if (!Version::isValid($v)) {
+            throw new \InvalidArgumentException(sprintf(
+                'Geçersiz sürüm biçimi: "%s" (projects.version). Beklenen: A.B.C -> örn. 0.1.1 (versioning.md §1).',
+                $v
+            ));
+        }
+
+        return (bool) $this->model('master.projects')
+            ->authorizeFields(['version'])
+            ->update($id, ['version' => $v]);
     }
 }

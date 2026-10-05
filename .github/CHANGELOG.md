@@ -6,11 +6,58 @@
 
 Biçim: [Keep a Changelog](https://keepachangelog.com/tr/1.1.0/). Sürümlendirme: [SemVer](https://semver.org/lang/tr/).
 
-**Son sürüm:** `0.9.1` (2026-10-05) — canlı geçişte bulunan 4 düzeltme.
+**Son sürüm:** `0.9.2` (2026-10-05) — canlı geçiş düzeltmeleri sonrası: tek kaynak, kural ve araç düzenlemesi.
 
 Güvenlik girdileri tarafsız yazılır: ne değişti ve etkisi ne, sömürme adımı/payload/PoC/dosya-satır ayrıntısı **yazılmaz**. Sayısal şiddet dereceleri de burada verilmez (iç onarım planında tutulur).
 
 ---
+
+## [Unreleased]
+
+## [0.9.2] - 2026-10-05
+
+**Kısa özet — canlı geçiş düzeltmeleri sonrası tek kaynak, kural ve araç düzenlemesi.**
+Bu sürüm, `0.9.1` canlı geçiş düzeltmelerinden sonra yapılan çalışmanın kaydıdır. Buradaki
+her madde kendi birim testiyle önce kırmızı, sonra yeşil doğrulandı. Kırıcı değişiklik
+**vardır** ve hepsi `UPGRADING.md` 0.9.2 bölümünde madde madde anlatılmıştır: yükseltme
+yapan operatörün yapması gerekenler o dosyada liste halinde durur.
+
+**Bu sürümün omurgası — panel ön eki ve varlık adlarında tek kaynak:**
+
+- **`project-routemap.php` panel ön eki için TEK kaynak oldu.** `project-settings.php`
+  içindeki `has_route_map` ve `dashboard_prefix` kalıntıları ikinci kaynak olarak
+  kaldırıldı: `Config.php`'deki `has_route_map` kapısı ve `SystemGuardHandler`'ın bakım
+  modu ön eki okuması aynı çözücüye bağlandı. Görsel değişiklik yoktur.
+- **favicon ve OpenGraph görseli için TEK adlandırma kuralı** (`AssetConvention`):
+  favicon = `images/favicon-<project_key>.{svg|png|ico}`, og görseli =
+  `images/og-image-<project_key>.{png|jpg|webp}`. Dört kapı (SEO meta etiketleri, sanal
+  varlık servisi, `/favicon.ico` kendini onarma yönlendirmesi, JSON-LD `image`) aynı
+  çözücüyü çağırır; `og:image` ölü adres vermesi ve `/favicon.ico` → 404 zinciri düzeldi.
+- **`RbnCommon` CSS motoru eksiksiz tamamlandı ve isteğe bağlı paketlere ayrıldı.**
+  Eksik sınıflar `rbnExtended` paketine ve motor dosyalarına taşındı; `core/rbn-auth.css`
+  eklendi. `rbn_master` paketinin istediği dosyalar **birebir aynı** kaldı — görsel
+  değişiklik ve yeni kural yok.
+- **Proje veritabanı bilgisi `DB_PROFILES` ile iki profille durabilir** (`local` ve
+  `production`). Ortam kararı isteğe değil **sunucunun kimliğine** bakar (`RBN_DB_PROFILE`);
+  seçilen profil yoksa ya da zorunlu anahtarlar eksikse **fail-closed** hata verir.
+
+**Sürümleme — proje sürümünün tek kaynağı master veritabanı:**
+
+- **`APP_VERSION` artık framework'ün sabit `3.5.0` kalıntısı değil, projenin sürümüdür.**
+  Tek kaynak master DB `projects.version` kolonudur; `ProjectVersionResolver` tek çözücüdür.
+  Sabit, proje veri önbelleği dolduktan sonra (`PreBoot::defineAppVersion()`) tanımlanır —
+  eski konumda (`detectEnvironment()`) veritabanı henüz okunamıyordu. Giriş noktasındaki
+  `define('APP_VERSION', '1.17.0')` satırı kaldırıldı (`1.17.0` kural ihlaliydi).
+- **Sürüm artık elle sayı yazılarak değil `Version::next()` ile hesaplanıyor:**
+  `0.9.1` → `0.9.2`, `0.9.9` → `1.0.0`, `9.9.9` → `10.0.0`.
+- **`rbn version:check`** (salt-okunur denetim, çıkış kodu) ve
+  **`rbn version:next <project_key>`** (`--apply` ile yazan sayaç) komutları eklendi.
+- **Veri geçişi:** `NormalizeProjectVersions` migration'ı `projects.version` değerlerini
+  `A.B.C` kuralına çevirir (yedek tablo + geri alma).
+
+**Sürüm artışı:** `FrameworkIdentity::FRAMEWORK_VERSION` `0.9.1` → **`0.9.2`**. Bu
+yayın hazırlığında `Version::next('0.9.1')` ile hesaplandı ve `rbn version:check` ile
+doğrulandı. Bileşen sürümleri `2.1.0` / `1.2.0` / `2.2.0` / `2.3.0` **değişmedi**.
 
 ## [0.9.1] - 2026-10-05
 
@@ -26,9 +73,56 @@ Güvenlik girdileri tarafsız yazılır: ne değişti ve etkisi ne, sömürme ad
 
 - **Yerel giri�Y noktası (`domains/<site>/index.php`) PHP sürüm kapısını gerçekten açar (20 dosya).** Sürüm kapısı blo�Yu, yolu `$rbnKapsiAdayi` de�Yi�Ykenine yazıyor ama `is_file($rbnKapisiAdayi)` ile kontrol ediyordu; `is_file(null)` `false` döndü�Yü için `PhpVersionGate` hiç bulunamıyor ve **sessizce devre dı�Yı kalıyordu** (geli�Ytirme ortamında ayrıca her istek sayfaya `Warning`/`Deprecated` metni basıyordu). De�Yi�Yken adı 20 dosyada `$rbnKapisiAdayi` olarak düzeltildi; dosyaların kodlaması ve geri kalan içeri�Yi bayt-bayt de�Yi�Ymedi. Yerel PHP 8.3.35 ile kap geçer ve tüm yerel siteler 200 + temiz gövde verir.
 
-## [Unreleased]
+### Added
+
+- **Sürümleme: proje sürümünün TEK kaynağı master veritabanı; `rbn version:check` ve `rbn version:next` komutları.** Patron kararı (2026-10-05): `APP_VERSION` **projenin** sürümüdür ve proje sürümü `project-settings.php`'den GELMEZ, hiçbir yerel dosyaya da yazılmaz — tek kaynak master DB `projects.version` kolonudur; değer açılışta proje veri önbelleğine yazılır (`ProjectDataMapper` → `project_data('version')`) ve her yer oradan okur.
+  - Yeni **`Core\Support\Bridges\Helpers\Library\ProjectVersionResolver`**: TEK çözücü. Geçerli `A.B.C` değeri aynen döner; değer yoksa veya bozuksa (iki parçalı `1.0`, dört parça, `v` öneki, `1.17.0` gibi) standart başlangıç sürümü `Version::initial()` (`0.1.1`) döner. Bozuk kayıt görüldüğünde `LogThrottle::once()` ile **saatte bir** uyarı yazılır. Sınıf durumsuz ve tamamen statiktir (`new` kullanılmaz); istisna fırlatmaz, karar değişmez.
+  - `app_version()`, `SeoResolver` (`module-version` meta), `AuthHandler` (`siteVersion`) ve `RbnAdminController` (`stats.app_version`) **aynı çözücüyü** kullanır. Tekrar eden iki parçalı `1.0` varsayılanları kaldırıldı.
+  - **`PreBoot`**: `define('APP_VERSION', '3.5.0')` kalıntısı **kaldırıldı**. Zamanlama gerekçesi koddan okunarak yazıldı: `detectEnvironment()` `orchestrate()` içinde 0. adımda çalışır, proje veri önbelleği ise 0.5. adımda (`ProjectDiscovery`) dolar — yani eski noktada `projects.version` **okunamazdı**. Yeni `PreBoot::defineAppVersion()` `initPaths()` sonrasında çağrılır. Giriş noktasındaki elle `define('APP_VERSION', '1.17.0')` satırı da kaldırıldı (`1.17.0` kural ihlaliydi: B basamağı 17 > 9).
+  - **Bileşen sürümleri** üç parçalı ve `v` ön eki olmadan: `FRAMEWORK_CLI_VERSION 2.3 → 2.3.0`, `SHIELD_VERSION v2.1 → 2.1.0`, `ADMIN_VERSION 1.2 → 1.2.0`, `AUTH_VERSION 2.2 → 2.2.0`. Gösterim yerleri (`PanelHandler`, `AuthHandler`, `sidebar.rbn.php`, `RbnCli` başlığı) sabitleri okuduğu için **elle değiştirilmedi**. `FrameworkIdentity::FRAMEWORK_VERSION` (`0.9.1`) **değiştirilmedi**.
+  - **`applications` sürüm kapısı (şema değiştirilmedi):** `MasterApplicationRepository::assertVersion()` yazma sırasında `Version::isValid()` kontrolü yapar ve geçersiz değeri `InvalidArgumentException` ile **açık hata** olarak reddeder; `MasterApplicationsService::versionGate()` okuma sırasında geçersiz sürümlü kaydı `getByAppKey()` için `null`, `list()` için listeden çıkar (saatte bir uyarı). Panel bozulmaz, "sessizce yanlış sürüm" durumu oluşmaz.
+  - **`rbn version:check`** — salt-okunur denetim; tablo + **çıkış kodu** (`0` temiz, `1` sapma). `FRAMEWORK_VERSION`, dört bileşen sürümü, `CITATION.cff`, CHANGELOG `Son sürüm` başlığı ve master DB'deki proje/uygulama sürümlerini karşılaştırır. **`rbn version:next <project_key>`** — sürümü `Version::next()` ile hesaplar; **varsayılan kuru koşu**, `--apply` ile yazar (yazma yalnız repository üzerinden, Anayasa §8).
+  - **Veri geçişi:** yeni `Core\Database\Migrations\Master\NormalizeProjectVersions` (`rbn master:migrate`, yalnız elle). Önce `projects_version_backup` tablosuna yedek alır, sonra tüm projeleri başlangıç sürümü `0.1.1`'e çeker; karar tek çözücüden (`ProjectVersionResolver`) gelir. `down()` yedekteki değerleri geri koyar, yedek tablo silinmez. **`projects` şeması değiştirilmedi** (kolon tipi ve `DEFAULT '1.0'` aynen durur); yerel ölçüm: 19 proje, hepsi `1.0` (geçersiz) → 19 satır `0.1.1`; geri alma denendi ve 19 satır `1.0`'a döndü. `applications` tablosu bu migration'a dokunmaz.
+  - `MasterProjectsService` artık proje kaydında `'version' => '1.0'` **yazmaz**; `Version::initial()` yazar.
+
+
+- **Marka varlıkları için TEK adlandırma kuralı ve tek çözücü** (`Core\Support\Definitions\Render\AssetConvention`). Kural: favicon = `images/favicon-<project_key>.{svg,png,ico}`, OpenGraph görseli = `images/og-image-<project_key>.{png,jpg,webp}`. Motor geneldir: framework'e proje/müşteri adı **yazılmaz**, `<project_key>` çalışma anında gelir (Anayusa §9). Aday listesi ve öncelik sırası artık **tek yerde**; dört kapı (`SeoResolver` meta etiketleri, `AssetController` sanal `/project-assets/<ad>` servisi, `RedirectManager::selfHealingAssets` (`/favicon.ico` → gerçek dosya), `SchemaResolver::resolveDefaultImage` (JSON-LD `image`)) aynı çözücüyü çağırır — yinelenen mantık yoktur.
+
+- **Sürümleme kuralı için standart sayaç yardımcısı** (`Core\Support\Bridges\Helpers\Library\Version` + global fonksiyonlar). Patron kuralı (`.agents/rules/versioning.md`): biçim `A.B.C`, birinci basamak sınırsız (`9 → 10, 11…`), ikinci ve üçüncü basamak yalnız `0…9` (asla `10`), başlangıç `0.1.1`, geçerli desen `^(0|[1-9][0-9]*)\.[0-9]\.[0-9]$`. Sürüm artık **elle sayı yazılarak değil** `next()` ile hesaplanır: `0.1.1 → 0.1.2`, `0.7.9 → 0.8.0`, `0.9.9 → 1.0.0`, `9.9.9 → 10.0.0`, `99.9.9 → 100.0.0`. Metotlar: `isValid()`, `parse()`, `next()`, `compare()`, `initial()`; geçersiz girdide `InvalidArgumentException`. Sınıf **durumsuz** ve tamamen statiktir (metot adları İngilizce, Anayasa §10); `new` kullanılmaz (§1) ve framework'e proje adı yazılmaz (§9). Global eşleyiciler `next_version()`, `version_is_valid()`, `version_compare()`, `version_parse()`, `version_initial()` yalnızca sınıfı çağırır — yinelenen mantık yoktur. 2000 adımlık zincirde hiçbir adım geçersiz sürüm üretmiyor ve çıktı kesin artıyor. **Davranış değişikliği yoktur**: mevcut hiçbir sürüm sabiti değiştirilmedi.
+
+### Fixed
+
+- **`og:image` meta etiketi artık ölü adres üretmiyor.** Ölçülen kök hata: `SeoResolver::getVirtualResourceRaw()` yalnız `favicon-*`/`logo-*` çözüyordu ve `AssetController` sanal kaynak dalını **yalnız `.svg`** uçlantısında açıyordu; raster og görseli fiziksel keşfe düşüyor, dosya `images/` altında olduğu için istek `Asset not found` ile bitiyordu. Altı sitede ölçüldü (`og:image` 404/500 → sosyal paylaşım önizlemesi görselsiz). Artık sanal `og-image-<key>.<png|jpg|webp>` adı **doğru `Content-Type`** ile servis edilir (yol güvenliği `AssetConvention::resolveVirtualOgImage()` içinde: `..`, mutlak yol, ters bölü ve kök dışına çıkış reddedilir — `AssetController`'un mevcut güvenlik sertliğiyle aynı).
+
+- **`/favicon.ico` yönlendirmesi artık var olmayan uzantıya gitmiyor.** `selfHealingAssets` favicon hedefini **her zaman** `.png` yazıyordu; `favicon-<key>.svg` olan projede `/favicon.ico` → 301 → `/images/favicon-<key>.png` → **404** ölçüldü. Hedef artık projenin gerçek favicon dosyasıdır (aynı çözücü), bulunamazsa framework'ün nötr varlığına gidilir.
+
+- **`og` üzerinde iki kaynak/sapma kapandı.** `SchemaResolver::resolveDefaultImage()` sabit `/images/og-image.png` ve `project-routemap` `og_image` anahtarını okuyordu (`og_image` anahtarı projelerde **yazılı değil**, yalnız `og-image` yazılı — hiç eşleşmediği için sabit ad kullanılıyordu); `SchemaPreset` de ikinci bir sabit yazıyordu. Artık üçü de aynı çözücüyü kullanır.
+
+- **Dosyası olmayan projede uydurma görsel adresi üretilmiyor.** Projede kurala uyan (ve geriye uyum adı da) hiçbir og görseli yoksa `og:image` meta etiketi **hiç üretilmez** ve JSON-LD'de `"image":""` yerine alan **tamamen düşer** (`SchemaBuilder`). `/og-image.png` standart yolu da uydurma adrese yönlenmez.
+
+### Deprecated
+
+- **Anahtarsız eski varlık adları (`images/favicon.png|.svg|.ico`, `images/og-image.png|.jpg|.webp`) "kullanımdan kalma" adımındadır; canlıda çalıştıkları için "son geri dönüş" olarak korunmuştur.** Yeni dosyalar için **yalnız kural adı** kullanılmalıdır. Sıra: kural adı → eski adlar (yalnız kural bulunamazsa). Aynı şekilde `project-routemap.php` içindeki `favicon`, `og-image`/`og_image` anahtarları **tolere edilir** ama artık öncelikli değildir; **patron bu anahtarları routemap'ten silmek istiyor** — bu görevde routemap dosyalarına dokunulmadı, kaldırma kararı patrona aittir.
+
+### Changed
+
+- **`project-routemap.php` artık panel ön eki için TEK kaynak; `project-settings.php` içindeki `has_route_map` ve `dashboard_prefix` anahtarları motor tarafından artık OKUNMAZ.** (Patron kararı 05.10.2026; kırıcı değil.) İki düzeltme:
+
+  1. **`Config.php` — `has_route_map` kapısı KALDIRILDI.** `project-settings.php` yüklenirken, aktif `project_key` için `project-routemap.php` `view_mapping[<key>]` değerleri **her zaman** `project-settings` üstüne birleşir. Önceden birleştirme yalnızca `has_route_map` anahtarı doğruysa çalışıyordu; anahtar yoksa `view_mapping` hiç uygulanmıyordu — bu yüzden canlıda `has_route_map` yazılmayan projelerde (ornek-proje-1, ornek-proje-2) ayarların siteye özel kısımları hiç okunmuyordu. Birleştirmenin gövdesi, `getRouteConfig($activeKey)` çağrısı ve yazma sırası **değiştirilmedi**; yalnızca `&& !empty(...['has_route_map'])` koşulu kalktı.
+
+  2. **`SystemGuardHandler` — bakım modu panel ön eki `project-settings`'ten okunmuyor.** Birincil kaynak `project_data('dashboard_prefix', '')` = `project-routemap.php` → `ProjectDataMapper::assemble()` → BootCache → `project_data()` yolu (bu yol zaten kapısızdı); kaynak boşsa `RouteBlueprint::DASHBOARD_PREFIX` (`dashboard`) devreye girer. `Config::get('project-settings.dashboard_prefix')` geriye uyum yedeği olarak **silindi**. Muafiyet listesi (`RouteBlueprint::SYSTEM_ALLOWED_PATHS`), S-1 yol ayrıştırma koruması ve S-2 boş-IP koruması **aynen duruyor**.
+
+  **Geriye uyum (canlı dosyalar bozulmaz):** `project-settings.php` içinde `has_route_map` veya `dashboard_prefix` **kalsa bile** motor çalışır; bu iki anahtar artık yalnızca YOK SAYILIR, hiçbir davranışı etkilemez. Yani canlı dosyaları silmek zorunlu değildir — silmek isteyenler temizlik için yapabilir. Kaldırılırsa panel ön eki **routemap'te tanımlı olmalıdır**; routemap'te yoksa `RouteBlueprint::DASHBOARD_PREFIX` (`dashboard`) uygulanır.
 
 ### Added
+- **RbnCommon CSS motoru eksik siniflarla tamamlandi (gorsel degisiklik yok, yeni kural yok).** `rbn-master.css` kapanisindaki on eksiz (katman B) yardimci sinif katmani yarim birakilmis; motor Bootstrap'in *islevlerinin* tamamini kendi `var(--rbn-*)` token'lariyla sunmuyordu. Kapsanan isler: (1) **`.rbn-empty-state`** — her liste/tablo/panel ekraninda yapisal olarak bulunabilen bos-durum blogu; "hic kayit yok" ve "filtre sonucu yok" icerik modlari **ayni sinifla, farkli icerikle** ayrilir. (2) **`.rbn-drawer-right` + `.rbn-drawer-body` / `.rbn-drawer-title`** — sag ray 992px altinda gizlenir ve mevcut overlay drawer'a devreder; tetikleyici icin **yeni bir toggle sinifi yazilmadi**, mevcut `.rbn-btn` + `[data-rbn-drawer]` kullanilir. (3) **`.rbn-card-media`** — yalniz yuzey + oran tanimlar (kenarlik yok, ust koseler yuvarlak, alt koseler 0); gorsel view'da gercek `<img>` olarak yazilir; oran 16/9 kilitlidir, `-portrait` (4/5) ve `-square` (1/1) varyantlari vardir; **`.rbn-card-subtitle` / `-text` / `-link`** ve **`object-fit-*`** yardimcilari eklendi. (4) **Yeni `core/utilities.css`** (katman B): tek yonlu bosluk (`pt/pb/ps/pe`), `mx/my`, sifir resetleri, negatif bosluk, `overflow-*`, `z-*`, `order-*`, sizing, `visually-hidden`, tipografi, `align-self-*`, konum/kenar, `gx/gy/row-gap/column-gap`. (5) **Form:** `.input-group` / `.input-group-text` / `-sm` / `-lg` ve `.form-control-sm/lg`, `.form-select-sm/lg`. (6) **Renk ve sinir:** `rounded` ailesi, `border-1..5` ve kenar/sifir varyantlari, `border-opacity-*`, `opacity-*`, eksik `bg-*` / `text-*` renkleri. **Uyum:** sayi olcegi motorun mevcut olcegiyle birebir ayni tutuldu (`p-3` = 16px gibi), boylece `class="p-3 pt-5"` tutarli calisir; tum degerler mevcut `var(--rbn-*)` token'larindan okunur, **yeni renk ve yeni token tanimlanmadi**. Mevcut siniflarin hesaplanan stilleri dogrulandi: 22 temsilci sinifin `getComputedStyle` ciktisi degismedi; duman testi **REGRESYON=0**, 6 yerel site 200, kabul kosusu KIRMIZI 0 / YESIL 125 / ELLE 7 / HATA 0. **Framework surumu degistirilmedi.**
+
+
+- **Proje veritabanı bilgisi artık `project-settings.php` içinde İKİ profille durabilir: `DB_PROFILES`.** Yeni çözücü `ProjectDbProfileResolver` (`Core/System/Config/Engine/Database/`) `DB_PROFILES.local` / `DB_PROFILES.production` bloklarından çalıştığı ortama göre birini seçer. **Geriye uyumlu:** `DB_PROFILES` yoksa eski düz `DB_*` anahtarları aynen çalışır (kırıcı değişiklik yok, mevcut canlı dosyaları etkilenmez). Dört okuyucu — `DatabaseConfig::fromRaw()`, `DatabaseGuardProvider::loadCredentials()`, `ProjectDataMapper::buildProjectPdo()` ve `ProjectCleanupJob` — artık **tek** çözücüyü kullanır; ikinci bir profil seçme kodu yazılmadı.
+
+  Ortam kararı **sunucunun kimliğine** bakar, isteğe değil: ortam değişkeni `RBN_DB_PROFILE` (`local`/`production`; başka değer "karar yok" sayılır) → **framework kökündeki tam `localhost` yol segmenti**. Çalışılan dizin (`getcwd()`), alan adı ve `REMOTE_ADDR`/`Host` başlığı bilerek **kullanılmaz**: `is_local()` bir tarayıcıya dönük yardımcıdır (istek kimliğine bakar) ve veritabanı seçimine temel yapılırsa aynı sunucuda istek kimliğine göre farklı veritabanlarına bağlanılırdı. Belirsizlik her zaman `production` sayılır (fail-closed).
+
+  **Fail-closed:** seçilen profil yoksa, profil içinde zorunlu anahtar (`DB_HOST`/`DB_NAME`/`DB_USER`/`DB_PASS`/`DB_CHARSET`) eksikse ya da bir değer `__DOLDUR__` yer tutucusuysa **AÇIK hata** verilir; motor diğer profile ya da `root`/boş parolaya sessizce düşmez. Hata metni yalnızca anahtar/profil **adı** yazar, sır değeri yazmaz. `RBN_DB_PROFILE` ortam değişkeni `EnvKeys::RBN_DB_PROFILE` olarak kayıtlıdır.
 
 - **Kiracı kapsamının istisnası artık modele taşındı: `BaseModel::$projectScopeIncludes`.** `QueryModelTrait` içinde `cm_sys_ip_blocks` **tablo adı sabiti** gömülüydü; tek bir tablo için yazılmış istisna büyüdükçe ikinci bir tablo eklemek kabuğu düzenlemek olurdu. Artık istisna modelin kendi dosyasında beyan edilir (`CmSysIpBlocksModel → ['GLOBAL']`). Kural kabukta tek: varsayılan `[]`, bildirilen dizi varsa kapsam `project_key IN (aktif, …istisnalar)`, yoksa `project_key = aktif`. Kapsam süzgeci artık **tablo adı ile nitelikli** yazılır (`z_settings.project_key`); JOIN'li sorgularda iki tabloda da `project_key` varsa MySQL 1052 "ambiguous" vermeden önce bu gerekliydi.
 
@@ -40,9 +134,17 @@ Güvenlik girdileri tarafsız yazılır: ne değişti ve etkisi ne, sömürme ad
 
 - **Kapsamlı bağlantı yardımcısı: `ConnectionTrait::connectionScoped(string $name, callable $islem)`.** Bağlantıyı geçici olarak başka bir adla çalıştırıp iş bitince `finally` ile geri alan "kaydet/geri al" deseninin **tek yazılışı** eklendi. Mevcut `connection()` imzası **değişmedi**; yalnız elde kodla birebir aynı davranan yeni bir yardımcı eklendi: geri alma `finally` içindedir (istisna olsa da aktif bağlantı eski haline döner), istisna yutulmaz, işin dönüş değeri aynen geçer, iç içe kullanılabilir. Master geçişi yapan yardımcı kendi elindeki elle deseni silip bu çağrıya devrediyor; metot silinmedi ve imzası korundu. Kırıcı değildir, şema değişikliği yoktur.
 
+- **RbnCommon CSS motoru iki pakete bolundu ve kalan 306 eksik islev motor dosyalarina tasindi.** `rbn-master.css` TEK bir `@import` zinciridir ve `AssetBundles::STACK_MAP` uzerinden **her sayfaya** gider; bu yuzden yeni islevleri master`a eklemek gzip butcesini patlatiyordu. Karar: **master`in kapanisi degistirilmedi**, yeni siniflar **istege bagli paketlere** konuldu.
+
+  **(1) Yeni paket `rbnExtended`** — `optional/rbn-utilities-extended.css` (312 secici) + `optional/rbn-components-extended.css` (153 secici). Bu paket `STACK_MAP` icine **GIRILMEDI**: hicbir sayfaya otomatik yuklenmez, yalnizca proje/gorunum acikca `assets => ['rbnExtended']` (ViewMap) veya `$this->addAsset('rbnExtended')` (Controller) dediginde yuklenir. `AssetBuilder` hic degistirilmedi — `collect()` zaten bundle adini styles listesine cozuyordu. Kapsanan isler: `offset-*`, `row-cols-*`, `col-auto` / `col-{sm,md,lg,xl}-auto`, duyarli `d-*` / `flex-*` / `justify-*` / `items-*` / `order-*` (sm·md·lg·xl·xxl), `g-0`, `container-md/xl`, `rounded-sm/xl`, `shadow-xs/hover`, `fs-xxs`, `link-*`, `*-opacity-10/100`, `text-*-emphasis`, `.rbn-visible` / `.rbn-invisible` / `.rbn-visually-hidden` alias`lari, `.is-valid` / `.was-validated` / `.rbn-form-feedback-*`; bilesenlerde `rbn-btn-{block,info,light,outline-dark,outline-info,outline-light,outline-secondary}`, `rbn-alert-{dark,info,light,heading,link}`, form on ekleri (`rbn-form-control`, `-sm/-lg`, `-plaintext`, `-color`, `rbn-form-select`, `rbn-form-range`, `rbn-form-text`, `rbn-form-floating`, `rbn-input-group-{sm,lg}`), `rbn-dropdown-{start,end,text,toggle}`, `rbn-modal-{backdrop,dialog,content,header,centered,scrollable}`, `rbn-navbar*`, `rbn-list-*`, `rbn-breadcrumb*`, `rbn-ratio{,-1x1,-16x9,-4x3}`, `rbn-progress-track`, `rbn-spinner-{sm,grow}`, `rbn-table-{borderless,row-active,responsive}`, `rbn-display-1..6`, `rbn-tooltip*`, `rbn-popover*`, `rbn-toast-{header,body}`, `rbn-carousel*`.
+
+  **(2) `core/rbn-auth.css`** — `Resources/Views/RbnAuth/Layouts/auth_header.rbn.php` icindeki 12,5 KB`lik view-ici `<style>` blogu (17 `rbn-auth-*` sinifi, 29 hardcoded hex) motor dosyasina tasindi; `rbn_core_auth` paketi artik bu dosyayi da istiyor. **29 hex yerine mevcut `--rbn-*` token`lari ve 20 yeni `--rbn-auth-*` saydamlik tonu** kullaniliyor. Diger framework view`larina (`Resources/Views/`) dokunulmadi.
+
+  **Uyum ve olcu:** `rbn_master` paketinin istedigi dosyalar birebir ayni kaldi, `rbn-master.css` kapanisi **19 dosya / 47 884 B gzip** olarak **DEGISMEDI** (butce asimi yok). Yeni paketler ayri olculdu: `rbn-auth.css` 2 682 B gzip, `rbnExtended` 8 242 B gzip. Dogrulama: mapping JSON`undaki 863 hedefin **863`u de tanimli** (once 306 eksikti), **ters uyusmazlik 0**; 107 yeni sinif `getComputedStyle` ile 375/768/1280`de olculdu; 44 mevcut sinifin hesaplanan stili 132/132 ayni; login sayfasi 375/768/1280`de once-sonra karsilastirmasi **26/26 ayni, PNG farki 0**; 4 yerel site ana sayfa + iletisim DOM/computed-style/PNG karsilastirmasi fark 0 (ornek-site-1 ve ornek-proje-1'taki kucuk PNG farklari **kod tabanli olmayan** sayfa ici canli icerik; ayni kod tabaniyla iki kez calistirildiginde ayni farklar tekrar uretiliyor). Duman testi **REGRESYON=0**, 6 yerel site 200, kabul kosusu kotuylesmedi, birim testi yeni: `fw_css_motor_2_bundle` 13/13 yesil. **Framework surumu degistirilmedi.**
+
 ### Changed
 
-- **13 çok kiracılı modelde kiracı izolasyonu AÇILDI (KIRICI — model bazında ölçülerek).** FW-ALTYAPI-1 H'de ölçülen ve tek tek taşınan modeller: `FaqsModel`, `PagesModel`, `FrontendMenusModel`, `SettingsModel`, `SidebarCategoriesModel`, `SidebarMenusModel`, `ContentCategoryModel`, `ContentDraftModel`, `CronLogsModel`, `RssSourceModel`, `RssBlacklistModel` (framework) + `AAProductModel` (aritma) + `IcerikModel` (rbncore) → `protected bool $scoped = true`. `BaseModel::$scoped` **false olarak kaldı**; 68 somut model kapsam dışı kalmaya devam ediyor. Ölçülen etki: `appsro` kiracısı `sroweb` veritabanından `sroweb`'in SSS ve sayfa kayıtlarını görebiliyordu; kapsam sonrası göremiyor. Kapsamlı model artık `create()/update()` ile `project_key` değerini **sunucu bağlamından** yazar (B-20) ve okuma süzgecini otomatik uygular. Ayrıntı ve geri alım için `UPGRADING.md`.
+- **13 çok kiracılı modelde kiracı izolasyonu AÇILDI (KIRICI — model bazında ölçülerek).** FW-ALTYAPI-1 H'de ölçülen ve tek tek taşınan modeller: `FaqsModel`, `PagesModel`, `FrontendMenusModel`, `SettingsModel`, `SidebarCategoriesModel`, `SidebarMenusModel`, `ContentCategoryModel`, `ContentDraftModel`, `CronLogsModel`, `RssSourceModel`, `RssBlacklistModel` (framework) + `AAProductModel` (ornek-proje-5) + `IcerikModel` (rbncore) → `protected bool $scoped = true`. `BaseModel::$scoped` **false olarak kaldı**; 68 somut model kapsam dışı kalmaya devam ediyor. Ölçülen etki: `ornek-kiraci` kiracısı `ornek-proje-3` veritabanından `ornek-proje-3`'in SSS ve sayfa kayıtlarını görebiliyordu; kapsam sonrası göremiyor. Kapsamlı model artık `create()/update()` ile `project_key` değerini **sunucu bağlamından** yazar (B-20) ve okuma süzgecini otomatik uygular. Ayrıntı ve geri alım için `UPGRADING.md`.
 
 - **`project_key` yazma yolu artık `'default'` sentinelini ASLA yazmıyor.** Ölçülen gerçek: yedi yerel veritabanındaki 74 kolonda `project_key='default'` satırı yoktur; yani bu değer ne okumada işe yarar (her zaman 0 satır) ne yazmada (görünmez, sahipsiz satır). Bağlam çözülemediğinde (`getActiveProjectKey()` yedeğine düşüldüğünde) kapsamlı model artık hiçbir `project_key` yazmaz; çağıran bir değer verdiyse o korunur, vermediyse kolon `NULL` kalır (hiçbir kiracının kapsamına girmez — fail-closed).
 
@@ -59,6 +161,8 @@ Güvenlik girdileri tarafsız yazılır: ne değişti ve etkisi ne, sömürme ad
 - **Durum yazımı için anlamı açık yeni adlar: `setStatus()` ve `setStatusById()`.** `toggleStatus` adı iki katmanda iki farklı sözleşme taşıyordu (model/sağlayıcıda 2. parametre alan adı, serviste istenen değer) ve istenen değer sağlayıcı katmanına giderken düşüyordu. Yeni adlar bu sözleşmeyi tekilleştirir; eski ad silinmedi, imzası değişmedi, `@deprecated` işaretlendi ve kullanımı saatlik günlüğe düşüyor. Panelde "durum değiştir" isteği artık istenen değeri yazıyor; `null` değer verildiğinde eski "değiştir" anlamı birebir korunur. Ayrıntı için `UPGRADING.md`.
 
 ### Fixed
+
+- **Bakım modu muafiyeti panel ön ekini yanlış kaynaktan okuyordu (`SystemGuardHandler`).** Panel ön eki iki ayrı yerden geliyordu: rotalar ve önbellek **tek kaynaktan** (`Core/Config/project-routemap.php` → `view_mapping[<project_key>]` → `ProjectDataMapper` → `project_data()`, bu yolda hiçbir kapı yok) okurken, bakım modu muafiyeti ikinci bir yerden (`project-settings.dashboard_prefix`) okuyordu. İkisi ayrıştığında **bakım modunda panel yolu kilitlenir**: rota `/rbn` altındayken muafiyet `/dashboard`'a bakardı (veya tersi). Artık sıra tek: önce `project_data('dashboard_prefix')` (tek kaynak), yoksa `project-settings.dashboard_prefix` (**geriye uyum yedeği korundu**), hiçbiri yoksa framework sabiti. Yardımcı `function_exists` ile korunur (CLI/erken boot). Güvenlik sınırları **gevşetilmedi**: sorgu parametresi içinde taşınan istisna metinleri, statik varlık istisnaları, sistem izinli yollar ve boş IP'nin VIP sayılmaması aynen durur; kırıcı değişiklik yoktur.
 
 - **`UNIQUE (project_key, <slug>)` varlığı yanlış ölçülüyordu (veri bütünlüğü).** Ölçüm, indeksin varlığını `COLUMN_NAME IN ('project_key', <slug>)` filtresiyle soruyordu; **üç kolonlu** bir UNIQUE (ör. `project_key, type, slug`) indeksi de bu filtreyle **iki** satır döndürüp "iki kolonlu UNIQUE var" sanılıyordu. Sonuçta iki kolonlu UNIQUE hiçbir tabloya ekleniyordu. `TenantKeyMigration` artık indeksin **tüm kolonlarını** okuyup listesini sırayla **birebir** karşılaştırıyor (kolon sayısı da); ekleyici `UNIQUE (project_key, <slug>)` ekleyen `applyUnique()` yalnız **çakışma yoksa** çalışıyor, çakışmalı tabloyu `skipped_conflict` durumuyla atlayıp sayısını raporluyor. Kırıcı değildir; mevcut indekslere dokunmaz, yalnız eksik olanı ekler (`revertUnique()` yalnız kendi ürettiği ada sahip indeksi düşürür).
 
@@ -104,9 +208,9 @@ Güvenlik girdileri tarafsız yazılır: ne değişti ve etkisi ne, sömürme ad
 
 - **Orta/düşük şiddetli güvenlik sertleştirmeleri (altı paket).** (1) Origin/Referer denetimi bozuk URL'de artık hata (500) vermeden isteği reddediyor; joker alan adı eşleşmesi başa ve sona sabitlendi. (2) Üretimde hata/yol sızıntıları kapandı: iki repository'nin sistem günlüğüne ham veritabanı mesajı yazılmıyor (sınıf adı + kod; ayrıntı yalnız debug kanalında), `View` render hatası ve `ExceptionHandler` çözüm ipucu yalnız yerel geliştirmede ayrıntı gösteriyor, indirme başlığındaki dosya adı (`Content-Disposition`) satır sonu/tırnak kaçışlı. (3) Dosya yüklemede çift uzantı için yerel geliştirme muafiyeti kaldırıldı; gömülü `<?php` taraması 1 MB'a genişletildi. (4) `SchemaBuilder` kimlik kaçışı tek geçitte, `convert()` collation değeri doğrulanıyor. (5) `custom_path` dosya yoluna girmeden önce doğrulanıyor (geçersizse "yapılandırma yok" yoluna düşer, istisna atmaz). (6) Çıkışta silinen çerezler oluşturulurken kullanılan bayraklarla gönderiliyor; başarılı girişte eski parola özeti sessizce yenileniyor (`CryptoHelper::needsRehash()`).
 
-- **CRUD girişi artık model beyaz listesine bağlı: `CrudControllerTrait::create()/update()` ham istek gövdesini servis/modele aktarmıyor.** Standart CRUD uçları `request->form([])` çağırıyordu; kuralsız bu çağrı **tüm** istek alanlarını döndürür (CSRF/iç anahtarlar düşülmüş haliyle) ve veri doğrudan servise akıtılıyordu. Artık veri hedef modelin `$fillable` listesine göre budanır. **Geri uyumluluk kilidi korunur:** hedef model çözülemiyorsa veya `$fillable` tanımlı değilse veri **hiç değişmeden** geçer — beyaz listesi olmayan modelin davranışı birebir aynıdır. Birincil anahtar (`id`) her zaman geçer. Düşürülen alanlar `security` kanalına **değer taşımadan** `CRUD_INPUT_FIELD_DROPPED` olarak loglanır. Altı modülün (aritma, sroweb, rbnflix, sefa, tuberadyo, minaemlak) 35 yazma modeli beyaz listeye bağlandı; listeler gerçek veritabanı şemasından ölçülmüştür ve panelin gerçekten gönderdiği alanların tamamını kapsar.
+- **CRUD girişi artık model beyaz listesine bağlı: `CrudControllerTrait::create()/update()` ham istek gövdesini servis/modele aktarmıyor.** Standart CRUD uçları `request->form([])` çağırıyordu; kuralsız bu çağrı **tüm** istek alanlarını döndürür (CSRF/iç anahtarlar düşülmüş haliyle) ve veri doğrudan servise akıtılıyordu. Artık veri hedef modelin `$fillable` listesine göre budanır. **Geri uyumluluk kilidi korunur:** hedef model çözülemiyorsa veya `$fillable` tanımlı değilse veri **hiç değişmeden** geçer — beyaz listesi olmayan modelin davranışı birebir aynıdır. Birincil anahtar (`id`) her zaman geçer. Düşürülen alanlar `security` kanalına **değer taşımadan** `CRUD_INPUT_FIELD_DROPPED` olarak loglanır. Altı modülün (ornek-proje-5, ornek-proje-3, ornek-proje-4, ornek-proje-6, ornek-proje-2, ornek-proje-1) 35 yazma modeli beyaz listeye bağlandı; listeler gerçek veritabanı şemasından ölçülmüştür ve panelin gerçekten gönderdiği alanların tamamını kapsar.
 
-- **Süzgeçten geçen yazma yolları da beyaz listeye bağlandı (`filterFillable()`).** `model->query()->insert()/update()` yolları `CrudModelTrait`'ten geçmediği için toplu atama süzgeci kendiliğinden çalışmıyordu. `MassAssignmentTrait::filterFillable()` eklendi ve sefa (`PbProgramRepository::saveProgram`) ile minaemlak (`OfisProperty`/`OfisCustomer`/`OfisContract`/`OfisPersonel`/`OfisCash`/`DsaPropertyRepository`) repository'lerindeki bu tür yazma yollarında açıkça çağrıldı. Bayrak kapalıyken veya liste tanımsızsa veri yine dokunulmaz.
+- **Süzgeçten geçen yazma yolları da beyaz listeye bağlandı (`filterFillable()`).** `model->query()->insert()/update()` yolları `CrudModelTrait`'ten geçmediği için toplu atama süzgeci kendiliğinden çalışmıyordu. `MassAssignmentTrait::filterFillable()` eklendi ve ornek-proje-6 (`PbProgramRepository::saveProgram`) ile ornek-proje-1 (`OfisProperty`/`OfisCustomer`/`OfisContract`/`OfisPersonel`/`OfisCash`/`DsaPropertyRepository`) repository'lerindeki bu tür yazma yollarında açıkça çağrıldı. Bayrak kapalıyken veya liste tanımsızsa veri yine dokunulmaz.
 
 - **RbnAdmin profil ekranı gerçek şemaya uyarıldı.** `z_users` tablosunda `firstname`/`lastname`/`phone_number` kolonları yok; profil formu bu alanları gönderdiği için ekran "Unknown column" ile kırık kalıyordu (ve T4 sonrası `email` de düşüyordu — `email` `UsersModel::$guarded` içindedir). Ekran tek `name` kolonuna göre düzeltildi; `email` açık bir yetkili yazıcıya taşındı (`UserRepository::updateEmail()` → `authorizeFields(['email'])`, `UserRepository::updateProfile()` → `UserManager::updateProfile()`).
 
@@ -354,12 +458,13 @@ Güvenlik girdileri tarafsız yazılır: ne değişti ve etkisi ne, sömürme ad
 ## Bağlantılar
 
 - Depo adresi: https://github.com/RbnCore/rbnframework
-- Karşılaştırma: [0.9.1] · [0.9.0]
+- Karşılaştırma: [0.9.2] · [0.9.1]
 - Güvenlik bildirimi: [SECURITY.md](SECURITY.md)
 - Yükseltme notları: [UPGRADING.md](UPGRADING.md)
 - Biçim: [Keep a Changelog](https://keepachangelog.com/tr/1.1.0/) · [SemVer](https://semver.org/lang/tr/)
 
-[Unreleased]: https://github.com/RbnCore/rbnframework/compare/v0.9.1...HEAD
+[Unreleased]: https://github.com/RbnCore/rbnframework/compare/v0.9.2...HEAD
+[0.9.2]: https://github.com/RbnCore/rbnframework/compare/v0.9.1...v0.9.2
 [0.9.1]: https://github.com/RbnCore/rbnframework/compare/v0.9.0...v0.9.1
 [0.9.0]: https://github.com/RbnCore/rbnframework/releases/tag/v0.9.0
 - **Sablon motoru artık ifade guvenlik kapısı kullanıyor: `{{ }}` / `{!! !!}` içindeki ifade ham PHP olarak gömülmüyor.** Değer `htmlspecialchars` ile kaçırılıyordu, ama **ifadenin kendisi** sunucuda çalışıyordu; `projects/`, `domains/` ve framework şablonlarında kullanılan ~1500 benzersiz ifadenin tamamı envantere alındı ve yasaklı yapılar (kabuk/eval/dosya yazma/`include`/`new`/derleyici dışına çıkma) için derleme hatası veren kapı eklendi. **Geri uyumluluk kanıtı:** korpusun tamamı kapıdan geçiyor (0 yanlış-pozitif); şablonlarda kullanılan değişken-fonksiyon çağrıları (`$getEmoji(...)`, `$cleanPhone(...)`, `$categoryColor(...)`) çalışmaya devam ediyor.

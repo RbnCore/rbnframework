@@ -115,7 +115,7 @@ class RbnAdminController extends BaseController
         // 🎻 RBN 3.5: Dynamic App Name / Project Group Logic
         $rawAppName = (!empty($groupProjects) && count($groupProjects) > 1) ? $this->projectGroup : $this->appName;
         $data['stats']['app_name'] = mb_convert_case((string) ($rawAppName ?? 'RBN Framework'), MB_CASE_TITLE, 'UTF-8');
-        $data['stats']['app_version'] = $this->appVersion ?? '1.0';
+        $data['stats']['app_version'] = app_version();
 
         // Compute active project key and display name for dashboard view
         $projectKey = active_project_key();

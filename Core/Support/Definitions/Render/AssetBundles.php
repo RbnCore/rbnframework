@@ -55,10 +55,22 @@ class AssetBundles
             ]
         ],
         'rbn_core_auth' => [
-            // 🎼 RBN Core Master Engine: Master CSS + Universal Master JS
+            // 🎼 RBN Core Master Engine: Master CSS + Auth Identity Suite CSS
+            // rbn-auth.css, eskiden `Resources/Views/RbnAuth/Layouts/auth_header.rbn.php`
+            // icindeki view-içi `<style>` bloguydu; motor-once kurali geregi buraya tasindi.
             'styles' => [
                 AD::RBN_MASTER_CSS,
+                AD::RBN_AUTH_CSS,
             ]
+        ],
+
+        // 📦 OPT-IN CSS PACKETS (core/rbn-master.css kapanisinin DISINDA) 🧾
+        // Bu paketler HER sayfaya otomatik yuklenMEZ. Bir proje veya gorunum
+        // acikca istemedigi surece hicbir sayfaya girmez -> mevcut sayfalarin
+        // davranisi degismez. Iste: `assets => ['rbnExtended']` (Map) veya
+        // `$this->addAsset('rbnExtended')` (Controller).
+        'rbnExtended' => [
+            'styles' => [AD::RBN_EXTENDED_UTILITIES_CSS, AD::RBN_EXTENDED_COMPONENTS_CSS],
         ],
 
         // 🛰️ Feature Bundles (Atomic & Modular Enhancements)

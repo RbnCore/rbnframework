@@ -8,6 +8,7 @@ use Rbn\Framework\Core\Base\Services\BaseProvider;
 use Rbn\Framework\Core\Support\Contracts\Base\BaseProviderInterface;
 use Rbn\Framework\Core\Support\Exceptions\PreflightException;
 use Rbn\Framework\Core\System\Discovery\Clusters\Logic\Definition\Definition;
+use Rbn\Framework\Core\System\Config\Engine\Database\ProjectDbProfileResolver;
 use PDO;
 use PDOException;
 
@@ -45,7 +46,21 @@ class DatabaseGuardProvider extends BaseProvider implements BaseProviderInterfac
             throw new PreflightException("Proje yapılandırma dosyası eksik!", "Yol: [{$path}]");
         }
 
-        $source = include $path;
+        // [FW-DB-PROFIL] local/production profil seçimi TEK çözücüde
+        // (`ProjectDbProfileResolver`). Profil eksik / içinde anahtar eksik /
+        // `__DOLDUR__` yer tutucusu varsa çözücü fail-closed `RuntimeException`
+        // fırlatır; o durumda aşağıdaki "zorunlu anahtar eksik" preflight
+        // hatasına ÇEVİRİLİR (kullanıcıya anlamlı teşhis, sır değeri YOK).
+        try {
+            $source = ProjectDbProfileResolver::resolve((array) (include $path));
+        } catch (\RuntimeException $e) {
+            throw new PreflightException(
+                'Yapılandırma Hatası! [database_project]',
+                $e->getMessage(),
+                'Lütfen ' . $path . ' dosyasındaki DB_PROFILES bloğunu kontrol edin.'
+            );
+        }
+
         $creds = [];
 
         foreach ($requiredKeys as $key) {

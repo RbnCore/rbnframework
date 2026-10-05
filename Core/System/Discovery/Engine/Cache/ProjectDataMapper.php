@@ -413,6 +413,8 @@ class ProjectDataMapper
 
         try {
             $cfg    = (array) (include $settingsPath);
+            // [FW-DB-PROFIL] local/production profil seçimi TEK çözücüde.
+            $cfg    = \Rbn\Framework\Core\System\Config\Engine\Database\ProjectDbProfileResolver::resolve($cfg);
             $map    = \Rbn\Framework\Core\System\Config\Definitions\DbProfiles\ProjectDbData::KEYS_MAP;
             $dbName = $cfg[$map['database']] ?? '';
             if (empty($dbName)) {

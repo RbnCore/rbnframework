@@ -10,6 +10,7 @@ use Rbn\Framework\Core\Routes\Engine\Providers\Router;
 use Rbn\Framework\Core\Support\Definitions\Route\RouteBlueprint;
 use Rbn\Framework\Core\Base\Services\Traits\Service\Blogcontent\ContentLegacyRedirectServiceTrait;
 use Rbn\Framework\Core\Http\Engine\Traits\Response\RedirectTrait;
+use Rbn\Framework\Core\Support\Definitions\Render\AssetConvention;
 
 /**
  * RedirectManager - Extensible Request & URL Normalization Engine 🌐🔄⚓
@@ -535,7 +536,16 @@ class RedirectManager extends BaseManager
 
         // 1. Favicon & Mobil Kısayol Dosyaları (ico, png, svg, apple-touch-icon, android-chrome)
         $isFavicon = false;
-        $faviconTarget = "/images/favicon-{$projectKey}.png";
+
+        // [FW-ASSET-KONVANSIYON] Hedef artık SABİT `.png` DEĞİL: projenin
+        // GERÇEK favicon dosyası çözülür (`images/favicon-{key}.{svg,png,ico}`).
+        // Ölçülen hata: `favicon-<key>.svg` olan projede `/favicon.ico` →
+        // 301 → `/images/favicon-<key>.png` → 404 (uçantı yanlış yazılıyordu).
+        // Çözümleyici TEK YERDE: `AssetConvention` (SeoResolver ile aynı).
+        $faviconRel = AssetConvention::findFavicon($projectKey);
+        $faviconTarget = $faviconRel !== null
+            ? '/' . $faviconRel
+            : '/framework-assets/images/favicon-rbnauth.svg';
 
         if (in_array($cleanUri, RouteBlueprint::FALLBACK_FAVICONS, true)) {
             $isFavicon = true;
@@ -559,8 +569,15 @@ class RedirectManager extends BaseManager
         }
 
         // 2. OpenGraph/Sosyal Paylaşım Görselleri
+        // [FW-ASSET-KONVANSIYON] Hedef sabit `.png` değil; projenin GERÇEK
+        // og dosyası çözülür (`images/og-image-{key}.{png,jpg,webp}`).
+        // Proje dosyası yoksa UYDURMA adres üretilmez: yol olduğu gibi bırakılır
+        // (düzgün 404) — kural "dosya yoksa meta etiketi yok" ile aynıdır.
         if (in_array($cleanUri, RouteBlueprint::FALLBACK_OG_IMAGES, true)) {
-            $this->path = "/images/og-image-{$projectKey}.png";
+            $ogRel = AssetConvention::findOgImage($projectKey);
+            if ($ogRel !== null) {
+                $this->path = '/' . $ogRel;
+            }
             return;
         }
     }

@@ -6,6 +6,7 @@ namespace Rbn\Framework\Core\Render\Resolvers;
 
 use Rbn\Framework\Core\Base\BaseComponent;
 use Rbn\Framework\Core\Base\Services\BaseService;
+use Rbn\Framework\Core\Support\Definitions\Render\AssetConvention;
 
 /**
  * SchemaResolver - Context resolver for page SEO metadata and request paths 🧠🛰️⚓
@@ -104,18 +105,48 @@ class SchemaResolver extends BaseComponent
     }
 
     /**
-     * Resolve default fallback image from project-routemap.php config 🖼️
+     * Resolve the JSON-LD default image (fallback when the model has no image).
+     *
+     * [FW-ASSET-KONVANSIYON] KURAL TEK MERKEZ: `AssetConvention`
+     * (`images/og-image-{project_key}.{png,jpg,webp}`). Önceki hâlde burada
+     * sabit `/images/og-image.png` ve `project-routemap` `og_image` anahtarı
+     * kullanılıyordu — meta etiketi ile JSON-LD İKİ AYRI kaynaktan geliyordu
+     * ve sabit ad hiçbir projede yoktu.
+     *
+     *geriye uyum: routemap'te `og_image` / `og-image` anahtarı varsa TOLERE
+     * edilir (patron bu anahtarları routemap'ten silmek istiyor; bu görevde
+     * routemap dosyalarına DOKUNULMADI — CHANGELOG'da kaldırma notu yazılı).
+     * Ancak KURAL ÖNCELİKLİ: dosya gerçekten varsa kullanılır.
+     *
+     * @return string tam URL; proje dosyası YOKSA boş string (uydurma görsel
+     *                     adresi üretilmez — çağıran taraf `image` alanını boş bırakır)
      */
     public function resolveDefaultImage(): string
     {
         $projectKey = function_exists('project_key') ? project_key() : 'default';
-        $ogImage = '/images/og-image.png';
 
-        $routeMap = $this->resolveProjectConfig('project-routemap');
-        if (is_array($routeMap)) {
-            $ogImage = $routeMap['view_mapping'][$projectKey]['og_image'] ?? $ogImage;
+        $goreli = AssetConvention::findOgImage($projectKey);
+        if ($goreli !== null) {
+            return url($goreli);
         }
 
-        return url(ltrim($ogImage, '/'));
+        // GERİYE UYUM (son çare): routemap'te yazılı GÖRELİ yol gerçekten var mı?
+        $routeMap = $this->resolveProjectConfig('project-routemap');
+        if (is_array($routeMap)) {
+            $eski = $routeMap['view_mapping'][$projectKey]['og_image']
+                ?? ($routeMap['view_mapping'][$projectKey]['og-image'] ?? null);
+
+            if (is_string($eski) && $eski !== '') {
+                $temiz = ltrim(str_replace('\\', '/', $eski), '/');
+                if (!str_contains($temiz, '..')
+                    && \Rbn\Framework\Core\System\Paths\Paths::isInitialized()
+                    && is_file(\Rbn\Framework\Core\System\Paths\Paths::publicRoot()
+                        . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $temiz))) {
+                    return url($temiz);
+                }
+            }
+        }
+
+        return '';
     }
 }

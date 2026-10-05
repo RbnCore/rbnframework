@@ -36,6 +36,8 @@ trait SystemAccessMapTrait
                 'make'    => 'Core\Services\Console\Handlers\GeneratorHandlers',
                 'migrate' => 'Core\Services\Console\Handlers\MigrationHandlers',
                 'system'  => 'Core\Services\Console\Handlers\SystemHandlers',
+                // [FW-SURUMLEME-2] Sürüm denetimi + sürüm sayacı (master DB).
+                'version' => 'Core\Services\Console\Handlers\VersionHandlers',
                 // [FW-ALTYAPI-2/H] Kiracı izolasyonu: `tenant:audit` (yalnız
                 // okur) + hedef veritabanı başına ekleyici kolon migration'ı.
                 'tenant'  => 'Core\Services\Console\Handlers\TenantHandlers',

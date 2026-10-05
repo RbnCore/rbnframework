@@ -7,6 +7,8 @@ namespace Rbn\Framework\Core\Render\Resolvers;
 use Rbn\Framework\Core\Base\Web\BaseRender;
 use Rbn\Framework\Core\Render\Configs\SeoConfig;
 use Rbn\Framework\Core\Support\Definitions\System\FrameworkIdentity;
+use Rbn\Framework\Core\Support\Definitions\Render\AssetConvention;
+use Rbn\Framework\Core\Support\Bridges\Helpers\Library\ProjectVersionResolver;
 
 /**
  * SeoResolver - The Semantic Intelligence Layer (Framework Cluster) 🧬🗺️⚓
@@ -95,7 +97,13 @@ class SeoResolver extends BaseRender
                         ? $config['app_name']
                         : 'RBN Project')));
 
-        $moduleVersion = $overrides['module-version'] ?? ($config['app_version'] ?? '1.0');
+        // [FW-SURUMLEME-2] `module-version` = PROJE surumu. TEK cozucu:
+        // `ProjectVersionResolver` (master DB `projects.version` uzerinden).
+        // Iki parcali `1.0` gibi gecersiz varsayilan YOK; deger yoksa
+        // standart baslangic surumu (`0.1.1`) kullanilir.
+        $moduleVersion = $overrides['module-version'] ?? ProjectVersionResolver::resolve(
+            $config['app_version'] ?? project_data('version')
+        );
 
         // 🎼 RBN 3.5: Centralized Favicon Resolution 🏺🛰️⚓
         $faviconRaw = $this->resolveFaviconRaw($hub, $overrides);
@@ -152,27 +160,13 @@ class SeoResolver extends BaseRender
             }
         }
 
-        // 3. Dynamic Domain/Public folder check using project-key
-        $publicRoot = \Rbn\Framework\Core\System\Paths\Paths::isInitialized() ? \Rbn\Framework\Core\System\Paths\Paths::publicRoot() : null;
-        if ($publicRoot) {
-            $candidates = [];
-            if (!empty($projectKey)) {
-                $candidates[] = "images/{$projectKey}.svg";
-                $candidates[] = "images/favicon-{$projectKey}.svg";
-                $candidates[] = "images/favicon-{$projectKey}.png";
-                $candidates[] = "images/{$projectKey}.png";
-                $candidates[] = "images/{$projectKey}.ico";
-            }
-            $candidates[] = "images/favicon.svg";
-            $candidates[] = "images/favicon.png";
-            $candidates[] = "images/favicon.ico";
-
-            foreach ($candidates as $candidate) {
-                $fullPath = $publicRoot . DIRECTORY_SEPARATOR . str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $candidate);
-                if (file_exists($fullPath)) {
-                    return $this->formatFaviconData($candidate);
-                }
-            }
+        // 3. [FW-ASSET-KONVANSIYON] KURAL: `images/favicon-{project_key}.{svg,png,ico}`
+        // Ad listesi ve oncelik sirasi TEK YERDE: `AssetConvention`.
+        // (Onceki hâli burada kendi listesini tasiyordu; `og-image` tarafi
+        //  baska bir liste tasiyordu -> og meta etiketi her sitede 404 veriyordu.)
+        $conventionFavicon = AssetConvention::findFavicon($projectKey);
+        if ($conventionFavicon !== null) {
+            return $this->formatFaviconData($conventionFavicon);
         }
 
         // 4. Config next (the old structure in project-settings.php)
@@ -225,37 +219,52 @@ class SeoResolver extends BaseRender
         $seoDb = $hub['seo'] ?? [];
         $ogImageRaw = $overrides['og_image'] ?? ($seoDb['og-image'] ?? ($hub['config']['og_image'] ?? null));
 
-        $publicRoot = \Rbn\Framework\Core\System\Paths\Paths::isInitialized() ? \Rbn\Framework\Core\System\Paths\Paths::publicRoot() : null;
         $projectKey = $this->projectKey ?? null;
 
-        if ($publicRoot) {
-            $candidates = [];
-            if (!empty($projectKey)) {
-                $candidates[] = "images/og-image-{$projectKey}.png";
-                $candidates[] = "images/og-image-{$projectKey}.jpg";
-            }
-            $candidates[] = "images/og-image.png";
-            $candidates[] = "images/og-image.jpg";
-
-            foreach ($candidates as $candidate) {
-                $fullPath = $publicRoot . DIRECTORY_SEPARATOR . str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $candidate);
-                if (file_exists($fullPath)) {
-                    $ogImageRaw = $candidate;
-                    break;
-                }
+        // 🖼️ [FW-ASSET-KONVANSIYON] KURAL: `images/og-image-{project_key}.{png,jpg,webp}`.
+        // Dosya GERCEKTEN varsa sanal `/project-assets/og-image-<key>.<ext>` adı
+        // uretilir (AssetController bu adi guvenli cozuyor).
+        //
+        // DOSYA YOKSA `null` -> `og:image` meta etiketi HIC URETILMEZ.
+        // Onceki hâl `og-image-{key}.png` adini SORU SORMAKTAYDI: dosya yoksa
+        // bile meta etiketi yaziliyor, `AssetController` bu adi cozemedigi icin
+        // HER SITE 404 donuyordu (olcum: 6 site).
+        $virtualOgName = null;
+        $legacyOgPath = null;
+        $conventionOg = AssetConvention::findOgImage($projectKey);
+        if ($conventionOg !== null) {
+            $base = basename($conventionOg);
+            // Sanal ad YALNIZCA kurala uyan dosya için üretilir
+            // (`og-image-<key>.<png|jpg|webp>`). Anahtarsız ESKİ ad
+            // (`images/og-image.png`) sanal ad DEĞİLDİR: sanal URL üretmek
+            // ölü adres verirdi; bu dosyalar doğrudan `/images/...` adresiyle
+            // servis edilir.
+            if (AssetConvention::isVirtualOgImageName($base)) {
+                $virtualOgName = $base;
+            } else {
+                $legacyOgPath = $conventionOg;
             }
         }
 
-        $projectKey = $this->projectKey ?? 'default';
-        $virtualOgName = "og-image-{$projectKey}.png";
-
-        // 🖼️ OpenGraph / Social Crawler URL Resolution (Standard project-assets Proxy)
+        // 🖼️ OpenGraph / Social Crawler URL Resolution
         $resolvedImage = null;
-        if (!empty($ogImageRaw)) {
-            if (str_starts_with($ogImageRaw, 'http') || str_starts_with($ogImageRaw, 'data:')) {
-                $resolvedImage = $ogImageRaw;
-            } else {
-                $resolvedImage = url('/project-assets/' . $virtualOgName);
+        if (!empty($ogImageRaw) && (str_starts_with($ogImageRaw, 'http') || str_starts_with($ogImageRaw, 'data:'))) {
+            // Açık URL (ayar/DB) — dokunulmaz.
+            $resolvedImage = $ogImageRaw;
+        } elseif ($virtualOgName !== null) {
+            $resolvedImage = url('/project-assets/' . $virtualOgName);
+        } elseif ($legacyOgPath !== null) {
+            $resolvedImage = url('/' . $legacyOgPath);
+        } elseif (!empty($ogImageRaw)) {
+            // Kuralda dosya yok: ayar/DB'deki GÖRELİ yol gerçekten var mı?
+            // Varsa düz dosya adresi kullanılır; yoksa meta etiketi üretilmez.
+            $goreli = ltrim(str_replace('\\', '/', (string) $ogImageRaw), '/');
+            $publicRoot = \Rbn\Framework\Core\System\Paths\Paths::isInitialized()
+                ? \Rbn\Framework\Core\System\Paths\Paths::publicRoot()
+                : null;
+            if ($goreli !== '' && !str_contains($goreli, '..') && $publicRoot
+                && is_file($publicRoot . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $goreli))) {
+                $resolvedImage = url('/' . $goreli);
             }
         }
 
@@ -337,6 +346,15 @@ class SeoResolver extends BaseRender
 
         if ($name === 'logo.svg' || str_starts_with($name, 'logo-')) {
             return $hub['company']['company-logo'] ?? ($hub['company']['logo'] ?? '');
+        }
+
+        // [FW-ASSET-KONVANSIYON] `og-image-{key}.{png,jpg|webp}` sanal adi.
+        // OG meta etiketi bu adi uretiyor; icerik fiziksel dosyadan gelir.
+        // Cozum ve yol guvenligi TEK YERDE: `AssetConvention`.
+        if (AssetConvention::isVirtualOgImageName($name)) {
+            $fiziksel = AssetConvention::resolveVirtualOgImage($name);
+
+            return $fiziksel !== null ? (string) file_get_contents($fiziksel) : '';
         }
 
         return match ($name) {

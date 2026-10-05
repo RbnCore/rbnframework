@@ -1,0 +1,382 @@
+/* ==========================================================================
+   RBN COMMON OPTIONAL: EXTENDED COMPONENT LAYER
+   (optional/rbn-components-extended.css) 🧩➕
+   --------------------------------------------------------------------------
+   Paket: `rbnComponents` (AssetBundles::BUNDLES) — ISTEGE BAGLI (opt-in).
+   `rbn-master.css` kapanisina **DOKUNMAZ**.
+
+   KAPSAM: mapping JSON'unda "EKSIK" durdugu halde motorda olmayan BILESEN
+   parcalari. Bunlar `rbn-` onekli cekirdek bilesen siniflaridir (Katman A),
+   dolayisiyla `!important` KULLANILMAZ — mevcut bilesen kodunun sozlesmesi
+   budur (bkz. components/*.css).
+
+   JS NOTU: carousel / tooltip / popover / toast icin JS YAZILMADI.
+   Bu paket YALNIZCA CSS tarafini verir; JS tarafi `RbnCommon/js` icinde
+   bulunmuyor (bkz. rapor §10).
+   ========================================================================== */
+
+/* ==========================================================================
+   1. BUTON TAMAMLAMA
+   ========================================================================== */
+.rbn-btn-block { display: flex !important; width: 100% !important; justify-content: center !important; }
+
+.rbn-btn-info {
+    background: var(--rbn-blue-500, #3b82f6);
+    border: 1px solid var(--rbn-blue-500, #3b82f6);
+    color: var(--rbn-text-on-primary, #ffffff);
+}
+.rbn-btn-info:hover { background: var(--rbn-blue-600, #2563eb); border-color: var(--rbn-blue-600, #2563eb); }
+
+.rbn-btn-light {
+    background: var(--rbn-slate-100, #f1f5f9);
+    border: 1px solid var(--rbn-slate-200, #e2e8f0);
+    color: var(--rbn-slate-800, #1e293b);
+}
+.rbn-btn-light:hover { background: var(--rbn-slate-200, #e2e8f0); border-color: var(--rbn-slate-300, #cbd5e1); }
+
+.rbn-btn-outline-dark {
+    background: transparent;
+    border: 1px solid var(--rbn-slate-700, #334155);
+    color: var(--rbn-slate-700, #334155);
+}
+.rbn-btn-outline-dark:hover { background: var(--rbn-slate-700, #334155); color: var(--rbn-white, #ffffff); }
+
+.rbn-btn-outline-info {
+    background: transparent;
+    border: 1px solid var(--rbn-blue-500, #3b82f6);
+    color: var(--rbn-blue-600, #2563eb);
+}
+.rbn-btn-outline-info:hover { background: var(--rbn-blue-500, #3b82f6); color: var(--rbn-white, #ffffff); }
+
+.rbn-btn-outline-light {
+    background: transparent;
+    border: 1px solid var(--rbn-slate-300, #cbd5e1);
+    color: var(--rbn-slate-600, #475569);
+}
+.rbn-btn-outline-light:hover { background: var(--rbn-slate-100, #f1f5f9); color: var(--rbn-slate-800, #1e293b); }
+
+.rbn-btn-outline-secondary {
+    background: transparent;
+    border: 1px solid var(--rbn-slate-500, #64748b);
+    color: var(--rbn-slate-600, #475569);
+}
+.rbn-btn-outline-secondary:hover { background: var(--rbn-slate-600, #475569); color: var(--rbn-white, #ffffff); }
+
+/* ==========================================================================
+   2. UYARI VARYANTLARI (.rbn-alert-dark / -info / -light + baslik/baglanti)
+   `components/rbnAlert.css` §6 ile ayni sozlesme.
+   ========================================================================== */
+.rbn-alert-info {
+    background: var(--rbn-blue-50, #eff6ff);
+    border-color: var(--rbn-blue-200, #bfdbfe);
+    border-left-color: var(--rbn-blue-500, #3b82f6);
+    color: var(--rbn-blue-900, #1e3a8a);
+}
+.rbn-alert-light {
+    background: var(--rbn-slate-100, #f1f5f9);
+    border-color: var(--rbn-slate-200, #e2e8f0);
+    border-left-color: var(--rbn-slate-500, #64748b);
+    color: var(--rbn-slate-800, #1e293b);
+}
+.rbn-alert-dark {
+    background: var(--rbn-slate-900, #0f172a);
+    border-color: var(--rbn-slate-700, #334155);
+    border-left-color: var(--rbn-slate-400, #94a3b8);
+    color: var(--rbn-slate-100, #f1f5f9);
+}
+.rbn-alert-heading {
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--rbn-space-1, 4px);
+}
+.rbn-alert-link { color: inherit; font-weight: 700; text-decoration: underline; }
+.rbn-alert-link:hover { color: inherit; opacity: 0.85; }
+
+/* ==========================================================================
+   3. FORMLAR — Bootstrap uyumlu on ekler
+   Mevcut `.rbn-form-input` / `.rbn-input-group` uzerine ALIAS.
+   ========================================================================== */
+.rbn-form-control { width: 100%; display: block; }
+.rbn-form-control-sm { height: 32px; font-size: 0.8rem; padding: 0 var(--rbn-space-3, 12px); }
+.rbn-form-control-lg { height: 50px; font-size: 1rem; padding: 0 var(--rbn-space-5, 20px); }
+.rbn-form-control-plaintext {
+    display: block; width: 100%; padding: 0 var(--rbn-space-3, 12px);
+    margin-bottom: 0; line-height: 1.5; color: var(--rbn-text-primary);
+    background-color: transparent; border: solid transparent; border-width: 1px 0;
+}
+.rbn-form-select { cursor: pointer; }
+.rbn-form-select-sm { height: 32px; font-size: 0.8rem; padding: 0 var(--rbn-space-3, 12px); }
+.rbn-form-select-lg { height: 50px; font-size: 1rem; padding: 0 var(--rbn-space-5, 20px); }
+.rbn-input-group-sm .rbn-form-input, .rbn-input-group-sm .form-control { height: 32px; font-size: 0.8rem; padding: 0 var(--rbn-space-3, 12px); }
+.rbn-input-group-lg .rbn-form-input, .rbn-input-group-lg .form-control { height: 50px; font-size: 1rem; padding: 0 var(--rbn-space-5, 20px); }
+.rbn-form-check-label { cursor: pointer; user-select: none; }
+.rbn-form-text {
+    margin-top: var(--rbn-space-1, 4px);
+    font-size: 0.75rem;
+    color: var(--rbn-text-muted);
+}
+.rbn-form-range { width: 100%; height: 1.5rem; padding: 0; background-color: transparent; appearance: none; }
+.rbn-form-range::-webkit-slider-runnable-track {
+    height: 0.5rem; border-radius: var(--rbn-radius-pill, 9999px); background: var(--rbn-border, #e2e8f0);
+}
+.rbn-form-range::-webkit-slider-thumb {
+    appearance: none; width: 1rem; height: 1rem; margin-top: -0.25rem;
+    border-radius: 50%; background: var(--rbn-primary, #2563eb); border: 0; cursor: pointer;
+}
+.rbn-form-range::-moz-range-track { height: 0.5rem; border-radius: var(--rbn-radius-pill, 9999px); background: var(--rbn-border, #e2e8f0); }
+.rbn-form-range::-moz-range-thumb { width: 1rem; height: 1rem; border-radius: 50%; background: var(--rbn-primary, #2563eb); border: 0; cursor: pointer; }
+
+.rbn-form-color {
+    width: 3rem; height: 1.5rem; padding: 0.2rem; cursor: pointer;
+    border: 1px solid var(--rbn-border, #e2e8f0);
+    border-radius: var(--rbn-radius-sm, 6px);
+    background-color: transparent;
+}
+
+/* Yuzen (floating) etiket */
+.rbn-form-floating { position: relative; }
+.rbn-form-floating > .rbn-form-input,
+.rbn-form-floating > .form-control { height: 56px; padding: 1.25rem var(--rbn-space-3, 12px) 0.5rem; }
+.rbn-form-floating > label {
+    position: absolute; top: 0.65rem; left: var(--rbn-space-3, 12px);
+    font-size: 0.7rem; color: var(--rbn-text-muted); pointer-events: none;
+}
+.rbn-form-floating > .rbn-form-input::placeholder,
+.rbn-form-floating > .form-control::placeholder { color: transparent; }
+
+/* ==========================================================================
+   4. AÇILIR MENÜ TAMAMLAMA (.rbn-dropdown-start / -text / -toggle)
+   ========================================================================== */
+.rbn-dropdown-start { left: 0; right: auto; }
+/* `core/dropdowns.css` §2 yalniz `.dropdown-menu-end` adiyla yaziyor; motorun
+   `rbn-` onek adlandirma sozlesmesinin (Katman A) uyumlu kardesidir. */
+.rbn-dropdown-end { right: 0; left: auto; }
+.rbn-dropdown-text { display: block; padding: var(--rbn-space-2, 8px) var(--rbn-space-3, 12px); color: var(--rbn-text-muted); font-size: 0.8rem; }
+.rbn-dropdown-toggle::after {
+    display: inline-block; margin-left: 0.4em; vertical-align: 0.15em;
+    content: ""; border-top: 0.3em solid; border-right: 0.3em solid transparent;
+    border-bottom: 0; border-left: 0.3em solid transparent;
+}
+.rbn-dropdown-toggle.show::after { transform: rotate(180deg); }
+
+/* ==========================================================================
+   5. MODAL VARYANTLARI
+   `components/rbnModal.css` yalniz Bootstrap adlariyla (.modal-*) yaziyor;
+   asagidakiler motorun `rbn-` onek adlandirma sozlesmesinin uyumlu kardesleridir.
+   ========================================================================== */
+.rbn-modal-backdrop {
+    position: fixed; inset: 0; z-index: 1050;
+    background-color: var(--rbn-bg-overlay, rgba(0, 0, 0, 0.5));
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+.rbn-modal-backdrop.show { opacity: 1; visibility: visible; }
+.rbn-modal-dialog { position: relative; width: 100%; max-width: 580px; margin: auto; pointer-events: none; }
+.rbn-modal-content {
+    pointer-events: auto; position: relative; overflow: visible;
+    background: var(--rbn-bg-surface, #ffffff);
+    border: 1px solid var(--rbn-border, #e2e8f0);
+    border-radius: 20px;
+    box-shadow: var(--rbn-shadow-modal);
+}
+.rbn-modal-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 1.6rem;
+    background: var(--rbn-bg-surface-subtle, #f1f5f9);
+    border-bottom: 1px solid var(--rbn-border, #e2e8f0);
+    border-top-left-radius: 19px;
+    border-top-right-radius: 19px;
+}
+.rbn-modal-centered { display: flex; align-items: center; min-height: calc(100% - var(--rbn-space-8, 32px)); }
+.rbn-modal-scrollable { max-height: calc(100vh - var(--rbn-space-8, 32px)); overflow-y: auto; }
+
+/* ==========================================================================
+   6. SEKMELER / PILLLER (alias) — `core/tabs.css` ile paylasir
+   ========================================================================== */
+.rbn-tabs, .rbn-pills { display: flex; align-items: center; }
+
+/* ==========================================================================
+   7. NAVBAR
+   ========================================================================== */
+.rbn-navbar {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: var(--rbn-space-4, 16px);
+    padding: var(--rbn-space-3, 12px) var(--rbn-space-6, 24px);
+    background: var(--rbn-bg-surface, #ffffff);
+    border-bottom: 1px solid var(--rbn-border, #e2e8f0);
+}
+.rbn-navbar-brand { display: inline-flex; align-items: center; gap: var(--rbn-space-2, 8px); font-weight: 800; color: var(--rbn-text-display); text-decoration: none; }
+.rbn-navbar-nav { display: flex; flex-direction: column; gap: var(--rbn-space-1, 4px); list-style: none; margin: 0; padding: 0; }
+.rbn-navbar-nav .nav-link, .rbn-navbar-nav .rbn-nav-link { color: var(--rbn-text-primary); text-decoration: none; padding: var(--rbn-space-2, 8px); border-radius: var(--rbn-radius-sm, 6px); }
+.rbn-navbar-nav .nav-link.active, .rbn-navbar-nav .rbn-nav-link.active { background: var(--rbn-primary-subtle, #eff6ff); color: var(--rbn-primary, #2563eb); font-weight: 700; }
+.rbn-navbar-collapse { display: none; flex-basis: 100%; }
+.rbn-navbar-collapse.show { display: flex; flex-direction: column; gap: var(--rbn-space-2, 8px); padding-top: var(--rbn-space-3, 12px); }
+.rbn-navbar-toggle {
+    display: none; background: transparent; border: 1px solid var(--rbn-border, #e2e8f0);
+    border-radius: var(--rbn-radius-sm, 6px); padding: var(--rbn-space-2, 8px); cursor: pointer; color: inherit;
+}
+.rbn-navbar-toggle-icon {
+    display: inline-block; width: 1.25rem; height: 2px; background: currentColor;
+    box-shadow: 0 6px 0 currentColor, 0 -6px 0 currentColor; vertical-align: middle;
+}
+@media (max-width: 991.98px) {
+    .rbn-navbar-toggle { display: inline-flex; }
+    .rbn-navbar-collapse { display: flex; flex-direction: column; }
+}
+
+/* ==========================================================================
+   8. LISTE GRUPLARI
+   ========================================================================== */
+.rbn-list-group { display: flex; flex-direction: column; padding: 0; margin: 0; list-style: none; border-radius: var(--rbn-radius-md, 10px); overflow: hidden; }
+.rbn-list-item {
+    padding: var(--rbn-space-3, 12px) var(--rbn-space-4, 16px);
+    background: var(--rbn-bg-surface, #ffffff);
+    border: 1px solid var(--rbn-border, #e2e8f0);
+    color: var(--rbn-text-primary);
+}
+.rbn-list-item + .rbn-list-item { border-top: none; }
+.rbn-list-item-action { display: block; width: 100%; text-align: inherit; text-decoration: none; cursor: pointer; transition: background 0.15s ease; }
+.rbn-list-item-action:hover, .rbn-list-item-action:focus { background: var(--rbn-bg-surface-hover, #f8fafc); color: var(--rbn-text-primary); }
+.rbn-list-item-action.active { background: var(--rbn-primary-subtle, #eff6ff); color: var(--rbn-primary, #2563eb); border-color: var(--rbn-primary, #2563eb); font-weight: 700; }
+.rbn-list-flush { border: none; border-radius: 0; background: transparent; }
+.rbn-list-flush .rbn-list-item { border-left: none; border-right: none; border-radius: 0; }
+
+/* ==========================================================================
+   9. KIRINTI (BREADCRUMB)
+   ========================================================================== */
+.rbn-breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: var(--rbn-space-2, 8px); list-style: none; margin: 0; padding: 0; font-size: 0.8rem; }
+.rbn-breadcrumb-item { display: inline-flex; align-items: center; gap: var(--rbn-space-2, 8px); color: var(--rbn-text-muted); }
+.rbn-breadcrumb-item + .rbn-breadcrumb-item::before { content: "/"; color: var(--rbn-border-strong, #cbd5e1); }
+.rbn-breadcrumb-item a { color: var(--rbn-text-muted); text-decoration: none; }
+.rbn-breadcrumb-item a:hover { color: var(--rbn-primary, #2563eb); text-decoration: underline; }
+.rbn-breadcrumb-item.active { color: var(--rbn-text-primary); font-weight: 600; }
+
+/* ==========================================================================
+   10. ORANLI KUTU (.rbn-ratio)
+   ========================================================================== */
+/* --rbn-ratio-x / --rbn-ratio-y SAF SAYI olarak tanimlanir; hem
+   `aspect-ratio` hem de `::before` dolgusu ayni degerden turer. */
+.rbn-ratio { position: relative; width: 100%; aspect-ratio: var(--rbn-ratio-x) / var(--rbn-ratio-y); }
+.rbn-ratio::before { display: block; content: ""; padding-top: calc(var(--rbn-ratio-y) / var(--rbn-ratio-x) * 100%); }
+.rbn-ratio > * { position: absolute; inset: 0; width: 100%; height: 100%; }
+.rbn-ratio-1x1  { --rbn-ratio-x: 1;  --rbn-ratio-y: 1; }
+.rbn-ratio-16x9 { --rbn-ratio-x: 16; --rbn-ratio-y: 9; }
+.rbn-ratio-4x3  { --rbn-ratio-x: 4;  --rbn-ratio-y: 3; }
+
+/* ==========================================================================
+   11. ILERLEME KAYDI ALIAS (.rbn-progress-track)
+   `core/elements.css` §7 ile paylasir.
+   ========================================================================== */
+.rbn-progress-track {
+    display: flex; height: 10px; overflow: hidden;
+    font-size: 0.75rem; background: var(--rbn-slate-100, #f1f5f9);
+    border-radius: var(--rbn-radius-pill, 9999px);
+}
+.rbn-progress-track .rbn-progress-bar { background: var(--rbn-primary, #2563eb); }
+
+/* ==========================================================================
+   12. YUKLEME GOSTERGELERI (.rbn-spinner-sm / .rbn-spinner-grow)
+   ========================================================================== */
+.rbn-spinner-sm { width: 1rem; height: 1rem; border-width: 2px; border-style: solid; border-color: var(--rbn-border, #e2e8f0); border-top-color: var(--rbn-primary, #2563eb); border-radius: 50%; animation: rbnSpin 0.75s linear infinite; }
+.rbn-spinner-grow {
+    width: 1.5rem; height: 1.5rem;
+    background-color: var(--rbn-primary, #2563eb);
+    border-radius: 50%;
+    animation: rbnGrowPulse 0.75s ease-in-out infinite;
+    transform-origin: center;
+}
+@keyframes rbnGrowPulse {
+    0%   { transform: scale(0.4); opacity: 0.6; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* ==========================================================================
+   13. TABLO VARYANTLARI
+   ========================================================================== */
+.rbn-table-borderless, .rbn-table-borderless > :not(caption) > * > * { border-bottom-width: 0; }
+/* `components/rbnTable.css` yalniz `.table-responsive` adiyla yaziyor. */
+.rbn-table-responsive { display: block; width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.rbn-table-row-active, .rbn-table-row-active > * {
+    background-color: var(--rbn-primary-subtle, #eff6ff);
+    color: var(--rbn-text-primary, #0f172a);
+}
+
+/* ==========================================================================
+   14. BAŞLIK BOYUTLARI (.rbn-display-1..6)
+   ========================================================================== */
+.rbn-display-1 { font-size: 3.5rem; font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; }
+.rbn-display-2 { font-size: 3rem; font-weight: 800; line-height: 1.15; letter-spacing: -0.025em; }
+.rbn-display-3 { font-size: 2.5rem; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
+.rbn-display-4 { font-size: 2rem; font-weight: 700; line-height: 1.25; letter-spacing: -0.015em; }
+.rbn-display-5 { font-size: 1.5rem; font-weight: 600; line-height: 1.3; }
+.rbn-display-6 { font-size: 1rem; font-weight: 600; line-height: 1.4; }
+
+/* ==========================================================================
+   15. TOOLTIP (yalnız CSS; JS tarafi `RbnCommon/js` icinde YOK)
+   ========================================================================== */
+.rbn-tooltip {
+    position: absolute; z-index: 1080; display: block; margin: 0;
+    font-size: 0.75rem; word-wrap: break-word; opacity: 0;
+}
+.rbn-tooltip.show { opacity: 1; }
+.rbn-tooltip-arrow { position: absolute; display: block; width: 0.4rem; height: 0.4rem; background: var(--rbn-slate-900, #0f172a); transform: rotate(45deg); }
+.rbn-tooltip-inner {
+    max-width: 260px; padding: var(--rbn-space-2, 8px) var(--rbn-space-3, 12px);
+    color: var(--rbn-slate-100, #f1f5f9); text-align: center;
+    background: var(--rbn-slate-900, #0f172a);
+    border-radius: var(--rbn-radius-sm, 6px);
+}
+
+/* ==========================================================================
+   16. POPOVER (yalnız CSS)
+   ========================================================================== */
+.rbn-popover {
+    position: absolute; top: 0; left: 0; z-index: 1070;
+    display: block; max-width: 276px; font-family: var(--rbn-font-sans);
+    background: var(--rbn-bg-surface, #ffffff);
+    border: 1px solid var(--rbn-border, #e2e8f0);
+    border-radius: var(--rbn-radius-md, 10px);
+    box-shadow: var(--rbn-shadow-modal);
+    opacity: 0;
+}
+.rbn-popover.show { opacity: 1; }
+.rbn-popover-header {
+    padding: var(--rbn-space-2, 8px) var(--rbn-space-3, 12px);
+    margin-bottom: 0; font-size: 0.85rem; font-weight: 700;
+    color: var(--rbn-text-display); background: var(--rbn-slate-50, #f8fafc);
+    border-bottom: 1px solid var(--rbn-border, #e2e8f0);
+    border-radius: var(--rbn-radius-md, 10px) var(--rbn-radius-md, 10px) 0 0;
+}
+.rbn-popover-body { padding: var(--rbn-space-3, 12px); color: var(--rbn-text-primary); }
+
+/* ==========================================================================
+   17. TOAST PARCALARI (yalnız CSS)
+   ========================================================================== */
+.rbn-toast-header {
+    display: flex; align-items: center; gap: var(--rbn-space-2, 8px);
+    padding: var(--rbn-space-2, 8px) var(--rbn-space-3, 12px);
+    color: var(--rbn-text-primary);
+    background: var(--rbn-bg-surface-subtle, #f1f5f9);
+    border-bottom: 1px solid var(--rbn-border, #e2e8f0);
+    border-radius: var(--rbn-radius-md, 10px) var(--rbn-radius-md, 10px) 0 0;
+}
+.rbn-toast-body { padding: var(--rbn-space-3, 12px); color: var(--rbn-text-primary); }
+
+/* ==========================================================================
+   18. CAROUSEL (yalnız CSS)
+   ========================================================================== */
+.rbn-carousel { position: relative; display: flex; align-items: center; width: 100%; overflow: hidden; border-radius: var(--rbn-radius-md, 10px); }
+.rbn-carousel-inner { display: flex; width: 100%; transition: transform 0.5s ease; }
+.rbn-carousel-item { flex: 0 0 100%; width: 100%; display: none; }
+.rbn-carousel-item.active { display: block; }
+.rbn-carousel-prev, .rbn-carousel-next {
+    position: absolute; top: 50%; z-index: 2; display: inline-flex;
+    align-items: center; justify-content: center;
+    width: 2.5rem; height: 2.5rem; padding: 0;
+    color: var(--rbn-white, #ffffff); background: rgba(0, 0, 0, 0.45);
+    border: none; border-radius: 50%; cursor: pointer;
+    transform: translateY(-50%);
+}
+.rbn-carousel-prev { left: var(--rbn-space-3, 12px); }
+.rbn-carousel-next { right: var(--rbn-space-3, 12px); }
+.rbn-carousel-prev:hover, .rbn-carousel-next:hover { background: rgba(0, 0, 0, 0.7); }
