@@ -18,7 +18,8 @@
 | `Config.php`, `Env.php`, `Secrets.php` | `Rbn\Framework\Core\System\Config` |
 | `Definitions/` (`EnvKeys`, `ConfigMap`, `SecretsSchema`) | `…\System\Config\Definitions` |
 | `Definitions/DbProfiles/` (`CommonDbData`, `MasterDbData`, `ProjectDbData` — **yalnız sabit**, hiçbir sınıftan türemez) | `…\System\Config\Definitions\DbProfiles` |
-| `Engine/Config/` (`ConfigResolver`, `DatabaseConfig`, `ConfigFileLoader`, `ConfigFileGuard`, `DbProfileResolver`, `SmtpProfileResolver`) | `…\System\Config\Engine\Config` |
+| `Engine/Config/` (`ConfigResolver`, `ConfigFileLoader`, `ConfigFileGuard`) | `…\System\Config\Engine\Config` |
+| `Engine/Database/` (`DatabaseConfig`, `DbProfileResolver`, `ProjectDbProfileResolver`, `SmtpProfileResolver`) | `…\System\Config\Engine\Database` |
 | `Engine/Secrets/` (`SecretsLoader`, `SecretsValidator`, `SecretsSections`, `SecretsFlatApi`) | `…\System\Config\Engine\Secrets` |
 | `Secrets/` (`secrets.php` — sir dosyasi, `.gitignore`'lu) | (veri, sinif degil) |
 

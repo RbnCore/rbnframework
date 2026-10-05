@@ -234,7 +234,28 @@ class RedirectManager extends BaseManager
                 || in_array($currentHost, \Rbn\Framework\Core\System\Kernel\Base\PreBoot::LOCAL_HOST_ALLOWLIST, true);
         }
 
-        $isRbnCore = (str_ends_with($currentHost, '.rbncore.tr') || $currentHost === 'rbncore.tr') && !$isLocalDev;
+        // [SEO-ROBOTS-SITEMAP-301] APEX `rbncore.tr` DALI KALDIRILDI.
+        //
+        // SORUN: `str_ends_with($currentHost, '.rbncore.tr')` alt-dizge kontrolu
+        // apex'i ZATEN yakalamaz. `|| $currentHost === 'rbncore.tr'` eklenince
+        // apex de "kanonik disi (staging) host" sayildi ve asagidaki blok
+        // `$this->path = '/'` yazdigindan `rbncore.tr` uzerindeki TUM yollar
+        // (robots.txt, sitemap.xml, gercek sayfalar, sahte yollar) 301 -> `/`
+        // oldu. Canli kanit (yalniz GET, 05.10.2026):
+        //   /robots.txt  -> 301 Location: https://rbncore.tr/  (g├Âvde 0 bayt)
+        //   /sitemap.xml -> 301 Location: https://rbncore.tr/ (g├Âvde 0 bayt)
+        //   /referanslar -> 301 -> /   (sitede GERCEKTEN var olan sayfa)
+        // Arama motoru robots.txt/sitemap.xml'e ULASAMIYOR.
+        //
+        // NEDEN YANLIS: `rbncore.tr` staging alt domaini DEGIL, `rbncore`
+        // projesinin KANONIK alan adidir (canli `projects` satiri id=4:
+        // project_key=`rbncore`, domain=`rbncore.tr`). Kural kendi kanonik alan
+        // adini kanonik disi ilan ediyordu.
+        //
+        // GERI ALINAN DAVRANIS: alt-dizge dali `.rbncore.tr` OLDUGU GIBI
+        // KORUNUR; `email.rbncore.tr` / `sub.example.test` ana sayfaya 301'lemeye
+        // DEVAM eder (kasintili kural). Yalnizca apex muaf kalir.
+        $isRbnCore = str_ends_with($currentHost, '.rbncore.tr') && !$isLocalDev;
 
         if ($isRbnCore || (!$isLocalDev && $currentHost !== $officialDomain && $currentHost !== ('www.' . $officialDomain))) {
             $this->host = $officialDomain;

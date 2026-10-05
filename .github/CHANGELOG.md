@@ -6,13 +6,49 @@
 
 Biçim: [Keep a Changelog](https://keepachangelog.com/tr/1.1.0/). Sürümlendirme: [SemVer](https://semver.org/lang/tr/).
 
-**Son sürüm:** `0.9.2` (2026-10-05) — canlı geçiş düzeltmeleri sonrası: tek kaynak, kural ve araç düzenlemesi.
+**Son sürüm:** `0.9.3` (2026-10-05) — apex alan adı yönlendirme düzeltmesi, PHP gerekliliği hizası ve depoya giren `docs/`.
 
 Güvenlik girdileri tarafsız yazılır: ne değişti ve etkisi ne, sömürme adımı/payload/PoC/dosya-satır ayrıntısı **yazılmaz**. Sayısal şiddet dereceleri de burada verilmez (iç onarım planında tutulur).
 
 ---
 
 ## [Unreleased]
+
+## [0.9.3] - 2026-10-05
+
+**Kısa özet — apex alan adı yönlendirme düzeltmesi, PHP gerekliliği hizası ve depoya giren `docs/`.**
+Bu sürüm, `0.9.2` yayınından sonra yapılan çalışmanın kaydıdır. Madde madde yükseltme
+yapılacakların karşılığı `UPGRADING.md` 0.9.3 bölümündedir.
+
+### Düzeltildi
+
+* **Apex alan adı yanlış dala alınıyordu (`rbncore.tr`).** Kanonik alan adı denetimi, apex
+  alan adını "kanonik dışı (staging)" gibi ele alıyordu; sonuç olarak apex altındaki
+  **tüm alt yollar** (`robots.txt`, `sitemap.xml`, oturum açma ve benzeri) `/` adresine
+  301 ile atılıyordu. Artık yalnız **alt alan adları** bu dalda değerlendirilir; apex
+  alan adı kanonik kabul edilir ve alt yollar kendi adreslerine gider.
+  Etki: apex alan adı altındaki hiçbir adres yanlış yönlendirilmez.
+
+### Uyumluluk / belgeler
+
+* **PHP gerekliliği belgelerde hizalandı.** `README.md` ve `README.en.md` "PHP 8.1+"
+  diyordu; `composer.json` `require.php` değeri `>=8.3` ve `UPGRADING.md` "PHP >= 8.3
+  gereklidir" diyor. Belgeler artık **PHP 8.3+** der. Kurulum ön koşulu değişmedi;
+  yalnızca belgeler `composer.json` ile aynı dili konuşuyor.
+
+### Eklendi
+
+* **`docs/` klasörü depoya eklendi (69 belge).** Framework'ün kendi iç dokümantasyonu
+  (mimari harita, yapılandırma, veritabanı/kiracılık, sürümleme/yayın, kaynak ağacı
+  belgeleri ve açık sorular) artık sürümle birlikte depoda bulunur.
+  **Dağıtım notu:** bu klasör yalnız depoya aittir; **canlı sunucuya dağıtım paketine
+  girmez** (`.github/` ile birlikte paket dışıdır).
+
+### Sürüm
+
+* **Sürüm artışı:** `FrameworkIdentity::FRAMEWORK_VERSION` `0.9.2` → **`0.9.3`**.
+  Kopyalar (`CITATION.cff`, `README.md`, `README.en.md`) tek kaynaktan okur.
+  Sayac kuralı `Version::next()` ile doğrulandı; elle sayı yazılmadı.
 
 ## [0.9.2] - 2026-10-05
 
@@ -458,12 +494,13 @@ doğrulandı. Bileşen sürümleri `2.1.0` / `1.2.0` / `2.2.0` / `2.3.0` **deği
 ## Bağlantılar
 
 - Depo adresi: https://github.com/RbnCore/rbnframework
-- Karşılaştırma: [0.9.2] · [0.9.1]
+- Karşılaştırma: [0.9.3] · [0.9.2] · [0.9.1]
 - Güvenlik bildirimi: [SECURITY.md](SECURITY.md)
 - Yükseltme notları: [UPGRADING.md](UPGRADING.md)
 - Biçim: [Keep a Changelog](https://keepachangelog.com/tr/1.1.0/) · [SemVer](https://semver.org/lang/tr/)
 
-[Unreleased]: https://github.com/RbnCore/rbnframework/compare/v0.9.2...HEAD
+[Unreleased]: https://github.com/RbnCore/rbnframework/compare/v0.9.3...HEAD
+[0.9.3]: https://github.com/RbnCore/rbnframework/compare/v0.9.2...v0.9.3
 [0.9.2]: https://github.com/RbnCore/rbnframework/compare/v0.9.1...v0.9.2
 [0.9.1]: https://github.com/RbnCore/rbnframework/compare/v0.9.0...v0.9.1
 [0.9.0]: https://github.com/RbnCore/rbnframework/releases/tag/v0.9.0

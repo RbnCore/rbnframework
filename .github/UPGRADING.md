@@ -1,5 +1,68 @@
 ## [Unreleased]
 
+## 0.9.3 (yayın hazırlığı — 2026-10-05)
+
+### Bu sürümde ne yapmalısınız (kısa liste)
+
+1. **Framework dosyalarını güncelleyin** (paketi değiştirin). **Kırıcı değişiklik yoktur**:
+   bu sürüm yalnızca bir yönlendirme hatasını kaldırır, iki belgede PHP gerekliliğini
+   hizalar ve depoya dokümantasyon ekler.
+2. **`docs/` klasörünü canlı sunucuya yüklemeyin.** Depo paketinde **vardır**, dağıtım
+   paketinde **yoktur** — `.github/` ile aynı kural. (Ayrıntı: aşağıdaki "Dağıtım notu".)
+3. **PHP gerekliliği 8.3'tür** — `composer.json` `require.php: ">=8.3"`. Bu sürümde
+   değişmedi; yalnızca `README.md` / `README.en.md` bu değerle hizalandı. Ayrıntı:
+   aşağıdaki 0.9.2 bölümündeki `### PHP >= 8.3 gereklidir` maddesi.
+
+### Düzeltildi: apex alan adı alt yolları yanlış yönlendiriliyordu
+
+**Belirti:** `rbncore.tr` apex alan adı altındaki hiçbir alt adres çalışmıyordu; hepsi
+`/` adresine **301** ile atılıyordu. Etkilenen adresler arasında `robots.txt`,
+`sitemap.xml` ve oturum açma sayfası da vardı.
+
+**Kök neden:** kanonik alan adı denetimi, apex alan adını da "kanonik dışı (staging)"
+listesinde sayıyordu. Oysa yalnız **alt alan adları** (`*.rbncore.tr`) staging'tir.
+
+**Çözüm:** apex alan adı kanonik kabul edildi; yalnız alt alan adları için yönlendirme
+dalı korunuyor.
+
+| Adres | 0.9.2 kuralı | 0.9.3 kuralı |
+|---|---|---|
+| `https://rbncore.tr/` | kanonik | kanonik (değişmedi) |
+| `https://rbncore.tr/robots.txt` | 301 → `/` | **kendi adresinde kalır** |
+| `https://rbncore.tr/sitemap.xml` | 301 → `/` | **kendi adresinde kalır** |
+| `https://rbncore.tr/giris` | 301 → `/` | **kendi adresinde kalır** |
+| `https://<alt>.rbncore.tr/...` | staging → kanonik | **değişmedi** |
+
+> **Bu tablo kuralı anlatır, ölçüm değildir.** Yerel ortamda apex adresi
+> (`Host: rbncore.tr`) tekrarlanamıyor — yerel kurulum `*.test` alan adlarıyla çalışıyor;
+> canlı sunucuya bu sürüm hazırlığı sırasında **hiçbir yazma yapılmadı**. Canlı
+> doğrulama yayın sırasında yapılacaktır.
+
+**Geri alma:** `git revert` ile tek dosya eski hâline döner; tablo şeması, anahtar,
+parola veya oturum değişikliği **yoktur**.
+
+### Uyumluluk: PHP gerekliliği belgelerde hizalandı
+
+`README.md` ve `README.en.md` "PHP 8.1+" diyordu; `composer.json` `require.php` değeri
+`>=8.3` ve `UPGRADING.md` "PHP >= 8.3 gereklidir" diyor. Belgeler artık **PHP 8.3+** der.
+Kurulum ön koşulu **değişmedi** — yalnızca belgeler `composer.json` ile aynı dili konuşuyor.
+
+### Eklendi: `docs/` (69 belge)
+
+Framework'ün kendi iç dokümantasyonu (mimari harita, yapılandırma, veritabanı/kiracılık,
+sürümleme/yayın, kaynak ağacı belgeleri, açık sorular) artık sürümle birlikte depoda
+bulunur.
+
+> **Dağıtım notu:** `docs/` **yalnız depoya aittir**. Canlı sunucuya dağıtım paketine
+> **girmez** — `.github/` ile aynı kural. Paket hazırlarken `.github/` ile birlikte
+> `docs/` de dışlanmalıdır.
+
+### Sürüm
+
+`FrameworkIdentity::FRAMEWORK_VERSION` `0.9.2` → **`0.9.3`**. Kopyalar (`CITATION.cff`,
+`README.md`, `README.en.md`, `CHANGELOG.md`) tek kaynaktan okur. Sayac kuralı
+`Version::next()` ile doğrulandı; elle sayı yazılmadı.
+
 ## 0.9.2 (yayın hazırlığı — 2026-10-05)
 
 ### Bu sürümde ne yapmalısınız (kısa liste)
@@ -787,7 +850,7 @@ Sürümlendirme: [SemVer](https://semver.org/lang/tr/). Değişiklik kaydı: [CH
 
 ## Bu sürüm
 
-- **Son sürüm:** `0.9.2` (2026-10-05) — canlı geçiş düzeltmeleri sonrası: tek kaynak, kural ve araç düzenlemesi. Kırıcı değişiklik **var** (aşağıdaki 0.9.2 bölümüne bakın).
+- **Son sürüm:** `0.9.3` (2026-10-05) — apex alan adı yönlendirme düzeltmesi, PHP gerekliliği hizası ve depoya giren `docs/`. Kırıcı değişiklik **yoktur** (aşağıdaki 0.9.3 bölümüne bakın; kırıcı değişiklikler 0.9.2 bölümündedir).
 - Bu dosyaya yazılan her sürüm, o sürümün canlıya çıktığı andan itibaren geçerlidir.
 
 ---

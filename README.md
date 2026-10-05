@@ -2,7 +2,7 @@
 
 # RBN Core Framework
 
-**Sürüm:** `0.9.2` · **Lisans:** MIT · **PHP:** 8.1+ (8.2/8.3 ile geliştirilir)
+**Sürüm:** `0.9.3` · **Lisans:** MIT · **PHP:** 8.3+
 
 RBN Core Framework, tek bir çekirdeğin altında **birden çok bağımsız PHP projesini** barındıran,
 çok kiracılı (multi-tenant) mimariye sahip, hafif bir uygulama çatısıdır. Yönlendirme, şablon
@@ -31,7 +31,7 @@ kendi içinde gelir; dışarıdan yalnız üç Composer paketi kullanır.
 
 | Bileşen | Sürüm / Gereklilik |
 |---|---|
-| PHP | 8.1 veya üzeri (Attribute API kullanılır; 8.2 ve 8.3 üzerinde geliştirilir) |
+| PHP | 8.3 veya üzeri (Attribute API kullanılır; 8.3 üzerinde geliştirilir ve test edilir) |
 | PHP Eklentileri | `pdo`, `pdo_mysql`, `mbstring`, `curl`, `openssl`, `zip` |
 | Composer | 2.x |
 | Veritabanı | MySQL / MariaDB |
