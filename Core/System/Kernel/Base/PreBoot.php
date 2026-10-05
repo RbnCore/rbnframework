@@ -363,6 +363,13 @@ class PreBoot
      */
     public static function orchestrate(string $publicPath, array $config = []): void
     {
+        // [FW-CANLI-ONCESI-2] PHP surum kapisi (>= 8.3) — autoload'dan SONRAKI
+        // savunma katmani. `domains/*/index.php` ve `rbn` zaten autoload'dan
+        // once kapiyi gecirir; burada kapi TEK MERKEZE de baglanir, boylece
+        // yeni bir giris noktasi eklendiginde kapidan kacinilamaz.
+        require_once __DIR__ . '/PhpVersionGate.php';
+        PhpVersionGate::enforce();
+
         if (self::$initialized)
             return;
 

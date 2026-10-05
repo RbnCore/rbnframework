@@ -18,6 +18,14 @@ class Bootstrap
      */
     public static function run(string $publicPath, array $config = []): void
     {
+        // [FW-CANLI-ONCESI-2] PHP surum kapisi (>= 8.3) — framework'un EN ERKEN
+        // calisan kodu. `vendor/autoload.php` bu dosyayi zaten yuklemis olsa da
+        // surum yanlissa (canlida belirlenemiyor) hata mesaji "Parse error"
+        // degil, bakim mesaji olsun. Gercek koruma `domains/*/index.php` ve
+        // `rbn` icinde autoload ONCESI yapilir; burasi savunma derinligidir.
+        require_once __DIR__ . '/Base/PhpVersionGate.php';
+        Base\PhpVersionGate::enforce();
+
         try {
             // 🛑 RBN 3.5: K-02 — Hata ayrıntısı görünürlüğü ORTAMA BAĞLI.
             // İlk çağrı ortam tespitinden ÖNCE gelir: RBN_DEV henüz yok, guvenli

@@ -1,5 +1,69 @@
 ## [Unreleased]
 
+### PHP >= 8.3 gereklidir (KIRICI — sunucu tarafı adım)
+
+**Ne degisti:** Framework artık **PHP 8.3 veya üzeri** olmayan bir sunucuda
+**çalışmaz** ve bunu "Parse error" ile değil, **anlaşılır bir mesajla** söyler.
+
+İki ayrı değişiklik:
+
+1. **Beyan:** `composer.json` → `require.php = ">=8.3"`.
+2. **Çalışma zamanı kapısı:** `Core/System/Kernel/Base/PhpVersionGate.php`.
+   `vendor/autoload.php` yüklenmeden **önce** çağrılır.
+
+**Adım 1 — Sürümü yükseltin (ZORUNLU).** Hosting panelinden sitelerin
+bağlandığı PHP sürümünü **8.3** yapın. Bu yapılmadan önce hiçbir adıma
+geçmeyin: kapı, sürüm 8.3'ten küçükse isteği `HTTP 503` ile reddeder ve
+sayfa "şu anda kullanılamıyor" görünür.
+
+**Adım 2 — Yeterliliği doğrulayın.** Zorunlu ilan edilen eklentiler
+`composer.json`'da listelidir:
+
+```
+php >= 8.3
+ext-pdo  ext-pdo_mysql  ext-mbstring  ext-json  ext-curl
+ext-openssl  ext-gd  ext-zip  ext-fileinfo  ext-session
+```
+
+`apcu` **zorunlu değildir** (`LogThrottle` kendi içinde kontrol eder, APCu
+olmadan da çalışır). `simplexml`, `iconv`, `intl` yalnızca iki tekil RSS /
+Google Trends / yedek metin çağrısında kullanılır — **önerilir, zorunlu
+değildir.**
+
+**Adım 3 — Canlı `index.php` dosyalarını güncelleyin (geçişte zorunlu).**
+Kapı, `vendor/autoload.php`'den önce çalışmak için **her sitedeki
+`index.php`'nin başına** eklenmelidir. Depodaki 20 `index.php` bu blokla
+güncellendi; **canlıdaki `public_html/index.php` dosyaları ayrıdır** ve
+geçiş paketiyle birlikte elle aynı blok eklenmelidir. Blok şudur:
+
+```php
+// 0. [FW-CANLI-ONCESI-2] PHP surum kapisi (>= 8.3) — vendor/autoload.php'dan ONCE.
+$rbnPhpSurumKapisi = null;
+foreach ([2, 3, 4] as $rbnSeviye) {
+    $rbnKapisiAdayi = dirname(__DIR__, $rbnSeviye) . '/rbnframework/Core/System/Kernel/Base/PhpVersionGate.php';
+    if (is_file($rbnKapisiAdayi)) {
+        $rbnPhpSurumKapisi = $rbnKapisiAdayi;
+        break;
+    }
+}
+
+if ($rbnPhpSurumKapisi !== null) {
+    require_once $rbnPhpSurumKapisi;
+    \Rbn\Framework\Core\System\Kernel\Base\PhpVersionGate::enforce();
+}
+```
+
+Bu blok eklenmezse kapı yine de çalışır ama **autoload'dan sonra** çalışır
+(`Bootstrap::run()` / `PreBoot::orchestrate()` içinde). Yani 8.3'ten eski
+bir sürümde "Parse error" yerine yine mesaj alırsınız, ama autoload
+kütüphanesinin kendisi daha önce yüklenmeye çalışmış olur.
+
+**Geri alma:** Sunucu PHP sürümünü geri alırsanız framework eski hâliyle
+çalışmaz (8.3 sözdizimi kullanılıyor). Geri alma, sunucu sürümünü
+**8.3'e çıkarmak** yönündedir; kod tarafında geri alma gerekmez.
+
+---
+
 ### 13 modelde kiraci izolasyonu acildi (KIRICI, model bazinda olculerek)
 
 **Ne degisti:** Asagidaki modeller `protected bool $scoped = true` beyan
@@ -500,12 +564,107 @@ Sürümlendirme: [SemVer](https://semver.org/lang/tr/). Değişiklik kaydı: [CH
 
 ## Bu sürüm
 
-- **Planlanan sürüm:** `0.9.0` — güvenlik onarım sürümü. **Henüz yayınlanmadı.**
-- **Yayınlanmış sürüm listesi boştur.** Bu dosyaya yazılan her sürüm, o sürümün canlıya çıktığı andan itibaren geçerlidir.
+- **Son sürüm:** `0.9.1` (2026-10-05) — canlı geçiş düzeltmeleri. Kırıcı değişiklik yok.
+- Bu dosyaya yazılan her sürüm, o sürümün canlıya çıktığı andan itibaren geçerlidir.
 
 ---
 
-## 0.9.0 (planlanan — güvenlik onarım sürümü)
+## 0.9.1 (canlı geçiş düzeltmeleri — 2026-10-05)
+
+Bu sürümde **kırıcı değişiklik yoktur**, yalnız **canlı geçiş sırasında ortaya çıkan 4 gerçek
+hatayı düzeltir**. Yükseltme sonrası geri almaya gerek yoktur; yalnız aşağıdaki **(a)** maddesi
+zaten dağıtılmış `domains/*/index.php` dosyaları için zorunlu bir **dosya yeniden kopyalama**
+adımıdır. Kapsam dışı: `asw_*` tabloları, ortak (`cm_*`) şema, master şeması
+(`developers`, `ip_blocks`), sır rotasyonu, lisans/IP katmanı ayarları — hiçbiri değişmedi.
+
+### 0.9.1 — (a) ZORUNLU: `domains/*/index.php` dosyaları yeniden kopyalanmalı
+
+**Neden:** 0.9.0 ile eklenen PHP sürüm kapısı (`PhpVersionGate`) blokunda yol bir değişkene
+**yazılıyor**, karşılaştırma **başka bir değişkenle** yapılıyordu
+(`is_file($rbnKapisiAdayi)` — değişken yazım hatası). `is_file(null)` her zaman `false`
+döndüğü için kapı dosyası hiç bulunamıyor ve sürüm kapısı **sessizce devre dışı** kalıyordu.
+Geliştirme ortamında `display_errors` açık olduğu için her istek sayfaya ayrıca iki hata
+(`Warning: Undefined variable …`, `Deprecated: is_file(): Passing null …`) basıyordu ve
+render hatasının **önünde** görünüyordu.
+
+**Etkilenen dosya sayısı:** 20 adet `domains/<site>/index.php`.
+
+**Ne yapmalısınız:** Bu dosyalar framework **paketinin parçası değildir** (her site kendi
+giriş noktasını taşır). Yükseltmede framework'ü kopyalayan tek adım bu dosyaları **yeniden
+getirmez**; onları ayrıca kopyalamanız gerekir. Kopyalama sonrası kapının çalıştığını şöyle
+doğrulayın:
+
+- Sunucuda PHP sürümü 8.3+ değilse kapı **anlaşılır bir hata** ile kapatır (kasıtlı davranış).
+- Doğru yüklendiğinde sayfa gövdesinin **başında** `Warning`/`Deprecated` satırı **yoktur** —
+  gövdenin ilk satırı `<!DOCTYPE` veya `<html` olmalıdır.
+- Tarayıcıda `?v=` sürüm damgası yerine panel alt bilgisinde framework sürümü `0.9.1` görünür.
+
+**Geri alma:** Bu dosyalar değiştirilmediği için eski hâliyle bırakmak da güvenlidir; yalnız o
+durumda sürüm kapısı devre dışı kalır (bu, 0.9.0 öncesi durumdur).
+
+### 0.9.1 — (b) Dış görsel vekili artık `proxy_allowed_hosts` ile beyaz liste alıyor
+
+**Neden:** Dış CDN hedefleri `media/<base64>` dalında güvenlik gereği beyaz listede aranıyordu;
+liste kaynağı yalnız framework sabitiydi ve motor genel kalsın diye **boş** bırakıldı. Sonuç:
+dış CDN kullanan her proje `Location` üretilmeden 404 alıyordu. Artık beyaz listenin **ikinci
+kaynağı aktif projenin kendi ayarıdır.**
+
+**Ne yapmalısınız:** Dış CDN kullanan projelerde, kullandığınız host'ları projenin ayar dosyasına
+ekleyin (`Core/Config/project-settings.php` veya `project-routemap.php`):
+
+```php
+'project-settings' => [
+    // Dis CDN host'lari icin beyaz liste. Yalniz ALAN ADI; sema/yol/port YAZILMAZ.
+    // Kural: tam host eslesir, ya da host bu son eki degilse ('.' son ek) son ek eslesir.
+    'proxy_allowed_hosts' => ['cdn.example.com', 'images.example.net'],
+],
+```
+
+**Motor genel kalır (Anayasa §9):** framework'e proje/müşteri adı ya da host listesi
+**yazılmaz**; liste yalnızca projenin dosyasında durur. Değer kuralları: eleman **yalnız string**
+olmalı; şema/port/yol/boşluk/kontrol karakteri içeren elemanlar **sessizce yok sayılır** (beyaz
+liste genişlemez, hata fırlatılmaz). Ayar dosyası okunamazsa liste **boş** kalır — bu fail-closed
+davranıştır ve kasıtlıdır.
+
+**Güvenlik değişmedi:** şema beyaz listesi (yalnız `http`/`https`), kontrol karakteri/CRLF ve ters
+bölü normalizasyonu aynen durur; reddedilen hedef için `Location` üretilmez.
+
+### 0.9.1 — (c) Dikkat: paketlemede büyük/küçük harf duyarsız dosya filtresi
+
+**Uyarı (davranış değişikliği DEĞİLDİR — yalnız paketleme/arşivleme tarafı):** Git, macOS ve
+Windows dosya sistemlerinde dosya adını **büyük/küçük harf duyarsız** karşılaştırır, Linux
+(POSIX) **duyarlıdır**. Framework'te iki farklı dosya vardır:
+
+| Dosya | Ne |
+|---|---|
+| `Core/System/Config/Secrets.php` | Framework **sınıf** dosyası (kod). **Her zaman gereklidir.** |
+| `Core/System/Config/Secrets/secrets.php` | Sunucudaki **sır** dosyası (gerçek değerler). **Asla commit edilmez.** |
+
+İkisi yalnız **harf büyüklüğüyle** ayrılır. Paketleme/dağıtım betiğiniz "sır dosyasını ele" gibi
+**genel bir filtre** kullanıyorsa, büyük/küçük harf duyarsız karşılaştırma yüzünden
+`Secrets.php` **sınıf dosyasını da** eleyebilir. Belirtisi: sınıf bulunamadığı için
+`Class "…Secrets" not found` veya sır okuma katmanının açılmamasıdır.
+
+**Ne yapmalısınız:** Sır dosyası filtresi **yalnız tam yolu hedefleyen** ve
+**harf büyüklüğüne duyarlı** olmalıdır:
+
+```
+KAPSAM = Core/System/Config/Secrets/secrets.php   (yalnız bu, tam yol, harf duyarlı)
+```
+
+`Core/System/Config/Secrets/secrets.example.php` **hariç tutulmaz** — şablondur, gerçek değer
+içermez ve depoda tutulması gerekir. Kural, `.gitignore` içinde de aynı şekilde dar yazılmalıdır
+(`secrets.php` kalıbı, kök dizinlerdeki başka dosyaları yutmasın).
+
+**Doğrulama:** paketten sonra sınıf dosyası **VAR**, sır dosyası **YOK** olmalıdır:
+
+```bash
+test -f Core/System/Config/Secrets.php                    && echo "OK sinif dosyasi var"
+test ! -f Core/System/Config/Secrets/secrets.php           && echo "OK sir dosyasi yok"
+test -f Core/System/Config/Secrets/secrets.example.php     && echo "OK sablon var"
+```
+
+## 0.9.0 (güvenlik onarım sürümü)
 
 Bu sürümde **zorunlu** adımlar aşağıdadır. Hiçbiri isteğe bağlı değildir.
 

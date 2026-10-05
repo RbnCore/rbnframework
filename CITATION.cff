@@ -3,8 +3,8 @@ message: "Bu çalışma için CITATION.cff dosyasındaki sürümü kullanın."
 title: "RBN Core Framework"
 abstract: "Lightweight, low-dependency PHP application framework with a multi-project (multi-tenant) architecture, discovery engine, rendering engine, routing, CLI and security layer."
 type: software
-version: 0.9.0
-date-released: "2026-10-03"
+version: 0.9.1
+date-released: "2026-10-05"
 license: MIT
 repository-code: "https://github.com/RbnCore/rbnframework"
 url: "https://github.com/RbnCore/rbnframework"

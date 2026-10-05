@@ -52,6 +52,40 @@ class RedirectManager extends BaseManager
         'selfHealingAssets',
     ];
 
+    /**
+     * [FW-ACIL-MEDYA-301] `forceLowercaseUrl()` kuralindan MUAF yol ONEKLERI.
+     *
+     * SORUN: kural her yolu `mb_strtolower()` ile kucuk harfe cevirip tek bir 301
+     * yaziyordu. Boylece BUYUK/KUCUK HARFE DUYARLI, opak (encoded) segment tasiyan
+     * yollar calinca hedef COZULEMEZ ve AssetController 404 donuyordu. Canli kanit
+     * (yalniz GET): `/media/series/aHR0cHM6.../5ZgPQjEsJqCwRtx6vsBBISxn389`
+     * -> 301 Location: kucuk harfli karsilik -> o adres 404.
+     *
+     * COZUM: muafiyet listesi TEK YERDE, DEGISMEZ (const) tutulur; asagida
+     * ONEK + segment siniri denetimi vardir (`/media-arsivi` gibi onek-benzeri
+     * yollar muaf OLMAZ, boylece SEO kanonikalizasyonu daralmaz).
+     *
+     * KAPSAM (olcumle secildi, her yol bir rota oneki veya opak yol tasiyicisidir):
+     *   - `media`     : `ViewHelperTrait::mediaUrl()` base64 masked medya
+     *   - `fw-proxy`  : `FileProxyController` upload/export dosya adlari
+     *   - `api`, `webhook`, `bot-sync`, `bot-data`: zaten `shouldBypassRedirect()`
+     *     ile 301 disi; liste birlik/kesinlik icin tamamlanir.
+     * Geri kalan her yol (sayfa, blog, dizi, ara ...) kanonik kucuk harf 301'i
+     * almaya DEVAM eder — SEO davranisi bu degisiklikle korunur.
+     *
+     * @var string[] Kucuk harf kanonikalizasyonundan muaf yol onekleri
+     */
+    protected const LOWERCASE_EXEMPT_PREFIXES = [
+        '/framework-assets',
+        '/project-assets',
+        '/media',
+        '/fw-proxy',
+        '/api',
+        '/webhook',
+        '/bot-sync',
+        '/bot-data',
+    ];
+
     /** @var string Active scheme (http/https) */
     protected string $scheme = 'http';
 
@@ -251,8 +285,11 @@ class RedirectManager extends BaseManager
      */
     protected function forceLowercaseUrl(): void
     {
-        // Skip asset directories if they might be case-sensitive
-        if (str_starts_with($this->path, '/framework-assets') || str_starts_with($this->path, '/project-assets')) {
+        // [FW-ACIL-MEDYA-301] Muafiyet TEK listeden okunur (`LOWERCASE_EXEMPT_PREFIXES`).
+        // Segment siniri: `/media` ile `/media-arsivi` AYRI yollardir; onek-benzeri
+        // bir yol muaf sayilmaz, boylece normal sayfa yollari kanonik kucuk harf
+        // 301'ini almaya devam eder (SEO davranisi korunur).
+        if ($this->isLowercaseExemptPath($this->path)) {
             return;
         }
 
@@ -260,6 +297,30 @@ class RedirectManager extends BaseManager
         if ($this->path !== $lowerPath) {
             $this->path = $lowerPath;
         }
+    }
+
+    /**
+     * [FW-ACIL-MEDYA-301] Yol, kucuk harf kanonikalizasyonundan muaf mi?
+     *
+     * Kural basit: yol, `LOWERCASE_EXEMPT_PREFIXES` girdilerinden biriyle TAM
+     * eslesirse ya da o onek + `/` ile baslarsa muaftir. Boylece `/media` ve
+     * `/media/...` muaf olurken `/media-arsivi` (onek-benzeri, normal sayfa yolu)
+     * muaf OLMAZ ve kanonik kucuk harf 301'ini almaya devam eder.
+     *
+     * Buyuk/kucuk harf esitligi: `/Media/...` de ayni yoldur; onek karsilastirmasi
+     * kucuk harfe indirgenerek yapilir (yolun KENDISI degistirilmez).
+     */
+    protected function isLowercaseExemptPath(string $path): bool
+    {
+        $karsilastirilan = mb_strtolower($path, 'UTF-8');
+
+        foreach (self::LOWERCASE_EXEMPT_PREFIXES as $onek) {
+            if ($karsilastirilan === $onek || str_starts_with($karsilastirilan, $onek . '/')) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

@@ -243,9 +243,26 @@ class ViewEngine extends BaseRender
 
     public function path(string $type, ...$args): string
     {
-        $resolved = match (strtolower($type)) {
+        // [FW-CANLI-GECIS / VIEWENGINE] `array_shift($args)` PHP'de REFERANSLA
+        // calistigi icin $args'i KALICI olarak kisaltir. Onceki surumde ilk
+        // `match` bunu yapiyor, sonraki `$baseArgs = $args` ise zaten kisalmis
+        // diziyi kopyalayip dosya yolunu "modul adi" saniyordu -> izin koku
+        // yanlis -> HER `@import('module', ...)` cagrisi fail-closed reddediliyor
+        // (canli pilot: HTTP 200 ama govde `[Render Error]`).
+        // Burada $args HIC kisislanmaz; modul adi ve kalan yol ONCEDEN ayrilir,
+        // iki `match` de AYNI degerleri kullanir.
+        $tip = strtolower($type);
+
+        $moduleName = '';
+        $moduleYol  = [];
+        if ($tip === 'module' || $tip === 'modules') {
+            $moduleName = (string) ($args[0] ?? '');
+            $moduleYol  = array_slice($args, 1);
+        }
+
+        $resolved = match ($tip) {
             'suite' => Paths::framework()->suite(...$args),
-            'module', 'modules' => Paths::module(array_shift($args))->root(implode('/', $args)),
+            'module', 'modules' => Paths::module($moduleName)->root(implode('/', $moduleYol)),
             'framework' => Paths::framework()->root(...$args),
             'public', 'web' => Paths::project()->public(...$args),
             'project', 'core', 'root' => Paths::project()->root(...$args),
@@ -254,10 +271,9 @@ class ViewEngine extends BaseRender
 
         // [A0-9 / R-02] Cozulen yolun TIPE ait kok dizinde kaldigini dogrula.
         // `..` ile kok disina cikan her yol burada reddedilir (fail-closed).
-        $baseArgs = $args;
-        $base = match (strtolower($type)) {
+        $base = match ($tip) {
             'suite' => Paths::framework()->root(),
-            'module', 'modules' => Paths::module(array_shift($baseArgs))->root(),
+            'module', 'modules' => Paths::module($moduleName)->root(),
             'framework' => Paths::framework()->root(),
             'public', 'web' => Paths::project()->public(),
             default => Paths::project()->root(),

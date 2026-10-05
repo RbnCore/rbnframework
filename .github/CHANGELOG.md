@@ -6,11 +6,25 @@
 
 Biçim: [Keep a Changelog](https://keepachangelog.com/tr/1.1.0/). Sürümlendirme: [SemVer](https://semver.org/lang/tr/).
 
-**Planlanan sürüm:** `0.9.0` (güvenlik onarım sürümü) — henüz **yayınlanmadı**.
+**Son sürüm:** `0.9.1` (2026-10-05) — canlı geçişte bulunan 4 düzeltme.
 
 Güvenlik girdileri tarafsız yazılır: ne değişti ve etkisi ne, sömürme adımı/payload/PoC/dosya-satır ayrıntısı **yazılmaz**. Sayısal şiddet dereceleri de burada verilmez (iç onarım planında tutulur).
 
 ---
+
+## [0.9.1] - 2026-10-05
+
+**Kısa özet — canlı geçişte bulunan 4 düzeltme:** Bu sürüm, canlı geçiş sırasında **4 gerçek framework hatası**nın bulunmasıyla çıktı. Dört düzeltme de canlı yüklemesi sonrası ortaya çıktı. Kırıcı değişiklik **yok**: hiçbir imza, şema, izin veya metot imzası değişmedi; güvenlik sınırları (kök sınır fail-closed davranışı dahil) aynen duruyor. Her madde kendi birim testiyle önce kırmızı, sonra yeşil doğrulandı.
+
+### Fixed
+
+- **Dış varlık vekili (asset proxy) beyaz listesi artık proje ayarından okunuyor** (`AssetController`). Dış CDN hedefleri (`media/<base64>` dalı) beyaz listede olmadığı için güvenlik gereği reddediliyor, `Location` üretilmiyor ve istek 404 ile bitiyordu. Beyaz listenin tek kaynağı framework sabitiydi; motor genel kalsın diye sabit **boş** bir varsayılan olarak bırakıldı ve ikinci kaynak olarak aktif projenin ayarı (`project-settings.proxy_allowed_hosts`) okunmaya başlandı — host listesi framework'e değil, projenin kendi ayar dosyasına yazılır. Eşleşme kuralı değişmedi: **tam host** veya `.` son ek. Güvenlik kontrolleri **gevşetilmedi**: şema beyaz listesi (yalnız `http`/`https`), kontrol karakteri/CRLF ve ters bölü normalizasyonu aynen durur, reddedilen hedef `Location` üretmez (fail-closed). Geçersiz ayar girdisi (dizi olmayan, şema/port/yol/boşluk/kontrol karakteri içeren eleman) sessizce yok sayılır; ayar okunamazsa liste boş kalır.
+
+- **Büyük/küçük harfe duyarlı yollar artık küçük harf 301'ine uğramıyor** (`RedirectManager::forceLowercaseUrl()`): `/media/<base64>/<dosya>` ve `/fw-proxy/<upload|export>/<Dosya>` gibi opak (base64) segment taşıyan yollar, istek öncesinde küçük harfe çevrilip 301 yazılıyordu; hedef çözülemediği için istek 404 ile bitiyordu (canlı: 301 → 404). Muafiyet listesi tek yerde, değişmez bir sabitte toplandı (`LOWERCASE_EXEMPT_PREFIXES`) ve **ön ek sınırı** denetimi eklendi: `/media` muafken ön ek-benzeri `/media-arsivi` muaf **değildir**; böylece normal sayfa yollarındaki SEO kanonik küçük harf davranışı korunur.
+
+- **`ViewEngine::path('module', ...)` artık hiçbir `@import('module', ...)` ça�Yrısını reddetmiyor (KRİTİK).** `path()` içindeki `array_shift($args)` ifadesi PHP'de REFERANSLA çalı�Ytı�Yı için `$args` dizisini kalıcı olarak kısaltıyordu; bir sonraki satırda `$baseArgs = $args` zaten kısaltılmı�Y diziyi kopyaladı�Yı için `array_shift($baseArgs)` dosya yolunu "modül adı" sanıyordu. Böylece kök sınırı kontrolü (`guardRoots`) izin kökü olarak modülün K�-K�o yerine görünür bir dosya yolu alıyor ve **her** `@import('module', ...)` ça�Yrısı fail-closed reddediliyordu. Sonuç: HTTP 200 ama `View::__toString`in yuttu�Yu içerik olarak `[Render Error]` gövdesi. Artık modül adı ve kalan yol `path()` ba�Yında �-NCEDEN ayrılır, `$args` hiç kı�Ylanmaz (kısaltılmaz) ve iki `match` aynı de�Yerleri kullanır. **Kök sınırı fail-closed KALIR**: `..` ile kök dı�Yına çıkan yol reddedilir, kapsam daralmadı. Yan hata olarak tek/argümansız ça�Yrı, `array_shift`in bo�Y dizide `null` döndürmesi nedeniyle `Paths::module(null)` TipHatası fırlatıyordu; o da kapandı. Metot imzası DEĞİŞMEDİ.
+
+- **Yerel giri�Y noktası (`domains/<site>/index.php`) PHP sürüm kapısını gerçekten açar (20 dosya).** Sürüm kapısı blo�Yu, yolu `$rbnKapsiAdayi` de�Yi�Ykenine yazıyor ama `is_file($rbnKapisiAdayi)` ile kontrol ediyordu; `is_file(null)` `false` döndü�Yü için `PhpVersionGate` hiç bulunamıyor ve **sessizce devre dı�Yı kalıyordu** (geli�Ytirme ortamında ayrıca her istek sayfaya `Warning`/`Deprecated` metni basıyordu). De�Yi�Yken adı 20 dosyada `$rbnKapisiAdayi` olarak düzeltildi; dosyaların kodlaması ve geri kalan içeri�Yi bayt-bayt de�Yi�Ymedi. Yerel PHP 8.3.35 ile kap geçer ve tüm yerel siteler 200 + temiz gövde verir.
 
 ## [Unreleased]
 
@@ -45,6 +59,10 @@ Güvenlik girdileri tarafsız yazılır: ne değişti ve etkisi ne, sömürme ad
 - **Durum yazımı için anlamı açık yeni adlar: `setStatus()` ve `setStatusById()`.** `toggleStatus` adı iki katmanda iki farklı sözleşme taşıyordu (model/sağlayıcıda 2. parametre alan adı, serviste istenen değer) ve istenen değer sağlayıcı katmanına giderken düşüyordu. Yeni adlar bu sözleşmeyi tekilleştirir; eski ad silinmedi, imzası değişmedi, `@deprecated` işaretlendi ve kullanımı saatlik günlüğe düşüyor. Panelde "durum değiştir" isteği artık istenen değeri yazıyor; `null` değer verildiğinde eski "değiştir" anlamı birebir korunur. Ayrıntı için `UPGRADING.md`.
 
 ### Fixed
+
+- **`UNIQUE (project_key, <slug>)` varlığı yanlış ölçülüyordu (veri bütünlüğü).** Ölçüm, indeksin varlığını `COLUMN_NAME IN ('project_key', <slug>)` filtresiyle soruyordu; **üç kolonlu** bir UNIQUE (ör. `project_key, type, slug`) indeksi de bu filtreyle **iki** satır döndürüp "iki kolonlu UNIQUE var" sanılıyordu. Sonuçta iki kolonlu UNIQUE hiçbir tabloya ekleniyordu. `TenantKeyMigration` artık indeksin **tüm kolonlarını** okuyup listesini sırayla **birebir** karşılaştırıyor (kolon sayısı da); ekleyici `UNIQUE (project_key, <slug>)` ekleyen `applyUnique()` yalnız **çakışma yoksa** çalışıyor, çakışmalı tabloyu `skipped_conflict` durumuyla atlayıp sayısını raporluyor. Kırıcı değildir; mevcut indekslere dokunmaz, yalnız eksik olanı ekler (`revertUnique()` yalnız kendi ürettiği ada sahip indeksi düşürür).
+
+- **GeoIP hata yolu sessizdi.** Coğrafi konum sağlayıcısına ulaşılamadığında, yanıt beklenenden büyük geldiğinde ya da istisna oluştuğunda istek düşürülmeden ülke bilgisi atlanıyordu ama hiçbir kayıt bırakılmıyordu. Artık bu yollar kısaltılmış (15 dakikada bir tek) bir `warning` kaydı yazıyor. **Dönen değer değişmedi**: yine `BILINMEYEN_ULKE` (`'XX'`); hiçbir koşulda boş değer dönmez, istisna yeniden fırlatılmaz. Kayıt anahtarı yalnız hata sınıfını taşır; istemci IP'si veya başka bir değer kayda girmez.
 
 - **Kategori güncellemesinde ham alan yazılabiliyordu.** İçerik kategorisi kaydederken, kayıt nesne döndürmediği durumda korumalı alanlar beyaz listeden geçirilmeden yazılıyordu. Artık aynı beyaz liste her iki yolda da uygulanıyor.
 
@@ -325,9 +343,9 @@ Güvenlik girdileri tarafsız yazılır: ne değişti ve etkisi ne, sömürme ad
   boyut sinirli" deniyordu ama kodda boyut siniri yoktu; beyan edilen govde boyutu 1 MB'yi
   asiyorsa istek reddediliyor ve govde hic okunmuyor.
 
-## [0.9.0] — Planlanan
+## [0.9.0]
 
-- Güvenlik onarım sürümü. İçerik: yukarıdaki `[Unreleased]` kalemleri, yayın öncesi kabul testleri geçtikten sonra.
+- Güvenlik onarım sürümü. İçerik: yayın öncesi kabul testleri geçtikten sonra `[Unreleased]` kalemleriyle tanımlandı; 0.9.1 canlı geçişte bulunan 4 düzeltmeyi ekler.
 - Yayın sırası ve zorunlu yükseltme adımları: `UPGRADING.md`.
 - Desteklenen sürümler ve bildirim kanalı: `SECURITY.md`.
 
@@ -335,14 +353,15 @@ Güvenlik girdileri tarafsız yazılır: ne değişti ve etkisi ne, sömürme ad
 
 ## Bağlantılar
 
-- Depo adresi: **TODO** — 0.9.0 için yeni depo açıldığında doldurulacak.
-- Karşılaştırma: [0.9.0] — **TODO** (yayınlandığında eklenir).
+- Depo adresi: https://github.com/RbnCore/rbnframework
+- Karşılaştırma: [0.9.1] · [0.9.0]
 - Güvenlik bildirimi: [SECURITY.md](SECURITY.md)
 - Yükseltme notları: [UPGRADING.md](UPGRADING.md)
 - Biçim: [Keep a Changelog](https://keepachangelog.com/tr/1.1.0/) · [SemVer](https://semver.org/lang/tr/)
 
-[Unreleased]: https://example.invalid/compare/v0.9.0...HEAD
-[0.9.0]: https://example.invalid/releases/tag/v0.9.0
+[Unreleased]: https://github.com/RbnCore/rbnframework/compare/v0.9.1...HEAD
+[0.9.1]: https://github.com/RbnCore/rbnframework/compare/v0.9.0...v0.9.1
+[0.9.0]: https://github.com/RbnCore/rbnframework/releases/tag/v0.9.0
 - **Sablon motoru artık ifade guvenlik kapısı kullanıyor: `{{ }}` / `{!! !!}` içindeki ifade ham PHP olarak gömülmüyor.** Değer `htmlspecialchars` ile kaçırılıyordu, ama **ifadenin kendisi** sunucuda çalışıyordu; `projects/`, `domains/` ve framework şablonlarında kullanılan ~1500 benzersiz ifadenin tamamı envantere alındı ve yasaklı yapılar (kabuk/eval/dosya yazma/`include`/`new`/derleyici dışına çıkma) için derleme hatası veren kapı eklendi. **Geri uyumluluk kanıtı:** korpusun tamamı kapıdan geçiyor (0 yanlış-pozitif); şablonlarda kullanılan değişken-fonksiyon çağrıları (`$getEmoji(...)`, `$cleanPhone(...)`, `$categoryColor(...)`) çalışmaya devam ediyor.
 
 - **Veritabanından gelen ham entegrasyon kodunda ikinci güvenlik katmanı açık kılındı.** Analytics/AdSense/Tag Manager kodunun `integrations` ayarında tutulup düzende çıplak basılması bir özellik olduğu için kaldırılmadı; bunun yerine satır içi olay öznitelikleri (`onerror=` vb.) ve tehlikeli URI şemaları (`javascript:`, `data:text/html`) temizleyen bir geçiş kapısı eklendi. Meşru analiz kodları (`googletagmanager`, `adsbygoogle`, GTM) birebir korunuyor.

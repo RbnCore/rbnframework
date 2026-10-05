@@ -8,6 +8,12 @@
 
 define('RBN_CLI', true);
 
+// 0. [FW-CANLI-ONCESI-2] PHP surum kapisi (>= 8.3) — autoload'dan ONCE.
+//    Canli sunucuda surum belirlenemedigi icin CLI da ayni acik hatayi verir.
+//    Dosyanin kendisi 8.3-oncesi PHP'de parse edilemeyen sozdizimi icermez.
+require_once __DIR__ . '/Core/System/Kernel/Base/PhpVersionGate.php';
+\Rbn\Framework\Core\System\Kernel\Base\PhpVersionGate::enforce();
+
 // 1. Initial Discovery (To find the autoloader)
 $basePath = __DIR__;
 $autoloader = $basePath . '/vendor/autoload.php';

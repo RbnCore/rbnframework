@@ -200,11 +200,22 @@ class AssetController extends BaseController
             return $url;
         }
 
-        // 3b) Yapılandırılmış dış kaynak listesi (CDN). `guvenliHedef()` bunu
-        //     bilmez; tam ALAN ADI ya da ALAN ADI SON EKI eşleşmesi gerekir
-        //     (`notcdn.example.com` -> `cdn.example.com` son eki YANLIS eşleşme
-        //     üretmesin diye son ek `.'.$sonEk` ile kontrol edilir).
-        foreach (AssetConfig::PROXY_ALLOWED_HOSTS as $izin) {
+        // 3b) Yapılandırılmış dış kaynak listesi (CDN). İKİ KAYNAK BİRLİKTE:
+        //     - `AssetConfig::PROXY_ALLOWED_HOSTS`: framework varsayılanı (boş).
+        //     - AKTİF PROJENİN AYARI `project-settings.proxy_allowed_hosts`
+        //       (`Config::get`; `has_route_map` açıkken `project-routemap.php`
+        //       `view_mapping[<aktif project_key>]` değerleri project-settings
+        //       üstüne yazıldığı için anahtar siteye özel de olabilir).
+        //     Neden ayrı: motor geneldir; proje/müşteri adı ve CDN listesi
+        //     framework'e YAZILMAZ, projenin kendi ayar dosyasında durur.
+        //     `guvenliHedef()` bu listeyi bilmez; tam ALAN ADI ya da ALAN ADI
+        //     SON EKI eşleşmesi gerekir (`notcdn.example.com` -> `cdn.example.com`
+        //     son eki YANLIS eşleşme üretmesin diye son ek `.'.$sonEk` ile
+        //     kontrol edilir).
+        foreach (array_merge(
+            AssetConfig::PROXY_ALLOWED_HOSTS,
+            $this->projectAllowedProxyHosts()
+        ) as $izin) {
             $izin = rtrim(strtolower(trim((string) $izin)), '.');
             if ($izin === '') {
                 continue;
@@ -216,6 +227,68 @@ class AssetController extends BaseController
 
         // 4) Fail-closed.
         return null;
+    }
+
+    /**
+     * [PROJE YAPILANDIRMASI · A0-5] Aktif projenin beyaz liste girdisini okur:
+     * `Config::get('project-settings.proxy_allowed_hosts')` -> host dizisi.
+     *
+     * MOTOR GENEL KALIR: framework'e proje/müşteri adı ya da host listesi
+     * YAZILMAZ (Anayasa §9). Host'lar projenin kendi ayar dosyasında
+     * (`project-settings.php` / `project-routemap.php`) durur; burada yalnız
+     * OKUNUR ve normalize edilir.
+     *
+     * DEĞER KURALLARI (yalnız host; şema/yol/port YAZILMAZ):
+     *  - `project-settings.php` `has_route_map` açıksa `Config::get`, aktif
+     *    `project_key` için `project-routemap.php` `view_mapping` değerlerini
+     *    project-settings ÜSTÜNE yazar; anahtar bu yüzden siteye özel de
+     *    verilebilir.
+     *  - GEÇERSİZ girdi (dizi olmayan, boş, şema/port/yol/boşluk/kontrol
+     *    karakteri içeren eleman) **SESSİZCE** yok sayılır — beyaz liste
+     *    genişlemez, hata fırlatılmaz, gürültü üretilmez.
+     *  - Eşleşme kuralı framework sabitiyle AYNI: tam host veya `.` son ek.
+     *
+     * @return array<int,string> normalize edilmiş, buyuk/kucuk harf ve sondaki
+     *                           noktadan arindirilmis host listesi
+     */
+    private function projectAllowedProxyHosts(): array
+    {
+        try {
+            $ayarlar = \Rbn\Framework\Core\System\Config\Config::get('project-settings.proxy_allowed_hosts');
+        } catch (\Throwable $e) {
+            // Ayar okunamazsa beyaz liste BOS kalir (fail-closed).
+            return [];
+        }
+
+        if (!is_array($ayarlar)) {
+            return [];
+        }
+
+        $temiz = [];
+        foreach ($ayarlar as $izin) {
+            // Yalnizca duz string kabul; sayi/nesne/dizi elemanlari yoksayilir.
+            if (!is_string($izin)) {
+                continue;
+            }
+            // Kontrol karakteri / CRLF -> sessizce yok say.
+            if (preg_match('/[\x00-\x1F\x7F]/', $izin) === 1) {
+                continue;
+            }
+            $izin = rtrim(strtolower(trim($izin)), '.');
+            // Bosluk, sema (`https://`), yol (`/a.jpg`), port (`:8443`) ve
+            // kullanici/fragment kalintilari -> bu bir HOST degildir.
+            if ($izin === '' || preg_match('/^[a-z0-9._-]+$/', $izin) !== 1) {
+                continue;
+            }
+            // Kaba sekilde supheli: ard arda nokta, basta/ sonda tire.
+            if (str_contains($izin, '..') || str_starts_with($izin, '.')
+                || str_starts_with($izin, '-') || str_ends_with($izin, '-')) {
+                continue;
+            }
+            $temiz[] = $izin;
+        }
+
+        return $temiz;
     }
 
     /**

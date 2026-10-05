@@ -5,6 +5,7 @@ namespace Rbn\Framework\Core\Services\Gatekeepers\Handlers;
 
 use Rbn\Framework\Core\Base\BaseComponent;
 use Rbn\Framework\Core\Database\Repositories\Common\ShieldSettingsRepository;
+use Rbn\Framework\Core\Support\Bridges\Helpers\Library\LogThrottle;
 use Rbn\Framework\Core\System\Paths\Paths;
 
 /**
@@ -150,18 +151,54 @@ class GeoIPHandler extends BaseComponent
                 $response = @file_get_contents($ucNokta, false, $ctx);
 
                 if (!is_string($response) || $response === '') {
-                    return self::BILINMEYEN_ULKE; // ag/HTTP/TLS hatasi
+                    // AĞ/HTTP/TLS hatası: istek dusturulmaz, ulke atlanir.
+                    // [A-27] Artık SESSİZ değil: kısaltılmış (throttle) bir kayıt
+                    // yazılır. Anahtar IP DEĞERİ içermez (PII yok).
+                    return $this->hataYolu('ag_http_tls');
                 }
                 if (strlen($response) > self::GEOIP_MAX_GOVDE_BAYT) {
-                    return self::BILINMEYEN_ULKE; // beklenmeyen kocaman govde
+                    return $this->hataYolu('govde_cok_buyuk');
                 }
 
                 return self::ulkeKoduAyikla($response);
             } catch (\Throwable $e) {
                 // Hata yolu: istek dusturulmaz, sadece ulke bilgisi atlanir.
-                return self::BILINMEYEN_ULKE;
+                // [A-27] Istisna YOKSARI: burada yeniden firlatilmiyor (fail-closed
+                // yonu burada yanlis olurdu) ama kayit birakilir.
+                return $this->hataYolu('istisna');
             }
         }, 86400 * 30); // Cache for 30 days
+    }
+
+    /**
+     * [A-27] Hata yolu: GÜVENLİ VARSAYILAN + kayıt, istisna YOK.
+     *
+     * SÖZLEŞME:
+     *   1. Dönen değer **dolu ve güvenli**dir (`BILINMEYEN_ULKE` = 'XX'); asla
+     *      `null` / `''` / boş dizi dönmez. Çağıran taraf `if ($ulke === '')`
+     *      gibi bir boşluk kontrolüyle "ülke bilinmiyor" ayrımını yapamaz.
+     *   2. **İstisna fırlatılmaz.** GeoIP hatası isteği düşürmemelidir; burada
+     *      fail-closed yönü YANLIŞ olurdu (bakım modu yorumu).
+     *   3. SESSİZ DEĞİLDİR: `LogThrottle::once()` ile kısaltılmış bir `warning`
+     *      kaydı yazılır. Anahtar yalnız hata KALEBİ adını taşır — IP veya
+     *      başka bir değer (PII) kayda girmez.
+     *
+     * @param string $kalep Hata sınıfı etiketi (makine tarafından sabitlenir).
+     */
+    private function hataYolu(string $kalep): string
+    {
+        if (LogThrottle::once('geoip_' . $kalep, 900)) {
+            try {
+                $this->logs()->warning('GeoIP saglayicisi yanit vermedi; ulke bilgisi atlandi.', [
+                    'kalep' => $kalep,
+                    'varsayilan' => self::BILINMEYEN_ULKE,
+                ], 'geoip');
+            } catch (\Throwable $yazmaHatasi) {
+                // Kayıt yazılamazsa da karar DEĞİŞMEZ: hata yolu yine 'XX'.
+            }
+        }
+
+        return self::BILINMEYEN_ULKE;
     }
 
     /**

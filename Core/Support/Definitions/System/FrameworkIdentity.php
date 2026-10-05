@@ -23,7 +23,7 @@ class FrameworkIdentity extends BaseConfig
     // Core Identity
     // -------------------------------------------------------------
     public const FRAMEWORK_NAME = 'RBN Core - Framework';
-    public const FRAMEWORK_VERSION = '0.9.0';
+    public const FRAMEWORK_VERSION = '0.9.1';
     public const FRAMEWORK_SLOGAN = 'The Sovereign Web Technologies & "Masterpiece" Architectures';
     public const FRAMEWORK_DESCRIPTION = 'RBN Framework provides high-performance digital transformation, enterprise software solutions, and sovereign web technologies.';
     public const FRAMEWORK_URL = 'https://rbncore.tr';
