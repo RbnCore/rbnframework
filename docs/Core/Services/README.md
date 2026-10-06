@@ -1,6 +1,6 @@
 # Core/Services — iş servisleri, güvenlik kapıları, hata yönetimi, master ve CLI (81 dosya)
 
-> **Doğrulanan kod tabanı:** `c23b431f` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `c23b431f` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Services/` — **81 `*.php`**.
 > **Envanter:** 81 dosyanın **81'i** anlatıldı (0 + 29 + 13 + 13 + 5 + 7 + 14).
 > **Doğrulama platformu:** Windows + PHP 8.3, gerçek `Paths::init` ile servis/handler/manager çözümlemeleri çalıştırıldı.

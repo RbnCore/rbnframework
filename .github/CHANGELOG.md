@@ -6,9 +6,25 @@
 
 Biçim: [Keep a Changelog](https://keepachangelog.com/tr/1.1.0/). Sürümlendirme: [SemVer](https://semver.org/lang/tr/).
 
-**Son sürüm:** `0.9.4` (2026-10-06) — tarama çıktısı (sitemap/llms.txt) düzeltmeleri, çerçevenin kendi `[B-92]` gürültüsünün kesilmesi, kaldırılan proje modülünün izlerinin framework'ten temizlenmesi ve görünür metinlerde anlamsız pazarlama sözcüklerinin nötrleştirilmesi.
+**Son sürüm:** `0.9.5` (2026-10-06) — sağlayıcı ve servis yaşam döngülerindeki yanlış-pozitif günlük kayıtları kaldırıldı; render bağlam eşlemeleri gerçek sınıf takma adlarından ayrıldı.
 
 Güvenlik girdileri tarafsız yazılır: ne değişti ve etkisi ne, sömürme adımı/payload/PoC/dosya-satır ayrıntısı **yazılmaz**. Sayısal şiddet dereceleri de burada verilmez (iç onarım planında tutulur).
+
+---
+
+## [0.9.5] - 2026-10-06
+
+**Kısa özet — sağlayıcı ve servis yaşam döngülerindeki yanlış-pozitif günlük kayıtları kaldırıldı; render bağlam eşlemeleri sınıf takma adlarından ayrıldı.**
+Bu sürüm, `0.9.4` yayınından sonra yapılan iki commit'in kaydıdır. Yükseltme notları `UPGRADING.md` 0.9.5 bölümündedir.
+
+### Düzeltildi
+
+* **Provider ve exception service yanlış-pozitif günlükleri kaldırıldı.** Sağlayıcılarda `register()` tanımlı değilken yazılan ve exception servisinde bulunmayan `register()` için üretilen kayıtlar kaldırıldı. Kayıt gerektiren gerçek `register()` çağrısı ve exception servisinin çözülmesi korunur; istek davranışı değişmez.
+* **Render bağlam eşlemeleri gerçek sınıf alias kayıtlarından ayrıldı.** Panel/render anahtarları `renderAliases` altında tutulur; `aliases` artık PHP sınıf takma adları içindir. Böylece bağlam anahtarları eksik sınıf takma adı gibi raporlanmaz.
+
+### Sürüm
+
+* **Sürüm artışı:** `FrameworkIdentity::FRAMEWORK_VERSION` `0.9.4` → `0.9.5`; sayaç `Version::next()` ile hesaplandı.
 
 ---
 
@@ -539,6 +555,7 @@ doğrulandı. Bileşen sürümleri `2.1.0` / `1.2.0` / `2.2.0` / `2.3.0` **deği
 - Biçim: [Keep a Changelog](https://keepachangelog.com/tr/1.1.0/) · [SemVer](https://semver.org/lang/tr/)
 
 [Unreleased]: https://github.com/RbnCore/rbnframework/compare/v0.9.4...HEAD
+[0.9.5]: https://github.com/RbnCore/rbnframework/compare/v0.9.4...v0.9.5
 [0.9.4]: https://github.com/RbnCore/rbnframework/compare/v0.9.3...v0.9.4
 [0.9.3]: https://github.com/RbnCore/rbnframework/compare/v0.9.2...v0.9.3
 [0.9.2]: https://github.com/RbnCore/rbnframework/compare/v0.9.1...v0.9.2

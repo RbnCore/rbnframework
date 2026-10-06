@@ -1,5 +1,17 @@
 ## [Unreleased]
 
+## 0.9.5 (yayın hazırlığı — 2026-10-06)
+
+### Bu sürümde ne yapmalısınız
+
+Framework dosyalarını 0.9.5 ile güncelleyin. Veritabanı şeması, ortam ayarı veya proje kodu değişikliği gerekmez.
+
+### Günlük kayıtlarındaki düzeltme
+
+Framework, `register()` metodu bulunmayan provider ve exception service için yanlış-pozitif `error_log` satırları üretmeyecektir. Bu kayıtlar mevcut günlük dosyalarında kalır; yeni kurulum veya günlük temizliği gerekmez. Gerçek `register()` metodu çağrılmaya devam eder ve exception service çözülür. İstek/yanıt davranışı değişmez.
+
+Render haritasındaki panel/auth/crawler bağlam eşlemeleri `renderAliases` altında yer alır; bunlar PHP sınıf takma adı değildir. Projeye özel kod değişikliği gerekmez.
+
 ## 0.9.4 (yayın hazırlığı — 2026-10-06)
 
 ### Bu sürümde ne yapmalısınız (kısa liste)
@@ -982,7 +994,7 @@ Sürümlendirme: [SemVer](https://semver.org/lang/tr/). Değişiklik kaydı: [CH
 
 ## Bu sürüm
 
-- **Son sürüm:** `0.9.4` (2026-10-06) — tarama çıktısı (sitemap/llms.txt) düzeltmeleri, çerçevenin kendi `[B-92]` gürültüsünün kesilmesi, kaldırılan proje modülünün izlerinin framework'ten temizlenmesi ve görünür metinlerde anlamsız pazarlama sözcüklerinin nötrleştirilmesi. Kırıcı değişiklik **yoktur** (aşağıdaki 0.9.4 bölümüne bakın; kırıcı değişiklikler 0.9.2 bölümündedir).
+- **Son sürüm:** `0.9.5` (2026-10-06) — sağlayıcı/exception service yanlış-pozitif günlük kayıtları kaldırıldı, render bağlam eşlemeleri sınıf alias kayıtlarından ayrıldı. Kırıcı değişiklik **yoktur** (0.9.5 bölümüne bakın).
 - Bu dosyaya yazılan her sürüm, o sürümün canlıya çıktığı andan itibaren geçerlidir.
 
 ---

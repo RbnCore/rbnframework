@@ -1,6 +1,6 @@
 # Packages/RbnApi — dış servis kapısı (API sağlayıcıları + servisler)
 
-> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Packages/RbnApi/` — **27 `*.php`**
 > (1 kök + `Managers/` 3 + `Models/` 3 + `Providers/` 10 + `Services/` 10).
 > **Envanter:** 27 dosyanın **27'si** aşağıda anlatıldı.

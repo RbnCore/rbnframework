@@ -1,6 +1,6 @@
 # Core/System/Kernel — Açılış zinciri (PreBoot → aşamalar → rota)
 
-> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/System/Kernel/` — 19 `*.php` (kök 2, `Base/` 5, `Guards/` 5, `Stages/` 7).
 > **Envanter:** 19 dosyanın 19'u aşağıda anlatıldı.
 

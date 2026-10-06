@@ -2,7 +2,7 @@
 
 > **Bu belge hangi commit'e göre yazıldı:** `d4af18d` (dal `feat/fw-license-master`)
 > **Son doğrulama tarihi:** 2026-10-05
-> **Yayın tabanı:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Yayın tabanı:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kapsam:** Sürüm kuralı, tek kaynak, `rbn version:*`, CHANGELOG/UPGRADING biçimi
 
 ---
@@ -172,9 +172,9 @@ ikisi de master DB'ye bağlanır (`rbn:67-72`).
 Kaynak 3 ve 4 **kopya** olduğu için "framework ile aynı mı" sorusudur; kaynak 1, 2, 5
 yalnız **geçerlilik** (`Version::isValid()`) sorusudur.
 
-**Ölçülen çıktı** (yerel master, 2026-10-06, 0.9.4 ağacında yeniden ölçüldü): framework `0.9.4` OK; CLI `2.3.0`,
-Shield `2.1.0`, Admin `1.2.0`, Auth `2.2.0` OK; `CITATION.cff` `0.9.4` OK;
-`CHANGELOG.md` `0.9.4` OK; master'daki **19 proje** kaydının **19'u** `0.1.1` OK.
+**Ölçülen çıktı** (yerel master, 2026-10-06, 0.9.5 ağacında yeniden ölçüldü): framework `0.9.5` OK; CLI `2.3.0`,
+Shield `2.1.0`, Admin `1.2.0`, Auth `2.2.0` OK; `CITATION.cff` `0.9.5` OK;
+`CHANGELOG.md` `0.9.5` OK; master'daki **19 proje** kaydının **19'u** `0.1.1` OK.
 Sonuç: *"Tüm sürümler tutarlı ve geçerli (A.B.C)."*
 
 ### 4.2 `version:next <project_key>` — varsayılan KURU KOŞU

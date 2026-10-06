@@ -1,6 +1,6 @@
 # Core/Support/Definitions — Çatı tanım sabitleri (ad alanı, klasör, rota, varlık, kimlik)
 
-> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Support/Definitions/` — 10 `*.php` (`Render/` 4, `Route/` 2, `System/` 4).
 > **Envanter:** 10 dosyanın 10'u aşağıda anlatıldı. Sabit sayıları `ReflectionClass` ile ölçüldü (PHP 8.3, Windows).
 
@@ -26,7 +26,7 @@
 | `NamespaceMap.php` (`BaseConfig`) | `FRAMEWORK_PREFIX='Rbn\Framework\'`, `PROJECT_PREFIX='Rbn\Project\'`, `COMPONENT_REGISTRY`, `MAP` (26 giriş: `Framework`, `Framework.Core`, `Base`, `Database`, `Support`, `Helpers`, `Services`, `Http`, `Render`, `Routes`, `System`, `Internal`, `Suite`, `RbnSuite`, `RbnAdmin`, `RbnAuth`, `RbnStudio`, `Packages`, `App`, `Project`, `Project.App`, `Project.Core`, `Modules`, `Project.Modules`, `Backend`, `Frontend`). | — |
 | `FolderMatrix.php` (`BaseConfig`) | `FRAMEWORK` (5 kök), `PROJECT` (6 kök), `RUNTIME_LAYERS` (11), `CODE_LAYERS` (16); kategori `folder`. | `getDefinitionCategory()`, `isRuntimeLayer(string)`, `isCodeLayer(string)` |
 | `ComponentTypes.php` | `MAP` (22: sonek → tür; `Handler→handler`, `Validator→validation` …), `PLURAL_MAP` (22: tekil → çoğul kayıt anahtarı; `repository→repositories`, `metadata→metadata`). | `static typeMap(): array`, `static pluralize(string $type): string` (bilinmeyen tür: küçük harf + `s`) |
-| `FrameworkIdentity.php` (`BaseConfig`) | 26 skaler sabit: ad, sürüm (`FRAMEWORK_VERSION='0.9.4'`), URL'ler (`https://rbncore.tr`, `https://cdn.rbncore.tr/`), geliştirici bilgisi, depo/sorun/güvenlik bağlantıları, `FRAMEWORK_CLI_VERSION='2.3.0'`, `SHIELD_*`, `ADMIN_*`, `AUTH_*`. | — |
+| `FrameworkIdentity.php` (`BaseConfig`) | 26 skaler sabit: ad, sürüm (`FRAMEWORK_VERSION='0.9.5'`), URL'ler (`https://rbncore.tr`, `https://cdn.rbncore.tr/`), geliştirici bilgisi, depo/sorun/güvenlik bağlantıları, `FRAMEWORK_CLI_VERSION='2.3.0'`, `SHIELD_*`, `ADMIN_*`, `AUTH_*`. | — |
 
 ### 2.2 `Route/`
 

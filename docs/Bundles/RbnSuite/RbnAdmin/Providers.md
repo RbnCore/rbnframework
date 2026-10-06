@@ -1,6 +1,6 @@
 # RbnAdmin/Providers + Services + Traits — analiz ve sunum katmanı
 
-> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasörler:** `Bundles/RbnSuite/RbnAdmin/{Providers,Services,Traits}/`
 > — **7 `*.php`** (Providers 4 · Services 2 · Traits 1)
 > **Envanter:** 7 dosyanın 7'si anlatıldı.

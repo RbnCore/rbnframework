@@ -1,6 +1,6 @@
 # Core/Render/Configs — sabit tanım dosyaları (5 dosya)
 
-> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Render/Configs/` — **5 `*.php`**.
 > **Envanter:** 5 dosyanın **5'i** anlatıldı.
 > **Doğrulama platformu:** Windows + PHP 8.3, tüm sabitler reflection/erişimle **ölçüldü**.

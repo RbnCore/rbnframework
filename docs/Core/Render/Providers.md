@@ -1,6 +1,6 @@
 # Core/Render/Providers — fiziksel HTML/XML/JSON üretimi (12 dosya)
 
-> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Render/Providers/` — **12 `*.php`** = 5 kök + `UI/` altında 7.
 > **Envanter:** 12 dosyanın **12'si** anlatıldı.
 > **Doğrulama platformu:** Windows + PHP 8.3, tümü `provider()`/`resolver()` üzerinden gerçekten çözüldü.

@@ -1,6 +1,6 @@
 # Core/Support/Bridges — Yardımcı kütüphaneler, global işlevler, vekil ve ortak özellikler
 
-> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Support/Bridges/` — 32 `*.php`: `Helpers/rbn_helpers.php` 1, `Helpers/Global/` 4, `Helpers/Library/` 15, `Helpers/Library/Icons/` 2 + `Icons/Internal/` 7, `Proxies/` 1, `Traits/` 2.
 > **Envanter:** 32 dosyanın 32'si aşağıda anlatıldı.
 

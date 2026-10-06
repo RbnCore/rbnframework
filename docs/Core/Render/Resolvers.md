@@ -1,6 +1,6 @@
 # Core/Render/Resolvers — ad → yol/meta/payload çözümleyiciler (10 dosya)
 
-> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Render/Resolvers/` — **10 `*.php`** = 6 kök + `Sub/` altında 4.
 > **Envanter:** 10 dosyanın **10'u** anlatıldı.
 > **Doğrulama platformu:** Windows + PHP 8.3, `ViewResolver`/`LayoutResolver`/`RobotsResolver` gerçekten çalıştırılarak.

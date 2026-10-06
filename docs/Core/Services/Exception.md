@@ -1,6 +1,6 @@
 # Core/Services/Exception — hata analizi, günlükleme ve kullanıcı/developer çıktısı (13 dosya)
 
-> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Services/Exception/` — **13 `*.php`** = 1 kök + `Concerns/` 2 +
 > `Data/` 2 + `Handlers/` 3 + `Providers/` 4 (+ `Providers/Base/` 1).
 > **Envanter:** 13 dosyanın **13'u** anlatıldı.
@@ -163,10 +163,12 @@ Yedi yardımcı, her biri bir istisna sınıfı fırlatır veya `abort()` çağ�
    döndürürse `ExceptionService` çıktı basmamış olur (return yok, `:53-57`).
    Dönüş değeri **yok sayılır** (`ExceptionService.php:53-54`).
 8. **`DevelopmentProvider` ve `UserErrorProvider` `register()` metodu
-   tanımlamaz** — ölçüldü: `[RBN] … register() metodunu TANIMLAMIYOR; kayit
-   adimi sessizce atlandi (B-63 gorunurluk kaydi)`. Bu bir hata değil,
-   provider'ların kayıt gerektirmediğinin işareti; ama kayıt adımının
-   sessizce atlandığı **günlük satırı** her provider örneklemesinde üretilir.
+   tanımlamaz** — ve bu artık bir sorun DEĞİLDİR. Ölçüm (FW-095): framework
+   ağacındaki **41/41** sağlayıcı bu yola düşüyor, yani `[RBN] … register()
+   metodunu TANIMLAMIYOR; kayit adimi sessizce atlandi (B-63 gorunurluk
+   kaydi)` satırı saf yanlış-pozitif gürültüydü; kayıt işi constructor/DNA ile
+   zaten yapılıyor. **FW-095'te bu günlük satırı kaldırıldı**; tanımlı olan bir
+   `register()` varsa çağrı aynen sürer.
 
 ## 6. Örnek (gerçek koddan)
 

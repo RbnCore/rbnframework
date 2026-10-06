@@ -1,6 +1,6 @@
 # Core/System/Config — Yapılandırma, ortam değişkeni ve sır okuyucuları
 
-> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/System/Config/` — 22 `*.php` + 3 `README.md` (sır dosyası `Secrets/secrets.php` bilerek okunmadı/anlatılmadı; yalnız adı ve kuralları var).
 > **Envanter:** 22 php dosyasının 22'si ve 3 README aşağıda anlatıldı (`secrets.php` dahil; içeriği hariç).
 

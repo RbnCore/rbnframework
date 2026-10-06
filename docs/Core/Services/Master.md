@@ -1,6 +1,6 @@
 # Core/Services/Master — lisans doğrulama, proje/ayar/uygulama yönetimi (7 dosya)
 
-> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Services/Master/` — **7 `*.php`** = 5 kök + `Data/` 2.
 > **Envanter:** 7 dosyanın **7'si** anlatıldı.
 > **Doğrulama platformu:** Windows + PHP 8.3; `LicenceAccessRule` 4 kayıtla,

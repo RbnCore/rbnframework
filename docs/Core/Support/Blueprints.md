@@ -1,6 +1,6 @@
 # Core/Support/Blueprints — Doğrulama ve alan sabitleri
 
-> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Support/Blueprints/` — 11 `*.php` (`Constants/` 2, `Validations/` 9).
 > **Envanter:** 11 dosyanın 11'i aşağıda anlatıldı. Sayılar `ReflectionClass` ile PHP 8.3'te ölçüldü (Windows).
 

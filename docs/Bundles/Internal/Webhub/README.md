@@ -1,6 +1,6 @@
 # Bundles/Internal/Webhub — Frontend kimlik, SEO, navigasyon, entegrasyon ve yasal sayfalar
 
-> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Bundles/Internal/Webhub/` — 43 `*.php` + 19 `*.rbn.php` görünüm.
 > **Envanter:** 43 php dosyasının 43'ü bu belgelerde anlatıldı.
 

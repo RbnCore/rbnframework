@@ -1,6 +1,6 @@
 # Core/Render — görünüm motoru, şablon derleme, varlık/SEO/crawler üretimi
 
-> **Doğrulanan kod tabanı:** `c23b431f` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `c23b431f` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Render/` — **51 `*.php`** = 2 kök (`View.php`, `ViewEngine.php`) + 49 alt dal.
 > **Envanter:** 51 dosyanın **51'i** anlatıldı (2 + 7 + 5 + 5 + 6 + 12 + 10 + 4).
 > `Services/` (4 dosya) **bu belgede §3.2'de listelenir** (ayrı alt dal belgesi yoktur).

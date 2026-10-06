@@ -2,7 +2,7 @@
 
 > **Bu belge hangi commit'e göre yazıldı:** `d49b4413` (dal `feat/fw-license-master`)
 > **Son doğrulama tarihi:** 2026-10-05
-> **Yayın tabanı:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Yayın tabanı:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kapsam:** `rbnframework/` deposunun tamamı (okuma yönü: framework'ü hiç bilmeyen biri)
 
 Bu dizi, framework'ün **kendi kodunu okuyarak** yazılmış rehberidir. Her iddia
@@ -146,7 +146,7 @@ Ek kurallar:
 
 * Her belgenin başındaki **"Doğrulanan kod tabanı"** satırı, belgeyi yazan kişi
   tarafından **güncellenir**; "son doğrulama tarihi" de aynı anda yazılır.
-* **"Yayın tabanı"** satırı sürümü anlatır: `0.9.4 = bu commit + sonrası`, yani belge
+* **"Yayın tabanı"** satırı sürümü anlatır: `0.9.5 = bu commit + sonrası`, yani belge
   yalnız **doğrulama anındaki** kodu anlatır. Belgeyi yazan kişi o commit'ten sonra
   değişen bir şeyi anlatıyorsa commit'i **kendisi** günceller — başkası güncellemez.
 * Bir iddia artık kodda doğrulanamıyorsa **silinmez**,

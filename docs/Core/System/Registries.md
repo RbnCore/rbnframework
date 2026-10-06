@@ -1,6 +1,6 @@
 # Core/System/Registries — Sistem kayıt defteri (ad → sınıf haritası)
 
-> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/System/Registries/` — 8 `*.php` (kök 3, `RegistryMap/` 5).
 > **Envanter:** 8 dosyanın 8'i aşağıda anlatıldı.
 
@@ -22,7 +22,7 @@ Harita beş **özellik (trait)** dosyasına bölünmüştür; `SystemRegistry::r
 | `RegistryMap/SystemAccessMapTrait.php` | `aliases` (4) ve `commands` (6). | `protected accessMap(): array` |
 | `RegistryMap/SystemLogicMapTrait.php` | `managers` (5), `services` (27), `handlers` (24), `resolvers` (2), `jobs` (3). | `protected logicMap(): array` |
 | `RegistryMap/SystemPhysicalMapTrait.php` | `models` (36), `providers` (6), `repositories` (23). | `protected physicalMap(): array` |
-| `RegistryMap/SystemRenderMapTrait.php` | Render katmanı: `services` (4), `handlers` (10), `providers` (10), `presets` (1), `resolvers` (10), `clusters` (1), `aliases` (panel/auth/crawler takma adları). | `protected renderMap(): array` |
+| `RegistryMap/SystemRenderMapTrait.php` | Render katmanı: `services` (4), `handlers` (10), `providers` (10), `presets` (1), `resolvers` (10), `clusters` (1), `renderAliases` (panel/auth/crawler takma adları — bunlar PHP sınıf takma adı DEĞİLDİR; gerçek sınıf alias defteri `aliases` anahtarındadır, [FW-095]). | `protected renderMap(): array` |
 | `RegistryMap/SystemResourceMapTrait.php` | `helpers` (12), `validations` (6), `constants` (boş), `metadata` (3 önek). | `protected resourceMap(): array` |
 
 ## 3. Akış

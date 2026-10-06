@@ -85,7 +85,15 @@ trait SystemRenderMapTrait
             ],
 
             /* --- Render Optimization Aliases 🏷️ --- */
-            'aliases' => [
+            // [FW-095] KÖK NEDEN DÜZELTMESİ: Bu girdiler PHP SINIF TAKMA ADI
+            // DEĞİLDİR; panel/render bağlam anahtarı eşlemesidir (örn.
+            // 'admin' => 'panel'). Eskiden `'aliases'` anahtarında tutulduğu
+            // için `SystemRegistry::registerMap()` bunları `SystemAccessMapTrait`
+            // içindeki GERÇEK sınıf takma adlarıyla aynı diziye birleştiriyor,
+            // `ComponentRegistry::registerAliases()` de hepsini sınıf takma
+            // adı sanıp `S09_ALIAS_ORIGINAL_MISSING` yanlış-pozitifi üretiyordu
+            // (ölçüm: 17 satır/istek). Ayrı anahtara taşındı.
+            'renderAliases' => [
                 'admin' => 'panel',
                 'backend' => 'panel',
                 'editor' => 'panel',

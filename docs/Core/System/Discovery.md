@@ -1,6 +1,6 @@
 # Core/System/Discovery — Keşif motoru (bileşen/ad alanı/dosya yolu çözümü)
 
-> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/System/Discovery/` — 24 `*.php`.
 > **Envanter:** 24 dosyanın 24'ü aşağıda anlatıldı.
 

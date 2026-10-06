@@ -1,6 +1,6 @@
 # Core/Services/Console — CLI komutları, cron kervanı, migration ve temizlik (29 dosya)
 
-> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Services/Console/` — **29 `*.php`** = 1 kök + `Base/` 4 + `Handlers/` 8
 > (+ `Handlers/Resolvers/` 2) + `Jobs/` 1 (+ `Jobs/Cleanup/` 3) + `Managers/` 3 +
 > `Services/` 6 + `Tasks/` 1.

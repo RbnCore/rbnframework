@@ -2,7 +2,7 @@
 
 # RBN Core Framework
 
-**Sürüm:** `0.9.4` · **Lisans:** MIT · **PHP:** 8.3+
+**Sürüm:** `0.9.5` · **Lisans:** MIT · **PHP:** 8.3+
 
 RBN Core Framework, tek bir çekirdeğin altında **birden çok bağımsız PHP projesini** barındıran,
 çok kiracılı (multi-tenant) mimariye sahip, hafif bir uygulama çatısıdır. Yönlendirme, şablon

@@ -1,6 +1,6 @@
 # Core/Base/Services — servis, sağlayıcı ve yönetici tabanları
 
-> **Doğrulanan kod tabanı:** `1d89c431` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `1d89c431` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Base/Services/` — 18 `*.php`.
 > **Envanter:** 18 dosyanın 18'i aşağıda anlatıldı.
 

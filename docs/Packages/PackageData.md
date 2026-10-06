@@ -1,6 +1,6 @@
 # Packages/PackageData — paket kayıt haritası (bütün `Packages/*` tek noktada)
 
-> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak dosya:** `Packages/PackageData.php` — **1 `*.php`** (paket kökündeki tek dosya).
 > **Envanter:** 1/1.
 > Bu dosya, `Packages/` ağacındaki **79 `*.php`** dosyanın hepsini tek

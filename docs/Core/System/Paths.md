@@ -1,6 +1,6 @@
 # Core/System/Paths — Yol kayıt defteri (çatı / proje / modül kökleri)
 
-> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/System/Paths/` — 4 `*.php` (`Paths.php` + `Contexts/` altında 3).
 > **Envanter:** 4 dosyanın 4'ü aşağıda anlatıldı.
 > **Doğrulama platformu:** Windows (PHP 8.3 ile `FolderContext::path()` çalıştırıldı, bkz. §5).

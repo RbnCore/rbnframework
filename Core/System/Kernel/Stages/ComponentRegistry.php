@@ -25,7 +25,6 @@ class ComponentRegistry extends BaseStage
      * adı taşır (değer, proje anahtarı veya istek verisi YOK — Anayasa §9).
      */
     private const THROTTLE_STAGE_SERVICE = 'S09_STAGE_SERVICE_UNRESOLVED';
-    private const THROTTLE_EXCEPTION_SERVICE = 'S09_EXCEPTION_SERVICE_UNREGISTERED';
     private const THROTTLE_ALIAS_ORIGINAL = 'S09_ALIAS_ORIGINAL_MISSING';
     private const THROTTLE_ALIAS_TARGET = 'S09_ALIAS_TARGET_ALREADY_EXISTS';
 
@@ -44,15 +43,14 @@ class ComponentRegistry extends BaseStage
         $kernel->set('services', $services);
 
         // 1. Exception Service Orchestration 🔱🧬⚡
-        $exceptionService = $services->service('exception');
-        if ($exceptionService && method_exists($exceptionService, 'register')) {
-            $exceptionService->register();
-        } else {
-            // [S-09] `exception` servisi çözülemedi/yok (`register` metodu
-            // yok). Önceden hiçbir iz bırakmıyordu; teşhisi zorlaştırıyordu.
-            // Yalnız log: istek akışı DEĞİŞMEZ.
-            $this->reportUnresolved(self::THROTTLE_EXCEPTION_SERVICE, 'exception-service');
-        }
+        // [FW-095] KÖK NEDEN DÜZELTMESİ: servisler yaşam döngüsünü `boot()` ile
+        // yürütür (bkz. `BaseService::__construct()` → `boot()`), `register()`
+        // ile DEĞİL. Eski `method_exists($exceptionService, 'register')` dalı
+        // hiçbir serviste TRUE olmuyordu ve her istekte yanlış-pozitif bir S-09
+        // exception-service satırı üretiyordu. Servisi çözmek erken
+        // kuruluş/boot davranışını korur; yanlış-pozitif kapı KALDIRILDI
+        // (istek akışı DEĞİŞMEZ).
+        $services->service('exception');
 
         // 2. Aliases (Unified Fusion via Root DNA) 🎭⚓
         $this->registerAliases();
@@ -114,7 +112,7 @@ class ComponentRegistry extends BaseStage
     private function reportUnresolved(string $tag, string $subject): void
     {
         try {
-            if (!LogThrottle::once($tag . ':' . static::class)) {
+            if (!LogThrottle::once($tag . ':' . $subject . ':' . static::class)) {
                 return;
             }
         } catch (\Throwable) {
