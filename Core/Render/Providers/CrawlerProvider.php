@@ -111,13 +111,77 @@ class CrawlerProvider extends BaseRender implements BaseRenderInterface
             // [FW-ALTYAPI-3 / H · G4] `PagesModel` artık `scoped = true`.
             // Açık anahtar verilirse kapsam `withProjectScope()` ile O anahtara
             // daraltılır; verilmezse modelin kapsamı (aktif bağlam) geçerli.
-            $model = $this->model('page');
+            //
+            // [FW-094-CRAWLER / Ö-1] Registry anahtarı `project.page`'dir
+            // (`SystemPhysicalMapTrait.php:55`). ÖNCEKİ HALİ `model('page')`
+            // idi: registry'de olmayan anahtar NULL döner, `->where()` Throwable
+            // atar ve `catch` sessizce `[]` verirdi. ÖLÇÜM: 17/17 projede
+            // `getActivePages()` = 0, `model('project.page')` = 62 satır →
+            // DB'de aktif olan 62 yasal sayfa sitemap'ten SİLİNİYORDU (kayıp %100).
+            $model = $this->model('project.page');
             if (!empty($this->projectKey)) {
                 $model = $model->withProjectScope((string) $this->projectKey);
             }
             return $model->where('status', 'active')->get()->all();
         } catch (\Throwable $e) {
+            // [FW-094-CRAWLER / Ö-1] Sessizlik kaldırıldı. Bu blok bir kez daha
+            // sessiz `[]` dönerse aynı hata aylarca fark edilmez.
+            error_log('[RBN-CRAWLER] getActivePages: ' . $e->getMessage());
             return [];
+        }
+    }
+
+    /**
+     * Physical Data: Does an ACTIVE page with this slug exist? 🔍📄
+     *
+     * [FW-094-CRAWLER / Ö-3] Standart dinamik sayfalar (`sik-sorulan-sorular`)
+     * sabit bir sayfa DEĞİLDİR: denetleyici içerik yoksa ana sayfaya
+     * yönlendirir (`GroupBaseController::faqs()` → `redirect('/')`). Sitemap ve
+     * `llms.txt` böyle bir adresi listelerse arama motoruna "git, ana sayfa"
+     * demiş olur. Sitemap girdisi bu yüzden "içerik gerçekten var mı" sorusunu
+     * buradan sorar.
+     *
+     * TASLAK/ARŞİV SAYFALAR SAYILMAZ: yalnızca `status = active`.
+     */
+    public function hasActivePage(string $slug): bool
+    {
+        $slug = trim($slug, '/');
+        if ($slug === '') {
+            return false;
+        }
+
+        try {
+            $model = $this->model('project.page');
+            if (!empty($this->projectKey)) {
+                $model = $model->withProjectScope((string) $this->projectKey);
+            }
+
+            return $model->where('status', 'active')->where('slug', $slug)->count() > 0;
+        } catch (\Throwable $e) {
+            error_log('[RBN-CRAWLER] hasActivePage: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Physical Data: Are there any ACTIVE FAQ entries? ❓🔍
+     *
+     * [FW-094-CRAWLER / Ö-3] `faqs()` denetleyicisi yalnızca SSS satırı VEYA
+     * `sik-sorulan-sorular` sayfası varsa içerik render eder; ikisi de yoksa
+     * yönlendirir. İki kaynaktan biri boşsa sayfa içeriksizdir.
+     */
+    public function hasActiveFaqs(): bool
+    {
+        try {
+            $model = $this->model('project.faq');
+            if (!empty($this->projectKey)) {
+                $model = $model->withProjectScope((string) $this->projectKey);
+            }
+
+            return $model->where('is_active', 1)->count() > 0;
+        } catch (\Throwable $e) {
+            error_log('[RBN-CRAWLER] hasActiveFaqs: ' . $e->getMessage());
+            return false;
         }
     }
 
@@ -127,14 +191,35 @@ class CrawlerProvider extends BaseRender implements BaseRenderInterface
     public function getActivePagesCount(): int
     {
         try {
-            $model = $this->model('page');
+            // [FW-094-CRAWLER / Ö-1] Anahtar `model('page')` DEĞİL `project.page`
+            // (bkz. `getActivePages()` ve `SystemPhysicalMapTrait.php:55`).
+            $model = $this->model('project.page');
             if (!empty($this->projectKey)) {
                 $model = $model->withProjectScope((string) $this->projectKey);
             }
             return $model->where('status', 'active')->count();
         } catch (\Throwable $e) {
+            error_log('[RBN-CRAWLER] getActivePagesCount: ' . $e->getMessage());
             return 0;
         }
+    }
+
+    /**
+     * [FW-094-NOINDEX] Site düzeyi noindex: robots/sitemap/llms/feed tek cevap 🛡️
+     */
+    public function isSiteNoindex(): bool
+    {
+        $seo = $this->resolver('seo');
+        return $seo ? $seo->isSiteNoindex() : false;
+    }
+
+    /**
+     * [FW-094-NOINDEX] Sayfa/kayıt düzeyi noindex: yalnız o kayıt çıktıdan düşer 🛡️
+     */
+    public function isPageNoindex(array|object $entry): bool
+    {
+        $seo = $this->resolver('seo');
+        return $seo ? $seo->isPageNoindex($entry) : false;
     }
 
     /**

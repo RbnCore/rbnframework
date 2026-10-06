@@ -1,6 +1,6 @@
 # Core/Render/Controllers — HTTP giriş kapıları (5 dosya)
 
-> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Render/Controllers/` — **5 `*.php`** = 4 kök + `Api/` altında 1.
 > **Envanter:** 5 dosyanın **5'i** anlatıldı.
 > **Doğrulama platformu:** Windows + PHP 8.3, `AssetController::guvenliProxyHedefi()` ve `RawHtmlGate` gerçekten çalıştırılarak.
@@ -37,7 +37,7 @@ Mappings/web.php:17  Route::any('/api/v1/external', ExternalApiController@index)
 | Dosya | Görev | Önemli public yöntemler |
 |---|---|---|
 | `AssetController.php` (454) | **Varlık vekili.** Sanal font/medya yönlendirmeleri, fiziksel dosya servisi, MIME, önbellek başlıkları. | `serve(string $path,bool $isProject=false): void`, `serveProject(string $path): void` · korumalı: `getMimeType(string $ext): string` · özel: `guvenliProxyHedefi(string $url): ?string`, `projectAllowedProxyHosts(): array`, `guvenliBaslikDegeri(string $deger): string`, `serveVirtualOgImage(string $name)`, `serveVirtualResource(string $name)` |
-| `CrawlerController.php` (196) | Arama motoru/AI dosyalarını basar: robots, sitemap, feed, xsl, humans, security.txt, llms.txt, IndexNow anahtarı. | `robots()`, `sitemap()`, `subSitemap(string $type)`, `feed()`, `sitemapXsl()`, `humans()`, `security()`, `llms()`, `indexNowKey(string $key)` · korumalı: `serve(string $type,string $contentType,string $cachePrefix,?string $subType=null)` |
+| `CrawlerController.php` (276) | Arama motoru/AI dosyalarını basar: robots, sitemap, feed, xsl, humans, security.txt, llms.txt, IndexNow anahtarı. | `robots()`, `sitemap()`, `subSitemap(string $type)`, `feed()`, `sitemapXsl()`, `humans()`, `security()`, `llms()`, `indexNowKey(string $key)` · korumalı: `serve(string $type,string $contentType,string $cachePrefix,?string $subType=null)` · özel: `notFound(): never`, `hostCacheSuffix(string $host): string`, `isKnownSubSitemap(string $type): bool` |
 | `FileProxyController.php` (86) | `fw-proxy/upload` ve `fw-proxy/export` ile **güvenli dosya indirme**. | `serveUpload(string $path=''): void`, `serveExport(string $path=''): void` · özel: `serveFile(string $fullPath,bool $forceDownload=false): void` |
 | `FrontendBaseController.php` (258) | **Soyut taban.** Proje/müşteri controller'larının ortak atası: varlık ekleme, footer kategorileri, paylaşım linkleri, reklam ayarları, `render()` ve SEO/schema bağlama. | `addAsset($assets,...$moreAssets): self`, `footerCategories(array $categories,string $showInKey='show_in'): array`, `footerPages(array $pages,string $showInKey='show_in_footer'): array`, `getShareLinks(string $url,string $title=''): array`, `loadAdSettings(): self`, `render(string $view,$data=[],$mergeData=[]): \Rbn\Framework\Core\Render\View` · korumalı: `afterBoot()`, `onGroupBoot()`, `onAfterBoot()`, `viewExists(string $view): bool` |
 | `Api/ExternalApiController.php` (113) | `/api/v1/external` — dış istemcilere açık JSON ucu. | `index(): void` |
@@ -156,13 +156,21 @@ döner**. Ölçülen `ViewResolver::resolve()` de zaten `NULL` dönüyordu
    yolunu **sabit kodlanmış** olarak arar; `Paths` kullanmaz. Framework klasör
    adı değişirse `__DIR__` tabanlı olduğu için sorun yok, ama **yol kırılganlığı**
    `Resources/` adına bağlıdır.
-4. **`serve()` önbellek anahtarı `$cachePrefix` + ölçüt** (`:108`); `subSitemap`
+4. **Site düzeyi `noindex` (FW-094-NOINDEX).** `serve()` önbelleğe bakmadan ÖNCE
+   `provider('crawler')->isSiteNoindex()` sorar. Site noindex ise `sitemap` (alt
+   sitemap'ler dahil), `llms` ve `feed` **404** döner (`notFound()` → `PageNotFoundException`;
+   `shield()->abort(404)` düz `\Exception` olduğu için hata sayfası 500 veriyordu);
+   `robots` ise `Disallow: /` ile cevap verir ve önbellek anahtarı `robots_txt_noindex`
+   olur. Böylece noindex açılmadan önce üretilmiş çıktı asla servis edilmez ve iki durum
+   birbirinin önbelleğini kullanmaz. Karar tek yerdedir (`SeoResolver::isSiteNoindex()`);
+   projeler özelleştirmez.
+5. **`serve()` önbellek anahtarı `$cachePrefix` + ölçüt** (`:108`); `subSitemap`
    ölçütü `$type` içerir (`"sitemap_xml_{$type}_"`, `:42`), `sitemap` içermez —
    yani ana sitemap ve alt sitemap'ler **farklı anahtarlar** kullanır (doğru).
-5. **`FileProxyController::serveFile()` `$forceDownload` bayrağı** (`:38`)
+6. **`FileProxyController::serveFile()` `$forceDownload` bayrağı** (`:38`)
    `Content-Disposition` için; `BaseManager::deliverFile()` yardımcısı da var
    (`Core/Base/Services/BaseManager.php` korumalı metotlar listesinde).
-6. **`Api/ExternalApiController::index(): void`** tek metottur (113 satır).
+7. **`Api/ExternalApiController::index(): void`** tek metottur (113 satır).
    `Route::any()` ile bağlı olduğu için **tüm HTTP metotları** bu uca düşer;
    içeride yetki kontrolü yapılıp yapılmadığı bu dosyadan anlaşılmaz (gövde
    `getContent()`/benzeri bir yardımcıya devrediyor — bu çalışmada ölçülmedi).

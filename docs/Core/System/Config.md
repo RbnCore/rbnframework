@@ -1,6 +1,6 @@
 # Core/System/Config — Yapılandırma, ortam değişkeni ve sır okuyucuları
 
-> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/System/Config/` — 22 `*.php` + 3 `README.md` (sır dosyası `Secrets/secrets.php` bilerek okunmadı/anlatılmadı; yalnız adı ve kuralları var).
 > **Envanter:** 22 php dosyasının 22'si ve 3 README aşağıda anlatıldı (`secrets.php` dahil; içeriği hariç).
 
@@ -131,7 +131,7 @@ Veritabanı bağlantı bilgisi bu üçünün birleşimidir: `DbProfileResolver` 
 
 ## 4. Ayar anahtarları ve varsayılanlar
 
-### 4.1 Ortam değişkenleri (`EnvKeys`) — 24 kayıtlı ad (`ALL_KEYS`), 9'u gizli (`SECRET_KEYS`)
+### 4.1 Ortam değişkenleri (`EnvKeys`) — 15 kayıtlı ad (`ALL_KEYS`), 5'i gizli (`SECRET_KEYS`)
 
 | Ad | Gizli | Not |
 |---|:--:|---|
@@ -145,11 +145,9 @@ Veritabanı bağlantı bilgisi bu üçünün birleşimidir: `DbProfileResolver` 
 | `RBN_DEBUG` | | `PreBoot::envOverrideRequested()` kendi `1\|true\|on\|yes\|development` listesiyle; varsayılan KAPALI |
 | `RBN_DEV`, `APP_ENV` | | |
 | `RBN_LOG_THROTTLE` | | tanılama günlüğü saatlik kapısı; `0\|false\|off\|no\|hayir` ile kapanır; okuyan `LogThrottle` (`Core/Support/Bridges/Helpers/Library/LogThrottle.php`) |
-| `RBN_WORKER_TOKEN`, `RBN_CREW_TOKEN`, `REDIRECT_RBN_WORKER_TOKEN`, `REDIRECT_RBN_CREW_TOKEN` | ✔ | işçi/ekip jetonları (`REDIRECT_` önekli olanlar Apache'nin yeniden yazma sonrası adıdır) |
-| `RBN_UPLOADS_DIR`, `RBN_UPLOADS_URL_BASE`, `RBN_CREW_INBOX_DIR`, `RBN_CREW_DATA_DIR`, `REDIRECT_RBN_CREW_DATA_DIR` | | dizin/URL tabanları |
 | `TG_SEND_DELAY_MS` | | yalnız test router'ı |
 
-`SECRET_KEYS` ve `ALL_KEYS` listeleri `EnvKeys.php:194` ve `:210`'dadır; `OFF_VALUES = ['0','false','off','no','hayir']` (`:187`) ile `ShieldSettingsRepository::normalizeSwitch` aynı kümeyi kullanmak **zorundadır** (birim testiyle sabitli).
+`SECRET_KEYS` ve `ALL_KEYS` listeleri `EnvKeys.php:159` ve `:171`'dedir; `OFF_VALUES = ['0','false','off','no','hayir']` (`:152`) ile `ShieldSettingsRepository::normalizeSwitch` aynı kümeyi kullanmak **zorundadır** (birim testiyle sabitli).
 
 ### 4.2 Sır dosyası şeması (`SecretsSchema`)
 

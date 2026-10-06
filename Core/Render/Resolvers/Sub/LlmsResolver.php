@@ -28,7 +28,7 @@ class LlmsResolver extends BaseRender
             $path = parse_url($url, PHP_URL_PATH) ?: '/';
             $cleanPath = trim($path, '/');
             $title = ($path === '/') ? 'Ana Sayfa' : ucwords(str_replace(['/', '-', '_'], [' ', ' ', ' '], $cleanPath));
-            $pagesList[] = "- [{$title}]({$url})";
+            $pagesList[] = \Rbn\Framework\Core\Render\Builders\LlmsBuilder::link($title, $url);
         }
 
         if (!empty($pagesList)) {
@@ -70,6 +70,12 @@ class LlmsResolver extends BaseRender
                 }
             }
 
+            // [FW-094-NOINDEX] Sayfa düzeyi noindex kayıtlar llms.txt'ye girmez.
+            $entries = array_values(array_filter(
+                $entries,
+                fn ($entry) => !$this->provider('crawler')->isPageNoindex($entry)
+            ));
+
             foreach (array_slice($entries, 0, $limit) as $entry) {
                 $getData = function ($key) use ($entry) {
                     if (is_array($entry)) return $entry[$key] ?? null;
@@ -105,7 +111,7 @@ class LlmsResolver extends BaseRender
 
                 if ($path) {
                     $fullUrl = $siteUrl . '/' . ltrim($path, '/');
-                    $typeList[] = "- [{$title}]({$fullUrl})";
+                    $typeList[] = \Rbn\Framework\Core\Render\Builders\LlmsBuilder::link((string) $title, $fullUrl);
                 }
             }
 

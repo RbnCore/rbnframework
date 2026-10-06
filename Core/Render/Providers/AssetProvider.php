@@ -119,7 +119,7 @@ class AssetProvider extends BaseRender implements BaseRenderInterface
 
             $banner = "/**\n";
             $banner .= " * 🔱 {$fwName} [v{$fwVersion} \"RbnCore\"]\n";
-            $banner .= " * 🏛️ ARCHITECTURE  : Sovereign Asset Engine\n";
+            $banner .= " * 🏛️ ARCHITECTURE  : RBN Asset Engine\n";
             $banner .= " * ---------------------------------------\n";
             $banner .= " * 🛰️ COMPONENT     : {$kitName} v{$kitVersion}\n";
             $banner .= " * ⚓ RESOURCE      : {$fileName} [{$label}]\n";

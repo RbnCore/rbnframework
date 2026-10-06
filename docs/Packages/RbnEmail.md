@@ -1,6 +1,6 @@
 # Packages/RbnEmail — SMTP gönderimi, şablon sarmalama ve IMAP okuma
 
-> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Packages/RbnEmail/` — **10 `*.php`**
 > (6 `Handlers/` + 1 `Models/` + 1 `Services/` + 1 `Tasks/` + 1 `Views/`).
 > **Envanter:** 10 dosyanın **10'u** aşağıda anlatıldı.

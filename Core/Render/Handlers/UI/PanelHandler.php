@@ -104,7 +104,7 @@ class PanelHandler extends BaseRender
 
         // 🎼 RBN 3.5: Centralized Head State & Ready Queue Hub 🛰️⚓
         $renderedHeadState = $this->provider('partial')->render('RbnCommon/head_state', ['context' => 'panel']);
-        $data['headStateHtml'] = "\n    <!-- [RBN 3.5] Sovereign Head State Engine -->\n" . $renderedHeadState . "\n";
+        $data['headStateHtml'] = "\n    <!-- [FRAMEWORK HEAD STATE ENGINE] -->\n" . $renderedHeadState . "\n";
 
         // 🎼 RBN 3.5 [MASTERPIECE] Centralized App Configuration (JS Bridge) 🛰️⚓
         $securitySettings = $this->service('settings')->read('security');

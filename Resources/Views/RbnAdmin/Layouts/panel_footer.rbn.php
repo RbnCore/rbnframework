@@ -8,7 +8,7 @@
 </main>
 </div> <!-- .rbn-dash-main-scroll end -->
 
-<!-- Admin/Backend Footer Content (Sovereign at Bottom) -->
+<!-- Admin/Backend Footer Content (At Bottom) -->
 <footer class="rbn-dash-footer d-flex justify-content-between align-items-center px-4">
     <div class="text-muted small">
         &copy; <?= date('Y') ?> <a href="@sys('FRAMEWORK_URL')" target="_blank"

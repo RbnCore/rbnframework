@@ -66,7 +66,7 @@
     </div>
 </div>
 
-<!-- 3. BİLDİRİM TABLOSU (Sovereign Table Mimarisi) 🔔 -->
+<!-- 3. BİLDİRİM TABLOSU (Tablo Mimarisi) 🔔 -->
 <div class="rbn-table-wrap mb-4">
     <div class="table-responsive">
         <table class="rbn-table rbn-table-hover rbn-table-fixed align-middle mb-0" id="noti-table">

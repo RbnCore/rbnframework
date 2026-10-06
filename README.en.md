@@ -2,7 +2,7 @@
 
 # RBN Core Framework
 
-**Version:** `0.9.3` · **License:** MIT · **PHP:** 8.3+
+**Version:** `0.9.4` · **License:** MIT · **PHP:** 8.3+
 
 RBN Core Framework is a lightweight PHP application framework with a multi-tenant
 architecture: a single core hosts many independent projects. Routing, templating,

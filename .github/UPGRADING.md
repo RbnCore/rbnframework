@@ -1,5 +1,137 @@
 ## [Unreleased]
 
+## 0.9.4 (yayın hazırlığı — 2026-10-06)
+
+### Bu sürümde ne yapmalısınız (kısa liste)
+
+1. **Framework dosyalarını güncelleyin** (paketi değiştirin). **Kırıcı değişiklik yoktur**:
+   bu sürüm tarama çıktısını düzeltir, çerçevenin kendi gürültüsünü keser, kaldırılmış bir
+   proje modülünün izlerini temizler ve görünür metinleri nötrleştirir. Veritabanı şeması,
+   anahtar, parola ve oturum değişikliği **yoktur**.
+2. **`sitemap.xml` / `llms.txt` önbelleğini temizleyin.** Çıktı orta katmanda önbelleğe
+   alınır; paketi değiştirdikten sonra eski çıktı bir süre daha sunulabilir. Uygulama
+   klasörlerindeki `<proje>_sitemap_xml*`, `<proje>_llms_txt`, `<proje>_robots_txt`
+   önbellek dosyalarını silin (ya da uygulamayı yeniden başlatın).
+3. **Ortam değişkenleri kaldırıldı — `EnvKeys` kaydından çıkarıldı, kullanılmayacaklar.**
+   Aşağıdaki "Kaldırılan ortam değişkenleri" tablosundaki adları `.env`/ortam ayarınızda
+   **tanımlı bırakabilirsiniz**; framework artık okumaz, tanımsız kalmaları zararsızdır.
+   **Zorunlu bir işlem yoktur.**
+4. **Görünür metinler değişti.** Sayfa kaynağındaki `framework-slogan` /
+   `framework-description` meta etiketleri ve hata/pre-flight/panel ekranlarındaki metinler
+   nötr karşılıklarla değişti. Proje içeriğiniz (marka metni, kendi sloganınız) **dokunulmadı**.
+
+5. **Üretilmiş keşif/bileşen önbelleğini yenileyin (yalnız kaldırılmış bir proje modülü
+   olan kurulumlar).** Uygulama klasöründeki `Storage/framework/discovery_map_*.php` ve
+   `components_map_*.json` dosyaları çalışma anında yeniden üretilir; kaldırılmış modülün
+   sınıf adı bu dosyalarda eski kayıt olarak kalabilir. Dosyaları silin; ilk istekte
+   yeniden yazılırlar. Kaynak kodda değişiklik gerekmez.
+
+### Davranış değişikliği: noindex kararı okunamazsa site noindex sayılır
+
+`isSiteNoindex()` artık **fail-closed**: ayar servisi yoksa ya da ayar okunurken hata
+oluşursa site **noindex varsayılır** (nedeni süreç başına bir kez günlüğe yazılır). Canlı
+görünürlüğe etkisi: veritabanı/ayar arızası sürerken `sitemap.xml`, `llms.txt` ve `feed`
+**404**, `robots.txt` `Disallow: /` verir; arıza giderilince karar kendiliğinden normale döner
+(sitemap/llms çıktısı orta katman süresi kadar gecikmeyle geri gelir). Normal çalışan
+sitelerde değişiklik yoktur. Ek olarak `sitemap-<tür>.xml` yalnız beyan edilmiş kaynak
+adlarında (ve geçerli sayfa ekinde) yanıt verir; bilinmeyen tür **404** döner. Crawler
+önbellek anahtarı host sınıfını da taşır; yeni anahtarlar ilk istekte oluşur, eski
+dosyalar kendiliğinden düşer.
+
+### Davranış değişikliği: `noindex` siteler artık `sitemap.xml` / `llms.txt` yayınlamaz
+
+Bir site **noindex** ise (`project-routemap.php` → `view_mapping[<site>]['robots']['noindex'] = true`
+ya da panel SEO ayarı `meta-robots` değeri `noindex` içeriyor):
+
+| Adres | Önce | Sonra |
+|---|---|---|
+| `sitemap.xml`, `sitemap-<tür>.xml` | 200, adresleri listeler | **404** |
+| `llms.txt` | 200, "resmi içerik haritası" | **404** |
+| `feed` | 200 (kaynak varsa) | **404** |
+| `robots.txt` | yalnız panel yolları yasak, `Sitemap:` satırı var | `User-agent: *` + `Disallow: /`, `Sitemap:` satırı **yok** |
+
+Yalnız **tek sayfa** noindex ise (kayıt satırında `robots`/`meta_robots` `noindex`): site normal
+yayın yapar, yalnız o kayıt sitemap + `llms.txt` + `feed` çıktısına girmez. `/feed` besleme
+kaynağı olmayan sitelerde de artık 404 döner (önceden hata sayfası, 500). Normal sitelerin
+çıktısı **değişmez**.
+
+> **Not:** Denetleyicide çalışma anında verilen `$this->noIndex()` çağrısı meta etiket ve
+> `X-Robots-Tag` başlığını sağlar; tarayıcı rotaları (sitemap/robots) o çağrıyı göremez. Site
+> genelini kapatmak için yukarıdaki yapılandırma anahtarını yazın. **Zorunlu bir işlem yoktur**;
+> anahtarı yazmayan siteler eskisi gibi çalışır. Yeni durum için önbelleği temizlemek gerekmez
+> (karar önbellekten önce verilir).
+
+### Kaldırılan ortam değişkenleri (jeton / dizin anahtarları)
+
+Kaldırılan bir proje modülü framework'ten çıkarıldığında, o modüle ait ortam değişkenleri de
+`EnvKeys` kaydından çıkarıldı. **Adlar burada yazılmaz** (marka/proje adı yazma yasağı):
+ad listesi tek kaynaktan okunur — `rbnframework/Core/System/Config/Definitions/EnvKeys.php`
+(`ALL_KEYS` = 15 kayıtlı ad, `SECRET_KEYS` = 5 gizli ad).
+
+| Önceki durum | Sonraki durum | Yapılacak |
+|---|---|---|
+| `EnvKeys` kaydında bir proje modülüne ait jeton/dizin ortam değişkenleri vardı | Bu kayıtlar **kaldırıldı** (`ALL_KEYS` 24 → 15, `SECRET_KEYS` 9 → 5) | **Hiçbir işlem gerekmez.** Ortamınızda tanımlı kalsalar da okunmazlar. |
+| Aynı adlara ait `REDIRECT_` önekli yedekler kayıtlıydı | Kaldırıldı | **Hiçbir işlem gerekmez.** |
+| Ortam değişkenlerini okuyan yardımcılar (`getenv`, `$_ENV`, `$_SERVER`) | `Env` üzerinden tek kapıdan okunuyor | Değişiklik yok; yalnız `EnvKeys` **kayıt** listesi daraldı. |
+
+> **Kural notu:** Kayıt dışı bir ad `Env` üzerinden okunursa **fail-closed** hata verir.
+> Kaldırılan adlar artık hiçbir kod tarafından okunmadığı için bu hata **oluşmaz**.
+> Kalıcı kurulumda bir yeri **silmeniz de gerekmez** — tanımsız kalmaları zararsızdır.
+
+Ayrıca kaldırıldı: `ApiKeysRegistry` içindeki kullanılmayan ajan anahtarı eşlemesi ve
+`MachineApiRegistry` tohumundaki ilgili makine API yolu beyanı. **Güvenlik etkisi yok:**
+kaldırılan beyanın IP muafiyeti zaten kapalıydı (`ip_exempt = false`), yani IP katmanının
+(WAF/ban) kapsamı ne daraldı ne genişledi. Diğer makine API'leri ve muafiyetleri aynen duruyor.
+
+### Davranış değişikliği: `sitemap.xml` / `llms.txt` ne yazıyor?
+
+Dört davranış değişti. Hepsi **çıktının içeriğiyle** ilgilidir; hiçbiri sayfanın kendisini
+değiştirmez.
+
+| # | Önce | Sonra | Ölçüm |
+|---|---|---|---|
+| 1 | Aktif yasal sayfalar (`status = active`) **hiçbir** sitemap'e girmiyordu; okuma sessizce boş liste dönüyordu | Giriyor | 62 yasal sayfa geri geldi, hepsi 200 döndü |
+| 2 | Aynı adres **iki kez** yazılıyordu (modül rotaları iki kez yükleniyordu) | Bir kez | Yinelenen adres 63 → 0 |
+| 3 | İçeriği olmayan / ana sayfaya yönlendiren adresler ve giriş-panel kökleri sitemap'e giriyordu | Girmiyor | 200 dönmeyen adres 23 → 12 (kalanı veri/içerik kaynaklı) |
+| 4 | Slug'ı veritabanında aktif sayfa olarak bulunan tek segment'li adres listeleniyordu | Listelenmiyor (kanonik `/sayfa/<slug>` kalıyor) | Gölgelenen adres sayısı ölçüldü |
+
+**Dört kural da çekirdek standardır; projeler kendi başına özelleştirmez.**
+
+**Sitemap çıktısı önbelleğe alınır.** Yeni davranış ancak önbellek temizlendikten sonra
+görünür. Uygulama klasörünüzde `<proje>_sitemap_xml*` / `<proje>_llms_txt` /
+`<proje>_robots_txt` dosyalarını silin.
+
+**Kural gevşetilmedi, sıkılaştırıldı:** taslak/arsiv sayfaları hâlâ girmiyor; içerik
+sorgusu hata verirse adres listelenmez (güvenli taraf: eksik sayfa, bozuk adres değil).
+Yönetim paneli ve giriş akışı **etkilenmedi** — filtre yalnız tarama çıktısının girdisini
+belirler, yönlendirmeyi değil.
+
+### Düzeltildi: çerçeve kendi `[B-92]` uyarısını üretmiyordu
+
+**Belirti:** sunucu günlüğünde "DI nesnesi yok sayıldı" uyarıları birikiyordu; kaynağı
+çerçevenin **kendi** iç çağrılarıydı.
+
+**Kök neden:** bileşen kurucusu, DI nesnesini kullanmayan iki sınıfa (`RemoteRequest`,
+`ViewEngine`) fazladan DI nesnesi geçiriyordu.
+
+**Çözüm:** bu iki çağrıdan argüman kaldırıldı. **Uyarı mantığı ve imza değişmedi** —
+yani gerçekten DI yok sayılan bir çağrı hâlâ uyarır. Sadece çerçevenin kendi hatasız
+çağrıları artık uyarı basmıyor.
+
+**Geri alma:** `git revert` ile iki dosya eski hâline döner.
+
+### Düzeltildi: görünür metinlerde anlamsız pazarlama sözcükleri
+
+`FrameworkIdentity` slogan/açıklama sabitleri, hata ve pre-flight sayfaları, yönetim
+paneli bileşenleri, SEO puan etiketleri ve servislenen CSS/JS dosya başlıklarındaki
+anlamsız sıfatlar nötr karşılıklarla değiştirildi.
+
+**Değişmeyenler (bilinçli):** PHP yorumlarındaki geçiş etiketleri ve tanımlayıcı adları
+(`SovereignIdentity`, `sovereignBundles()`, `searchInGate('Sovereign', …)`) **korundu** —
+yeniden adlandırma geriye uyumluluk kaybı doğurur, ayrı iş kalemidir. Proje içerikleri
+(marka metinleri) **dokunulmadı**. Yönetici arayüzü, meta etiketleri ve işlevsel davranış
+**değişmedi**.
+
 ## 0.9.3 (yayın hazırlığı — 2026-10-05)
 
 ### Bu sürümde ne yapmalısınız (kısa liste)
@@ -850,7 +982,7 @@ Sürümlendirme: [SemVer](https://semver.org/lang/tr/). Değişiklik kaydı: [CH
 
 ## Bu sürüm
 
-- **Son sürüm:** `0.9.3` (2026-10-05) — apex alan adı yönlendirme düzeltmesi, PHP gerekliliği hizası ve depoya giren `docs/`. Kırıcı değişiklik **yoktur** (aşağıdaki 0.9.3 bölümüne bakın; kırıcı değişiklikler 0.9.2 bölümündedir).
+- **Son sürüm:** `0.9.4` (2026-10-06) — tarama çıktısı (sitemap/llms.txt) düzeltmeleri, çerçevenin kendi `[B-92]` gürültüsünün kesilmesi, kaldırılan proje modülünün izlerinin framework'ten temizlenmesi ve görünür metinlerde anlamsız pazarlama sözcüklerinin nötrleştirilmesi. Kırıcı değişiklik **yoktur** (aşağıdaki 0.9.4 bölümüne bakın; kırıcı değişiklikler 0.9.2 bölümündedir).
 - Bu dosyaya yazılan her sürüm, o sürümün canlıya çıktığı andan itibaren geçerlidir.
 
 ---
@@ -1085,7 +1217,7 @@ $query->orderBy('created_at', in_array($yon, ['ASC', 'DESC'], true) ? $yon : 'AS
 |---|---|---|
 | `DebugHelper` | yalnız `$_ENV['APP_ENV']` | `Env` → `$_ENV`/`$_SERVER`/getenv. `APP_ENV=production` gerçek ortamda tanımlıysa hata ayıklama çıktısı **artık da** bastırılır (sızıntı yönünde). |
 | `PreBoot` / `CryptoHelper` / `BaseDbData` | ilk kaynakta boş değer varsa bir sonrakine geçmezdi | `Env` boş (yalnız boşluk) değerleri geçer, ilk **dolu** kaynağı kullanır. |
-| `ProjectStatusService` / `WorkerTokenService` | `getenv` → `$_SERVER` → `$_SERVER['REDIRECT_…']` | `Env` (sıra `$_ENV`→`$_SERVER`→getenv) + `REDIRECT_…` **kayıtlı ad** olarak. Gerçekçi kurulumlarda aynı sonuç. |
+| Bir proje modülünün jeton/dizin okumaları (kaldırıldı) | `getenv` → `$_SERVER` → `$_SERVER['REDIRECT_…']` | `Env` (sıra `$_ENV`→`$_SERVER`→getenv) + `REDIRECT_…` **kayıtlı ad** olarak. Gerçekçi kurulumlarda aynı sonuç. |
 
 **Geri alma:** Tek commit'in `git revert`'i yeterlidir; hiçbir veri/ayar dosyası taşınmaz.
 

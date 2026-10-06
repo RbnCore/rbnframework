@@ -1,6 +1,6 @@
 # Core/Render/Providers — fiziksel HTML/XML/JSON üretimi (12 dosya)
 
-> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Render/Providers/` — **12 `*.php`** = 5 kök + `UI/` altında 7.
 > **Envanter:** 12 dosyanın **12'si** anlatıldı.
 > **Doğrulama platformu:** Windows + PHP 8.3, tümü `provider()`/`resolver()` üzerinden gerçekten çözüldü.
@@ -22,7 +22,7 @@ tek sınıflardır: `FrontendProvider` header+view+footer'ı birleştirir,
 |---|---|---|
 | `SeoProvider.php` (236) | **`<head>` meta üreticisi.** Teknik/proje/sosyal/marka/link segmentlerini ayrı ayrı basar, hepsini yorum işaretleriyle çerçeveler. | `render(?string $view=null,array $data=[]): string` · korumalı: `renderTechnical()`, `renderProjectMeta()`, `renderSocial()`, `renderBranding()`, `renderLinks(array $meta,string $context='frontend'): array` |
 | `AssetProvider.php` (135) | CSS/JS etiketlerini basar; CDN önceliği uygular. | `render(?string $view,array $data=[]): string`, `decorate(string $content,string $physicalPath,?string $label='RBN Framework'): string` · korumalı: `cdnFirst(array $assets): array`, `renderStyle(array $style): string`, `renderScript(array $script): string` |
-| `CrawlerProvider.php` (221) | `robots.txt`, sitemap, feed, `llms.txt` üretir; aktif sayfa envanteri sunar. | `render(?string $view,array $data=[]): string`, `renderRobots(array $data=[]): string`, `renderSitemap(array $data=[]): string`, `renderFeed(array $data=[]): string`, `renderLlms(array $data=[]): string`, `getActivePages(): array`, `getActivePagesCount(): int`, `hasFeed(): bool`, `getProject(string $type)` |
+| `CrawlerProvider.php` (306) | `robots.txt`, sitemap, feed, `llms.txt` üretir; aktif sayfa envanteri sunar. noindex kararını **kendisi yorumlamaz**, `SeoResolver`'a devreder. | `render(?string $view,array $data=[]): string`, `renderRobots(array $data=[]): string`, `renderSitemap(array $data=[]): string`, `renderFeed(array $data=[]): string`, `renderLlms(array $data=[]): string`, `getActivePages(): array`, `hasActivePage(string $slug): bool`, `hasActiveFaqs(): bool`, `getActivePagesCount(): int`, `isSiteNoindex(): bool`, `isPageNoindex(array\|object $entry): bool`, `hasFeed(): bool`, `getProject(string $type)` |
 | `BreadcrumbProvider.php` (104) | Kırıntı HTML'ini basar **ve** veri dizisine enjekte eder. | `resolveAndRender(array &$data,?string $view): string`, `render(?string $view,array $data=[]): string` |
 | `SchemaProvider.php` (85) | Biriktirilen JSON-LD şemalarını `<script type="application/ld+json">` olarak basar. | `build(string $name,array $data=[]): self`, `render(): string` |
 | `UI/FrontendProvider.php` (137) | **En sık çalışan provider.** Trafik kaydı + ayarlar + SEO + asset + şablon zinciri. | `render(?string $view,array $data=[]): string` · korumalı: `safeSnippet(mixed $value): string` |
@@ -149,6 +149,21 @@ Nasıl? `ComponentContext::resolve()`
 7. **`PartialProvider::renderImports()`** `@import` dizisini toplu basar
    (`:46`); her içe aktarma `ViewEngine::import()` → `path()` + `compile()`
    gider, yani **her biri kök sınırından geçer** ([README §3.6](README.md)).
+8. **`CrawlerProvider` yasal sayfaları `model('project.page')` ile okur.**
+   Registry'deki anahtar **`project.page`**'dir
+   (`Core/System/Registries/RegistryMap/SystemPhysicalMapTrait.php:55`).
+   `page` diye bir kayıt **yoktur**; öyle bir anahtarla çağrıldığında model
+   `NULL` döner, `->where()` istisna atar ve `catch` bloğu boş liste verir —
+   yani yasal sayfalar **sessizce** sitemap'ten düşer. Bu yüzden dört metot
+   (`getActivePages`, `getActivePagesCount`, `hasActivePage`, `hasActiveFaqs`)
+   `catch` bloklarında `error_log('[RBN-CRAWLER] …')` yazar: sessizlik, aynı
+   hatanın aylarca fark edilmemesine yol açmıştır.
+9. **`hasActivePage()` / `hasActiveFaqs()` içerik varlığını DB'den sorar**
+   (yalnız `status = active` / `is_active = 1`). Sitemap üretimi bunları
+   kullanır: içeriğe bağlı standart rotalar yalnızca gerçekten içerik
+   varken listelenir, aksi halde denetleyici ana sayfaya yönlendirir ve
+   sitemap'te 301/302 dönen bir adres kalır. Sorgu hata verirse
+   `false` döner (güvenli taraf: adres listelenmez).
 
 ## 7. Örnek (gerçek koddan)
 

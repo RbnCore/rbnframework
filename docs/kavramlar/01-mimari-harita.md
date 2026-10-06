@@ -2,7 +2,7 @@
 
 > **Bu belge hangi commit'e göre yazıldı:** `d4af18d` (dal `feat/fw-license-master`)
 > **Son doğrulama tarihi:** 2026-10-05
-> **Yayın tabanı:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Yayın tabanı:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kapsam:** Açılış zinciri, yönlendirme, render, kavramlar, `Paths`, ortam algısı
 
 ---

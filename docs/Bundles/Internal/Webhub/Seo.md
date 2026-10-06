@@ -1,6 +1,6 @@
 # Bundles/Internal/Webhub/Handlers — SEO tarama pipeline'ı (3 tarayıcı + 1 danışman)
 
-> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Bundles/Internal/Webhub/Handlers/` — 5 `*.php`.
 > **Envanter:** 5 dosyanın 5'i anlatıldı.
 

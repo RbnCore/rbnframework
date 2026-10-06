@@ -253,7 +253,7 @@ class RedirectManager extends BaseManager
         // adini kanonik disi ilan ediyordu.
         //
         // GERI ALINAN DAVRANIS: alt-dizge dali `.rbncore.tr` OLDUGU GIBI
-        // KORUNUR; `email.rbncore.tr` / `sub.example.test` ana sayfaya 301'lemeye
+        // KORUNUR; `email.rbncore.tr` gibi alt alan adlari ana sayfaya 301'lemeye
         // DEVAM eder (kasintili kural). Yalnizca apex muaf kalir.
         $isRbnCore = str_ends_with($currentHost, '.rbncore.tr') && !$isLocalDev;
 

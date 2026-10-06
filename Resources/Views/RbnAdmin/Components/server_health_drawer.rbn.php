@@ -1,4 +1,4 @@
-<!-- Sovereign System & Server Health Deck 🚀🖥️ (Powered by RBN Core CSS) -->
+<!-- System & Server Health Deck 🚀🖥️ (Powered by RBN Core CSS) -->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="serverHealthCanvas" aria-labelledby="serverHealthLabel">
     
     <!-- Offcanvas Header -->
@@ -7,7 +7,7 @@
             <i class="ri-server-line text-primary fs-5"></i>
             <div>
                 <h5 class="offcanvas-title fw-bold mb-0" id="serverHealthLabel">Sunucu Durumu</h5>
-                <span class="text-muted small">RBN Sovereign Runtime Radar</span>
+                <span class="text-muted small">RBN Runtime Radar</span>
             </div>
         </div>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Kapat"></button>

@@ -199,7 +199,7 @@ $trendValues = array_values($stats['seven_day_trend'] ?? []);
     </div>
 </div>
 
-<!-- 5. SON ZİYARETÇİ HAREKETLERİ (Sovereign rbn-table-wrap Mimarisi) 📋 -->
+<!-- 5. SON ZİYARETÇİ HAREKETLERİ (rbn-table-wrap Mimarisi) 📋 -->
 <div class="rbn-table-wrap mb-5">
     <div class="ra-traffic-card-header d-flex justify-content-between align-items-center">
         <h6 class="ra-traffic-card-title mb-0">

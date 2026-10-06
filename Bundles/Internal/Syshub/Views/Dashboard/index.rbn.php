@@ -97,7 +97,7 @@
     </div>
 </div>
 
-<!-- 🎛️ 2. ANA MODÜL KARTLARI (Kusursuz Sovereign Standart Grid) -->
+<!-- 🎛️ 2. ANA MODÜL KARTLARI (Standart Eşet Izgara) -->
 <div class="row g-4">
 
     <!-- 1. VERİ TEMİZLİĞİ -->

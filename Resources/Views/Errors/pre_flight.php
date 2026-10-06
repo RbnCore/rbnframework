@@ -11,11 +11,11 @@ $rbnE = static fn($deger, string $yedek = ''): string => htmlspecialchars(
     'UTF-8'
 );
 ?>
-<!-- 🎯 RBN 3.5: Obsidian Edge Diagnostic View 🏹🪐🛡️ -->
+<!-- 🎯 Obsidian Edge Diagnostic View 🏹🪐🛡️ -->
 <div class="row justify-content-center">
     <div class="col-lg-12 d-flex justify-content-center">
 
-        <!-- 🛡️ RBN 3.5: Masterpiece Core Shield Layout 🕯️ -->
+        <!-- 🛡️ Core Shield Layout 🕯️ -->
         <div class="error-card text-center" data-aos="zoom-in">
 
                 <!-- 🛰️ Premium Icon Header -->
@@ -32,7 +32,7 @@ $rbnE = static fn($deger, string $yedek = ''): string => htmlspecialchars(
                     </div>
                 </div>
 
-                <!-- 🏷️ Masterpiece Titles -->
+                <!-- 🏷️ Titles -->
                 <div class="mb-5">
                     <h1 class="error-title" data-aos="fade-left" data-aos-delay="400">
                         <?= $rbnE($error_type ?? null, 'Sistem Uyarısı') ?>

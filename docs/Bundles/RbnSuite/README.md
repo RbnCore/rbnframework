@@ -1,6 +1,6 @@
 # Bundles/RbnSuite — RBN Suite paketleri (panel + kimlik + içerik)
 
-> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Bundles/RbnSuite/` — **80 `*.php`** (RbnAdmin 49 · RbnAuth 15 ·
 > RbnStudio 16)
 > **Envanter:** 80 php dosyasının **80'i** alt belgelerde anlatıldı.

@@ -1,6 +1,6 @@
 # Core/Render/Builders — durum biriktiriciler (varlık, SEO, schema, breadcrumb, sitemap, feed, llms)
 
-> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Render/Builders/` — **7 `*.php`**.
 > **Envanter:** 7 dosyanın **7'si** anlatıldı.
 > **Doğrulama platformu:** Windows + PHP 8.3, `AssetBuilder` gerçekten çalıştırılarak.
@@ -27,7 +27,7 @@ ise **Resolver**. İkisi karıştırılmamalı; `SeoBuilder` override'ları biri
 | `BreadcrumbBuilder.php` (130) | Kırıntı (breadcrumb) adımlarını biriktirir; ana adımı korpustan, alt adımları `BreadcrumbResolver`'dan alır. | `reset(): self`, `build(…)`, `add(string $title,string $url,string $icon='',bool $active=false): self` |
 | `SitemapBuilder.php` (114) | Sitemap `<url>` girdilerini biriktirir ve `<urlset>`/`<sitemapindex>` XML'i üretir. | `reset(): self`, `addUrl(string $loc,string $priority='0.5',string $changefreq='monthly',?string $lastmod=null): self`, `addUrls(array $urls): self`, `getEntries(): array`, `hasEntries(): bool`, `buildXml(bool $isIndex=false): string` |
 | `FeedBuilder.php` (92) | RSS 2.0 feed XML'i üretir. | `setChannel(array $channel): self`, `addPosts(array $posts): self`, `buildXml(): string` · korumalı: `clean(string $string,bool $stripNewlines=false): string` |
-| `LlmsBuilder.php` (60) | `llms.txt` (Markdown) üretir. | `reset(): self`, `setSiteInfo(string $siteName,string $siteUrl): self`, `addSection(string $title,array $items): self`, `buildMarkdown(): string` |
+| `LlmsBuilder.php` (94) | `llms.txt` (Markdown) üretir. | `reset(): self`, `setSiteInfo(string $siteName,string $siteUrl): self`, `addSection(string $title,array $items): self`, `buildMarkdown(): string` · statik: `sanitizeText(string $text): string`, `link(string $title,string $url): string` (içerik kaynaklı metni tek satıra / güvenli bağlantı biçimine indirir) |
 
 ## 3. Akış — `AssetBuilder` (en karmaşık zincir)
 

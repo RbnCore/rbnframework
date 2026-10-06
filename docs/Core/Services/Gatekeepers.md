@@ -1,6 +1,6 @@
 # Core/Services/Gatekeepers — IP/bakım/veritabanı kapıları, WAF, GeoIP (13 dosya)
 
-> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Services/Gatekeepers/` — **13 `*.php`** = 5 kök + `Concerns/` 2 +
 > `Handlers/` 5 + `Providers/` 1.
 > **Envanter:** 13 dosyanın **13'u** anlatıldı.

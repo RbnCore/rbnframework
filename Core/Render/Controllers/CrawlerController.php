@@ -39,6 +39,12 @@ class CrawlerController extends BaseController
      */
     public function subSitemap(string $type)
     {
+        // [FW-094-BULGU-DUZELT / G-3] Beyan edilmemiş tür 404 verir ve ÖNBELLEĞE
+        // YAZILMAZ (kimliksiz isteklerle önbellek/disk şişirme + 200 soft-404 kapanır).
+        if (!$this->isKnownSubSitemap($type)) {
+            $this->notFound();
+        }
+
         return $this->serve('sitemap', 'application/xml', "sitemap_xml_{$type}_", $type);
     }
 
@@ -49,7 +55,7 @@ class CrawlerController extends BaseController
     public function feed()
     {
         if (!$this->provider('crawler')->hasFeed()) {
-            shield()->abort(404);
+            $this->notFound();
         }
 
         header('X-Robots-Tag: noindex, follow');
@@ -113,6 +119,24 @@ class CrawlerController extends BaseController
 
         // 🔥 Dynamic Caching (Universal CacheProvider handles projectKey prepending)
         $cacheKey = rtrim($cachePrefix, '_');
+
+        // [FW-094-NOINDEX] Site düzeyi noindex: sitemap (+ alt sitemap'ler), llms.txt ve
+        // feed YAYINLANMAZ (404). Önbellekten ÖNCE karar verilir: noindex açılmadan önce
+        // üretilmiş çıktı asla servis edilmez. robots.txt ise `Disallow: /` ile cevap verir;
+        // önbellek anahtarı noindex durumunu taşır, böylece iki durum birbirinin çıktısını
+        // servis etmez (noindex değişince anahtar değişir; eski kayıt TTL ile kendiliğinden düşer).
+        $siteNoindex = $this->provider('crawler')->isSiteNoindex();
+        if ($siteNoindex) {
+            if ($type !== 'robots') {
+                $this->notFound();
+            }
+            $cacheKey .= '_noindex';
+        }
+
+        // [FW-094-BULGU-DUZELT / G-4] Çıktı host'a bağlıdır (robots/sitemap üretim ve
+        // alan adı eşleşmesi kararı); önbellek anahtarı da host sınıfını taşır.
+        $cacheKey .= '_' . $this->hostCacheSuffix();
+
         $content = $cache->get($cacheKey);
 
         if ($content === null) {
@@ -136,6 +160,62 @@ class CrawlerController extends BaseController
             ->contentType($contentType)
             ->body($content)
             ->send();
+    }
+
+    /**
+     * [FW-094-BULGU-DUZELT / G-4] Önbellek anahtarının host eki.
+     *
+     * Resmi alan adı ailesinden (`domain`, `domain.test`, `domain.local`) gelen
+     * istekler host'un kısa özetini taşır; resmi aileden OLMAYAN her host TEK
+     * `x` sınıfına düşer (rastgele `Host` başlığıyla anahtar çoğaltılamaz).
+     * Resmi alan adı tanımsızsa host başına özet kullanılır.
+     */
+    private function hostCacheSuffix(): string
+    {
+        $host = strtolower((string) ($_SERVER['HTTP_HOST'] ?? ''));
+        $host = (string) preg_replace('/:\d+$/', '', $host);
+
+        $projectData = \Rbn\Framework\Core\System\Kernel\Bootstrap::getAppContext('project_data') ?: [];
+        $official = strtolower((string) ($projectData['domain'] ?? ''));
+
+        if ($official !== '' && !in_array($host, [$official, $official . '.test', $official . '.local'], true)) {
+            return 'x';
+        }
+
+        return substr(md5($host), 0, 8);
+    }
+
+    /**
+     * [FW-094-BULGU-DUZELT / G-3] `/sitemap-{type}.xml` yalnız beyan edilmiş bir
+     * kaynak adı (`pages`, proje kaynakları) ya da onun `-{sayfa}` eki olabilir.
+     * Sayfa eki 1..toplam sayfa aralığındadır (başı sıfırlı/aralık dışı sayılar
+     * her biri ayrı önbellek anahtarı üretirdi).
+     */
+    private function isKnownSubSitemap(string $type): bool
+    {
+        $sources = (array) $this->provider('crawler')->getProject('source');
+        if (isset($sources[$type])) {
+            return true;
+        }
+
+        if (preg_match('/^(.+)-([1-9][0-9]*)$/D', $type, $m) !== 1 || !isset($sources[$m[1]])) {
+            return false;
+        }
+
+        $total = (int) $this->resolver('sitemapResolver')->getData($m[1], 1, true);
+
+        return (int) $m[2] <= max(1, (int) ceil($total / 50000));
+    }
+
+    /**
+     * [FW-094-NOINDEX] Gerçek HTTP 404 🚫
+     * `shield()->abort(404)` düz `\Exception` fırlatır ve hata sayfası 500 döner;
+     * yönlendirici ile aynı `PageNotFoundException` kullanılır.
+     */
+    private function notFound(): never
+    {
+        $uri = trim((string) parse_url((string) ($_SERVER['REQUEST_URI'] ?? ''), PHP_URL_PATH), '/');
+        throw new \Rbn\Framework\Core\Support\Exceptions\PageNotFoundException($uri);
     }
 
     /**

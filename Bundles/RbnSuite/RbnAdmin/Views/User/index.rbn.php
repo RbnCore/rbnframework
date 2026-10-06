@@ -170,7 +170,7 @@
         </div>
     </div>
 
-    <!-- 3. KULLANICILAR TABLOSU (Sovereign .rbn-table-wrap Mimarisi) 📋 -->
+    <!-- 3. KULLANICILAR TABLOSU (.rbn-table-wrap Mimarisi) 📋 -->
     <div class="rbn-table-wrap" id="users-table-wrap">
         <table class="rbn-table rbn-table-hover" id="users-table"
             data-rbn-table="true"

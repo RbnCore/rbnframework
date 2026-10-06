@@ -1,6 +1,6 @@
 # RbnStudio — İçerik yönetimi (makale, haber, kategori, taslak)
 
-> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Bundles/RbnSuite/RbnStudio/` — **16 `*.php`**
 > (Controllers 5 · Models 2 · Views 9)
 > **Envanter:** 16 php dosyasının **16'sı** aşağıdaki tabloda anlatıldı.

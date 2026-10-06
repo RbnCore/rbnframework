@@ -3,7 +3,7 @@
 /** @var string $purgeAllUrl */
 ?>
 
-<!-- 📊 1. DB STAT CARDS (4 Sovereign Kart) -->
+<!-- 📊 1. DB STAT CARDS (4 Kart) -->
 <div class="row g-4 mb-4">
     <!-- Card 1: Veritabanı Adı -->
     <div class="col-12 col-sm-6 col-xl-3">
@@ -88,7 +88,7 @@
     </div>
 </div>
 
-<!-- 🎛️ 2. VERİTABANI HIZLI YÖNETİM MERKEZİ (6 Eşit Sovereign Kart) -->
+<!-- 🎛️ 2. VERİTABANI HIZLI YÖNETİM MERKEZİ (6 Eşet Kart) -->
 <div class="row g-4">
 
     <!-- 1. Clean Install -->

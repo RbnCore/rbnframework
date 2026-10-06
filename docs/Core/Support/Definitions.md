@@ -1,6 +1,6 @@
 # Core/Support/Definitions — Çatı tanım sabitleri (ad alanı, klasör, rota, varlık, kimlik)
 
-> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Support/Definitions/` — 10 `*.php` (`Render/` 4, `Route/` 2, `System/` 4).
 > **Envanter:** 10 dosyanın 10'u aşağıda anlatıldı. Sabit sayıları `ReflectionClass` ile ölçüldü (PHP 8.3, Windows).
 
@@ -26,13 +26,13 @@
 | `NamespaceMap.php` (`BaseConfig`) | `FRAMEWORK_PREFIX='Rbn\Framework\'`, `PROJECT_PREFIX='Rbn\Project\'`, `COMPONENT_REGISTRY`, `MAP` (26 giriş: `Framework`, `Framework.Core`, `Base`, `Database`, `Support`, `Helpers`, `Services`, `Http`, `Render`, `Routes`, `System`, `Internal`, `Suite`, `RbnSuite`, `RbnAdmin`, `RbnAuth`, `RbnStudio`, `Packages`, `App`, `Project`, `Project.App`, `Project.Core`, `Modules`, `Project.Modules`, `Backend`, `Frontend`). | — |
 | `FolderMatrix.php` (`BaseConfig`) | `FRAMEWORK` (5 kök), `PROJECT` (6 kök), `RUNTIME_LAYERS` (11), `CODE_LAYERS` (16); kategori `folder`. | `getDefinitionCategory()`, `isRuntimeLayer(string)`, `isCodeLayer(string)` |
 | `ComponentTypes.php` | `MAP` (22: sonek → tür; `Handler→handler`, `Validator→validation` …), `PLURAL_MAP` (22: tekil → çoğul kayıt anahtarı; `repository→repositories`, `metadata→metadata`). | `static typeMap(): array`, `static pluralize(string $type): string` (bilinmeyen tür: küçük harf + `s`) |
-| `FrameworkIdentity.php` (`BaseConfig`) | 26 skaler sabit: ad, sürüm (`FRAMEWORK_VERSION='0.9.3'`), URL'ler (`https://rbncore.tr`, `https://cdn.rbncore.tr/`), geliştirici bilgisi, depo/sorun/güvenlik bağlantıları, `FRAMEWORK_CLI_VERSION='2.3.0'`, `SHIELD_*`, `ADMIN_*`, `AUTH_*`. | — |
+| `FrameworkIdentity.php` (`BaseConfig`) | 26 skaler sabit: ad, sürüm (`FRAMEWORK_VERSION='0.9.4'`), URL'ler (`https://rbncore.tr`, `https://cdn.rbncore.tr/`), geliştirici bilgisi, depo/sorun/güvenlik bağlantıları, `FRAMEWORK_CLI_VERSION='2.3.0'`, `SHIELD_*`, `ADMIN_*`, `AUTH_*`. | — |
 
 ### 2.2 `Route/`
 
 | Dosya | İçerik |
 |---|---|
-| `RouteBlueprint.php` (`BaseConfig`, kategori `route`) | `MIDDLEWARE` (`aliases`: `auth`, `guard` → `AuthMiddleware`, `machine-api` → `ApiGuard`; `groups`: `user`, `admin`, `superadmin`, `developer`), `FILES` (`framework`: `core`, `auth`, `web`; `project`: **boş**), `PANELS` (5: `user, admin, developer, guest, frontend`), `AUTH_ROOTS` (8: `rbn-admin, register, auth, logout, lockscreen, forgot-password, verify-code, reset-password`), `CORE_MODULES` (`dashboard`, `RbnAdmin`), `DASHBOARD_PREFIX='dashboard'`, `LOGIN_PATH='rbn-admin'`, `SYSTEM_ALLOWED_PATHS` (4), `HONEYPOT_PATHS` (35), `HONEYPOT_ROUTE_EXEMPT` (5), `HONEYPOT_KEYWORDS` (12), `LEGACY_FONTS_KEYWORDS` (3), `FALLBACK_FAVICONS` (6), `FALLBACK_MOBILE_PREFIXES` (2), `FALLBACK_MOBILE_MANIFESTS` (2), `FALLBACK_OG_IMAGES` (8), `LEGAL_ALIASES` (17: `kvkk, iptal-iade, … sozlesme`). |
+| `RouteBlueprint.php` (`BaseConfig`, kategori `route`) | `MIDDLEWARE` (`aliases`: `auth`, `guard` → `AuthMiddleware`, `machine-api` → `ApiGuard`; `groups`: `user`, `admin`, `superadmin`, `developer`), `FILES` (`framework`: `core`, `auth`, `web`; `project`: **boş**), `PANELS` (5: `user, admin, developer, guest, frontend`), `AUTH_ROOTS` (8: `rbn-admin, register, auth, logout, lockscreen, forgot-password, verify-code, reset-password`), `LOGIN_ALIAS` (`giris`; panel kapalıyken yönlendirilen giriş takma adı, `AUTH_ROOTS` dışındadır), `CORE_MODULES` (`dashboard`, `RbnAdmin`), `DASHBOARD_PREFIX='dashboard'`, `LOGIN_PATH='rbn-admin'`, `SYSTEM_ALLOWED_PATHS` (4), `HONEYPOT_PATHS` (35), `HONEYPOT_ROUTE_EXEMPT` (5), `HONEYPOT_KEYWORDS` (12), `LEGACY_FONTS_KEYWORDS` (3), `FALLBACK_FAVICONS` (6), `FALLBACK_MOBILE_PREFIXES` (2), `FALLBACK_MOBILE_MANIFESTS` (2), `FALLBACK_OG_IMAGES` (8), `LEGAL_ALIASES` (17: `kvkk, iptal-iade, … sozlesme`). |
 | `StrategicRouteMap.php` | `STRATEGIC_ACTIONS` (7): `index` GET `/`, `modal` GET `modal/?([0-9]*)`, `update` POST `save`, `delete` POST `delete/([0-9]+)`, `destroy` POST `destroy/([0-9]+)`, `status` POST `toggle`, `bulkOrder` POST `reorder` — "sıfır kod" rota eşlemesi. |
 
 ### 2.3 `Render/`

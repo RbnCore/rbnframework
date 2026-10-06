@@ -1,4 +1,4 @@
-<!-- 🎛️ BACKSTAGE MODÜL KARTLARI (3'lü Kusursuz Izgara) -->
+<!-- 🎛️ BACKSTAGE MODÜL KARTLARI (3'lü Eşet Izgara) -->
 <div class="row g-4 mb-4">
 
     <!-- 1. SIDEBAR YÖNETİMİ -->

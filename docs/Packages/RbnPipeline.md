@@ -1,6 +1,6 @@
 # Packages/RbnPipeline — yapay zekâ içerik hattı (prompt kuralları, preset'ler, otomasyon)
 
-> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Packages/RbnPipeline/` — **31 `*.php`**
 > (3 `Builders/` + 3 `Builders/Tasks/` + 4 `Concerns/` + 2 `Contracts/` +
 > 6 `Presets/` + 3 `Rules/Blog/` + 7 `Rules/Prompt/` + 1 `Rules/Youtube/` + 2 `Services/`).

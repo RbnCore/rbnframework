@@ -1,6 +1,6 @@
 # Resources — çerçeve kaynak varlıkları (görünümler, varlıklar, veri, ikonlar)
 
-> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Resources/` — 4 alt klasör: `Assets/`, `Data/`, `images/`, `Views/`.
 > **Envanter:** **`Views/` 29 `*.php`** + `Views/System/sitemap.xsl` (1) →
 > toplam **29 `*.php` + 1 `.xsl` = 30 dosya**; `Assets/` 52, `Data/` 10,

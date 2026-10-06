@@ -1,4 +1,4 @@
-<!-- Sovereign RBN Dashboard Sidebar Component 🏛️ -->
+<!-- RBN Dashboard Sidebar Component 🏛️ -->
 <nav class="rbn-dash-sidebar" id="sidebar">
     <!-- Header / Brand -->
     <div class="rbn-dash-sidebar-header">

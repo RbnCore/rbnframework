@@ -126,41 +126,6 @@ final class EnvKeys
     public const RBN_LOG_THROTTLE = 'RBN_LOG_THROTTLE';
 
     /* ------------------------------------------------------------------
-     * İŞYABENİ / MODULE JETONLARI (gizli)
-     * ---------------------------------------------------------------- */
-
-    /** İçerik fabrikası worker endpoint jetonu; boş dönerse endpoint fail-closed reddeder. Kullanım: `WorkerTokenService::configuredToken()`. */
-    public const RBN_WORKER_TOKEN = 'RBN_WORKER_TOKEN';
-
-    /** Module API jetonu; boş dönerse API istekleri fail-closed reddedilir. Kullanım: `ProjectStatusService::configuredToken()`. */
-    public const RBN_CREW_TOKEN = 'RBN_CREW_TOKEN';
-
-    /** Bazı FastCGI/Apache kurulumlarında jeton `REDIRECT_` önekiyle gelir; yedek kaynak. Kullanım: `WorkerTokenService::configuredToken()`. */
-    public const REDIRECT_RBN_WORKER_TOKEN = 'REDIRECT_RBN_WORKER_TOKEN';
-
-    /** `REDIRECT_` önekli Module jetonu (yedek kaynak). Kullanım: `ProjectStatusService::configuredToken()`. */
-    public const REDIRECT_RBN_CREW_TOKEN = 'REDIRECT_RBN_CREW_TOKEN';
-
-    /* ------------------------------------------------------------------
-     * DEPOLAMA / YÜKLEME DİZİNLERİ
-     * ---------------------------------------------------------------- */
-
-    /** Diskteki yükleme kök dizini; boşsa `Paths::project()->uploads()`. Kullanım: `MediaIngestService::uploadsRoot()`. */
-    public const RBN_UPLOADS_DIR = 'RBN_UPLOADS_DIR';
-
-    /** Yükleme dosyalarının public URL öneki; boşsa `/uploads`. Kullanım: `MediaIngestService::publicUrl()`. */
-    public const RBN_UPLOADS_URL_BASE = 'RBN_UPLOADS_URL_BASE';
-
-    /** Module gelen kutusu (görev) dizini; boşsa Module kökünden türetilir. Kullanım: `ProjectStatusService::taskDirectory()`. */
-    public const RBN_CREW_INBOX_DIR = 'RBN_CREW_INBOX_DIR';
-
-    /** Module API veri dizini; boşsa kök dizinden türetilir. Kullanım: `ProjectStatusService::dataDirectory()`. */
-    public const RBN_CREW_DATA_DIR = 'RBN_CREW_DATA_DIR';
-
-    /** `REDIRECT_` önekli Module veri dizini (yedek kaynak). Kullanım: `ProjectStatusService::dataDirectory()`. */
-    public const REDIRECT_RBN_CREW_DATA_DIR = 'REDIRECT_RBN_CREW_DATA_DIR';
-
-    /* ------------------------------------------------------------------
      * YARDIMCI
      * ---------------------------------------------------------------- */
 
@@ -197,10 +162,6 @@ final class EnvKeys
         self::RBN_LEGACY_SALT,
         self::COMMON_DB_PASS,
         self::DB_PASS,
-        self::RBN_WORKER_TOKEN,
-        self::RBN_CREW_TOKEN,
-        self::REDIRECT_RBN_WORKER_TOKEN,
-        self::REDIRECT_RBN_CREW_TOKEN,
     ];
 
     /**
@@ -222,15 +183,6 @@ final class EnvKeys
         self::RBN_DEV,
         self::APP_ENV,
         self::RBN_LOG_THROTTLE,
-        self::RBN_WORKER_TOKEN,
-        self::RBN_CREW_TOKEN,
-        self::REDIRECT_RBN_WORKER_TOKEN,
-        self::REDIRECT_RBN_CREW_TOKEN,
-        self::RBN_UPLOADS_DIR,
-        self::RBN_UPLOADS_URL_BASE,
-        self::RBN_CREW_INBOX_DIR,
-        self::RBN_CREW_DATA_DIR,
-        self::REDIRECT_RBN_CREW_DATA_DIR,
         self::TG_SEND_DELAY_MS,
     ];
 }

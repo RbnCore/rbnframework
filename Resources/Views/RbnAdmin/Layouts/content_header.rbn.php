@@ -30,7 +30,7 @@ $pageBadge = $page['badge'] ?? 'Live Monitoring';
 
 <div class="row g-3 mb-4 position-relative">
     <div class="col-12">
-        <!-- 🏛️ Unified Sovereign Hero Banner (Her Sayfada Otomatik & Tekil Başlık) -->
+        <!-- 🏛️ Unified Hero Banner (Her Sayfada Otomatik & Tekil Başlık) -->
         <div class="card border-0 shadow-lg ra-hero-banner">
             <div class="ra-hero-pattern"></div>
             

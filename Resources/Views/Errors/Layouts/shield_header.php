@@ -15,7 +15,7 @@
 
     <!-- 👤 2. BRANDING & FRAMEWORK -->
     <meta name="author" content="<?= $branding['author'] ?? 'RbnBilisim' ?>">
-    <meta name="designer" content="<?= $branding['designer'] ?? 'RBN Framework Masterpiece' ?>">
+    <meta name="designer" content="<?= $branding['designer'] ?? 'RBN Framework' ?>">
     <meta name="generator" content="<?= trim(($branding['fw_name'] ?? 'RBN') . ' ' . (($branding['fw_version'] ?? '3.5') !== '' ? 'v' . ($branding['fw_version'] ?? '3.5') : '')) ?>">
     <meta name="rbnshield-version"
         content="<?= $branding['shield_name'] ?? 'RbnShield' ?> <?= $branding['shield_version'] ?? 'v2.1' ?>">
@@ -26,7 +26,7 @@
     <meta property="og:description"
         content="<?= ($branding['shield_seo_desc'] ?? 'Professional Error & Security Service') ?>">
     <meta property="og:url" content="<?= $branding['site_url'] ?? '#' ?>">
-    <meta property="og:site_name" content="<?= $branding['shield_name'] ?? 'RbnShield' ?> Masterpiece">
+    <meta property="og:site_name" content="<?= $branding['shield_name'] ?? 'RbnShield' ?>">
     <meta property="og:type" content="website">
 
     <!-- 🐦 4. TWITTER CARD (Shield Identity) -->
@@ -39,7 +39,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
 
-    <!-- 2. RBN Master Design Engine (Sovereign CSS) 🏛️💎 -->
+    <!-- 2. RBN Master Design Engine (Framework CSS) 🏛️💎 -->
     <link rel="stylesheet" href="/framework-assets/rbncommon/css/rbn-master.css?v=<?= $asset_v ?>">
     <link rel="stylesheet" href="/framework-assets/rbncommon/css/rbn-shield.css?v=<?= $asset_v ?>" id="rbn_shield_master_css">
 </head>

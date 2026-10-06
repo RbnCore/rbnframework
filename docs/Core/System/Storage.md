@@ -1,6 +1,6 @@
 # Core/System/Storage — Dosya tabanlı depolama (önbellek, oturum, günlük, trafik…)
 
-> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/System/Storage/` — 16 `*.php` (`StorageManager` 1, `Base/` 1, `Constants/` 3, `Drivers/` 1, `Providers/` 10).
 > **Envanter:** 16 dosyanın 16'sı aşağıda anlatıldı.
 

@@ -160,7 +160,7 @@
         </div>
     </div>
 
-    <!-- 3. AKTİVİTELER TABLOSU (Sovereign .rbn-table-wrap Mimarisi) 📋 -->
+    <!-- 3. AKTİVİTELER TABLOSU (.rbn-table-wrap Mimarisi) 📋 -->
     <div class="rbn-table-wrap" id="activities-table-wrap">
         <table class="rbn-table rbn-table-hover" id="activities-table"
             data-rbn-table="true"

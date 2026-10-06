@@ -60,7 +60,7 @@ trait HttpContextTrait
             if ($this instanceof RemoteRequest) {
                 $this->remote = $this;
             } else {
-                $this->remote = $hub->remote ?? new RemoteRequest($hub);
+                $this->remote = $hub->remote ?? new RemoteRequest();
             }
         }
 

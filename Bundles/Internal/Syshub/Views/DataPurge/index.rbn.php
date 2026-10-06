@@ -6,7 +6,7 @@
 /** @var array $allStats */
 ?>
 
-<!-- 📊 1. STORAGE STATS & NUKE ROW (4 Sovereign Kart) -->
+<!-- 📊 1. STORAGE STATS & NUKE ROW (4 Kart) -->
 <div class="row g-4 mb-4">
     <!-- Card 1: Disk Kullanımı -->
     <div class="col-12 col-sm-6 col-xl-3">
@@ -95,7 +95,7 @@
     </div>
 </div>
 
-<!-- 🎛️ 2. ALT MODÜL KARTLARI (Sovereign Standart Grid) -->
+<!-- 🎛️ 2. ALT MODÜL KARTLARI (Standart Eşet Izgara) -->
 <div class="row g-4">
     <?php foreach ($subModules as $key => $sub):
         $stats = $allStats[$key] ?? ['total_files' => 0, 'total_size' => '0 B'];

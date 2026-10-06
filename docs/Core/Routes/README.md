@@ -1,6 +1,6 @@
 # Core/Routes — URL yönlendirme, rota toplama, eşleştirme ve 301 normalizasyonu
 
-> **Doğrulanan kod tabanı:** `1d89c431` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `1d89c431` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Routes/` — 13 `*.php` (3'ü rota eşleme dosyası, 10'u sınıf).
 > **Envanter:** 13 dosyanın 13'ü aşağıda anlatıldı.
 
@@ -152,6 +152,19 @@ başka projenin alan adı (`//domain/`), diğer paneller
 12. **API/webhook 301'e uğramaz** ve `enforceCanonicalDomain`'u da atlar;
     kanal başındaki `Host` zorlaması bu yüzden oradan atlanamaz
     (`RedirectManager.php:120-123, 609-622`).
+13. **Bir modülün rotaları TAM OLARAK BİR KEZ yüklenir.** `registerRoutes()`
+    iki ayrı yoldan çağrılır: `Core/Routes/Mappings/web.php:33` ve
+    `Kernel/Stages/Routing.php:38` → `ModuleDiscoveryDriver:89`. "Rotalar
+    yüklendi" işareti (`ModuleDiscoveryDriver::$loadedRoutes`) **yalnız
+    `registerBundles()` içinde** tutulduğu için ilk yol işarete dokunmuyor ve
+    ikinci yükleme engellenemiyordu — statik adresler iki kez kaydediliyor,
+    sitemap'e iki kez yazılıyordu (ölçüm: 17/17 proje, 63 fazladan `<loc>`).
+    Artık `Route::load()` işareti `registerRoutes()` **çağrıldıktan sonra**
+    koyar (önce konursa rota hiç yüklenmeden "yüklendi" görünürdü) ve anahtar
+    `routeKey()` ile kanonikleştirilir — `Route::load()` sınıf adını
+    **baştaki `\` ile**, `discoverBundles()` ise **onsuz** üretir;
+    `class_exists()` ikisini de kabul eder ama dizi anahtarı olarak farklı
+    oldukları için işaret yine tutmazdı.
 
 ## 6. Örnek (gerçek koddan)
 

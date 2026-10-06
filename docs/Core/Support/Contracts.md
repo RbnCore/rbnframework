@@ -1,6 +1,6 @@
 # Core/Support/Contracts — Arayüz (interface) sözleşmeleri
 
-> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Support/Contracts/` — 21 `*.php` (`Base` 7, `Collections` 1, `Console` 1, `Database` 3, `Discovery` 1, `Http` 3, `Kernel` 2, `Routes` 2, `Services` 1).
 > **Envanter:** 21 dosyanın 21'i aşağıda anlatıldı. "Uygulayan" sayıları `implements`/`extends` taraması (`Core`, `Bundles`, `Packages`; sözleşme dosyalarının kendisi hariç) ile ölçüldü.
 

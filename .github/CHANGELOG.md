@@ -6,13 +6,52 @@
 
 Biçim: [Keep a Changelog](https://keepachangelog.com/tr/1.1.0/). Sürümlendirme: [SemVer](https://semver.org/lang/tr/).
 
-**Son sürüm:** `0.9.3` (2026-10-05) — apex alan adı yönlendirme düzeltmesi, PHP gerekliliği hizası ve depoya giren `docs/`.
+**Son sürüm:** `0.9.4` (2026-10-06) — tarama çıktısı (sitemap/llms.txt) düzeltmeleri, çerçevenin kendi `[B-92]` gürültüsünün kesilmesi, kaldırılan proje modülünün izlerinin framework'ten temizlenmesi ve görünür metinlerde anlamsız pazarlama sözcüklerinin nötrleştirilmesi.
 
 Güvenlik girdileri tarafsız yazılır: ne değişti ve etkisi ne, sömürme adımı/payload/PoC/dosya-satır ayrıntısı **yazılmaz**. Sayısal şiddet dereceleri de burada verilmez (iç onarım planında tutulur).
 
 ---
 
-## [Unreleased]
+## [0.9.4] - 2026-10-06
+
+**Kısa özet — tarama çıktısı düzeltmeleri, kendi uyarısını üretmeyen çerçeve, kaldırılan proje modülünün izlerinin temizlenmesi ve görünür metin temizliği.**
+Bu sürüm, `0.9.3` yayınından sonra yapılan çalışmanın kaydıdır. Madde madde yükseltme
+yapılacakların karşılığı `UPGRADING.md` 0.9.4 bölümündedir.
+
+### Değişti
+
+* **Çerçeve dışındaki anlamsız/abartılı sözcükler temizlendi (görünür metinler).** `FrameworkIdentity::FRAMEWORK_SLOGAN` / `FRAMEWORK_DESCRIPTION` değerleri gerçeği anlatan nötr metinlerle değiştirildi (artık sayfa kaynağına `framework-slogan` ve `framework-description` meta etiketleri olarak çıkıyor); hata/pre-flight sayfalarındaki, admin paneli bileşenlerindeki, SEO raporu puan etiketlerindeki, uyarı/hata mesajlarındaki ve panele basılan bütünleşen görünür metinlerdeki `Sovereign` / `Masterpiece` / `Kusursuz` / `RBN 3.5` ifadeleri nötr karşılıklarıyla değiştirildi ya da kaldırıldı. Yönetici arayüzü, meta etiketleri, CSS/JS dosya başlıkları ve fınksiyonel davranış değişmedi; PHP yorumlarındaki geçişler ve tanımlayıcı adları (`SovereignIdentity`, `sovereignBundles()`, `searchInGate('Sovereign', …)`) davranş/API değişikliği yaratmamak için bilerek korundu (ayrı envanter işi).
+
+### Düzeltildi
+
+* **Çerçeve kendi `[B-92]` uyarısını artık tetiklemiyor.** Bileşen kurulurken iç çağrılar, parametreyi kullanmayan `RemoteRequest` ve `ViewEngine` nesnelerine DI nesnesi geçirip günlüğe "DI yok sayıldı" satırı yazdırıyordu (canlıda her saat başı ve zamanlanmış görev çalışmalarında). Çağrılardan argüman kaldırıldı; imza ve uyarı mantığı değişmedi, çağıranın verdiği gerçek DI nesnesi hâlâ uyarır.
+
+* **Aktif yasal sayfalar `sitemap.xml` ve `llms.txt` çıktısına giriyor.** `CrawlerProvider` yasal sayfaları okurken registry'de var olmayan bir anahtarı (`page`) arıyordu; sorgu bu yüzden istisna atıyor, `catch` bloğu hata kaydı tutmadan boş liste döndürüyordu. Bu yüzden veritabanında `status = active` olan yasal sayfalar hiçbir sitemap'e eklenmiyordu. Doğru model kaydı kullanılıyor ve hata durumu artık günlüğe yazılıyor; yalnızca gerçekten aktif (`status = active`) sayfalar listelenmeye devam eder, taslak/arsiv sayfaları girmez.
+
+* **`sitemap.xml` / `llms.txt` çıktısında yinelenen adresler kalktı.** Bir modülün rotaları iki ayrı yoldan yükleniyordu (çekirdek web rotası ve modül keşfi), "rotalar yüklendi" işareti ise yalnızca ikinci yolda tutulduğu için ikinci yükleme engellenemiyordu; statik adresler iki kez kaydediliyor ve aynı adres sitemap'e iki kez yazılıyordu. İşaret artık rotalar gerçekten yüklendikten sonra konuyor ve sınıf adı tek bir kanonik biçime indiriliyor (baştaki `\` temizleniyor — iki yol aynı sınıfı farklı yazımla üretiyordu ve işaret bu yüzden tutmuyordu). Etkilenen adres sayısı: 17 projenin tamamı.
+
+* **İçeriği olmayan ve yönlendirme yapan sayfalar `sitemap.xml` / `llms.txt` çıktısına girmiyor.** Sitemap girdisi üretilirken hiçbir yerde "bu adres gerçekten 200 döner mi" kontrolü yoktu; sonuç olarak içerik bulunmadığı için ana sayfaya yönlendiren standart dinamik sayfalar ve giriş/panel kökleri listeleniyordu (ölçüm: 11 sitede 23 adres, çoğu 301/302). Artık (1) panel ve giriş kökleri tarama dışı bırakılıyor, (2) içeriğe bağlı standart rotalar veritabanı durumuna göre değerlendiriliyor. Kural çekirdek standardıdır; projeler kendi başına özelleştirmez. İçerik sorgusu hata verirse adres listelenmez (güvenli taraf: eksik sayfa, bozuk adres değil).
+
+* **Bir adresin slug'ı veritabanında aktif bir sayfa kaydıyla aynıysa, o adres sitemap'e girmiyor.** Çekirdek yönlendirme kuralı, tek segment'li bir yolun slug'ı veritabanında aktif sayfa olarak bulunduğunda o yolu kalıcı olarak `/sayfa/{slug}` adresine 301'liyor; yani o adres hiçbir zaman 200 dönmediği hâlde sitemap'te listelenebiliyordu. Artık bu durumda yalnızca kanonik adres (`/sayfa/{slug}`) listeleniyor, gölgelenen adres listelenmiyor.
+
+* **noindex tek kaynaktan yönetiliyor: `noindex` site artık `sitemap.xml` / `llms.txt` / `feed` yayınlamıyor, `robots.txt` tüm taramayı kapatıyor.** Sayfa `noindex` derken `sitemap.xml` ve `llms.txt` "bu adresleri tara" demeye devam ediyordu (çelişki). Artık `SeoResolver::isSiteNoindex()` (site) ve `isPageNoindex()` (sayfa/kayıt) tek yardımcıdır; robots, sitemap, llms ve feed aynı cevaba bakar. **Site noindex** (`view_mapping[site]['robots']['noindex'] = true` ya da panel `meta-robots` değeri `noindex` içeriyor): `sitemap.xml` (+ alt sitemap'ler), `llms.txt` ve `feed` **404** döner, `robots.txt` `User-agent: *` + `Disallow: /` döner ve `Sitemap:` satırı yazmaz (mevcut "üretim değil / alt alan adı" yolunun proje düzeyi karşılığı, aynı kod yolu). **Sayfa noindex** (kayıt satırında `robots`/`meta_robots` `noindex` ya da `noindex` bayrağı): site normal yayın yapar, yalnız o kayıt sitemap, `llms.txt` ve `feed` çıktısına girmez. Önbellek: site noindex kararı önbellekten ÖNCE verilir (eski çıktı servis edilmez); `robots.txt` önbellek anahtarı noindex durumunu taşır. Ayrıca `/feed` besleme kaynağı olmayan sitelerde (ve noindex sitelerde) hata sayfası/500 yerine gerçek **404** döner (`shield()->abort(404)` düz bir `\Exception` fırlatıyordu).
+
+* **noindex kararı okunamazsa site noindex sayılıyor (fail-closed).** Ayar servisi yoksa ya da okuma istisna atarsa `SeoResolver::isSiteNoindex()` eskiden "index" diyordu; gizli bir site tam arıza anında `sitemap.xml` / `llms.txt` yayınlayabilirdi. Artık karar belirsizse noindex varsayılır ve nedeni süreç başına bir kez günlüğe yazılır. Geçici bir ayar hatasında site o süre `sitemap.xml` / `llms.txt` için 404 verir (UPGRADING'e not düşüldü). `isSiteNoindex()` ayrıca `resolve()` ile aynı öncelik sırasını kullanıyor; robots yönergesi dizi ya da metin olarak yazılabiliyor.
+* **`llms.txt` içeriği tek satıra ve güvenli bağlantı biçimine indirildi.** İçerik başlığındaki satır sonu / köşeli parantez / başlık işaretiyle sahte bölüm ve bağlantı eklenebiliyordu. `LlmsBuilder::sanitizeText()` ve `LlmsBuilder::link()` tek kaynak oldu; `addSection()` ikinci savunma hattı.
+* **`/sitemap-{tür}.xml` yalnız beyan edilmiş kaynaklar için yanıt veriyor.** Bilinmeyen tür (ve aralık dışı / başı sıfırlı sayfa eki) 404 verir ve önbelleğe yazılmaz; önceden her rastgele ad 200 dönüp yeni önbellek dosyası üretiyordu.
+* **Crawler önbellek anahtarı host sınıfını taşıyor.** Resmi alan adı ailesi (`alan`, `alan.test`, `alan.local`) kendi anahtarını, diğer tüm host'lar tek ortak anahtarı kullanır (rastgele `Host` başlığıyla anahtar çoğaltılamaz). Eski anahtarlı dosyalar süresiyle düşer.
+* **`RouteBlueprint::LOGIN_ALIAS` eklendi** ve panel-kapalı kapsamı ile sitemap süzgecindeki `'giris'` literali bu sabite bağlandı; `AUTH_ROOTS` değişmedi, davranış değişmez. `hasRouteContent()` kaynak kutupları (`blocked-by:` / `satisfied-by:`) açık adlandırıldı; okuyucusu olmayan `site_noindex` anahtarı kaldırıldı; `EnvKeys.php` dosya sonu satır sonu ve bir yorum artığı düzeltildi.
+
+### Kaldırıldı
+
+* **Kaldırılan proje modülünün izleri framework'ten silindi.** Artık hiçbir kod tarafından okunmayan jeton ve dizin ortam değişkenleri `EnvKeys` kaydından çıkarıldı (`SECRET_KEYS` 9 → 5, `ALL_KEYS` 24 → 15; aynı kanıt kuralıyla, okuyucusu kalmamış iki yükleme dizini adı da kayıttan çıktı), `ApiKeysRegistry` içindeki ilgili anahtar eşlemesi ve `MachineApiRegistry` tohumundaki ilgili yol beyanı kaldırıldı; belgeler (`Config` README'si, `docs/`) buna göre sayıldı. Güvenlik etkisi yok: kaldırılan yol beyanı `ip_exempt = false` idi (IP katmanı muafiyeti zaten verilmemişti), diğer makine API'leri ve muafiyetleri aynen korunur. Bu adları ortamında tanımlayan kurulumlarda değişiklik gerekmez; tanımsız kalmaları zararsızdır.
+
+### Sürüm
+
+* **Sürüm artışı:** `FrameworkIdentity::FRAMEWORK_VERSION` `0.9.3` → **`0.9.4`**.
+  Kopyalar (`CITATION.cff`, `README.md`, `README.en.md`, `.github/UPGRADING.md`
+  "Son sürüm" satırı) tek kaynaktan okur. Sayaç kuralı `Version::next()` ile
+  ölçülerek doğrulandı; elle sayı yazılmadı. Kırıcı değişiklik **yoktur**.
 
 ## [0.9.3] - 2026-10-05
 
@@ -356,7 +395,7 @@ doğrulandı. Bileşen sürümleri `2.1.0` / `1.2.0` / `2.2.0` / `2.3.0` **deği
 - **FW-CONFIG-YAPISI (güvenlik incelemesi):** Ortak dosya tekniği `Secrets.php`'ten `Engine/`'ye taşındı. `Engine/ConfigFileGuard.php` (izin tavanı 0600 + `<?php`/`return` sızıntı kontrolü + operatör yol/ipucu üretimi) ve `Engine/ConfigFileLoader.php` (bul → `require` → dizi doğrula → anahtar doğrula → tembel önbellek) ayrı trait'ler oldu; ikincisi birincisini `use` eder. `Secrets.php` bunları **göreli `require_once` ile** yükler (otoloader henüz hazır olmayan kernel/bootstrap aşaması ve izole dizin kopyaları için zorunlu). Gece yazılmış Türkçe metot adları İngilizceye çevrildi: `sablonYolu()`→`examplePath()`, `ipucu()`→`hint()`, `izinTavani()`→`permissionCeiling()`, `ilkReturnKonumu()`→`firstReturnPosition()`, `onbellekAnahtari()`→`cacheKey()`. **Davranış birebir aynıdır** (aynı hata metinleri, aynı fail-closed davranışı, aynı önbellek).
 - **FW-CONFIG-YAPISI (güvenlik incelemesi):** `Secrets.php` ****İNCE CEPHEYE**** bölündü (1009 → 249 satır). Sorumluluklar ayrıldı: `Definitions/SecretsSchema.php` (**yalnız `public const`, metot yok** — alan adları, izin tavanı 0600, `CHANGE_ME` işaretçisi, bölüm kuralları), `Engine/SecretsLoader.php` (yol çözümü + ham dosya okuma; **TEK okuma kapısı**), `Engine/SecretsValidator.php` (bölüm adı biçimi + "var ama okunamıyor" ayrımı), `Engine/SecretsSections.php` (bölüm okuma/doğrulama + düz anahtar haritaları), `Engine/SecretsFlatApi.php` (eski düz anahtar yüzeyi `all()/get()/optional()/masterDbPass()/masterSmtpPass()`; trait olarak `Secrets` üzerinde `use` edildiği için **imzalar korunur**). `Secrets::masterDb()/smtp()/cpanel()/api()/appKey()/section()` **imzaları değişmedi**, çağıranlar kırılmaz. **Hiçbir `Config/**` dosyası 250 satırı geçmiyor.** Gece yazılmış Türkçe kod adları (`hepsi`, `ipucu`, `sablonYolu`, `izinTavani`, `ilkReturnKonumu`, `onbellekAnahtari`, `bolumAdiDogrula`, `okunabilirDogrula`, `ustDuzEkler`, `gevsekDuz`, `apiTum`, `ham`) İngilizceye çevrildi. **Davranış birebir aynıdır** — aynı fail-closed hata mesajları; hata metinlerinde hiçbir sır **değeri** yazılmaz.
 
-- **FW-ENV-KAYIT-160:** `getenv(` / `$_ENV` / `$_SERVER` ile ortam değişkeni okuyan **11 nokta `Env`'e taşındı** (davranış korunarak): `CryptoHelper::ortamDegiskeni()`, `BaseDbData::ortamDegiskeni()` (`MASTER_DB_*` / `COMMON_DB_*` / `DB_*`), `SystemGuardHandler::resolveFailClosed()` (`RBN_GUARD_FAILCLOSED`), `PreBoot::envOverrideRequested()` (`RBN_DEBUG` / `RBN_DEV`), `AiUsageManager` + `rbn` CLI + `DebugHelper` (`APP_ENV`), `MediaIngestService` (`RBN_UPLOADS_DIR`, `RBN_UPLOADS_URL_BASE`), `WorkerTokenService` + `ProjectStatusService` (`RBN_WORKER_TOKEN`, `RBN_CREW_TOKEN`, `RBN_CREW_*_DIR`; `REDIRECT_` onekli yedekler artık **kayıtlı ad**), Telegram test router'ı (`TG_SEND_DELAY_MS`).
+- **FW-ENV-KAYIT-160:** `getenv(` / `$_ENV` / `$_SERVER` ile ortam değişkeni okuyan **11 nokta `Env`'e taşındı** (davranış korunarak): `CryptoHelper::ortamDegiskeni()`, `BaseDbData::ortamDegiskeni()` (`MASTER_DB_*` / `COMMON_DB_*` / `DB_*`), `SystemGuardHandler::resolveFailClosed()` (`RBN_GUARD_FAILCLOSED`), `PreBoot::envOverrideRequested()` (`RBN_DEBUG` / `RBN_DEV`), `AiUsageManager` + `rbn` CLI + `DebugHelper` (`APP_ENV`), `MediaIngestService` (`RBN_UPLOADS_DIR`, `RBN_UPLOADS_URL_BASE`), bir proje modülünün jeton/dizin okumaları (ilgili ortam değişkenleri ve `REDIRECT_` önekli yedekleri artık **kayıtlı ad**; sonradan kaldırıldı, bkz. `[0.9.4]`), Telegram test router'ı (`TG_SEND_DELAY_MS`).
 - **FW-ENV-KAYIT-160 (fail-closed / kill-switch semantiği DEĞİŞMEDİ):** `RBN_GUARD_FAILCLOSED` artık `Env::flag($ad, true)` ile okunur — tanımsız/boş → `true` (fail-closed), `0|false|off|no|hayir` → `false`; **yorum yine TEK merkezden** (`normalizeSwitch`) gelir, ikinci bir parser yazılmadı. `RBN_DEBUG`/`RBN_DEV` **bilerek** `Env::flag` DEĞİL, kendi `1|true|on|yes|development` listesiyle okunmaya devam eder: bu kapının varsayılanı KAPALI'dır, `normalizeSwitch` "belirsiz → AÇIK" dediği için kullanılsa hata ayıklama modu yazım hatasıyla açılırdı. `RBN_ALLOW_LEGACY_SALT` de eski 4-değerlik listesiyle korundu (geriye uyum). A0-2, A0-3, R1/R2 öncelik sıraları ve `Secrets` bölümü ↔ `Env` ilişkisi değişmedi.
 - **FW-SIRLAR-TEK-CIKIS-149:** Çağıranlar yeni çıkışlara taşındı — `MasterDbData::pass()` → `Secrets::masterDb()['pass']`, `::smtpPass()` → `Secrets::smtp()['pass']`, `CommonDbData::pass()` master'a düşerken `Secrets::masterDb()['pass']`, `CpanelData::host()/user()/token()/credentials()` → `Secrets::section('cpanel')`. **Geriye uyum:** `all()`, `get()`, `masterDbPass()`, `masterSmtpPass()`, `optional()`, `cpanel()`, `cpanelHost()`, `cpanelUser()`, `cpanelToken()` isimleri ve davranışları **korundu**; `Secrets::cpanel()` dizisinin `cpanel_host/cpanel_user/cpanel_token` anahtarları **değiştirilmedi** (kabul testi bunu sabitler) — kanonik bölüm biçimi `section('cpanel')` üzerinden okunur. Ortam değişkeni önceliği (`MASTER_DB_PASS`, `COMMON_DB_PASS`) ve bağlantı şeması **değişmedi**.
 
@@ -494,12 +533,13 @@ doğrulandı. Bileşen sürümleri `2.1.0` / `1.2.0` / `2.2.0` / `2.3.0` **deği
 ## Bağlantılar
 
 - Depo adresi: https://github.com/RbnCore/rbnframework
-- Karşılaştırma: [0.9.3] · [0.9.2] · [0.9.1]
+- Karşılaştırma: [0.9.4] · [0.9.3] · [0.9.2] · [0.9.1]
 - Güvenlik bildirimi: [SECURITY.md](SECURITY.md)
 - Yükseltme notları: [UPGRADING.md](UPGRADING.md)
 - Biçim: [Keep a Changelog](https://keepachangelog.com/tr/1.1.0/) · [SemVer](https://semver.org/lang/tr/)
 
-[Unreleased]: https://github.com/RbnCore/rbnframework/compare/v0.9.3...HEAD
+[Unreleased]: https://github.com/RbnCore/rbnframework/compare/v0.9.4...HEAD
+[0.9.4]: https://github.com/RbnCore/rbnframework/compare/v0.9.3...v0.9.4
 [0.9.3]: https://github.com/RbnCore/rbnframework/compare/v0.9.2...v0.9.3
 [0.9.2]: https://github.com/RbnCore/rbnframework/compare/v0.9.1...v0.9.2
 [0.9.1]: https://github.com/RbnCore/rbnframework/compare/v0.9.0...v0.9.1

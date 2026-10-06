@@ -73,7 +73,7 @@ class ModalController extends BaseController
         echo '<div class="d-flex align-items-center">';
         echo '<i class="bi bi-robot fs-2 me-3 text-warning"></i>';
         echo '<div>';
-        echo '<h6 class="mb-1 fw-bold text-dark">Otonom Keşif Hatası (RBN 3.5 Discovery)</h6>';
+        echo '<h6 class="mb-1 fw-bold text-dark">Otonom Keşif Hatası (Discovery)</h6>';
         echo '<span class="small opacity-75"><code>' . htmlspecialchars($type) . '</code> tipi için geçerli bir kontrolcü veya modal bileşeni bulunamadı.</span>';
         echo '</div>';
         echo '</div>';

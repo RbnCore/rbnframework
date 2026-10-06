@@ -1,6 +1,6 @@
 # Core/Support/Exceptions — Çatı istisna sınıfları
 
-> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Support/Exceptions/` — 8 `*.php`.
 > **Envanter:** 8 dosyanın 8'i aşağıda anlatıldı.
 

@@ -42,7 +42,7 @@ class FrontendHandler extends BaseRender
 
         // 🎼 RBN 3.5: Centralized Head State & Ready Queue Hub (Frontend Context) 🛰️⚓
         $renderedHeadState = $this->provider('partial')->render('RbnCommon/head_state', ['context' => 'frontend']);
-        $data['headStateHtml'] = "\n    <!-- [RBN 3.5] Sovereign Head State Engine -->\n" . $renderedHeadState . "\n";
+        $data['headStateHtml'] = "\n    <!-- [FRAMEWORK HEAD STATE ENGINE] -->\n" . $renderedHeadState . "\n";
 
         return $data;
     }

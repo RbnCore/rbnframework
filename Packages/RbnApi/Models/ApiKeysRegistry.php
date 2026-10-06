@@ -19,7 +19,6 @@ class ApiKeysRegistry
         'openai'      => 'OPENAI_API_KEY',
         'youtube'   => 'YOUTUBE_API_KEY',
         'shopier'   => 'SHOPIER_API_KEY',
-        'module' => 'RBN_CREW_TOKEN',
         'instagram' => [
             'access_token' => 'INSTAGRAM_ACCESS_TOKEN',
             'account_id'   => 'INSTAGRAM_ACCOUNT_ID',

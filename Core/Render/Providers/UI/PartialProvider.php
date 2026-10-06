@@ -47,7 +47,7 @@ class PartialProvider extends BaseRender implements BaseRenderInterface
     {
         $output = '';
         foreach ($imports as $import) {
-            $output .= "\n<!-- [RBN 3.5] Autonomous Import: {$import} -->\n";
+            $output .= "\n<!-- [FRAMEWORK] Autonomous Import: {$import} -->\n";
             $output .= $this->render($import, $data);
         }
         return $output;

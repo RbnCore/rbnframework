@@ -29,7 +29,7 @@ class RouteBlueprint extends BaseConfig
      * (PARAMETRESIZ). Neden parametre yok:
      * `Dispatcher::resolveMiddleware()` (`Core/Routes/Engine/Dispatcher.php:113`)
      * `alias:arg` bicimini COZMEZ — cozulemeyen middleware icin R-10
-     * fail-closed `RuntimeException` atar, yani `machine-api:crew-panel`
+     * fail-closed `RuntimeException` atar, yani `machine-api:<kapsam>`
      * yazimi rotayi 500 ile KIRARDI. O dosya bu gorevin dosya kumesinde
      * DEGILDIR; parametre destegi ayri bir is olarak birakilir.
      *
@@ -73,6 +73,14 @@ class RouteBlueprint extends BaseConfig
      * Default Login Path 🚀
      */
     public const LOGIN_PATH = 'rbn-admin';
+
+    /**
+     * Çekirdek web rotasının panel KAPALIYKEN yönlendirdiği giriş takma adı.
+     * `AUTH_ROOTS` içinde DEĞİLDİR (oradaki tüketiciler öneklemeyi/oturumu bu
+     * adla ilişkilendirmez); bu ad yalnız "panel kapalı" kapsamında ve sitemap
+     * süzgecinde kullanılır.
+     */
+    public const LOGIN_ALIAS = 'giris';
 
     /**
      * Auth-related Root Paths (Prevents prefixing) 🔒

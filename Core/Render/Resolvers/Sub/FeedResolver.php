@@ -53,6 +53,11 @@ class FeedResolver extends BaseRender
             }
 
             $entries = (array) $this->resolver('crawler')->callServiceMethod($postsSource, 'raw_feed_method', 'getEntries', 1);
+            // [FW-094-NOINDEX] Sayfa düzeyi noindex kayıtlar feed'e girmez.
+            $entries = array_values(array_filter(
+                $entries,
+                fn ($entry) => !$this->provider('crawler')->isPageNoindex($entry)
+            ));
             $entries = array_slice($entries, 0, 30);
 
             foreach ($entries as $entry) {

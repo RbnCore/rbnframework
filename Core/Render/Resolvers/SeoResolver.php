@@ -82,8 +82,7 @@ class SeoResolver extends BaseRender
                 ?: $defaults['keywords']);
 
         $robots = ($overrides['robots'] ?? null)
-            ?: (($seoDb['meta-robots'] ?? null)
-                ?: ($defaults['robots'] ?? null));
+            ?: $this->siteRobotsDirective($seoDb, $defaults);
 
         // 🎼 RBN 3.5: [SOVEREIGN IDENTITY DISCOVERY] 🏛️⚖️⚓
         // Logic: Overrides > appName > DB (company-name) > Config (app_name)
@@ -379,5 +378,102 @@ class SeoResolver extends BaseRender
     {
         $config = \Rbn\Framework\Core\System\Config\Config::get('project-settings') ?: [];
         return $config;
+    }
+
+    /** Okunamayan noindex kararı süreç başına bir kez günlüğe yazılır. */
+    private static bool $noindexUnreadableLogged = false;
+
+    /**
+     * [FW-094-NOINDEX] Robots yönergesi `noindex` içeriyor mu? 🛡️
+     * Site ve sayfa düzeyi kararların TEK yorumlayıcısı (büyük/küçük harf duyarsız).
+     */
+    public static function directiveHasNoindex(mixed $directives): bool
+    {
+        // Yönerge dizi (liste) olarak da yazılabilir: ['noindex', 'nofollow'].
+        // İsimli anahtarlı diziler (ör. `disallow` yolları) yönerge DEĞİLDİR.
+        if (is_array($directives) && array_is_list($directives)) {
+            $directives = implode(',', array_filter($directives, 'is_string'));
+        }
+
+        return is_string($directives) && stripos($directives, 'noindex') !== false;
+    }
+
+    /**
+     * [FW-094-BULGU-DUZELT / D-5] Site düzeyi robots yönergesi: panel ayarı
+     * `meta-robots` → varsayılan `robots`. `resolve()` (önüne sayfa
+     * `overrides['robots']` eklenir) ve `isSiteNoindex()` AYNI sırayı kullanır.
+     */
+    private function siteRobotsDirective(array $seoDb, array $defaults): mixed
+    {
+        return ($seoDb['meta-robots'] ?? null) ?: ($defaults['robots'] ?? null);
+    }
+
+    /**
+     * [FW-094-NOINDEX] SİTE düzeyi noindex mi? 🛡️
+     *
+     * robots.txt, sitemap, llms.txt ve feed AYNI cevaba bakar; projeler
+     * özelleştirmez. İki kaynaktan biri yeterlidir:
+     *   1. `view_mapping[site]['robots']['noindex'] = true`
+     *      (`getSeoConfig()['robots']['noindex']`; mevcut `robots` dizisinin anahtarı)
+     *   2. Panel ayarı `seo` grubundaki `meta-robots` değeri `noindex` içeriyor
+     *      (`resolve()` içindeki meta robots ile AYNI okuma).
+     * Sayfa başına `noIndex()` çağrısı site düzeyi SAYILMAZ (bkz. `isPageNoindex()`).
+     *
+     * Karar okunamazsa (ayar servisi yok / okuma istisnası) FAIL-CLOSED: noindex
+     * varsayılır ve nedeni günlüğe yazılır (bkz. UPGRADING 0.9.4).
+     */
+    public function isSiteNoindex(): bool
+    {
+        // Proje kaydı `robots` anahtarı dizi (`['noindex' => true, ...]`) ya da
+        // yönerge metni (`'noindex, nofollow'`) olabilir; ikisi de geçerlidir.
+        $robots = $this->getSeoConfig()['robots'] ?? [];
+        if (is_array($robots) ? !empty($robots['noindex']) : self::directiveHasNoindex($robots)) {
+            return true;
+        }
+
+        try {
+            $settings = $this->service('settings');
+            if (!$settings) {
+                throw new \RuntimeException('settings service unavailable');
+            }
+            $seoDb = (array) $settings->read('seo');
+        } catch (\Throwable $e) {
+            // [FW-094-BULGU-DUZELT / G-1] FAIL-CLOSED: karar okunamıyorsa site
+            // noindex SAYILIR. Aksi halde ayar/DB arızasında gizli bir site
+            // tam arıza anında sitemap/llms yayınlar. Süreç başına TEK satır.
+            if (!self::$noindexUnreadableLogged) {
+                self::$noindexUnreadableLogged = true;
+                error_log('[RBN-CRAWLER] isSiteNoindex: karar okunamadi, noindex varsayildi: '
+                    . preg_replace('/\s+/', ' ', $e->getMessage()));
+            }
+            return true;
+        }
+
+        return self::directiveHasNoindex($this->siteRobotsDirective($seoDb, SeoConfig::defaults()));
+    }
+
+    /**
+     * [FW-094-NOINDEX] SAYFA/kayıt düzeyi noindex mi? 🛡️
+     * Kayıt satırı `robots` / `meta_robots` / `meta-robots` yönergesi taşıyorsa
+     * ya da `noindex` bayrağı doluysa true. Site normal yayın yapar, yalnız bu
+     * kayıt sitemap, llms.txt ve feed çıktısına girmez.
+     *
+     * @param array|object $entry Kaynak/sayfa satırı
+     */
+    public function isPageNoindex(array|object $entry): bool
+    {
+        $row = is_array($entry) ? $entry : (method_exists($entry, 'toArray') ? $entry->toArray() : (array) $entry);
+
+        if (!empty($row['noindex'])) {
+            return true;
+        }
+
+        foreach (['robots', 'meta_robots', 'meta-robots'] as $key) {
+            if (self::directiveHasNoindex($row[$key] ?? null)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

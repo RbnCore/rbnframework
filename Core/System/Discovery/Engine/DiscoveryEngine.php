@@ -160,7 +160,7 @@ class DiscoveryEngine extends BaseDiscoveryContext implements DiscoveryInterface
     {
         return $this->instances[$type] ??= match ($type) {
             'view' => new ViewResolver($this->rbn),
-            'view_engine' => new ViewEngine($this->rbn),
+            'view_engine' => new ViewEngine(),
             'asset' => new AssetResolver($this->rbn),
 
             /* --- Structure Resolvers --- */

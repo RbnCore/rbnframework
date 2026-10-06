@@ -43,7 +43,7 @@ Kodda `RBN_*` / `APP_*` adlı yeni bir ortam değişkeni okumak istiyorsan:
 ## `Env` API'si
 
 ```php
-Env::string('RBN_UPLOADS_DIR');            // ?string  (tanımsız/boş -> null)
+Env::string('APP_ENV');                    // ?string  (tanımsız/boş -> null)
 Env::string('APP_ENV', 'production');     // ?string  (varsayılanlı)
 Env::flag('RBN_GUARD_FAILCLOSED', true);  // bool     (kill-switch: varsayılan true = fail-closed)
 Env::int('TG_SEND_DELAY_MS', 0);          // ?int     (sayı olmayan metin -> varsayılan)
@@ -68,12 +68,6 @@ Tam liste ve tek satırlık açıklamaları için `EnvKeys.php` (sabit dosyasıd
 | `RBN_GUARD_FAILCLOSED` | flag | hayır | `SystemGuardHandler::resolveFailClosed()` |
 | `RBN_DEBUG` / `RBN_DEV` | flag | hayır | `PreBoot::envOverrideRequested()` (kapalı listesi `normalizeSwitch` DEĞİL, bilerek korunur) |
 | `APP_ENV` | string | hayır | `AiUsageManager`, `DebugHelper`, `rbn` (CLI) |
-| `RBN_WORKER_TOKEN` / `RBN_CREW_TOKEN` | string | **evet** | `WorkerTokenService`, `ProjectStatusService` |
-| `REDIRECT_RBN_WORKER_TOKEN` / `REDIRECT_RBN_CREW_TOKEN` | string | **evet** | Aynıları (FastCGI `REDIRECT_` yedeği) |
-| `RBN_UPLOADS_DIR` | string | hayır | `MediaIngestService::uploadsRoot()` |
-| `RBN_UPLOADS_URL_BASE` | string | hayır | `MediaIngestService::publicUrl()` |
-| `RBN_CREW_INBOX_DIR` | string | hayır | `ProjectStatusService::taskDirectory()` |
-| `RBN_CREW_DATA_DIR` / `REDIRECT_RBN_CREW_DATA_DIR` | string | hayır | `ProjectStatusService::dataDirectory()` |
 | `TG_SEND_DELAY_MS` | int | hayır | Telegram test router'ı (yalnız test) |
 
 ### Neden bu listede *olmayan*lar?
@@ -98,7 +92,7 @@ Bu klasördeki **salt-okunur tanımlar** (varlık sabitleri, sınıf sabitleri, 
 | | `Definitions/EnvKeys.php` | `Definitions/ConfigMap.php` |
 |---|---|---|
 | Konusu | Ortam değişkeni olarak **okunan** adların sabitleri | Framework'ün **global olarak tanımladığı** ayar anahtarları + PHP `define()` sabitleri |
-| Örnek | `RBN_UPLOADS_DIR`, `APP_ENV`, `RBN_WORKER_TOKEN` | `app.debug`, `app.logging`, `app.env`, `RBN_CLI`, `RBN_SESSION_TIMEOUT` (`getApp*` kalıbı) |
+| Örnek | `APP_ENV`, `TG_SEND_DELAY_MS` | `app.debug`, `app.logging`, `app.env`, `RBN_CLI`, `RBN_SESSION_TIMEOUT` (`getApp*` kalıbı) |
 | Okuyan | `Env` (TEK kapı) | `ConfigMap::getAppDebug()` vb. |
 
 ## `Secrets.php` neden bu kadar kısa? (ince cephe)

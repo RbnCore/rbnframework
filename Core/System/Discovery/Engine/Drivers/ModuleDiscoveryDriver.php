@@ -51,6 +51,52 @@ class ModuleDiscoveryDriver
     }
 
     /**
+     * [FW-094-CRAWLER / Ö-2] Bir modülün rotalarının yüklendiğini İŞARETLE 🛡️⚓
+     *
+     * KÖK NEDEN: `$loadedRoutes` bayrağı yalnızca `registerBundles()` içinde
+     * kontrol edilip doldurulurdu (`:67` kontrol → `:71` yazım). Ama
+     * `ModuleData::registerRoutes()` İKİ AYRI YOLDAN çağrılır:
+     *   1. `Core/Routes/Mappings/web.php:33` → `Route::module('frontend', …)->load()`
+     *   2. `Kernel/Stages/Routing.php:38` → `registerBundles('routes')` → `:89`
+     *      `Route::module(…)->load()`
+     * 1. yol bayrağa dokunmadığı için 2. yükleme engellenemiyordu.
+     *
+     * ÖLÇÜM (17/17 proje, `docs/agent-results/FW-CRAWLER-COKLU-OLCUM-pelin-6eb7f5.md`):
+     * statik GET rotaları iki kez kayıtlıydı — toplam 95 çift kayıt; sitemap'e
+     * 63 fazladan `<loc>`, `llms.txt`'e 62 fazladan satır yazılıyordu.
+     * Tek koşul: aktif modülün `ModuleData::registerRoutes()`'ında ≥1 statik
+     * GET rotası (modül sayısı/alt host sayısıyla ilgisi YOK).
+     *
+     * Bayrak, rotalar GERÇEKTEN yüklendikten SONRA konur: `Route::load()`
+     * `registerRoutes()`'ı çağırdıktan sonra buraya gelir. Önce konulursa
+     * ikinci yükleme engellenirken rota hiç yüklenmemiş olurdu.
+     *
+     * [Ö-2 / ikinci katman] ANAHTAR KANONİKLEŞTİRİLİR. `Route::load()` sınıf
+     * adını BAŞLANGIÇTAKİ `\` ile üretir (`'\\' . $baseNamespace . …`),
+     * `discoverBundles()` ise `\` İÇERMEZ. `class_exists()` ikisini de kabul
+     * eder ama dizi anahtarı olarak İKİ FARKLI değerdir; bu yüzden bayrak
+     * yazıldıktan sonra `isset()` kontrolü yine de kaçırır ve ikinci yükleme
+     * engellenmez. Anahtar `ltrim($class, '\\')` ile tek biçime indirilir —
+     * `registerBundles()` içindeki kontrol ve yazım da aynı biçimi kullanır.
+     *
+     * @param string $bundleClass Tam `ModuleData` sınıf adı
+     */
+    public static function markRoutesLoaded(string $bundleClass): void
+    {
+        self::$loadedRoutes[self::routeKey($bundleClass)] = true;
+    }
+
+    /**
+     * [FW-094-CRAWLER / Ö-2] Çift kayıt bayrağının kanonik anahtar biçimi 🛡️
+     *
+     * @return string Baştaki `\` temizlenmiş sınıf adı
+     */
+    private static function routeKey(string $bundleClass): string
+    {
+        return ltrim(trim($bundleClass), '\\');
+    }
+
+    /**
      * Registers and maps all active bundles (Sovereign & Project) 🏛️🛰️⚓
      */
     public function registerBundles(string $type = 'map', ?array $bundles = null): mixed
@@ -64,11 +110,15 @@ class ModuleDiscoveryDriver
             $moduleDataDriver = new ModuleDataDriver();
 
             foreach ($uniqueClasses as $bundleClass) {
-                if (!class_exists($bundleClass) || isset(self::$loadedRoutes[$bundleClass])) {
+                // [FW-094-CRAWLER / Ö-2] Anahtar kanonikleştirilir: `Route::load()`
+                // sınıf adını baştaki `\` ile, keşif ise onsuz üretir. İki biçim
+                // `class_exists()` için aynı ama dizi anahtarı olarak FARKLI
+                // olduğu için bayrak tutmuyor ve modül rotaları iki kez yükleniyordu.
+                if (!class_exists($bundleClass) || isset(self::$loadedRoutes[self::routeKey((string) $bundleClass)])) {
                     continue;
                 }
 
-                self::$loadedRoutes[$bundleClass] = true;
+                self::$loadedRoutes[self::routeKey((string) $bundleClass)] = true;
 
                 // Provider dependency resolution
                 $id = $moduleDataDriver->resolveFromClass($bundleClass);

@@ -1,6 +1,6 @@
 # Core/Render/Resolvers — ad → yol/meta/payload çözümleyiciler (10 dosya)
 
-> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Render/Resolvers/` — **10 `*.php`** = 6 kök + `Sub/` altında 4.
 > **Envanter:** 10 dosyanın **10'u** anlatıldı.
 > **Doğrulama platformu:** Windows + PHP 8.3, `ViewResolver`/`LayoutResolver`/`RobotsResolver` gerçekten çalıştırılarak.
@@ -24,14 +24,14 @@ tümü `SystemRenderMapTrait.php:69-80`'de `resolvers` altında kayıtlı.
 |---|---|---|
 | `ViewResolver.php` (126) | **Mantıksal view adı → fiziksel dosya yolu.** 7 hedef dizini sırayla tarar, `.php` ve `.rbn.php` uzantılarını dener. | `resolve(string $view,array $options=[]): ?string` · statik: `$resolveCache` |
 | `LayoutResolver.php` (97) | Layout zinciri + **bölüm yığını** (`@section`/`@yield`). `ob_start()` tabanlı. | `setExtends(string $layout): void`, `getExtends(): ?string`, `resetExtends(): void`, `startSection(string $name): void`, `endSection(): void`, `getSection(string $name,string $default=''): string`, `getAllSections(): array`, `clear(): void` |
-| `SeoResolver.php` (383) | **Meta birleştirici.** `SettingsService` grupları + `SeoConfig::defaults()` + controller override'ları → `meta`/`og` paketi. | `resolve(string $context='project',array $overrides=[]): array`, `resolveFaviconRaw(array $hub,array $overrides=[]): string`, `resolveAsset(?string $path,string $virtualName='favicon.svg'): ?string`, `getVirtualResourceRaw(string $name,string $context='project'): string`, `webContext(): array`, `getSeoConfig(): array` · korumalı: `formatFaviconData()`, `resolveSocial()` |
+| `SeoResolver.php` (479) | **Meta birleştirici.** `SettingsService` grupları + `SeoConfig::defaults()` + controller override'ları → `meta`/`og` paketi. **noindex'in tek yorumlayıcısı** (bkz. §7 noindex maddesi). | `resolve(string $context='project',array $overrides=[]): array`, `resolveFaviconRaw(array $hub,array $overrides=[]): string`, `resolveAsset(?string $path,string $virtualName='favicon.svg'): ?string`, `getVirtualResourceRaw(string $name,string $context='project'): string`, `webContext(): array`, `getSeoConfig(): array`, `isSiteNoindex(): bool`, `isPageNoindex(array\|object $entry): bool` · statik: `directiveHasNoindex(mixed $directives): bool` · özel: `siteRobotsDirective(): mixed` · korumalı: `formatFaviconData()`, `resolveSocial()` |
 | `SchemaResolver.php` (152) | Şema için site/breadcrumb/görsel bağlamı üretir. | `meta(): array`, `breadcrumbs(?string $currentTitle=null): array`, `resolveDefaultImage(): string` |
 | `BreadcrumbResolver.php` (85) | Kırıntı adımlarını modül metadata'sından türetir. | `resolve(array $options=[]): array`, `resolveInitialMetadata(array\|object $moduleData,string $module,array $options): array`, `resolveSegmentMatch(string $segment,array $subModules): ?array`, `normalizeIcon(string $icon): string` |
 | `CrawlerResolver.php` (146) | `robots/sitemap/feed` yapılandırmasını proje kaynaklarından okur, servis metotlarını çağırır. | `resolveCrawlerMap(): ?array`, `resolveProjectSources(): array`, `resolveDirectModel(string $identifier,string $moduleNamespace): string`, `callServiceMethod(array $config,string $methodKey,string $defaultMethod,...$args)` |
-| `Sub/RobotsResolver.php` (98) | `robots.txt` metnini ve **yol kısıtlamasını** üretir. | `resolvePayload(): array`, `isPathRestricted(string $path): bool` |
-| `Sub/SitemapResolver.php` (215) | Sitemap girdilerini sayfalar + model verisinden toplar. | `resolvePayload(string $view): array`, `getSummary(): array`, `getData(string $type,int $page=1,bool $onlyCount=false)`, `resolveCorePages(): array` |
-| `Sub/FeedResolver.php` (103) | RSS kanal + gönderi listesini hazırlar. | `resolvePayload(): array` |
-| `Sub/LlmsResolver.php` (123) | `llms.txt` bölüm/girdi listesini hazırlar. | `resolvePayload(): array` |
+| `Sub/RobotsResolver.php` (137) | `robots.txt` metnini ve **yol kısıtlamasını** üretir; site noindex ise "üretim değil" ile AYNI erken çıkış (`Disallow: /`, sitemap satırı yok). | `resolvePayload(): array`, `isPathRestricted(string $path): bool` · korumalı: `panelRoots(): array` |
+| `Sub/SitemapResolver.php` (365) | Sitemap girdilerini sayfalar + model verisinden toplar. | `resolvePayload(string $view): array`, `getSummary(): array`, `getData(string $type,int $page=1,bool $onlyCount=false)`, `resolveCorePages(): array` · korumalı: `hasRouteContent(string $cleanUri): bool`, `sourcesSatisfied(array $kaynaklar): bool` |
+| `Sub/FeedResolver.php` (108) | RSS kanal + gönderi listesini hazırlar; **sayfa noindex** kayıtları gönderi listesine girmez. | `resolvePayload(): array` |
+| `Sub/LlmsResolver.php` (129) | `llms.txt` bölüm/girdi listesini hazırlar. `resolveCorePages()` çıktısını doğrudan kullanır — sitemap kuralları `llms.txt` için de geçerlidir. | `resolvePayload(): array` |
 
 ## 3. Akış — `ViewResolver::resolve()` (ViewResolver.php:34-125)
 
@@ -184,6 +184,46 @@ tam olarak bu yolu kullanır (`View.php:88-96` → `SeoService::prepare` →
    süreçlerinde birikim mümkündür (`clear()` çağrılmıyor, arama sonucu boş).
 6. **`SchemaResolver::meta()` DB'ye gider** (`Core\Base\Services\BaseService`
    kullanır) → schema render'ı aktif proje DB'si açık değilse boş döner.
+7. **noindex tek kaynak (FW-094-NOINDEX).** Robots/sitemap/llms/feed AYNI iki yardımcıya
+   bakar: `SeoResolver::isSiteNoindex()` (site) ve `SeoResolver::isPageNoindex($kayıt)` (sayfa);
+   `CrawlerProvider` yalnızca devreder. **Site noindex** = `view_mapping[site]['robots']['noindex'] = true`
+   (`getSeoConfig()['robots']['noindex']`) VEYA panel `seo.meta-robots` değeri `noindex` içeriyor.
+   Sonuç: sitemap/llms/feed 404, `robots.txt` `Disallow: /` (sitemap satırı yok). **Sayfa noindex**
+   = kayıt satırında `robots` / `meta_robots` / `meta-robots` `noindex` içerir ya da `noindex`
+   bayrağı doludur; site normal yayın yapar, yalnız o kayıt sitemap + llms.txt + feed'e girmez.
+   ⚠️ Denetleyicide çalışma anında verilen `$this->noIndex()` çağrısı meta etiket ve
+   `X-Robots-Tag` başlığını sağlar ama tarayıcı rotalarının (sitemap vb.) GÖREBİLECEĞİ kalıcı kayıt
+   DEĞİLDİR; site genelini kapatmak için yukarıdaki yapılandırma anahtarı yazılmalıdır.
+   Önbellek: bkz. `Controllers.md` (site noindex önbellekten önce karar verilir); sayfa noindex
+   değişimi çıktıya orta katman önbellek süresi (TTL) kadar gecikmeyle yansır.
+8. **Sitemap girdisi iki katmanlı bir filtreden geçer.** Katman 1 mevcut
+   süzgeçlerdir (GET · `{`/`(` yok · `modal` değil · modül namespace'i ·
+   `isPathRestricted()` · `/` değil). Katman 2 **`hasRouteContent()`**'dir:
+   *içeriğe bağlı* standart rotalar (`CONTENT_BACKED_ROUTES`) yalnızca
+   gerçekten içerik varken listelenir. Bunun iki çekirdek kuralı vardır:
+   * **`blocked-by:shadowed-page`** (engelleyici) — slug'ı DB'de aktif sayfa
+     olarak varsa `RedirectManager::redirectOldUrls()` o yolu kalıcı olarak
+     `/sayfa/{slug}` adresine 301'ler; rota **hiçbir zaman 200 dönmez** ve
+     kanonik adres zaten listelendiği için rota listelenmez.
+   * **`satisfied-by:faq`** (olumlu) — aktif SSS satırı varsa rota kendi
+     içeriğini 200 ile render eder ve listelenir. Sayfa da SSS de yoksa
+     denetleyici ana sayfaya yönlendirir (302) → listelenmez.
+
+   **Kutup kuralı** (`sourcesSatisfied()`): kaynaklar `|` ile ayrılır ve her
+   biri `blocked-by:` ya da `satisfied-by:` önekiyle kutbunu söyler. Tetiklenen
+   herhangi bir engelleyici rotayı dışlar; olumlu kaynak tanımlıysa en az biri
+   sağlanmalıdır; yalnız engelleyici tanımlıysa ve hiçbiri tetiklenmediyse rota
+   listelenir. Yani engelleyici kaynak tek başına "listele" demez ama yokluğu
+   da rotayı dışlamaz.
+   Kural **çekirdek standardıdır**; projeler kendi başına özelleştirmez.
+   Sorgu hata verirse rota listelenmez (güvenli taraf: eksik sayfa, bozuk adres
+   değil). `resolveCorePages()` ayrıca **sessiz `catch` kullanmaz**:
+   rota tablosu okunamazsa `error_log('[RBN-CRAWLER] …')` yazar.
+9. **`isPathRestricted()` panel/giriş köklerini de kısıtlı sayar**
+   (`panelRoots()`): `RouteBlueprint::AUTH_ROOTS` + çekirdek web rotasının da
+   yönlendirme altına aldığı `giris`. Bu aynı metot üç yerden çağrılır —
+   sitemap girdisi, robots disallow listesi ve trafik istatistiği — dolayısıyla
+   panel yollarının üçünde de tutarlı biçimde elenir.
 
 ## 8. Örnek (gerçek koddan)
 

@@ -1,6 +1,6 @@
 # Core/Database — bağlantı yönetimi, sorgu motoru, model ve repository katmanı
 
-> **Doğrulanan kod tabanı:** `1d89c431` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `1d89c431` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Database/` — 74 `*.php`.
 > **Envanter:** 74 dosyanın 74'ü aşağıda anlatıldı (alt dal belgelerinde dağınık).
 

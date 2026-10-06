@@ -152,6 +152,24 @@ class Route
                 Router::getInstance()->group($groupAttributes, function () use ($moduleDataClass) {
                     (new $moduleDataClass())->registerRoutes();
                 });
+
+                // [FW-094-CRAWLER / Ö-2] Bu modülün rotaları yüklendi: keşif
+                // sürücüsü (ModuleDiscoveryDriver) aynı modülü TEKRAR yüklemesin.
+                //
+                // KÖK NEDEN: `ModuleData::registerRoutes()` iki ayrı yoldan
+                // çağrılıyordu — `Core/Routes/Mappings/web.php:33` ve
+                // `Kernel/Stages/Routing.php:38` → `ModuleDiscoveryDriver:89`.
+                // Çift kayıt bayrağı (`$loadedRoutes`) yalnızca
+                // `registerBundles()` içinde doldurulduğu için ilk yol
+                // bayrağa dokunmuyor, ikinci yükleme engellenemiyordu.
+                //
+                // ÖLÇÜM: 17/17 projede statik GET rotaları iki kez kayıtlıydı;
+                // toplam 95 çift kayıt (63 fazladan sitemap `<loc>`,
+                // 62 fazladan `llms.txt` satırı).
+                //
+                // BAYRAK ROTALAR YÜKLENDİKTEN SONRA konur — önce konulursa
+                // ikinci yükleme engellenirken rota hiç yüklenmemiş olurdu.
+                \Rbn\Framework\Core\System\Discovery\Engine\Drivers\ModuleDiscoveryDriver::markRoutesLoaded($moduleDataClass);
             }
         }
 

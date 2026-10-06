@@ -4,7 +4,7 @@
 
 > **Bu belge hangi commit'e göre yazıldı:** `d49b4413` (dal `feat/fw-license-master`)
 > **Son doğrulama tarihi:** 2026-10-05
-> **Yayın tabanı:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Yayın tabanı:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > (`§2.10`–`§2.13` maddeleri 05.10.2026'da DOC-REHBER-AGAC-5 / `Bundles/RbnSuite`
 > görevi tarafından eklendi.)
 >

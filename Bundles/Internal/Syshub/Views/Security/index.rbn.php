@@ -101,7 +101,7 @@
     </div>
 </div>
 
-<!-- 🎛️ 2. GÜVENLİK ALT MODÜLLERİ (3 Eşit Sovereign Kart) -->
+<!-- 🎛️ 2. GÜVENLİK ALT MODÜLLERİ (3 Eşet Kart) -->
 <div class="row g-4 mb-4">
     <!-- 1. Son İzinsiz Denemeler -->
     <div class="col-12 col-md-4">

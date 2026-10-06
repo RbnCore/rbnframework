@@ -1,6 +1,6 @@
 # Core/System — Çatının çekirdeği (açılış, yapılandırma, keşif, yol, kayıt, depolama)
 
-> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/System/` — 93 `*.php` (+ `Config/` içinde 3 `README.md`). Kökte `*.php` yoktur; her dosya altı alt dalın birindedir.
 > **Envanter:** 93 php dosyasının 93'ü alt belgelerde anlatıldı (aşağıdaki tablo).
 

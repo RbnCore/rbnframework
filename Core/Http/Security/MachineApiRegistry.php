@@ -70,14 +70,15 @@ final class MachineApiRegistry
      * - `ip_exempt = false` -> uc BEYAN EDILMISTIR (tek kaynak, dokumasyon,
      *   ileride koruma ekleme noktasi) ama IP katmani muafiyeti HENUZ VERILMEMISTIR.
      *
-     * NEDEN CREW/WORKER `ip_exempt = false` (A-11):
+     * NEDEN BU ISLEME UCUN `ip_exempt = false` (A-11):
      * Tasarim raporu §4, "beyan ucu bagla + kapsam daraltma" adimini
      * **"1-3'un gozlem verisi olmadan yapilmaz"** ve **"EN RISKLI adimdir"**
      * diye isaretler; oncesinde her ucten 48 saat `log-only` olcumu onerilir.
-     * Crew paneli tarayicidan `X-Crew-Token` ile cagrilir (bkz.
-     * `Module/Views/home.rbn.php`); bu yollarda muafiyeti ACMAK WAF/ban
-     * kapsamini daraltir = bir güvenlik GERILEMESi. Gozlem verisi toplanmadan
-     * acilmasi "cok kritik" sayilir -> ATLANDI, onerilen karar rapora yazildi.
+     * Bu turda kaldirilan panel modulundeki ekran bir tarayicidan
+     * ozel bir jeton basligiyla cagriliyordu; bu yollarda muafiyeti ACMAK
+     * WAF/ban kapsamini daraltir = bir güvenlik GERILEMESi. Gozlem verisi
+     * toplanmadan acilmasi "cok kritik" sayilir -> ATLANDI, onerilen karar
+     * rapora yazildi.
      * Beyan yine de yazildi: boylece tek kaynak hazir, muafiyet anahtari tek
      * satirlik bir karar.
      *
@@ -97,7 +98,6 @@ final class MachineApiRegistry
         ['path' => '/api/telegram/webhook', 'scope' => 'agent-telemetry', 'enforce' => self::ENFORCE_DEFAULT, 'ip_exempt' => true],
         ['path' => '/ws/agent',             'scope' => 'agent-realtime',  'enforce' => self::ENFORCE_DEFAULT, 'ip_exempt' => true],
         // A-11 tutarsizligi: beyan yazildi, muafiyet HENUZ ACILMADI (olum gerekiyor).
-        ['path' => '/api/v1/crew/',         'scope' => 'crew-panel',      'enforce' => self::ENFORCE_DEFAULT, 'ip_exempt' => false],
         ['path' => '/api/v1/media/upload',  'scope' => 'worker-ingest',   'enforce' => self::ENFORCE_DEFAULT, 'ip_exempt' => false],
         ['path' => '/api/v1/icerik-aktar',  'scope' => 'worker-ingest',   'enforce' => self::ENFORCE_DEFAULT, 'ip_exempt' => false],
     ];

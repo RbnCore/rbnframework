@@ -1,6 +1,6 @@
 # Core/Database/Models — tablo sınıfları (Master / Common / Project)
 
-> **Doğrulanan kod tabanı:** `1d89c431` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `1d89c431` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Database/Models/` — 34 `*.php`.
 > **Envanter:** 34 dosyanın 34'ü aşağıda anlatıldı.
 

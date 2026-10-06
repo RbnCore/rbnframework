@@ -2,7 +2,7 @@
 
 > **Bu belge hangi commit'e göre yazıldı:** `d4af18d` (dal `feat/fw-license-master`)
 > **Son doğrulama tarihi:** 2026-10-05
-> **Yayın tabanı:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Yayın tabanı:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kapsam:** Hangi ayar hangi dosyada, kim okuyor, öncelik sırası, ortam değişkenleri
 
 ---
@@ -201,7 +201,7 @@ bir proje klasöründe 3 anahtar, 3 blok).
 | `domain` | `getRouteConfig($key,'domain')` → `targetProjectUrl()` (`ResolvesProjectConfigTrait.php:116-118`) | Alan adı |
 | `dashboard_prefix` | `ProjectDataMapper.php:214, 220-221` → `project_data('dashboard_prefix')`; tüketiciler: `RouteManager.php:159, 192, 223, 295`, `SessionSandboxStage.php:366`, `PanelHandler.php:46`, `ActionControllerTrait.php:126`, `ViewHelperTrait.php:84`, `AuthViewController.php:36`, `SystemGuardHandler.php:53` | Boşsa framework sabiti `dashboard` (`RouteBlueprint.php:99`) |
 | `css_engine` | `AssetBuilder.php:251` (`getRouteConfig($projectKey, 'css_engine')`) | |
-| `robots` | `SeoResolver::getSeoConfig()` (`Core/Render/Resolvers/SeoResolver.php:378-382`) → `RobotsResolver.php:49-52, 89-91` | `disallow` / `allow` dizileri |
+| `robots` | `SeoResolver::getSeoConfig()` (`Core/Render/Resolvers/SeoResolver.php:378-382`) → `RobotsResolver.php:49-52, 89-91` | `disallow` / `allow` dizileri; `noindex` (bool) = SİTE düzeyi noindex: sitemap/llms/feed 404, `robots.txt` `Disallow: /` (FW-094-NOINDEX; `Resolvers.md` madde 7) |
 | `proxy_allowed_hosts` | `AssetController.php:275` | §3.4 |
 | `favicon`, `og-image` / `og_image` | **toler edilir ama önceliksizdir** (`.github/UPGRADING.md:100-103`) | Kural `AssetConvention` ile gelir |
 | `bundles`, `api_google`, `api_gemini`, `content`, `user_dash_controller`, `cookie`, `admin_panel_disabled` | proje/modül kodu | `admin_panel_disabled` ayrıca `ProjectDataMapper.php:215, 354-359` |
@@ -286,7 +286,7 @@ olmadan** okunur (`Config.php:89-90` → boş anahtar → blok atlanır).
 ### 6.1 API
 
 ```php
-Env::string('RBN_UPLOADS_DIR');            // ?string  (tanımsız/boş -> null)
+Env::string('APP_ENV');                    // ?string  (tanımsız/boş -> null)
 Env::string('APP_ENV', 'production');     // ?string  (varsayılanlı)
 Env::flag('RBN_GUARD_FAILCLOSED', true);  // bool     (kill-switch: varsayılan true)
 Env::int('TG_SEND_DELAY_MS', 0);          // ?int
@@ -297,20 +297,17 @@ Env::int('TG_SEND_DELAY_MS', 0);          // ?int
 * **Kayıtsız ad = hata:** `EnvKeys::ALL_KEYS` dışındaki ad `RuntimeException` ile
   reddedilir (`Core/System/Config/README.md:52`).
 * **Gizli ad:** hata mesajı yalnız **adı** taşır, **değeri** değil
-  (`Core/System/Config/README.md:53`); liste `EnvKeys::SECRET_KEYS` (`EnvKeys.php:194`).
+  (`Core/System/Config/README.md:53`); liste `EnvKeys::SECRET_KEYS` (`EnvKeys.php:159`).
 * **Bayrak yorumu TEK merkezden:** `0 | false | off | no | hayir` = **kapalı**,
-  diğer her şey **açık** (fail-closed) (`EnvKeys.php:187` `OFF_VALUES`).
+  diğer her şey **açık** (fail-closed) (`EnvKeys.php:152` `OFF_VALUES`).
 
 ### 6.2 Kayıtlı adlar (koddan)
 
-`EnvKeys.php:49-173`:
+`EnvKeys.php:49-138`:
 
 `APP_KEY`, `ENCRYPTION_KEY`, `RBN_LEGACY_SALT`, `RBN_ALLOW_LEGACY_SALT`,
 `COMMON_DB_USER`, `COMMON_DB_PASS`, `DB_USER`, `DB_PASS`, `RBN_DB_PROFILE`,
 `RBN_GUARD_FAILCLOSED`, `RBN_DEBUG`, `RBN_DEV`, `APP_ENV`, `RBN_LOG_THROTTLE`,
-`RBN_WORKER_TOKEN`, `RBN_CREW_TOKEN`, `REDIRECT_RBN_WORKER_TOKEN`,
-`REDIRECT_RBN_CREW_TOKEN`, `RBN_UPLOADS_DIR`, `RBN_UPLOADS_URL_BASE`,
-`RBN_CREW_INBOX_DIR`, `RBN_CREW_DATA_DIR`, `REDIRECT_RBN_CREW_DATA_DIR`,
 `TG_SEND_DELAY_MS`.
 
 ### 6.3 `EnvKeys` ≠ `ConfigMap`
@@ -318,7 +315,7 @@ Env::int('TG_SEND_DELAY_MS', 0);          // ?int
 | | `Definitions/EnvKeys.php` | `Definitions/ConfigMap.php` |
 |---|---|---|
 | Konusu | Ortam değişkeni olarak **okunan** adlar | Framework'ün **global tanımladığı** ayar anahtarları |
-| Örnek | `RBN_UPLOADS_DIR`, `APP_ENV` | `app.debug`, `app.logging`, `app.env`, `app.is_cli`, `app.session_timeout` |
+| Örnek | `APP_ENV`, `TG_SEND_DELAY_MS` | `app.debug`, `app.logging`, `app.env`, `app.is_cli`, `app.session_timeout` |
 | Okuyan | `Env` | `ConfigMap::getAppDebug()` vb. |
 
 İkisi de **kalır**, birleştirilmez (`Core/System/Config/README.md:93-102`).
@@ -380,8 +377,6 @@ Yani master `settings` **doğrudan `Config::get()` okumaz**; önbellekten gelen
 | API anahtarları | `secrets.php` → `api` (`Secrets::api($sağlayıcı)`) veya proje `options` tablosu | `ProjectDataMapper.php:246-274` | `bot_activity` **ve** `use_master_api` açıksa master API yedeği devreye girer |
 | Proje sürümü | master DB `projects.version` → önbellek → `project_data('version')` | `ProjectVersionResolver` → `app_version()` / `APP_VERSION` | [04-surumleme-ve-yayin.md](04-surumleme-ve-yayin.md) |
 | `app.debug`, `app.env`, `app.is_cli`, oturum süresi | `ConfigMap` (sabit öncelikli) | `ConfigMap.php:23-60` | §6.3 |
-| Yükleme/medya kökü | `RBN_UPLOADS_DIR`, `RBN_UPLOADS_URL_BASE` | `MediaIngestService` | `EnvKeys`'e kayıtlı |
-| Ajan/ekip terafı jetonları | `RBN_WORKER_TOKEN`, `RBN_CREW_TOKEN` (+ `REDIRECT_` yedekleri) | `WorkerTokenService`, `ProjectStatusService` | Gizli |
 | Karma (sahte) `Options`'dan gelen anahtarlar | `options` tablosu (`group_key` = `api`/`bot`) | `ProjectDataMapper.php:246-254` | `bot_activity` açık değilse **okunmaz** |
 
 ---

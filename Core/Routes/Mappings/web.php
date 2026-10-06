@@ -44,7 +44,7 @@ if (($config['panel'] ?? true) === false) {
     // icinde zaten var (`:346-353`) — iki kaynak birbirinden ayristirildi.
     // Kapsam genisler: alt yollar da kapatilir. `/rbn-admin-benzeri` gibi
     // onek-benzeri yollar KAPSAM DEGIL (segment sonu siniri).
-    $panelKapaliKapsam = str_starts_with($uri, $panelPrefix) || $uri === 'giris';
+    $panelKapaliKapsam = str_starts_with($uri, $panelPrefix) || $uri === \Rbn\Framework\Core\Support\Definitions\Route\RouteBlueprint::LOGIN_ALIAS;
     if (!$panelKapaliKapsam) {
         foreach (\Rbn\Framework\Core\Support\Definitions\Route\RouteBlueprint::AUTH_ROOTS as $page) {
             if ($uri === $page || str_starts_with($uri, $page . '/')) {

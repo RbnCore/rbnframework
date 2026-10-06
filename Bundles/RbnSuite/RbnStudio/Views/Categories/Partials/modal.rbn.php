@@ -27,7 +27,7 @@ $selectedType = $cat['type'] ?? ($currentType ?? 'blog');
                     placeholder="Örn: Teknoloji & Donanım" value="<?= htmlspecialchars($cat['name'] ?? '') ?>" required>
             </div>
 
-            <!-- Kategori Türü (Sovereign Dropdown Standard) -->
+            <!-- Kategori Türü (Dropdown Standard) -->
             <?php if (($hasBlog ?? false) && ($hasNews ?? false)): ?>
             <div class="col-12">
                 <label class="ra-stat-label mb-2 d-block">
@@ -81,7 +81,7 @@ $selectedType = $cat['type'] ?? ($currentType ?? 'blog');
                     placeholder="Örn: ri-folder-line, ri-cpu-line" value="<?= htmlspecialchars($cat['icon'] ?? 'ri-folder-line') ?>">
             </div>
 
-            <!-- Durum Dropdown (Sovereign RBN Dropdown Standard) -->
+            <!-- Durum Dropdown (RBN Dropdown Standard) -->
             <div class="col-md-6">
                 <label class="ra-stat-label mb-2 d-block">
                     <i class="ri-checkbox-circle-line me-1 text-warning"></i> YAYIN DURUMU <span class="text-danger">*</span>

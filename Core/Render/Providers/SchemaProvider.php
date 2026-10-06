@@ -75,7 +75,7 @@ class SchemaProvider extends BaseComponent
         $json = json_encode($mergedSchema, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         $indentedJson = implode("\n", array_map(fn($line) => '    ' . $line, explode("\n", $json)));
 
-        $html = "\n    <!-- 🚀 RBN 3.5: [SOVEREIGN SCHEMA ENGINE] 🛰️⚓ -->\n";
+        $html = "\n    <!-- [FRAMEWORK SCHEMA ENGINE] -->\n";
         $html .= "    <script type=\"application/ld+json\">\n";
         $html .= $indentedJson;
         $html .= "\n    </script>\n";

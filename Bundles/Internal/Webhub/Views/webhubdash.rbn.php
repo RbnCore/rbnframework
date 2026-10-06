@@ -23,7 +23,7 @@
     </div>
 </div>
 
-<!-- 🎛️ 2. WEBHUB MODÜL KARTLARI (Kusursuz Hizalı Izgara) -->
+<!-- 🎛️ 2. WEBHUB MODÜL KARTLARI (Hizalı Izgara) -->
 <div class="row g-4 mb-4">
 
     <!-- 1. KİMLİK & MARKA -->

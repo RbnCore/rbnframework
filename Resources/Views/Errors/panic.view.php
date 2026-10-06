@@ -15,7 +15,7 @@ $rbnTrace = $rbnDev ? $rbnE($trace) : '(ayrıntı yalnız sunucu günlüğünde)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RBN Masterpiece | Boot Failure 🏛️⚓</title>
+    <title>RBN Framework | Boot Failure 🏛️⚓</title>
     <style>
         :root {
             --bg: #0d0d0d;
@@ -189,7 +189,7 @@ $rbnTrace = $rbnDev ? $rbnE($trace) : '(ayrıntı yalnız sunucu günlüğünde)
         <div class="header">
             <div class="header-text">
                 <h1>Critical Boot Failure 🏛️⚔️🛡️⚓</h1>
-                <p>RBN Masterpiece Sentinel (Fail-Safe Mode)</p>
+                <p>RBN Framework Sentinel (Fail-Safe Mode)</p>
             </div>
             <button class="btn-copy btn-copy-top" onclick="copyError()">Copy Error 📋</button>
         </div>

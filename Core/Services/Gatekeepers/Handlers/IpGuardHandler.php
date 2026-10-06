@@ -226,7 +226,7 @@ class IpGuardHandler extends BaseComponent
                 );
             } elseif ($beyan !== null) {
                 // [FW-APIGUARD · madde 5] Beyanli ama muafiyeti HENUZ VERILMEMIS
-                // uc (crew/worker). Kayit yazilir, koruma KALIR: muafiyet
+                // uc (beyanli ama muafiyeti verilmemis). Kayit yazilir, koruma KALIR: muafiyet
                 // anahtari tek satirlik bir karardir ve gozlem verisi
                 // toplanmadan acilmaz (tasarim raporu §4).
                 $decisions[] = $this->decision(

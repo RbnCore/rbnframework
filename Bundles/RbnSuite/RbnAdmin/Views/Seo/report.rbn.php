@@ -2,7 +2,7 @@
 // Skor rengini ve ikonunu belirleyelim (Referanstaki mantık)
 $scoreColor = ($stats->score > 85 ? '#10b981' : ($stats->score > 65 ? '#f59e0b' : '#ef4444'));
 $scoreIcon = ($stats->score > 85 ? 'ri-checkbox-circle-fill' : ($stats->score > 65 ? 'ri-alert-fill' : 'ri-shield-cross-fill'));
-$scoreText = ($stats->score > 85 ? 'Kusursuz' : ($stats->score > 65 ? 'İyileştirilmeli' : 'Kritik Risk'));
+$scoreText = ($stats->score > 85 ? 'Çok iyi' : ($stats->score > 65 ? 'İyileştirilmeli' : 'Kritik Risk'));
 ?>
 <!-- 🏛️ RBN Admin - SEO Intelligence Masterpiece (Reference Style) -->
 <div class="row g-4 mb-5">

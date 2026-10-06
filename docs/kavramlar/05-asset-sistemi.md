@@ -9,7 +9,7 @@ platform: Windows
 
 > **Bu belge hangi commit'e göre yazıldı:** `d4af18d` (dal `feat/fw-license-master`, 2026-10-05 20:49)
 > **Son doğrulama tarihi:** 2026-10-05
-> **Yayın tabanı:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Yayın tabanı:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kapsam:** `rbnframework/` deposunun asset katmanı — `Core/Support/Definitions/Render/*`,
 > `Core/Render/{Builders,Controllers,Services,Providers,Configs}/*`, `Resources/Assets/RbnCommon/*`
 > **Yazım kuralı:** Her iddia `dosya:satır` ile kaynağa bağlıdır. Ölçülen sayılar **bu belgedeki

@@ -1,6 +1,6 @@
 # Core/Base — framework'ün soyut tabanı (bileşen, servis, veri, web)
 
-> **Doğrulanan kod tabanı:** `1d89c431` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `1d89c431` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Base/` — 65 `*.php`.
 > **Envanter:** 65 dosyanın 65'i aşağıda anlatıldı (alt dal belgelerinde dağınık).
 
@@ -116,6 +116,7 @@ $this->model('project.user')                 (service/repo vb. de aynı yol)
 2. **Saatlik uyarı `LogThrottle::once()` kullanır.** Süreç içi "bir kez"
    koruması PHP-FPM'de işe yaramaz (her istek yeni süreç); ölçülen gürültü
    162 isteklik koşuda 596 satırdı (`BaseComponent.php:76-81`).
+3. **Çerçeve kendi uyarısını tetiklememelidir.** `HttpContextTrait` ve `DiscoveryEngine`, parametreyi gövdede kullanmayan `RemoteRequest` / `ViewEngine` nesnelerini **argümansız** açar (`new RemoteRequest()`, `new ViewEngine()`); B-92 uyarısı yalnız çağıranın bilerek verdiği DI nesnesi için yazılır. Yeni bir iç çağrıda `$hub`/`$rbn` geçirmeyin.
 3. **Özyineleme koruması 20 derinliktedir** ve `finally` ile daima geri
    alınır (`BaseComponent.php:163-188`).
 4. **Aktif controller DNA'sı önce gelir.** Bileşenler kendi `module/panel`

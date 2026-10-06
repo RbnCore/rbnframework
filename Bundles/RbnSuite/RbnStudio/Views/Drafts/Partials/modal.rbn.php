@@ -87,7 +87,7 @@ if ($selectedCatId > 0) {
                 <?php endif; ?>
             </div>
 
-            <!-- Kategori Seçimi (Sovereign Modal Dropdown) -->
+            <!-- Kategori Seçimi (Modal Dropdown) -->
             <div class="col-12">
                 <label class="form-label fw-bold small text-muted text-uppercase mb-2">
                     <i class="ri-folder-line me-1 text-warning"></i> Kategori <span class="text-danger">*</span>

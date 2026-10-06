@@ -1,6 +1,6 @@
 # Core/System/Registries — Sistem kayıt defteri (ad → sınıf haritası)
 
-> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/System/Registries/` — 8 `*.php` (kök 3, `RegistryMap/` 5).
 > **Envanter:** 8 dosyanın 8'i aşağıda anlatıldı.
 

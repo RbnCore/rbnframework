@@ -1,6 +1,6 @@
 # Core/Support — Ortak sabitler, sözleşmeler, yardımcılar ve istisnalar
 
-> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.3 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.4 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Support/` — 82 `*.php`. Kökte `*.php` yoktur.
 > **Envanter:** 82 dosyanın 82'si alt belgelerde anlatıldı (aşağıdaki tablo).
 

@@ -60,7 +60,7 @@
     </div>
 </div>
 
-<!-- 3. MESAJ LİSTESİ TABLOSU (Sovereign Table Mimarisi) 📩 -->
+<!-- 3. MESAJ LİSTESİ TABLOSU (Tablo Mimarisi) 📩 -->
 <div class="rbn-table-wrap mb-4">
     <div class="p-3 border-bottom border-light">
         <ul class="rbn-table-tabs rbn-tab-pills">

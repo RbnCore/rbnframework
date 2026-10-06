@@ -23,9 +23,9 @@ class FrameworkIdentity extends BaseConfig
     // Core Identity
     // -------------------------------------------------------------
     public const FRAMEWORK_NAME = 'RBN Core - Framework';
-    public const FRAMEWORK_VERSION = '0.9.3';
-    public const FRAMEWORK_SLOGAN = 'The Sovereign Web Technologies & "Masterpiece" Architectures';
-    public const FRAMEWORK_DESCRIPTION = 'RBN Framework provides high-performance digital transformation, enterprise software solutions, and sovereign web technologies.';
+    public const FRAMEWORK_VERSION = '0.9.4';
+    public const FRAMEWORK_SLOGAN = 'Modüler ve çok kiracılı PHP uygulama çatısı';
+    public const FRAMEWORK_DESCRIPTION = 'RBN Framework, çok kiracılı (multi-tenant) modüler bir PHP uygulama çatısıdır: yönetim paneli, kimlik doğrulama, SEO, güvenlik ve içerik modüllerini aynı çatı altında sunar.';
     public const FRAMEWORK_URL = 'https://rbncore.tr';
     public const CDN_BASE_URL = 'https://cdn.rbncore.tr/';
 

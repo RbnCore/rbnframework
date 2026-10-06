@@ -1,4 +1,4 @@
-<!-- 🌌 RBN Sovereign Masterpiece Dashboard - Command Center View 🏛️🛰️⚓ -->
+<!-- 🌌 RBN Dashboard - Command Center View 🏛️🛰️⚓ -->
 
 
 @if(!empty($stats['today_hits']) || isset($stats['active_now']))
