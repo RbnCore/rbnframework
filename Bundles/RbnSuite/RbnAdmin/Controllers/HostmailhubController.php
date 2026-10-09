@@ -7,10 +7,10 @@ namespace Rbn\Framework\Bundles\RbnSuite\RbnAdmin\Controllers;
 use Rbn\Framework\Core\Base\Attributes\SubModule;
 
 /**
- * HostmailhubController - Sovereign Email Management Hub 🏰📧
+ * HostmailhubController - RBN Framework Email Management Hub 🏰📧
  * Handles the interaction between RbnAdmin UI and cPanel UAPI.
  * 
- * RBN 3.5: Masterpiece Standard.
+ * RBN Framework: Standard.
  * Controller and Link are now identical: hostmailhub
  */
 #[SubModule(
@@ -24,7 +24,7 @@ class HostmailhubController extends RbnAdminController
      */
     public function index()
     {
-        // 🎼 RBN 3.5: All Projects for group dropdown
+        // 🎼 RBN Framework: All Projects for group dropdown
         $projects = group_projects();
         $projectKey = $this->activeProjectKey();
 
@@ -53,7 +53,7 @@ class HostmailhubController extends RbnAdminController
             $selectedDomain = !empty($domains) ? $domains[0] : $selectedDomain;
         }
 
-        // 🎼 RBN 3.5: Query accounts only for the selected domain (with CacheProvider targeting target project) 🛰️⚓
+        // 🎼 RBN Framework: Query accounts only for the selected domain (with CacheProvider targeting target project) 🛰️⚓
         $cache = $this->service('storage')->cache();
         $accounts = $cache->withProject($projectKey)->remember('api_cpanel_mail', function () use ($selectedDomain) {
             return $this->service('cpanel')->mail()->list((string) $selectedDomain) ?: [];

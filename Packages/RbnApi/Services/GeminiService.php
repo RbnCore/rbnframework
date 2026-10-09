@@ -8,9 +8,9 @@ use Rbn\Framework\Core\Base\Services\BaseService;
 use Rbn\Framework\Packages\RbnPipeline\Concerns\SanitizesResponseTrait;
 
 /**
- * GeminiService - Sovereign AI Orchestrator 🧠🛰️⚓
+ * GeminiService - RBN Framework AI Orchestrator 🧠🛰️⚓
  * 
- * RBN 3.5 Masterpiece: High-level interface for Google Gemini AI operations.
+ * RBN Framework: High-level interface for Google Gemini AI operations.
  * @property \Rbn\Framework\Packages\RbnApi\Providers\GeminiProvider $gemini
  */
 class GeminiService extends BaseService

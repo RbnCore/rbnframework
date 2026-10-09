@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Support\Definitions\System\FrameworkIdentity;
 /**
  * ShieldMetadata - The RBN Shield Identity & Policy 🏗️🛡️🏺
  * 
- * RBN 3.5: Masterpiece SSoT (Single Source of Truth).
+ * RBN Framework: SSoT (Single Source of Truth).
  * Contains branding metadata and the global exception-to-layer policy.
  */
 class ShieldMetadata
@@ -23,7 +23,7 @@ class ShieldMetadata
     /**
      * Master Error Mapping 🗺️🏛️
      * 
-     * RBN 3.5: Clean, Semantic Strings for Layers and Designs.
+     * RBN Framework: Clean, Semantic Strings for Layers and Designs.
      * Maps Throwables to their respective HIERARCHY stages.
      */
     public const ERROR_MAP = [

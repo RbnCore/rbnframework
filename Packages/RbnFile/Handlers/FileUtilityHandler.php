@@ -10,7 +10,7 @@ use Rbn\Framework\Core\System\Paths\Paths;
 /**
  * FileUtilityHandler - The Master Utility Worker 🛠️🛡️
  * 
- * RBN 3.5: Masterpiece Standard (BaseComponent Actor).
+ * RBN Framework: Standard (BaseComponent Actor).
  * Location: Bundles\RbnSuite\RbnFile\Handlers\
  */
 class FileUtilityHandler extends BaseComponent
@@ -72,7 +72,7 @@ class FileUtilityHandler extends BaseComponent
     }
 
     /**
-     * 🎼 RBN 3.5: [SOVEREIGN CONTENT TO FILE] 🛰️⚓
+     * 🎼 RBN Framework: [RBN Framework CONTENT TO FILE] 🛰️⚓
      * Ham veriyi veya Base64 içeriği geçici bir dosyaya dönüştürür.
      */
     public function contentToFile(string $content, string $extension = 'png'): string|bool

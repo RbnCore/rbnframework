@@ -6,9 +6,79 @@
 
 Biçim: [Keep a Changelog](https://keepachangelog.com/tr/1.1.0/). Sürümlendirme: [SemVer](https://semver.org/lang/tr/).
 
-**Son sürüm:** `0.9.5` (2026-10-06) — sağlayıcı ve servis yaşam döngülerindeki yanlış-pozitif günlük kayıtları kaldırıldı; render bağlam eşlemeleri gerçek sınıf takma adlarından ayrıldı.
+**Son sürüm:** `0.9.6` (2026-10-09) — giriş kapısı ve oturum sertleştirmesi, posta parolalarında `enc:v2`, sistem e-postasında TLS doğrulaması, ortam değişkeni katmanının kaldırılması (tek kaynak `secrets.php`), tek komutla sürüm yükseltme, keşif haritası ve cron düzeltmeleri, CSS/JS motorunda tema token'lı bileşenler.
 
 Güvenlik girdileri tarafsız yazılır: ne değişti ve etkisi ne, sömürme adımı/payload/PoC/dosya-satır ayrıntısı **yazılmaz**. Sayısal şiddet dereceleri de burada verilmez (iç onarım planında tutulur).
+
+---
+
+## [0.9.6] - 2026-10-09
+
+**Kısa özet — giriş kapısı ve kullanıcı oturumu sertleştirildi; posta modülü doğrulamalı IMAP/SMTP ve `enc:v2` parola biçimine geçti; keşif haritası, cron ve yönlendirme hataları düzeltildi; CSS/JS motoruna tema token'lı bileşenler eklendi; ortam değişkeni katmanı kaldırıldı, çalışma ayarları `secrets.php` `app` bölümünden okunur.**
+Bu sürüm `0.9.5` yayınından sonraki çalışmanın kaydıdır. Davranış değişiklikleri ve yükseltme adımları `UPGRADING.md` 0.9.6 bölümündedir. Kırıcı değişiklikler: posta parolası mühürleme API'si (`seal()`/`open()`) hesap bağlaması alır; framework işletim sistemi ortam değişkeni okumaz (`Env`, `EnvKeys` ve `vlucas/phpdotenv` kaldırıldı).
+
+### Güvenlik
+
+* **Kayıt proje bazlı kapatılabilir.** `auth_registration` site ayarı kapalıysa kayıt rotaları hiç kaydedilmez (404). Yalnız tanınan "açık" değerleri kaydı açar; tanınmayan ya da okunamayan ayar kaydı kapatır.
+* **Kayıt yanıtı hesap varlığını sızdırmaz.** Kayıtlı ve yeni e-posta aynı metni, aynı en kısa süreyi alır; yanıtta kullanıcı kimliği dönmez; doğrulama e-postası gönderilemezse de yanıt aynıdır.
+* **Hesap bazlı artan giriş kilidi.** IP sınırına ek olarak aynı kimlikle art arda başarısız denemeler kademeli kilit doğurur; kilitliyken doğru parola da reddedilir; olaylar `security` günlüğüne yazılır. Hız sınırı servisi çözülemezse form reddedilir.
+* **Üretimde hata ayıklama kapısı.** Ortam kararı `secrets.php` `app.environment` alanından okunur; alan yoksa ya da geçersizse `production` kabul edilir. Üretimde hata ayıklama kipi istekten açılmaz; yalnız `app.debug` / `app.dev` açar. Hata sayfası maskesi parola, tek kullanımlık kod, özel anahtar ve oturum alanlarını da gizler.
+* **Kullanıcı alanında oturum süreleri.** `/user/*` için boşta ve mutlak süre sunucuda denetlenir; `/user` rotası `auth` ara katmanından geçer (önceden yalnız rol denetimi çalışıyordu, süre, parmak izi ve kilit ekranı atlanıyordu); boşta kalma süresinin tek kaynağı panelin oturum süresi ayarıdır; oturum kimliği yalnız sunucuda karşılığı varsa kabul edilir; çıkış çerezi güvenli bayraklarla silinir.
+* **Giriş dönüş yolu.** Başarısız girişte yönetim paneli kapalı sitenin panel yolu gösterilmez; yönetici olmayan kullanıcının hedefi ayarla belirlenir.
+* **Posta parolaları `enc:v2`.** Hesap ve sunucuya bağlı kimlik doğrulamalı şifreleme; eski biçim okunur ve yeniden mühürlenir; geçiş komutu kuru koşu ve geri alma destekler. Şifreleme anahtarı yoksa ayrı bir hata kodu döner.
+* **Sistem e-postasında TLS doğrulaması.** Bildirim gönderimi sertifikayı ve ana makine adını doğrular; hata ayıklama günlüğüne kimlik satırları yazılmaz.
+* **IMAP komut değerlerinde satır sonu ve NUL reddedilir.**
+* **Posta hesabı ekleme/test ucu** sunucu ve port izin listesiyle, hız sınırıyla korunur; HTML temizleyici stil izin listesi kullanır ve uzak görsel yüklemez.
+* **Veritabanından gelen sayfa metni** için `RawHtmlGate::sanitizeContent()` eklendi (betik, stil, çerçeve, gömülü nesne, `base`/`meta`/`link` kaldırılır).
+* **Remix Icon** stil dosyası alt kaynak bütünlüğü (SRI) özniteliğiyle basılır.
+
+### Eklendi
+
+* **RbnEmail:** doğrulamalı IMAP oturumu (ek eklenti gerektirmez), hesap başına SMTP, posta kutusu akışları (çöp, geri alma, kalıcı silme, artımlı senkron), HTML temizleyici, gönderim kotası; ekli gönderim (RFC 2231 dosya adları) ve eklerin dilimli okunması.
+* **Saat-altı cron aralığı:** görev parametresinde `every_minutes` (1-59).
+* **Görev bazlı cron bildirimi:** `notify_on` parametresi ya da görev sınıfındaki `NOTIFY_ON`; varsayılan davranış değişmez.
+* **`QueryBuilder::rows(): array`** düz satır dizisi döndürür.
+* **`llms_limit` site ayarı** (llms.txt'de kaynak başına giriş sayısı).
+* **Hata sayfasında proje dikişi:** site ya da proje kendi hata görünümünü verebilir; görünüm hata verirse varsayılan sayfaya düşülür.
+* **`rbn_version` görünüm değişkeni** ön yüz görünümlerine verilir.
+* **CSS motoru:** tema token'lı metin/arka plan/kenar yardımcıları; `.rbn-btn-accent`, `.rbn-btn-danger`, `.rbn-badge-subtle/-accent/-sans`, `.rbn-card-flush`, `.rbn-feature-grid`, `.rbn-display-title`, `.rbn-modal` (alt sayfa ve tam ekran kipleri), `.rbn-empty-state`, `.rbn-theme-toggle`; `order-{bp}-*`, `fs-xxs`, `z-10/20/50`, kap genişliği ve form token'ları; onay kutusunda `:indeterminate`.
+* **JS motoru:** `RbnModal.trapFocus()` odak tuzağı; `RbnService` hata yanıtının gövdesini (`code`, `fields`, `new_token`) hata nesnesine taşır, geriye uyumlu.
+* **apple-touch-icon ve web manifest kuralı:** dosya varsa SEO katmanı ilgili `<link>` etiketlerini basar.
+
+### Değişti
+
+* **Koyu tema:** renk yardımcıları sabit palet yerine tema token'larını okur; çift tanımlı yardımcılar ve boş durum bileşeni tek tanıma indi; koyu temada ikincil metin, birincil düğme ve vurgu rozeti AA kontrastına çıktı.
+* **Oturumsuz JSON isteği** `auth` ara katmanında yönlendirme yerine `401` ve `UNAUTHENTICATED` kodu alır.
+* **`rbn cache:clear`** keşif ve bileşen haritalarını da siler; proje bazlı silme desteklenir.
+* **Yorum ve görünür metinlerde kimlik temizliği:** kişi adları ve eski pazarlama etiketleri nötr ifadelerle değiştirildi; kod davranışı değişmedi.
+* **Ortam değişkeni katmanı kaldırıldı.** Framework `getenv`, `$_ENV` ya da `.env` okumaz. Ortam bayrağı ve çalışma ayarları (`environment`, `debug`, `dev`, `guard_failclosed`, `log_throttle`, `db_profile`, `allow_legacy_salt`) `secrets.php` `app` bölümündedir; okuyucu `Secrets::app()`. Bölüm isteğe bağlıdır, güvenli varsayılanlar kullanılır. Şifreleme anahtarı ve veritabanı bilgisi yalnız `secrets.php`'den okunur.
+* **Bağımlılık:** `vlucas/phpdotenv` ve ona bağlı paketler kaldırıldı.
+* **Tek komutla sürüm yükseltme:** `rbn version:framework [--to=A.B.C] [--apply]` framework sürümünü ve bütün kopyalarını (`FrameworkIdentity`, `CITATION.cff`, `composer.json`, `composer.lock` özeti, CHANGELOG, belge damgaları) birlikte yazar; varsayılan kuru koşudur. `rbn version:check` aynı listeyi denetler. `composer.json` `version` alanı taşır; README dosyalarında elle yazılmış sürüm yoktur.
+* **Oturum boşta kalma süresi tek kaynak:** sunucu ve panel geri sayımı panelin oturum süresi ayarını okur; proje ayarındaki ayrı süre anahtarı kaldırıldı.
+* **Belgeler tek kaynak:** belge sitesi framework `docs/` dizinini ve bu dosyayı doğrudan okur; proje içindeki belge ve değişiklik günlüğü kopyaları ile senkron komutları kaldırıldı. Arama indeksi ilk istekte üretilir ve sürüm ile belge parmak izine göre yenilenir.
+* **Eski sürüm etiketleri temizlendi:** yorum, dize, görünüm ve belgelerdeki eski sürüm numaraları ve pazarlama etiketleri kaldırıldı; hata sayfaları sürümü yalnız framework kimliğinden alır.
+
+### Düzeltildi
+
+* **Bileşen haritası:** komut satırı ana kipinde tarama kökü projenin kökünden farklıysa boş tarama sonucu projenin haritasına yazılmaz (bir sitenin geçici 500 vermesine yol açıyordu).
+* **Cron sonraki çalışma zamanı** saat-altı aralıkta doğru dilime düşer.
+* **Küçük harf 301 döngüsü:** yüzde kodlu Unicode yollar kod çözülerek küçültülür; kodu büyük harfe normalleştiren istemcilerle sonsuz yönlendirme oluşmaz.
+* **Kanonik alan adı yönlendirmesi:** routemap'te kayıtlı site host'u, ara ortam 301'inden muaftır; kayıtsız alt alanlar yönlendirilmeye devam eder.
+* **CSS `@import` zinciri** dosya değişim zamanıyla sürümlenir; sürümsüz erişim önbelleğe alınmaz. Araç ipucu ekran kenarında yön çevirir.
+* **`get()` dönüşü:** `array` dönüş tipli iki yöntemde `Collection` dönüşünden doğan tip hatası giderildi; ölü `?: []` kalıpları temizlendi.
+* **Eski ad kullanım günlüğü:** anonim sınıflarda günlük satırı yarıda kesiliyordu; yöntem adı ve uyarı metni artık tam yazılır.
+* **Posta modülü:** kullanılmayan eski yöntemler, sınıflar ve sütunlar kaldırıldı.
+* **`updateBatch()`** emüle edilmeyen hazırlanmış ifadelerde aynı adlı yer tutucu nedeniyle `HY093` hatası veriyordu; panelin ayar kaydetme yolu yazamıyordu. Düzeltildi.
+
+### Sürüm
+
+* **Sürüm artışı:** `FrameworkIdentity::FRAMEWORK_VERSION` `0.9.5` → `0.9.6`; sayaç `Version::next()` ile hesaplandı.
+
+### 0.9.7'ye kalanlar
+
+* İki aşamalı doğrulama (TOTP).
+* `enc:v1` değerleri için ek doğrulanmış veri (AAD) bağlaması; eski kayıtların tümüyle `enc:v2`'ye taşınması.
+* `RawHtmlGate::sanitizeContent()` kullanımının veritabanından içerik basan bütün görünümlere yaygınlaştırılması.
 
 ---
 
@@ -549,12 +619,13 @@ doğrulandı. Bileşen sürümleri `2.1.0` / `1.2.0` / `2.2.0` / `2.3.0` **deği
 ## Bağlantılar
 
 - Depo adresi: https://github.com/RbnCore/rbnframework
-- Karşılaştırma: [0.9.4] · [0.9.3] · [0.9.2] · [0.9.1]
+- Karşılaştırma: [0.9.6] · [0.9.5] · [0.9.4] · [0.9.3] · [0.9.2] · [0.9.1]
 - Güvenlik bildirimi: [SECURITY.md](SECURITY.md)
 - Yükseltme notları: [UPGRADING.md](UPGRADING.md)
 - Biçim: [Keep a Changelog](https://keepachangelog.com/tr/1.1.0/) · [SemVer](https://semver.org/lang/tr/)
 
-[Unreleased]: https://github.com/RbnCore/rbnframework/compare/v0.9.4...HEAD
+[Unreleased]: https://github.com/RbnCore/rbnframework/compare/v0.9.6...HEAD
+[0.9.6]: https://github.com/RbnCore/rbnframework/compare/v0.9.5...v0.9.6
 [0.9.5]: https://github.com/RbnCore/rbnframework/compare/v0.9.4...v0.9.5
 [0.9.4]: https://github.com/RbnCore/rbnframework/compare/v0.9.3...v0.9.4
 [0.9.3]: https://github.com/RbnCore/rbnframework/compare/v0.9.2...v0.9.3

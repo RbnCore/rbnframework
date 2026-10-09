@@ -1,6 +1,6 @@
 # Core/Services/System — ayar servisi, oturum/kullanıcı, CDN, modül ve iletişim (14 dosya)
 
-> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Services/System/` — **14 `*.php`** = 6 kök + `Handlers/` 2 +
 > `Managers/` 2 + `Models/` 1 + `Providers/` 1 (+ `Providers/Fluent/` 2).
 > **Envanter:** 14 dosyanın **14'ü** anlatıldı.
@@ -57,7 +57,7 @@ SettingsService::read($groupKey = null)
 ```
 
 **Ölçülen mimari karar (`$cacheKeys`, `:24`):** `['settings_all', 'settings_shield']`
-— RBN 3.5 "single table cache architecture": her grup için ayrı önbellek dosyası
+— RBN Framework "single table cache architecture": her grup için ayrı önbellek dosyası
 spawn etmek yerine **tek** ana dosya.
 
 **Tuzak — `$isBusy` geri çağırma kilidi (`:126-129`):** `read()` içinde bir

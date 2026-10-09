@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Services\BaseService;
 /**
  * SettingsService - Universal Application Configuration Manager 🛰️⚙️⚓
  * 
- * RBN 3.5: [CENTRALIZED ORCHESTRATION] 🏛️✨
+ * RBN Framework: [CENTRALIZED ORCHESTRATION] 🏛️✨
  * 
  * @property \Rbn\Framework\Core\Database\Repositories\Project\SettingsRepository $projectSettingsRepository
  * @property \Rbn\Framework\Core\Services\System\Handlers\SettingsHandler $SettingsHandler
@@ -34,7 +34,7 @@ class SettingsService extends BaseService
      */
     public function boot(): void
     {
-        // 🎼 RBN 3.5: [PURE MAGIC ALIGNMENT] 🪄✨
+        // 🎼 RBN Framework: [PURE MAGIC ALIGNMENT] 🪄✨
         // Handlers and Providers are now discovered autonomously via docblocks.
         // No explicit assignments needed if keys match.
     }
@@ -100,7 +100,7 @@ class SettingsService extends BaseService
             }
         }
 
-        // 1. RBN 3.5: [STRATEGIC ORCHESTRATION] 🛰️✨
+        // 1. RBN Framework: [STRATEGIC ORCHESTRATION] 🛰️✨
         $results = $this->repository('project.settings')->fetch($this->criteria);
 
         // 2. Decorative Finish 🎭
@@ -116,13 +116,13 @@ class SettingsService extends BaseService
     /**
      * Strategic Read helper (Frontend Friendly) 🕊️🏛️⚓
      * 
-     * RBN 3.5: [SINGLE TABLE CACHE ARCHITECTURE]
+     * RBN Framework: [SINGLE TABLE CACHE ARCHITECTURE]
      * Caches all active settings in a single master cache file ('settings_all.cache') 
      * instead of spawning multiple separate group cache files.
      */
     public function read(?string $groupKey = null): array
     {
-        // 🎼 RBN 3.5: [RECURSION GUARD] 🛡️
+        // 🎼 RBN Framework: [RECURSION GUARD] 🛡️
         if ($this->isBusy) {
             return [];
         }

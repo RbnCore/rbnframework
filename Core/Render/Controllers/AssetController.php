@@ -12,7 +12,7 @@ use Rbn\Framework\Core\Support\Definitions\Render\AssetConvention;
 /**
  * AssetController - High Performance Asset Proxy 🌐⚡⚓
  *
- * RBN 3.5 Masterpiece: Minimalist serving logic.
+ * RBN Framework: Minimalist serving logic.
  * Serves physical assets with proper mime-types, banners and caching.
  *
  * [GÜVENLİK YAMASI 2026-10-02 · A0-5 · R-01] `media/<base64>` dalı kullanıcıdan
@@ -45,13 +45,15 @@ class AssetController extends BaseController
      */
     public function serve(string $path, bool $isProject = false): void
     {
-        // ⚖️ Masterpiece Versioning Shield: Strip versioning suffix (=v1.0 etc) 🛡️
+        // ⚖️ RBN Framework Versioning Shield: Strip versioning suffix (=v1.0 etc) 🛡️
+        // [FW-H51] Sürümlü istek mi? Sürümsüz erişim uzun süre önbelleğe girmemeli.
+        $isVersioned = str_contains($path, '=v');
         if (str_contains($path, '=')) {
             $path = explode('=', $path)[0];
         }
 
-        // 🎼 RBN 3.5: [VIRTUAL ASSET HUB] 🏺🛰️⚓
-        // 1. Sovereign Font Resolution: Masked URL to Remote Google URL 🎭⚓
+        // 🎼 RBN Framework: [VIRTUAL ASSET HUB] 🏺🛰️⚓
+        // 1. RBN Framework Font Resolution: Masked URL to Remote Google URL 🎭⚓
         if (str_starts_with($path, 'fonts/')) {
             $fontSlug = str_replace('fonts/', '', $path);
             $library = \Rbn\Framework\Core\Support\Definitions\Render\AssetFonts::FONT_LIBRARY;
@@ -76,7 +78,7 @@ class AssetController extends BaseController
             }
         }
 
-        // 2. Sovereign Media Resolution: Masked URL to Remote / Local Media Resource (Zero Inode / Browser & CDN Caching) 🎨🖼️⚓
+        // 2. RBN Framework Media Resolution: Masked URL to Remote / Local Media Resource (Zero Inode / Browser & CDN Caching) 🎨🖼️⚓
         if (str_starts_with($path, 'media/')) {
             $parts = explode('/', str_replace('media/', '', $path));
             // Eğer kategori varsa (örn: media/actor/encoded/file) 2. eleman, yoksa (media/encoded/file) 1. eleman encoded'dır
@@ -143,13 +145,20 @@ class AssetController extends BaseController
         $extension = strtolower(pathinfo($physicalPath, PATHINFO_EXTENSION));
         $contentType = $this->getMimeType($extension);
 
-        // 3. Dosya İçeriği ve "Sovereign Signature" 🔱🎨📝
+        // 3. Dosya İçeriği ve "RBN Framework Signature" 🔱🎨📝
         $content = file_get_contents($physicalPath);
+        // [FW-H51] CSS içindeki göreli @import'lar `=v<mtime>` ile sürümlenir; aksi hâlde
+        // ana dosya yenilense bile import edilenler 1 yıl önbellekte eski kalıyordu.
+        if ($extension === 'css') {
+            $content = \Rbn\Framework\Core\Render\Handlers\CssImportVersioner::rewrite($content, $physicalPath);
+        }
         $content = $this->provider('asset')->decorate($content, $physicalPath, $label);
 
         // 4. HTTP Headers ve Dispatch 🚀
         header('Content-Type: ' . $contentType);
-        header('Cache-Control: public, max-age=31536000'); // 1 Year Caching
+        // Sürümlü URL içeriği değişince değişir → 1 yıl güvenli. Sürümsüz URL (ör. import
+        // edilen ama sürümü bilinmeyen) her seferinde doğrulanır.
+        header($isVersioned ? 'Cache-Control: public, max-age=31536000' : 'Cache-Control: public, no-cache');
         header('Content-Length: ' . strlen($content));
         header('X-RBN-Source: ' . $detected->source);
 
@@ -322,7 +331,7 @@ class AssetController extends BaseController
      */
     protected function getMimeType(string $ext): string
     {
-        // 🏛️ RBN 3.5: [CENTRALIZED DEFINITIONS] 🛰️⚓
+        // 🏛️ RBN Framework: [CENTRALIZED DEFINITIONS] 🛰️⚓
         $mimeMap = $this->validation('mime.MAP');
 
         if (is_array($mimeMap) && isset($mimeMap[$ext][0])) {
@@ -408,7 +417,7 @@ class AssetController extends BaseController
 
     private function serveVirtualResource(string $name): void
     {
-        // 🎼 RBN 3.5: [SOVEREIGN RESOURCE DISPATCH] 🏛️🛰️
+        // 🎼 RBN Framework: [RBN Framework RESOURCE DISPATCH] 🏛️🛰️
         // 1. Controller artık isim bazlı (favicon.svg, logo.svg) veri talep eder.
         $svgData = $this->resolver('seo')->getVirtualResourceRaw($name);
 

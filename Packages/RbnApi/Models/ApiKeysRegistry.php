@@ -6,7 +6,7 @@ namespace Rbn\Framework\Packages\RbnApi\Models;
 
 /**
  * ApiKeysRegistry - API Keys Configuration & Whitelist Dictionary 🛡️🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 class ApiKeysRegistry
 {

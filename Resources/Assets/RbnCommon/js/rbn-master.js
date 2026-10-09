@@ -1,7 +1,7 @@
 /**
  * ==========================================================================
  * RBN FRAMEWORK MASTER JAVASCRIPT SUITE (rbn-master.js) 🏛️💎
- * The Sovereign Master Script Index for all RBN Applications.
+ * The RBN Framework Master Script Index for all RBN Applications.
  * Combines: Ready Queue Engine + Dynamic Core Module Loader
  * ==========================================================================
  */

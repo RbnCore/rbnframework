@@ -7,14 +7,14 @@ namespace Rbn\Framework\Core\Base\Services\Traits\Provider\Engine;
 /**
  * CrudProviderTrait - Strategic CRUD Automation for Providers 🛰️⚙️
  * 
- * RBN 3.5: Bridges the Provider to the Model's Persist and Read traits.
+ * RBN Framework: Bridges the Provider to the Model's Persist and Read traits.
  * Eliminates repetitive code in strategic hub providers.
  */
 trait CrudProviderTrait
 {
     /**
      * The primary model target for this provider. 🛰️🎡
-     * RBN 3.5: Renamed to targetModel for discovery symmetry.
+     * RBN Framework: Renamed to targetModel for discovery symmetry.
      */
     protected $targetModel = null;
 
@@ -29,7 +29,7 @@ trait CrudProviderTrait
 
         $res = $model->save($data);
 
-        // 🎼 RBN 3.5: [AUTONOMOUS INSERT ID GUARANTEE] 🏛️⚓
+        // 🎼 RBN Framework: [AUTONOMOUS INSERT ID GUARANTEE] 🏛️⚓
         // Return real Insert ID on creation for seamless downstream processing.
         if (empty($data['id']) && method_exists($model, 'getLastInsertId')) {
             $lastId = (int) $model->getLastInsertId();
@@ -184,7 +184,8 @@ trait CrudProviderTrait
             // Ölçüm katmanı kararı bozamaz.
         }
 
-        error_log('[RBN] B-06: ' . static::class . '::' . $metot . '() kullanildi; '
+        // Anonim sinif adi NUL bayt tasir; error_log() orada keser.
+        error_log('[RBN] B-06: ' . explode("\0", static::class, 2)[0] . '::' . $metot . '() kullanildi; '
             . 'belirsiz addir. Yeni kod setStatusById($id, $field, $status) kullanmali '
             . '(null = degistir, deger = yaz).');
     }

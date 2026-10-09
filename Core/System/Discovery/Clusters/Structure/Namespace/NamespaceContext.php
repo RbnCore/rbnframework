@@ -9,7 +9,7 @@ use Rbn\Framework\Core\System\Discovery\Clusters\Structure\Folder\FolderContext;
 /**
  * NamespaceContext - Handles logical PSR-4 path resolution for a module.
  * 
- * RBN 3.5 Masterpiece: Autonomous namespace context.
+ * RBN Framework: Autonomous namespace context.
  * Inherits full DNA (Shield, Cache, Normalize) from BaseDiscoveryContext.
  */
 class NamespaceContext extends BaseDiscoveryContext
@@ -80,11 +80,11 @@ class NamespaceContext extends BaseDiscoveryContext
 
     /**
      * Get the ModuleData manifesto class name for this module. 🛰️🏛️⚓
-     * RBN 3.5: Prioritizes new 'Models\ModuleData' but falls back to legacy 'ModuleConfig'.
+     * RBN Framework: Prioritizes new 'Models\ModuleData' but falls back to legacy 'ModuleConfig'.
      */
     public function moduleDataClass(): string
     {
-        // 1. New Masterpiece Standard: Data\ModuleData 🏛️
+        // 1. New RBN Framework Standard: Data\ModuleData 🏛️
         $dataStandard = $this->baseNamespace . '\\' . FolderContext::DATA . '\\' . FolderContext::MODULE_DATA;
         if (class_exists($dataStandard)) {
             return $dataStandard;

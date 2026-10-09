@@ -10,8 +10,8 @@ use Rbn\Framework\Bundles\Internal\Backstage\Models\BackstageMap;
 /**
  * ModuleData - Backstage Bundle DNA & Orchestration Center 🛡️🛰️🏛️⚓
  * 
- * RBN 3.5 Masterpiece Standard.
- * Centralizes identity, orchestration map, and sovereign routing.
+ * RBN Framework Standard.
+ * Centralizes identity, orchestration map, and RBN Framework routing.
  */
 #[Bundle(
     name: 'backstage',
@@ -42,8 +42,8 @@ class ModuleData extends BaseConfig
     }
 
     /**
-     * Sovereign Route Registration 🎯🛰️
-     * 🎼 RBN 3.5: Enabling autonomous URI mapping for all sub-modules.
+     * RBN Framework Route Registration 🎯🛰️
+     * 🎼 RBN Framework: Enabling autonomous URI mapping for all sub-modules.
      */
     public function registerRoutes(): void
     {
@@ -53,12 +53,12 @@ class ModuleData extends BaseConfig
             Route::get('dashboard', 'index');
         });
 
-        // 🎼 Sidebar Management (Atomic & Sovereign)
+        // 🎼 Sidebar Management (Atomic & RBN Framework)
         Route::prefix('backstage/sidebar')->controller('SidebarController')->group(function () {
             Route::get('/', 'index');
             Route::get('modal/{id?}', 'modal');
 
-            // 🎯 Sovereign Categories (RBN 3.5 Standard: toggle/reorder)
+            // 🎯 RBN Framework Categories (RBN Framework Standard: toggle/reorder)
             Route::prefix('category')->group(function () {
                 Route::post('save', 'categorySave');
                 Route::post('delete/{id}', 'delete');
@@ -66,7 +66,7 @@ class ModuleData extends BaseConfig
                 Route::post('reorder', 'bulkOrder');
             });
 
-            // 🎯 Sovereign Menus (RBN 3.5 Standard: toggle/reorder)
+            // 🎯 RBN Framework Menus (RBN Framework Standard: toggle/reorder)
             Route::prefix('menu')->group(function () {
                 Route::post('save', 'menuSave');
                 Route::post('delete/{id}', 'delete');

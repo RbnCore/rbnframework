@@ -8,7 +8,7 @@ use PDO;
  * DbProviderInterface - Standard Database Connection Provider
  * 
  * Defines the contract for different database drivers 
- * (MySQL, SQLite, etc.) in RBN 3.0.
+ * (MySQL, SQLite, etc.) in RBN.
  */
 interface DbProviderInterface
 {

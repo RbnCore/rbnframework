@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Base\Data\Traits\Config\Engine\DiscoveryConfigTrait;
 /**
  * ActionConfigTrait - Configuration Management Hub ⚙️🛰️
  * 
- * RBN 3.5: Masterpiece Configuration logic.
+ * RBN Framework: Configuration logic.
  * Orchestrates Data, Discovery and Mapping engine traits.
  */
 trait ActionConfigTrait

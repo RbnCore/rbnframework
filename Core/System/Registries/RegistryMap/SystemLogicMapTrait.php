@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\System\Registries\RegistryMap;
 /**
  * SystemLogicMapTrait - The Intellectual Hub of the Framework 🧠⚡⚓
  * 
- * RBN 3.5 Masterpiece: Centralized authority for Services and Logical Handlers.
+ * RBN Framework: Centralized authority for Services and Logical Handlers.
  */
 trait SystemLogicMapTrait
 {

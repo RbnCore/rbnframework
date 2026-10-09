@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Support\Contracts\Database\SchemaProviderInterface;
 /**
  * SchemaBuilder - DDL & Maintenance Engine 🎻🛠️
  * 
- * Part of the RBN Framework v3.0 Modern Engine.
+ * Part of the RBN Framework Engine.
  * Handles table-level structural operations and database maintenance fluently.
  */
 class SchemaBuilder implements SchemaProviderInterface

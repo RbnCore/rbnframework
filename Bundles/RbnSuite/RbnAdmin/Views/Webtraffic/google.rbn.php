@@ -1,6 +1,6 @@
 <?php
 /**
- * RBN 3.5 Masterpiece - Google Analytics 4 (GA4) Dashboard 📊🏛️
+ * RBN Framework - Google Analytics 4 (GA4) Dashboard 📊🏛️
  */
 
 $startDate = $startDate ?? '';

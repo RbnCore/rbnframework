@@ -1,6 +1,6 @@
 <?php
 /**
- * RBN Framework 3.0: High-Performance Database Engine 🎻🔐
+ * High-Performance Database Engine 🎻🔐
  */
 namespace Rbn\Framework\Core\Database\Engine\Traits;
 

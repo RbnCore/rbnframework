@@ -7,9 +7,9 @@ namespace Rbn\Framework\Core\Base\Web\Traits\Controller\Engine;
 use Exception;
 
 /**
- * DownloadControllerTrait - Optimized RBN 3.5 Download Actions 📥🎡
+ * DownloadControllerTrait - Optimized RBN Framework Download Actions 📥🎡
  * 
- * RBN 3.5: Renamed to ControllerTrait to maintain layer-specific standards.
+ * RBN Framework: Renamed to ControllerTrait to maintain layer-specific standards.
  */
 trait DownloadControllerTrait
 {
@@ -20,7 +20,7 @@ trait DownloadControllerTrait
     {
         $service = $service ?? $this->activeService;
 
-        // RBN 3.0 Standard: Validate and get from form if id not provided
+        // Validate and get from form if id not provided
         if (!$id) {
             $data = $this->request->form(['file' => 'required|string']);
             $id = $data['file'];
@@ -41,7 +41,7 @@ trait DownloadControllerTrait
     {
         $service = $service ?? $this->activeService;
 
-        // RBN 3.0 Standard: Use request->form() for validation
+        // Use request->form() for validation
         if (!$ids) {
             $data = $this->request->form(['ids' => 'required|array']);
             $ids = $data['ids'];
@@ -61,7 +61,7 @@ trait DownloadControllerTrait
      */
     protected function respondDownload(string $filename, string $message): void
     {
-        // RBN 3.5 Standard download route pattern
+        // RBN Framework Standard download route pattern
         $url = $this->Route->url($this->indexRoute . '/download-temp', 'developer') . '?file=' . urlencode($filename);
 
         $this->Route->handleResult(true, [

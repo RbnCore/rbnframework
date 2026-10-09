@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Support\Blueprints\Validations\RateLimitValidations;
 /**
  * RateLimitHandler - The Frequency Control Actor 🛡️⚡
  * 
- * RBN 3.5: Atomic actor for evaluating hits and penalties.
+ * RBN Framework: Atomic actor for evaluating hits and penalties.
  */
 class RateLimitHandler extends BaseComponent
 {
@@ -203,6 +203,97 @@ class RateLimitHandler extends BaseComponent
         $seconds = max(0, $unblockTime - time());
 
         return (int) ceil($seconds / 60);
+    }
+
+    /**
+     * Hesap kilidi durumu (`remaining` > 0 ise kilitli; saniye).
+     *
+     * Sayaç girilen kimliğin özetiyle tutulur: var olmayan hesap da aynı
+     * sayacı alır (kilit davranışı hesabın varlığını sızdırmaz). Okuma hatası
+     * YUTULMAZ: çağıran (giriş akışı) istisnada girişi reddeder (fail-closed).
+     *
+     * @return array{failures:int,lock_seconds:int,remaining:int}
+     */
+    public function accountLockStatus(string $identity): array
+    {
+        if ($this->limits === []) {
+            // `rate_limit` kill-switch kapalı: tüm sınırlar gibi bu da kapalı.
+            return ['failures' => 0, 'lock_seconds' => 0, 'remaining' => 0];
+        }
+
+        return $this->accountLockState($identity);
+    }
+
+    /**
+     * Başarısız girişi hesap sayacına yazar; yeni durumu döner.
+     *
+     * @return array{failures:int,lock_seconds:int,remaining:int}
+     */
+    public function recordAccountFailure(string $identity): array
+    {
+        if ($this->limits === []) {
+            return ['failures' => 0, 'lock_seconds' => 0, 'remaining' => 0];
+        }
+
+        $this->recordAttempt(self::accountKey($identity), RateLimitValidations::ACCOUNT_LOGIN_ACTION);
+
+        return $this->accountLockState($identity);
+    }
+
+    /**
+     * Başarılı girişte hesap sayacını sıfırlar (yalnız bu hesabın satırları).
+     */
+    public function clearAccountFailures(string $identity): void
+    {
+        $this->model('common.rateLimit')
+            ->where('identifier', self::accountKey($identity))
+            ->where('action', RateLimitValidations::ACCOUNT_LOGIN_ACTION)
+            ->delete();
+    }
+
+    /**
+     * Kilit: eşiği dolduran (N.) denemenin zamanı + kademe süresi.
+     *
+     * @return array{failures:int,lock_seconds:int,remaining:int}
+     */
+    private function accountLockState(string $identity): array
+    {
+        $key = self::accountKey($identity);
+        $action = RateLimitValidations::ACCOUNT_LOGIN_ACTION;
+        $windowStart = time() - RateLimitValidations::ACCOUNT_LOCK_WINDOW;
+
+        $failures = $this->model('common.rateLimit')->getAttemptsCount($key, $action, $windowStart);
+        $step = RateLimitValidations::accountLockStep($failures);
+        if ($step === null) {
+            return ['failures' => $failures, 'lock_seconds' => 0, 'remaining' => 0];
+        }
+
+        // Pencere içindeki denemeler eskiden yeniye; eşiği dolduran satır.
+        $row = $this->model('common.rateLimit')
+            ->where('identifier', '=', $key)
+            ->where('action', '=', $action)
+            ->where('created_at', '>=', now('Y-m-d H:i:s', $windowStart))
+            ->orderBy('created_at', 'ASC')
+            ->orderBy('id', 'ASC')
+            ->offset($step['threshold'] - 1)
+            ->first();
+        $row = is_object($row) && method_exists($row, 'toArray') ? $row->toArray() : (array) $row;
+
+        // Satır okunamazsa en sıkı yorum: kilit şimdi başlamış sayılır (fail-closed).
+        $reachedAt = isset($row['created_at']) ? strtotime((string) $row['created_at']) : false;
+        $remaining = $reachedAt === false
+            ? $step['seconds']
+            : max(0, $reachedAt + $step['seconds'] - time());
+
+        return ['failures' => $failures, 'lock_seconds' => $step['seconds'], 'remaining' => $remaining];
+    }
+
+    /**
+     * Sayaç anahtarı: kimliğin kendisi tabloya yazılmaz, özeti yazılır.
+     */
+    private static function accountKey(string $identity): string
+    {
+        return 'acct:' . hash('sha256', mb_strtolower(trim($identity)));
     }
 
     /**

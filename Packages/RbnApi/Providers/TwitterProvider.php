@@ -20,7 +20,7 @@ class TwitterProvider extends BaseComponent
         if (!$keys || !is_array($keys) || empty($keys['consumer_key']) || empty($keys['consumer_secret']) || empty($keys['access_token']) || empty($keys['access_token_secret'])) {
             return [
                 'status' => 'error',
-                'message' => 'RBN 3.5: Twitter API yetkisi veya anahtarları bulunamadı! 🛡️⚓'
+                'message' => 'Twitter API yetkisi veya anahtarları bulunamadı! 🛡️⚓'
             ];
         }
 

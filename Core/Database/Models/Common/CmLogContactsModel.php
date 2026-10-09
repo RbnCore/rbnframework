@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseModelInterface;
 /**
  * CmLogContactsModel - Centralized Contact / Lead Form Hub 📬✨
  * 
- * RBN 3.5: Centralized storage for contact messages across projects in rbncore_common.
+ * RBN Framework: Centralized storage for contact messages across projects in rbncore_common.
  * 
  * @property int         $id
  * @property string      $project_key

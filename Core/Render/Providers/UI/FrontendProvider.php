@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseRenderInterface;
 /**
  * FrontendProvider - Website Layout Renderer 🛰️🌐⚓
  * 
- * Part of the RBN 3.5 "Masterpiece" Architecture.
+ * Part of the RBN Framework Architecture.
  */
 class FrontendProvider extends BaseRender implements BaseRenderInterface
 {
@@ -18,13 +18,13 @@ class FrontendProvider extends BaseRender implements BaseRenderInterface
      */
     public function render(?string $view, array $data = []): string
     {
-        // 📊 [SOVEREIGN ANALYTICS] 🛫🕊️⚓
-        // RBN 3.5: Masterpiece Direct Storage Access 🛰️🪐
+        // 📊 [RBN Framework ANALYTICS] 🛫🕊️⚓
+        // RBN Framework: Direct Storage Access 🛰️🪐
         $this->storage->traffic()->record();
 
         $renderService = $this->service('render');
 
-        // 🎼 RBN 3.5: Masterpiece Context Orchestration 🛰️🪐⚓
+        // 🎼 RBN Framework: Context Orchestration 🛰️🪐⚓
         // 1. Dynamic Site Identity (Prefers Controller-Injected State for 0 Duplicate Reads)
         $site         = $data['site'] ?? ($this->service('settings')?->read('site') ?? []);
         $siteName     = $data['siteName'] ?? (trim((string) ($site['name'] ?? '')) ?: 'RBN Core');
@@ -37,17 +37,17 @@ class FrontendProvider extends BaseRender implements BaseRenderInterface
         $social       = $data['social'] ?? ($this->service('settings')?->read('social') ?? []);
         $contact      = $data['contact'] ?? ($this->service('settings')?->read('contact') ?? []);
 
-        // 2. Fetch Sovereign SEO Metadata (Specialized Shield Packaging)
+        // 2. Fetch RBN Framework SEO Metadata (Specialized Shield Packaging)
         $builder = $this->handler('seoBuilder');
         if ($builder) {
             $builder->prepare($this->context ?? 'frontend');
         }
         $appSeoHtml = $this->service('seo')?->render() ?? '';
 
-        // 3. Fetch Sovereign Asset Manifest
+        // 3. Fetch RBN Framework Asset Manifest
         $assetService = $this->service('asset');
         if ($assetService) {
-            // 🎼 RBN 3.5: Masterpiece Asset Orchestration 🛰️⚓
+            // 🎼 RBN Framework: Asset Orchestration 🛰️⚓
             // Triggers Core Stack (Universal) + Frontend Core Bundle (inc. master.css)
             $assetService->prepareContext($this->context ?? 'frontend');
         }
@@ -76,7 +76,7 @@ class FrontendProvider extends BaseRender implements BaseRenderInterface
             'body_scripts' => $this->safeSnippet($integrations['body_scripts'] ?? '')
         ], $data);
 
-        // [RBN 3.0] Layout Resolve Strategy (Header/Footer Auto-Wrapping)
+        // Layout Resolve Strategy (Header/Footer Auto-Wrapping)
         $context = $this->context ?? 'frontend';
         $viewPath = $renderService->resolveViewPath($view, $data, 'auto', false, $context);
         $headerPath = $renderService->resolveViewPath('Layouts/header', $data, 'auto', false, $context);
@@ -88,7 +88,7 @@ class FrontendProvider extends BaseRender implements BaseRenderInterface
 
         ob_start();
 
-        // 🛡️ Masterpiece Fragment Guard:
+        // 🛡️ RBN Framework Fragment Guard:
         if ($fragment = $this->resolveFragment($viewPath, $data)) {
             return $fragment;
         }

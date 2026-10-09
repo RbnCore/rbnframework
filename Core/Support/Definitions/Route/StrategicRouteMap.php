@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Rbn\Framework\Core\Support\Definitions\Route;
 
 /**
- * StrategicRouteMap - RBN 3.5 "Masterpiece" Otonom Rota Tanımları 🗺️🛰️⚓
+ * StrategicRouteMap - RBN Framework Otonom Rota Tanımları 🗺️🛰️⚓
  * 
  * Bu sınıf, framework genelinde modül bazlı CRUD işlemlerinin hangi metodlara
  * ve hangi URI desenlerine otomatik bağlanacağını belirleyen merkezi haritadır.
@@ -16,7 +16,7 @@ class StrategicRouteMap
     /**
      * OTONOM ROTA HARİTASI 🗺️⚓
      * 
-     * RBN 3.5 Masterpiece: "Zero-Code" routing için aksiyon-rota eşleşmeleri.
+     * RBN Framework: "Zero-Code" routing için aksiyon-rota eşleşmeleri.
      * Key: Controller Aksiyonu (Metod)
      * Value: [HTTP Method, URI Path Pattern]
      */

@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\Base\Services\Traits\Provider\Engine;
 /**
  * BulkProviderTrait - Strategic Bulk Operations for Providers 🛸🛰️
  * 
- * RBN 3.5: Proxies high-performance batch operations to the model.
+ * RBN Framework: Proxies high-performance batch operations to the model.
  */
 trait BulkProviderTrait
 {

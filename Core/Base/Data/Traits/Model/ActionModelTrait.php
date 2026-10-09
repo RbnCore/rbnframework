@@ -18,7 +18,7 @@ use Rbn\Framework\Core\Base\Data\Traits\Model\Engine\JsonModelTrait;
 /**
  * ActionModelTrait - The Unified Model Powerhouse 🪐🔋
  * 
- * RBN 3.5: Strategic Hub that composes all model engines.
+ * RBN Framework: Strategic Hub that composes all model engines.
  * Centralized under Data hierarchy.
  */
 trait ActionModelTrait

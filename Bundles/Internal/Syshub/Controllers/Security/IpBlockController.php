@@ -9,7 +9,7 @@ use Rbn\Framework\Bundles\Internal\Syshub\Controllers\SyshubController;
 
 /**
  * IpBlockController - Manuel IP Engelleme Yönetimi 🚫🛡️
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 #[SubModule(
     entity: 'security/ipblock',
@@ -27,7 +27,7 @@ class IpBlockController extends SyshubController
         // 1. Fetch Blocks (Otonom Provider üzerinden)
         $blocks = $this->service->ipBlock()->getBlocks();
 
-        // 🎼 Masterpiece MVC: Veri zenginleştirme mantığı Handler katmanına taşındı 🛰️⚓
+        // 🎼 RBN Framework MVC: Veri zenginleştirme mantığı Handler katmanına taşındı 🛰️⚓
         $blocks = $this->service->security()->enrich($blocks);
 
         $paginator = $this->paginate($blocks, 10);

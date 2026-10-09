@@ -9,7 +9,7 @@ use Rbn\Framework\Core\System\Config\Engine\Config\ConfigResolver;
 /**
  * Config - The "Strategic Proxy Hub" ✨🛰️⚓
  * 
- * RBN 3.5 Masterpiece Hub: 
+ * RBN Framework Hub:
  * Flattened architecture. Directly orchestrates Environment and Schema resolvers.
  * Acts as a singleton proxy for all dynamic and static configuration requests.
  */
@@ -55,7 +55,7 @@ class Config
      */
     public static function get(string $key, mixed $default = null): mixed
     {
-        // 🎼 RBN 3.5: [RECURSION GUARD] 🛡️
+        // 🎼 RBN Framework: [RECURSION GUARD] 🛡️
         if (ConfigResolver::isResolving()) {
             return $default;
         }
@@ -76,7 +76,7 @@ class Config
                 $path = ConfigResolver::resolve($filename);
                 self::$items[$filename] = (file_exists($path)) ? (array) (include $path) : [];
 
-                // RBN 3.5 Dynamic Multi-Tenant Settings Override 🧬🛰️⚓
+                // RBN Framework Dynamic Multi-Tenant Settings Override 🧬🛰️⚓
                 // [FW-ROUTEMAP-SSOT-2 · PATRON KARARI 05.10.2026] KAPI KALDIRILDI.
                 // Önceden `project-settings.php` içindeki `has_route_map` bayrağı bu
                 // birleştirmeyi şart koşuyordu; anahtar olmayınca `view_mapping`

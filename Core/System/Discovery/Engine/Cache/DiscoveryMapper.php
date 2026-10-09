@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Base\Concerns\Data\ResolvesProjectConfigTrait;
 /**
  * DiscoveryMapper - Shared Discovery Persistence Manager 💾⚡🛰️
  * 
- * RBN 3.5: Centralized storage engine for discovery maps and resolution caches.
+ * RBN Framework: Centralized storage engine for discovery maps and resolution caches.
  * Ensures high-speed disk persistence across the entire Discovery Cluster.
  */
 class DiscoveryMapper

@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 
 /**
  * SettingsScannerHandler - Global Setting Analysis (Max 25 Points)
- * RBN 3.5 Handler Pipeline
+ * RBN Framework Handler Pipeline
  */
 class SettingsScannerHandler extends BaseSeoHandler
 {

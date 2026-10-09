@@ -13,7 +13,7 @@ use Rbn\Framework\Core\Render\Handlers\TemplateExpressionGuard;
 /**
  * ViewEngine - RBN Framework Modern Template Engine 🎨
  * 
- * RBN 3.5: Powered by BaseComponent DNA via BaseRender.
+ * RBN Framework: Powered by BaseComponent DNA via BaseRender.
  * Focused purely on compilation and parsing. Layout logic is delegated to LayoutResolver.
  */
 class ViewEngine extends BaseRender
@@ -43,7 +43,7 @@ class ViewEngine extends BaseRender
         // 🧬 Root DNA'yı ayağa kaldır.
         parent::__construct($rbn);
 
-        // 🎼 RBN 3.5: [AUTONOMOUS CACHE RESOLUTION] 🛰️⚓
+        // 🎼 RBN Framework: [AUTONOMOUS CACHE RESOLUTION] 🛰️⚓
         $this->cachePath = Paths::project()->storage('framework/views');
         if (!is_dir($this->cachePath)) {
             mkdir($this->cachePath, 0755, true);
@@ -55,7 +55,7 @@ class ViewEngine extends BaseRender
      */
     public function render(string $viewPath, array $data = []): void
     {
-        // [RBN 3.5] Zero-Scan Discovery-First Resolution 🕵️‍♂️⚓
+        // [RBN Framework] Zero-Scan Discovery-First Resolution 🕵️‍♂️⚓
         if (isset(self::$resolvedViewPaths[$viewPath])) {
             $viewPath = self::$resolvedViewPaths[$viewPath];
         } else {
@@ -71,7 +71,7 @@ class ViewEngine extends BaseRender
 
         $compiledPath = $this->compile($viewPath);
 
-        // 🎨 RBN 3.5: Masterpiece Harmony Hub (Lazy-Resolved in BaseRender) 🎻⚓
+        // 🎨 RBN Framework: Harmony Hub (Lazy-Resolved in BaseRender) 🎻⚓
         $data = array_merge($this->bootHarmony(), $data);
 
         $layoutResolver = $this->layoutResolver();

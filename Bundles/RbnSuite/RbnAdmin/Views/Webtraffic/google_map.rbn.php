@@ -1,6 +1,6 @@
 <?php
 /**
- * RBN 3.5 Masterpiece - Google Analytics 4 (GA4) Turkey Traffic Map 📊🗺️
+ * RBN Framework - Google Analytics 4 (GA4) Turkey Traffic Map 📊🗺️
  */
 
 $startDate = $startDate ?? '';

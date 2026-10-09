@@ -12,7 +12,7 @@ use Rbn\Framework\Core\Base\Data\Traits\Repository\ContentCacheTrait;
 /**
  * BaseRepository - Abstract Foundation for Enterprise Data Repositories 🏛️📦⚓
  * 
- * RBN 3.5 Masterpiece: Base foundation for all database repositories.
+ * RBN Framework: Base foundation for all database repositories.
  * Located strictly under Core\Base\Data right beside BaseModel for architecture purity.
  */
 abstract class BaseRepository extends BaseComponent

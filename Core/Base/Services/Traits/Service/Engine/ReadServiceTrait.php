@@ -3,9 +3,9 @@
 namespace Rbn\Framework\Core\Base\Services\Traits\Service\Engine;
 
 /**
- * ReadServiceTrait - RBN 3.0 Standard Data Retrieval 🔍
+ * ReadServiceTrait - Data Retrieval 🔍
  * 
- * RBN 3.5: Hardened with Shield support to prevent fatal null pointer exceptions.
+ * RBN Framework: Hardened with Shield support to prevent fatal null pointer exceptions.
  */
 trait ReadServiceTrait
 {
@@ -40,12 +40,12 @@ trait ReadServiceTrait
      */
     public function all(): array
     {
-        // 🎼 RBN 3.5: Masterpiece Strategic Dispatch 🔱🛰️⚓
+        // 🎼 RBN Framework: Strategic Dispatch 🔱🛰️⚓
         if (isset($this->provider) && method_exists($this->provider, 'fetch')) {
             return $this->provider->fetch($this->criteria);
         }
 
-        // 🎯 RBN 3.5: Fail-safe Criteria Enforcer (Prevents Memory Exhaustion) 🛡️🧬
+        // 🎯 RBN Framework: Fail-safe Criteria Enforcer (Prevents Memory Exhaustion) 🛡️🧬
         // If no provider is present, we MUST pass our criteria pool to the model's query engine.
         $query = $this->component('model')->query();
         
@@ -71,7 +71,7 @@ trait ReadServiceTrait
 
     /**
      * Get Root/Parent Records (Hierarchical Logic) 🌳
-     * RBN 3.0 Standard: All parent-child structures use parent_id field.
+     * All parent-child structures use parent_id field.
      */
     public function parents(?int $excludeId = null): array
     {

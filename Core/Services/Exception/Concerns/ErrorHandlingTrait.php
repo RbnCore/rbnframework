@@ -6,7 +6,7 @@ namespace Rbn\Framework\Core\Services\Exception\Concerns;
 /**
  * ErrorHandlingTrait - Unified Resilience & State Capability 🧰🛡️
  * 
- * RBN 3.5: Masterpiece Standard (Shield Integrated).
+ * RBN Framework: Standard (Shield Integrated).
  * Standardizes error collection and provides a bridge to the central Shield Hub.
  * 
  * Part of the Core Service Exception Concerns layer.
@@ -60,7 +60,7 @@ trait ErrorHandlingTrait
 
     /**
      * Terminate the request with a semantic status code (DNA Gateway) 🏛️🛡️⚓
-     * RBN 3.5 Masterpiece: Direct bridge to the Shield Hub.
+     * RBN Framework: Direct bridge to the Shield Hub.
      */
     public function abort(int $code = 404, string $message = ''): void
     {

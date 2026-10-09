@@ -6,7 +6,7 @@ namespace Rbn\Framework\Bundles\RbnSuite\RbnShield\Support\Contracts\Providers;
 /**
  * IpGuardProviderInterface - Strategy for IP Access Management 🛰️⚖️
  * 
- * RBN 3.5: Rules for fetching, saving and validating IP block/whitelist status.
+ * RBN Framework: Rules for fetching, saving and validating IP block/whitelist status.
  */
 interface IpGuardProviderInterface
 {

@@ -6,7 +6,7 @@ namespace Rbn\Framework\Core\Base\Services\Traits\Service\Blogcontent;
 
 /**
  * ContentMetaTrait - Tüm RBN projelerinde blog, haber ve içerik nesnelerini otonom zenginleştirici temel Trait 📝📅⏱️
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 trait ContentMetaTrait
 {
@@ -163,7 +163,7 @@ trait ContentMetaTrait
             $post['headings'] = $headings;
         }
 
-        // 🎼 RBN 3.5: Clean Markdown & Auto-wrap plaintext character names in <strong> tags 🪐🛡️
+        // 🎼 RBN Framework: Clean Markdown & Auto-wrap plaintext character names in <strong> tags 🪐🛡️
         $markdownFields = ['content', 'author_comment', 'our_review', 'senaryo_analysis', 'character_analysis', 'custom_summary', 'summary'];
         foreach ($markdownFields as $field) {
             $val = $isObj ? ($post->{$field} ?? null) : ($post[$field] ?? null);

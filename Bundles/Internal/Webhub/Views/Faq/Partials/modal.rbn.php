@@ -3,7 +3,7 @@
 /** @var int|null $id */
 /** @var bool $isEdit */
 
-// 🎼 RBN 3.5: Masterpiece Form Orchestration
+// 🎼 RBN Framework: Form Orchestration
 $action = $Route->url('webhub/faq/save', 'developer');
 ?>
 

@@ -7,7 +7,7 @@
 
     <div class="row g-4">
         <div class="col-lg-8">
-            <!-- RBN MASTERPIECE FORM CARD -->
+            <!-- RBN Framework FORM CARD -->
             <div class="rbn-table-wrap mb-4">
                 <div class="ra-traffic-card-header">
                     <h6 class="ra-traffic-card-title mb-0">

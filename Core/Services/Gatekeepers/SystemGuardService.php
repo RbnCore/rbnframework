@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseServiceInterface;
 /**
  * SystemGuardService - The Master Access Sentinel 🛡️🛰️🪐
  * 
- * RBN 3.5: Masterpiece Standard Orchestrator. 🎻🛰️
+ * RBN Framework: Standard Orchestrator. 🎻🛰️
  * [SYMMETRIC LAZY DISCOVERY] 🏛️✨
  * 
  * @property-read \Rbn\Framework\Core\Services\Gatekeepers\Handlers\SystemGuardHandler $systemGuardHandler

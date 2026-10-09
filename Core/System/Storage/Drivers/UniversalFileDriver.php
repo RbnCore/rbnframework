@@ -6,7 +6,7 @@ use Rbn\Framework\Core\Base\Services\BaseService;
 use Exception;
 
 /**
- * UniversalFileDriver - RBN 3.0 Storage Engine 🌪️
+ * UniversalFileDriver - RBN Storage Engine 🌪️
  * 
  * Tüm depolama birimleri için standart, güvenli ve performanslı 
  * dosya işlemlerini yöneten ana motor.
@@ -108,7 +108,7 @@ class UniversalFileDriver
     private function parseContent(string $content, string $format): mixed
     {
         if ($format === 'jsonl') {
-            // 🎼 RBN 3.5: [ROBUST JSONL PARSER] 🛰️🪐⚓
+            // 🎼 RBN Framework: [ROBUST JSONL PARSER] 🛰️🪐⚓
             // 1. BOM Temizliği (Görünmez kirleri temizle)
             $content = preg_replace('/^\xEF\xBB\xBF/', '', $content);
 

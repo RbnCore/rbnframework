@@ -8,9 +8,9 @@ use Rbn\Framework\Packages\RbnPipeline\Builders\PromptBuilder;
 use Rbn\Framework\Packages\RbnPipeline\Builders\AbstractPresetBuilder;
 
 /**
- * TrendsPreset - Sovereign Google Trends AI Generation Preset 📈🧠🚀
+ * TrendsPreset - RBN Framework Google Trends AI Generation Preset 📈🧠🚀
  * Location: RbnPipeline/Presets/TrendsPreset.php
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 class TrendsPreset extends AbstractPresetBuilder
 {

@@ -7,7 +7,8 @@
    1. ATOMIC TEXT COLOR UTILITIES (.text-*)
    ========================================================================== */
 /* 🔵 Blues & Navies */
-.text-primary, .text-blue       { color: var(--rbn-blue-600, #2563eb) !important; }
+.text-primary                   { color: var(--rbn-primary) !important; }
+.text-blue                      { color: var(--rbn-blue-600, #2563eb) !important; }
 .text-blue-light                { color: var(--rbn-blue-400, #60a5fa) !important; }
 .text-navy                      { color: var(--rbn-blue-900, #1a365d) !important; }
 .text-sky                       { color: var(--rbn-sky, #0284c7) !important; }
@@ -19,16 +20,19 @@
 .text-clay-dark                 { color: var(--rbn-clay-700, #8F3E1C) !important; }
 
 /* 🌿 Greens & Emeralds */
-.text-success, .text-green, .text-emerald { color: var(--rbn-green-500, #10b981) !important; }
+.text-success                   { color: var(--rbn-success) !important; }
+.text-green, .text-emerald       { color: var(--rbn-green-500, #10b981) !important; }
 .text-lime                      { color: var(--rbn-lime, #65a30d) !important; }
 
 /* 👑 Ambers & Golds */
-.text-warning, .text-amber, .text-gold    { color: var(--rbn-amber-500, #f59e0b) !important; }
+.text-warning                   { color: var(--rbn-warning) !important; }
+.text-amber, .text-gold         { color: var(--rbn-amber-500, #f59e0b) !important; }
 .text-amber-dark                { color: var(--rbn-amber-700, #b45309) !important; }
 .text-coral, .text-orange       { color: var(--rbn-coral, #ea580c) !important; }
 
 /* 🔴 Reds & Roses */
-.text-danger, .text-red, .text-rose { color: var(--rbn-red-500, #ef4444) !important; }
+.text-danger                    { color: var(--rbn-danger) !important; }
+.text-red, .text-rose           { color: var(--rbn-red-500, #ef4444) !important; }
 .text-crimson                   { color: var(--rbn-crimson-500, #991b1b) !important; }
 .text-pink                      { color: var(--rbn-pink, #db2777) !important; }
 .text-fuchsia                   { color: var(--rbn-fuchsia, #d946ef) !important; }
@@ -38,7 +42,8 @@
 .text-purple                    { color: var(--rbn-purple, #8b5cf6) !important; }
 
 /* 🌫️ Neutrals, Slates & Monochromes */
-.text-secondary, .text-slate    { color: var(--rbn-slate-600, #475569) !important; }
+.text-secondary                 { color: var(--rbn-secondary) !important; }
+.text-slate                     { color: var(--rbn-slate-600, #475569) !important; }
 .text-stone                     { color: var(--rbn-stone-700, #3F3F38) !important; }
 .text-muted                     { color: var(--rbn-text-muted, #94a3b8) !important; }
 .text-dark, .text-charcoal      { color: var(--rbn-slate-900, #0f172a) !important; }
@@ -47,12 +52,17 @@
 /* ==========================================================================
    2. ATOMIC BACKGROUND UTILITIES (.bg-*)
    ========================================================================== */
-.bg-primary, .bg-blue          { background-color: var(--rbn-blue-600, #2563eb) !important; color: #fff !important; }
-.bg-secondary, .bg-slate       { background-color: var(--rbn-slate-600, #475569) !important; color: #fff !important; }
+.bg-primary                    { background-color: var(--rbn-primary) !important; color: var(--rbn-text-on-primary) !important; }
+.bg-blue                       { background-color: var(--rbn-blue-600, #2563eb) !important; color: #fff !important; }
+.bg-secondary                  { background-color: var(--rbn-secondary) !important; color: #fff !important; }
+.bg-slate                      { background-color: var(--rbn-slate-600, #475569) !important; color: #fff !important; }
 .bg-terracotta, .bg-clay       { background-color: var(--rbn-clay-500, #C56A3C) !important; color: #fff !important; }
-.bg-success, .bg-green         { background-color: var(--rbn-green-500, #10b981) !important; color: #fff !important; }
-.bg-warning, .bg-amber         { background-color: var(--rbn-amber-500, #f59e0b) !important; color: #fff !important; }
-.bg-danger, .bg-red            { background-color: var(--rbn-red-500, #ef4444) !important; color: #fff !important; }
+.bg-success                    { background-color: var(--rbn-success) !important; color: #fff !important; }
+.bg-green                      { background-color: var(--rbn-green-500, #10b981) !important; color: #fff !important; }
+.bg-warning                    { background-color: var(--rbn-warning) !important; color: #fff !important; }
+.bg-amber                      { background-color: var(--rbn-amber-500, #f59e0b) !important; color: #fff !important; }
+.bg-danger                     { background-color: var(--rbn-danger-solid) !important; color: #fff !important; }
+.bg-red                        { background-color: var(--rbn-red-500, #ef4444) !important; color: #fff !important; }
 .bg-crimson                    { background-color: var(--rbn-crimson-500, #991b1b) !important; color: #fff !important; }
 .bg-indigo                     { background-color: var(--rbn-indigo-600, #4f46e5) !important; color: #fff !important; }
 .bg-purple                     { background-color: var(--rbn-purple, #8b5cf6) !important; color: #fff !important; }
@@ -64,16 +74,20 @@
 .bg-lime                       { background-color: var(--rbn-lime, #65a30d) !important; color: #fff !important; }
 .bg-dark, .bg-charcoal         { background-color: var(--rbn-slate-900, #0f172a) !important; color: #fff !important; }
 .bg-navy                       { background-color: var(--rbn-blue-900, #1a365d) !important; color: #fff !important; }
-.bg-white                      { background-color: #ffffff !important; }
+/* .bg-white: layout.css'te tek tanim (--rbn-bg-surface, token'li; FW-096-C1) */
 .bg-transparent                { background-color: transparent !important; }
 
 /* ==========================================================================
    3. SUBTLE / PASTEL BACKGROUND UTILITIES (.bg-*-subtle)
    ========================================================================== */
-.bg-primary-subtle, .bg-blue-subtle       { background-color: var(--rbn-blue-50, #eff6ff) !important; color: var(--rbn-blue-700, #1d4ed8) !important; }
-.bg-success-subtle, .bg-green-subtle      { background-color: var(--rbn-green-50, #ecfdf5) !important; color: var(--rbn-green-700, #047857) !important; }
-.bg-warning-subtle, .bg-amber-subtle      { background-color: var(--rbn-amber-50, #fffbeb) !important; color: var(--rbn-amber-700, #b45309) !important; }
-.bg-danger-subtle, .bg-red-subtle         { background-color: var(--rbn-red-50, #fef2f2) !important; color: var(--rbn-red-700, #b91c1c) !important; }
+.bg-primary-subtle                        { background-color: var(--rbn-primary-subtle) !important; color: var(--rbn-primary) !important; }
+.bg-blue-subtle                           { background-color: var(--rbn-blue-50, #eff6ff) !important; color: var(--rbn-blue-700, #1d4ed8) !important; }
+.bg-success-subtle                        { background-color: var(--rbn-success-subtle) !important; color: var(--rbn-success-text) !important; }
+.bg-green-subtle                          { background-color: var(--rbn-green-50, #ecfdf5) !important; color: var(--rbn-green-700, #047857) !important; }
+.bg-warning-subtle                        { background-color: var(--rbn-warning-subtle) !important; color: var(--rbn-warning-text) !important; }
+.bg-amber-subtle                          { background-color: var(--rbn-amber-50, #fffbeb) !important; color: var(--rbn-amber-700, #b45309) !important; }
+.bg-danger-subtle                         { background-color: var(--rbn-danger-subtle) !important; color: var(--rbn-danger-text) !important; }
+.bg-red-subtle                            { background-color: var(--rbn-red-50, #fef2f2) !important; color: var(--rbn-red-700, #b91c1c) !important; }
 .bg-indigo-subtle                         { background-color: var(--rbn-indigo-50, #eef2ff) !important; color: var(--rbn-indigo-700, #4338ca) !important; }
 .bg-purple-subtle                         { background-color: var(--rbn-purple-light, #f3e8ff) !important; color: var(--rbn-purple-dark, #5b21b6) !important; }
 .bg-terracotta-subtle, .bg-clay-subtle    { background-color: var(--rbn-clay-50, #FAF3E7) !important; color: var(--rbn-clay-600, #AA552B) !important; }
@@ -83,16 +97,20 @@
 .bg-coral-subtle, .bg-orange-subtle       { background-color: var(--rbn-coral-light, #ffedd5) !important; color: var(--rbn-coral-dark, #c2410c) !important; }
 .bg-pink-subtle                           { background-color: var(--rbn-pink-light, #fce7f3) !important; color: var(--rbn-pink-dark, #831843) !important; }
 .bg-lime-subtle                           { background-color: var(--rbn-lime-light, #f7fee7) !important; color: var(--rbn-lime-dark, #4d7c0f) !important; }
-.bg-slate-subtle, .bg-secondary-subtle    { background-color: var(--rbn-slate-100, #f1f5f9) !important; color: var(--rbn-slate-700, #334155) !important; }
+.bg-slate-subtle, .bg-secondary-subtle    { background-color: var(--rbn-bg-surface-subtle) !important; color: var(--rbn-text-primary) !important; }
 .bg-stone-subtle                          { background-color: var(--rbn-stone-100, #F4F4F1) !important; color: var(--rbn-stone-700, #3F3F38) !important; }
 
 /* ==========================================================================
    4. ATOMIC BORDER COLOR UTILITIES (.border-*)
    ========================================================================== */
-.border-primary, .border-blue   { border-color: var(--rbn-blue-500, #3b82f6) !important; }
-.border-success, .border-green  { border-color: var(--rbn-green-500, #10b981) !important; }
-.border-warning, .border-amber  { border-color: var(--rbn-amber-500, #f59e0b) !important; }
-.border-danger, .border-red     { border-color: var(--rbn-red-500, #ef4444) !important; }
+.border-primary                 { border-color: var(--rbn-primary) !important; }
+.border-blue                    { border-color: var(--rbn-blue-500, #3b82f6) !important; }
+.border-success                 { border-color: var(--rbn-success) !important; }
+.border-green                   { border-color: var(--rbn-green-500, #10b981) !important; }
+.border-warning                 { border-color: var(--rbn-warning) !important; }
+.border-amber                   { border-color: var(--rbn-amber-500, #f59e0b) !important; }
+.border-danger                  { border-color: var(--rbn-danger) !important; }
+.border-red                     { border-color: var(--rbn-red-500, #ef4444) !important; }
 .border-crimson                 { border-color: var(--rbn-crimson-500, #991b1b) !important; }
 .border-terracotta, .border-clay{ border-color: var(--rbn-clay-400, #D4A373) !important; }
 .border-purple                  { border-color: var(--rbn-purple, #8b5cf6) !important; }
@@ -117,7 +135,7 @@
 .border-bottom-0, .border-end, .border-end-0 { border-bottom: 0 !important; border-inline-end: 0 !important; }
 .border-muted { border-color: var(--rbn-border-strong) !important; }
 .border-info { border-color: var(--rbn-blue-500) !important; }
-.border-light { border-color: var(--rbn-slate-200) !important; }
+.border-light { border-color: var(--rbn-border) !important; }
 .border-secondary { border-color: var(--rbn-slate-600) !important; }
 .border-white { border-color: #ffffff !important; }
 .border-black { border-color: #000000 !important; }
@@ -141,10 +159,10 @@
 /* 7. ZEMIN / YAZI RENGI TAMAMLAMA */
 .bg-canvas { background-color: var(--rbn-bg-canvas) !important; }
 .bg-muted { background-color: var(--rbn-bg-surface-subtle) !important; }
-.bg-light-subtle { background-color: var(--rbn-slate-100) !important; }
+.bg-light-subtle { background-color: var(--rbn-bg-surface-subtle) !important; }
 .bg-dark-subtle { background-color: var(--rbn-slate-800) !important; }
-.bg-white-subtle { background-color: var(--rbn-slate-50) !important; }
-.bg-muted-subtle { background-color: var(--rbn-slate-100) !important; }
+.bg-white-subtle { background-color: var(--rbn-bg-surface-hover) !important; }
+.bg-muted-subtle { background-color: var(--rbn-bg-surface-subtle) !important; }
 .bg-black { background-color: #000000 !important; color: #ffffff !important; }
 .bg-info { background-color: var(--rbn-blue-500) !important; color: #ffffff !important; }
 .bg-info-subtle { background-color: var(--rbn-blue-50) !important; color: var(--rbn-blue-700) !important; }
@@ -156,5 +174,5 @@
 .text-black { color: #000000 !important; }
 .text-black-emphasis { color: var(--rbn-slate-900) !important; }
 .text-muted-emphasis { color: var(--rbn-slate-600) !important; }
-.text-primary-emphasis { color: var(--rbn-blue-700) !important; }
+.text-primary-emphasis { color: var(--rbn-primary-hover) !important; }
 .text-secondary-emphasis { color: var(--rbn-slate-700) !important; }

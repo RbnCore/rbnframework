@@ -5,7 +5,7 @@ namespace Rbn\Framework\Core\Support\Contracts\Http;
 use Rbn\Framework\Core\Http\Engine\UploadedFile;
 
 /**
- * RequestInterface - The Grand Contract for RBN 3.0 HTTP Engine ⚓🛡️
+ * RequestInterface - The Grand Contract for RBN HTTP Engine ⚓🛡️
  * 
  * Defines the standard API for input handling, detection, and validation.
  */
@@ -180,12 +180,12 @@ interface RequestInterface
     public function validate(array $rules, array $messages = []): array;
 
     /**
-     * RBN Masterpiece "Form" - Combine Shield & Validation 🛡️✨
+     * RBN Framework "Form" - Combine Shield & Validation 🛡️✨
      */
     public function form(array $rules, array $options = []): array;
 
     /**
-     * RBN Masterpiece "Filter" - Filter and validate GET/Query parameters safely 🛡️🔎
+     * RBN Framework "Filter" - Filter and validate GET/Query parameters safely 🛡️🔎
      */
     public function filter(array $rules, array $options = []): array;
 }

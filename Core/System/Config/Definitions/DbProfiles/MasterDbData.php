@@ -6,7 +6,7 @@ namespace Rbn\Framework\Core\System\Config\Definitions\DbProfiles;
 /**
  * MasterDbData - Sistem (master) veritabanı kimlik profili (yalniz SABIT) 🧬🛰️
  *
- * RBN 3.5: Centralizes database requirements for the Master DB environment.
+ * RBN Framework: Centralizes database requirements for the Master DB environment.
  *
  * [FW-DBPROFILES-TASIMA-95] Core/Services/Gatekeepers/Models ->
  * Core/System/Config/Definitions/DbProfiles. Bu sınıf kimlik/yapılandırma
@@ -35,14 +35,11 @@ final class MasterDbData
     // Sunucu Veritabani (Sistem Veritabani) bilgileri
     protected static ?string $definitionCategory = 'database_master';
 
-    /** Ortam değişkeni / anahtar ön eki (master ortam değişkeni YOKTUR). */
+    /** Anahtar ön eki (ortam değişkeni DEĞİLDİR; framework ortam değişkeni okumaz). */
     public const PREFIX = 'MASTER_DB';
 
     /** Bağlantı karakter kümesi (şema kimliği, sır DEĞİLDİR). */
     public const CHARSET = 'utf8mb4';
-
-    /** Bu profilin ayar dosyası adı (anahtar keşfi `ENV_FILE` anahtarını sınıftan okur; `.env` varsayılanı). */
-    public const ENV_FILE = '.env';
 
     /**
      * Master Database Required Tables (Identity & Control 🧬)

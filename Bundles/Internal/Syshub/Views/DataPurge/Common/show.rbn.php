@@ -71,7 +71,7 @@
     </div>
 </div>
 
-<!-- 🖥️ 2. SOVEREIGN TERMINAL ÇIKTISI -->
+<!-- 🖥️ 2. RBN Framework TERMINAL ÇIKTISI -->
 <div class="rbn-card p-0 overflow-hidden mb-4">
     <div class="d-flex justify-content-between align-items-center px-4 py-3 border-bottom" style="background: #1e293b;">
         <div class="d-flex align-items-center gap-2 text-white">

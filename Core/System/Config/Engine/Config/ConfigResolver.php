@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\System\Config\Engine\Config;
 /**
  * ConfigResolver - The "Resolution Engine" 🏛️⚙️⚓
  * 
- * RBN 3.5 Masterpiece: This class encapsulates all logic for path discovery,
+ * RBN Framework: This class encapsulates all logic for path discovery,
  * contextual DTO resolution, and autonomous survival fallbacks.
  * Separated from the public Config API to ensure architectural purity.
  */
@@ -48,11 +48,11 @@ class ConfigResolver
 
     /**
      * Internal Access to the Authoritative Guard 🛡️👨‍🍳
-     * RBN 3.5: Autonomous during recursion or survival to prevent core loops.
+     * RBN Framework: Autonomous during recursion or survival to prevent core loops.
      */
     public static function guard(): mixed
     {
-        // 🎼 RBN 3.5: [AUTONOMOUS BYPASS] 
+        // 🎼 RBN Framework: [AUTONOMOUS BYPASS]
         if (self::$isResolving || self::$isSurvivalMode || !class_exists(\Rbn\Framework\Core\Base\Services\BaseService::class)) {
             return null;
         }
@@ -65,12 +65,12 @@ class ConfigResolver
     }
 
     /**
-     * MASTERPIECE RESOLUTION DNA 🧬🏛️⚓
-     * RBN 3.5: Strictly asks the authority for the path with an autonomous fallback.
+     * RBN Framework RESOLUTION DNA 🧬🏛️⚓
+     * RBN Framework: Strictly asks the authority for the path with an autonomous fallback.
      */
     public static function resolve(string $name, ?string $projectKey = null): string
     {
-        // 🎼 RBN 3.5: [DATABASE PATH AUTHORITY] 🏛️⚙️
+        // 🎼 RBN Framework: [DATABASE PATH AUTHORITY] 🏛️⚙️
         // Returning the actual SSOT path for the Master Identity
         if ($name === 'database_master') {
             return \Rbn\Framework\Core\System\Paths\Paths::frameworkRoot() . DIRECTORY_SEPARATOR .
@@ -103,7 +103,7 @@ class ConfigResolver
 
         $guard = self::guard();
 
-        // 🛡️ RBN 3.5: [SURVIVAL FALLBACK]
+        // 🛡️ RBN Framework: [SURVIVAL FALLBACK]
         if (!$guard) {
             return \Rbn\Framework\Core\System\Paths\Paths::project()->configs($name . '.php');
         }
@@ -129,7 +129,7 @@ class ConfigResolver
     }
 
     /**
-     * RBN 3.5: Masterpiece Autonomous Fallback for Contextual Resolution 🧬🏛️⚓
+     * RBN Framework: Autonomous Fallback for Contextual Resolution 🧬🏛️⚓
      * Bypasses the Guard service to resolve critical DTOs during early-boot or collapse.
      */
     private static function resolveContextSurvival(string $type, ?string $projectKey = null): mixed
@@ -138,10 +138,7 @@ class ConfigResolver
         if (!str_contains($type, 'database'))
             return null;
 
-        // [RBN 3.5] Resolve Environment File name from Definitions (Pure Architecture) 🛰️🏛️
-        $envFile = \Rbn\Framework\Core\System\Discovery\Clusters\Logic\Definition\Definition::get($type, 'ENV_FILE') ?? 'project-settings.php';
-
-        // 🛡️ RBN 3.5: Authoritative Path Selection (Mirrors GuardHandler Logic) ⚖️⚓
+        // 🛡️ RBN Framework: Authoritative Path Selection (Mirrors GuardHandler Logic) ⚖️⚓
         $projectSettingsPath = match ($type) {
             'database_master'  => self::resolve('database_master', $projectKey), // Using the central authority
             'database_common'  => self::resolve('database_common', $projectKey),
@@ -149,7 +146,7 @@ class ConfigResolver
             default            => self::resolve('database_project', $projectKey)
         };
 
-        // 🎯 RBN 3.5: [SURVIVAL] Delegate autonomous loading to the DTO 🧬🦾
+        // 🎯 RBN Framework: [SURVIVAL] Delegate autonomous loading to the DTO 🧬🦾
         return \Rbn\Framework\Core\System\Config\Engine\Database\DatabaseConfig::fromFile($projectSettingsPath, $type);
     }
 }

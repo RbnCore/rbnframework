@@ -10,7 +10,7 @@ use Rbn\Framework\Bundles\Internal\Syshub\Models\PurgeConfig;
 use Rbn\Framework\Bundles\Internal\Syshub\Models\SyshubMap;
 
 /**
- * PurgeController - RBN 3.5 Sovereign Purge Controller 🧹🛰️⚓
+ * PurgeController - RBN Framework Purge Controller 🧹🛰️⚓
  * Centralized dashboard for data purging and storage statistics.
  */
 #[SubModule(
@@ -29,7 +29,7 @@ class PurgeController extends SyshubController
         $projectQuery = $projectKey ? '?project=' . urlencode($projectKey) : '';
         $stats = $this->service->purge()->getDashboardStats($projectKey);
 
-        // 🎼 RBN 3.5: Masterpiece Autonomous Discovery 🛰️⚓
+        // 🎼 RBN Framework: Autonomous Discovery 🛰️⚓
         // Pull sub-modules directly from the static SyshubMap constant.
         $subModules = SyshubMap::MAP['sub_modules']['datapurge']['sub_modules'] ?? [];
 
@@ -169,7 +169,7 @@ class PurgeController extends SyshubController
      */
     public function bulkDelete($target = null, string $method = 'bulkDestroy', $redirect = null): void
     {
-        // 🎼 RBN 3.5: Sovereign Parameter Mapping 🛰️⚓
+        // 🎼 RBN Framework: Parameter Mapping 🛰️⚓
         // Router passes {type} as first arg ($target) and {path} as second arg ($method)
         $type = $target ?? $this->request->input('type');
         $ids = $this->request->input('ids');

@@ -10,7 +10,7 @@ use Rbn\Framework\Core\System\Config\Engine\Database\DatabaseConfig;
 /**
  * DatabaseGuardService - The Administrative Database Chef 🛡️👨‍🍳⚓
  * 
- * RBN 3.5: Central authority for database path resolution and integrity validation.
+ * RBN Framework: Central authority for database path resolution and integrity validation.
  * No one connects to the database without asking the Chef for path clearance.
  * 
  * [SYMMETRIC LAZY DISCOVERY] 🏛️🛰️✨
@@ -24,7 +24,7 @@ class DatabaseGuardService extends BaseService implements BaseServiceInterface
 
     /**
      * Boot the Guard ⚓
-     * RBN 3.5: Clean boot to prevent circular discovery loops during bootstrap. 🧘‍♂️🧬
+     * RBN Framework: Clean boot to prevent circular discovery loops during bootstrap. 🧘‍♂️🧬
      */
     public function boot(): void
     {
@@ -36,7 +36,7 @@ class DatabaseGuardService extends BaseService implements BaseServiceInterface
      */
     public function resolvePath(string $category, ?string $projectKey = null): string
     {
-        // 🎼 RBN 3.5: Masterpiece Lazy-Loading 🎻⚓
+        // 🎼 RBN Framework: Lazy-Loading 🎻⚓
         if ($this->databaseGuardHandler === null) {
             $this->databaseGuardHandler = $this->handler('databaseGuard');
         }

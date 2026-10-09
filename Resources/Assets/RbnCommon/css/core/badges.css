@@ -27,6 +27,25 @@
 .rbn-badge-md { font-size: 0.75rem; padding: 4px 10px; }
 .rbn-badge-lg { font-size: 0.8125rem; padding: 5px 12px; }
 
+/* Yazi tipi: sans (varsayilan mono) — FW-096-C2 */
+.rbn-badge-sans { font-family: var(--rbn-font-sans, inherit); letter-spacing: 0; }
+
+/* Tema token'li rozetler: koyu temada proje --rbn-primary-subtle / --rbn-accent verir — FW-096-C2 */
+.rbn-badge-subtle {
+    background: var(--rbn-primary-subtle);
+    color: var(--rbn-primary);
+    border-color: color-mix(in srgb, var(--rbn-primary) 25%, transparent);
+    font-family: var(--rbn-font-sans, inherit);
+    letter-spacing: 0;
+}
+.rbn-badge-accent {
+    background: var(--rbn-accent-subtle);
+    color: var(--rbn-accent-text);
+    border-color: color-mix(in srgb, var(--rbn-accent) 40%, transparent);
+    font-family: var(--rbn-font-sans, inherit);
+    letter-spacing: 0;
+}
+
 /* 3. Shape Variants */
 .rbn-badge-square { border-radius: var(--rbn-radius-sm, 6px); }
 

@@ -8,7 +8,7 @@ use Rbn\Framework\Core\System\Discovery\Clusters\Logic\Definition\Definition;
 /**
  * DatabaseService - The Database Management Hub 🛠️
  * 
- * RBN Framework 3.0 "Masterpiece" Implementation.
+ * RBN FrameworkImplementation.
  * Modernized version that provides high-level DB management features.
  * Acts as a fluent API wrapper around the SchemaDoctorModel.
  */

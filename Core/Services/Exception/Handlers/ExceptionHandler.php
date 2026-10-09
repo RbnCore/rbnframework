@@ -22,7 +22,7 @@ class ExceptionHandler
     public function handle(Throwable $exception): void
     {
         try {
-            // [LAYER 3] RBN 3.5: Strategic Pre-flight Dispatch (Zero-Dependency) 🛡️🚀⚓
+            // [LAYER 3] RBN Framework: Strategic Pre-flight Dispatch (Zero-Dependency) 🛡️🚀⚓
             // If the failure is at the boot/initialization level, we MUST bypass discovery.
             if ($exception instanceof PreflightException) {
                 PreflightProvider::renderFatal(
@@ -68,7 +68,7 @@ class ExceptionHandler
      */
     private function survivalFallback(Throwable $exception, string $messagePrefix = ""): void
     {
-        // 📓 RBN 3.5: Masterpiece Black-box Recording (Panic Mode)
+        // 📓 RBN Framework: Black-box Recording (Panic Mode)
         LogHandler::failsafeLog([
             'type' => $messagePrefix ?: get_class($exception),
             'message' => $exception->getMessage(),

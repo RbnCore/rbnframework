@@ -1,7 +1,7 @@
 <?php
 /**
  * RbnMail / Hostmailhub Management View 🏰📧
- * Terracotta Craft Sovereign Standard.
+ * Terracotta Craft RBN Framework Standard.
  */
 ?>
 

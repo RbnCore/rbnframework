@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\System\Registries\RegistryMap;
 /**
  * SystemResourceMapTrait - The Universal Resource Library 🛠️📋⚓
  * 
- * RBN 3.5 Masterpiece: Centralized authority for Helpers, Metadata and Constants.
+ * RBN Framework: Centralized authority for Helpers, Metadata and Constants.
  * Consolidates all Internal DNA and Utility maps.
  */
 trait SystemResourceMapTrait

@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Services\Console\Base\AbstractCronTask;
 /**
  * SystemTask - Framework System & Maintenance Task Dispatcher 🧼🎻⚓
  * 
- * RBN 3.5 Sovereign Architecture Standard.
+ * RBN Framework Architecture Standard.
  * Handles system-level cleanup and maintenance operations using Jobs.
  */
 class SystemTask extends AbstractCronTask

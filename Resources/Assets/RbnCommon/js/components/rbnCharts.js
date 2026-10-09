@@ -1,7 +1,7 @@
 /**
- * rbnCharts.js — Native Sovereign Visualization & Map Engine (Pure JS) 📊🗺️⚡
+ * rbnCharts.js — Native RBN Framework Visualization & Map Engine (Pure JS) 📊🗺️⚡
  * Custom dependency-free charting & interactive mapping using HTML5 Canvas & SVG.
- * Part of the RBN 3.5 "Masterpiece" Architecture.
+ * Part of the RBN Framework Architecture.
  */
 
 const RbnCharts = (function () {

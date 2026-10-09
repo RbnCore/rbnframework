@@ -14,7 +14,7 @@ use Rbn\Framework\Core\Base\Patterns\BaseProxy;
 /**
  * HttpContextTrait - Shared HTTP Component Layer 🛰️⚓
  * 
- * RBN 3.5: Accesses core properties via BaseContextTrait hierarchy.
+ * RBN Framework: Accesses core properties via BaseContextTrait hierarchy.
  * Prevents code redundancy while ensuring total linter compatibility.
  */
 trait HttpContextTrait
@@ -28,7 +28,7 @@ trait HttpContextTrait
      */
     protected function initHttpContext(): array
     {
-        // 🎯 RBN 3.5: Masterpiece DNA Hub Access 🎻⚓
+        // 🎯 RBN Framework: DNA Hub Access 🎻⚓
         // Try to fetch shared instances from the Grand Orchestrator (rbn) first.
         $hub = \Rbn\Framework\Core\Base\Services\BaseService::get();
 
@@ -45,7 +45,7 @@ trait HttpContextTrait
             $this->response = $hub->response ?? Response::getInstance();
         }
 
-        // 🎼 RBN 3.5: Sovereign Recursion Guard 🛡️⚓
+        // 🎼 RBN Framework: Recursion Guard 🛡️⚓
         // Prevent RouteHandle from instantiating itself recursively.
         if ($this->Route === null) {
             if ($this instanceof RouteHandle) {
@@ -55,7 +55,7 @@ trait HttpContextTrait
             }
         }
 
-        // 🪐 RBN 3.5: Masterpiece Remote Connector 🛰️
+        // 🪐 RBN Framework: Remote Connector 🛰️
         if ($this->remote === null) {
             if ($this instanceof RemoteRequest) {
                 $this->remote = $this;
@@ -64,7 +64,7 @@ trait HttpContextTrait
             }
         }
 
-        // 🎼 RBN 3.5: Masterpiece Decoupling
+        // 🎼 RBN Framework: Decoupling
         if ($this->proxy === null) {
             $this->proxy = $hub->proxy ?? new BaseProxy('proxy');
         }

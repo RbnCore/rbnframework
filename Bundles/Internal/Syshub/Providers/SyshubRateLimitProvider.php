@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\Services\BaseProvider;
 
 /**
  * SyshubRateLimitProvider - Otonom Hız Sınırlama Veri Katmanı 🛡️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * Bu provider, hiçbir aracı servis kullanmadan doğrudan RateLimitModel ile konuşur.
  * 
@@ -35,7 +35,7 @@ class SyshubRateLimitProvider extends BaseProvider
 
         $records = $query->get()->toArray();
 
-        // 🌍 GeoIP Mapping (Masterpiece Data Enrichment) 🛰️⚓
+        // 🌍 GeoIP Mapping (RBN Framework Data Enrichment) 🛰️⚓
         $geoIP = $this->handler('geoIP');
         if ($geoIP) {
             foreach ($records as &$record) {

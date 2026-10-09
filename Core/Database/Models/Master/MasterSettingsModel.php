@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Data\BaseModel;
 /**
  * MasterSettingsModel - The Global Authority Configuration Model 🏛️🛰️⚓
  * 
- * RBN 3.5 Masterpiece: Sovereign orchestrator for the rbn_master settings table.
+ * RBN Framework: orchestrator for the rbn_master settings table.
  * This is the Single Source of Truth (SSoT) for system-wide configurations.
  * 
  * @property int    $id             [PRIMARY]

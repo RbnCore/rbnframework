@@ -7,9 +7,9 @@ namespace Rbn\Framework\Core\Database\Repositories\Project;
 use Rbn\Framework\Core\Base\Data\BaseRepository;
 
 /**
- * FaqRepository - Sovereign Data Repository for FAQ Submodule 🏛️📦⚓
+ * FaqRepository - RBN Framework Data Repository for FAQ Submodule 🏛️📦⚓
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Handles data retrieval and persistence for Frequently Asked Questions.
  * 
  * @property \Rbn\Framework\Core\Database\Models\Project\FaqsModel $faqsModel
@@ -26,7 +26,7 @@ class FaqRepository extends BaseRepository
     {
         $model = $this->model('project.faq');
 
-        // 🎯 RBN 3.5: [SOVEREIGN FILTERING]
+        // 🎯 RBN Framework: [RBN Framework FILTERING]
         // [FW-ALTYAPI-3 / H · G4] Elle `where('project_key', active_project_key())`
         // KALDIRILDI: `FaqsModel` artık `scoped = true`, kapsam modelin kendi
         // beyanı. Aynı değer iki kez yazılınca davranış değişmiyordu; kapsam

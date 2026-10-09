@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\Http\Security;
 /**
  * MachineApiRegistry - "Bu uc bir makine API'sidir" beyaninin TEK kaynagi 🤖📜
  *
- * [FW-APIGUARD · TASARIM GOREV 1 · 2026-10-03 · zeki-6eb7f5]
+ * [FW-APIGUARD · TASARIM GOREV 1 · 2026-10-03 · team member]
  *
  * SORUN (tasarim raporu §3.0): bugun "hangi uc makine API'sidir?" sorusunun
  * UC BAGIMSIZ cevabi var:

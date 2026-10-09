@@ -57,7 +57,7 @@ class SettingsArchitectController extends BackstageController
             $this->modalView = "Settings/Partials/modal_group";
             $group = $id ? $settingsDb->fetch(['target' => 'groups', 'id' => $id]) : [];
             $data = !empty($group) ? $group[0] : [];
-            // 🎨 RBN 3.5: [SOVEREIGN HELPER] Accessing IconLibrary via the official 'icons' alias.
+            // 🎨 RBN Framework: [RBN Framework HELPER] Accessing IconLibrary via the official 'icons' alias.
             $data['icons'] = $this->helper('icons')->category('popular')->toSelect();
             return $data;
         }

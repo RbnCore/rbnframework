@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 /**
  * YoutubeProvider - YouTube Data API v3 Connectivity Hub 📽️🛰️⚓
  * 
- * RBN 3.5 Masterpiece: Autonomous YouTube orchestrator.
+ * RBN Framework: Autonomous YouTube orchestrator.
  */
 class YoutubeProvider extends BaseComponent
 {
@@ -25,7 +25,7 @@ class YoutubeProvider extends BaseComponent
         if (empty($apiKey)) {
             return [
                 'status' => 'error',
-                'message' => 'RBN 3.5: YouTube API yetkisi veya anahtarı bulunamadı! 🛡️⚓'
+                'message' => 'YouTube API yetkisi veya anahtarı bulunamadı! 🛡️⚓'
             ];
         }
 

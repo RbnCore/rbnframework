@@ -6,7 +6,7 @@ use Rbn\Framework\Core\Routes\Route;
 use Rbn\Framework\Core\Base\Services\BaseService;
 
 /**
- * Unified App Routes - (Mirror Hub v5.0 Masterpiece) 🎼🛰️⚓
+ * Unified App Routes - (Mirror Hub) 🎼🛰️⚓
  */
 
 // 0. Static Route Map Cache 🧠⚡
@@ -17,7 +17,7 @@ Route::middleware(\Rbn\Framework\Core\Http\Security\ApiGuard::class)->group(func
     Route::any('/api/v1/external', 'Rbn\Framework\Core\Render\Controllers\Api\ExternalApiController@index');
 });
 
-// 1. Frontend & Public Discovery (Key-Based Sovereign Dispatch) 🌍
+// 1. Frontend & Public Discovery (Key-Based RBN Framework Dispatch) 🌍
 $projectData = \Rbn\Framework\Core\System\Kernel\Bootstrap::getAppContext('project_data');
 $projectKey = $projectData['project_key'] ?? project_key();
 

@@ -10,7 +10,7 @@ use Rbn\Framework\Core\System\Paths\Paths;
 /**
  * FileProxyController - Secure Storage Streamer 🛡️📦
  * 
- * RBN 3.5 Masterpiece: Powered by Autonomous DNA.
+ * RBN Framework: Powered by Autonomous DNA.
  * Securely streams files from private storage (uploads, exports) to the client
  * with strict path traversal protection and Shield-integrated error handling.
  */
@@ -33,7 +33,7 @@ class FileProxyController extends BaseController
     }
 
     /**
-     * Core streaming logic with Masterpiece Security.
+     * Core streaming logic with RBN Framework Security.
      */
     private function serveFile(string $fullPath, bool $forceDownload = false): void
     {
@@ -42,7 +42,7 @@ class FileProxyController extends BaseController
         $storageRoot = realpath(Paths::project()->storage());
 
         if ($realPath === false || !str_starts_with($realPath, $storageRoot) || !is_file($realPath)) {
-            // 🏹 RBN 3.5: Use centralized DNA abort mechanism
+            // 🏹 RBN Framework: Use centralized DNA abort mechanism
             $this->abort(404, 'File not found or access denied.');
         }
 

@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 /**
  * BaseDiscoveryContext - The Standardized Discovery DNA 🧬🏛️🛰️⚖️
  * 
- * RBN 3.5 Masterpiece: Centralized base for all Discovery Contexts.
+ * RBN Framework: Centralized base for all Discovery Contexts.
  * Provides resilient diagnostic reporting, input normalization and caching capabilities.
  * Inherits the full RBN DNA (Shield & ErrorHandling) via BaseComponent.
  */
@@ -24,13 +24,13 @@ abstract class BaseDiscoveryContext extends BaseComponent
      */
     public function __construct(?object $rbn = null)
     {
-        // 🎼 RBN 3.5: Absolute Isolation 🪓🛡️⚓
+        // 🎼 RBN Framework: Absolute Isolation 🪓🛡️⚓
         // We DO NOT call parent::__construct() here.
         // We MUST prevent BaseComponent from triggering bootConcernsContext().
 
         $this->rbn = $rbn ?? self::$globalRbn;
 
-        // 🎼 RBN 3.5: Pure Discovery Linkage 🏛️⚔️🛡️⚓
+        // 🎼 RBN Framework: Pure Discovery Linkage 🏛️⚔️🛡️⚓
         // Ensure the discovery motor is ALWAYS initialized across the hierarchy.
         $this->discover = \Rbn\Framework\Core\System\Discovery\Engine\DiscoveryEngine::instance($this->rbn);
     }
@@ -52,7 +52,7 @@ abstract class BaseDiscoveryContext extends BaseComponent
     protected function triggerDiagnostic(string $name, string $type): void
     {
         // 🥇 Utilizing the Global Shield integrated into Root DNA ($this->shield)
-        // RBN 3.5: Lazy initialization to prevent boot-time recursion 🧬🛡️⚓
+        // RBN Framework: Lazy initialization to prevent boot-time recursion 🧬🛡️⚓
         $this->shield ??= (function_exists('shield') ? shield() : null);
 
         if ($this->shield) {

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Rbn\Framework\Core\Support\Contracts\Base;
 
 /**
- * BaseConfigInterface - The Grand Contract for RBN 3.5 Configs ⚙️🎻🛰️
+ * BaseConfigInterface - The Grand Contract for RBN Framework Configs ⚙️🎻🛰️
  * 
- * RBN 3.5: Otonom Discovery (Keşif) mimarisine göre modernize edildi.
+ * RBN Framework: Otonom Discovery (Keşif) mimarisine göre modernize edildi.
  * Artık manuel kayıt (services, models vb.) metotlarını barındırmaz.
  */
 interface BaseConfigInterface

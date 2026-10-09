@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 /**
  * BaseCleanupHandler - Temizlik İşlemleri İçin Ortak Taban ve Güvenlik Zırhı 🛡️🧼
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 abstract class BaseCleanupHandler extends BaseComponent
 {

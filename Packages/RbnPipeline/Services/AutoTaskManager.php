@@ -9,8 +9,8 @@ use Rbn\Framework\Core\Base\Services\BaseManager;
 use Rbn\Framework\Packages\RbnPipeline\Concerns\AutoTaskTrait;
 
 /**
- * AutoTaskManager - Master Orchestrator for All Sovereign Automated Tasks (Blog, News, Product, etc.) 🤖🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * AutoTaskManager - Master Orchestrator for All RBN Framework Automated Tasks (Blog, News, Product, etc.) 🤖🛰️⚓
+ * RBN Framework Standard.
  */
 #[Component(alias: 'autoTask', type: 'manager')]
 class AutoTaskManager extends BaseManager

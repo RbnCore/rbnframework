@@ -10,7 +10,7 @@ use Rbn\Framework\Packages\RbnApi\Models\ApiKeysRegistry;
 
 /**
  * ApiManager - Central Gateway Manager for API Security & Logs 📡🛡️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 #[Component(alias: 'api', type: 'manager')]
 class ApiManager extends BaseManager

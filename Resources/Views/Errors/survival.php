@@ -31,7 +31,7 @@ $rbnE = static fn($deger, string $yedek = ''): string => htmlspecialchars(
 </div>
 
 <script>
-    // 🎯 RBN 3.5: Masterpiece Global Diagnostic Payload 📼
+    // 🎯 RBN Framework: Global Diagnostic Payload 📼
     // Used by survival.js theme asset.
     window.survivalDiagnosticText = <?= json_encode($copyText ?? '') ?>;
 </script>

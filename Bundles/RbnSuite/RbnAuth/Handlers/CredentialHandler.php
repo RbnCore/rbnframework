@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Support\Blueprints\Validations\PasswordValidations;
 
 /**
  * CredentialHandler - The Central Security Karargah 🛡️🏛️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * Specialized orchestrator for identity credential validation:
  * - Email Domain/Pattern filtering
@@ -141,7 +141,7 @@ class CredentialHandler extends BaseComponent
 
     /**
      * Calculates password strength score (0-100) 🛡️📊
-     * RBN 3.5 High-Performance Entropy Analysis.
+     * RBN Framework High-Performance Entropy Analysis.
      */
     public function calculateScore(string $password): int
     {

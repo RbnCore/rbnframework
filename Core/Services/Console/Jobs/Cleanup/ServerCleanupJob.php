@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Base\Attributes\Component;
 /**
  * ServerCleanupJob - Sunucu / Workspace Seviyesi Otonom Temizlik Görevi 🌐🧼
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Workspace altındaki merkezi logları, tmp scratch, lscache ve .trash dosyalarını temizler.
  */
 #[Component(alias: 'cleanup.server', type: 'job')]

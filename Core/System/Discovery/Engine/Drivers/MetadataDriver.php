@@ -9,7 +9,7 @@ use Rbn\Framework\Core\System\Discovery\Engine\DiscoveryEngine;
 /**
  * MetadataDriver - Specialized Constant & Config Discovery 🧬🛰️
  * 
- * RBN 3.5: Handles the discovery of constants and configuration metadata.
+ * RBN Framework: Handles the discovery of constants and configuration metadata.
  * Centralizes all non-instance discovery logic.
  */
 class MetadataDriver
@@ -46,7 +46,7 @@ class MetadataDriver
      */
     public function config(string $key)
     {
-        // RBN 3.5 Bridge: Delegate to the orchestrator's config system
+        // RBN Framework Bridge: Delegate to the orchestrator's config system
         if (method_exists($this->rbn, 'config')) {
             return $this->rbn->config($key);
         }

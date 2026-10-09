@@ -7,7 +7,7 @@ use Exception;
 
 /**
  * SidebarHandler - Action specialist for Admin Sidebar 🛰️🛠️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * @property \Rbn\Framework\Core\Database\Models\Project\SidebarMenusModel $SidebarMenusModel
  * @property \Rbn\Framework\Core\Database\Models\Project\SidebarCategoriesModel $SidebarCategoriesModel

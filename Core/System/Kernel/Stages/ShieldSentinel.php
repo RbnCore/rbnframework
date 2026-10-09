@@ -13,7 +13,7 @@ use Throwable;
 /**
  * ShieldSentinel - Unified Security & Diagnostic Guard 🛡️🚨⚓
  * 
- * RBN 3.5: [MASTERPIECE REFACTORED]
+ * RBN Framework: [RBN Framework REFACTORED]
  * This stage enforces mandatory system health and security checks.
  * Legacy RbnShield boot is replaced by direct Exception Orchestration via Shield Hub.
  */
@@ -40,7 +40,7 @@ class ShieldSentinel extends BaseStage
         }
 
         try {
-            // 🔥 RBN 3.5: Masterpiece Security Enforcement 🏺🛰️
+            // 🔥 RBN Framework: Security Enforcement 🏺🛰️
             // Here we can trigger any high-level security boot logic if needed,
             // or simply use the shield() hub to validate the current environment.
             // For now, we ensure that if a security breach or missing guard is detected,

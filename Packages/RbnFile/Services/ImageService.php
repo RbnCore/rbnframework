@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Attributes\Component;
 
 /**
  * ImageService - Görsel İşleme ve Manipülasyon Servisi 🎨⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 #[Component(alias: 'image', type: 'service')]
 class ImageService extends BaseService

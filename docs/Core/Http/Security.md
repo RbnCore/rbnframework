@@ -1,6 +1,6 @@
 # Core/Http/Security — form kalkanı, dış API koruması ve makine anahtar deposu
 
-> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Http/Security/` — **14 `*.php`** (5 kök + 8 `Handlers/` + 1 `bin/`).
 > **Envanter:** 14 dosyanın **14'ü** aşağıda anlatıldı.
 

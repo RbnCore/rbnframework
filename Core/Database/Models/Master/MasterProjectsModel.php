@@ -8,9 +8,9 @@ use Rbn\Framework\Core\Base\Data\BaseModel;
 use Rbn\Framework\Core\Support\Contracts\Base\BaseModelInterface;
 
 /**
- * MasterProjectsModel - Sovereign Project Identity Model 🏛️🧬⚓
+ * MasterProjectsModel - RBN Framework Project Identity Model 🏛️🧬⚓
  * 
- * RBN 3.5: Strategic Master Hub Model.
+ * RBN Framework: Strategic Master Hub Model.
  * This model lives in the Database Master layer to manage project registrations across the ecosystem.
  * All master-layer registrations MUST flow through this authoritative shell.
  * 

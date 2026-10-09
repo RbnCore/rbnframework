@@ -98,4 +98,70 @@ final class SecretsSchema
 
     /** `api` bölümünün şema adı. */
     public const API_SECTION = 'api';
+
+    /* ------------------------------------------------------------------
+     * [FW-096-D8] `app` BÖLÜMÜ — ortam bayrağı ve çalışma ayarları
+     *
+     * Framework OS ortam değişkeni OKUMAZ (`getenv`, `.htaccess SetEnv`,
+     * `.env` bu framework'ün mekanizması DEĞİLDİR). Ortam bayrağı ve
+     * çalışma anahtarları burada tanımlı `app` bölümünden, TEK okuyucu
+     * `Secrets::app()` ile okunur.
+     *
+     * Bölümün TAMAMI opsiyoneldir: anahtar yoksa aşağıdaki GÜVENLİ varsayılan
+     * kullanılır. `environment` yoksa `production` kabul edilir ve süreç başına
+     * bir kez loglanır (fail-closed: belirsizlik üretim tarafına düşer).
+     * ---------------------------------------------------------------- */
+
+    /** `app` bölümünün şema adı. */
+    public const APP_SECTION = 'app';
+
+    /** Geliştirme ortamı değeri (`app.environment`). */
+    public const ENV_DEVELOPMENT = 'development';
+
+    /** Üretim ortamı değeri (`app.environment`) — güvenli varsayılan. */
+    public const ENV_PRODUCTION = 'production';
+
+    /**
+     * `app` bölümünün alanları ve GÜVENLİ varsayılanları. Değerin PHP tipi
+     * alanın tipidir: `bool` alana `true/false`, `int` alana tam sayı, `string`
+     * alana metin yazılır. Tipi tutmayan değer varsayılana düşer ve loglanır
+     * (metin yorumlayan ikinci bir "kapalı listesi" YAZILMAZ).
+     *
+     *  - `environment`       `production` | `development` (Okuyan: `PreBoot::isProductionDeclared()`)
+     *  - `debug`, `dev`      operatörün açık hata ayıklama kapısı (Okuyan: `PreBoot::detectEnvironment()`)
+     *  - `guard_failclosed`  koruma hatasında ENGELLE (Okuyan: `SystemGuardHandler::resolveFailClosed()`)
+     *  - `log_throttle`      tanılama logu saatlik kapısı (Okuyan: `LogThrottle::enabled()`)
+     *  - `db_profile`        `''` (otomatik) | `local` | `production` (Okuyan: `ProjectDbProfileResolver::activeProfile()`)
+     *  - `tg_send_delay_ms`  Telegram test router gecikmesi, yalnız TEST (Okuyan: `projects/myapps/sroweb/Tests/Telegram/router.php`)
+     *  - `allow_legacy_salt` eski gömülü tuz kill-switch onayı (Okuyan: `CryptoHelper::legacySaltApproval()`)
+     *
+     * @var array<string,bool|int|string>
+     */
+    public const APP_DEFAULTS = [
+        'environment' => self::ENV_PRODUCTION,
+        'debug' => false,
+        'dev' => false,
+        'guard_failclosed' => true,
+        'log_throttle' => true,
+        'db_profile' => '',
+        'tg_send_delay_ms' => 0,
+        'allow_legacy_salt' => false,
+    ];
+
+    /**
+     * Metin alanlarının kabul edilen değerleri. Listede olmayan değer
+     * varsayılana düşer (yazım hatası `staging` üretimi gevşetmez).
+     *
+     * @var array<string,string[]>
+     */
+    public const APP_ALLOWED = [
+        'environment' => [self::ENV_PRODUCTION, self::ENV_DEVELOPMENT],
+        'db_profile' => ['', 'local', 'production'],
+    ];
+
+    /**
+     * Üst düzey (bölüm olmayan) anahtar: eski gömülü tuz (legacy). Sır
+     * niteliğindedir; yalnız `app.allow_legacy_salt = true` iken okunur.
+     */
+    public const LEGACY_SALT_NAME = 'legacy_salt';
 }

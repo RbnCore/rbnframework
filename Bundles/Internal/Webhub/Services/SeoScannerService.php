@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\Services\BaseService;
 
 /**
  * SeoScannerService - The Real SEO Analyzer Pipeline Orchestrator 🤖🚀⚓
- * Standard: RBN 3.5 Masterpiece
+ * Standard: RBN Framework
  */
 class SeoScannerService extends BaseService
 {
@@ -50,7 +50,7 @@ class SeoScannerService extends BaseService
 
     /**
      * Get Centralized SEO Report (View-Ready) 🏛️📊
-     * Standard: RBN 3.5 Masterpiece
+     * Standard: RBN Framework
      */
     public function getReport(): array
     {

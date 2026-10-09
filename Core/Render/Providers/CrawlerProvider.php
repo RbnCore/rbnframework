@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseRenderInterface;
 /**
  * CrawlerProvider - Unified Search Engine Indexing & Discovery Hub 🛰️🤖🗺️⚓
  * 
- * RBN 3.5 Masterpiece: Centralized provider for Robots directives and XML Sitemaps.
+ * RBN Framework: Centralized provider for Robots directives and XML Sitemaps.
  * Manages how external crawlers perceive and navigate the system structure.
  */
 class CrawlerProvider extends BaseRender implements BaseRenderInterface
@@ -34,7 +34,7 @@ class CrawlerProvider extends BaseRender implements BaseRenderInterface
 
     /**
      * Segment: Robots.txt Rendering 🤖⚓
-     * RBN 3.5: Generates plain-text directives for search engine crawlers.
+     * RBN Framework: Generates plain-text directives for search engine crawlers.
      */
     public function renderRobots(array $data = []): string
     {
@@ -88,7 +88,7 @@ class CrawlerProvider extends BaseRender implements BaseRenderInterface
 
     /**
      * Segment: XML Sitemap Rendering 🗺️⚓
-     * RBN 3.5: Generates valid XML directory map for index optimization.
+     * RBN Framework: Generates valid XML directory map for index optimization.
      */
     public function renderSitemap(array $data = []): string
     {
@@ -237,7 +237,7 @@ class CrawlerProvider extends BaseRender implements BaseRenderInterface
     }
 
     /**
-     * 🛰️ RBN 3.5: [SOVEREIGN PROJECT SSOT] ⚓
+     * 🛰️ RBN Framework: [RBN Framework PROJECT SSOT] ⚓
      * Projeye ait çekirdek ayarları ve kaynakları (Handler üzerinden) döndürür.
      */
     public function getProject(string $type)
@@ -267,7 +267,7 @@ class CrawlerProvider extends BaseRender implements BaseRenderInterface
 
     /**
      * Segment: XML RSS Feed Rendering 📡📰
-     * RBN 3.5: Generates valid XML feed using FeedBuilder.
+     * RBN Framework: Generates valid XML feed using FeedBuilder.
      */
     public function renderFeed(array $data = []): string
     {
@@ -286,7 +286,7 @@ class CrawlerProvider extends BaseRender implements BaseRenderInterface
 
     /**
      * Segment: LLMs.txt Markdown Rendering 🤖📄
-     * RBN 3.5: Generates valid LLMs markdown using LlmsBuilder.
+     * RBN Framework: Generates valid LLMs markdown using LlmsBuilder.
      */
     public function renderLlms(array $data = []): string
     {

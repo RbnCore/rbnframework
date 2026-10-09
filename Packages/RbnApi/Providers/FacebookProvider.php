@@ -7,8 +7,8 @@ namespace Rbn\Framework\Packages\RbnApi\Providers;
 use Rbn\Framework\Core\Base\BaseComponent;
 
 /**
- * FacebookProvider - Sovereign Meta Facebook Graph API Provider 🌐👤⚓
- * RBN 3.5 Masterpiece Standard.
+ * FacebookProvider - RBN Framework Meta Facebook Graph API Provider 🌐👤⚓
+ * RBN Framework Standard.
  */
 class FacebookProvider extends BaseComponent
 {
@@ -25,14 +25,14 @@ class FacebookProvider extends BaseComponent
         if (empty($accessToken)) {
             return [
                 'status' => 'error',
-                'message' => 'RBN 3.5: Facebook Access Token yetkisi veya anahtarı bulunamadı! 🛡️⚓'
+                'message' => 'Facebook Access Token yetkisi veya anahtarı bulunamadı! 🛡️⚓'
             ];
         }
 
         $params['access_token'] = $accessToken;
         $url = $this->baseUrl . ltrim($method, '/');
 
-        // 🪐 Use the Sovereign Remote Engine! (Meta Graph API requires form-urlencoded for POST)
+        // 🪐 Use the RBN Framework Remote Engine! (Meta Graph API requires form-urlencoded for POST)
         $result = $this->remote->request($httpMethod, $url, $params, [], false);
 
         if ($result['status'] === 'success') {

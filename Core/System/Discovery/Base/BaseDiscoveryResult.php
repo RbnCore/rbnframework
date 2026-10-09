@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\System\Discovery\Base;
 /**
  * BaseDiscoveryResult - Unified Metadata Container 📦🛰️⚓
  * 
- * RBN 3.5: Represents a generic successful discovery result.
+ * RBN Framework: Represents a generic successful discovery result.
  * Encapsulates the physical path and source layer information.
  */
 abstract class BaseDiscoveryResult

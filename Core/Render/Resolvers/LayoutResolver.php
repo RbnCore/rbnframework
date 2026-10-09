@@ -8,8 +8,8 @@ use Rbn\Framework\Core\Base\Web\BaseRender;
 
 /**
  * LayoutResolver - Hierarchical View Orchestrator 🏛️🛰️⚓
- * 
- * RBN 3.5 Masterpiece: Responsible for managing view extensions, 
+ *
+ * RBN Framework: Responsible for managing view extensions,
  * blocks, and hierarchical data inheritance.
  */
 class LayoutResolver extends BaseRender

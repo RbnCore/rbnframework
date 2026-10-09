@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 
 /**
  * BaseSeoHandler - Abstract Base Class for SEO Scanner Pipeline
- * RBN 3.5 Handler Pipeline
+ * RBN Framework Handler Pipeline
  */
 abstract class BaseSeoHandler extends BaseComponent
 {

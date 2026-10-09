@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseModelInterface;
 /**
  * CmSysRateLimitsModel - Hız Sınırlama ve İstek Takip Katmanı ⏱️🛡️
  * 
- * RBN 3.5: Consolidated model for managing rate limit attempts in rbncore_common.
+ * RBN Framework: Consolidated model for managing rate limit attempts in rbncore_common.
  * 
  * @property int         $id
  * @property string      $project_key
@@ -27,7 +27,7 @@ class CmSysRateLimitsModel extends BaseModel implements BaseModelInterface
     protected string $connection = 'database_common';
     protected $table = 'cm_sys_rate_limits';
     protected bool $timestamps = false;
-    protected bool $scoped = true; // 🛡️ RBN 3.5: Multi-Tenant Scoping Switch
+    protected bool $scoped = true; // 🛡️ RBN Framework: Multi-Tenant Scoping Switch
 
     /**
      * Record a new rate limit attempt.

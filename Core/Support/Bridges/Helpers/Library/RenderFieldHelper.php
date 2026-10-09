@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Rbn\Framework\Core\Support\Bridges\Helpers\Library;
 
 /**
- * RenderFieldHelper - The Sovereign UI Engine 🏛️🏗️⚓
+ * RenderFieldHelper - The RBN Framework UI Engine 🏛️🏗️⚓
  * 
- * RBN 3.5: Strategic decoupling of module business logic from UI rendering.
+ * RBN Framework: Strategic decoupling of module business logic from UI rendering.
  * [MOTOR]: renderField() - Generic HTML generation engine.
  * [BRIDGE]: renderSetting() - Specific normalization for Admin Settings.
  */

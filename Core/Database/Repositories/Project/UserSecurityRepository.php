@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Data\BaseRepository;
 /**
  * UserSecurityRepository - Specialized Data Repository for User Security & Vault Management 🛡️🏛️⚓
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Specialized repository for IP blocks, brute-force protection,
  * and security vault mutations.
  * 

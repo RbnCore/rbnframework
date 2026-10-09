@@ -6,7 +6,7 @@ use Rbn\Framework\Core\System\Paths\Paths;
 
 /**
  * TrafficAnalysisTrait - Analytics engine for WebtrafficService 📊
- * RBN 3.5: Modular analytical logic with persistent stats support.
+ * RBN Framework: Modular analytical logic with persistent stats support.
  */
 trait TrafficAnalysisTrait
 {

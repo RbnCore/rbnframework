@@ -6,7 +6,7 @@ namespace Rbn\Framework\Core\Services\Gatekeepers\Concerns;
 /**
  * Lisans kapısı uyarılarının günlüğe yazılması. 📜
  *
- * [G-18 · 2026-10-03 · zeki-6eb7f5] `DatabaseGuardHandler`'dan AYRILDI, çünkü
+ * [G-18 · 2026-10-03 · team member] `DatabaseGuardHandler`'dan AYRILDI, çünkü
  * kabul testi `fw_licence_kapi.php` K6 o dosyayı **<= 250 satırda** tutuyor ve
  * günlük yardımcıları o sınırı zorluyordu. Test GEVŞETİLMEDİ; kod sınıra
  * uyduruldu. Buradaki üç üye birebir aynıdır:

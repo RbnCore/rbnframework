@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseServiceInterface;
 /**
  * IpGuardService - The Master Access Gatekeeper 🛡️🛰️
  * 
- * RBN 3.5: Master Orchestrator for all IP-based security layers.
+ * RBN Framework: Master Orchestrator for all IP-based security layers.
  * Consolidates Blacklisting, Whitelisting, and Rate Limiting.
  * 
  * [SYMMETRIC LAZY DISCOVERY] 🏛️🛰️✨
@@ -72,6 +72,34 @@ class IpGuardService extends BaseService implements BaseServiceInterface
     }
 
     /**
+     * Account lock status for a login identity (`remaining` seconds > 0 = locked).
+     *
+     * @return array{failures:int,lock_seconds:int,remaining:int}
+     */
+    public function accountLockStatus(string $identity): array
+    {
+        return $this->rateLimitHandler->accountLockStatus($identity);
+    }
+
+    /**
+     * Account lock: record a failed login for an identity.
+     *
+     * @return array{failures:int,lock_seconds:int,remaining:int}
+     */
+    public function recordAccountFailure(string $identity): array
+    {
+        return $this->rateLimitHandler->recordAccountFailure($identity);
+    }
+
+    /**
+     * Account lock: reset the counter after a successful login.
+     */
+    public function clearAccountFailures(string $identity): void
+    {
+        $this->rateLimitHandler->clearAccountFailures($identity);
+    }
+
+    /**
      * Geo Utility: Flag and Location.
      */
     public function countryCode(string $ip): string
@@ -109,7 +137,7 @@ class IpGuardService extends BaseService implements BaseServiceInterface
     /**
      * İstek yolu bir AJAN ucu mu? 🤖🔓
      *
-     * [FW-IP-ENFORCE-HAZIRLIK · Ö-2 · 2026-10-03 · zeki-6eb7f5]
+     * [FW-IP-ENFORCE-HAZIRLIK · Ö-2 · 2026-10-03 · team member]
      * Muaf yollar: `/api/agent/*` ve `/api/telegram/webhook` (tam yol).
      * GEREKCE: bu uclarin KENDI kimlik dogrulamasi (`resolveWebhookAuth`,
      * `?key=` / `x-agent-key`) ve KENDI hiz siniri (`AGENT_RATE_MAX`) var.
@@ -187,7 +215,7 @@ class IpGuardService extends BaseService implements BaseServiceInterface
     /**
      * Gelen istek parametrelerinde (GET, POST, REQUEST_URI) saldırı örüntülerini tarar 🛡️🔥
      *
-     * [FW-IP-ENFORCE-HAZIRLIK · Ö-1 · 2026-10-03 · zeki-6eb7f5] GÖVDE DE
+     * [FW-IP-ENFORCE-HAZIRLIK · Ö-1 · 2026-10-03 · team member] GÖVDE DE
      * TARANIR. Önceki hâlde yalnız `REQUEST_URI`, `QUERY_STRING` ve `$_POST`
      * vardı: `Content-Type: application/json` ile gelen bir saldırı gövdesi
      * `$_POST`'a DÜŞMEZ, dolayısıyla WAF onu hiç görmüyordu (JSON gövde
@@ -220,7 +248,7 @@ class IpGuardService extends BaseService implements BaseServiceInterface
      */
     public function detectAttack(?string $body = null): ?string
     {
-        // [FW-GECE-GATEGUARD · G-07 · 2026-10-03 · zeki-6eb7f5] YOL AYRI
+        // [FW-GECE-GATEGUARD · G-07 · 2026-10-03 · team member] YOL AYRI
         // TARAMA ALTINDAN CIKARILDI. Onceki halde `REQUEST_URI` (yol + sorgu
         // dizesi birlikte) TAM deseni geciriyordu; sonuc: meşru URL/slug
         // parcaları saldiri siniflandiriliyordu. OLÇÜLEN 6 yanlis pozitif

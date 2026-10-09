@@ -324,7 +324,7 @@ body.has-cookie-notice .rbn-scroll-top {
 [data-tooltip]::before {
     content: attr(data-tooltip);
     bottom: calc(100% + 7px);
-    left: 50%;
+    left: calc(50% + var(--rbn-tip-shift, 0px)); /* kenara yakın öğede JS içeri kaydırır */
     transform: translateX(-50%) translateY(4px);
     padding: 5px 10px;
     background: #0f172a;

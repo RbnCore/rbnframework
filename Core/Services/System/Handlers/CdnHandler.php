@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 /**
  * CdnHandler - CDN Logic & Data Processor ⚙️🛰️⚓
  * 
- * RBN 3.5: Veri setlerini (dizi, model, koleksiyon) CDN standartlarına göre işler.
+ * RBN Framework: Veri setlerini (dizi, model, koleksiyon) CDN standartlarına göre işler.
  */
 class CdnHandler extends BaseComponent
 {

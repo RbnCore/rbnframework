@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\Http\Security;
 /**
  * MachineApiKeyStore - Anahtar basina kimlik + kapsam + iptal/sure 🔑🗝️
  *
- * [FW-APIGUARD · TASARIM GOREV 2 · 2026-10-03 · zeki-6eb7f5]
+ * [FW-APIGUARD · TASARIM GOREV 2 · 2026-10-03 · team member]
  *
  * TABAN (A-10): `external-api` ayarinda tek bir `api_key` vardir, duz metindir,
  * iptali/suresi/kapsami YOKTUR; `enabled=false` tum uclari ayni anda dusurur

@@ -7,9 +7,9 @@ namespace Rbn\Framework\Packages\RbnApi\Services;
 use Rbn\Framework\Core\Base\Services\BaseService;
 
 /**
- * TwitterService - The Sovereign X Service 🐦🛰️⚓
+ * TwitterService - The RBN Framework X Service 🐦🛰️⚓
  * 
- * RBN 3.5 Masterpiece: High-level service for all Twitter/X operations.
+ * RBN Framework: High-level service for all Twitter/X operations.
  * @property \Rbn\Framework\Packages\RbnApi\Providers\TwitterProvider $twitter
  */
 class TwitterService extends BaseService

@@ -24,7 +24,7 @@ class WebtrafficController extends RbnAdminController
         // Ortak grafikleri yükle
         $this->service('asset')->prepare('@fw/RbnCommon/js/components/rbnCharts.js', 'panel');
 
-        // 🎼 RBN 3.5: Ziyaretçi konum bayraklarını GeoHelper ile çözümle 🌍
+        // 🎼 RBN Framework: Ziyaretçi konum bayraklarını GeoHelper ile çözümle 🌍
         $geoHelper = $this->helper('Geo');
         $countryFlags = $geoHelper->countryFlags();
 
@@ -112,11 +112,11 @@ class WebtrafficController extends RbnAdminController
         $selectedDate = $this->request->input('date') ?? \now('Y-m-d');
         $visitorType = $this->request->input('type') ?? 'all';
 
-        // 1. Verileri Çek (Sovereign Discovery) 🛰️⚓
+        // 1. Verileri Çek (RBN Framework Discovery) 🛰️⚓
         $traffic = $this->service->traffic();
         $hits = $traffic->query()->forDate($selectedDate)->get();
 
-        // 🎼 RBN 3.5: [DATA SANITIZATION] 🧬⚓ - Boş veya hatalı satırları ayıkla.
+        // 🎼 RBN Framework: [DATA SANITIZATION] 🧬⚓ - Boş veya hatalı satırları ayıkla.
         $allHits = array_values(array_filter($hits, fn($hit) => isset($hit['time'])));
 
         // 🤖 Bot/Organik Filtresi Uygula
@@ -134,7 +134,7 @@ class WebtrafficController extends RbnAdminController
             return strcmp($b['time'] ?? '', $a['time'] ?? '');
         });
 
-        // 🎼 RBN 3.5: Ziyaretçi konum bayraklarını GeoHelper ile çözümle 🌍
+        // 🎼 RBN Framework: Ziyaretçi konum bayraklarını GeoHelper ile çözümle 🌍
         $geoHelper = $this->helper('Geo');
         $countryFlags = $geoHelper->countryFlags();
         foreach ($allHits as &$hit) {
@@ -175,7 +175,7 @@ class WebtrafficController extends RbnAdminController
         }
         unset($hit);
 
-        // 2. Pagination (RBN 3.5: Context-Aware Pagination) 📑
+        // 2. Pagination (RBN Framework: Context-Aware Pagination) 📑
         $paginator = $this->paginate($allHits);
 
         $this->render('Webtraffic/logs', [

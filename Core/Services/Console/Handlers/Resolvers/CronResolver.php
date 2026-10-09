@@ -77,9 +77,13 @@ class CronResolver extends BaseComponent
         sort($hours);
         sort($days);
 
+        // Saat-altı aralık (dakika, 1-59): yalnız görev açıkça isterse (`params.every_minutes`).
+        $everyMinutes = (int) ($params['every_minutes'] ?? 0);
+
         return [
             'days' => $days,
             'hours' => $hours,
+            'every_minutes' => ($everyMinutes > 0 && $everyMinutes < 60) ? $everyMinutes : 0,
             'params' => $params
         ];
     }

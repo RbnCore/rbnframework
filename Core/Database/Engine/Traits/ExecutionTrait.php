@@ -1,6 +1,6 @@
 <?php
 /**
- * RBN Framework 3.0: High-Performance Database Engine 🎻⚡
+ * High-Performance Database Engine 🎻⚡
  */
 namespace Rbn\Framework\Core\Database\Engine\Traits;
 
@@ -45,12 +45,12 @@ trait ExecutionTrait
      */
     public function query(string $query, array $params = [])
     {
-        // 🛠️ RBN 3.5 [PANIC BRAKE] 🏹 Atomic Constant check to prevent memory exhaustion ⚡
+        // 🛠️ RBN Framework [PANIC BRAKE] 🏹 Atomic Constant check to prevent memory exhaustion ⚡
         if (defined('RBN_PANIC_ACTIVE')) {
             return false;
         }
 
-        // 🛡️ RBN 3.5: [BOOT LOOP SENSOR] 🛰️⚓ (CLI modunda pasif)
+        // 🛡️ RBN Framework: [BOOT LOOP SENSOR] 🛰️⚓ (CLI modunda pasif)
         if (PHP_SAPI !== 'cli') {
             self::$bootQueryCount++;
             if (self::$bootQueryCount > 100) {
@@ -83,7 +83,7 @@ trait ExecutionTrait
                 return $stmt;
             }
 
-            // 🛡️ RBN 3.5: [ENGINE ISOLATION] Absolute Terminal Failure 🏛️⚓
+            // 🛡️ RBN Framework: [ENGINE ISOLATION] Absolute Terminal Failure 🏛️⚓
             throw $e;
         }
     }

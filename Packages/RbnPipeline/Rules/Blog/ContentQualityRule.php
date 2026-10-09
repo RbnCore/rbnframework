@@ -10,7 +10,7 @@ use Rbn\Framework\Packages\RbnPipeline\Contracts\PromptRuleInterface;
 /**
  * ContentQualityRule - Master Enforcer for Article Quality, Anti-AI Slop & Topic Adherence 🧠🎯
  * Location: RbnPipeline/Rules/Blog/ContentQualityRule.php
- * RBN 3.5 Sovereign Framework Standards.
+ * RBN Framework Framework Standards.
  */
 class ContentQualityRule extends BaseComponent implements PromptRuleInterface
 {

@@ -7,7 +7,7 @@ use Rbn\Framework\Core\Base\Data\BaseConfig;
 
 /**
  * AuthIdentity - RbnAuth Paket Kimliği ve UI Meta Verileri 🛡️🛰️🏛️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * Bu sınıf paketin SEO, Slogan ve Görünüm (View) meta verilerini 
  * "Identity Map" olarak merkezi HUB üzerinden yönetir.

@@ -10,7 +10,7 @@ use Rbn\Framework\Core\System\Registries\ComponentRegistry;
 /**
  * DiscoveryProxyTrait - Standardized Magic Logic for Proxies 🪐🦾⚓
  * 
- * RBN 3.5: Masterpiece Decoupling.
+ * RBN Framework: Decoupling.
  * Artık rbn saklamaz, her zaman merkezi Hub (BaseService::get()) üzerinden konuşur.
  */
 trait DiscoveryProxyTrait
@@ -38,12 +38,12 @@ trait DiscoveryProxyTrait
             return $this->instances[$name];
         }
 
-        // 🎯 RBN 3.5: Merkezi Kayıt Defterinden çöz
+        // 🎯 RBN Framework: Merkezi Kayıt Defterinden çöz
         $class = ComponentRegistry::locate($name, $this->type);
 
         // Class bulunduysa ayağa kaldır
         if ($class && class_exists($class)) {
-            // 🎼 RBN 3.5: Decoupled Constructor - Sadece tip bilgisini gönderiyoruz.
+            // 🎼 RBN Framework: Decoupled Constructor - Sadece tip bilgisini gönderiyoruz.
             // Orkestra şefi her zaman Hub üzerinden çözülür.
             $instance = new $class($this->type);
             return $this->instances[$name] = $instance;

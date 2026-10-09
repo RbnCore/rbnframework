@@ -10,14 +10,14 @@ use Rbn\Framework\Core\System\Discovery\Engine\DiscoveryEngine;
 /**
  * DiscoveryConfigTrait - Discovery Orchestration & Gate Management 🛰️⚙️🎻
  * 
- * RBN 3.5 Triple Gates: The Grand Orchestrator.
+ * RBN Framework Triple Gates: The Grand Orchestrator.
  * Universal name mapping: Uses standardized 'Map' terminology across all gates.
  * Refactored for Pentaric Satellite Architecture & Dynamic Module Discovery.
  */
 trait DiscoveryConfigTrait
 {
     /**
-     * RBN 3.5: Masterpiece Expansion DNA 🧬🛰️⚓
+     * RBN Framework: Expansion DNA 🧬🛰️⚓
      */
     use \Rbn\Framework\Core\System\Discovery\Base\Traits\NamespaceExpansionTrait;
 
@@ -36,7 +36,7 @@ trait DiscoveryConfigTrait
         self::$isLocating = true;
 
         try {
-            // 🎼 RBN 3.5 Masterpiece Gate Logic: System -> Project -> Sovereign -> Module -> Component
+            // 🎼 RBN Framework Gate Logic: System -> Project -> RBN Framework -> Module -> Component
             if ($found = static::searchInGate('System', $name, $type))
                 return $found;
             if ($found = static::searchInGate('Project', $name, $type))
@@ -57,14 +57,14 @@ trait DiscoveryConfigTrait
      */
     private static function searchInGate(string $gate, string $name, string $type): ?string
     {
-        // 🎼 RBN 3.5 GATE RESOLUTION DNA 🧬⚓
+        // 🎼 RBN Framework GATE RESOLUTION DNA 🧬⚓
         $gateClassMapping = [
             'System' => [SystemRegistry::class],
             'Project' => ["Rbn\\Framework\\Core\\System\\Registries\\AppProjectRegistry"],
             'Sovereign' => SystemRegistry::sovereignBundles()
         ];
 
-        // 🧬 1. Static Resolution (System, Project & Sovereign Gates) 🏛️
+        // 🧬 1. Static Resolution (System, Project & RBN Framework Gates) 🏛️
         if (isset($gateClassMapping[$gate])) {
             foreach ($gateClassMapping[$gate] as $class) {
                 if (class_exists($class)) {
@@ -102,11 +102,11 @@ trait DiscoveryConfigTrait
 
         $fullMap = $instance->registerMap();
 
-        // 🎼 RBN 3.5: Single Source of Truth Pluralization 🎭📦
+        // 🎼 RBN Framework: Single Source of Truth Pluralization 🎭📦
         $key = \Rbn\Framework\Core\Support\Definitions\System\ComponentTypes::pluralize($type);
         $found = isset($fullMap[$key]) ? static::searchDeep($name, $fullMap[$key]) : null;
 
-        // 🎼 RBN 3.5: [SOVEREIGN ARRAY RESOLUTION] 🏙️🛰️⚓
+        // 🎼 RBN Framework: [RBN Framework ARRAY RESOLUTION] 🏙️🛰️⚓
         // Recursive merge nedeniyle dizi dönerse, en son eklenen (override) değeri al.
         return is_array($found) ? (string) end($found) : $found;
     }

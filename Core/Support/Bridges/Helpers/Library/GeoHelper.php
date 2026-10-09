@@ -2,8 +2,8 @@
 namespace Rbn\Framework\Core\Support\Bridges\Helpers\Library;
 
 /**
- * GeoHelper - Coğrafi veriler ve lokasyon araçları (Masterpiece Core) 🌍🛰️⚓
- * RBN 3.5: Tüm veriler merkezi JSON kaynaklarından beslenir.
+ * GeoHelper - Coğrafi veriler ve lokasyon araçları (RBN Framework Core) 🌍🛰️⚓
+ * RBN Framework: Tüm veriler merkezi JSON kaynaklarından beslenir.
  */
 class GeoHelper
 {

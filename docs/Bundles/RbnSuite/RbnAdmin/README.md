@@ -1,6 +1,6 @@
 # RbnAdmin — Yönetim paneli (dashboard, trafik, kullanıcı, ayar, cron, e-posta)
 
-> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Bundles/RbnSuite/RbnAdmin/` — **49 `*.php`**
 > (Controllers 11 · Views 28 · Models 3 · Providers 4 · Services 2 · Traits 1)
 > **Envanter:** 49 php dosyasının **49'u** aşağıdaki tabloda anlatıldı; hiçbir dosya

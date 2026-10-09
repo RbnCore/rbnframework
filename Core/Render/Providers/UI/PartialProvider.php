@@ -7,8 +7,8 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseRenderInterface;
 
 /**
  * PartialProvider - Standard UI Partial Renderer 🛰️🧩⚓
- * 
- * Part of the RBN 3.5 "Masterpiece" Architecture.
+ *
+ * Part of the RBN Framework Architecture.
  */
 class PartialProvider extends BaseRender implements BaseRenderInterface
 {
@@ -25,8 +25,8 @@ class PartialProvider extends BaseRender implements BaseRenderInterface
             $this->handleMissing($view ?? 'unknown');
         }
 
-        // 🛡️ Masterpiece Fragment Awareness: 
-        // We render everything into a buffer, but if a fragment is requested, 
+        // 🛡️ RBN Framework Fragment Awareness:
+        // We render everything into a buffer, but if a fragment is requested,
         // we strictly return only that section.
         ob_start();
         $this->viewEngine()->render($path, $data);
@@ -40,7 +40,7 @@ class PartialProvider extends BaseRender implements BaseRenderInterface
     }
 
     /**
-     * RBN 3.5 Masterpiece: Autonomous Import Orchestration 🛰️⚓
+     * RBN Framework: Autonomous Import Orchestration 🛰️⚓
      * Renders multiple partials into a single HTML block.
      */
     public function renderImports(array $imports, array $data = []): string

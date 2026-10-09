@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Services\BaseService;
 /**
  * RenderService - The Grand Orchestrator for all rendering operations. 🎭🎻⚓
  *
- * RBN 3.5 Masterpiece: Autonomous Orchestration Hub.
+ * RBN Framework: Autonomous Orchestration Hub.
  * This service coordinates data collection (Handlers) and dispatches 
  * the final payload to specialized Providers.
  */
@@ -20,7 +20,7 @@ class RenderService extends BaseService
      */
     public function boot(): void
     {
-        // 🎼 RBN 3.5: DNA ready.
+        // 🎼 RBN Framework: DNA ready.
     }
 
     /**
@@ -47,18 +47,18 @@ class RenderService extends BaseService
             $this->abort(500, "Render Provider not found for type: {$type}");
         }
 
-        // 🎯 RBN 3.5: Masterpiece returning instead of echoing.
-        // Special Case: Delegation to Sovereign AssetService 🎼
+        // 🎯 RBN Framework: returning instead of echoing.
+        // Special Case: Delegation to RBN Framework AssetService 🎼
         if ($type === 'asset') {
             return $this->assetService->render($view, $preparedData);
         }
 
-        // Special Case: Delegation to Sovereign SeoService 🏹
+        // Special Case: Delegation to RBN Framework SeoService 🏹
         if ($type === 'seo' || $type === 'meta') {
             return $this->seoService->render($view, $preparedData);
         }
 
-        // [RBN 3.5] Masterpiece: Passing the render type (context) to the provider.
+        // [RBN Framework] RBN Framework: Passing the render type (context) to the provider.
         return $provider->render($view, $preparedData, $type);
     }
 
@@ -67,7 +67,7 @@ class RenderService extends BaseService
      */
     protected function prepareContext(string $type, string $view, array $data): array
     {
-        // Special Case: Delegation to Sovereign AssetService 🎼
+        // Special Case: Delegation to RBN Framework AssetService 🎼
         if ($type === 'asset') {
             $this->assetService->prepare($view, $data['appContext'] ?? 'frontend');
             return []; // Data is stored in Service state.
@@ -83,7 +83,7 @@ class RenderService extends BaseService
     }
 
     /**
-     * Compatibility Bridge: Resolve a physical view path via the 3.5 Resolver Cluster. 👁️🛰️
+     * Compatibility Bridge: Resolve a physical view path via the Resolver Cluster. 👁️🛰️
      * 
      * @param string $path Logical view path
      * @param array $data View data (for context)
@@ -94,12 +94,12 @@ class RenderService extends BaseService
      */
     public function resolveViewPath(string $path, array $data = [], string $source = 'auto', bool $checkFile = false, string $appContext = 'frontend'): ?string
     {
-        // 🎼 RBN 3.5 Nomenclature Normalization 🎹
+        // 🎼 RBN Framework Nomenclature Normalization 🎹
         if ($appContext === 'admin') {
             $appContext = 'panel';
         }
 
-        // 🎼 RBN 3.5: Delegate to the Sovereign View Resolver cluster (Pass module if present)
+        // 🎼 RBN Framework: Delegate to the RBN Framework View Resolver cluster (Pass module if present)
         $options = ['context' => $appContext];
         if (isset($data['module'])) {
             $options['module'] = $data['module'];
@@ -117,7 +117,7 @@ class RenderService extends BaseService
     }
 
     /**
-     * Legacy Alias: Support for RBN 3.0 bundles 🕰️
+     * Legacy Alias: Support for RBN bundles 🕰️
      */
     public function engine()
     {

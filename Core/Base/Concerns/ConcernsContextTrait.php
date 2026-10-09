@@ -16,9 +16,9 @@ use Rbn\Framework\Core\Base\Services\Traits\Service\Engine\FileTransferServiceTr
 use Rbn\Framework\Core\Base\Concerns\Data\InteractsWithProjectContextTrait;
 
 /**
- * ConcernsContextTrait - RBN 3.5 Masterpiece Context Composer 🎻🪐⚓
+ * ConcernsContextTrait - RBN Framework Context Composer 🎻🪐⚓
  * 
- * RBN 3.5: Composes all sub-context traits into a unified hub.
+ * RBN Framework: Composes all sub-context traits into a unified hub.
  * Centralizes the boot sequence and shared DNA hierarchy.
  */
 trait ConcernsContextTrait
@@ -40,8 +40,8 @@ trait ConcernsContextTrait
      */
     public function bootConcernsContext(): array
     {
-        // 🎼 RBN 3.5: Önce DNA Kökü (rbn & discover) ayağa kalkar! 🧬
-        // Masterpiece Boot Sequence: Artık her şey hiyerarşik sırayla çözülür.
+        // 🎼 RBN Framework: Önce DNA Kökü (rbn & discover) ayağa kalkar! 🧬
+        // RBN Framework Boot Sequence: Artık her şey hiyerarşik sırayla çözülür.
         $this->bootBaseContext();
 
         return array_merge(

@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Support\Bridges\Helpers\Library\Version;
 
 /**
  * MasterProjectsService - Proje Yönetimi İş Mantığı Servisi 🏛️🛰️
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * @property \Rbn\Framework\Core\Database\Repositories\Master\MasterProjectsRepository $masterProjectsRepository
  */

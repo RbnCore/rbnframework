@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\Support\Definitions\Render;
 /**
  * AssetDefinition - The Master Asset Registry 🎭⚓
  * 
- * RBN 3.5 "Masterpiece" Architecture.
+ * RBN Framework Architecture.
  * This file is a PURE REGISTRY of individual asset constants (Paths/CDNs).
  */
 class AssetDefinition
@@ -21,6 +21,12 @@ class AssetDefinition
     public const FONT_AWESOME = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css';
     public const BOOTSTRAP_ICONS = 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css';
     public const REMIX_ICON = 'https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css';
+    /**
+     * Alt kaynak bütünlüğü (SRI): CDN'deki dosya değiştirilirse tarayıcı yüklemez.
+     * Sürüm değişirse özet de değişir: `openssl dgst -sha384 -binary remixicon.css | openssl base64 -A`
+     * (jsDelivr `data.jsdelivr.com/v1/package/npm/remixicon@<sürüm>/flat` sha256'sıyla karşılaştırılarak).
+     */
+    public const REMIX_ICON_ATTRS = ['integrity' => 'sha384-6FSSi597BTd6QcnsBNoLclRKxTOyyYqkaucRjFgCNr8wHVCp0COLClSPY4Vy/bjh', 'crossorigin' => 'anonymous'];
     public const FLAG_ICON = 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/6.6.6/css/flag-icons.min.css';
 
     public const JQUERY = ['path' => 'https://code.jquery.com/jquery-3.7.1.min.js', 'renderInHead' => true];

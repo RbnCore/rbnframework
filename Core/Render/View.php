@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Render\Configs\AssetConfig;
 /**
  * View - The Unified Render Orchestrator 📽️🛰️⚓
  * 
- * RBN 3.5 Masterpiece: Unified Architecture.
+ * RBN Framework: Unified Architecture.
  * Now a core occupant of the Resolvers/View cluster.
  */
 class View extends BaseRender
@@ -47,16 +47,16 @@ class View extends BaseRender
         $this->view = $view;
         $this->data = $data;
         $this->type = $type;
-        $this->module = $type; // 🎼 RBN 3.5: Module context synchronization
+        $this->module = $type; // 🎼 RBN Framework: Module context synchronization
 
-        // 🎻 RBN 3.5: [AUTONOMOUS AJAX DETECTION] 🛰️⚓
+        // 🎻 RBN Framework: [AUTONOMOUS AJAX DETECTION] 🛰️⚓
         // Shift to AjaxProvider if the data explicitly requests it.
         if (isset($this->data['ajax']) && $this->data['ajax'] === true) {
             $this->type = 'ajax';
             $this->module = 'ajax';
         }
 
-        // 🧬 RBN 3.5: Initialize DNA via BaseRender (Discovery, Request, Context)
+        // 🧬 RBN Framework: Initialize DNA via BaseRender (Discovery, Request, Context)
         parent::__construct();
     }
 
@@ -135,7 +135,7 @@ class View extends BaseRender
      */
     public function viewHarmony(): array
     {
-        // 🎼 RBN 3.5: [DNA WAKE UP] 🧬⚓
+        // 🎼 RBN Framework: [DNA WAKE UP] 🧬⚓
         // Ensure core harmony variables (Route, site, helpers) are booted.
         return array_merge($this->bootHarmony(), $this->data);
     }
@@ -182,10 +182,10 @@ class View extends BaseRender
             'data' => $this->data // 🎼 Veri doğrudan aktarılır, harmony birleştirmesi tek noktada (ViewEngine/Provider) yapılır
         ]);
 
-        // 🎭 RBN 3.5: Parse placeholder {year} globally in the final HTML
+        // 🎭 RBN Framework: Parse placeholder {year} globally in the final HTML
         $html = str_replace('{year}', date('Y'), $html);
 
-        // 🎨 RBN 3.5: Autonomous Global Media Proxy Configuration 🖼️⚓
+        // 🎨 RBN Framework: Autonomous Global Media Proxy Configuration 🖼️⚓
         $setup = AssetConfig::PROXY_SETUP;
         $source = in_array($this->type, ['framework', 'core'], true) ? 'framework' : 'project';
         $proxyPath = $setup[$source]['path'] ?? 'project-assets';
@@ -193,7 +193,7 @@ class View extends BaseRender
         $prPrefix = '/' . ($setup['project']['path'] ?? 'project-assets') . '/';
         $fwPrefix = '/' . ($setup['framework']['path'] ?? 'framework-assets') . '/';
 
-        // 🎼 RBN 3.5: Sovereign HTML Normalization Process (Core DNA SSoT) 🛰️⚓
+        // 🎼 RBN Framework: HTML Normalization Process (Core DNA SSoT) 🛰️⚓
         return $this->renderedHtml = $this->normalizeHtmlUrls($html, null, [
             'pr_prefix' => $prPrefix,
             'fw_prefix' => $fwPrefix,
@@ -218,7 +218,7 @@ class View extends BaseRender
         try {
             return $this->result();
         } catch (\Throwable $e) {
-            // 🛡️ RBN 3.5: Kill any hanging buffers to expose the error
+            // 🛡️ RBN Framework: Kill any hanging buffers to expose the error
             if (ob_get_level() > 0) {
                 ob_end_clean();
             }

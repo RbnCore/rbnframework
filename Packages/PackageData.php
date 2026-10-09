@@ -7,9 +7,9 @@ namespace Rbn\Framework\Packages;
 use Rbn\Framework\Core\Base\Data\BaseConfig;
 
 /**
- * PackageData - RBN Packages Sovereign Registry 🏛️🛰️⚓
+ * PackageData - RBN Packages RBN Framework Registry 🏛️🛰️⚓
  * 
- * RBN 3.5: Centralized orchestrator for all standalone packages.
+ * RBN Framework: Centralized orchestrator for all standalone packages.
  */
 class PackageData extends BaseConfig
 {
@@ -21,6 +21,7 @@ class PackageData extends BaseConfig
                 'file' => \Rbn\Framework\Packages\RbnFile\Services\FileService::class,
                 'image' => \Rbn\Framework\Packages\RbnFile\Services\ImageService::class,
                 'email' => \Rbn\Framework\Packages\RbnEmail\Services\EmailService::class,
+                'emailMailbox' => \Rbn\Framework\Packages\RbnEmail\Services\MailboxService::class,
                 'gemini' => \Rbn\Framework\Packages\RbnApi\Services\GeminiService::class,
                 'instagram' => \Rbn\Framework\Packages\RbnApi\Services\InstagramService::class,
                 'facebook' => \Rbn\Framework\Packages\RbnApi\Services\FacebookService::class,
@@ -61,6 +62,9 @@ class PackageData extends BaseConfig
                 'emailTransport' => \Rbn\Framework\Packages\RbnEmail\Handlers\EmailTransportHandler::class,
                 'emailImap' => \Rbn\Framework\Packages\RbnEmail\Handlers\ImapClientHandler::class,
                 'emailParser' => \Rbn\Framework\Packages\RbnEmail\Handlers\MailParserHandler::class,
+                'emailSanitizer' => \Rbn\Framework\Packages\RbnEmail\Handlers\MailHtmlSanitizerHandler::class,
+                'emailCredential' => \Rbn\Framework\Packages\RbnEmail\Handlers\MailCredentialHandler::class,
+                'emailQuota' => \Rbn\Framework\Packages\RbnEmail\Handlers\SendQuotaHandler::class,
             ],
 
             // --- [ RULES ] ---

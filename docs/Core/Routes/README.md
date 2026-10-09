@@ -1,6 +1,6 @@
 # Core/Routes — URL yönlendirme, rota toplama, eşleştirme ve 301 normalizasyonu
 
-> **Doğrulanan kod tabanı:** `1d89c431` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `1d89c431` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Routes/` — 13 `*.php` (3'ü rota eşleme dosyası, 10'u sınıf).
 > **Envanter:** 13 dosyanın 13'ü aşağıda anlatıldı.
 

@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Services\Hosting\Data\CpanelData;
 /**
  * CPanelMailHandler - Specialized Bridge for Email Management 🏰📧
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * @property \Rbn\Framework\Core\Services\Hosting\Providers\CPanelProvider $CPanelProvider
  */
 class CPanelMailHandler extends BaseComponent
@@ -20,7 +20,7 @@ class CPanelMailHandler extends BaseComponent
      */
     public function list(string $domain): array
     {
-        // 🎼 RBN 3.5: Accessing the provider directly via autonomous discovery 🏗️⚓
+        // 🎼 RBN Framework: Accessing the provider directly via autonomous discovery 🏗️⚓
         $result = $this->CPanelProvider->call('Email', 'list_pops_with_disk', [
             'domain' => $domain
         ]);

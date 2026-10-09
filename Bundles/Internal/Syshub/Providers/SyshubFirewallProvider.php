@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Database\Repositories\Common\ShieldSettingsRepository;
 
 /**
  * SyshubFirewallProvider - Otonom Güvenlik Ayarları Veri Katmanı 🛡️🛰️
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * @property \Rbn\Framework\Core\Database\Models\Common\CmSysSettingsShieldModel $shieldSettingModel
  */
 class SyshubFirewallProvider extends BaseProvider

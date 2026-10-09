@@ -5,8 +5,8 @@ namespace Rbn\Framework\Bundles\Internal\Webhub\Providers;
 use Rbn\Framework\Core\Base\Services\BaseProvider;
 
 /**
- * PolicyProvider - Masterpiece Data Delivery 🕵️‍♂️🛰️⚓
- * RBN 3.5 Standard: Synchronized access for Pages and Redirects.
+ * PolicyProvider - RBN Framework Data Delivery 🕵️‍♂️🛰️⚓
+ * RBN Framework Standard: Synchronized access for Pages and Redirects.
  * 
  * @property \Rbn\Framework\Core\Database\Models\Project\PagesModel $PagesModel
  */
@@ -16,7 +16,7 @@ class PolicyProvider extends BaseProvider
     protected $targetModel = 'Pages';
 
     /**
-     * Masterpiece Persistence Discovery 🕵️‍♂️🛰️
+     * RBN Framework Persistence Discovery 🕵️‍♂️🛰️
      */
     protected function afterBoot(): void
     {
@@ -25,7 +25,7 @@ class PolicyProvider extends BaseProvider
 
     /**
      * Standard Save Override 💾
-     * RBN 3.5: Ensures beforeSave hook is explicitly triggered.
+     * RBN Framework: Ensures beforeSave hook is explicitly triggered.
      */
     public function save(array $data): bool|int
     {
@@ -59,14 +59,14 @@ class PolicyProvider extends BaseProvider
     }
 
 
-    /* --- [ SOVEREIGN HOOKS ] --- */
+    /* --- [ RBN Framework HOOKS ] --- */
 
     /**
      * Strategic Persistence Guard 🛡️
      */
     protected function beforeSave(array &$data): void
     {
-        // 🎼 RBN 3.5: [SOVEREIGN SANITIZATION] 🚿
+        // 🎼 RBN Framework: [RBN Framework SANITIZATION] 🚿
         // Remove metadata that doesn't exist in DB schema.
         unset($data['entity']);
 
@@ -77,7 +77,7 @@ class PolicyProvider extends BaseProvider
     }
 
     /**
-     * Sovereign Status Toggle 🔄
+     * RBN Framework Status Toggle 🔄
      */
     public function toggleStatus(int $id, string $field = 'status'): bool
     {

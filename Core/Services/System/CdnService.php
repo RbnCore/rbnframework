@@ -9,9 +9,9 @@ use Rbn\Framework\Core\Support\Definitions\System\FrameworkIdentity;
 use Rbn\Framework\Core\System\Config\Config;
 
 /**
- * CdnService - Framework Sovereign CDN Gateway 🛰️🏛️⚓
+ * CdnService - Framework RBN Framework CDN Gateway 🛰️🏛️⚓
  * 
- * RBN 3.5 Core: Tüm projenin CDN ekosistemini yönetir.
+ * RBN Framework Core: Tüm projenin CDN ekosistemini yönetir.
  */
 class CdnService extends BaseService
 {
@@ -25,7 +25,7 @@ class CdnService extends BaseService
 
         // 2. Eğer bağlam 'projects' ise klasörü tespit et
         if ($context === 'projects') {
-            // 🛡️ RBN 3.5: [DIRECT CONFIG ACCESS] 🏹⚓
+            // 🛡️ RBN Framework: [DIRECT CONFIG ACCESS] 🏹⚓
             // Discovery Engine hatasından kaçınmak için doğrudan Config::get kullanıyoruz.
             $cdnFolder = Config::get('project-settings.cdn_folder') ?? $this->projectKey ?? 'default';
             $baseUrl .= $cdnFolder . '/';

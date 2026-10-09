@@ -14,7 +14,7 @@ use Rbn\Framework\Core\Support\Definitions\System\ComponentTypes;
 /**
  * ComponentContext - The Smart Discovery DNA 🧬🕵️‍♂️🧠⚓
  * 
- * RBN 3.5 Masterpiece: Autonomous component context.
+ * RBN Framework: Autonomous component context.
  * Performs deterministic path calculation and suffix parsing with Zero-Tolerance reporting.
  * Inherits full DNA (Shield, Cache, Normalize) from BaseDiscoveryContext.
  */
@@ -48,7 +48,7 @@ class ComponentContext extends BaseDiscoveryContext
         $property = $targetProperty ?? "target" . $typeSuffix;
         $fallback = $targetProperty ?? $type;
 
-        // 🎼 RBN 3.5: [SOVEREIGN ATTRIBUTE DISCOVERY] ⚖️🛰️⚓
+        // 🎼 RBN Framework: [RBN Framework ATTRIBUTE DISCOVERY] ⚖️🛰️⚓
         // Check for #[SubModule] attribute on the context or its heritage chain.
         $name = null;
         $attribute = $this->getSubModuleAttribute($context);
@@ -57,7 +57,7 @@ class ComponentContext extends BaseDiscoveryContext
             $name = $attribute->{$type};
         }
 
-        // RBN 3.5 Masterpiece: Sovereign Visibility Guard (Legacy Properties) 🛡️⚓
+        // RBN Framework: Visibility Guard (Legacy Properties) 🛡️⚓
         if (!$name) {
             foreach ([$property, $fallback] as $key) {
                 if ($key && property_exists($context, $key)) {
@@ -103,7 +103,7 @@ class ComponentContext extends BaseDiscoveryContext
             return new $fqcn();
         }
 
-        // 🛡️ RBN 3.5: Auto-Shield Diagnostic Gateway (Zero-Tolerance)
+        // 🛡️ RBN Framework: Auto-Shield Diagnostic Gateway (Zero-Tolerance)
         if ($mandatory) {
             $this->triggerDiagnostic($name, $type);
         }
@@ -146,7 +146,7 @@ class ComponentContext extends BaseDiscoveryContext
         $namespaceParts = explode('\\', $currentFqcn);
         array_pop($namespaceParts); // Remove Class name
 
-        // 🎼 RBN 3.5: Masterpiece Layer-Aware Discovery 🛰️⚓
+        // 🎼 RBN Framework: Layer-Aware Discovery 🛰️⚓
         // If we are in a known layer (Controllers/Services/Repositories/etc.), move up to Bundle Root.
         $lastLayer = end($namespaceParts);
         $knownLayers = array_merge(['Controllers'], array_map('ucfirst', array_values(ComponentTypes::PLURAL_MAP)));
@@ -181,7 +181,7 @@ class ComponentContext extends BaseDiscoveryContext
         $reflection = new ReflectionClass($context);
         $attribute = null;
 
-        // 🎻 RBN 3.5: [HERITAGE LOOKUP] 🏹🏙️⚓
+        // 🎻 RBN Framework: [HERITAGE LOOKUP] 🏹🏙️⚓
         // Climb the inheritance chain to find the SubModule or Module identity.
         $current = $reflection;
         while ($current) {

@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\Base\Data\Traits\Repository;
 /**
  * ContentQueryTrait - Reusable High-Performance Content Query Engine 🖋️⚡
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Trait for blog, news, and content providers or repositories across all projects.
  */
 trait ContentQueryTrait

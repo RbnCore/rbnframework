@@ -7,8 +7,8 @@ namespace Rbn\Framework\Bundles\RbnSuite\RbnStudio\Controllers;
 use Rbn\Framework\Core\Base\Attributes\SubModule;
 
 /**
- * NewsController - Sovereign Published News Management 📰🎨🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * NewsController - RBN Framework Published News Management 📰🎨🛰️⚓
+ * RBN Framework Standard.
  */
 #[SubModule(module: 'studio', entity: 'news')]
 class NewsController extends RbnStudioController

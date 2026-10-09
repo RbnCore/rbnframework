@@ -7,7 +7,7 @@ namespace Rbn\Framework\Packages\RbnPipeline\Concerns;
 /**
  * PipelineSanitizerTrait - Universal Content Sanitization & Normalization Concern 🧼✨⚓
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Handles AI response normalization, FAQ sanitization, HTML cleanup, and existing link formatting for AI context.
  */
 trait PipelineSanitizerTrait

@@ -12,7 +12,7 @@ use Rbn\Framework\Core\System\Storage\Providers\BootCacheProvider;
 /**
  * ProjectDataMapper - Proje Verisi Hidrasyon & Önbellek Yazıcısı 🗺️💾🏛️
  *
- * RBN 3.5: [SINGLE RESPONSIBILITY]
+ * RBN Framework: [SINGLE RESPONSIBILITY]
  * Yalnızca iki PDO bağlantısı (Master + Proje) açar, tüm tabloları bildirimsel
  * (declarative) sorgu matrisi üzerinden çeker, birleştirir ve BootCacheProvider
  * aracılığıyla diske mühürler. Yeni bir tablo eklemek = 1 satır yazmak.

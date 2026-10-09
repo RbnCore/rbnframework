@@ -29,7 +29,7 @@ use Rbn\Framework\Core\System\Paths\Paths;
 use Rbn\Framework\Core\Base\Services\BaseService;
 use Rbn\Framework\Core\System\Kernel\Stages\Autoload;
 use Rbn\Framework\Core\System\Kernel\Stages\ProjectDiscovery;
-use Rbn\Framework\Core\System\Config\Env;
+use Rbn\Framework\Core\System\Kernel\Base\PreBoot;
 
 // 3. Early Framework Initialization (Always initialize Paths first)
 $frameworkDir = Paths::frameworkRoot();
@@ -110,7 +110,7 @@ try {
     // Always initialize Paths with the identified (or fallback) project root
     Paths::init($projectRoot, $publicPath);
 
-    // [RBN 3.5 SSoT] Boot project & framework autoloader via Kernel Autoload stage
+    // Boot project & framework autoloader via Kernel Autoload stage
     Autoload::boot();
 
     require_once $frameworkDir . '/Core/Support/Bridges/Helpers/rbn_helpers.php';
@@ -130,8 +130,8 @@ try {
         $logs->channel('cli')->logException($e, "CLI Master Exception");
     }
 
-    // [FW-ENV-KAYIT-160] TEK okuyucu: `Env::string('APP_ENV')`.
-    if (Env::string('APP_ENV') === 'development') {
+    // [FW-096-D8] TEK okuyucu: `PreBoot::isProductionDeclared()` (`secrets.php` `app.environment`).
+    if (!PreBoot::isProductionDeclared()) {
         echo "Source: " . $e->getFile() . ":" . $e->getLine() . "\n";
     }
     exit(1);

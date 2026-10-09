@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseModelInterface;
 /**
  * CmLogNotificationsModel - Shared Notification Logs 📨📜
  * 
- * RBN 3.5: Centralized logging for notifications in rbncore_common.
+ * RBN Framework: Centralized logging for notifications in rbncore_common.
  * 
  * @property int         $id
  * @property string      $project_key

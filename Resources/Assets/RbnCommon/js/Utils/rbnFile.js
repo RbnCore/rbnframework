@@ -2,7 +2,7 @@
  * ==========================================================================
  * rbnFile.js — Universal File, Media, Upload & Export Suite 📁🖼️📊
  * ==========================================================================
- * Zero-dependency Sovereign File Engine for RBN Applications.
+ * Zero-dependency RBN Framework File Engine for RBN Applications.
  * Combines: Image Preview, File Uploader, Excel/CSV Exporter, Remote Downloader.
  */
 (function (window, document) {

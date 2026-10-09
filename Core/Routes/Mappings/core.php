@@ -29,7 +29,7 @@ Route::get('500', function () {
 Route::
         namespace('Rbn\Framework\Core\Render\Controllers')->group(function () {
 
-            // SEO Routes via Sovereign Crawler Hub 🤖🗺️⚓
+            // SEO Routes via RBN Framework Crawler Hub 🤖🗺️⚓
             Route::get('feed', 'CrawlerController@feed');
             Route::get('sitemap-{type}.xml', 'CrawlerController@subSitemap');
             Route::get('sitemap.xml', 'CrawlerController@sitemap');
@@ -54,15 +54,15 @@ Route::
             });
         });
 
-// --- SOVEREIGN BACKSTAGE ORCHESTRATION 🛰️🪐⚓ ---
+// --- RBN Framework BACKSTAGE ORCHESTRATION 🛰️🪐⚓ ---
 
-// ⚡ [RBN 3.5] Smart Developer Panel - Developer Authority (Session + Role) 🛠️
+// ⚡ [RBN Framework] Smart Developer Panel - Developer Authority (Session + Role) 🛠️
 Route::middleware('developer')->panel('developer')->group(function () {
     // 🚀 Backstage (Developer Merkezi) 🛰️🪐⚓
     Route::module('internal', 'Backstage')->load();
 });
 
-// ⚡ [RBN 3.5] Smart Assistant Panel - Super Admin & Developer 🛠️
+// ⚡ [RBN Framework] Smart Assistant Panel - Super Admin & Developer 🛠️
 Route::middleware('superadmin')->panel('developer')->group(function () {
     // 🌐 Web Hub (Frontend Identity, SEO & Navigation) 🏛️⚓
     Route::module('internal', 'Webhub')->load();
@@ -71,9 +71,9 @@ Route::middleware('superadmin')->panel('developer')->group(function () {
     Route::module('internal', 'Syshub')->load();
 });
 
-// ⚡ [RBN 3.5] Clean Wrapper - Admin Authority (Session + Lock + Role: Admin) 🔱🏛️
+// ⚡ [RBN Framework] Clean Wrapper - Admin Authority (Session + Lock + Role: Admin) 🔱🏛️
 Route::middleware('admin')->group(function () {
-    // 🎷 [UNIVERSAL SOVEREIGN GATEWAY] Dedicated dispatcher for centralized AJAX modals
+    // 🎷 [UNIVERSAL RBN Framework GATEWAY] Dedicated dispatcher for centralized AJAX modals
     Route::get('admin/modal/content', [\Rbn\Framework\Bundles\RbnSuite\RbnAdmin\Controllers\ModalController::class, 'content']);
 
     // 2. ADMIN MANAGEMENT PANEL 🔱🏛️

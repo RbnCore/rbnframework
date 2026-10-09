@@ -11,7 +11,7 @@ use Rbn\Framework\Core\System\Config\Secrets;
 /**
  * CPanelProvider - Core Data & Execution Provider for cPanel 🏗️🛰️⚓
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Handles API communication bridge.
  */
 class CPanelProvider extends BaseComponent

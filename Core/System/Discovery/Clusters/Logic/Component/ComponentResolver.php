@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\System\Discovery\Clusters\Logic\Component;
 /**
  * ComponentResolver - The Discovery Proxy Layer 🏹🛰️⚓
  * 
- * RBN 3.5 Masterpiece: Acts as a simplified static entry point.
+ * RBN Framework: Acts as a simplified static entry point.
  * Delegates all intelligence and resolution logic to the ComponentContext unit.
  */
 class ComponentResolver

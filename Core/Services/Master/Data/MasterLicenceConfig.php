@@ -6,7 +6,7 @@ namespace Rbn\Framework\Core\Services\Master\Data;
 
 /**
  * MasterLicenceConfig - Merkezi Lisans Sabitleri 🔑🏛️
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  *
  * KURAL: Bu dosya YALNIZCA sabit (public const) tutar; METOT İÇERMEZ.
  * Tüm değerler veritabanı şemasıyla birebir aynıdır (tek gerçek = DB).

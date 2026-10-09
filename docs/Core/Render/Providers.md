@@ -1,6 +1,6 @@
 # Core/Render/Providers — fiziksel HTML/XML/JSON üretimi (12 dosya)
 
-> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Render/Providers/` — **12 `*.php`** = 5 kök + `UI/` altında 7.
 > **Envanter:** 12 dosyanın **12'si** anlatıldı.
 > **Doğrulama platformu:** Windows + PHP 8.3, tümü `provider()`/`resolver()` üzerinden gerçekten çözüldü.
@@ -65,7 +65,7 @@ render($view, $data)
  ├─ $view === 'branding' ise SADECE renderBranding()                   :32-34
  └─ segmentler sırayla: technical → project → social → branding → links :36-40
     Her segment "<!-- [ ETİKET ] -->" yorumuyla çerçevelenir;
-    baştaki/ sondaki RBN SOVEREIGN SEO ENGINE v<FRAMEWORK_VERSION> işaretleri :44, :61
+    baştaki/ sondaki RBN FRAMEWORK SEO ENGINE v<FRAMEWORK_VERSION> işaretleri :44, :61
 ```
 
 `renderProjectMeta()` `<title>`'ı `htmlspecialchars_decode()` ile basar
@@ -169,12 +169,12 @@ Nasıl? `ComponentContext::resolve()`
 
 ```php
 // Core/Render/Providers/SeoProvider.php:44-61  (çerçeve + segment birleştirme)
-$output = "\n    <!-- 🔱 RBN SOVEREIGN SEO ENGINE [v" . FrameworkIdentity::FRAMEWORK_VERSION . " ] -->\n";
+$output = "\n    <!-- 🔱 RBN FRAMEWORK SEO ENGINE [v" . FrameworkIdentity::FRAMEWORK_VERSION . " ] -->\n";
 $output .= $techHtml . "\n";
 $output .= "\n    <!-- [ {$contextLabel} SEO ] -->\n" . $projectHtml . "\n";
 $output .= $socialHtml . "\n";
 $output .= "\n    <!-- [ RESOURCE LINKS ] -->\n" . implode("\n", $linkHtml) . "\n";
-$output .= "\n    <!-- ⚓ SOVEREIGN SEO ENGINE - END -->\n";
+$output .= "\n    <!-- ⚓ RBN Framework SEO ENGINE - END -->\n";
 ```
 
 ```php

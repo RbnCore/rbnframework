@@ -5,6 +5,7 @@ namespace Rbn\Framework\Core\System\Config;
 
 use Rbn\Framework\Core\System\Config\Definitions\SecretsSchema;
 use Rbn\Framework\Core\System\Config\Engine\Config\ConfigFileLoader;
+use Rbn\Framework\Core\System\Config\Engine\Secrets\SecretsApp;
 use Rbn\Framework\Core\System\Config\Engine\Secrets\SecretsFlatApi;
 use Rbn\Framework\Core\System\Config\Engine\Secrets\SecretsLoader;
 use Rbn\Framework\Core\System\Config\Engine\Secrets\SecretsSections;
@@ -20,6 +21,7 @@ require_once __DIR__ . '/Definitions/SecretsSchema.php';
 require_once __DIR__ . '/Engine/Secrets/SecretsLoader.php';
 require_once __DIR__ . '/Engine/Secrets/SecretsValidator.php';
 require_once __DIR__ . '/Engine/Secrets/SecretsSections.php';
+require_once __DIR__ . '/Engine/Secrets/SecretsApp.php';
 require_once __DIR__ . '/Engine/Secrets/SecretsFlatApi.php';
 
 /**
@@ -30,11 +32,11 @@ require_once __DIR__ . '/Engine/Secrets/SecretsFlatApi.php';
  *
  * TEK ÇIKIŞ:
  *   Secrets::masterDb()     -> ['host','port','name','user','pass']
- *   Secrets::smtp()         -> ['enabled','host','port','secure','user','pass',
- *                               'from_address','from_name']
+ *   Secrets::smtp()         -> ['enabled','host','port','secure','user','pass','from_address','from_name']
  *   Secrets::cpanel()       -> ['cpanel_host','cpanel_user','cpanel_token']
  *   Secrets::appKey()       -> uygulama şifreleme anahtarı
  *   Secrets::api('iyzico')  -> ['api_key' => ..., 'secret_key' => ...]
+ *   Secrets::app()          -> ortam bayrağı + çalışma ayarları (opsiyonel bölüm)
  *   Secrets::section($ad)   -> bölümün tamamı (genel erişim)
  *
  * BU DOSYA İNCE CEPHEDİR (yalnız genel metot imzaları, hiçbiri değişmedi):
@@ -42,44 +44,28 @@ require_once __DIR__ . '/Engine/Secrets/SecretsFlatApi.php';
  *   Engine/Secrets/SecretsLoader    -> yol çözümü + ham dosya okuma (TEK okuma kapısı)
  *   Engine/Secrets/SecretsValidator -> bölüm adı + okunabilirlik doğrulaması
  *   Engine/Secrets/SecretsSections  -> bölüm okuma/doğrulama + düz anahtar haritaları
+ *   Engine/Secrets/SecretsApp       -> `app` bölümü (tip + güvenli varsayılan)
  *   Engine/Config/ConfigFileLoader   -> ortak dosya tekniği (bul → require → doğrula)
  *   Engine/Config/ConfigFileGuard    -> 0600 izin + `<?php`/`return` sızıntı koruması
  *
- * `ConfigFileLoader` ve `SecretsFlatApi` trait'leri **geriye uyum** için
- * `use` edilir: `guardFileMode()`/`guardFileContent()` birim testi tarafından
- * yansımayla (`ReflectionMethod`) çağrıldığı için, düz anahtar API'si ise
- * mevcut çağıranlar için `Secrets` üzerinde KALMAYA devam eder.
+ * `ConfigFileLoader`/`SecretsFlatApi` trait'leri geriye uyum için `use` edilir
+ * (birim testi `guardFile*()`'ı yansımayla çağırır; düz API çağıranlar için kalır).
  *
  * TEK DOSYA: `Core/System/Config/Secrets/secrets.php` (şablon:
  * `Secrets/secrets.example.php`; gerçek dosya `.gitignore`'ludur). Bölümler:
- * `master_db`, `smtp`, `cpanel`, üst düzey `app_key`, `api` {hizmet => alanlar}.
- * GERİYE UYUM **YOKTUR** (bilinçli karar): önceki iki ayrı sır dosyası ve
- * "geriye uyum" kipi TAMAMEN KALDIRILDI.
- *
- * API SABİTLERİ (kabul testleriyle sabitlenmiş - İZMALİYOR): `cpanel()`
- * döndürdüğü dizinin anahtarları `host/user/token` DEĞİL,
- * `cpanel_host/cpanel_user/cpanel_token` şeklindedir.
+ * `master_db`, `smtp`, `cpanel`, `app`, üst düzey `app_key`, `api` {hizmet => alanlar}.
+ * [FW-096-D8] Ortam değişkeni OKUNMAZ; ortam bayrağı da bu dosyada (`app`).
+ * GERİYE UYUM **YOKTUR**: önceki iki ayrı sır dosyası ve "geriye uyum" kipi kaldırıldı.
  *
  * FAIL-CLOSED / GÜVENLİK:
- * - Dosya yok / bozuk / izin fazla geniş / zorunlu alan eksik / `CHANGE_ME` /
- *   zorunlu alan boş  -> açık `RuntimeException`. Sessiz `root` / `''`
- *   fallback **YOKTUR**.
- * - Hata metni YALNIZ dosya/bölüm/alan ADINI yazar; HİÇBİR sır değeri yazmaz.
- *   Örnek: `secrets.php: master_db.user tanimli degil.`
- * - `master_db.pass` ve `smtp.pass` BOŞ OLABİLİR (yerelde master DB parolası
- *   gerçekten `''`); `cpanel` ve `api` değerleri BOŞ OLAMAZ.
+ * - Dosya yok/bozuk/izin geniş/zorunlu alan eksik/`CHANGE_ME`/zorunlu boş ->
+ *   `RuntimeException`; sessiz `root`/`''` fallback YOKTUR.
+ * - Hata metni YALNIZ alan ADINI yazar (`secrets.php: master_db.user tanimli degil.`).
+ * - `master_db.pass`/`smtp.pass` boş olabilir; `cpanel`/`api` değerleri olamaz.
  * - LAZY: dosya yalnız ilk istendiğinde okunur.
  *
- * SSOT istisnası: bu okuyucu kernel/bootstrap aşamalarında çalışır; bu yüzden
- * ortam servis / IoC / Paths KULLANMAZ, yalnız `__DIR__` ile göreli çözülen
- * komsu dosyaları `require_once` eder. Böylece dosya TEK BAŞINA da çalışır
- * (izole kopyalar, bootstrap).
- *
- * @see \Rbn\Framework\Core\System\Config\Definitions\SecretsSchema
- * @see \Rbn\Framework\Core\System\Config\Engine\Secrets\SecretsLoader
- * @see \Rbn\Framework\Core\System\Config\Engine\Secrets\SecretsValidator
- * @see \Rbn\Framework\Core\System\Config\Engine\Secrets\SecretsSections
- * @see \Rbn\Framework\Core\System\Config\Engine\Config\ConfigFileLoader
+ * SSOT istisnası: kernel/bootstrap (PreBoot dahil) aşamalarında çalışır; IoC /
+ * Paths KULLANMAZ, komşu dosyaları `__DIR__` ile `require_once` eder (tek başına çalışır).
  */
 final class Secrets
 {
@@ -108,6 +94,10 @@ final class Secrets
 
         if ($name === SecretsSchema::API_SECTION) {
             return SecretsSections::readAll();
+        }
+
+        if ($name === SecretsSchema::APP_SECTION) {
+            return self::app();
         }
 
         return SecretsSections::read($name);
@@ -179,11 +169,26 @@ final class Secrets
     }
 
     /**
+     * [FW-096-D8] `app` bölümü (opsiyonel; eksik alan = güvenli varsayılan,
+     * `environment` yoksa production + bir kez log). @see SecretsApp
+     *
+     * @throws \RuntimeException Dosya var ama okunamaz/bozuk ise.
+     */
+    public static function app(): array
+    {
+        return SecretsApp::read();
+    }
+
+    /** Eski gömülü tuz (üst düzey `legacy_salt`); yalnız `app.allow_legacy_salt` iken. */
+    public static function legacySalt(): ?string
+    {
+        return SecretsSections::topLevel(SecretsSchema::LEGACY_SALT_NAME);
+    }
+
+    /**
      * Uygulama şifreleme anahtarı (`CryptoHelper`).
      *
-     * KAYNAK: **yalnız** `secrets.php` üst düzey `app_key` alanı. Ortam
-     * değişkeni (`APP_KEY`/`ENCRYPTION_KEY`) bu okuyucu içinde BİR YOL
-     * DEĞİLDİR; `CryptoHelper` kendi `Env` okumasını kendi yolunda yapar.
+     * KAYNAK: **yalnız** `secrets.php` üst düzey `app_key` alanı.
      *
      * @throws \RuntimeException Anahtar tanımlı değilse (fail-closed).
      */
@@ -224,26 +229,19 @@ final class Secrets
         return SecretsSections::read('cpanel')['token'];
     }
 
-    /**
-     * Yalnızca test/doğrulama için: sır dizinini geçici bir dizine bağlar.
-     *
-     * `null` verilirse gerçek dizine (`Core/System/Config`) dönülür.
-     * Önbellek de sıfırlanır.
-     */
+    /** Yalnız TEST: sır dizinini geçici dizine bağlar (`null` = gerçek dizin); önbellek sıfırlanır. */
     public static function setTestDirectory(?string $directory): void
     {
         SecretsLoader::setDirectory($directory);
     }
 
     /**
-     * Önbelleği sıfırlar.
-     *
-     * NOT: Trait'in kendi `$cache`'i değil, **TEK okuma kapısı** olan
-     * `SecretsLoader` önbelleği sıfırlanır (birim testleri statik önbellek
-     * sızmasına güvenerek buradan döner).
+     * Önbelleği sıfırlar: trait'in değil, TEK okuma kapısı `SecretsLoader`'ın
+     * önbelleği (+ `app` uyarı bayrakları).
      */
     public static function resetCache(): void
     {
         SecretsLoader::resetCache();
+        SecretsApp::resetWarnings();
     }
 }

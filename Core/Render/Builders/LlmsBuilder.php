@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 
 /**
  * LlmsBuilder - Stateful accumulator and Markdown generator for LLMs.txt 🤖📄⚓
- * Part of RBN 3.5 Sovereign Framework Standards.
+ * Part of RBN Framework Framework Standards.
  */
 class LlmsBuilder extends BaseComponent
 {

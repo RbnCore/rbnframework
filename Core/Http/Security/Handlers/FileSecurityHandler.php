@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Support\Blueprints\Validations\ThreatValidations;
 /**
  * FileSecurityHandler - The File Sentinel Actor 🛡️📦
  * 
- * RBN 3.5: Atomic actor for "Hard" file security validation.
+ * RBN Framework: Atomic actor for "Hard" file security validation.
  * Detects Extension Spoofing, Magic Byte mismatch, and Double Extensions.
  */
 class FileSecurityHandler extends BaseComponent
@@ -26,7 +26,7 @@ class FileSecurityHandler extends BaseComponent
     public function validateRequestFiles(array $files): array
     {
         foreach ($files as $field => $file) {
-            // RBN 3.5: Handle multiple files (array of objects or legacy array)
+            // RBN Framework: Handle multiple files (array of objects or legacy array)
             if (is_array($file)) {
                 // Check if it's a legacy $_FILES structure (nested arrays)
                 if (isset($file['name']) && is_array($file['name'])) {
@@ -117,7 +117,7 @@ class FileSecurityHandler extends BaseComponent
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $detectedMime = finfo_file($finfo, $tmpPath) ?: 'application/octet-stream';
 
-        // 🛡️ RBN 3.5 [SOVEREIGN SECURITY ORCHESTRATION] 🏛️🛰️⚓
+        // 🛡️ RBN Framework [RBN Framework SECURITY ORCHESTRATION] 🏛️🛰️⚓
         if (!MimeValidations::isValidMime($extension, $detectedMime)) {
             // Eğer ikisi de resimse (image/*) esneklik göster, değilse blokla.
             $detectedIsImage = str_starts_with($detectedMime, 'image/');

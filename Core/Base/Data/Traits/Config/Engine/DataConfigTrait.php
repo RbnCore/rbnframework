@@ -11,7 +11,7 @@ use Rbn\Framework\Core\System\Discovery\Engine\DiscoveryEngine;
 /**
  * DataConfigTrait - Persistent Static Cache and Deep Data Access 🛰️⚙️
  * 
- * RBN 3.5: Manages configuration state and dot-notation navigation.
+ * RBN Framework: Manages configuration state and dot-notation navigation.
  * Isolated as an Engine trait for architectural symmetry.
  */
 trait DataConfigTrait
@@ -116,7 +116,7 @@ trait DataConfigTrait
         // 🎼 Sync with static CONFIG constant if exists (Satellite Integrity) 🧬⚓
         $config = defined('static::CONFIG') ? static::CONFIG : [];
 
-        // 🎼 RBN 3.5: [SOVEREIGN PRIORITIZATION]
+        // 🎼 RBN Framework: [RBN Framework PRIORITIZATION]
         // Check Registry (Repository) first, then Static Config.
         if (isset($this->repository[$key])) {
             return $this->repository[$key];

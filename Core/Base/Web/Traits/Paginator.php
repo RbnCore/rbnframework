@@ -5,7 +5,7 @@ namespace Rbn\Framework\Core\Base\Web\Traits;
 /**
  * Paginator - Fluent, Context-Aware Pagination 🎻🎹
  * 
- * RBN 3.0: Automatically resolves current page and self-injects variables into the View Context.
+ * Automatically resolves current page and self-injects variables into the View Context.
  */
 class Paginator
 {
@@ -31,13 +31,13 @@ class Paginator
         $this->items = $items ?? [];
         $this->controller = $controller;
 
-        // 🎯 RBN 3.5 Masterpiece: Auto-Detection for API/Wrapped Results
+        // 🎯 RBN Framework: Auto-Detection for API/Wrapped Results
         if (isset($this->items['results']) && is_array($this->items['results'])) {
             $this->total = (int) ($this->items['total_results'] ?? $this->items['total'] ?? count($this->items['results']));
             $this->items = $this->items['results'];
             $this->preSliced = true;
         } else {
-            // 🎯 RBN 3.0: Standard Array Logic
+            // 🎯 Standard Array Logic
             $this->items = $this->applySearchFilter($this->items);
             $this->total = count($this->items);
         }
@@ -45,7 +45,7 @@ class Paginator
 
     /**
      * Static Factory for Fluent Creation 🪐
-     * RBN 3.5: Supports both auto-slicing and manual (pre-sliced) data.
+     * RBN Framework: Supports both auto-slicing and manual (pre-sliced) data.
      */
     public static function make(?array $items = null, ?int $total = null, int $perPage = 15, ?string $url = null): self
     {
@@ -115,7 +115,7 @@ class Paginator
         if ($this->executed)
             return;
 
-        // 🎯 RBN 3.5: Masterpiece Safe Request Discovery
+        // 🎯 RBN Framework: Safe Request Discovery
         // B-39: Ham `$_GET` yerine guvenli kaynak (request nesnesi).
         $request = $this->resolveRequest();
 

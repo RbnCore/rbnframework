@@ -10,7 +10,7 @@ use Rbn\Framework\Packages\RbnPipeline\Contracts\PromptRuleInterface;
 /**
  * WritingToneRule - Enforces project-specific writing tone, narrator perspective, and brand persona guidelines 🗣️
  * Location: RbnPipeline/Rules/Prompt/WritingToneRule.php
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 class WritingToneRule extends BaseComponent implements PromptRuleInterface
 {

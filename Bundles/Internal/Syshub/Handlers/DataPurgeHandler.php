@@ -9,7 +9,7 @@ use Rbn\Framework\Core\System\Paths\Paths;
 
 /**
  * DataPurgeHandler - Storage & Purge Business Logic 🧹🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * Orchestrates raw storage operations, stats aggregation, and file deliveries.
  * 
@@ -119,7 +119,7 @@ class DataPurgeHandler extends BaseComponent
         $projectKey = $projectKey ?: active_project_key();
         $provider = $this->service('storage')->{$type}()->withProject($projectKey);
 
-        // 🎼 RBN 3.5: Masterpiece Resilient Reading Strategy 🎻🛰️
+        // 🎼 RBN Framework: Resilient Reading Strategy 🎻🛰️
         // Security Check: Prevent directory traversal or accidental directory reading 🛡️
         $path = Paths::project()->storage($type . '/' . ltrim($filename, '/\\'));
         if (is_dir($path)) {

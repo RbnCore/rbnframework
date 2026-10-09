@@ -7,8 +7,8 @@ namespace Rbn\Framework\Bundles\RbnSuite\RbnStudio\Controllers;
 use Rbn\Framework\Core\Base\Attributes\SubModule;
 
 /**
- * CategoriesController - Sovereign Content Category Management 📂🎨🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * CategoriesController - RBN Framework Content Category Management 📂🎨🛰️⚓
+ * RBN Framework Standard.
  */
 #[SubModule(module: 'studio', entity: 'categories', model: 'app.contentCategory', repository: 'app.contentCategory')]
 class CategoriesController extends RbnStudioController

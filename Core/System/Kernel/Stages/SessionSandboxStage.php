@@ -13,10 +13,10 @@ use Rbn\Framework\Core\System\Kernel\Stages\ProjectDiscovery;
 use Rbn\Framework\Core\Http\Engine\RequestEnvironment;
 
 /**
- * SessionSandboxStage - Sovereign Session Lifecycle & Project Sandbox 🛡️🛰️⚓
+ * SessionSandboxStage - RBN Framework Session Lifecycle & Project Sandbox 🛡️🛰️⚓
  * 
- * RBN 3.5 Stage: Centralizes session handler registration, garbage collection,
- * and sovereign project switch sync without polluting ComponentRegistry.
+ * RBN Framework Stage: Centralizes session handler registration, garbage collection,
+ * and RBN Framework project switch sync without polluting ComponentRegistry.
  */
 class SessionSandboxStage extends BaseStage
 {
@@ -35,11 +35,11 @@ class SessionSandboxStage extends BaseStage
 
         if (is_dir($sessionPath) && is_writable($sessionPath)) {
             if (session_status() === PHP_SESSION_NONE) {
-                // RBN 3.5: Dynamic Session Storage Handler Discovery
+                // RBN Framework: Dynamic Session Storage Handler Discovery
                 $handler = $services->service('storage') ? $services->service('storage')->sessions() : null;
 
                 if (is_object($handler) && method_exists($handler, 'getName')) {
-                    // 🎼 [SOVEREIGN SESSION IDENTITY] 🏙️🛰️⚓
+                    // 🎼 [RBN Framework SESSION IDENTITY] 🏙️🛰️⚓
                     session_name($handler->getName());
                     session_set_save_handler($handler, true);
                 }
@@ -101,7 +101,7 @@ class SessionSandboxStage extends BaseStage
                         }
                     }
 
-                    // 🎼 [SOVEREIGN PROJECT SWITCH SYNC] 🔄🛰️⚓
+                    // 🎼 [RBN Framework PROJECT SWITCH SYNC] 🔄🛰️⚓
                     $this->syncActiveProjectContext();
                 } catch (\Throwable $e) {
                     // Fail-safe graceful catch

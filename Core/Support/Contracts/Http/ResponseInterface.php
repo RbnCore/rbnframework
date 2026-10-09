@@ -3,7 +3,7 @@
 namespace Rbn\Framework\Core\Support\Contracts\Http;
 
 /**
- * ResponseInterface - The Grand Contract for RBN 3.0 HTTP Response ⚓🛡️
+ * ResponseInterface - The Grand Contract for RBN HTTP Response ⚓🛡️
  */
 interface ResponseInterface
 {

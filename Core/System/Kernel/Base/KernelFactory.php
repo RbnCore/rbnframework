@@ -75,7 +75,7 @@ class KernelFactory
     {
         $kernel = new Kernel($publicPath, $config);
 
-        // 🎼 Orchestrate the Masterpiece Pipeline 🏺⚖️🛡️⚓
+        // 🎼 Orchestrate the RBN Framework Pipeline 🏺⚖️🛡️⚓
         // Logic: Autoload -> Diagnostics -> DB -> Services -> Session -> Route
         // Sıra ve bağımlılık gerekçeleri: yukarıdaki [S-10] bloğu.
         $kernel->addStage(new Autoload())

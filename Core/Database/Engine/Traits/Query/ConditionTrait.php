@@ -36,7 +36,7 @@ trait ConditionTrait
             return $this;
         }
 
-        // 🎼 RBN 3.5: [SOVEREIGN PARAMETER MASTERPIECE] 🎻🛰️⚓
+        // 🎼 RBN Framework: [RBN Framework PARAMETER RBN Framework] 🎻🛰️⚓
         // Use func_num_args to detect exact intent regardless of NULL values
         $argCount = func_num_args();
 

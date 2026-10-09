@@ -9,9 +9,9 @@ use Rbn\Framework\Core\Base\Attributes\Module;
 use Rbn\Framework\Bundles\RbnSuite\RbnAdmin\Models\ModuleData;
 
 /**
- * RbnAdminController - The Sovereign Root for Admin Suite 🏰🛰️⚓
+ * RbnAdminController - The RBN Framework Root for Admin Suite 🏰🛰️⚓
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * This class serves as the root identity for the RbnAdmin module ecosystem.
  */
 #[Module(
@@ -109,10 +109,10 @@ class RbnAdminController extends BaseController
             'stats' => array_merge($trafficSummary, $dashStats)
         ];
 
-        // 🎻 RBN 3.5: Group Projects Discovery (Unified Caching)
+        // 🎻 RBN Framework: Group Projects Discovery (Unified Caching)
         $groupProjects = group_projects();
 
-        // 🎻 RBN 3.5: Dynamic App Name / Project Group Logic
+        // 🎻 RBN Framework: Dynamic App Name / Project Group Logic
         $rawAppName = (!empty($groupProjects) && count($groupProjects) > 1) ? $this->projectGroup : $this->appName;
         $data['stats']['app_name'] = mb_convert_case((string) ($rawAppName ?? 'RBN Framework'), MB_CASE_TITLE, 'UTF-8');
         $data['stats']['app_version'] = app_version();
@@ -137,7 +137,7 @@ class RbnAdminController extends BaseController
             $projectDomain = $data['stats']['site_domain'] ?? site_domain();
         }
 
-        // 🎼 RBN 3.5: Automatic AI Telemetry Cards on Dashboard when bot_activity is active
+        // 🎼 RBN Framework: Automatic AI Telemetry Cards on Dashboard when bot_activity is active
         $botActive = (int) $this->service('shieldSettings')->getSetting('bot_activity', 0) === 1;
         $aiReport = null;
         if ($botActive) {
@@ -148,7 +148,7 @@ class RbnAdminController extends BaseController
         // Projede veya framework içinde Resources/Views/RbnAdmin/dashboard.rbn.php basılır.
         return $this->render('RbnAdmin/dashboard', array_merge([
             'panel' => $panel,
-            'module' => null, // 🎼 RBN 3.5: [SOVEREIGN] No project-module required
+            'module' => null, // 🎼 RBN Framework: [RBN Framework] No project-module required
             'groupProjects' => $groupProjects,
             'projectKey' => $projectKey,
             'activeProjectName' => $activeProjectName,

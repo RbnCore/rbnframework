@@ -6,8 +6,8 @@ namespace Rbn\Framework\Bundles\RbnSuite\RbnAdmin\Controllers;
 
 use Rbn\Framework\Core\Base\Attributes\SubModule;
 /**
- * NotificationController - The Sovereign Notification Hub 🔔🏛️⚓
- * RBN 3.5 Masterpiece Standard.
+ * NotificationController - The RBN Framework Notification Hub 🔔🏛️⚓
+ * RBN Framework Standard.
  */
 #[SubModule(
     entity: 'notification',
@@ -17,7 +17,7 @@ class NotificationController extends RbnAdminController
 {
     public function index(): void
     {
-        // 🪐 [FLUENT ENGINE] - Sovereign Channel Orchestration
+        // 🪐 [FLUENT ENGINE] - RBN Framework Channel Orchestration
         $channel = $this->service->notifications();
 
         $this->paginate($channel->get())->to('notifications');

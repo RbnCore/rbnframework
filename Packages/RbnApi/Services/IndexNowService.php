@@ -9,7 +9,7 @@ use Rbn\Framework\Core\System\Paths\Paths;
 
 /**
  * IndexNowService - Manages automated search engine indexing notifications 🚀
- * RBN 3.5 Masterpiece Standard (Part of RbnApi package).
+ * RBN Framework Standard (Part of RbnApi package).
  */
 class IndexNowService extends BaseService
 {

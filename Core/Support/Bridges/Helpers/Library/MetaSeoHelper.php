@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 
 /**
  * MetaSeoHelper - Centralized SEO Metadata Architect 🧠🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 class MetaSeoHelper extends BaseComponent
 {

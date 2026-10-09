@@ -7,7 +7,7 @@ namespace Rbn\Framework\Packages\RbnPipeline\Concerns;
 /**
  * PipelineResolverTrait - Universal Data & Candidate Resolution Pipeline Concern 🌐🎯⚓
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Handles source mode resolution, draft candidate fetching, RSS pool resolution,
  * category mapping, balanced item selection, and blacklist GUID resolution.
  * 
@@ -24,7 +24,7 @@ trait PipelineResolverTrait
 
     /**
      * Kategorileri AI için Çözümler/Formatlar, Seçilen Kategori ID'sini veya Slug Değerini Doğrular 🏷️
-     * RBN 3.5 Standart: Tüm projelerde sabit 'app.contentCategory' (content_categories) kullanılır.
+     * RBN Framework Standart: Tüm projelerde sabit 'app.contentCategory' (content_categories) kullanılır.
      */
     public function resolveCategories(
         mixed $categoriesOrModel = null,
@@ -159,7 +159,7 @@ trait PipelineResolverTrait
 
     /**
      * Veritabanından sıradaki taslağı çeker 💾
-     * RBN 3.5 Standart: Tüm projelerde sabit 'app.contentDraft' (content_drafts) kullanılır.
+     * RBN Framework Standart: Tüm projelerde sabit 'app.contentDraft' (content_drafts) kullanılır.
      */
     public function fetchDraftCandidate(array $params): ?array
     {

@@ -41,7 +41,7 @@ class AssetDoctor extends BaseGuard
 
         // 3. Dispatch Fast Serve via Instance 🛰️
         if (class_exists(AssetController::class)) {
-            // [RBN 3.5] SIGNAL SURVIVAL CONTEXT 🚩
+            // [RBN Framework] SIGNAL SURVIVAL CONTEXT 🚩
             // Inform the Config hub that we are in Fast-Path / Pre-Boot stage.
             // This prevents the BaseController from triggering a circular DB loop.
             \Rbn\Framework\Core\System\Config\Config::setSurvivalMode(true);

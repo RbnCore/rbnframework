@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 /**
  * OriginHandler - The Request Source Actor 🛡️⛵
  * 
- * RBN 3.5: Atomic actor for verifying HTTP Origin and Referer headers.
+ * RBN Framework: Atomic actor for verifying HTTP Origin and Referer headers.
  * Protects against CSRF and Unauthorized Cross-Site Form submissions.
  */
 class OriginHandler extends BaseComponent
@@ -26,7 +26,7 @@ class OriginHandler extends BaseComponent
 
         // 0. If both are missing, it might be a direct API/Curl/Postman request.
         if (is_null($origin) && is_null($referer)) {
-            // [F-14 · 2026-10-04 · zeki-6eb7f5] LOG-ONLY GÖZLEM: Origin ve
+            // [F-14 · 2026-10-04 · team member] LOG-ONLY GÖZLEM: Origin ve
             // Referer yok. KARAR DEĞİŞMİYOR (aşağıdaki `!$strict` aynen korunur);
             // yalnız bu isteklerin sayısı `security` kanalında özetlenir, çünkü
             // `strict`'i açmak kararı **ölçüm olmadan** verilemez.

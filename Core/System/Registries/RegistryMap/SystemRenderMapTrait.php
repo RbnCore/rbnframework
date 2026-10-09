@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\System\Registries\RegistryMap;
 /**
  * SystemRenderMapTrait - The 6th Satellite: Render Hub Map 🛰️🎨⚓
  * 
- * RBN 3.5 Masterpiece: Centralized authority for Render Handlers (Contexts), 
+ * RBN Framework: Centralized authority for Render Handlers (Contexts),
  * Providers and specific Render Aliases.
  */
 trait SystemRenderMapTrait

@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseModelInterface;
 /**
  * MasterDevelopersModel - The Identity Authority Hub 🕵️‍♂️🛰️
  * 
- * RBN 3.5: Targeted model for developer/VIP validation on the 'master' DB.
+ * RBN Framework: Targeted model for developer/VIP validation on the 'master' DB.
  * 
  * @property int    $id
  * @property string $username

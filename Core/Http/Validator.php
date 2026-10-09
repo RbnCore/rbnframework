@@ -11,7 +11,7 @@ use Rbn\Framework\Core\Base\Concerns\Contexts\ServicesContextTrait;
 /**
  * Validator - High-Performance Validation Engine
  * 
- * RBN 3.0: Manages validation rules using a Trait-Driven Architecture.
+ * Manages validation rules using a Trait-Driven Architecture.
  * Decomposes massive rule sets into specialized structural units.
  */
 class Validator
@@ -127,7 +127,7 @@ class Validator
             return;
         }
 
-        // [F-06 · 2026-10-03 · baran-6eb7f5] Bilinmeyen kural ARTIK sessizce gecilmiyor.
+        // [F-06 · 2026-10-03 · team member] Bilinmeyen kural ARTIK sessizce gecilmiyor.
         //
         // TABAN: `method_exists()` false ise dongu SESSIZCE biterdi. Boylece yazim hatali
         // bir kural ("acccepted", "requred") veya framework'te unutulmus bir kural hicbir

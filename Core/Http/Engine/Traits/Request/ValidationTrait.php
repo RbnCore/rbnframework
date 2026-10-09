@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Support\Bridges\Helpers\Library\LogThrottle;
 /**
  * ValidationTrait - The Security Shield 🛡️⚓
  * 
- * RBN 3.5: Masterpiece Standard (Shield Hub Integrated).
+ * RBN Framework: Standard (Shield Hub Integrated).
  * Centralized request validation logic with automated security guards.
  */
 trait ValidationTrait
@@ -56,7 +56,7 @@ trait ValidationTrait
         if ($this->isPost() && empty($this->post) && empty($this->files) && ($this->server['CONTENT_LENGTH'] ?? 0) > 2048) {
             $limit = ini_get('post_max_size');
 
-            // RBN 3.5: Masterpiece Global Shield Gateway 🛡️✨
+            // RBN Framework: Global Shield Gateway 🛡️✨
             shield()->validation(['post_max_size' => 'Limit exceeded'], "Form verisi gönderilemedi. Gönderilen veri boyutu PHP limitini ({$limit}) aşmış olabilir.");
         }
 
@@ -110,7 +110,7 @@ trait ValidationTrait
     }
 
     /**
-     * RBN Masterpiece "Form" - Security, Validation and Data Retrieval 🛡️
+     * RBN Framework "Form" - Security, Validation and Data Retrieval 🛡️
      *
      * FW-ALTYAPI-2 / B (adım 5) — `security.form_input_mode`:
      *   `enforce` (VARSAYILAN): yalnız doğrulanmış (kuralda tanımlı VE gönderilmiş)
@@ -222,7 +222,7 @@ trait ValidationTrait
     }
 
     /**
-     * RBN Masterpiece "Filter" - Filter and validate GET/Query parameters safely 🛡️🔎
+     * RBN Framework "Filter" - Filter and validate GET/Query parameters safely 🛡️🔎
      */
     public function filter(array $rules, array $options = []): array
     {
@@ -273,7 +273,7 @@ trait ValidationTrait
      */
     protected function applyFormGuard(array $options = []): void
     {
-        // 🛡️ Masterpiece Automated Guard: Ensure correct HTTP method (Post-only by default)
+        // 🛡️ RBN Framework Automated Guard: Ensure correct HTTP method (Post-only by default)
         $method = $options['method'] ?? 'POST';
         if (!$this->isMethod($method)) {
             alert()->error($options['error_message'] ?? 'Geçersiz İstek (Method Mismatch)');
@@ -300,7 +300,7 @@ trait ValidationTrait
 
     protected function handleFailedShield(string $message): void
     {
-        // RBN 3.5: [MASTERPIECE SHIELD LOGIC] 🛡️🛰️⚓
+        // RBN Framework: [RBN Framework SHIELD LOGIC] 🛡️🛰️⚓
         // Add fallback redirect for non-ajax requests to prevent white pages.
         alert()->error($message, $_SERVER['HTTP_REFERER'] ?? '/');
         exit;
@@ -310,7 +310,7 @@ trait ValidationTrait
     {
         $_SESSION['_old_input'] = $this->all();
 
-        // RBN 3.5: [MASTERPIECE SHIELD LOGIC] 🛡️🛰️⚓
+        // RBN Framework: [RBN Framework SHIELD LOGIC] 🛡️🛰️⚓
         alert()->error($message, $_SERVER['HTTP_REFERER'] ?? '/');
         exit;
     }
@@ -324,7 +324,7 @@ trait ValidationTrait
         $_SESSION['_errors'] = $errors;
         $_SESSION['_old_input'] = $this->all();
 
-        // RBN 3.5: [MASTERPIECE SHIELD LOGIC] 🛡️🛰️⚓
+        // RBN Framework: [RBN Framework SHIELD LOGIC] 🛡️🛰️⚓
         alert()->error((string) $message, $_SERVER['HTTP_REFERER'] ?? '/', null, ['errors' => $errors]);
         exit;
     }

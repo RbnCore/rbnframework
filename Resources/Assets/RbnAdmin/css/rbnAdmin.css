@@ -3,7 +3,7 @@
    --------------------------------------------------------------------------
    MİMARİ GELİŞTİRME & CSS STANDART KURALLARI (STRICT ARCHITECTURE RULES):
    
-   1. SAF İSKELET AYRIMI (SOVEREIGN SKELETON):
+   1. SAF İSKELET AYRIMI (RBN Framework SKELETON):
       - Dashboard temel yerleşimi, sidebar, navbar, header, breadcrumb, dropdown
         ve genel iskelet kodları daima 'core/dashboard.css' içinde (.rbn-dash-*)
         olarak yer alır. Buraya projeye özel renk veya genel iskelet kodu yazılmaz.

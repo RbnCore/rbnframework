@@ -11,7 +11,7 @@ use Rbn\Framework\Core\Services\Exception\Data\ShieldMetadata;
 /**
  * BaseExceptionProvider - Abstract Foundation for Exception Organs 🛰️🛡️
  * 
- * RBN 3.5: Masterpiece Standard.
+ * RBN Framework: Standard.
  * Extends 'BaseProvider' to inherit Discovery and Contextual services.
  * All specialized exception providers (except Survival) must extend this class.
  */
@@ -158,7 +158,7 @@ abstract class BaseExceptionProvider extends BaseProvider
             header('Content-Type: application/json; charset=UTF-8');
         }
 
-        // 🎯 RBN 3.5: Masterpiece JSON Signature
+        // 🎯 RBN Framework: JSON Signature
         $report = [
             'status' => 'error',
             '_is_rbn_diagnostic' => true, // 🛰️ Identification Flag for Debug Bridge
@@ -208,13 +208,13 @@ abstract class BaseExceptionProvider extends BaseProvider
     /**
      * Centralized Autonomous Renderer (Save Mode) 🏛️🛡️⚓
      * 
-     * RBN 3.5: Masterpiece Standard.
+     * RBN Framework: Standard.
      * Manages layout inclusion, asset injection, and view rendering without 
      * relying on the framework's internal Service Hub.
      */
     protected static function renderAutonomous(string $view, array $data, int $code = 500): void
     {
-        // 🔬 RBN 3.5: Kill any existing buffers to ensure a clean diagnostic output
+        // 🔬 RBN Framework: Kill any existing buffers to ensure a clean diagnostic output
         while (ob_get_level() > 0)
             ob_end_clean();
 
@@ -223,7 +223,7 @@ abstract class BaseExceptionProvider extends BaseProvider
             header("Content-Type: text/html; charset=UTF-8");
         }
 
-        // 🎯 RBN 3.5: Global Masterpiece Branding Orchestration (Direct Metadata) 🛡️🚀
+        // 🎯 RBN Framework: Global RBN Framework Branding Orchestration (Direct Metadata) 🛡️🚀
         $branding = [
             // 🛡️ Shield Core Identity (Requested Constants)
             'shield_name' => FrameworkIdentity::SHIELD_NAME,
@@ -248,7 +248,7 @@ abstract class BaseExceptionProvider extends BaseProvider
             // 🏮 Assets & Visuals
             'icon' => ShieldMetadata::ICON,
             'favicon' => ShieldMetadata::FAVICON,
-            'keywords' => 'rbnframework, error, security, shield, diagnostic, masterpiece'
+            'keywords' => 'rbnframework, error, security, shield, diagnostic, framework'
         ];
 
         // DUSUK-3: surum bilgisi (framework/shield) yalniz yerel gelistirmede; uretimde marka adi kalir.
@@ -260,9 +260,9 @@ abstract class BaseExceptionProvider extends BaseProvider
         $errorType = $data['type'] ?? 'Hata';
 
         $shieldVersion = $branding['shield_version'];
-        $asset_v = time(); // 🎯 RBN 3.5: Dynamic Masterpiece Cache Buster 🏹🪐
+        $asset_v = time(); // 🎯 RBN Framework: Dynamic RBN Framework Cache Buster 🏹🪐
 
-        // 🚀 RBN 3.5: Autonomous Theme JS Discovery (No Hardcode) 🏺⚓
+        // 🚀 RBN Framework: Autonomous Theme JS Discovery (No Hardcode) 🏺⚓
         $jsThemeName = str_replace('_', '-', $view);
         $jsCheckPath = \Rbn\Framework\Core\System\Paths\Paths::framework()->resources('Assets/RbnShield/js/themes/' . $jsThemeName . '.js');
         $shield_theme_js = file_exists($jsCheckPath) ? $jsThemeName : 'standard';
@@ -272,7 +272,7 @@ abstract class BaseExceptionProvider extends BaseProvider
         $error_message = $data['message'] ?? 'Sarsılmaz bir hata oluştu.';
         $solution_hint = $data['hint'] ?? 'Lütfen sistem yöneticisi ile iletişime geçin.';
 
-        // 🏗️ RBN 3.5: Paths Detection via Centralized Hub (No Service Dependency)
+        // 🏗️ RBN Framework: Paths Detection via Centralized Hub (No Service Dependency)
         $baseDir = \Rbn\Framework\Core\System\Paths\Paths::framework()->resources('Views/Errors');
         $header = $baseDir . '/Layouts/shield_header.php';
         $viewFile = $baseDir . '/' . ltrim($view, '/') . '.php';
@@ -291,7 +291,7 @@ abstract class BaseExceptionProvider extends BaseProvider
             exit;
         }
 
-        // 🛡️ RBN 3.5: Masterpiece Recursion Guard 🏹🪐
+        // 🛡️ RBN Framework: Recursion Guard 🏹🪐
         // If the 'survival' view itself is missing, we must DIE to prevent an infinite loop.
         if ($view === 'survival') {
             die("=== RBNSHIELD FATAL RECURSION PREVENTED ===\n" .

@@ -6,7 +6,7 @@ namespace Rbn\Framework\Packages\RbnApi\Models;
 
 /**
  * OpenAiPricingRegistry - OpenAI GPT Models Pricing Reference 🏷️📊
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 class OpenAiPricingRegistry
 {

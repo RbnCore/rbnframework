@@ -9,7 +9,7 @@ use Rbn\Framework\Core\System\Paths\Paths;
 /**
  * PathDriver - Specialized Physical Path Discovery 📂🛰️
  * 
- * RBN 3.5: Bridges the DiscoveryEngine to the physical directory structure.
+ * RBN Framework: Bridges the DiscoveryEngine to the physical directory structure.
  * Wraps the Paths hub for consistent folder and file resolution.
  */
 class PathDriver
@@ -50,7 +50,7 @@ class PathDriver
      */
     public function resolveFolder(string $key): ?string
     {
-        // 🎯 RBN 3.5: Connect to the specialized Folder Resolver within the cluster
+        // 🎯 RBN Framework: Connect to the specialized Folder Resolver within the cluster
         return \Rbn\Framework\Core\System\Discovery\Engine\DiscoveryEngine::instance()->folders()->resolveLayerDirectory($key);
     }
 }

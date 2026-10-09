@@ -1,6 +1,6 @@
 <?php
 /**
- * RBN Framework 3.0: High-Performance Http Engine 🎻📡
+ * High-Performance Http Engine 🎻📡
  */
 namespace Rbn\Framework\Core\Http\Engine\Traits\Validator;
 

@@ -2,7 +2,7 @@
 
 > **Bu belge hangi commit'e göre yazıldı:** `d4af18d` (dal `feat/fw-license-master`)
 > **Son doğrulama tarihi:** 2026-10-05
-> **Yayın tabanı:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Yayın tabanı:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kapsam:** Açılış zinciri, yönlendirme, render, kavramlar, `Paths`, ortam algısı
 
 ---
@@ -85,18 +85,18 @@ ise yalnız mesaj basılır, aksi halde `"Sistem şu an kullanılamıyor. Hata k
 | **4** | `handleFastAssets()` | 456 | `AssetDoctor::check()` — statik varlıklar için bağımlılıksız hızlı yol |
 
 `PreBoot` tek seferliktir: `private static bool $initialized` (`PreBoot.php:20`, 415-416).
-`Env` autoloader'dan **önce** kullanıldığı için `Config/Env.php` **elle** `require`
- edilir (`PreBoot.php:93`).
+Ortam kararı autoloader'dan **önce** verildiği için `Config/Secrets.php` **elle** `require`
+ edilir (`PreBoot::appSettings()`; `secrets.php` `app` bölümü, FW-096-D8).
 
 ### 2.4 `detectEnvironment()` — `RBN_DEV` nasıl belirlenir?
 
 `PreBoot.php:340-364`. **Güvenli varsayılan: ÜRETİM.** Geliştirme kipi yalnız iki
 kaynaktan açılır:
 
-1. **Operatör kararı**: `RBN_DEBUG` / `RBN_DEV` ortam değişkeni, açık kabul listesinde
-   (`1|true|on|yes|development`, küçük harfe çevrilip `trim`'li) →
-   `PreBoot.php:91-108` ve `96-106`. Bu kapının **kabul listesi `normalizeSwitch`
-   ile değiştirilmez** (belirsiz değerde `RBN_DEV=banal` **kapatır**) — bilerek korunur.
+1. **Operatör kararı**: `secrets.php` `app.debug` / `app.dev` = PHP `true`
+   (`PreBoot::operatorDebugRequested()`). Değer `bool` olmak zorundadır; `'banal'`
+   gibi metin şema tarafından varsayılana (`false`) düşürülür, kapı **kapalı** kalır.
+   `app.environment` `'development'` değilse (yazılmamışsa da) 2. madde hiç denenmez.
 2. **Yerel istek**: `isTrustedLocalEnvironment($host, $addr)` (`PreBoot.php:317-334`)
    → host normalizasyonu geçerli, **istemci IP'si `isLocalClientAddress()`'tan geçer**
    (loopback + RFC1918 + link-local + ULA, IPv4-eşlemeli IPv6 dahil,
@@ -106,7 +106,7 @@ kaynaktan açılır:
 
 **Alt dize eşlemesi yoktur** (`stripos`/`str_contains` kullanılmaz,
 `PreBoot.php:30-32`): `www.tester-attacker.com`, `evil.localhost.attacker.com`,
-`rbncore.tr.test.evil.com` **kapsam dışıdır**.
+`example.tr.test.evil.com` **kapsam dışıdır**.
 
 `X-Forwarded-For` **bilerek hiç okunmaz** (`PreBoot.php:153-157`).
 
@@ -415,7 +415,7 @@ Modül bulunamazsa `ModuleDiscoveryDriver` kaynak taramasına düşer; kodda
 7. `Paths::init()` (`rbn:111`) → `Autoload::boot()` (`rbn:114`) →
    `rbn_helpers.php` `require` (`rbn:116`) → `rbncli` servisinin `run($argv)`
    çağrılır (`rbn:117-121`).
-8. İstisna: `[CLI Error]` + log + `APP_ENV=development` ise kaynak satırı,
+8. İstisna: `[CLI Error]` + log + `secrets.php` `app.environment = 'development'` ise kaynak satırı,
    çıkış kodu 1 (`rbn:124-138`).
 
 **Komut listesi (ölçüldü, `php rbn list`):**
@@ -457,8 +457,8 @@ hata üretti.
 
 **Karar sırası** (`ProjectDbProfileResolver.php:85-96, 99-107`):
 
-1. Ortam değişkeni `RBN_DB_PROFILE` = tam `local` ya da tam `production`
-   (`180-196`). Başka değer (`yerel`, `1`, boş) **karar yok** sayılır, sıradakine geçilir.
+1. `secrets.php` `app.db_profile` = tam `local` ya da tam `production`
+   (`declaredProfile()`, `180-189`). Başka değer (`yerel`, `1`, boş) **karar yok** sayılır, sıradakine geçilir. Ortam değişkeni okunmaz (FW-096-D8).
 2. Framework kökünde **tam** `localhost` yol segmenti → `local`.
 3. Hiçbiri okunamazsa/belirsizlik → **`production`** (fail-closed).
 
@@ -471,7 +471,7 @@ hata üretti.
 
 * `.github/SECURITY.md` — bildirim kanalları, desteklenen sürümler, koordineli ifşa.
 * `.github/KNOWN-LIMITATIONS.md` — **bilinçli olarak sıkılaştırılmamış** tercihler.
-* `Core/System/Config/README.md` — sır/ortam değişkeni **tek kapı** kuralı.
+* `Core/System/Config/README.md` — sır **tek kapı** kuralı (`secrets.php`; ortam değişkeni yok).
 * `Core/System/Kernel/Base/PreBoot.php` — `RBN_DEV` fail-closed kapısı.
 * `Core/Render/Handlers/TemplateExpressionGuard.php` — şablon ifadesi güvenliği.
 * `RedirectManager` `guvenliHedef()` zinciri — `Location` başlığı güvenliği.

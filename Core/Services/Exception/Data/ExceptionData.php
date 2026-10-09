@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\Services\Exception\Data;
 /**
  * ExceptionData - The Pure Error DTO (Data Transfer Object) 🏺
  * 
- * RBN 3.5: Masterpiece Standard.
+ * RBN Framework: Standard.
  * Standardizes how error information is passed between Handlers and Providers.
  * No constants, no hidden logic—just raw diagnostic data.
  */

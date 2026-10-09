@@ -9,14 +9,14 @@ use Rbn\Framework\Core\Database\Engine\Collection;
 
 /**
  * BaseChannel - Shared logic for all communication channels 🕊️🏛️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * Akıcı (Fluent) sorgu arayüzleri için temel iskeleti sağlar.
  * BaseComponent DNA'sı sayesinde cache ve context erişimine sahiptir.
  */
 abstract class BaseChannel extends BaseComponent
 {
-    /** --- State Management (Sovereign Engine) 🪐 --- */
+    /** --- State Management (RBN Framework Engine) 🪐 --- */
     protected $targetModel = null;
     protected string $status = 'unread';
     protected int $limit = 50;
@@ -173,7 +173,7 @@ abstract class BaseChannel extends BaseComponent
 
     /**
      * [HYDRATOR] Synchronize data with the selected mode 🎭
-     * RBN 3.5: Masterpiece level flexibility.
+     * RBN Framework: level flexibility.
      */
     protected function hydrate(mixed $data): mixed
     {
@@ -208,7 +208,7 @@ abstract class BaseChannel extends BaseComponent
         $items = $this->get();
         $total = $this->count();
 
-        // RBN Masterpiece Paginator Bridge 🌉
+        // RBN Framework Paginator Bridge 🌉
         return Paginator::make($items, $total, $perPage, $url);
     }
 

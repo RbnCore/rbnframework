@@ -1,6 +1,6 @@
 # Core/Support/Bridges — Yardımcı kütüphaneler, global işlevler, vekil ve ortak özellikler
 
-> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Support/Bridges/` — 32 `*.php`: `Helpers/rbn_helpers.php` 1, `Helpers/Global/` 4, `Helpers/Library/` 15, `Helpers/Library/Icons/` 2 + `Icons/Internal/` 7, `Proxies/` 1, `Traits/` 2.
 > **Envanter:** 32 dosyanın 32'si aşağıda anlatıldı.
 
@@ -72,7 +72,7 @@
 
 ### 3.1 Şifreleme anahtarı (`CryptoHelper::resolveKey`, `:129-171`)
 
-Öncelik: (1) çağıranın verdiği `$key`; (2) ortam `APP_KEY`, sonra `ENCRYPTION_KEY` (`Env::string`); (3) sır dosyası `Secrets::optional('app_key')`; (4) yalnız `RBN_ALLOW_LEGACY_SALT ∈ {1,true,on,yes}` **ve** `RBN_LEGACY_SALT` doluysa eski türetme; hiçbiri yoksa `RuntimeException` (gömülü/sabit tuz **yok**). Anahtar = `substr(hash('sha256', <ham>), 0, 32)`.
+Öncelik: (1) çağıranın verdiği `$key`; (2) sır dosyası `Secrets::optional('app_key')` (ortam değişkeni yolu yok, FW-096-D8); (3) yalnız `secrets.php` `app.allow_legacy_salt === true` **ve** üst düzey `legacy_salt` doluysa eski türetme; hiçbiri yoksa `RuntimeException` (gömülü/sabit tuz **yok**). Anahtar = `substr(hash('sha256', <ham>), 0, 32)`.
 `encrypt()`: rastgele IV (`openssl_random_pseudo_bytes`), `openssl_encrypt(…, 'aes-256-cbc', $key, 0, $iv)`, çıktı `base64_encode($iv . $şifreli)`. `decrypt()`: IV uzunluğundan kısa girdi, boş girdi ya da hata → `null`.
 
 ### 3.2 `LogThrottle::once($anahtar, $ttl=3600)` (`LogThrottle.php:98-152`)

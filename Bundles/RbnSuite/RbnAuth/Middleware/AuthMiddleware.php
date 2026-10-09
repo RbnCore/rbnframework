@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace Rbn\Framework\Bundles\RbnSuite\RbnAuth\Middleware;
 
 use Rbn\Framework\Core\Base\BaseComponent;
+use Rbn\Framework\Bundles\RbnSuite\RbnAuth\Handlers\SessionHandler;
 use Rbn\Framework\Bundles\RbnSuite\RbnAuth\Support\RememberTokenService;
+use Rbn\Framework\Core\Http\Security\AuthPolicy;
 
 /**
  * AuthMiddleware - The Unified Authentication & Security Sentinel 🛡️🗝️⚔️
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * Tüm route güvenlik adımlarını (Remember-Me, Login Guard, Hijack Guard, Lockscreen ve Rol Yetkilendirme)
  * tek bir merkezi orkestrasyon altında birleştirir.
@@ -34,8 +36,12 @@ class AuthMiddleware extends BaseComponent
 
         // 🎼 Step 2: Login Check (Authentication Guard) 🔐
         if (!$auth || !$auth->check()) {
-            response()->redirect('/');
-            exit;
+            $this->rejectUnauthenticated();
+        }
+
+        // Kullanıcı paneli (`/user/*`) oturum süreleri: sunucu tarafı boşta + mutlak.
+        if (self::isUserPanelPath((string) $this->request->path())) {
+            $this->enforceUserSessionLifetime($auth);
         }
 
         // 🎼 Step 3: Anti-Hijacking Fingerprint Guard (IP & User-Agent) 🛡️
@@ -127,6 +133,76 @@ class AuthMiddleware extends BaseComponent
     }
 
     /**
+     * Kullanıcı oturumu süre denetimi (sunucu tarafı).
+     *
+     * - Boşta: son istekten bu yana `AuthPolicy::sessionIdleMinutes()` (panel ayarı `security.session_timeout`).
+     * - Mutlak: girişten bu yana `AuthPolicy::sessionAbsoluteMinutes()` (varsayılan 12 sa).
+     * Süre dolduysa oturum kapatılır (beni-hatırla çerezi dahil) ve `/`a dönülür.
+     * Zaman damgası olmayan eski oturuma damga şimdi basılır (geriye uyum).
+     */
+    private function enforceUserSessionLifetime(mixed $auth): void
+    {
+        $session = $this->session();
+        $now = time();
+
+        $startedAt = (int) $session->get(SessionHandler::STARTED_AT_KEY, 0);
+        $lastActivity = (int) $session->get(SessionHandler::LAST_ACTIVITY_KEY, 0);
+
+        if ($startedAt <= 0) {
+            $session->set(SessionHandler::STARTED_AT_KEY, $now);
+            $startedAt = $now;
+        }
+        if ($lastActivity <= 0) {
+            $lastActivity = $now;
+        }
+
+        $idleExpired = ($now - $lastActivity) > AuthPolicy::sessionIdleMinutes() * 60;
+        $absoluteExpired = ($now - $startedAt) > AuthPolicy::sessionAbsoluteMinutes() * 60;
+
+        if ($idleExpired || $absoluteExpired) {
+            try {
+                $this->logs()->channel('auth')->info('USER_SESSION_EXPIRED', [
+                    'reason'  => $absoluteExpired ? 'absolute' : 'idle',
+                    'user_id' => (int) $session->get('user_id', 0),
+                ]);
+            } catch (\Throwable) {
+                // Log yazılamasa da oturum kapanır.
+            }
+
+            $auth->logout();
+            $this->rejectUnauthenticated();
+        }
+
+        $session->set(SessionHandler::LAST_ACTIVITY_KEY, $now);
+    }
+
+    /**
+     * Oturumsuz istek: tarayıcı gezintisi `/`'a yönlenir; JSON bekleyen istek
+     * (`Accept: application/json` ya da `X-Requested-With: XMLHttpRequest`) 302
+     * yerine 401 `UNAUTHENTICATED` alır (istemci giriş HTML'ini JSON diye ayrıştırmaz).
+     */
+    private function rejectUnauthenticated(): never
+    {
+        if ($this->request->wantsJson() || $this->request->isAjax()) {
+            response()->error('Oturum bulunamadı ya da süresi doldu, lütfen yeniden giriş yapın.', 401, ['code' => 'UNAUTHENTICATED']);
+            exit;
+        }
+
+        response()->redirect('/');
+        exit;
+    }
+
+    /**
+     * Yol kullanıcı paneli mi? (`/user` ya da `/user/...`; sorgu dizesi atılır.)
+     */
+    public static function isUserPanelPath(string $path): bool
+    {
+        $path = strtolower(trim(substr($path, 0, strcspn($path, '?#')), '/'));
+
+        return $path === 'user' || str_starts_with($path, 'user/');
+    }
+
+    /**
      * Step 3 Helper: Anti-Hijacking Fingerprint Verification
      */
     private function verifyFingerprint(mixed $auth): void
@@ -139,8 +215,7 @@ class AuthMiddleware extends BaseComponent
 
         if ($savedFingerprint && !hash_equals((string)$savedFingerprint, $expectedFingerprint)) {
             $auth->logout();
-            response()->redirect('/');
-            exit;
+            $this->rejectUnauthenticated();
         }
     }
 

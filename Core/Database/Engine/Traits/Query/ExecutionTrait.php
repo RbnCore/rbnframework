@@ -7,7 +7,7 @@ use PDO;
 /**
  * ExecutionTrait - The Query Performance Hub ⚔️🛰️⚓
  * 
- * RBN 3.0: Compiles internal state into SQL and executes it with Collections integration.
+ * Compiles internal state into SQL and executes it with Collections integration.
  */
 trait ExecutionTrait
 {
@@ -33,7 +33,7 @@ trait ExecutionTrait
 
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        // 🎼 RBN 3.5: [HYDRATION ENGINE] 🏺🛰️
+        // 🎼 RBN Framework: [HYDRATION ENGINE] 🏺🛰️
         // If a model is assigned, transform raw arrays into full model instances.
         if ($this->modelClass && class_exists($this->modelClass)) {
             $results = array_map(function ($row) {
@@ -41,7 +41,7 @@ trait ExecutionTrait
                 if (method_exists($model, 'forceJsonFill')) {
                     $model->forceJsonFill($row);
                 } else {
-                    // 🎼 RBN 3.5: [DYNAMIC HYDRATION] 🛰️⚓
+                    // 🎼 RBN Framework: [DYNAMIC HYDRATION] 🛰️⚓
                     foreach ($row as $key => $value) {
                         $model->{$key} = $value;
                     }
@@ -50,8 +50,28 @@ trait ExecutionTrait
             }, $results);
         }
 
-        // Return wrapping with the RBN 3.0 Collections Engine 🚀
+        // Return wrapping with the RBN Collections Engine 🚀
         return function_exists('collect') ? collect($results) : $results;
+    }
+
+    /**
+     * Sorguyu çalıştırır ve DÜZ satır dizisi döndürür: `list<array<string, mixed>>`.
+     *
+     * `get()` bir `Collection` döndürür (model atanmışsa öğeleri model nesnesidir);
+     * `array` dönüş tipli yöntemde `return ...->get();` ya da `->get() ?: []` TypeError
+     * verir/işe yaramaz (nesne her zaman doğrudur). Satır dizisi gereken yerde bu kullanılır.
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    public function rows(): array
+    {
+        $result = $this->get();
+        $items = is_array($result) ? $result : (method_exists($result, 'all') ? $result->all() : (array) $result);
+
+        return array_values(array_map(
+            static fn ($row) => is_array($row) ? $row : (is_object($row) && method_exists($row, 'toArray') ? $row->toArray() : (array) $row),
+            $items
+        ));
     }
 
     /**

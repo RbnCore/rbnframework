@@ -8,9 +8,9 @@ use Rbn\Framework\Core\System\Discovery\Clusters\Structure\Namespace\NamespaceCo
 use Rbn\Framework\Core\Support\Definitions\System\NamespaceMap;
 
 /**
- * ModuleContext - The Sovereign Path & Namespace Orchestrator 🛰️🪐⚓
+ * ModuleContext - The RBN Framework Path & Namespace Orchestrator 🛰️🪐⚓
  * 
- * RBN 3.5 Masterpiece: Unified context for module file paths and namespaces.
+ * RBN Framework: Unified context for module file paths and namespaces.
  * Handles deterministic resolution without directory scanning.
  */
 class ModuleContext
@@ -38,7 +38,7 @@ class ModuleContext
 
     /**
      * Get the logical Namespace Context for this module 🧬
-     * [RBN 3.5] Returns a standardized NamespaceContext for architectural symmetry.
+     * [RBN Framework] Returns a standardized NamespaceContext for architectural symmetry.
      */
     public function namespaces(): NamespaceContext
     {
@@ -62,7 +62,7 @@ class ModuleContext
 
         $baseNamespace = $prefix . $name;
 
-        // 🎼 RBN 3.5: [SOVEREIGN NAMESPACE MERGE] 🧬⚓
+        // 🎼 RBN Framework: [RBN Framework NAMESPACE MERGE] 🧬⚓
         // Prevent doubling if the prefix already contains the module name.
         $prefixTrimmed = rtrim($prefix, '\\');
         if (str_ends_with($prefixTrimmed, $name) || str_ends_with($prefixTrimmed, "Rbn{$name}")) {
@@ -74,7 +74,7 @@ class ModuleContext
 
     /**
      * Get the module's views directory 👁️
-     * [RBN 3.5] Hybrid: Checks local module storage THEN central framework resources.
+     * [RBN Framework] Hybrid: Checks local module storage THEN central framework resources.
      */
     public function views(?string $path = null): string
     {

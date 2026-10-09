@@ -9,13 +9,13 @@ use Rbn\Framework\Core\Base\BaseComponent;
 /**
  * BaseManager - The Framework System Logic Root 🏛️🛰️⚓
  * 
- * RBN 3.5 Masterpiece: Provides a distinct identity for system-level 
+ * RBN Framework: Provides a distinct identity for system-level
  * management components. Inherits all DNA from BaseComponent.
  */
 abstract class BaseManager extends BaseComponent
 {
     /**
-     * RBN 3.5: [SOVEREIGN LIFECYCLE] 🛫
+     * RBN Framework: [RBN Framework LIFECYCLE] 🛫
      * Managers can implement custom boot logic here.
      */
     protected function afterBoot(): void

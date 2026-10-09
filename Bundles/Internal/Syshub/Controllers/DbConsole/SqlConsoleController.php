@@ -9,7 +9,7 @@ use Rbn\Framework\Bundles\Internal\Syshub\Controllers\SyshubController;
 
 /**
  * SqlConsoleController - Interactive SQL Engine 🖥️🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 #[SubModule(
     entity: 'database',

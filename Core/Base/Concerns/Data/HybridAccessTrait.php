@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Rbn\Framework\Core\Base\Concerns\Data;
 
 /**
- * HybridAccessTrait - The "Sovereign Duality" Engine 🏺🧬⚓
+ * HybridAccessTrait - The "RBN Framework Duality" Engine 🏺🧬⚓
  * 
- * RBN 3.5 Masterpiece: Enables an object to behave both as an Object and an Array.
+ * RBN Framework: Enables an object to behave both as an Object and an Array.
  * Seamlessly integrates with the BaseComponent's Magic Discovery System.
  */
 trait HybridAccessTrait

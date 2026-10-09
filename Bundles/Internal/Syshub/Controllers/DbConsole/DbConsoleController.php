@@ -9,7 +9,7 @@ use Rbn\Framework\Bundles\Internal\Syshub\Controllers\SyshubController;
 
 /**
  * DbConsoleController - Database Management Orchestrator 🛠️🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 #[SubModule(
     entity: 'database',

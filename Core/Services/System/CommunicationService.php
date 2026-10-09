@@ -11,7 +11,7 @@ use Rbn\Framework\Core\Services\System\Providers\Fluent\NotificationChannel;
 /**
  * CommunicationService - Global Framework Communication Bridge 🛰️🏛️⚓
  * 
- * RBN 3.5 Masterpiece: Core service for global messaging and notification access.
+ * RBN Framework: Core service for global messaging and notification access.
  * This service provides the essential data needed by the Framework Panel (UI) 
  * regardless of which module is active.
  * 

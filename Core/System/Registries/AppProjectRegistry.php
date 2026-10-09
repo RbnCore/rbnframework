@@ -10,14 +10,14 @@ use Rbn\Framework\Core\System\Discovery\Engine\Drivers\ModuleDiscoveryDriver;
 /**
  * AppProjectRegistry - Unified Project-Level Discovery Hub 🏛️🛰️⚓
  * 
- * RBN 3.5 "Masterpiece" Standard.
+ * RBN Framework Standard.
  * This is the SINGLE gate for all non-module project registrations.
  */
 class AppProjectRegistry extends BaseConfig
 {
     public function bundles(): array
     {
-        // 🎼 RBN 3.5: [SOVEREIGN AUTONOMOUS DISCOVERY] 🚀🛰️⚓
+        // 🎼 RBN Framework: [RBN Framework AUTONOMOUS DISCOVERY] 🚀🛰️⚓
         $discovery = new ModuleDiscoveryDriver();
         $discovered = $discovery->discoverBundles();
         $projectKey = (string) ($this->resolveProjectData('project_key') ?: '');
@@ -39,7 +39,7 @@ class AppProjectRegistry extends BaseConfig
      */
     public function registerMap(): array
     {
-        // 🎼 RBN 3.5: [SOVEREIGN AUTONOMOUS DISCOVERY] 🚀🛰️⚓
+        // 🎼 RBN Framework: [RBN Framework AUTONOMOUS DISCOVERY] 🚀🛰️⚓
         $discovery = new ModuleDiscoveryDriver();
 
         // 1. Projeye ait modül haritalarını otonom olarak topla 🏛️

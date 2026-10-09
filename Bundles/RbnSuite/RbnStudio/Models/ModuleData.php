@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Routes\Route;
 
 /**
  * ModuleData - RbnStudio Bundle Identity and Registration Center 🎨🚀🏛️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 #[Bundle(
     name: 'studio',
@@ -31,11 +31,11 @@ class ModuleData extends BaseConfig
     }
 
     /**
-     * SOVEREIGN CUSTOM ROUTES 🎯
+     * RBN Framework CUSTOM ROUTES 🎯
      */
     public function registerRoutes(): void
     {
-        // 📂 Categories Sovereign Routes
+        // 📂 Categories RBN Framework Routes
         Route::prefix('studio/categories')->controller('CategoriesController')->group(function () {
             Route::get('/', 'index')->name('admin.studio.categories.index');
             Route::post('save', 'save')->name('admin.studio.categories.save');
@@ -46,7 +46,7 @@ class ModuleData extends BaseConfig
             Route::post('reorder', 'bulkOrder')->name('admin.studio.categories.reorder');
         });
 
-        // 📝 Drafts Sovereign Routes
+        // 📝 Drafts RBN Framework Routes
         Route::prefix('studio/drafts')->controller('DraftsController')->group(function () {
             Route::get('/', 'index')->name('admin.studio.drafts.index');
             Route::post('save', 'save')->name('admin.studio.drafts.save');
@@ -57,7 +57,7 @@ class ModuleData extends BaseConfig
             Route::post('reorder', 'bulkOrder')->name('admin.studio.drafts.reorder');
         });
 
-        // 📰 Posts Sovereign Routes
+        // 📰 Posts RBN Framework Routes
         Route::prefix('studio/posts')->controller('PostsController')->group(function () {
             Route::get('/', 'index')->name('admin.studio.posts.index');
             Route::post('save', 'save')->name('admin.studio.posts.save');
@@ -71,7 +71,7 @@ class ModuleData extends BaseConfig
             Route::post('social-share', 'socialShare')->name('admin.studio.posts.social-share');
         });
 
-        // 🗞️ News Sovereign Routes
+        // 🗞️ News RBN Framework Routes
         Route::prefix('studio/news')->controller('NewsController')->group(function () {
             Route::get('/', 'index')->name('admin.studio.news.index');
             Route::post('save', 'save')->name('admin.studio.news.save');

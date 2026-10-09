@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Data\BaseRepository;
 /**
  * MasterSettingsRepository - Central Authority Data Access & Query Repository 🛰️🏛️⚓
  * 
- * RBN 3.5 Masterpiece: Enterprise Repository Pattern for Master Settings.
+ * RBN Framework: Enterprise Repository Pattern for Master Settings.
  * Located strictly under Core\Database\Repositories\Master for clean architecture.
  * 
  * @property \Rbn\Framework\Core\Database\Models\Master\MasterSettingsModel $masterSettingsModel

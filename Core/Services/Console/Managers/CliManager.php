@@ -19,9 +19,9 @@ use Rbn\Framework\Core\System\Kernel\Stages\Autoload;
 use Rbn\Framework\Core\System\Paths\Paths;
 
 /**
- * CliManager - Sovereign CLI Lifecycle, Project Context & Memory Manager 🛰️🔄⚓
+ * CliManager - RBN Framework CLI Lifecycle, Project Context & Memory Manager 🛰️🔄⚓
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Orchestrates complete project switching, memory reset, discovery caches,
  * configuration reloading and database connection binding for CLI & Cron tasks.
  */

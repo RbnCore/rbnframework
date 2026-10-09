@@ -11,7 +11,7 @@ use Rbn\Framework\Core\Base\Services\BaseService;
 /**
  * DatabaseGuardStage - The Consolidated Security & Environment Gatekeeper 👨‍🍳🛡️⚓
  * 
- * RBN 3.5: Masterpiece Architecture. 
+ * RBN Framework: Architecture.
  * Replaces legacy EnvDiscovery and ProjectDiscovery stages.
  * Delegates all responsibility to the DatabaseGuardService.
  */

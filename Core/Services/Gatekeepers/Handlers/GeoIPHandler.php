@@ -11,7 +11,7 @@ use Rbn\Framework\Core\System\Paths\Paths;
 /**
  * GeoIPHandler - The Location Detective 🌍🛰️
  * 
- * RBN 3.5: Atomic actor for IP-based geolocation and flag support.
+ * RBN Framework: Atomic actor for IP-based geolocation and flag support.
  */
 class GeoIPHandler extends BaseComponent
 {
@@ -25,7 +25,7 @@ class GeoIPHandler extends BaseComponent
     /**
      * [G-08 KAPANDI — FW-GEOIP-IPWHO-146] GeoIP saglayicisi ve SEKI.
      *
-     * KARAR VERİLDİ: ipwho.is (Vera 144, otopilot; patron sabah onayı:
+     * KARAR VERİLDİ: ipwho.is (team member 144, otopilot; patron sabah onayı:
      * değişiklik tek satır)
      *
      * `{ip}` yerine sorgulanacak IP yazilir. Sorgu artik **TLS'li** calisir
@@ -38,7 +38,7 @@ class GeoIPHandler extends BaseComponent
      *   HTTP'den cikmanin tek yolu PRO (ucretli) plana gecmek.
      *
      * NEDEN ipwho.is:
-     *   - Ucretsiz planda HTTPS ACIK (Vera 144: gercek istek, 8.8.8.8 -> 200),
+     *   - Ucretsiz planda HTTPS ACIK (team member 144: gercek istek, 8.8.8.8 -> 200),
      *   - anahtarsiz, ticari kullanim izinli,
      *   - kotasi 1000 istek/gun/istemci IP (30 gunluk onbellekle uyumlu),
      *   - JSON alani **`country_code`** (ip-api'nin `countryCode`'i DEGIL —
@@ -47,7 +47,7 @@ class GeoIPHandler extends BaseComponent
      *
      * ALAN SOZLESMESI:
      *   `?fields=success,message,country_code` -> `{"success":true,"country_code":"US"}`
-     *   (Vera 144 olcum: 0.20-0.26 sn; bu gorevde tekrar olcum: 0.68 sn).
+     *   (team member 144 olcum: 0.20-0.26 sn; bu gorevde tekrar olcum: 0.68 sn).
      *
      * YEDEK (ileride gerekirse): freeipapi.com
      *   `https://free.freeipapi.com/api/v1/json/{ip}` — alan `countryCode`
@@ -146,7 +146,7 @@ class GeoIPHandler extends BaseComponent
                         'peer_name'        => self::GEOIP_SUNUCU,
                     ],
                 ]);
-                // [RBN 3.5] Using a more robust API endpoint or local DB if available
+                // [RBN Framework] Using a more robust API endpoint or local DB if available
                 $ucNokta = self::urlFor(self::GEOIP_UC_NOKTA, $ip);
                 $response = @file_get_contents($ucNokta, false, $ctx);
 
@@ -286,7 +286,7 @@ class GeoIPHandler extends BaseComponent
     /**
      * Check if IP is in Private/Local range.
      *
-     * [G-16 · 2026-10-03 · zeki-6eb7f5] KAPSAM GENİŞLETİLDİ (IPv4 + IPv6).
+     * [G-16 · 2026-10-03 · team member] KAPSAM GENİŞLETİLDİ (IPv4 + IPv6).
      *
      * Ölçülen eksikler (birim testi `fw_gateguard_orta_dusuk.php` (G16-a),
      * fix ÖNCESİ 11 özel adresin 5'i kapsam dışıydı):

@@ -204,7 +204,7 @@ $rbnTrace = $rbnDev ? $rbnE($trace) : '(ayrıntı yalnız sunucu günlüğünde)
         </div>
         <div class="footer">
             <button class="btn-copy" onclick="copyError()">Copy Error 📋</button>
-            <div class="footer-text">RbnShield 3.5 | Autonomous Emergency Interface ✅🛡️⚓</div>
+            <div class="footer-text">RbnShield | Autonomous Emergency Interface ✅🛡️⚓</div>
         </div>
     </div>
 

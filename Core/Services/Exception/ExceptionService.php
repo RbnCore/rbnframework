@@ -8,9 +8,9 @@ use Rbn\Framework\Core\Base\Services\BaseService;
 use Rbn\Framework\Core\Support\Contracts\Base\BaseServiceInterface;
 
 /**
- * ExceptionService - The Ultimate Masterpiece Orchestrator 🎻🪐
+ * ExceptionService - The Ultimate RBN Framework Orchestrator 🎻🪐
  * 
- * RBN 3.5: [SYMMETRIC LAZY DISCOVERY] 🏛️🛰️✨
+ * RBN Framework: [SYMMETRIC LAZY DISCOVERY] 🏛️🛰️✨
  * 
  * 
  * @property-read \Rbn\Framework\Core\Services\Exception\Handlers\ErrorAnalysisHandler $errorAnalysisHandler
@@ -49,7 +49,7 @@ class ExceptionService extends BaseService implements BaseServiceInterface
         $this->logHandler->log($arrayData);
 
         // 3. Render (Auto-resolves Providers/DevelopmentProvider or UserErrorProvider) 🎭
-        // RBN 3.5: If level is 'user', ALWAYS use UserErrorProvider (even in debug) 🛡️⚓
+        // RBN Framework: If level is 'user', ALWAYS use UserErrorProvider (even in debug) 🛡️⚓
         if ($arrayData['level'] !== 'user' && $this->shouldShowRichError()) {
             $this->developmentProvider->render($arrayData, $e);
         } else {
@@ -62,7 +62,7 @@ class ExceptionService extends BaseService implements BaseServiceInterface
      */
     public function shouldShowRichError(): bool
     {
-        // 🛡️ RBN 3.5: [AUTONOMOUS DEFENSE] 🏛️🛰️
+        // 🛡️ RBN Framework: [AUTONOMOUS DEFENSE] 🏛️🛰️
         // Using the direct RBN_DEBUG constant to avoid circular loops with SettingsService.
         //
         // FW-KARAR-2 / Z-1: ayrica `RBN_DEV` kapisi (fail-closed). Aksi halde

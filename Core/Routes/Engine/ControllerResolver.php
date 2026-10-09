@@ -17,7 +17,7 @@ class ControllerResolver
      */
     public static function resolve(string $action, ?string $default = null): string
     {
-        $action = ltrim($action, '\\'); // [RBN 3.5] Normalize leading backslash for Absolute Flow 🛰️⚓
+        $action = ltrim($action, '\\'); // [RBN Framework] Normalize leading backslash for Absolute Flow 🛰️⚓
 
         $framework = Definition::get('namespace', 'FRAMEWORK_PREFIX');
         $project = Definition::get('namespace', 'PROJECT_PREFIX');
@@ -80,7 +80,7 @@ class ControllerResolver
     }
 
     /**
-     * Ensures the class name is handled (RBN 3.0 standard suffixing is optional)
+     * Ensures the class name is handled (RBN standard suffixing is optional)
      */
     private static function ensureControllerSuffix(string $class): string
     {

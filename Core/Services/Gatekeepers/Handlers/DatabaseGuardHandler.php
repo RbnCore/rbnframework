@@ -18,7 +18,7 @@ use PDOException;
 /**
  * DatabaseGuardHandler - The Logic Engine for DB Integrity 🛡️⚙️⚓
  *
- * RBN 3.5 Masterpiece: database preflight via DatabaseGuardProvider; security
+ * RBN Framework: database preflight via DatabaseGuardProvider; security
  * logic and rule enforcement only. [G-18] Ham DB hata mesajı kullanıcıya
  * GÖSTERİLMEZ; `LogsGuardErrors` ile sunucu günlüğüne yazılır.
  *
@@ -41,7 +41,7 @@ class DatabaseGuardHandler extends BaseComponent
         $projectKey = $projectKey ?: (function_exists('active_project_key') ? active_project_key() : null);
         $cacheKey = $category . '_' . ($projectKey ?: 'default');
 
-        // 🎼 RBN 3.5: [DELEGATED AUTHORITY] 🏛️⚙️
+        // 🎼 RBN Framework: [DELEGATED AUTHORITY] 🏛️⚙️
         $path = \Rbn\Framework\Core\System\Config\Engine\Config\ConfigResolver::resolve($category, $projectKey);
 
         if (!isset(self::$validated[$cacheKey])) {
@@ -58,7 +58,7 @@ class DatabaseGuardHandler extends BaseComponent
     private function validateIntegrity(string $category, string $path): void
     {
         // 1. Physical File Check 📂
-        // 🛡️ RBN 3.5: [MASTER & COMMON IDENTITY BYPASS]
+        // 🛡️ RBN Framework: [MASTER & COMMON IDENTITY BYPASS]
         // Master and Common DB configurations are static models, so we bypass the file existence check.
         if (!in_array($category, ['database_master', 'database_common']) && !file_exists($path)) {
             throw new PreflightException(
@@ -67,7 +67,7 @@ class DatabaseGuardHandler extends BaseComponent
             );
         }
 
-        // 🎻 RBN 3.5: The Bridge Pattern 🌁 (Physical Provider delegate)
+        // 🎻 RBN Framework: The Bridge Pattern 🌁 (Physical Provider delegate)
         $provider = $this->provider('databaseGuard');
 
         // 2. Load & Validate Credentials 🧬
@@ -142,7 +142,7 @@ class DatabaseGuardHandler extends BaseComponent
      */
     private function checkProjectStatus(string $category, string $path): void
     {
-        // 🎼 RBN 3.5: [MASTERPIECE DISCOVERY SYNC] 🛰️🏛️⚓
+        // 🎼 RBN Framework: [RBN Framework DISCOVERY SYNC] 🛰️🏛️⚓
         $projectData = Bootstrap::getAppContext('project_data');
 
         if (!$projectData) {
@@ -181,7 +181,7 @@ class DatabaseGuardHandler extends BaseComponent
             );
         }
 
-        // [RBN 3.5] Identity Sealing 🧬🏛️⚓
+        // [RBN Framework] Identity Sealing 🧬🏛️⚓
         Bootstrap::setAppContext('project_id', (int) ($projectData['id'] ?? 0));
         Bootstrap::setAppContext('project_data', $projectData);
     }

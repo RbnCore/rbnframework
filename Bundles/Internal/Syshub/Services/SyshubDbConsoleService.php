@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\Services\BaseService;
 
 /**
  * SyshubDbConsoleService - Database Orchestrator Hub 🛠️🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * @property \Rbn\Framework\Bundles\Internal\Syshub\Handlers\SyshubDbConsoleHandler $syshubDbConsoleHandler
  * @property \Rbn\Framework\Bundles\Internal\Syshub\Providers\SyshubDbConsoleProvider $syshubDbConsoleProvider

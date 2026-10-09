@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\Web\BaseRender;
 
 /**
  * BreadcrumbResolver - Pure metadata and configuration resolver for navigation 🧠🛰️⚓
- * Part of RBN 3.5 Masterpiece.
+ * Part of RBN Framework.
  */
 class BreadcrumbResolver extends BaseRender
 {
@@ -17,13 +17,13 @@ class BreadcrumbResolver extends BaseRender
      */
     public function resolve(array $options = []): array
     {
-        // 🎼 RBN 3.5: [SOVEREIGN HYDRATION] 🏺🛰️⚓
+        // 🎼 RBN Framework: [RBN Framework HYDRATION] 🏺🛰️⚓
         $panelPrefix = $options['panelPrefix'] ?? ($this->rbn->activeController()->panel ?? 'admin');
         $module      = $options['module']      ?? ($this->rbn->activeController()->module ?? 'dashboard');
         $moduleData  = $options['moduleData']  ?? ($this->rbn->activeController()->moduleData ?? []);
         $subModules  = $moduleData['sub_modules'] ?? ($options['subModules'] ?? []);
 
-        // 🎼 Sovereign Segment Sterilization 🛡️✨
+        // 🎼 RBN Framework Segment Sterilization 🛡️✨
         $path        = $this->request->path();
         $rawSegments = array_values(array_filter(explode('/', trim($path, '/'))));
         $basePrefix  = strtolower((string) $this->service('route')->getBasePrefix());

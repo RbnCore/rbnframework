@@ -6,7 +6,7 @@ namespace Rbn\Framework\Core\System\Config\Definitions\DbProfiles;
 /**
  * ProjectDbData - Standart proje veritabanı kimlik profili (yalniz SABIT) 🛰️📐🗃️
  *
- * RBN 3.5: Centralizes all core database requirements for standard projects.
+ * RBN Framework: Centralizes all core database requirements for standard projects.
  * [FW-DBPROFILES-TASIMA-95] Core/Services/Gatekeepers/Models ->
  * Core/System/Config/Definitions/DbProfiles. Kimlik/yapılandırma verisi;
  * koruma mantığı değildir (ters bağımlılık giderildi).
@@ -17,7 +17,7 @@ namespace Rbn\Framework\Core\System\Config\Definitions\DbProfiles;
  * `Core/System/Config/Engine/Database/DatabaseConfig::fromFile()` ve
  * `DatabaseGuardProvider::loadCredentials()` `project-settings.php` dosyasını
  * okur. `DbProfileResolver` içindeki proje profili yolu yalnız YEDEK
- * yoldur: `DB_USER`/`DB_PASS` ortam değişkeni. Framework seviyesindeki TEK sır
+ * yoldur: `secrets.php` `db_user`/`db_pass` (ortam değişkeni YOK). Framework seviyesindeki TEK sır
  * dosyası (`secrets.php`) proje DB'sini TARAMAZ — her projenin kendi DB'si
  * kendi dosyasındadır. Hiçbiri yoksa sessiz `''` dönülmez — fail-closed
  * (`DbProfileResolver::pass()`).
@@ -47,15 +47,6 @@ final class ProjectDbData
 
     /** En az ayarlanmış kurulumlar için DB kullanıcı adı (kimlik, sır DEĞİLDİR); proje ayarında tanımlıysa kodda yazan KULLANILMAZ. */
     public const DEFAULT_DB_USER = 'root';
-
-    /**
-     * Ortam değişkeni ADLARI (yedek okuma yolu; kayıt `Definitions/EnvKeys.php`).
-     *
-     * [FW-ENV-KAYIT-160] Ad burada AÇIKÇA yazılır; `PREFIX . '_USER'` ile
-     * birleştirmek okuma noktasını görünmez yapıyordu.
-     */
-    public const USER_ENV = 'DB_USER';
-    public const PASS_ENV = 'DB_PASS';
 
     /**
      * Sır dosyasındaki OPSİYONEL anahtar adları (küçük harf, eski düz-anahtar

@@ -9,7 +9,7 @@ platform: Windows
 
 > **Bu belge hangi commit'e göre yazıldı:** `d4af18d` (dal `feat/fw-license-master`, 2026-10-05 20:49)
 > **Son doğrulama tarihi:** 2026-10-05
-> **Yayın tabanı:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Yayın tabanı:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kapsam:** `rbnframework/` deposunun asset katmanı — `Core/Support/Definitions/Render/*`,
 > `Core/Render/{Builders,Controllers,Services,Providers,Configs}/*`, `Resources/Assets/RbnCommon/*`
 > **Yazım kuralı:** Her iddia `dosya:satır` ile kaynağa bağlıdır. Ölçülen sayılar **bu belgedeki
@@ -189,11 +189,11 @@ sabit + `rbn-master.js` dizisi.
 **Canlı ölçüm (yerel canlı, 2026-10-05):**
 
 ```
-$ curl -s -k -D - https://rbncore.tr.test/framework-assets/fonts/space-mono
+$ curl -s -k -D - https://example.tr.test/framework-assets/fonts/space-mono
 HTTP/1.1 307 Temporary Redirect
 Location: https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap
 
-$ curl -s -k -I https://rbncore.tr.test/framework-assets/fonts/space-mono     # HEAD
+$ curl -s -k -I https://example.tr.test/framework-assets/fonts/space-mono     # HEAD
 HTTP/1.1 307 Temporary Redirect
 Location: https://fonts.googleapis.com/css2?family=Space+Mono:...
 
@@ -287,7 +287,7 @@ bu ikonlar **tarayıcıda boş** — §13-B5).
 | `rbnCharts` | `<proje-a>/…/<projeA>FrontendController.php:28`, `RbnAdmin/Models/PanelMap.php` |
 | `aos` | `<proje-b>` `<projeB>FrontendController.php:90`, `<projeB2>FrontendController.php:51`, `<proje-d>` `<projeD>FrontendController.php` |
 | `flag_icon` | `<grup-x>/…/<projeC>FrontendController.php:23`, `RbnAdmin/Models/PanelMap.php` |
-| `rbnDashboard` | `rbncore/…/EmailFrontendController.php` |
+| `rbnDashboard` | `example/…/EmailFrontendController.php` |
 | `rbnModal` | **hiçbir yerden istenmiyor** — motor `rbn-master.js` yüklüyor (`:8.1`) |
 | `admin_core_css` | **hiçbir yerden istenmiyor** (§13-B6) |
 | `rbnExtended` | **hiçbir yerden istenmiyor** (§7.5) |
@@ -326,7 +326,7 @@ if (($isAuthContext || $isPanelContext || $isRbnEngine) && isset($payload['style
 
 | Sayfa | `rbn-master.css` | `rbnalert.css` | `rbn-common.css` |
 |---|---|---|---|
-| `rbncore.tr.test` (`css_engine=rbn`) | ✅ `=v1791201628` | ❌ yok | ❌ yok |
+| `example.tr.test` (`css_engine=rbn`) | ✅ `=v1791201628` | ❌ yok | ❌ yok |
 | `<site-a>.test` (`css_engine=rbn`) | ✅ `=v1791201628` | ❌ yok | ❌ yok |
 | `<site-b>.test` (bootstrap) | ❌ yok | ✅ `=v1788997133` | ✅ `=v1789055904` |
 | `<site-c>.test` (bootstrap) | ❌ yok | ✅ `=v1788997133` | ✅ `=v1789055904` |
@@ -369,7 +369,7 @@ altında aranır.
 
 | Değer | Alt proje sayısı | Dosya:satır |
 |---|---|---|
-| `'css_engine' => 'rbn'` | **13** | `rbncore` (`:11,:25,:37,:49`), `<grup-y>` (`:36,:92`), `<grup-z>` (`:13,:46`), `<proje-d>` (`:17,:43,:58`), `<proje-a>` (`:11,:21`) |
+| `'css_engine' => 'rbn'` | **13** | `example` (`:11,:25,:37,:49`), `<grup-y>` (`:36,:92`), `<grup-z>` (`:13,:46`), `<proje-d>` (`:17,:43,:58`), `<proje-a>` (`:11,:21`) |
 | belirtilmemiş (⇒ bootstrap) | **8** | `<grup-w>` (`<proje-b>`,`<proje-b2>`), `<grup-x>` (`<proje-c>`,`<proje-g>`,`<proje-h>`), `<grup-y>` (`<proje-e>`,`<proje-f>`) |
 | **Toplam `view_mapping` girişi** | **21** | |
 
@@ -381,7 +381,7 @@ altında aranır.
 
 | Site | `css_engine` | Bootstrap CSS | `rbn-master.css` |
 |---|---|---|---|
-| `rbncore.tr.test` | `rbn` | ❌ | ✅ |
+| `example.tr.test` | `rbn` | ❌ | ✅ |
 | `<site-a2>.test` | `rbn` | ❌ | ✅ |
 | `<site-c>.test` | *(yok)* | ✅ `bootstrap@5.3.2` | ❌ |
 | `<site-b>.test` | *(yok)* | ✅ `bootstrap@5.3.2` | ❌ |
@@ -402,7 +402,7 @@ kullanıcı **açıkça** `@font/Inter` dememişse, önceki çalışmadan kalmı
 
 > **Ölçülen gözlem:** `<proje-a>` `<projeA>FrontendController.php:28` `@font/Inter`'i **açıkça** istediği için
 > Inter + Outfit + JetBrains Mono + Space Mono = 4 font basıldı. `<proje-c>` yalnız `@font/Syne`
-> istedi → 1 font. `rbncore` `@font/Space Mono` + `@font/JetBrains Mono` → 2 font, Inter düştü.
+> istedi → 1 font. `example` `@font/Space Mono` + `@font/JetBrains Mono` → 2 font, Inter düştü.
 > `<proje-b>` **hiç** font istemedi → fallback devreye girmeliydi ama sayfada **font link'i yok**
 > (§13-B8).
 
@@ -643,7 +643,7 @@ Her canlı sayfada bu iki satır doğrulandı.
 | `fonts_auth` (`:37`) | Plus Jakarta Sans | `auth` bağlamında **otomatik** |
 | `frontend` | — | **otomatik font yok**; `@font/<Ad>` ile `addAsset()` gerekir, hiç istenmezse fallback `Inter` |
 
-**Canlı kanıt — auth sayfası (`https://rbncore.tr.test/rbn-admin`, HTTP 200):**
+**Canlı kanıt — auth sayfası (`https://example.tr.test/rbn-admin`, HTTP 200):**
 
 ```
 <link href="…/framework-assets/fonts/inter"              ← fallback Inter (priority 5)
@@ -793,7 +793,7 @@ Yani **proje `variables.css` yalnız `--rbn-*` DEĞİL, ön ek olmadan** (`--bg-
 `--primary-color`, `--font-display`, `--radius-md`, `--border-color`, `--shadow-card`…) tanım
 yapar ve motor onları otomatik toplar. Bu, `design-system.md` §1.3'ün
 "`variables.css`: sadece renk/zemin/font/radius token'ları" ile birebir örtüşür.
-Örnek: `domains/<marka>/rbncore.tr/css/variables.css` `--primary-color`, `--bg-canvas`,
+Örnek: `domains/<marka>/example.tr/css/variables.css` `--primary-color`, `--bg-canvas`,
 `--font-mono`, `--text-display` vb. tanımlıyor; `core/tokens.css` bunları `--rbn-*` altına topluyor.
 
 **8-Point ızgarası — iki FARKLI ölçek var (kritik!):**
@@ -864,7 +864,7 @@ Kod doğrusu: `utilities.css:17` (`--rbn-space-4` = 16px). JSON §13-B13'e yazı
 2. `rbnExtended` adı **hiçbir proje/framework PHP dosyasında istenmiyor** — yalnız
    `AssetBundles.php`'in kendi 3 satırında geçiyor (`:70`, `:71`, `:72`).
 3. Canlı hiçbir sayfanın `<link>` listesinde `rbn-utilities-extended` / `rbn-components-extended`
-   **yok** (4 sayfa tarandı: rbncore, <proje-a>, <proje-c>, <proje-b>).
+   **yok** (4 sayfa tarandı: example, <proje-a>, <proje-c>, <proje-b>).
 4. Dosyalar yine de **sunulabilir** durumda:
    `GET /framework-assets/rbncommon/rbn-utilities-extended.css=v1` → **200** (düzleştirme).
 
@@ -940,10 +940,11 @@ opsiyonel paket sinif = 387    (bunlarin 17'si kapanista zaten var)
 | `rbn-form-input` | ✅ | `core/forms.css` |
 | `rbn-badge` | ✅ | `core/badges.css` |
 | `rbn-modal` | ✅ | `components/rbnModal.css` |
-| `rbn-empty-state`, `rbn-drawer-right`, `rbn-accordion` | ✅ | `core/elements.css` |
+| `rbn-empty-state` (FW-096-C3), `rbn-accordion` | ✅ | `core/elements.css` |
+| `rbn-drawer-right` (+ `rbn-drawer-aside`, FW-096-C3) | ✅ | `core/responsive.css` |
 | `pt-3` | ✅ | **`core/utilities.css:17`** `.pt-3 { padding-top: var(--rbn-space-4) !important; }` |
 | `pb-3`, `mb-0`, `py-2`, `gap-4`, `d-flex`, `rounded`, `rounded-3`, `border-bottom`, `fs-sm`, `fw-bold`, `text-dark` | ✅ | B katmanı |
-| `text-primary` | ✅ (⚠️ iki yerde) | `core/colors.css:10` **ve** `core/layout.css:118` — **çakışma**, §13-B18 |
+| `text-primary` | ✅ | `core/colors.css` tek tanım, `var(--rbn-primary)` (FW-096-C1: layout.css çift tanımı kaldırıldı) |
 | `object-fit-cover` | ❌ | **YANLIŞ İDDİA** — §13-B19 |
 | `<projeA>-tag` | ❌ | motorda yok; projelerin kendi CSS'inde (`domains/<grup>/<site>/css/{components,elements}.css`) |
 
@@ -1067,8 +1068,8 @@ const closeBtn = e.target.closest('[data-bs-dismiss="modal"], [data-rbn-dismiss=
 |---|---|---|---|
 | **jQuery** 3.7.1 | `jquery` paketi → `STACK_MAP['panel']` | **yalnız `panel`**, otomatik | `rbn-admin` (auth) sayfasında **yok** ✓; frontend'de **yok** ✓ |
 | **SortableJS** 1.15.2 | `sortable` paketi → `STACK_MAP['panel']` | **yalnız `panel`**, otomatik | — |
-| **Bootstrap JS** 5.3.2 | `bootstrap` paketi → `STACK_MAP['universal']` | evet, **ama `rbn`/panel/auth'ta baypas** | `<proje-b>` ve `<proje-c>` sayfalarında **var**; `rbncore`/`<proje-a>`/`rbn-admin` sayfasında **yok** ✓ |
-| **AOS** 2.3.4 | `aos` paketi | **hayır** — `addAsset('aos')` gerekir | `<proje-b>` (<projeB>/<projeB2> `addAsset('aos', …)`) ve `rbncore` (`MainFrontendController.php:35`) sayfalarında **css+js** var; `<proje-a>`/`<proje-c>` sayfasında **yok** ✓ |
+| **Bootstrap JS** 5.3.2 | `bootstrap` paketi → `STACK_MAP['universal']` | evet, **ama `rbn`/panel/auth'ta baypas** | `<proje-b>` ve `<proje-c>` sayfalarında **var**; `example`/`<proje-a>`/`rbn-admin` sayfasında **yok** ✓ |
+| **AOS** 2.3.4 | `aos` paketi | **hayır** — `addAsset('aos')` gerekir | `<proje-b>` (<projeB>/<projeB2> `addAsset('aos', …)`) ve `example` (`MainFrontendController.php:35`) sayfalarında **css+js** var; `<proje-a>`/`<proje-c>` sayfasında **yok** ✓ |
 | **Chart.js** (`rbnCharts` paketi) | `rbnCharts` paketi | **hayır** | `<proje-a>` `<alt-site-a>` sayfasında isteniyor (`<projeA>FrontendController.php:28`); ana `<site-a>` sayfasında **yok** ✓ |
 | **Google Tag Manager** | ⚠️ **paket/AssetDefinition YOK** | — | `<proje-b>` ana sayfasında `<script src="https://www.googletagmanager.com/gtag/js?id=G-J49KXF3T2L">` **var**; bu asset sisteminden **gelmiyor** (§13-B4) |
 
@@ -1163,6 +1164,8 @@ Dosya dokümanı (`:22-32`) "dört kapı"nın aynı kararı vermek zorunda kald�
 |---|---|---|---|
 | favicon | `favicon-<project_key>.<ext>` | `svg`, `png`, `ico` (`:43`) | `images/` |
 | og image | `og-image-<project_key>.<ext>` | `png`, `jpg`, `webp` (`:46`) | `images/` |
+| apple-touch-icon (FW-096-C7) | `apple-touch-icon-<project_key>.png` | `png` (180x180, zeminli) | `images/` — dosya varsa `<link rel="apple-touch-icon">` |
+| web manifest (FW-096-C7) | `manifest-<project_key>.webmanifest` | `webmanifest`, `json` | `images/` — dosya varsa `<link rel="manifest">` |
 
 Anahtar `normalizeKey()` (`:219-228`) ile normalize edilir: küçük harf, trim, `[a-z0-9_-]{1,64}`
 deseni. Uymayan anahtar `null` → **bozuk ad (`og-image-.png`) üretilmez**.
@@ -1211,7 +1214,7 @@ görselleri fiziksel keşfe düşüyor ve `og:image` **her sitede ölü URL** ü
 
 | Site | `<link rel="icon">` | `og:image` |
 |---|---|---|
-| `rbncore.tr.test` | `/project-assets/favicon-rbncore.svg` | `…` |
+| `example.tr.test` | `/project-assets/favicon-example.svg` | `…` |
 | `<site-a2>.test` | `/project-assets/favicon-<proje-a>.svg` | `…` |
 | `<site-b>.test` | `/project-assets/favicon-<proje-b>.svg` | `/project-assets/og-image-<proje-b>.png` |
 | `<site-c>.test` | `/project-assets/images/favicon-<proje-c>.png=v1782671388` | `…` |
@@ -1367,7 +1370,7 @@ Bkz. §7.2 tam tablo. Özet:
 | Site | `css_engine` | **Dış host isteği** | Yerel varlık isteği | Toplam `<link>`+`<script>` |
 |---|---|---|---|---|
 | `<site-a2>.test` | `rbn` | **2** (`fonts.gstatic.com` preconnect, `remixicon.css`) | 9 | 13 |
-| `rbncore.tr.test` | `rbn` | **4** (`fonts.gstatic.com`, `remixicon.css`, `aos.css`, `aos.js`) | 6 | 12 |
+| `example.tr.test` | `rbn` | **4** (`fonts.gstatic.com`, `remixicon.css`, `aos.css`, `aos.js`) | 6 | 12 |
 | `<site-c>.test` | bootstrap | **7** (`fonts.gstatic.com`, bootstrap, BAI, FA, remixicon, flag-icon, bootstrap.js) | 8 | 17 |
 | `<site-b>.test` | bootstrap | **9** (+ **GTM `googletagmanager.com`**) | 6 | 17 |
 
@@ -1412,21 +1415,21 @@ Kodla **doğrulanamayan** ya da **çelişen** noktalar. Her satır: gözlem + ka
 | **B5** | `bi-*` ikonları `rbn` motorunda **boş** | 726 view satırı `bi-*` kullanıyor, ama `injectCoreStack()` (`:259`) `bootstrap_icons`'u `rbn`/panel/auth'ta **baypas** ediyor → ikon dosyası indirilmiyor, ikonlar görünmez. `IconLibrary`/`SmartIconCategories` ise **panel** ikon listelerini `bi-*` sınıflarıyla döndürüyor (`IconLibrary.php:34`, `SmartIconCategories.php:23+`) — panel bağlamı da BAI'sız. | Ölçüm: view satırları (`ri-` 2 527, `bi-` 726, `fas-` 0). `rbn-admin` sayfasının `<link>` listesinde BAI CDN linki **yok**. |
 | **B6** | `admin_core_css` paketi ölü | `RBN_ADMIN_VARIABLES_CSS` + `RBN_ADMIN_GLOBAL_CSS` paketi hiçbir yerden istenmiyor ve `STACK_MAP`'te yok. | `Select-String "'admin_core_css'"` → yalnız `AssetBundles.php:46`. |
 | **B7** | `security` paketi | `'security' => ['scripts' => [AD::RBN_ADMIN_APP]]` (`:87`). 22 eşleşmenin **hepsi** `Security`/`Syshub` **controller sınıf adı**; paket adı olarak istenmiyor → `rbnAdminApp.js` hiç yüklenmiyor. | `Select-String "'security'"` → 22 dosya, hiçbiri `addAsset('security')` değil. |
-| **B8** | Varsayılan `Inter` fallback'i `<proje-b>`'da **düşmüyor** | `build()` (`:154-162`) frontend'de font yoksa `@font/Inter` eklemeli. `<proje-b>` hiç `addAsset` font çağırmıyor, sayfada **hiç font link'i yok**. `<proje-c>` (`@font/Syne`) → 1 font, `rbncore` (2 font) → Inter düştü, `<proje-a>` (açıkça `@font/Inter`) → 4 font. `<proje-b>` → **0 font** (Inter de yok). Muhtemel `prepare()`'teki `:104-112` temizleme ile `build()`'in `:154` kontrolünün etkileşimi ya da `hasAnyFont` sayımının `/fonts/` kalıbı. | Canlı font link sayımı (§6.4 tablosu). Kod: `AssetBuilder.php:93-113` ve `:144-162`. **Kök neden bu belgede kesinleştirilemedi** — `rbncore`'da `Space Mono` varken Inter düşmesi `:104-112` ile açıklanıyor; `<proje-b>`'da `:104-112` de tetiklenmemeli (özel font yok). İnceleme gerekiyor. |
+| **B8** | Varsayılan `Inter` fallback'i `<proje-b>`'da **düşmüyor** | `build()` (`:154-162`) frontend'de font yoksa `@font/Inter` eklemeli. `<proje-b>` hiç `addAsset` font çağırmıyor, sayfada **hiç font link'i yok**. `<proje-c>` (`@font/Syne`) → 1 font, `example` (2 font) → Inter düştü, `<proje-a>` (açıkça `@font/Inter`) → 4 font. `<proje-b>` → **0 font** (Inter de yok). Muhtemel `prepare()`'teki `:104-112` temizleme ile `build()`'in `:154` kontrolünün etkileşimi ya da `hasAnyFont` sayımının `/fonts/` kalıbı. | Canlı font link sayımı (§6.4 tablosu). Kod: `AssetBuilder.php:93-113` ve `:144-162`. **Kök neden bu belgede kesinleştirilemedi** — `example`'da `Space Mono` varken Inter düşmesi `:104-112` ile açıklanıyor; `<proje-b>`'da `:104-112` de tetiklenmemeli (özel font yok). İnceleme gerekiyor. |
 | **B9** | `?v=` elle sürümleme çalışmaz | Üretici `=v<filemtime>` (path sonu) üretir ve `serve()` yalnız `=` ile ayırır. Elle yazılan `?v=` **hiçbir şeyi ayırmaz** → sürümleme çalışmaz. | `AssetBuilder.php:347` · `AssetController.php:48-51`. `=v1.0` ile 307 doğrulandı; `?v=` ile canlı test **yapılmadı** (kod yolu açık). `Resources/Views/Errors/Layouts/shield_header.php` bu konuda elle link yazıyor (önceki analiz D-07/D-08) — bu belgede yeniden ölçülmedi. |
 | **B10** | `rbn-terminal.css` bağsız | 5 189 B ham dosya hiçbir sabitte, pakette veya `@import`'ta geçmiyor. | `Select-String 'rbn-terminal'` tüm repo → 0 (dosya adı hariç). |
-| **B11** | `@import` ve dinamik JS: **19 + 9 = 28 ek istek** | `rbn-master.css` **19 `@import`** → tarayıcı **19 ayrı istek** açar (HTTP/2 altında da 19 kaynak). `rbn-master.js` 9 modülü `document.createElement('script')` ile **çalışma anında** ekler → **9 ek istek + JS yürütme gecikmesi**. Ölçülen toplam: CSS 207 963 B / JS 151 852 B ham. | `rbn-master.css:7-29` (19 satır) · `rbn-master.js:64-81` (9 modül). Canlı: `rbncore` sayfasında 6 yerel varlık isteği (baskı sonrası gerçek sayım §12.2). **Karar gerekiyor:** kapanışı tek dosyaya birleştirmek (`FW-CSS-MOTOR-2` kararı: *"bundle bölme kararı (geriye uyumlu, en küçük değişiklik)"* — sıra korundu, paketler ayrıldı). |
+| **B11** | `@import` ve dinamik JS: **19 + 9 = 28 ek istek** | `rbn-master.css` **19 `@import`** → tarayıcı **19 ayrı istek** açar (HTTP/2 altında da 19 kaynak). `rbn-master.js` 9 modülü `document.createElement('script')` ile **çalışma anında** ekler → **9 ek istek + JS yürütme gecikmesi**. Ölçülen toplam: CSS 207 963 B / JS 151 852 B ham. | `rbn-master.css:7-29` (19 satır) · `rbn-master.js:64-81` (9 modül). Canlı: `example` sayfasında 6 yerel varlık isteği (baskı sonrası gerçek sayım §12.2). **Karar gerekiyor:** kapanışı tek dosyaya birleştirmek (`FW-CSS-MOTOR-2` kararı: *"bundle bölme kararı (geriye uyumlu, en küçük değişiklik)"* — sıra korundu, paketler ayrıldı). |
 | **B12** | B katmanı kuralına istisna | `design-system.md` §4.2: ön eksiz utility **yalnız** `layout.css`/`utilities.css`/`colors.css` içinde tanımlanır. Ama `core/cards.css:363-367` ön eksiz `.object-cover/.object-contain/.object-fill/.object-none/.object-scale-down` tanımlıyor. | `core/cards.css:363-367` (Select-String ile doğrulandı). |
 | **B13** | **Üç farklı boşluk ölçeği** çelişiyor | `design-system.md` §4.2: `.p-3` = **16px**. `docs/gorevler/css-bootstrap-rbn-esleme.json` `sayiOlcegi`: "1=4px 2=8px **3=12px** 4=16px". Kod (`utilities.css:17`): `.pt-3 { padding-top: var(--rbn-space-4) }` → `--rbn-space-4 = 16px`. Yani JSON ile kural belgesi **çelişiyor**. | `design-system.md:87` · JSON `:14` · `utilities.css:17` · `tokens.css:42` (`--rbn-space-4: 16px`). **Kod doğrusu (16px).** Öneri: JSON'daki `sayiOlcegi` düzeltilsin veya `--rbn-space` dizini ile `.p-*` dizisi bilinçli ayrılsın. |
 | **B14** | Proje CSS'i şişiyor | `<proje-c>` `master.css` **13 `@import`**; `design-system.md` §4.2 "hedef: sıfıra yakın". | `domains/<grup>/<site>/css/master.css` (13 satır `@import`). |
 | **B15** | `rbnExtended` ile kapanış arasında 17 sınıf çakışması | Opsiyonel paketlerin 387 sınıfından **17**si zaten kapanışta. B katmanı `!important` yazdığı için (B14/B88 kuralı) yükleme sırasına göre sonuç değişebilir. | Ölçüm: `|opsiyonel ∩ kapanış| = 17` (örn. `rbn-form-input`). |
 | **B16** | Eşleme JSON'u ölçüm sayıları **tutarsız** ve üretim betiği yok | JSON `surum 1.1.0`: kapanış 23 dosya / 1 563 sınıf / 575 `rbn-` / 988 ön eksiz. Bu belgenin **bağımsız** ölçümü: **19 dosya / 1 193 sınıf / 471 `rbn-` / 722 ön eksiz**. Ayrıca `hedefEksik: 0` ve `eksikBootstrapSiniflari: []` iddiaları **kapsam daraltılmadan** anlamsız (863 girdi taranmış, bootstrap'ın ~1 300 sınıfının hepsi değil). | JSON `:19-31` · bu belgenin §7.6 ölçümü (19 dosya, `\.[-\w]+` regex). **Bu belgede kapsam-daraltılmış yeniden ölçüm YAPILMADI** — `css_engine=rbn` + panel/auth kapsamına daraltılmış gerçek eksik sayısı açık bir sonraki görevdir. |
-| **B17** | Ölçüm betiği repoda yok | JSON `uretici: "FW-CSS-MOTOR-2 / zeki-6eb7f5 (olcu-genis.mjs + el ile)"`. `olcu-genis.mjs` araması: `E:\localhost`, `E:\AgentSpace`, `E:\tmp\_araclar` → **bulunamadı**. Yeniden üretilebilirlik yok. | `Get-ChildItem -Recurse -Include *.mjs,*.ps1,*.py` (üç kök) — eşleşme yok. |
+| **B17** | Ölçüm betiği repoda yok | JSON `uretici: "FW-CSS-MOTOR-2 / team member (olcu-genis.mjs + el ile)"`. `olcu-genis.mjs` araması: `E:\localhost`, `E:\AgentSpace`, `E:\tmp\_araclar` → **bulunamadı**. Yeniden üretilebilirlik yok. | `Get-ChildItem -Recurse -Include *.mjs,*.ps1,*.py` (üç kök) — eşleşme yok. |
 | **B18** | `.text-primary` **çift tanımlı** | `core/colors.css:10`: `.text-primary, .text-blue { color: var(--rbn-blue-600, #2563eb) !important; }` · `core/layout.css:118`: `.text-primary { color: var(--primary-color, var(--rbn-primary)) !important; }`. İkisi de `!important`, ikisi de `layout.css`/`colors.css` **B katmanı**. `rbn-master.css` sırası: `layout.css` (12) → `colors.css` (22) ⇒ **`colors.css` kazanır**, yani `--rbn-blue-600` (sabit mavi). Proje `--primary-color` ezilmez. | `core/colors.css:10` + `core/layout.css:118` · sıra `rbn-master.css:12` vs `:22`. |
 | **B19** | `design-system.md` §4.2 `object-fit-cover` **yanlış** | §4.2 B katmanı örneği olarak `object-fit-cover` veriyor. Motorda **yok**. Var olan: `.object-cover/.object-contain/.object-fill/.object-none/.object-scale-down` (`core/cards.css:363-367`). | `Select-String 'object-fit'` tüm `Resources/Assets/**/*.css` → yalnız `cards.css:323` (özellik) ve `:363-367` (sınıflar). |
 | **B20** | `<projeA>-tag` motorda yok | `design-system.md` §4.1 "Standart Şablon"unda `<projeA>-tag <projeA>-tag-blue` kullanılıyor. Framework motorunda **tanımı yok**; tanımları proje CSS'inde (`domains/<grup>/<site>/css/{components,elements}.css`). Yani bu "standart şablon" **bir projeye özgü** sınıfı standart gösteriyor. | `Select-String '\.<projeA>-tag'` `rbnframework/**` → 0; `domains/**` → `<site-a2>` dosyaları. |
 | **B21** | `rbnModal.js` yorumu kodla uyuşmuyor | `:24` yorumu `[data-rbn-modal="true"], [data-bs-toggle="modal"], [data-rbn-toggle="modal"]` diyor; `:26`'daki gerçek seçici **`[data-bs-toggle="modal"]` içermiyor**. | `components/rbnModal.js:24` vs `:26`. |
-| **B22** | `AssetConvention` tek doğruluk kaynağı **tam kapanmamış** | `<proje-c>` favicon'ı `SeoResolver` üzerinden **fiziksel yol + `=v<filemtime>`** ile basıyor (`/project-assets/images/favicon-<proje-c>.png=v1782671388`), sanal `AssetController` rotasını kullanmıyor. Yeni siteler (`rbncore`, `sro`, `<proje-b>`) sanal/uyumlu yolu kullanıyor. | Canlı `<link rel="icon">` taraması (§10.3). |
+| **B22** | `AssetConvention` tek doğruluk kaynağı **tam kapanmamış** | `<proje-c>` favicon'ı `SeoResolver` üzerinden **fiziksel yol + `=v<filemtime>`** ile basıyor (`/project-assets/images/favicon-<proje-c>.png=v1782671388`), sanal `AssetController` rotasını kullanmıyor. Yeni siteler (`example`, `sro`, `<proje-b>`) sanal/uyumlu yolu kullanıyor. | Canlı `<link rel="icon">` taraması (§10.3). |
 | **B23** | `panel` bağlamı `css_engine`'den **bağımsız** | `injectCoreStack()` `:266` koşulu `panel`'i içermiyor; panel `rbn_master`'i `STACK_MAP['panel'] → rbn_core_panel` ile alıyor. **Davranış doğru** ama kod okuyan kişi `:266`'ya bakıp "panel'de rbn_master yüklenmiyor" sanabilir. Belge düzeltmesi değil, okuma tuzağı notu. | `AssetBuilder.php:266` vs `AssetBundles.php:24,51-56`. Canlı `rbn-admin` sayfasında `rbn-master.css` **var** ✓. |
 | **B24** | `addAsset('js/x.js')` ile `addAsset('/js/x.js')` **farklı** yollar | `addAsset()` `:118-122` yalnız `@`/`http`/`/` ile **başlamayan** yola `@project/` ekler. `js/frontend.js` → `@project/js/frontend.js`; `/js/frontend.js` → site kökü (düzleştirme yok, `.test` altına gider). İkisi de 200 dönebilir ama **farklı fiziksel dosyalardır**. | `FrontendBaseController.php:118-122`. Canlı `<proje-a>`: `…/project-assets/js/frontend.js=v1789207191` (`addAsset('/js/frontend.js')` çağrısından, `<projeA>FrontendController.php:28`). |
 

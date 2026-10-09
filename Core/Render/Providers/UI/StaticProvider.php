@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseRenderInterface;
 /**
  * StaticProvider - Simplified UI Layout Renderer 🛰️📄⚓
  * 
- * Part of the RBN 3.5 "Masterpiece" Architecture.
+ * Part of the RBN Framework Architecture.
  */
 class StaticProvider extends BaseRender implements BaseRenderInterface
 {

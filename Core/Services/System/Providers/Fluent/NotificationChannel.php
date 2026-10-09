@@ -6,7 +6,7 @@ use Rbn\Framework\Core\Base\Patterns\BaseChannel;
 
 /**
  * NotificationChannel - Fluent Notification API 🔔🕊️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * Bu sınıf bildirimlere akıcı bir erişim arayüzü sağlar.
  * Veri kaynağı olarak NotificationProvider'ı kullanır (SSOT).

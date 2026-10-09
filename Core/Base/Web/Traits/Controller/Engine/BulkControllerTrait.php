@@ -7,9 +7,9 @@ namespace Rbn\Framework\Core\Base\Web\Traits\Controller\Engine;
 use Exception;
 
 /**
- * BulkControllerTrait - Optimized RBN 3.5 Bulk Actions ⛓️🎡
+ * BulkControllerTrait - Optimized RBN Framework Bulk Actions ⛓️🎡
  * 
- * RBN 3.5: Masterpiece Standard - Centralized Dispatching
+ * RBN Framework: Standard - Centralized Dispatching
  */
 trait BulkControllerTrait
 {
@@ -30,7 +30,7 @@ trait BulkControllerTrait
 
         $result = $target->$method($ids);
 
-        // 🎼 RBN 3.5: [EXPLICIT DISPATCH] 🗑️🛰️⚓
+        // 🎼 RBN Framework: [EXPLICIT DISPATCH] 🗑️🛰️⚓
         $this->handleResult($result, null, $redirect, 'delete');
     }
 
@@ -56,7 +56,7 @@ trait BulkControllerTrait
 
         $result = $target->$method($ids, $status);
 
-        // 🎼 RBN 3.5: [EXPLICIT DISPATCH] 🚥🛰️⚓
+        // 🎼 RBN Framework: [EXPLICIT DISPATCH] 🚥🛰️⚓
         $this->handleResult($result, null, false, 'status');
     }
 
@@ -75,7 +75,7 @@ trait BulkControllerTrait
 
         $result = $target->$method($order);
 
-        // 🎼 RBN 3.5: [EXPLICIT DISPATCH] 📊🛰️⚓ - Stay in place after sort
+        // 🎼 RBN Framework: [EXPLICIT DISPATCH] 📊🛰️⚓ - Stay in place after sort
         $this->handleResult($result, null, false, 'bulkOrder');
     }
 
@@ -106,7 +106,7 @@ trait BulkControllerTrait
             try {
                 $result = $target->$method(...$params);
 
-                // 🎯 RBN 3.5: Fluent Awareness
+                // 🎯 RBN Framework: Fluent Awareness
                 $isSuccess = ($result instanceof \Rbn\Framework\Core\Support\Contracts\Service\BaseServiceInterface) ? $result->success() : (bool) $result;
 
                 if (!$isSuccess) {
@@ -132,11 +132,11 @@ trait BulkControllerTrait
 
     /**
      * Standard Bulk Value Update Action (Settings, Batch Forms, etc.) 💾
-     * Optimized for RBN 3.5 Sovereign Architecture.
+     * Optimized for RBN Framework Architecture.
      */
     public function bulkValueUpdate(): void
     {
-        // 🎯 RBN 3.5 Masterpiece: Automatic input key discovery or override
+        // 🎯 RBN Framework: Automatic input key discovery or override
         $inputKey = (isset($this->bulkInputKey) && !empty($this->bulkInputKey)) ? $this->bulkInputKey : 'data';
 
         $data = $this->request->form([$inputKey => 'required|array']);
@@ -144,7 +144,7 @@ trait BulkControllerTrait
 
         $result = $this->activeService->bulkValueUpdate($payload);
 
-        // 🎼 RBN 3.5: [EXPLICIT DISPATCH] 💾🛰️⚓
+        // 🎼 RBN Framework: [EXPLICIT DISPATCH] 💾🛰️⚓
         $this->handleResult($result, null, null, 'bulkValueUpdate');
     }
 }

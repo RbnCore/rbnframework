@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Support\Exceptions\CronTaskException;
 use Rbn\Framework\Packages\RbnPipeline\Concerns\AutoTaskTrait;
 
 /**
- * AbstractTaskBuilder - Universal Sovereign Template for All Automated Task Builders 🤖🛰️⚓
+ * AbstractTaskBuilder - Universal RBN Framework Template for All Automated Task Builders 🤖🛰️⚓
  * Enforces standardized lifecycle validation, cron timing matching, daily publishing quota checks,
  * and provides direct shortcut methods for AI response normalization, image generation, FAQ formatting, and publishing.
  */

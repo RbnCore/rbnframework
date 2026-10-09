@@ -1,6 +1,6 @@
 # Core/Services/Gatekeepers — IP/bakım/veritabanı kapıları, WAF, GeoIP (13 dosya)
 
-> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Services/Gatekeepers/` — **13 `*.php`** = 5 kök + `Concerns/` 2 +
 > `Handlers/` 5 + `Providers/` 1.
 > **Envanter:** 13 dosyanın **13'u** anlatıldı.
@@ -252,8 +252,8 @@ S-1 düzeltmesi (`:36-40` yorumu): önceki hâlde ham `REQUEST_URI` üzerinde
 `str_contains` ile `/?x=/framework-assets/` gibi istekler **bakım modu + tüm VIP
 kontrolunu atlıyordu**.
 
-**`resolveFailClosed()` — ölçüldü:** `Env::flag('RBN_GUARD_FAILCLOSED', true)`
-(`:217-222`) → DB/ayar yoksa **`true`** (engelle). Tek kapı; ikinci "kapalı
+**`resolveFailClosed()`:** `Secrets::app()['guard_failclosed']` (`secrets.php`
+`app` bölümü, PHP `bool`; FW-096-D8) → alan yoksa ya da dosya okunamazsa **`true`** (engelle). Tek kapı; ikinci "kapalı
 listesi" yazılmaz (`ShieldSettingsRepository::KAPALI_DEGERLER` yalnız geriye
 dönük uyum sabiti olarak korunur, `:195-196`).
 

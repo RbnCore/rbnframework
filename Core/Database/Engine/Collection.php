@@ -15,7 +15,7 @@ use Traversable;
 /**
  * Collection - The Database & Data Manipulation Engine 🔱🧬
  * 
- * RBN 3.5: High-Performance, fluent, and memory-safe database data wrapper.
+ * RBN Framework: High-Performance, fluent, and memory-safe database data wrapper.
  * Located directly under Core\Database\Engine alongside DatabaseEngine and QueryBuilder.
  */
 class Collection implements CollectionInterface, ArrayAccess, Countable, IteratorAggregate, JsonSerializable

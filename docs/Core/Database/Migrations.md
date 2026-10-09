@@ -1,6 +1,6 @@
 # Core/Database/Migrations — master ve kiraci şema geçişleri
 
-> **Doğrulanan kod tabanı:** `1d89c431` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `1d89c431` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Database/Migrations/` — 3 `*.php` + 1 `*.sql`.
 > **Envanter:** 3 php dosyasının 3'ü anlatıldı; `111-z_user_tokens.sql` aşağıda not edilmiştir.
 

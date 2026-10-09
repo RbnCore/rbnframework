@@ -1,6 +1,6 @@
 <?php
 /**
- * RBN Framework 3.0 - Unified Render Hub 🎨
+ * Unified Render Hub 🎨
  * AuthRenderProvider: Standardized Identity Suite Renderer.
  */
 
@@ -12,7 +12,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseRenderInterface;
 /**
  * AuthProvider - Identity Suite Layout Renderer 🛰️🔐⚓
  * 
- * Part of the RBN 3.5 "Masterpiece" Architecture.
+ * Part of the RBN Framework Architecture.
  */
 class AuthProvider extends BaseRender implements BaseRenderInterface
 {
@@ -35,7 +35,7 @@ class AuthProvider extends BaseRender implements BaseRenderInterface
             $data = $uiHandler->prepare($this->context ?? 'auth', $view, $data);
         }
 
-        // 🎼 Step 2: Sovereign SEO & Identity Application 🕵️‍♂️🛰️⚓
+        // 🎼 Step 2: RBN Framework SEO & Identity Application 🕵️‍♂️🛰️⚓
         // Use the module identity (pre-loaded in harmony) if not already set.
         $identity = (is_object($this->moduleData) && method_exists($this->moduleData, 'get')) ? $this->moduleData->get('identity', []) : [];
         if (!empty($identity) && !isset($data['branding'])) {

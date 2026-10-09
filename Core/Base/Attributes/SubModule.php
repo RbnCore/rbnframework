@@ -8,16 +8,16 @@ use Attribute;
 use Rbn\Framework\Core\Base\BaseAttribute;
 
 /**
- * SubModule Attribute - The Sovereign Identity Anchor ⚖️🏛️⚓
+ * SubModule Attribute - The RBN Framework Identity Anchor ⚖️🏛️⚓
  * 
- * RBN 3.5 Masterpiece: Enables point-target component discovery.
+ * RBN Framework: Enables point-target component discovery.
  * Eliminates redundant properties in controllers and services.
  */
 #[Attribute(Attribute::TARGET_CLASS)]
 class SubModule extends BaseAttribute
 {
     /**
-     * RBN 3.5: Constructor with backward compatibility and zero conflict. 🛡️⚓
+     * RBN Framework: Constructor with backward compatibility and zero conflict. 🛡️⚓
      * Maps original names to the internal $metadata hub to avoid BaseComponent property collisions.
      */
     public function __construct(
@@ -34,7 +34,7 @@ class SubModule extends BaseAttribute
         public ?string $bulkInputKey = null,
         public ?string $modal = null
     ) {
-        // 🎼 DNA Injection: Delegate to the Sovereign Ancestor 🏛️🛰️⚓
+        // 🎼 DNA Injection: Delegate to the RBN Framework Ancestor 🏛️🛰️⚓
         parent::__construct([
             'module'     => $module,
             'entity'     => $entity,

@@ -11,7 +11,7 @@ use Rbn\Framework\Core\Database\Engine\Collection;
 /**
  * ViewTrait - Standard View Rendering Orchestration 🎨🛰️
  * 
- * RBN 3.5: Fulfills the BaseControllerInterface requirements.
+ * RBN Framework: Fulfills the BaseControllerInterface requirements.
  */
 trait ViewTrait
 {
@@ -64,21 +64,21 @@ trait ViewTrait
     /**
      * Render a view file with fluent context injection 🎨🛰️
      * 
-     * 🎼 RBN 3.5: [POLYMORPHIC RENDER] 🎻🛰️⚓
+     * 🎼 RBN Framework: [POLYMORPHIC RENDER] 🎻🛰️⚓
      * Supports:
-     * 1. render('view', [data]) - Sovereign Mode
+     * 1. render('view', [data]) - RBN Framework Mode
      * 2. render('module', 'view', [data]) - Legacy Mode
      */
     public function render(string $arg1, $arg2 = [], $arg3 = []): View
     {
-        // 🎼 RBN 3.5: Masterpiece Logic - Determine signature type
+        // 🎼 RBN Framework: Logic - Determine signature type
         if (is_array($arg2)) {
             // Modern Signature: render($view, $data)
             $view = $arg1;
             $data = $arg2;
             $module = $this->module ?? 'Frontend';
 
-            // 🎯 RBN 3.5 Masterpiece: Type is actually the Context (panel, auth, frontend) 🪐🛰️⚓
+            // 🎯 RBN Framework: Type is actually the Context (panel, auth, frontend) 🪐🛰️⚓
             // This ensures the correct RenderProvider (like PanelProvider) is triggered.
             $type = $this->context ?? 'frontend';
         } else {
@@ -89,13 +89,13 @@ trait ViewTrait
             $type = $module;
         }
 
-        // 🎯 RBN 3.5: [AUTOMATIC HUB DISCOVERY] 🛰️⚓
-        // Inject the sovereign module context if it exists on the controller.
+        // 🎯 RBN Framework: [AUTOMATIC HUB DISCOVERY] 🛰️⚓
+        // Inject the RBN Framework module context if it exists on the controller.
         if (!isset($data['module'])) {
             $data['module'] = $module;
         }
 
-        // 🎯 RBN 3.5: Masterpiece Unified View gateway.
+        // 🎯 RBN Framework: Unified View gateway.
         $viewObj = View::render($view, array_merge($this->viewContext, $data), $type);
 
         // 🛡️ Save to active context for the Dispatcher (Auto-Return Emulator)

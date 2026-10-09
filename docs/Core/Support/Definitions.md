@@ -1,6 +1,6 @@
 # Core/Support/Definitions — Çatı tanım sabitleri (ad alanı, klasör, rota, varlık, kimlik)
 
-> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Support/Definitions/` — 10 `*.php` (`Render/` 4, `Route/` 2, `System/` 4).
 > **Envanter:** 10 dosyanın 10'u aşağıda anlatıldı. Sabit sayıları `ReflectionClass` ile ölçüldü (PHP 8.3, Windows).
 
@@ -26,7 +26,7 @@
 | `NamespaceMap.php` (`BaseConfig`) | `FRAMEWORK_PREFIX='Rbn\Framework\'`, `PROJECT_PREFIX='Rbn\Project\'`, `COMPONENT_REGISTRY`, `MAP` (26 giriş: `Framework`, `Framework.Core`, `Base`, `Database`, `Support`, `Helpers`, `Services`, `Http`, `Render`, `Routes`, `System`, `Internal`, `Suite`, `RbnSuite`, `RbnAdmin`, `RbnAuth`, `RbnStudio`, `Packages`, `App`, `Project`, `Project.App`, `Project.Core`, `Modules`, `Project.Modules`, `Backend`, `Frontend`). | — |
 | `FolderMatrix.php` (`BaseConfig`) | `FRAMEWORK` (5 kök), `PROJECT` (6 kök), `RUNTIME_LAYERS` (11), `CODE_LAYERS` (16); kategori `folder`. | `getDefinitionCategory()`, `isRuntimeLayer(string)`, `isCodeLayer(string)` |
 | `ComponentTypes.php` | `MAP` (22: sonek → tür; `Handler→handler`, `Validator→validation` …), `PLURAL_MAP` (22: tekil → çoğul kayıt anahtarı; `repository→repositories`, `metadata→metadata`). | `static typeMap(): array`, `static pluralize(string $type): string` (bilinmeyen tür: küçük harf + `s`) |
-| `FrameworkIdentity.php` (`BaseConfig`) | 26 skaler sabit: ad, sürüm (`FRAMEWORK_VERSION='0.9.5'`), URL'ler (`https://rbncore.tr`, `https://cdn.rbncore.tr/`), geliştirici bilgisi, depo/sorun/güvenlik bağlantıları, `FRAMEWORK_CLI_VERSION='2.3.0'`, `SHIELD_*`, `ADMIN_*`, `AUTH_*`. | — |
+| `FrameworkIdentity.php` (`BaseConfig`) | 26 skaler sabit: ad, sürüm (`FRAMEWORK_VERSION='0.9.6'`), URL'ler (`https://example.tr`, `https://cdn.example.tr/`), geliştirici bilgisi, depo/sorun/güvenlik bağlantıları, `FRAMEWORK_CLI_VERSION='2.3.0'`, `SHIELD_*`, `ADMIN_*`, `AUTH_*`. | — |
 
 ### 2.2 `Route/`
 
@@ -42,7 +42,7 @@
 | `AssetDefinition.php` | 35 skaler sabit: CDN URL'leri (Bootstrap 5.3.2, Font Awesome 6.5.1, Bootstrap Icons 1.11.3, Remix Icon 4.2.0, flag-icons 6.6.6, jQuery 3.7.1 `['path'=>…, 'renderInHead'=>true]`, Sortable 1.15.2, AOS 2.3.4) ve çatı varlık takma yolları (`@fw/RbnAdmin/css/…`, `@fw/RbnCommon/css/…`). | — |
 | `AssetBundles.php` | `STACK_MAP` (4: `universal`, `frontend`, `panel`, `auth`), `BUNDLES` (24 paket: `rbn_master_js`, `fonts_panel`, `fonts_auth`, `bootstrap`, `font_awesome`, `bootstrap_icons`, `remix_icon`, `flag_icon`, `jquery`, `admin_core_css`, `rbn_core_frontend`, `rbn_core_panel`, `rbn_core_auth`, `rbnExtended`, `rbnModal`, `rbnDashboard`, `rbnCharts`, `rbnTable`, `sortable`, `aos`, `rbn_master`, `security`, `project`, `frontend`). | — |
 | `AssetFonts.php` | `FONT_LIBRARY` (33 yazı tipi; ad → Google Fonts tanımı) + 16 ad sabiti (`INTER`, `OUTFIT`, `GEIST`, …). | — |
-| `AssetConvention.php` | Favicon/OG görseli adlandırma kuralı: `favicon-<project_key>.{svg,png,ico}`, `og-image-<project_key>.{png,jpg,webp}` (`images/` altında); sanal OG adı deseni `og-image-<ad>.<uzantı>`. | `faviconCandidates(?string)`, `ogImageCandidates(?string)`, `findFavicon(?string)`, `findOgImage(?string)`, `resolveVirtualOgImage(string)`, `isVirtualOgImageName(string)`, `ogImageMimeType(string)` (hepsi `static`) |
+| `AssetConvention.php` | Favicon/OG görseli adlandırma kuralı: `favicon-<project_key>.{svg,png,ico}`, `og-image-<project_key>.{png,jpg,webp}`, `apple-touch-icon-<project_key>.png`, `manifest-<project_key>.{webmanifest,json}` (`images/` altında); sanal OG adı deseni `og-image-<ad>.<uzantı>`. | `faviconCandidates(?string)`, `ogImageCandidates(?string)`, `findFavicon(?string)`, `findOgImage(?string)`, `findAppleTouchIcon(?string)`, `findManifest(?string)`, `resolveVirtualOgImage(string)`, `isVirtualOgImageName(string)`, `ogImageMimeType(string)` (hepsi `static`) |
 
 ## 3. Akış
 
@@ -70,7 +70,7 @@ Bu klasördeki tüm değerler sabittir. `RouteBlueprint::FILES['project']` boş 
 4. **`NamespaceMap::MAP` anahtarları aynı hedefe birden çok ad verir** (`Suite` ve `RbnSuite`; `Modules` ve `Project.Modules`; `App` ve `Project.App`); `resolveCoreLayer()` ilk bulunanı kullanır.
 5. **`ComponentTypes::MAP` sonekten türe** (22 giriş), `PLURAL_MAP` türden kayıt anahtarına (22 giriş) gider; iki tablonun anahtar kümeleri aynı değildir (`PLURAL_MAP`'te `alias`, `metadata`, `constant`, `command`, `validation` vardır, `MAP`'te `Guard`, `Library`, `Validator` gibi sonekler vardır). Yeni bileşen türü eklenirken iki tabloya da bakılmalıdır.
 6. **`RouteBlueprint::HONEYPOT_PATHS` (35 yol) kurum bilgisi taşımaz**; liste `TrafficProvider::record()` ve tuzak yol koruması tarafından okunur — içerik burada kopyalanmadı.
-7. **Marka bilgisi yalnız `FrameworkIdentity` içindedir** (Anayasa §9): `rbncore.tr`, `info@rbncore.tr`, `RbnBilisim`; framework kodu başka yerde marka/proje adı yazmaz.
+7. **Marka bilgisi yalnız `FrameworkIdentity` içindedir** (Anayasa §9): `example.tr`, `info@example.tr`, `example`; framework kodu başka yerde marka/proje adı yazmaz.
 8. **CDN adresleri sürüme sabitlenmiştir** (`bootstrap@5.3.2`, `font-awesome/6.5.1`, …); güncelleme `AssetDefinition` değişikliğidir. İntegrity (SRI) özniteliği bu dosyada yoktur.
 
 ## 6. Örnek (gerçek koddan)

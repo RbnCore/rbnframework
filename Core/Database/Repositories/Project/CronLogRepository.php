@@ -11,7 +11,7 @@ use Rbn\Framework\Core\System\Config\Engine\Database\DbProfileResolver;
 /**
  * CronLogRepository - Execution History & Logging Repository 📜📑⚓
  * 
- * RBN 3.5: Masterpiece Standard.
+ * RBN Framework: Standard.
  * Manages project cron execution logging and history retrieval.
  * 
  * @property \Rbn\Framework\Core\Database\Models\Project\CronLogsModel $cronLogsModel

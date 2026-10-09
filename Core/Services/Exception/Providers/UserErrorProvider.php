@@ -7,8 +7,8 @@ use Rbn\Framework\Core\Services\Exception\Providers\Base\BaseExceptionProvider;
 /**
  * UserErrorProvider - Standard Error Renderer 🎭🏹
  * 
- * RBN 3.5: Responsible for rendering standardized user-facing error views.
- * MASTERPIECE [LAYER 4]: Completely autonomous and RenderService-independent.
+ * RBN Framework: Responsible for rendering standardized user-facing error views.
+ * RBN Framework [LAYER 4]: Completely autonomous and RenderService-independent.
  */
 class UserErrorProvider extends BaseExceptionProvider
 {
@@ -31,13 +31,13 @@ class UserErrorProvider extends BaseExceptionProvider
             );
         }
 
-        // 🎯 RBN 3.5: Masterpiece AJAX Diagnostic Support 🏹🛰️
+        // 🎯 RBN Framework: AJAX Diagnostic Support 🏹🛰️
         if ($this->isAjax()) {
             $this->renderJson(['code' => $code, 'data' => $data], $code);
             return true;
         }
 
-        // 🛡️ RBN 3.5: Masterpiece Dynamic Mapping (SSoT) 🏛️🚀
+        // 🛡️ RBN Framework: Dynamic Mapping (SSoT) 🏛️🚀
         $meta = $this->getErrorMapping($code);
 
         $payload = array_merge([
@@ -51,12 +51,77 @@ class UserErrorProvider extends BaseExceptionProvider
             'isPreFlight' => false
         ], $data);
 
-        // 🎯 RBN 3.5: Fallback Logic - Use specific file if exists, otherwise use 'standard'
+        // Proje dikişi (H12): proje kendi hata sayfasını (kendi kabuğuyla) çizebilir.
+        if (self::renderProjectView($code, $payload)) {
+            return true;
+        }
+
+        // 🎯 RBN Framework: Fallback Logic - Use specific file if exists, otherwise use 'standard'
         $viewPath = \Rbn\Framework\Core\System\Paths\Paths::framework()->resources("Views/Errors/{$code}.php");
         $view = file_exists($viewPath) ? (string) $code : 'standard';
 
         self::renderAutonomous($view, $payload, $code);
         return true;
+    }
+
+    /**
+     * Projenin hata görünümü: `Resources/Views/Errors/<site>/<kod>.php`, yoksa
+     * `Resources/Views/Errors/<kod>.php`. Dosya TAM sayfadır (Shield üst/alt şablonu
+     * eklenmez); `$code`, `$title`, `$message`, `$desc`, `$hint` … değişkenleri gelir
+     * (üretimde sistem hatası ayrıntısı zaten `redactForPublicOutput` ile gizlenmiştir).
+     * Görünüm istisna atarsa çıktısı atılır ve Shield sayfasına düşülür (döngü yok).
+     */
+    private static function renderProjectView(int $code, array $payload): bool
+    {
+        try {
+            $paths = \Rbn\Framework\Core\System\Paths\Paths::class;
+            if (!$paths::isInitialized()) {
+                return false;
+            }
+            $site = function_exists('active_project_key') ? (string) active_project_key() : '';
+            $candidates = [];
+            if ($site !== '' && $site !== 'default' && preg_match('/^[a-z0-9_-]+$/i', $site)) {
+                $candidates[] = $paths::project()->resources("Views/Errors/{$site}/{$code}.php");
+            }
+            $candidates[] = $paths::project()->resources("Views/Errors/{$code}.php");
+            $file = null;
+            foreach ($candidates as $candidate) {
+                if (is_file($candidate)) {
+                    $file = $candidate;
+                    break;
+                }
+            }
+            if ($file === null) {
+                return false;
+            }
+        } catch (\Throwable) {
+            return false;
+        }
+
+        $level = ob_get_level();
+        ob_start();
+        try {
+            (static function (string $__file, array $__data): void {
+                extract($__data, EXTR_SKIP);
+                include $__file;
+            })($file, $payload);
+            $html = (string) ob_get_clean();
+        } catch (\Throwable) {
+            while (ob_get_level() > $level) {
+                ob_end_clean();
+            }
+            return false;
+        }
+
+        while (ob_get_level() > 0) {
+            ob_end_clean();
+        }
+        if (!headers_sent()) {
+            http_response_code($code);
+            header('Content-Type: text/html; charset=UTF-8');
+        }
+        echo $html;
+        exit;
     }
 
     /**

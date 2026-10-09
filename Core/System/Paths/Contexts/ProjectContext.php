@@ -12,7 +12,7 @@ use Rbn\Framework\Core\System\Discovery\Clusters\Structure\Namespace\NamespaceCo
  * Project Context
  * Provides paths related to the active application project.
  * 
- * RBN 3.5: Moved to Contexts cluster for architectural symmetry.
+ * RBN Framework: Moved to Contexts cluster for architectural symmetry.
  */
 class ProjectContext extends FolderContext
 {
@@ -75,7 +75,7 @@ class ProjectContext extends FolderContext
         $projectData = \Rbn\Framework\Core\System\Kernel\Bootstrap::getAppContext('project_data') ?: [];
         $activeKey = function_exists('active_project_key') ? active_project_key() : '';
 
-        // 🎼 RBN 3.5: If active project key is switched (e.g. ?project=example), fetch switched project's discovery data
+        // 🎼 RBN Framework: If active project key is switched (e.g. ?project=example), fetch switched project's discovery data
         if (!empty($activeKey) && ($projectData['project_key'] ?? '') !== $activeKey) {
             $switchedData = \Rbn\Framework\Core\System\Storage\Providers\BootCacheProvider::get(
                 $activeKey,
@@ -171,7 +171,7 @@ class ProjectContext extends FolderContext
 
     /**
      * Get the project's Config directory (Core/Config)
-     * RBN 3.5: Renamed to avoid collision with ServicesContextTrait::config().
+     * RBN Framework: Renamed to avoid collision with ServicesContextTrait::config().
      */
     public function configs(?string $path = null): string
     {

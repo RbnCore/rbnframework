@@ -11,7 +11,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 /**
  * BaseProvider - Abstract Foundation for all RBN Providers 🏛️🎻⚓
  * 
- * RBN 3.5: Powered by BaseComponent DNA.
+ * RBN Framework: Powered by BaseComponent DNA.
  * Unified under Services hiyerarşisi.
  */
 abstract class BaseProvider extends BaseComponent implements BaseProviderInterface
@@ -23,10 +23,10 @@ abstract class BaseProvider extends BaseComponent implements BaseProviderInterfa
      */
     public function __construct(?BaseService $rbn = null)
     {
-        // 🎼 RBN 3.5: [DNA SYNC] - Root bileşeni ayağa kaldır
+        // 🎼 RBN Framework: [DNA SYNC] - Root bileşeni ayağa kaldır
         parent::__construct($rbn);
 
-        // 🎻 RBN 3.5: [REGISTRATION LIFECYCLE]
+        // 🎻 RBN Framework: [REGISTRATION LIFECYCLE]
         // Sağlayıcı `register()` tanımlıyorsa tetiklenir (kendi model/ayar
         // kaydı için). [FW-095] Ölçüm: framework ağacındaki HİÇBİR sağlayıcı
         // `register()` tanımlamıyor; kayıt işi constructor/DNA ile yapılıyor.
@@ -38,6 +38,6 @@ abstract class BaseProvider extends BaseComponent implements BaseProviderInterfa
         }
     }
 
-    // RBN 3.5: Redundant boot() and setContext() removed. 🚿
+    // RBN Framework: Redundant boot() and setContext() removed. 🚿
     // DNA inherited autonomously from BaseComponent and BaseContextTrait. 🧬⚓🚀
 }

@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\Attributes\SubModule;
 
 /**
  * IdentityController - Corporate Identity & Brand Orchestrator 👤
- * Standard: RBN 3.5 Masterpiece
+ * Standard: RBN Framework
  */
 #[SubModule(
     entity: 'identity',

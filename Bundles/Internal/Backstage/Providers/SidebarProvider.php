@@ -6,7 +6,7 @@ use Rbn\Framework\Core\Base\Services\BaseProvider;
 
 /**
  * SidebarProvider - Admin Sidebar Query Expert 🗺️🏛️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * @property \Rbn\Framework\Core\Database\Models\Project\SidebarMenusModel $SidebarMenusModel
  * @property \Rbn\Framework\Core\Database\Models\Project\SidebarCategoriesModel $SidebarCategoriesModel
@@ -18,7 +18,7 @@ class SidebarProvider extends BaseProvider
 
     /**
      * Autonomous Model Initialization 🛰️⚓
-     * RBN 3.5: Detects the active model context directly from the URI.
+     * RBN Framework: Detects the active model context directly from the URI.
      */
     protected function afterBoot(): void
     {
@@ -36,10 +36,10 @@ class SidebarProvider extends BaseProvider
      */
     public function getSidebarStructure(string $userRole): array
     {
-        // [RBN 3.5] SOVEREIGN CACHING: Önbelleği her seferinde silmek yerine, sadece değişim olduğunda (Service üzerinden) temizliyoruz.
+        // [RBN Framework] RBN Framework CACHING: Önbelleği her seferinde silmek yerine, sadece değişim olduğunda (Service üzerinden) temizliyoruz.
         // $this->cache()->delete("sidebar_{$userRole}");
 
-        // 🎼 RBN 3.5: [ATOMIC SIDEBAR CACHING] ⚡🛰️⚓
+        // 🎼 RBN Framework: [ATOMIC SIDEBAR CACHING] ⚡🛰️⚓
         //
         // [FW-ALTYAPI-3 / H · G4] İKİ DÜZELTME:
         //  1) ÖNBELLEK ANAHTARI kiracıyı İÇERMEYECEKİ — "sidebar_{rol}" anahtarı
@@ -161,7 +161,7 @@ class SidebarProvider extends BaseProvider
      */
     public function saveCategory(array $data): bool|int
     {
-        // 🎼 RBN 3.5: [AUTO-SLUG GENERATION] 🚀
+        // 🎼 RBN Framework: [AUTO-SLUG GENERATION] 🚀
         if (isset($data['category_name']) && empty($data['category_slug'])) {
             $data['category_slug'] = $this->helper('text')->turkishSlug($data['category_name']);
         }
@@ -176,7 +176,7 @@ class SidebarProvider extends BaseProvider
      */
     public function saveMenu(array $data): bool|int
     {
-        // 🎼 RBN 3.5: [AUTO-SLUG GENERATION] 🚀
+        // 🎼 RBN Framework: [AUTO-SLUG GENERATION] 🚀
         if (isset($data['menu_title']) && empty($data['menu_slug'])) {
             $data['menu_slug'] = $this->helper('text')->turkishSlug($data['menu_title']);
         }

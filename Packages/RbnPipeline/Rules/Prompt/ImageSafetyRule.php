@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 
 /**
  * ImageSafetyRule - Core safety boundaries and forbidden words for image prompts.
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 class ImageSafetyRule extends BaseComponent
 {

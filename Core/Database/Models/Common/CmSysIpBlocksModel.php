@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseModelInterface;
 /**
  * CmSysIpBlocksModel - Global & Project IP Blacklist Hub 🚧🛡️
  * 
- * RBN 3.5: Shared operational layer for managing blocked IP addresses in rbncore_common.
+ * RBN Framework: Shared operational layer for managing blocked IP addresses in rbncore_common.
  * 
  * @property int         $id
  * @property string      $project_key  // 'GLOBAL' or project specific key

@@ -6,7 +6,7 @@ use Rbn\Framework\Core\System\Paths\Paths;
 
 /**
  * DataHelper - Unified Resource Data Gateway 🗃️🪐
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 class DataHelper
 {

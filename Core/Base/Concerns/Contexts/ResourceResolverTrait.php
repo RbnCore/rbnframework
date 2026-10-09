@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\Base\Concerns\Contexts;
 /**
  * ResourceResolverTrait - Universal Dynamic Component & Context Resolver 🧬🛰️⚓
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Provides zero-code dynamic resolution for repositories, models, and project keys
  * across ALL components (Controllers, Services, Repositories, Providers, Helpers).
  */

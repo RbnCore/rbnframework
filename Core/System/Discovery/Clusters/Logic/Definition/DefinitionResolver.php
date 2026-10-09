@@ -10,7 +10,7 @@ use Rbn\Framework\Core\System\Paths\Paths;
 /**
  * DefinitionResolver - The Master DNA Motor & API 🛰️⚙️⚓
  * 
- * RBN 3.5: Hybrid Hub. 
+ * RBN Framework: Hybrid Hub.
  * Managed by DiscoveryEngine (untouched).
  * Provides the instance-based API for $this->discover->definitions()->get().
  */
@@ -75,7 +75,7 @@ class DefinitionResolver extends BaseResolver
             return;
         $this->isMapped = true;
 
-        // [RBN 3.5] CIRCULAR GUARD 🛡️⚓
+        // [RBN Framework] CIRCULAR GUARD 🛡️⚓
         // Pre-map the core namespace blueprint to satisfy early-boot requirements 🧬
         $this->categories['namespace'] = \Rbn\Framework\Core\Support\Definitions\System\NamespaceMap::class;
         $this->categories['database_master'] = \Rbn\Framework\Core\System\Config\Definitions\DbProfiles\MasterDbData::class;
@@ -107,7 +107,7 @@ class DefinitionResolver extends BaseResolver
 
             $explicitCategory = method_exists($className, 'getDefinitionCategory') ? $className::getDefinitionCategory() : null;
 
-            // [RBN 3.5] Property Fallback: Check for static property if method is missing 🧬🏛️
+            // [RBN Framework] Property Fallback: Check for static property if method is missing 🧬🏛️
             if ($explicitCategory === null && property_exists($className, 'definitionCategory')) {
                 $reflection = new \ReflectionClass($className);
                 $fallbackValue = null;

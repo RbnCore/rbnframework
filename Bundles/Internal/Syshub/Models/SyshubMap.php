@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\Data\BaseConfig;
 
 /**
  * SyshubMap - System Architecture Map 🏛️🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 class SyshubMap extends BaseConfig
 {

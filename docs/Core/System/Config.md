@@ -1,6 +1,6 @@
 # Core/System/Config — Yapılandırma, ortam değişkeni ve sır okuyucuları
 
-> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/System/Config/` — 22 `*.php` + 3 `README.md` (sır dosyası `Secrets/secrets.php` bilerek okunmadı/anlatılmadı; yalnız adı ve kuralları var).
 > **Envanter:** 22 php dosyasının 22'si ve 3 README aşağıda anlatıldı (`secrets.php` dahil; içeriği hariç).
 
@@ -11,12 +11,12 @@
 | Ne | Tek okuyucu | Kaynak |
 |---|---|---|
 | Gizli değer (parola, `app_key`, jeton, API anahtarı) | `Secrets` | `Secrets/secrets.php` (bölümlü tek dosya) |
-| Ortam değişkeni / bayrak / kill-switch / dizin | `Env` | `EnvKeys` sabit kaydı |
+| Ortam bayrağı / kill-switch / çalışma ayarı | `Secrets::app()` | `Secrets/secrets.php` → `app` bölümü (opsiyonel) |
 | Dosya tabanlı ayar (`project-settings.php` vb.) | `Config` (+ `ConfigResolver`) | proje `Core/Config/` klasörü |
 
-Veritabanı bağlantı bilgisi bu üçünün birleşimidir: `DbProfileResolver` master/common için `Secrets`, proje için `Env` → `Secrets` → sabit varsayılan sırasını izler.
+Framework işletim sistemi ortam değişkeni okumaz (FW-096-D8; ADR `Core/System/Config/README.md`). Veritabanı bağlantı bilgisi: `DbProfileResolver` master/common için `Secrets::masterDb()`, proje için `Secrets::optional()` → sabit varsayılan sırasını izler.
 
-**Kimler çağırır:** kernel aşamaları (`Kernel/Base/PreBoot`, `Stages/*`), `Core/Database` bağlantı sağlayıcıları, `Core/Services/Gatekeepers` (veritabanı bekçisi), `Packages/RbnEmail` (SMTP), CLI komutları. Ölçülen çağrı sayıları (yalnız `Core`, `Bundles`, `Packages`, `Resources` altındaki `*.php`): `Config::get(` 21, `Env::flag(` 9, `Env::string(` 10, `Secrets::` 38, `DbProfileResolver::` 21, `SmtpProfileResolver::` 9, `ProjectDbProfileResolver::` 5.
+**Kimler çağırır:** kernel aşamaları (`Kernel/Base/PreBoot`, `Stages/*`), `Core/Database` bağlantı sağlayıcıları, `Core/Services/Gatekeepers` (veritabanı bekçisi), `Packages/RbnEmail` (SMTP), CLI komutları. Ölçülen çağrı sayıları (yalnız `Core`, `Bundles`, `Packages`, `Resources` altındaki `*.php`): `Config::get(` 21, `Secrets::` 38+ (D8 sonrası `Secrets::app()` dahil; `Env::*` 0), `DbProfileResolver::` 21, `SmtpProfileResolver::` 9, `ProjectDbProfileResolver::` 5.
 
 ## 2. Klasör/dosya envanteri
 
@@ -25,14 +25,12 @@ Veritabanı bağlantı bilgisi bu üçünün birleşimidir: `DbProfileResolver` 
 | Dosya | Görev | Önemli public yöntemler |
 |---|---|---|
 | `Config.php` | Statik "proxy hub": noktalı anahtarla dosya ayarı okur, bellek önbelleği tutar. | `get(string $key, mixed $default = null): mixed`, `set(string $key, mixed $value): void`, `clear(?string $key = null): void`, `setSurvivalMode(bool)`, `isResolving(): bool` |
-| `Env.php` | Ortam değişkeni TEK okuyucusu; kayıtsız adı `RuntimeException` ile reddeder (fail-closed). | `string(string $name, ?string $default = null): ?string`, `flag(string $name, bool $default = true): bool`, `int(string $name, ?int $default = null): ?int`, `isSecretKey(string): bool`, `reset()`, `temizle()` (reset'in Türkçe takma adı) |
-| `Secrets.php` | Sır dosyasının ince cephesi (bölümlü API + düz API). `ConfigFileLoader` ve `SecretsFlatApi` trait'lerini kullanır. | `section(string $name): array`, `masterDb(): array`, `smtp(): array`, `cpanel(): array`, `api(string $name): array`, `appKey(): string`, `cpanelHost()/cpanelUser()/cpanelToken(): string`, `setTestDirectory(?string)`, `resetCache()`; trait'ten: `all()`, `get($key)`, `masterDbPass()`, `masterSmtpPass()`, `optional($key): ?string` |
+| `Secrets.php` | Sır dosyasının ince cephesi (bölümlü API + düz API). `ConfigFileLoader` ve `SecretsFlatApi` trait'lerini kullanır. | `section(string $name): array`, `masterDb(): array`, `smtp(): array`, `cpanel(): array`, `api(string $name): array`, `appKey(): string`, `app(): array` (ortam bayrağı + çalışma ayarları, güvenli varsayılanlı), `legacySalt(): ?string`, `cpanelHost()/cpanelUser()/cpanelToken(): string`, `setTestDirectory(?string)`, `resetCache()`; trait'ten: `all()`, `get($key)`, `masterDbPass()`, `masterSmtpPass()`, `optional($key): ?string` |
 
 ### 2.2 `Definitions/` — yalnız sabit/tanım (ad alanı `…\Config\Definitions`)
 
 | Dosya | Görev |
 |---|---|
-| `EnvKeys.php` | Ortam değişkeni adlarının tek kaydı. **İçinde metot yok**: `public const` adlar + `OFF_VALUES`, `SECRET_KEYS`, `ALL_KEYS` listeleri. |
 | `ConfigMap.php` | `BaseConfig`'ten türeyen küçük çekirdek ayar kısayolları: `getAppDebug()`, `getAppLogging()`, `getAppEnv()`, `getAppIsCli()`, `getAppSessionTimeout()` (hepsi `static`). |
 | `SecretsSchema.php` | Sır dosyasının şeması: yol, bölüm kuralları, düz anahtar adları (`final class`, yalnız `public const`). |
 
@@ -118,7 +116,7 @@ Veritabanı bağlantı bilgisi bu üçünün birleşimidir: `DbProfileResolver` 
 
 ### 3.4 `DB_PROFILES` seçimi (`ProjectDbProfileResolver.php`)
 
-`activeProfile()` (`:99-107`): önce `RBN_DB_PROFILE` ortam değişkeni (`local`/`production`, başka her değer yok sayılır, `:191-195`); yoksa framework kökünde tam `localhost` yol segmenti varsa `local` (`:205-215`); aksi `production`. Karar **istemciden bağımsızdır** (sunucu kimliği); `is_local()` kullanılmaz (gerekçe docblock `:66-98`).
+`activeProfile()` (`:99-107`): önce `secrets.php` `app.db_profile` (`local`/`production`, başka her değer yok sayılır; `declaredProfile()` `:180-189`, ortam değişkeni okunmaz); yoksa framework kökünde tam `localhost` yol segmenti varsa `local` (`:204-215`); aksi `production`. Karar **istemciden bağımsızdır** (sunucu kimliği); `is_local()` kullanılmaz (gerekçe docblock `:66-98`).
 `resolve()` (`:121-171`): `DB_PROFILES` yoksa/boşsa dosya aynen döner (geriye uyum). Seçilen profil yoksa, profilde zorunlu anahtar (`DB_HOST`,`DB_NAME`,`DB_USER`,`DB_PASS`,`DB_CHARSET`) eksikse ya da değer `__DOLDUR__` ise `RuntimeException`; başka profile düşülmez.
 
 ### 3.5 Sır okuma (`Secrets::section` → `SecretsSections::read`)
@@ -131,23 +129,9 @@ Veritabanı bağlantı bilgisi bu üçünün birleşimidir: `DbProfileResolver` 
 
 ## 4. Ayar anahtarları ve varsayılanlar
 
-### 4.1 Ortam değişkenleri (`EnvKeys`) — 15 kayıtlı ad (`ALL_KEYS`), 5'i gizli (`SECRET_KEYS`)
+### 4.1 `app` bölümü (eski 16 ortam değişkeninin yerine)
 
-| Ad | Gizli | Not |
-|---|:--:|---|
-| `APP_KEY`, `ENCRYPTION_KEY`, `RBN_LEGACY_SALT` | ✔ | şifreleme anahtarı / eski tuz |
-| `RBN_ALLOW_LEGACY_SALT` | | eski tuz onayı; `CryptoHelper::legacySaltApproval()` kendi `1\|true\|on\|yes` yorumunu yapar (`Env::flag` DEĞİL) |
-| `COMMON_DB_USER` | | common DB kullanıcı adı (sır değil) |
-| `COMMON_DB_PASS`, `DB_PASS` | ✔ | |
-| `DB_USER` | | |
-| `RBN_DB_PROFILE` | | `local`\|`production`; **`Env` üzerinden değil** doğrudan `$_ENV/$_SERVER/getenv` ile okunur (bkz. §5) |
-| `RBN_GUARD_FAILCLOSED` | | kill-switch; varsayılan fail-closed |
-| `RBN_DEBUG` | | `PreBoot::envOverrideRequested()` kendi `1\|true\|on\|yes\|development` listesiyle; varsayılan KAPALI |
-| `RBN_DEV`, `APP_ENV` | | |
-| `RBN_LOG_THROTTLE` | | tanılama günlüğü saatlik kapısı; `0\|false\|off\|no\|hayir` ile kapanır; okuyan `LogThrottle` (`Core/Support/Bridges/Helpers/Library/LogThrottle.php`) |
-| `TG_SEND_DELAY_MS` | | yalnız test router'ı |
-
-`SECRET_KEYS` ve `ALL_KEYS` listeleri `EnvKeys.php:159` ve `:171`'dedir; `OFF_VALUES = ['0','false','off','no','hayir']` (`:152`) ile `ShieldSettingsRepository::normalizeSwitch` aynı kümeyi kullanmak **zorundadır** (birim testiyle sabitli).
+Ortam değişkeni katmanı (`Env.php` + `EnvKeys.php`) FW-096-D8 ile kaldırıldı. Alanlar ve güvenli varsayılanlar `SecretsSchema::APP_DEFAULTS`'tadır: `environment` (`production`), `debug`/`dev` (`false`), `guard_failclosed` (`true`), `log_throttle` (`true`), `db_profile` (`''`), `tg_send_delay_ms` (`0`), `allow_legacy_salt` (`false`). Metin alanlarının izinli değerleri `APP_ALLOWED`. Tipi tutmayan değer varsayılana düşer ve loglanır; `environment` yoksa production + bir kez log. Eski ad → yeni alan eşlemesi: [kavramlar/02-yapilandirma.md §6](../../kavramlar/02-yapilandirma.md).
 
 ### 4.2 Sır dosyası şeması (`SecretsSchema`)
 
@@ -161,16 +145,16 @@ Veritabanı bağlantı bilgisi bu üçünün birleşimidir: `DbProfileResolver` 
 |---|---|---|
 | `getAppDebug()` | `RBN_DEBUG` sabiti tanımlıysa o, yoksa `app.debug` | `false` |
 | `getAppLogging()` | `app.logging` | `true` |
-| `getAppEnv()` | `RBN_DEV` sabiti doğruysa `development`, yoksa `app.env` | `production` |
+| `getAppEnv()` | `PreBoot::isProductionDeclared()` (`secrets.php` `app.environment`; TEK karar noktası) | `production` |
 | `getAppIsCli()` | `RBN_CLI` sabiti, yoksa `PHP_SAPI === 'cli'` | — |
 | `getAppSessionTimeout()` | `RBN_SESSION_TIMEOUT` sabiti | `30` (dakika) |
 
 ## 5. Tuzaklar ve kurallar (kodda görülen)
 
 1. **`Config::get()` bütünlük denetimine uğramaz.** `get()` içeride `setResolving(true)` yaptığı için `ConfigResolver::guard()` hep `null` döner (`Config.php:63`, `ConfigResolver.php:53-58`). Sonuç: `database_*` dışındaki her ad `Paths::project()->configs($ad.'.php')` yoluna düşer; `DatabaseGuardHandler::validateIntegrity` bu yolda devreye girmez. Guard'ı yalnız `ConfigResolver::resolve()` doğrudan (resolving kapalıyken) çağrılırsa kullanabilirsiniz. *(Eski `acik-sorular.md` §1.4 — kodla doğrulandı, buraya taşındı.)*
-2. **`Env` yalnız kayıtlı adı okur.** Kayıtsız ad `RuntimeException`. Okuma sırası `$_ENV` → `$_SERVER` → `getenv`; boş/metin olmayan değer atlanır; sonuç önbelleklenir (`Env::reset()` yalnız test içindir, `Env.php:118`).
-3. **`Env`'in tek kapı olduğu iddiası tam doğru değil:** `ProjectDbProfileResolver::fromEnvironment()` `RBN_DB_PROFILE`'ı `Env` yerine `$_ENV ?? $_SERVER ?? getenv` zinciriyle okur (`ProjectDbProfileResolver.php:183`). Kodda bunun için yazılı bir gerekçe yok; okuma sırası `Env` ile aynıdır, fark yalnız değeri küçük harfe çevirip `local`/`production` dışındakini yok saymasıdır (`:189-195`).
-4. **`Env::int()` hiçbir yerde çağrılmıyor** (`Core/Bundles/Packages/Resources` taramasında 0 çağrı); **`Config::set()` de 0 çağrı**. Yani çalışma anında ayar yazmak fiilen kullanılmıyor.
+2. **Ortam değişkeni okunmaz.** Framework ağacında `getenv(` / `$_ENV` okuyucusu yoktur (birim testi `fw_ortam_tek_kaynak`). Ortam bayrağı `Secrets::app()`.
+3. **`app` okuması güvenli tarafa düşer:** dosya yok / bölüm yok / alan yok → şema varsayılanı; dosya var ama okunamaz → `Secrets::app()` fırlatır, `PreBoot` bunu production sayıp loglar.
+4. **`Config::set()` 0 çağrı.** Çalışma anında ayar yazmak fiilen kullanılmıyor.
 5. **`ConfigMap` neredeyse kullanılmıyor:** tek çağrı `Core/Render/Handlers/UI/PanelHandler.php:111` (`getAppSessionTimeout`).
 6. **Sır dosyası izin denetimi Windows'ta atlanır** (`ConfigFileGuard.php:79-81`); Linux'ta 0600'den geniş izin `RuntimeException`'dır. Sır dosyasında `?>` kapanışı `return`'den önceyse reddedilir (aksi halde dosya `require` edilince ekrana basılır).
 7. **`cpanel()` anahtarları dönüşür:** bölümde `host/user/token`, ama `Secrets::cpanel()` `cpanel_host/cpanel_user/cpanel_token` döndürür (kabul testleriyle sabit, `Secrets.php:152-156`).
@@ -188,15 +172,15 @@ Veritabanı bağlantı bilgisi bu üçünün birleşimidir: `DbProfileResolver` 
 
 | Host | REMOTE_ADDR | `isTrustedLocalEnvironment` |
 |---|---|---|
-| `rbncore.tr.test` | `127.0.0.1` | true |
-| `rbncore.tr.test` | `203.0.113.9` (doküman IP'si) | **false** |
+| `example.tr.test` | `127.0.0.1` | true |
+| `example.tr.test` | `203.0.113.9` (doküman IP'si) | **false** |
 | `x.test.evil.com` | `127.0.0.1` | false |
 | `localhost:8080` ve `[::1]` | `::1` | true |
 | `a.test` | `::ffff:10.0.0.5` (IPv4-eşlenmiş) | true |
 | `A.TEST.` | `192.168.1.2` | true |
 | (boş) | `127.0.0.1` | false |
 
-Aynı süreçte `REMOTE_ADDR=203.0.113.9`, `HTTP_HOST=rbncore.tr.test` iken `ProjectDbProfileResolver::activeProfile()` = **`local`**: DB profili istemci adresinden etkilenmez; `is_local()` ve `RBN_DEV` etkilenir. Bu, `ProjectDbProfileResolver` docblock'ındaki tasarım gerekçesini (aynı sunucuda istek kimliğine göre farklı veritabanına bağlanılmaması) kodla doğrular. *(Eski `acik-sorular.md` §2.6 — karar ayrımı yeniden ölçüldü. Docblock'taki "8 dosyada hata" sayısı kabul harness'inin ölçümüdür; harness bu görevin kapsamı dışında olduğundan o sayı yeniden üretilmedi.)*
+Aynı süreçte `REMOTE_ADDR=203.0.113.9`, `HTTP_HOST=example.tr.test` iken `ProjectDbProfileResolver::activeProfile()` = **`local`**: DB profili istemci adresinden etkilenmez; `is_local()` ve `RBN_DEV` etkilenir. Bu, `ProjectDbProfileResolver` docblock'ındaki tasarım gerekçesini (aynı sunucuda istek kimliğine göre farklı veritabanına bağlanılmaması) kodla doğrular. *(Eski `acik-sorular.md` §2.6 — karar ayrımı yeniden ölçüldü. Docblock'taki "8 dosyada hata" sayısı kabul harness'inin ölçümüdür; harness bu görevin kapsamı dışında olduğundan o sayı yeniden üretilmedi.)*
 
 ## 6. Örnek (gerçek koddan)
 

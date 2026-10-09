@@ -7,8 +7,8 @@ namespace Rbn\Framework\Bundles\RbnSuite\RbnStudio\Controllers;
 use Rbn\Framework\Core\Base\Attributes\SubModule;
 
 /**
- * PostsController - Sovereign Published Articles Management 📰🎨🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * PostsController - RBN Framework Published Articles Management 📰🎨🛰️⚓
+ * RBN Framework Standard.
  */
 #[SubModule(module: 'studio', entity: 'posts')]
 class PostsController extends RbnStudioController

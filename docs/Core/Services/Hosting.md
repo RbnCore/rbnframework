@@ -1,6 +1,6 @@
 # Core/Services/Hosting — cPanel API köprüsü (5 dosya)
 
-> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Services/Hosting/` — **5 `*.php`** = 1 kök + `Data/` 1 +
 > `Handlers/` 2 + `Providers/` 1.
 > **Envanter:** 5 dosyanın **5'i** anlatıldı.

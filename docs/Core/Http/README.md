@@ -1,6 +1,6 @@
 # Core/Http — istek/yanıt motoru, doğrulama ve form güvenliği
 
-> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Http/` — 36 `*.php` = **5 kök + 17 `Engine/` + 14 `Security/`**.
 > Spek §1 "≥20 php alan için alt dal belgesi" kuralı gereği bu klasör **üç belgeye**
 > bölünmüştür: kök dosyalar burada, `Engine/` → [Engine.md](Engine.md),

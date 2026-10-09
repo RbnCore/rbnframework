@@ -11,7 +11,7 @@ use Rbn\Framework\Core\Services\Exception\Concerns\Shield;
 /**
  * SovereignIdentity - Total Module Metadata Hub 🏛️⚓
  * 
- * RBN 3.5 Masterpiece: Data object trait that consolidates all module/sub-module identity strings.
+ * RBN Framework: Data object trait that consolidates all module/sub-module identity strings.
  * Consolidates all DNA properties formerly residing in BaseContextTrait.
  */
 trait SovereignIdentity
@@ -21,7 +21,7 @@ trait SovereignIdentity
     protected ?DiscoveryEngine $discover = null;
     protected ?Shield $shield = null;
 
-    /** @var object|null Standard Satellite Contexts (RBN 3.5 DNA) 🛰️⚓ */
+    /** @var object|null Standard Satellite Contexts (RBN Framework DNA) 🛰️⚓ */
     protected ?object $service = null;
     protected ?object $model = null;
     protected ?object $activeService = null;
@@ -44,7 +44,7 @@ trait SovereignIdentity
     /** @var string|null Current rendering context */
     protected ?string $context = null;
 
-    /** @var \Rbn\Framework\Core\Base\Data\BaseConfig|object|string|null Sovereign Module Data Hub 🛰️ */
+    /** @var \Rbn\Framework\Core\Base\Data\BaseConfig|object|string|null RBN Framework Module Data Hub 🛰️ */
     protected object|string|null $moduleData = null;
 
     /** @var string|null Active Discovery Scopes */

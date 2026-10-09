@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Rbn\Framework\Core\Support\Definitions\Render;
 
 /**
- * AssetFonts - The Sovereign Font Dictionary 🏺🎨⚓
+ * AssetFonts - The RBN Framework Font Dictionary 🏺🎨⚓
  * 
- * RBN 3.5 "Masterpiece" Architecture.
+ * RBN Framework Architecture.
  * This file serves as the centralized library for all typographic assets.
  * Allows decoupling fonts from general assets for better orchestration.
  */

@@ -11,7 +11,7 @@ use Rbn\Framework\Core\Base\Attributes\Component;
 /**
  * ContentCategoryModel - Evrensel İçerik Kategorisi Modeli 🗂️✨
  * Tüm projelerin ve içerik türlerinin (blog, news, program vb.) kategorilerini tek merkezden yönetir.
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * @property int    $id
  * @property string $project_key

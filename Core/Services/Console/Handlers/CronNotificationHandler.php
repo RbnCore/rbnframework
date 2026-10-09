@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 /**
  * CronNotificationHandler - Cron Execution Email Notification Authority 📧🛰️⚓
  * 
- * Part of RBN 3.5 Framework Masterpiece.
+ * Part of RBN Framework Framework RBN Framework.
  * Reads notification emails zero-SQL from workspace/.cache/project_{projectKey}.json
  * and dispatches formatted HTML execution reports via SMTP email service.
  */
@@ -17,6 +17,50 @@ class CronNotificationHandler extends BaseComponent
 {
     /** @var array Deduplication registry to prevent double email delivery */
     private static array $sentJobs = [];
+
+    public const NOTIFY_ALWAYS = 'always';
+    public const NOTIFY_FAILURE = 'failure';
+    public const NOTIFY_NEVER = 'never';
+
+    /**
+     * Görev bazlı bildirim politikası: cron_jobs.params `notify_on` > görev sınıfı NOTIFY_ON > 'always'.
+     * Geçersiz değer bir alt kaynağa düşer; bildirim sessizce kaybolmaz.
+     */
+    public static function resolveNotifyPolicy(array $params, string $taskClass): string
+    {
+        $valid = [self::NOTIFY_ALWAYS, self::NOTIFY_FAILURE, self::NOTIFY_NEVER];
+
+        $fromDb = strtolower(trim((string) ($params['notify_on'] ?? '')));
+        if (in_array($fromDb, $valid, true)) {
+            return $fromDb;
+        }
+
+        $const = $taskClass . '::NOTIFY_ON';
+        if ($taskClass !== '' && class_exists($taskClass) && defined($const)) {
+            $fromClass = strtolower((string) constant($const));
+            if (in_array($fromClass, $valid, true)) {
+                return $fromClass;
+            }
+        }
+
+        return self::NOTIFY_ALWAYS;
+    }
+
+    /**
+     * Bu koşu sonucu için bildirim gönderilmeli mi? 'skipped' hiçbir politikada bildirmez.
+     */
+    public static function shouldNotify(string $status, string $policy): bool
+    {
+        if ($status === 'skipped' || $policy === self::NOTIFY_NEVER) {
+            return false;
+        }
+
+        if ($policy === self::NOTIFY_FAILURE) {
+            return !in_array($status, ['success', 'published'], true);
+        }
+
+        return true;
+    }
 
     /**
      * Sends an email notification for a completed cron task.
@@ -37,8 +81,10 @@ class CronNotificationHandler extends BaseComponent
                 return false;
             }
 
-            // 🛑 Pas Geçilen İşlemler İçin Mail Gönderme! 📬
-            if ($status === 'skipped') {
+            // 🛑 Pas Geçilen İşlemler ve Görev Bazlı Bildirim Politikası 📬
+            $taskClass = (string) ($job['task_class'] ?? ($task ? get_class($task) : ''));
+            $params = is_array($job['params'] ?? null) ? $job['params'] : (json_decode((string) ($job['params'] ?? ''), true) ?: []);
+            if (!self::shouldNotify($status, self::resolveNotifyPolicy($params, $taskClass))) {
                 return false;
             }
 

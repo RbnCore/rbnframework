@@ -69,7 +69,7 @@ class Dispatcher
                 $handler = new $mw();
             }
 
-            // [R-10 · 2026-10-03 · baran-6eb7f5] FAIL-CLOSED 🛑
+            // [R-10 · 2026-10-03 · team member] FAIL-CLOSED 🛑
             //
             // TABAN: asagidaki `if` sessizce gectigi icin COZULEMEYEN bir
             // middleware koruma hic uygulamadan controller'a gidiyordu:
@@ -136,7 +136,7 @@ class Dispatcher
      */
     private function callController($controller, $params = [])
     {
-        // 🎼 RBN 3.5: [POLYMORPHIC ACTION RESOLUTION] 🎻🛰️⚓
+        // 🎼 RBN Framework: [POLYMORPHIC ACTION RESOLUTION] 🎻🛰️⚓
         // Support both modern Array format [Class, Method] and legacy String format "Class@Method"
         if (is_array($controller)) {
             $class = $controller[0];
@@ -157,7 +157,7 @@ class Dispatcher
         $class = ControllerResolver::resolve($class);
 
         if (class_exists($class) && method_exists($class, $method)) {
-            // 🎼 RBN 3.5: [SOVEREIGN RESPONSE HUB] 🎻🛰️⚓
+            // 🎼 RBN Framework: [RBN Framework RESPONSE HUB] 🎻🛰️⚓
             // Capture the return value and echo it automatically.
             $controllerInstance = new $class;
             $response = call_user_func_array([$controllerInstance, $method], $params);

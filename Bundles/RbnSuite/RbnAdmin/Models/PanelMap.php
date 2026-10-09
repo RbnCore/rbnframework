@@ -6,7 +6,7 @@ use Rbn\Framework\Core\Base\Data\BaseConfig;
 
 /**
  * PanelMap - RbnAdmin Paket Haritası ve İskeleti 🗺️🛰️🏛️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * Bu sınıf paketin iç yapısını (Sub-Modules), Navigasyon hiyerarşisini 
  * ve Breadcrumb verilerini "Structural Map" olarak yönetir.

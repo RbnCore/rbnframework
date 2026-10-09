@@ -7,9 +7,9 @@ namespace Rbn\Framework\Core\Database\Repositories\Master;
 use Rbn\Framework\Core\Base\Data\BaseRepository;
 
 /**
- * IpGuardRepository - The Sovereign Access Strategist Repository 🧠🛡️⚓
+ * IpGuardRepository - The RBN Framework Access Strategist Repository 🧠🛡️⚓
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Master repository for IP Blacklisting, Whitelisting and Multi-tenant Security.
  * Located strictly under Core\Database\Repositories\Master for clean architecture.
  * 

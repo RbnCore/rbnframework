@@ -39,7 +39,7 @@ if (!function_exists('is_local')) {
      * muafiyetleri). Once `HTTP_HOST`u ALT DIZGE olarak ariyordu
      * (`str_contains($host, '.test')`). `HTTP_HOST` SALDIRGAN KONTROLLUDUR:
      * uretimde `Host: herhangi.test` gonderilerek tum muafiyetler acilabiliyordu
-     * (ayrica `rbncore.tr.test.evil.com` ve `shop.localhost.attacker.com`
+     * (ayrica `project.tr.test.evil.com` ve `shop.localhost.attacker.com`
      * gibi son-ek/alt-dizge sahte pozitifleri de geciyordu).
      *
      * Artik karar TEK kaynaktan gelir: `PreBoot::isTrustedLocalEnvironment()`
@@ -59,6 +59,14 @@ if (!function_exists('is_local')) {
         static $isLocal = null;
         if ($isLocal !== null) {
             return $isLocal;
+        }
+
+        // [FW-096-D8 / TK-03] Uretim ilani TEK karar noktasidir
+        // (`PreBoot::isProductionDeclared()` -> `secrets.php` `app.environment`;
+        // yoksa production). Uretimde Host/IP/yol sezgisine HIC bakilmaz.
+        if (!class_exists(\Rbn\Framework\Core\System\Kernel\Base\PreBoot::class)
+            || \Rbn\Framework\Core\System\Kernel\Base\PreBoot::isProductionDeclared()) {
+            return $isLocal = false;
         }
 
         $host = trim((string) ($_SERVER['HTTP_HOST'] ?? ''));

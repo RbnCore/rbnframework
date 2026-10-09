@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Support\Definitions\System\FrameworkIdentity;
 /**
  * CrawlerController - Unified Discovery Delivery Hub 🛰️🤖🗺️⚓
  * 
- * RBN 3.5 Masterpiece: Centralized controller for serving Robots.txt and XML Sitemaps.
+ * RBN Framework: Centralized controller for serving Robots.txt and XML Sitemaps.
  * Manages caching orchestration and content-type integrity for all crawler resources.
  */
 class CrawlerController extends BaseController
@@ -113,7 +113,7 @@ class CrawlerController extends BaseController
      */
     protected function serve(string $type, string $contentType, string $cachePrefix, ?string $subType = null)
     {
-        // 🎼 RBN 3.5: Masterpiece Hub Access 🚀⚓
+        // 🎼 RBN Framework: Hub Access 🚀⚓
         $crawlerService = $this->service('crawler');
         $cache = $this->service('storage')->cache();
 
@@ -155,7 +155,7 @@ class CrawlerController extends BaseController
             ]);
         }
 
-        // ⚓ RBN 3.5: Fluent High-Integrity Response 🏹🚀
+        // ⚓ RBN Framework: Fluent High-Integrity Response 🏹🚀
         return $this->response
             ->contentType($contentType)
             ->body($content)

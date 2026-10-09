@@ -9,9 +9,9 @@ use Rbn\Framework\Packages\RbnPipeline\Concerns\SanitizesResponseTrait;
 use Rbn\Framework\Packages\RbnPipeline\Contracts\PromptRuleInterface;
 
 /**
- * JsonResponseRule - Sovereign JSON Formatting & Autonomous Repair Hub 🧱🧼🛠️
+ * JsonResponseRule - RBN Framework JSON Formatting & Autonomous Repair Hub 🧱🧼🛠️
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Centralizes all markdown JSON wrapper stripping, unnesting, control character sanitization,
  * unescaped quote repairing, and array decoding for all AI operations across the framework.
  */

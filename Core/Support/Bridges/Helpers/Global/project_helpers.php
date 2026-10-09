@@ -41,7 +41,7 @@ if (!function_exists('project_id')) {
 
 if (!function_exists('project_key')) {
     /**
-     * Get the current project key (e.g. rbncore)
+     * Get the current project key (e.g. project)
      */
     function project_key(): string
     {
@@ -124,7 +124,7 @@ if (!function_exists('site_domain')) {
 
 if (!function_exists('url')) {
     /**
-     * Generate an absolute URL for the project with sovereign duplication guard 🌐🛰️⚓
+     * Generate an absolute URL for the project with RBN Framework duplication guard 🌐🛰️⚓
      */
     function url(string $path = ''): string
     {

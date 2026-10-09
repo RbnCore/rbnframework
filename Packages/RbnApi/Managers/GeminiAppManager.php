@@ -7,9 +7,9 @@ namespace Rbn\Framework\Packages\RbnApi\Managers;
 use Rbn\Framework\Core\Base\Services\BaseManager;
 
 /**
- * GeminiAppManager - Sovereign Framework Central AI Manager & Orchestrator Base 🧠🛰️⚓
+ * GeminiAppManager - RBN Framework Framework Central AI Manager & Orchestrator Base 🧠🛰️⚓
  * 
- * RBN 3.5 Sovereign Framework Standards.
+ * RBN Framework Framework Standards.
  * Centralizes all project_key resolution, module loading, prompt handler resolution,
  * persona merging, API execution, and response formatting for all projects.
  */

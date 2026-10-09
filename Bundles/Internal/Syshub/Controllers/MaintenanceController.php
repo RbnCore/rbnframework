@@ -6,7 +6,7 @@ namespace Rbn\Framework\Bundles\Internal\Syshub\Controllers;
 use Rbn\Framework\Core\Base\Attributes\SubModule;
 
 /**
- * MaintenanceController - RBN 3.5 Sovereign Guard Controller 🚧🛡️
+ * MaintenanceController - RBN Framework Guard Controller 🚧🛡️
  * Otonom kimlik keşfi ve standart aksiyon yönetimi ile donatılmıştır.
  */
 #[SubModule(
@@ -39,7 +39,7 @@ class MaintenanceController extends SyshubController
     }
 
     /**
-     * Otonom Modallar İçin Veri Sağlayıcı (RBN 3.5 Masterpiece) 💉
+     * Otonom Modallar İçin Veri Sağlayıcı (RBN Framework) 💉
      */
     protected function getModalData($id = null, ?string $view = null): array
     {

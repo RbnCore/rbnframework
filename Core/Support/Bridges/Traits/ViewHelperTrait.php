@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Rbn\Framework\Core\Support\Bridges\Traits;
 
 /**
- * ViewHelperTrait - Sovereign UI & Template Helpers 🧬🎨⚓
+ * ViewHelperTrait - RBN Framework UI & Template Helpers 🧬🎨⚓
  * 
- * RBN 3.5 Masterpiece: Positioned in the Bridge layer next to NormalizationTrait.
+ * RBN Framework: Positioned in the Bridge layer next to NormalizationTrait.
  * Provides core template shortcuts like CSRF tokens, method spoofing, 
  * and metadata tags directly within the Component DNA.
  */

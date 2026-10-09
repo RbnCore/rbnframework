@@ -10,7 +10,7 @@ use Rbn\Framework\Core\System\Storage\Providers\BootCacheProvider;
 /**
  * CronJobsRepository - Master `cron_jobs` Tablosu Data Access & Query Repository 🗄️⚡
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Sadece master veritabanındaki `cron_jobs` tablosu üzerinde okuma ve güncelleme yapar.
  * Hiçbir zamanlama veya iş mantığı (business logic) içermez.
  * 

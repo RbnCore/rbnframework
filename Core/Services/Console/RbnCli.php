@@ -27,12 +27,12 @@ class RbnCli
 
     /**
      * Discovery Orchestrator for CLI Commands 🏹🎡⚓
-     * RBN 3.5 Masterpiece: Now uses the Centralized Registry Gate instead of raw glob scanning.
+     * RBN Framework: Now uses the Centralized Registry Gate instead of raw glob scanning.
      * rbnframework/rbn  dosyası bağlantı yeridir. onu inceleyin.
      */
     protected function discoverCommands(): void
     {
-        // 🎼 RBN 3.5: Accessing the Sovereign Command Map 🏛️📜
+        // 🎼 RBN Framework: Accessing the RBN Framework Command Map 🏛️📜
         $registry = new \Rbn\Framework\Core\System\Registries\SystemRegistry();
         $map = $registry->registerMap()['commands'] ?? [];
 
@@ -120,7 +120,7 @@ class RbnCli
      */
     public function listCommands(): void
     {
-        ConsoleStyle::header(RbnSystemInfo::get('FRAMEWORK_NAME') . " CLI v" . RbnSystemInfo::get('FRAMEWORK_CLI_VERSION') . ($this->isMaster ? " (MASTER MODE)" : ""));
+        ConsoleStyle::header(RbnSystemInfo::get('FRAMEWORK_NAME') . " CLI v" . RbnSystemInfo::get('FRAMEWORK_VERSION') . ($this->isMaster ? " (MASTER MODE)" : ""));
 
         echo " Kullanım:\n  php rbn [komut] [parametreler]\n\n";
         echo " \033[0;32mMüsait Komutlar:\033[0m\n";

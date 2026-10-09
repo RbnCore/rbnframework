@@ -7,9 +7,9 @@ namespace Rbn\Framework\Packages\RbnApi\Services;
 use Rbn\Framework\Core\Base\Services\BaseService;
 
 /**
- * FacebookService - Sovereign Facebook Page & Graph API Orchestrator 🌐📘⚓
+ * FacebookService - RBN Framework Facebook Page & Graph API Orchestrator 🌐📘⚓
  * 
- * RBN 3.5 Masterpiece: High-level interface for Facebook Page publishing & operations.
+ * RBN Framework: High-level interface for Facebook Page publishing & operations.
  */
 class FacebookService extends BaseService
 {

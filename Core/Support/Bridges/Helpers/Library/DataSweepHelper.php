@@ -5,14 +5,14 @@ namespace Rbn\Framework\Core\Support\Bridges\Helpers\Library;
 /**
  * DataSweepHelper - Otonom Veri Süpürme ve Ayıklama Araçları 🧹🛰️⚓
  * 
- * RBN 3.5: AI yanıtları, Web Scraping ve karmaşık metinlerden veri çekmek için tasarlanmıştır.
+ * RBN Framework: AI yanıtları, Web Scraping ve karmaşık metinlerden veri çekmek için tasarlanmıştır.
  * Adı gibi veriyi süpürüp temizler ve özünü çıkarır.
  */
 class DataSweepHelper
 {
     /**
      * AI Yanıtı İçinden JSON Bloklarını Süpürür ve Ayıklar 🧹🧼🛰️⚓
-     * RBN 3.5 Masterpiece: Extract clean JSON (Array or Object) from dirty AI strings.
+     * RBN Framework: Extract clean JSON (Array or Object) from dirty AI strings.
      */
     public function cleanJson(string $text): string
     {

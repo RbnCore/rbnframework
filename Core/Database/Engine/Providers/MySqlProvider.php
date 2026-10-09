@@ -11,7 +11,7 @@ use Rbn\Framework\Core\System\Config\Engine\Database\DatabaseConfig;
 /**
  * MySqlProvider - High-Performance PDO Connection Motor 🏎️⚙️
  * 
- * RBN 3.5: Masterpiece Standard.
+ * RBN Framework: Standard.
  * Strictly authoritative via DatabaseConfig DTOs.
  * Centralized under Config Hub (SSoT).
  */
@@ -30,7 +30,7 @@ class MySqlProvider implements DbProviderInterface
     {
         $this->name = $name;
 
-        // 🧬 RBN 3.5: Strategic Mapping to Unified Standard Categories
+        // 🧬 RBN Framework: Strategic Mapping to Unified Standard Categories
         //
         // [FW-ALTYAPI-1 / B-05] FAIL-CLOSED: bilinmeyen ad ARTIK sessizce
         // `database_project`'e dusmuyor. Onceden `default` kolu sayesinde yazim
@@ -107,7 +107,7 @@ class MySqlProvider implements DbProviderInterface
      */
     private function connect(): void
     {
-        // 🎼 RBN 3.5: [INTEGRITY SEAL] 🛡️⚓
+        // 🎼 RBN Framework: [INTEGRITY SEAL] 🛡️⚓
         if ($this->config === null) {
             throw new \Rbn\Framework\Core\Support\Exceptions\PreflightException(
                 "Bağlantı Ayarları Eksik! [{$this->category}]",
@@ -116,7 +116,7 @@ class MySqlProvider implements DbProviderInterface
             );
         }
 
-        // 🎼 RBN 3.5: Pure Authoritative DSN Construction (Zero Legacy Overrides) 🏺⚖️🛡️⚓
+        // 🎼 RBN Framework: Pure Authoritative DSN Construction (Zero Legacy Overrides) 🏺⚖️🛡️⚓
         $dsn = "mysql:host={$this->config->host};dbname={$this->config->database};charset={$this->config->charset}";
 
         try {
@@ -128,7 +128,7 @@ class MySqlProvider implements DbProviderInterface
                 1002 => "SET NAMES {$this->config->charset} COLLATE utf8mb4_unicode_ci"
             ]);
         } catch (PDOException $e) {
-            // 🛡️ RBN 3.5: [ENGINE ISOLATION]
+            // 🛡️ RBN Framework: [ENGINE ISOLATION]
             // We do NOT call high-level services like 'logs' here to avoid recursion loops.
             // Authority is passed back to the caller (e.g. DatabaseGuard or Kernel).
             throw $e;

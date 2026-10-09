@@ -75,7 +75,7 @@ $rbnE = static fn($deger, string $yedek = ''): string => htmlspecialchars(
                     <div class="d-flex align-items-center justify-content-center gap-3">
                         <span
                             style="color: rgba(255,255,255,0.2); font-weight: 700; letter-spacing: 0.1em; font-size: 0.7rem;">
-                            <?= $branding['shield_name'] ?? 'RbnShield' ?> <?= $branding['shield_version'] ?? 'v2.1' ?>
+                            <?= $branding['shield_name'] ?? 'RbnShield' ?> <?= $branding['shield_version'] ?? '' ?>
                         </span>
                         <span style="color: rgba(255,255,255,0.1);">|</span>
                         <span style="color: rgba(255,255,255,0.3); font-size: 0.7rem;">

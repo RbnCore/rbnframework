@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\Base\Services\Traits\Service\Blogcontent;
 /**
  * ContentLegacyRedirectServiceTrait - Autonomous Content Migration & Redirect Engine 🧭⚡
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Pure service-trait for resolving legacy URL migrations using sibling traits (ContentDataServiceTrait, ContentServiceTrait)
  * with ZERO hardcoded service, repository, or provider names.
  */

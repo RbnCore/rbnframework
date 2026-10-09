@@ -7,9 +7,9 @@ namespace Rbn\Framework\Bundles\Internal\Webhub\Services;
 use Rbn\Framework\Core\Base\Services\BaseService;
 
 /**
- * WebhubService - The Sovereign Orchestrator for Webhub Bundle 🏛️🛰️⚓
+ * WebhubService - The RBN Framework Orchestrator for Webhub Bundle 🏛️🛰️⚓
  * 
- * RBN 3.5: Centralized service for all Webhub related logic.
+ * RBN Framework: Centralized service for all Webhub related logic.
  * Discovers and manages WebhubProvider and WebhubHandler autonomously.
  * 
  * @property \Rbn\Framework\Bundles\Internal\Webhub\Providers\WebhubProvider $WebhubProvider
@@ -25,7 +25,7 @@ class WebhubService extends BaseService
      */
     public function boot(): void
     {
-        // 🎼 RBN 3.5 [SOVEREIGN BINDING]
+        // 🎼 RBN Framework [RBN Framework BINDING]
         // We link our registered bundle provider to the service engine.
         $this->provider = $this->provider('webhub');
     }
@@ -33,7 +33,7 @@ class WebhubService extends BaseService
     /**
      * Point-Target Read helper 🕊️🏛️⚓
      * 
-     * Masterpiece: Fluent criteria setter for group-based settings.
+     * RBN Framework: Fluent criteria setter for group-based settings.
      */
     public function read(?string $groupKey = null): self
     {
@@ -59,7 +59,7 @@ class WebhubService extends BaseService
      */
     public function save(mixed $id = null, array $data = []): self
     {
-        // 🎼 RBN 3.5: Strategic Payload Alignment
+        // 🎼 RBN Framework: Strategic Payload Alignment
         if (is_array($id)) {
             $data = $id;
             $id = null;
@@ -72,7 +72,7 @@ class WebhubService extends BaseService
     /**
      * Strategic Action Bridge 🕊️🛰️⚓
      * 
-     * Masterpiece: Orchestrates operations between controllers and providers autonomously.
+     * RBN Framework: Orchestrates operations between controllers and providers autonomously.
      */
     public function action(?string $name = null, array $payload = []): self
     {

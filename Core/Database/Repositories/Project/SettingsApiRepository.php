@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Data\BaseRepository;
 /**
  * SettingsApiRepository - Repository for project API keys (z_settings_api) 🏛️🔑
  * 
- * RBN 3.5: Safely queries z_settings_api if exists, returns empty if table does not exist.
+ * RBN Framework: Safely queries z_settings_api if exists, returns empty if table does not exist.
  */
 class SettingsApiRepository extends BaseRepository
 {

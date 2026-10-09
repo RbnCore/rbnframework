@@ -11,7 +11,7 @@ use Rbn\Framework\Core\Base\Web\Traits\Controller\Engine\DownloadControllerTrait
 /**
  * ActionControllerTrait - Controller Orchestrator Hub 🛰️🎻
  * 
- * RBN 3.5: Strategic Hub that composes all controller-layer engine traits.
+ * RBN Framework: Strategic Hub that composes all controller-layer engine traits.
  * This is the primary entry point for CRUD, Bulk, and Download actions.
  * 
  * Symmetry: Enforces layer-specific naming standards (ControllerTrait).
@@ -23,7 +23,7 @@ trait ActionControllerTrait
         DownloadControllerTrait;
 
     /* ==========================================================================
-       [ SOVEREIGN PROPERTIES ] - Layer Specific Overrides 🪟
+       [ RBN Framework PROPERTIES ] - Layer Specific Overrides 🪟
        ========================================================================== */
 
     /** @var string|null Explicit modal view path override 🪟 */
@@ -61,8 +61,8 @@ trait ActionControllerTrait
     }
 
     /**
-     * Get Sovereign Resolved Return Path 🛰️⚓
-     * RBN 3.5: Multi-role autonomous discovery from URL.
+     * Get RBN Framework Resolved Return Path 🛰️⚓
+     * RBN Framework: Multi-role autonomous discovery from URL.
      */
     protected function returnPath(mixed $subPath = null)
     {
@@ -80,7 +80,7 @@ trait ActionControllerTrait
         }
 
 
-        // 🎼 RBN 3.5: [SOVEREIGN HIERARCHY DISCOVERY] 🏹🛰️⚓
+        // 🎼 RBN Framework: [RBN Framework HIERARCHY DISCOVERY] 🏹🛰️⚓
         // Priority: Explicit $subPath > Detected $sub_module > Null
         $subPath = $subPath ?? ($this->sub_module ?? null);
 
@@ -91,10 +91,10 @@ trait ActionControllerTrait
             $path = $subPath ? rtrim((string) $base, '/') . '/' . ltrim($subPath, '/') : $base;
 
 
-            // 🛡️ RBN 3.5 Masterpiece: Case-Insensitivity Armor 🛰️⚓
+            // 🛡️ RBN Framework: Case-Insensitivity Armor 🛰️⚓
             $path = is_string($path) ? strtolower($path) : $path;
 
-            // 📡 [RBN 3.5] Sovereign URL Discovery Hub
+            // 📡 [RBN Framework] RBN Framework URL Discovery Hub
             // Detect the active role/panel prefix (e.g. admin or developer) directly from the URI.
             // 🛡️ B-43: ham `$_SERVER['REQUEST_URI']` yerine istek nesnesi (Anayasa §7).
             // `Request::path()` sorgu dizesini zaten atar; CLI'de `$_SERVER` yoksa
@@ -109,7 +109,7 @@ trait ActionControllerTrait
             // Capture the 'role' part immediately following the prefix
             $detectedRole = ($pIdx !== false && isset($segments[$pIdx + 1])) ? $segments[$pIdx + 1] : null;
 
-            // 🎻 RBN 3.5: Sovereign Panel Overwrite
+            // 🎻 RBN Framework: Panel Overwrite
             $finalRole = $this->panel ?? ($detectedRole ?? 'admin');
 
             $url = $this->Route->url($path, $finalRole);
@@ -150,12 +150,12 @@ trait ActionControllerTrait
 
 
     /**
-     * Sovereign Result Dispatcher 🏹🛰️⚓
+     * RBN Framework Result Dispatcher 🏹🛰️⚓
      * Professional Message Architect & Autonomous Path Resolver.
      */
     protected function handleResult($result, ?string $message = null, mixed $path = null, mixed $context = null, array $data = [])
     {
-        // 🕵️‍♂️ RBN 3.5: [HEURISTIC ACTION DISCOVERY] 🧠🛰️⚓
+        // 🕵️‍♂️ RBN Framework: [HEURISTIC ACTION DISCOVERY] 🧠🛰️⚓
         $caller = $context ?? (debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1]['function'] ?? 'update');
 
         // Map common functional intents to professional verbs
@@ -179,7 +179,7 @@ trait ActionControllerTrait
             $action = $caller; // Explicit context passed as string
         }
 
-        // 🎼 Verb Mapping (Professional Masterpiece Standards)
+        // 🎼 Verb Mapping (Professional RBN Framework Standards)
         $verbs = [
             'create' => ['success' => 'başarıyla eklendi. ✅', 'error' => 'eklenirken bir hata oluştu! ❌'],
             'store' => ['success' => 'başarıyla kaydedildi. ✅', 'error' => 'kaydedilirken bir hata oluştu! ❌'],
@@ -193,7 +193,7 @@ trait ActionControllerTrait
 
         $contextMap = $verbs[$action] ?? $verbs['update'];
 
-        // 🎼 RBN 3.5: [MESSAGE ARCHITECT] Sentezleyici
+        // 🎼 RBN Framework: [MESSAGE ARCHITECT] Sentezleyici
         if (!empty($message)) {
             $trimmed = trim($message);
             $hasPunctuation = preg_match('/[.!?]$/u', $trimmed);
@@ -206,13 +206,13 @@ trait ActionControllerTrait
                 $error = $trimmed . ' ' . $contextMap['error'];
             }
         } else {
-            // 🎼 RBN 3.5: [SOVEREIGN FALLBACK]
+            // 🎼 RBN Framework: [RBN Framework FALLBACK]
             $entityName = (isset($this->entityName) && !empty($this->entityName)) ? ucfirst($this->entityName) : ucfirst($this->getDetectedEntityName());
             $success = $this->getCrudMessage('success', "{$entityName} işlemi {$contextMap['success']}");
             $error = $this->getCrudMessage('error', "{$entityName} {$contextMap['error']}");
         }
 
-        // 🎼 RBN 3.5: Override error message if service returned specific error messages 🚨
+        // 🎼 RBN Framework: Override error message if service returned specific error messages 🚨
         if (is_array($result) && isset($result['success']) && !$result['success']) {
             if (!empty($result['errors'])) {
                 $error = implode('; ', (array)$result['errors']);
@@ -230,7 +230,7 @@ trait ActionControllerTrait
     }
 
     /**
-     * Alert Proxy for Masterpiece Controllers 🔔🛰️
+     * Alert Proxy for RBN Framework Controllers 🔔🛰️
      * Simplified access to the RouteHandle alert system.
      */
     protected function alert(string $type, string $message, string|array $redirectOrData = []): void
@@ -243,9 +243,9 @@ trait ActionControllerTrait
     }
 
     /**
-     * Standard Generic Modal Renderer (Sovereign Architecture) 🪟🛰️⚓
+     * Standard Generic Modal Renderer (RBN Framework Architecture) 🪟🛰️⚓
      * 
-     * RBN 3.5: Masterpiece autonomous discovery logic.
+     * RBN Framework: autonomous discovery logic.
      * Priority: Hook (getModalData) > ID Lookup (Provider/Service) > Empty Array.
      */
     public function modal($id = null, ?string $view = null): void
@@ -268,20 +268,20 @@ trait ActionControllerTrait
             }
         }
 
-        // 🛡️ Fail-safe: Always deliver array-compatible object/array for RBN 3.5 Views
+        // 🛡️ Fail-safe: Always deliver array-compatible object/array for RBN Framework Views
         $record = $record ?: [];
 
         // 🏹 2. Autonomous View Path Discovery
-        // Uses the sovereign identity (sub_module) extracted during DNA awakening. 🧬⚓
+        // Uses the RBN Framework identity (sub_module) extracted during DNA awakening. 🧬⚓
         $folderName = $this->sub_module ?? $this->getDetectedEntityName();
         $viewFile = $view ?: 'modal';
 
-        // 🎼 RBN 3.5: [SOVEREIGN VIEW ARCHITECT] 🛰️⚓
+        // 🎼 RBN Framework: [RBN Framework VIEW ARCHITECT] 🛰️⚓
         // Priority: Explicit modalView property > PascalCase Folder Discovery
         $viewPath = $this->modalView ?? ucfirst((string) $folderName) . "/Partials/{$viewFile}";
 
-        // 📽️ 3. Execution (Sovereign Ajax Dispatch) ✂️🛰️⚓
-        // RBN 3.5: [DUAL-BINDING & AUTONOMOUS AJAX] 🎻🛰️⚓
+        // 📽️ 3. Execution (RBN Framework Ajax Dispatch) ✂️🛰️⚓
+        // RBN Framework: [DUAL-BINDING & AUTONOMOUS AJAX] 🎻🛰️⚓
         $viewData = [
             $entityName => $record,
             'id' => $id,
@@ -299,7 +299,7 @@ trait ActionControllerTrait
     }
 
     /* ==========================================================================
-       [ API & MOBILE JSON RESPONSES ] - Sovereign JSON Contract Hub 🌐📱⚓
+       [ API & MOBILE JSON RESPONSES ] - RBN Framework JSON Contract Hub 🌐📱⚓
        ========================================================================== */
 
     /**

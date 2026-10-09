@@ -10,13 +10,13 @@ use Rbn\Framework\Core\System\Discovery\Base\Traits\DiscoveryActionsTrait;
 /**
  * ComponentDriver - Specialized Object Discovery & Factory 🏗️🛰️
  * 
- * RBN 3.5: [CENTRALIZED SOVEREIGNTY]
+ * RBN Framework: [CENTRALIZED]
  * Performs physical discovery and instantiation of instance-based components.
  */
 class ComponentDriver
 {
     /**
-     * RBN 3.5: Masterpiece Discovery Actions 🧬🛰️🎡
+     * RBN Framework: Discovery Actions 🧬🛰️🎡
      * Centralized via DiscoveryActionsTrait.
      */
     use DiscoveryActionsTrait;
@@ -64,7 +64,7 @@ class ComponentDriver
         if ($class && class_exists($class)) {
             $instance = new $class();
 
-            // RBN 3.5: BaseComponent handles its own Hub Sync via bootBaseContext().
+            // RBN Framework: BaseComponent handles its own Hub Sync via bootBaseContext().
             return $this->instances[$cacheKey] = $instance;
         }
 

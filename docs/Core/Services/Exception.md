@@ -1,6 +1,6 @@
 # Core/Services/Exception — hata analizi, günlükleme ve kullanıcı/developer çıktısı (13 dosya)
 
-> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Services/Exception/` — **13 `*.php`** = 1 kök + `Concerns/` 2 +
 > `Data/` 2 + `Handlers/` 3 + `Providers/` 4 (+ `Providers/Base/` 1).
 > **Envanter:** 13 dosyanın **13'u** anlatıldı.

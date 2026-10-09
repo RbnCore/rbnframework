@@ -20,14 +20,14 @@ class InstagramProvider extends BaseComponent
         if (empty($accessToken)) {
             return [
                 'status' => 'error',
-                'message' => 'RBN 3.5: Instagram Access Token yetkisi veya anahtarı bulunamadı! 🛡️⚓'
+                'message' => 'Instagram Access Token yetkisi veya anahtarı bulunamadı! 🛡️⚓'
             ];
         }
 
         $params['access_token'] = $accessToken;
         $url = $this->baseUrl . ltrim($method, '/');
 
-        // 🪐 Use the Sovereign Remote Engine! (Meta Graph API requires form-urlencoded for POST)
+        // 🪐 Use the RBN Framework Remote Engine! (Meta Graph API requires form-urlencoded for POST)
         $result = $this->remote->request($httpMethod, $url, $params, [], false);
 
         if ($result['status'] === 'success') {

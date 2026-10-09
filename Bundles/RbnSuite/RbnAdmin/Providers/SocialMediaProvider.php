@@ -7,7 +7,7 @@ use Rbn\Framework\Core\System\Paths\Paths;
 
 /**
  * SocialMediaProvider - Platform Data Specialist 🎭🏛️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * Bu sağlayıcı hem platform tanımlarını yönetir hem de 
  * akıcı (fluent) bir arayüz sunar.

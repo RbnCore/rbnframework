@@ -24,14 +24,14 @@ trait CrudModelTrait
             $data = $this->applyMassAssignmentGuard($data);
         }
 
-        // 🎼 RBN 3.5: [SMART PK GUARD] 🛡️⚓
+        // 🎼 RBN Framework: [SMART PK GUARD] 🛡️⚓
         // If primary key exists and is empty, remove it to allow DB auto-increment.
         $pk = $this->getPrimaryKey();
         if (isset($data[$pk]) && (is_null($data[$pk]) || $data[$pk] === '')) {
             unset($data[$pk]);
         }
 
-        // 🛡️ RBN 3.5 + FW-BASE-1 T3 (B-20): [MULTI-TENANT SCOPED INJECTION] 📦🔑
+        // 🛡️ RBN Framework + FW-BASE-1 T3 (B-20): [MULTI-TENANT SCOPED INJECTION] 📦🔑
         // `project_key` daima SUNUCU BAĞLAMINDAN yazilir; kullanicinin gonderdigi
         // deger EZILIR. Tek istisna: `writeAsProject()` kacis kapisi.
         // Sira bilincli: kapsam enjekteyonu toplu atama suzgecinden SONRA gelir

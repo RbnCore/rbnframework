@@ -8,7 +8,7 @@ use Rbn\Framework\Bundles\RbnSuite\RbnAdmin\Providers\Fluent\TrafficStatsChannel
 
 /**
  * AnalyticsService - Unified System Intelligence Hub 📊🏛️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * @property \Rbn\Framework\Bundles\RbnSuite\RbnAdmin\Providers\AnalyticsProvider $analyticsProvider
  * 
@@ -39,7 +39,7 @@ class AnalyticsService extends BaseService
      */
     public function record(array $data = []): void
     {
-        // RBN 3.5: [PASSTHROUGH] Direct delegation to the storage hub.
+        // RBN Framework: [PASSTHROUGH] Direct delegation to the storage hub.
         $this->storage->traffic()->record($data);
     }
 

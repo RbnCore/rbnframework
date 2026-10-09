@@ -16,9 +16,9 @@
     <!-- 👤 2. BRANDING & FRAMEWORK -->
     <meta name="author" content="<?= $branding['author'] ?? 'RbnBilisim' ?>">
     <meta name="designer" content="<?= $branding['designer'] ?? 'RBN Framework' ?>">
-    <meta name="generator" content="<?= trim(($branding['fw_name'] ?? 'RBN') . ' ' . (($branding['fw_version'] ?? '3.5') !== '' ? 'v' . ($branding['fw_version'] ?? '3.5') : '')) ?>">
+    <meta name="generator" content="<?= trim(($branding['fw_name'] ?? 'RBN') . ' ' . (($branding['fw_version'] ?? '') !== '' ? 'v' . $branding['fw_version'] : '')) ?>">
     <meta name="rbnshield-version"
-        content="<?= $branding['shield_name'] ?? 'RbnShield' ?> <?= $branding['shield_version'] ?? 'v2.1' ?>">
+        content="<?= trim(($branding['shield_name'] ?? 'RbnShield') . ' ' . ($branding['shield_version'] ?? '')) ?>">
     <meta name="theme-color" content="#020617">
 
     <!-- 📣 3. OPENGRAPH (Shield Identity) -->
@@ -37,7 +37,7 @@
 
     <!-- 1. Fonts & Icons (Base) 🏹🪐🛡️ -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?= \Rbn\Framework\Core\Support\Definitions\Render\AssetDefinition::REMIX_ICON ?>" integrity="<?= \Rbn\Framework\Core\Support\Definitions\Render\AssetDefinition::REMIX_ICON_ATTRS['integrity'] ?>" crossorigin="anonymous">
 
     <!-- 2. RBN Master Design Engine (Framework CSS) 🏛️💎 -->
     <link rel="stylesheet" href="/framework-assets/rbncommon/css/rbn-master.css?v=<?= $asset_v ?>">

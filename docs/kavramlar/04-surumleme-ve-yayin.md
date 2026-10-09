@@ -1,8 +1,8 @@
 # 04 — SÜRÜMLEME VE YAYIN
 
 > **Bu belge hangi commit'e göre yazıldı:** `d4af18d` (dal `feat/fw-license-master`)
-> **Son doğrulama tarihi:** 2026-10-05
-> **Yayın tabanı:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Son doğrulama tarihi:** 2026-10-09 (§2, §4.3 ve §8: `version:framework`, FW-096-D7)
+> **Yayın tabanı:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kapsam:** Sürüm kuralı, tek kaynak, `rbn version:*`, CHANGELOG/UPGRADING biçimi
 
 ---
@@ -51,7 +51,7 @@ Yardımcılar (`Core/Support/Bridges/Helpers/Global/support_helpers.php`):
 
 | Sürüm | Tek kaynak | Türev alan |
 |---|---|---|
-| **Framework** | `FrameworkIdentity::FRAMEWORK_VERSION` (`Core/Support/Definitions/System/FrameworkIdentity.php:26`) | `README.md:5`, `CITATION.cff`, `CHANGELOG.md` "Son sürüm" başlığı |
+| **Framework** | `FrameworkIdentity::FRAMEWORK_VERSION` (`Core/Support/Definitions/System/FrameworkIdentity.php:26`) | `CITATION.cff`, `composer.json` `version` (+ `composer.lock` `content-hash`), `CHANGELOG.md` "Son sürüm" + `## [A.B.C]`, docs "Yayın" damgaları — hepsi `version:framework` ile birlikte yazılır (§4.3); README'lerde sürüm sayısı yoktur |
 | **CLI** | `FrameworkIdentity::FRAMEWORK_CLI_VERSION = '2.3.0'` (`FrameworkIdentity.php:57`) | `php rbn list` başlığı ("CLI v2.3.0") |
 | **RbnShield** | `FrameworkIdentity::SHIELD_VERSION = '2.1.0'` (`FrameworkIdentity.php:64`) | — |
 | **RBN Admin Pro** | `FrameworkIdentity::ADMIN_VERSION = '1.2.0'` (`FrameworkIdentity.php:68`) | Panel alt bilgisi |
@@ -113,7 +113,7 @@ master DB  projects.version
 
 | Çıktı | Önce | Sonra |
 |---|---|---|
-| `{{APP_VERSION}}` (şablon) | `3.5.0` | projenin `projects.version` değeri |
+| `{{APP_VERSION}}` (şablon) | elle yazılmış sabit sürüm | projenin `projects.version` değeri |
 | `module-version` (`<meta name="module-version">`) | `1.0` | aynı değer |
 | `siteVersion` (giriş ekranı) / panel `app_version` | `1.0` / `1.0` | aynı değer |
 | RbnShield / RBN Admin Pro / RbnAuth / CLI | `v2.1` / `1.2` / `2.2` / `2.3` | `2.1.0` / `1.2.0` / `2.2.0` / `2.3.0` |
@@ -153,8 +153,8 @@ php rbn master:migrate --rollback   # GERİ ALMA: yedekteki değerler geri yazı
 
 ## 4. `rbn version:*`
 
-İki komut `Core/Services/Console/Handlers/VersionHandlers.php` içindedir;
-ikisi de master DB'ye bağlanır (`rbn:67-72`).
+Üç komut `Core/Services/Console/Handlers/VersionHandlers.php` içindedir;
+`version:check` ve `version:next` master DB'ye bağlanır (`rbn:67-72`).
 
 ### 4.1 `version:check` — SALT-OKUNUR
 
@@ -172,9 +172,9 @@ ikisi de master DB'ye bağlanır (`rbn:67-72`).
 Kaynak 3 ve 4 **kopya** olduğu için "framework ile aynı mı" sorusudur; kaynak 1, 2, 5
 yalnız **geçerlilik** (`Version::isValid()`) sorusudur.
 
-**Ölçülen çıktı** (yerel master, 2026-10-06, 0.9.5 ağacında yeniden ölçüldü): framework `0.9.5` OK; CLI `2.3.0`,
-Shield `2.1.0`, Admin `1.2.0`, Auth `2.2.0` OK; `CITATION.cff` `0.9.5` OK;
-`CHANGELOG.md` `0.9.5` OK; master'daki **19 proje** kaydının **19'u** `0.1.1` OK.
+**Ölçülen çıktı** (yerel master, 2026-10-09, 0.9.6 ağacında yeniden ölçüldü): framework `0.9.6` OK; CLI `2.3.0`,
+Shield `2.1.0`, Admin `1.2.0`, Auth `2.2.0` OK; `CITATION.cff` `0.9.6` OK;
+`CHANGELOG.md` `0.9.6` OK; master'daki **18 proje** kaydının **18'i** `0.1.1` OK.
 Sonuç: *"Tüm sürümler tutarlı ve geçerli (A.B.C)."*
 
 ### 4.2 `version:next <project_key>` — varsayılan KURU KOŞU
@@ -189,6 +189,27 @@ Sonuç: *"Tüm sürümler tutarlı ve geçerli (A.B.C)."*
 
 **Kural:** Master hub → proje kaydındaki `version` alanını **elle güncelleme**;
 `rbn version:next <project_key> --apply` kullan (`.github/UPGRADING.md:51-54`).
+
+### 4.3 `version:framework [--to=A.B.C] [--apply]` — framework sürümünü TEK komutta yükseltir
+
+`VersionHandlers::versionFramework()`.
+
+* **`--apply` yoksa kuru koşudur:** yazılacak dosyaları tabloyla gösterir, hiçbir şey yazmaz (çıkış `0`).
+* Hedef verilmezse `Version::next(FRAMEWORK_VERSION)`; `--to` yalnız geçerli (`A.B.C`) ve
+  mevcut sürümden **büyük** bir değer kabul eder, aksi hâlde çıkış `1`.
+* Yazılan kopyaların **tek listesi** `VersionHandlers::frameworkKopyalari()`:
+  `FrameworkIdentity::FRAMEWORK_VERSION`, `CITATION.cff` (`version` + `date-released`),
+  `composer.json` `version`, CHANGELOG "Son sürüm" satırı + yeni `## [A.B.C]` başlığı
+  (eski başlık tarihçe olarak kalır), docs "Yayın" ve "Yayın tabanı" damgaları.
+  `version:check` aynı listeyi denetler; yeni bir kopya yalnız bu listeye eklenir.
+* `composer.json` `version` alanı `composer.lock` `content-hash` hesabına girer: komut
+  kilidin özetini **aynı çalıştırmada** yeniler (`composer validate` bayat kilit uyarısı vermez).
+* `--apply` sonrası yazılan kopyalar diskteki yeni değerle yeniden denetlenir; sapma varsa çıkış `1`.
+* Komut CHANGELOG `## [A.B.C]` bölümünün **içeriğini** yazmaz; sürüm notunu ayrıca doldurun.
+
+**Kural:** framework sürümü hiçbir dosyada elle değiştirilmez; eski etiketler (Sovereign,
+Masterpiece, eski ana sürüm adları) yazılmaz. Regresyon kapısı elle yazılmış sürüm
+kalıntısını kırmızı sayar.
 
 ---
 
@@ -243,7 +264,8 @@ bulunur. Paketleme/dağıtımda `LICENSE` metni **kalmalıdır** (kök `README.m
 3. **Kırıcı** değişiklikler UPGRADING'de etiketli ve geri alınmış.
 4. `.github/SECURITY.md` desteklenen sürüm tablosu güncel
    (`.github/SECURITY.md:20-34`).
-5. Sürüm **elle artırılmamış**, `Version::next()` ile üretilmiş.
+5. Sürüm **elle artırılmamış**: framework `php rbn version:framework --apply`, proje
+   `php rbn version:next <project_key> --apply` ile üretilmiş (ikisi de `Version::next()`).
 6. Proje sürümleri master DB'de `A.B.C` (`rbn version:check` bunu denetler).
 7. Framework değişikliğiyle **ilgili belge güncellendi** (bkz. `docs/README.md`).
 8. Sürüm **yayın sonraki güncellemeyle** yapılır; docs-only değişiklikler sürüm

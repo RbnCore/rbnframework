@@ -46,8 +46,8 @@ trait ReadModelTrait
     }
 
     /**
-     * MASTERPIECE HYDRATOR: Veritabanından çekerken veriyi nesneye doldur 🧬🏛️
-     * RBN 3.5: Otonom JSON dönüşümlerini tetikler.
+     * RBN Framework HYDRATOR: Veritabanından çekerken veriyi nesneye doldur 🧬🏛️
+     * RBN Framework: Otonom JSON dönüşümlerini tetikler.
      */
     public function forceJsonFill(array $row): void
     {

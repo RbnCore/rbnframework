@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseModelInterface;
 /**
  * SettingsApiModel - Project-level API and Integration Keys ⚙️🔑
  * 
- * RBN 3.5: Optional table (z_settings_api) created in project database on demand.
+ * RBN Framework: Optional table (z_settings_api) created in project database on demand.
  * 
  * @property int         $id
  * @property string|null $group_key

@@ -77,7 +77,7 @@ class FrameworkContext extends FolderContext
     }
 
     /**
-     * Get the centralized Packages directory (Sovereign Service Hub 📦🛰️)
+     * Get the centralized Packages directory (RBN Framework Service Hub 📦🛰️)
      */
     public function packages(?string $path = null): string
     {

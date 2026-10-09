@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\Data\BaseRepository;
 
 /**
  * ContentDraftRepository - Evrensel İçerik Taslak Veri Deposu 🏛️📦⚡
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 class ContentDraftRepository extends BaseRepository
 {

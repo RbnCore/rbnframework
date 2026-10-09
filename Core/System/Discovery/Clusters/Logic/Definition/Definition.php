@@ -13,7 +13,7 @@ use Rbn\Framework\Core\Support\Definitions\System\NamespaceMap;
 /**
  * Definitions - The Framework Static Gateway 🎻🛰️⚓
  * 
- * RBN 3.5: Static Facade. 
+ * RBN Framework: Static Facade.
  * Redirects to the Discovery Engine's DefinitionResolver.
  * No local logic, purely a bridge.
  */
@@ -27,7 +27,7 @@ class Definition
      */
     public static function get(string $category, string $key): mixed
     {
-        // [RBN 3.5] RECURSION GUARD 🛡️⚓
+        // [RBN Framework] RECURSION GUARD 🛡️⚓
         // Detects vertical discovery loops and forces survival fallbacks.
         // Special case: Namespace prefixes are allowed to avoid discovery deadlock.
         if (self::$isResolving) {
@@ -39,18 +39,18 @@ class Definition
         try {
             $instance = DiscoveryEngine::instance();
 
-            // [RBN 3.5] MASTERPIECE BOOTSTRAP FALLBACK 🏛️⚔️🛡️⚓
+            // [RBN Framework] RBN Framework BOOTSTRAP FALLBACK 🏛️⚔️🛡️⚓
             // If the engine is still initializing or missing, use survival logic.
             if (!$instance) {
                 return self::survivalFallback($category, $key);
             }
 
-            // [RBN 3.5] REGISTRY FALLBACK 🏛️⚓
+            // [RBN Framework] REGISTRY FALLBACK 🏛️⚓
             if ($category === 'registry' && !$instance) {
                 return [];
             }
 
-            // [RBN 3.5] MASTERPIECE IDENTITY FALLBACK 🏛️⚔️🛡️⚓
+            // [RBN Framework] RBN Framework IDENTITY FALLBACK 🏛️⚔️🛡️⚓
             if ($category === 'identity') {
                 $setup = \Rbn\Framework\Core\Render\Configs\AssetConfig::PROXY_SETUP;
                 return match ($key) {
@@ -74,7 +74,7 @@ class Definition
     }
 
     /**
-     * Masterpiece Survival Fallback Logic 🧬⚓
+     * RBN Framework Survival Fallback Logic 🧬⚓
      */
     private static function survivalFallback(string $category, string $key): mixed
     {

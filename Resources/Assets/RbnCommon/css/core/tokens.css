@@ -60,7 +60,29 @@
     --rbn-shadow-card:       var(--shadow-card, 0 1px 3px rgba(0,0,0,0.04), 0 6px 16px rgba(0,0,0,0.03));
     --rbn-shadow-hover:      var(--shadow-hover, 0 6px 12px -2px rgba(0,0,0,0.06), 0 16px 28px -4px rgba(0,0,0,0.08));
     --rbn-shadow-modal:      var(--shadow-modal, 0 20px 35px -5px rgba(0,0,0,0.12));
+    --rbn-shadow-xs:         var(--shadow-xs, 0 1px 1px rgba(0, 0, 0, 0.04));
+    --rbn-shadow-md:         var(--shadow-md, 0 4px 8px -2px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05));
+    --rbn-shadow-lg:         var(--shadow-lg, 0 12px 24px -6px rgba(0, 0, 0, 0.12), 0 4px 8px -4px rgba(0, 0, 0, 0.06));
     --rbn-bg-overlay:        var(--bg-overlay, rgba(0, 0, 0, 0.5));
     --rbn-text-on-primary:   var(--text-on-primary, #FFFFFF);
+    --rbn-text-on-accent:    var(--text-on-accent, #1c1917);
+
+    /* 🚦 Durum rengi aileleri (düz / zemin / yazı): koyu temada proje kendi değerini verir */
+    --rbn-success-subtle:    var(--success-subtle, var(--rbn-green-50));
+    --rbn-success-text:      var(--success-text, var(--rbn-green-700));
+    --rbn-warning-subtle:    var(--warning-subtle, var(--rbn-amber-50));
+    --rbn-warning-text:      var(--warning-text, var(--rbn-amber-700));
+    --rbn-danger-subtle:     var(--danger-subtle, var(--rbn-red-50));
+    --rbn-danger-text:       var(--danger-text, var(--rbn-red-700));
+    --rbn-danger-solid:      var(--danger-solid, var(--rbn-red-600));       /* beyaz yazı ile AA (4.8:1) */
+    --rbn-danger-solid-hover: var(--danger-solid-hover, var(--rbn-red-700));
+    --rbn-accent-subtle:     var(--accent-subtle, var(--rbn-amber-50));
+    --rbn-accent-text:       var(--accent-text, var(--rbn-amber-700));
+    --rbn-bg-ghost-hover:    var(--bg-ghost-hover, var(--rbn-bg-surface-subtle));
+
+    /* 📦 Yerleşim ve form belirteçleri */
+    --rbn-container-max:     var(--container-max, 1200px);
+    --rbn-container-max-lg:  var(--container-max-lg, 1360px);
+    --rbn-input-font:        var(--font-input, var(--rbn-font-mono));
 }
 

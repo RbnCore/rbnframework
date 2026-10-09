@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Support\Bridges\Helpers\Library\Version;
 /**
  * MasterProjectsRepository - Master Projects Data Access & Query Repository 🌍🏛️⚓
  * 
- * RBN 3.5 Masterpiece: Enterprise Repository Pattern for Master Projects.
+ * RBN Framework: Enterprise Repository Pattern for Master Projects.
  * Located strictly under Core\Database\Repositories\Master for clean architecture.
  * 
  * @property \Rbn\Framework\Core\Database\Models\Master\MasterProjectsModel $masterProjectsModel

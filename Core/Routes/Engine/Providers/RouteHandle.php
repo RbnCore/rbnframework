@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseServiceInterface;
 /**
  * RouteHandle - Contextual Route Assistant ($this->Route) 🛡️🛣️
  * 
- * RBN 3.0: High-performance controller assistant. Interface-driven and trait-free.
+ * High-performance controller assistant. Interface-driven and trait-free.
  * Synchronized with the official HTTP Request, Response, and Alert engines.
  */
 class RouteHandle extends BaseService implements RouteHandleInterface
@@ -74,7 +74,7 @@ class RouteHandle extends BaseService implements RouteHandleInterface
     }
 
     /**
-     * Masterpiece Result Handler 🧩🎻
+     * RBN Framework Result Handler 🧩🎻
      * Automatically coordinates with Alert and Response engines based on request context.
      * Optionally supports 'method' guard before processing result.
      */

@@ -15,7 +15,7 @@ use Rbn\Framework\Core\Support\Definitions\Render\AssetConvention;
 /**
  * RedirectManager - Extensible Request & URL Normalization Engine 🌐🔄⚓
  * 
- * RBN 3.5 Masterpiece: Evaluates and handles web redirects using an extensible rule pipeline.
+ * RBN Framework: Evaluates and handles web redirects using an extensible rule pipeline.
  * Collects modifications from all rules and performs exactly ONE single 301 redirect.
  */
 class RedirectManager extends BaseManager
@@ -192,7 +192,7 @@ class RedirectManager extends BaseManager
     }
 
     /**
-     * Rule: Redirect staging/dev domains (e.g. *.rbncore.tr or non-canonical hosts) directly to official primary domain home/URL 🛡️🏠
+     * Rule: Redirect staging/dev domains (e.g. *.project.tr or non-canonical hosts) directly to official primary domain home/URL 🛡️🏠
      */
     protected function enforceCanonicalDomain(): void
     {
@@ -234,27 +234,46 @@ class RedirectManager extends BaseManager
                 || in_array($currentHost, \Rbn\Framework\Core\System\Kernel\Base\PreBoot::LOCAL_HOST_ALLOWLIST, true);
         }
 
-        // [SEO-ROBOTS-SITEMAP-301] APEX `rbncore.tr` DALI KALDIRILDI.
+        // [SEO-ROBOTS-SITEMAP-301] APEX `project.tr` DALI KALDIRILDI.
         //
-        // SORUN: `str_ends_with($currentHost, '.rbncore.tr')` alt-dizge kontrolu
-        // apex'i ZATEN yakalamaz. `|| $currentHost === 'rbncore.tr'` eklenince
+        // SORUN: `str_ends_with($currentHost, '.project.tr')` alt-dizge kontrolu
+        // apex'i ZATEN yakalamaz. `|| $currentHost === 'project.tr'` eklenince
         // apex de "kanonik disi (staging) host" sayildi ve asagidaki blok
-        // `$this->path = '/'` yazdigindan `rbncore.tr` uzerindeki TUM yollar
+        // `$this->path = '/'` yazdigindan `project.tr` uzerindeki TUM yollar
         // (robots.txt, sitemap.xml, gercek sayfalar, sahte yollar) 301 -> `/`
         // oldu. Canli kanit (yalniz GET, 05.10.2026):
-        //   /robots.txt  -> 301 Location: https://rbncore.tr/  (g├Âvde 0 bayt)
-        //   /sitemap.xml -> 301 Location: https://rbncore.tr/ (g├Âvde 0 bayt)
+        //   /robots.txt  -> 301 Location: https://project.tr/  (g├Âvde 0 bayt)
+        //   /sitemap.xml -> 301 Location: https://project.tr/ (g├Âvde 0 bayt)
         //   /referanslar -> 301 -> /   (sitede GERCEKTEN var olan sayfa)
         // Arama motoru robots.txt/sitemap.xml'e ULASAMIYOR.
         //
-        // NEDEN YANLIS: `rbncore.tr` staging alt domaini DEGIL, `rbncore`
+        // NEDEN YANLIS: `project.tr` staging alt domaini DEGIL, `project`
         // projesinin KANONIK alan adidir (canli `projects` satiri id=4:
-        // project_key=`rbncore`, domain=`rbncore.tr`). Kural kendi kanonik alan
+        // project_key=`project`, domain=`project.tr`). Kural kendi kanonik alan
         // adini kanonik disi ilan ediyordu.
         //
-        // GERI ALINAN DAVRANIS: alt-dizge dali `.rbncore.tr` OLDUGU GIBI
-        // KORUNUR; `email.rbncore.tr` gibi alt alan adlari ana sayfaya 301'lemeye
+        // GERI ALINAN DAVRANIS: alt-dizge dali `.project.tr` OLDUGU GIBI
+        // KORUNUR; `email.project.tr` gibi alt alan adlari ana sayfaya 301'lemeye
         // DEVAM eder (kasintili kural). Yalnizca apex muaf kalir.
+        //
+        // [FW-REDIRECT-SUBDOMAIN] ROUTEMAP'TE KAYITLI SITE HOST'U MUAF.
+        //
+        // SORUN: `email.project.tr` staging alt alanı DEĞİL; aktif projenin
+        // `project-routemap.php` `view_mapping` kaydında `domain` olarak
+        // yazılı GERÇEK bir site. Yukarıdaki alt-dizge dalı onu staging sayıp
+        // `$this->path = '/'` yazıyordu: canlıda `/user/app`, `POST /auth/login`,
+        // `/robots.txt` dahil HER yol 301 -> `/` (08.10.2026, yalniz GET/POST
+        // HTTP kodu ölçüldü). Yerelde `.test` muafiyeti yüzünden görünmedi.
+        //
+        // ÇÖZÜM: host sabiti / istisna listesi YAZILMADI. Kaynak, framework'ün
+        // mevcut site çözücüsü `getRouteConfig(<aktif project_key>, 'domain')`.
+        // İstek host'u aktif sitenin routemap alan adına TAM eşitse bu host
+        // kanoniktir; staging/kanonik-dışı dalı uygulanmaz. Routemap'te olmayan
+        // alt alanlar (ör. `staging.project.tr`) 301 almaya DEVAM eder.
+        if ($this->hostRoutemapSitesiMi($currentHost, (string) ($projectData['project_key'] ?? ''))) {
+            return;
+        }
+
         $isRbnCore = str_ends_with($currentHost, '.rbncore.tr') && !$isLocalDev;
 
         if ($isRbnCore || (!$isLocalDev && $currentHost !== $officialDomain && $currentHost !== ('www.' . $officialDomain))) {
@@ -262,6 +281,42 @@ class RedirectManager extends BaseManager
             $this->path = '/';
             $this->queryString = '';
         }
+    }
+
+    /**
+     * [FW-REDIRECT-SUBDOMAIN] Istek host'u, aktif sitenin routemap kaydindaki
+     * `domain` ile TAM esit mi?
+     *
+     * Okuma `getRouteConfig()` uzerinden yapilir (yeni okuyucu yok). Kiyaslama
+     * kanonik alan adiyla AYNI normalize merkezinden gecer (sema, port, buyuk
+     * harf, sondaki nokta). Routemap okunamazsa FAIL-CLOSED: muaf sayilmaz,
+     * eski davranis (staging 301) korunur.
+     */
+    protected function hostRoutemapSitesiMi(string $currentHost, string $projectKey): bool
+    {
+        if ($currentHost === '' || $projectKey === '') {
+            return false;
+        }
+
+        try {
+            $siteDomain = strtolower((string) ($this->getRouteConfig($projectKey, 'domain') ?? ''));
+        } catch (\Throwable $e) {
+            return false;
+        }
+
+        if ($siteDomain === '') {
+            return false;
+        }
+
+        if (str_starts_with($siteDomain, 'http://') || str_starts_with($siteDomain, 'https://')) {
+            $siteDomain = parse_url($siteDomain, PHP_URL_HOST) ?? $siteDomain;
+        }
+
+        $siteDomain = class_exists(\Rbn\Framework\Core\System\Kernel\Base\PreBoot::class)
+            ? \Rbn\Framework\Core\System\Kernel\Base\PreBoot::normalizeHost($siteDomain)
+            : rtrim(strtolower($siteDomain), '.');
+
+        return $siteDomain !== '' && $currentHost === $siteDomain;
     }
 
     /**
@@ -315,10 +370,43 @@ class RedirectManager extends BaseManager
             return;
         }
 
-        $lowerPath = mb_strtolower($this->path, 'UTF-8');
+        $lowerPath = self::lowercasePath($this->path);
         if ($this->path !== $lowerPath) {
             $this->path = $lowerPath;
         }
+    }
+
+    /**
+     * Ham (yüzde kodlu) yolu küçük harfe indirir; kodlu diziler ÇÖZÜLEREK küçültülür.
+     *
+     * Eski hali `mb_strtolower()`'ı ham yola uyguluyordu: `%C3%9C` (Ü) yalnız onaltılık
+     * harfleri küçülüp `%c3%9c` oluyordu (harf küçülmüyordu) ve yüzde kodlamasını
+     * RFC 3986 §6.2.2.1 gereği büyük harfe normalleştiren istemci/CDN ile sonsuz 301
+     * döngüsü doğuyordu. Şimdi: küçültme kodu değiştirmiyorsa dizi AYNEN kalır; değiştiriyorsa
+     * büyük harfli kodla (`%C3%BC`) yeniden yazılır. Geçersiz UTF-8 dokunulmadan bırakılır.
+     */
+    public static function lowercasePath(string $path): string
+    {
+        $lower = static function (string $text): ?string {
+            if (!mb_check_encoding($text, 'UTF-8')) {
+                return null;
+            }
+            // Türkçe büyük İ: `mb_strtolower` "i + U+0307" üretir; yolda düz `i` istenir.
+            return mb_strtolower(str_replace('İ', 'i', $text), 'UTF-8');
+        };
+
+        return (string) preg_replace_callback(
+            '/((?:%[0-9A-Fa-f]{2})+)|([^%]+)/',
+            static function (array $m) use ($lower): string {
+                if ($m[1] !== '') {
+                    $decoded = rawurldecode($m[1]);
+                    $low = $lower($decoded);
+                    return ($low === null || $low === $decoded) ? $m[1] : rawurlencode($low);
+                }
+                return $lower($m[2]) ?? $m[2];
+            },
+            $path
+        );
     }
 
     /**

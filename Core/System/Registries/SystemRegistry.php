@@ -16,7 +16,7 @@ use Rbn\Framework\Core\Base\Data\Traits\Config\Engine\DiscoveryConfigTrait;
 /**
  * SystemRegistry - The Framework Core Population Office 🏛️⚓🛰️
  * 
- * RBN 3.5 "Masterpiece": [PENTARIC SATELLITE ARCHITECTURE] 🌌
+ * RBN Framework: [PENTARIC SATELLITE ARCHITECTURE] 🌌
  * Now refactored into categoric satellite maps for scalability and core purity.
  * Orchestrates Access, Logic, Physical, Resource and Ecosystem layers.
  */
@@ -34,8 +34,8 @@ class SystemRegistry extends BaseConfig
         DiscoveryConfigTrait;
 
     /**
-     * SOVEREIGN BUNDLE LIST 🚀🎯
-     * RBN 3.5: Centralized list of core modules for global discovery.
+     * RBN Framework BUNDLE LIST 🚀🎯
+     * RBN Framework: Centralized list of core modules for global discovery.
      */
     public static function sovereignBundles(): array
     {
@@ -52,7 +52,7 @@ class SystemRegistry extends BaseConfig
 
     /**
      * UNIFIED REGISTRATION ORCHESTRATOR 🏛️⚓🛰️
-     * RBN 3.5 Masterpiece: Merges specialized satellite maps into one global truth.
+     * RBN Framework: Merges specialized satellite maps into one global truth.
      * Memoized per request execution context for 0ms repeated speed.
      */
     public function registerMap(): array
@@ -73,8 +73,8 @@ class SystemRegistry extends BaseConfig
             $this->renderMap()     // 🛰️🎨 Render Hub
         );
 
-        // 🎼 RBN 3.5: [SOVEREIGN HIERARCHICAL AUTO-MERGE] 🏙️🛰️⚓
-        // Önce Framework (Sovereign), sonra Proje paketlerini BaseService üzerinden otonom olarak birleştir.
+        // 🎼 RBN Framework: [RBN Framework HIERARCHICAL AUTO-MERGE] 🏙️🛰️⚓
+        // Önce Framework (RBN Framework), sonra Proje paketlerini BaseService üzerinden otonom olarak birleştir.
         $moduleService = \Rbn\Framework\Core\Base\Services\BaseService::get()->service('module');
         if ($moduleService) {
             // 1. Framework Core Bundles
@@ -84,7 +84,7 @@ class SystemRegistry extends BaseConfig
             $map = array_merge_recursive($map, $moduleService->registerBundles('map'));
         }
 
-        // 🎼 RBN 3.5: [SOVEREIGN VIRTUAL REGISTRATION] 🏙️🛰️⚓
+        // 🎼 RBN Framework: [RBN Framework VIRTUAL REGISTRATION] 🏙️🛰️⚓
         // Aktif Controller'ın modül verilerini de ekle (Geriye dönük uyumluluk için)
         $controller = \Rbn\Framework\Core\Base\Services\BaseService::get()?->activeController();
         $moduleData = $controller->moduleData ?? null;

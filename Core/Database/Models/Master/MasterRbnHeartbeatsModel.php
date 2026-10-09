@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseModelInterface;
 /**
  * MasterRbnHeartbeatsModel - System Telemetry Hub 💓🛰️
  * 
- * RBN 3.5: Targeted model for framework heartbeat signaling on the master db.
+ * RBN Framework: Targeted model for framework heartbeat signaling on the master db.
  * 
  * @property string $heartbeat_key
  * @property string $last_beat

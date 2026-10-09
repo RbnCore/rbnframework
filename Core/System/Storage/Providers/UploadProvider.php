@@ -17,7 +17,7 @@ class UploadProvider extends BaseStorageProvider
     protected function getStorageDir(): string
     {
         $projectKey = $this->projectKey ?: project_key() ?: 'default';
-        // 🎯 RBN 3.0 Standard: Project Root Uploads (Isolated by projectKey)
+        // 🎯 Project Root Uploads (Isolated by projectKey)
         return Paths::project()->uploads($projectKey);
     }
 }

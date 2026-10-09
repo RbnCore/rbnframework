@@ -91,7 +91,7 @@ class DatabaseHandlers extends BaseCommand
         try {
             $db = Database::getInstance();
             
-            // 🧬 RBN 3.5: Detect Active Strategy (Master or Project)
+            // 🧬 RBN Framework: Detect Active Strategy (Master or Project)
             $activeConn = $db->connection();
             $category = ($activeConn === 'database_master') ? 'database_master' : 'database_project';
             

@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 
 /**
  * SyshubCronProvider - Syshub Cron Veri Sağlayıcısı ⚙️🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * @property \Rbn\Framework\Core\Database\Models\Master\MasterCronJobsModel $masterCronJobModel
  * @property \Rbn\Framework\Core\Database\Models\Project\CronLogsModel $cronLogModel
  */

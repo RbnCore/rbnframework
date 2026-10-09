@@ -14,7 +14,10 @@ declare(strict_types=1);
  * deger icermez.
  *
  * OKUMA: \Rbn\Framework\Core\System\Config\Secrets (TEK okuyucu) - fail-closed.
- *   Secrets::masterDb() / ::smtp() / ::cpanel() / ::api('iyzico') / ::appKey()
+ *   Secrets::masterDb() / ::smtp() / ::cpanel() / ::api('iyzico') / ::appKey() / ::app()
+ *
+ * ORTAM DEGISKENI YOK: framework isletim sistemi ortam degiskeni okumaz.
+ * Ortam bayragi dahil butun anahtarlar BU dosyadadir (`app` bolumu).
  */
 
 return [
@@ -100,6 +103,47 @@ return [
     //   php -r "echo bin2hex(random_bytes(32)), PHP_EOL;"
     // ---------------------------------------------------------------------
     'app_key' => 'CHANGE_ME', // ornek: 64 karakterlik onaltilik metin
+
+    // ---------------------------------------------------------------------
+    // app - Ortam bayragi ve calisma ayarlari (sir DEGIL; bolumun TAMAMI opsiyonel)
+    // Okuyan: Secrets::app()  (sema: Definitions/SecretsSchema.php APP_DEFAULTS)
+    // Deger tipi PHP tipidir: true/false, tam sayi, metin. Tipi tutmayan ya da
+    // izinli olmayan deger GUVENLI varsayilana duser ve loglanir.
+    // Yazilmayan alan asagidaki varsayilani alir.
+    // ---------------------------------------------------------------------
+    'app' => [
+        // Calisma ortami: 'production' (canli) | 'development' (yerel makine).
+        // YAZILMAZSA ya da CHANGE_ME kalirsa 'production' kabul edilir ve loglanir.
+        // Okuyan: PreBoot::isProductionDeclared()
+        'environment' => 'CHANGE_ME', // ornek: production
+
+        // Operatorun acik hata ayiklama kapisi. true = uretimde bile debug ACIK.
+        // Varsayilan false. Okuyan: PreBoot::detectEnvironment()
+        'debug' => false,
+        'dev' => false,
+
+        // Koruma katmani hata verirse istegi ENGELLE (true, guvenli) mi gecir (false) mi.
+        // Okuyan: SystemGuardHandler::resolveFailClosed()
+        'guard_failclosed' => true,
+
+        // Tanilama loglarinin saatlik kisiti. false = kisit yok (yalniz olcum/test).
+        // Okuyan: LogThrottle
+        'log_throttle' => true,
+
+        // Proje DB profili: '' (otomatik) | 'local' | 'production'. Sunucu cron'u icin acik karar.
+        // Okuyan: ProjectDbProfileResolver::activeProfile()
+        // 'db_profile' => 'CHANGE_ME', // ornek: production
+
+        // Eski gomulu tuzla sifrelenmis veriyi okumak icin GECICI onay (varsayilan false).
+        // true ise ust duzey 'legacy_salt' da tanimli olmalidir. Okuyan: CryptoHelper
+        'allow_legacy_salt' => false,
+
+        // Yalniz TEST: sroweb Telegram test router'inda mesaj basina gecikme (ms).
+        // 'tg_send_delay_ms' => 0,
+    ],
+
+    // Eski gomulu tuz (legacy, SIR). Yalniz app.allow_legacy_salt = true iken okunur.
+    // 'legacy_salt' => 'CHANGE_ME',
 
     // ---------------------------------------------------------------------
     // api - Harici servis API kimlik bilgileri (odeme, SMS, e-posta saglayici)

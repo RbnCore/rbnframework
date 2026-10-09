@@ -1,7 +1,7 @@
 /**
  * rbnService.js — Global Networking & AJAX Wrapper
  * 
- * RBN Framework 3.0 "Masterpiece" Networking Layer.
+ * RBN FrameworkNetworking Layer.
  * PHP AjaxResponseTrait ve AlertService ile tam uyumlu çalışır.
  * 
  * version 1.0.0 (Native Fetch Based)
@@ -150,7 +150,34 @@ window.RbnService = window.RbnService || {
             });
 
             if (!response.ok) {
-                throw new Error(`HTTP Hata! Statü: ${response.status}`);
+                // FW-096-C6: hata gövdesi (JSON) atılmaz; code/fields/new_token okunabilir.
+                // Geriye uyumlu: varsayılan hâlâ Error fırlatır (message değişmedi), gövde error.response / .code / .fields / .status'ta.
+                // { rawErrors: true } verilirse fırlatmaz, gövdeyi { ...body, success:false, status } olarak döndürür.
+                let body = null;
+                try {
+                    const ct = response.headers.get('content-type') || '';
+                    if (ct.includes('json')) body = await response.json();
+                } catch (_) { body = null; }
+
+                if (body && body.new_token && body.new_token.token) {
+                    const t = body.new_token.token;
+                    const meta = document.querySelector('meta[name="csrf-token"]');
+                    if (meta) meta.setAttribute('content', t);
+                    document.querySelectorAll('input[name="csrf_token"]').forEach(input => { input.value = t; });
+                    if (window.APP_CONFIG) window.APP_CONFIG.csrfToken = t;
+                }
+
+                if (options.rawErrors === true) {
+                    return Object.assign({ success: false }, body || {}, { status: response.status });
+                }
+
+                const httpErr = new Error(`HTTP Hata! Statü: ${response.status}`);
+                httpErr.status = response.status;
+                httpErr.response = body;
+                httpErr.code = body && body.code !== undefined ? body.code : null;
+                httpErr.fields = body && body.fields ? body.fields : null;
+                httpErr.newToken = body && body.new_token ? body.new_token : null;
+                throw httpErr;
             }
 
             // Response format kontrolü (json, text, blob)
@@ -165,7 +192,7 @@ window.RbnService = window.RbnService || {
                 result = await response.json();
             }
 
-            // [RBN 3.5] Auto-refresh CSRF tokens on page if returned by the server
+            // [RBN Framework] Auto-refresh CSRF tokens on page if returned by the server
             if (result && result.new_token && result.new_token.token) {
                 const newToken = result.new_token.token;
                 const meta = document.querySelector('meta[name="csrf-token"]');
@@ -182,10 +209,10 @@ window.RbnService = window.RbnService || {
             if (options.silent !== true && format === 'json') {
                 this._handleResponse(result, options);
 
-                // [RBN 3.1] Force Reject if server returns an error type (consistency for .catch users)
+                // Force Reject if server returns an error type (consistency for .catch users)
                 if (result.success === false || result.type === 'error') {
                     const err = new Error(result.message || 'Bir sunucu hatası oluştu.');
-                    err.isHandled = true; // [RBN 3.5] Hata zaten _handleResponse ile ekrana basıldı işareti
+                    err.isHandled = true; // [RBN Framework] Hata zaten _handleResponse ile ekrana basıldı işareti
                     throw err;
                 }
             }
@@ -217,7 +244,7 @@ window.RbnService = window.RbnService || {
         const redirect = res.redirect || null;
         const display = res.display || 'toast';
 
-        // Durum Mesajını Göster (RBN 3.1 Global Estetik Standart)
+        // Durum Mesajını Göster (RBN Global Estetik Standart)
         if (message) {
             const title = type === 'success' ? 'Başarılı' : (type === 'error' ? 'Hata' : 'Bilgi');
 
@@ -228,7 +255,7 @@ window.RbnService = window.RbnService || {
                 RbnAlert.show(type, title, message, { display: 'center' });
             }
 
-            // [RBN 3.5 Double-Toast Prevention] 🛡️
+            // [RBN Framework Double-Toast Prevention] 🛡️
             // Mesaj JS ile gösterildiyse, yönlendirme sonrası tekrar çıkmasın diye çerezi temizliyoruz.
             document.cookie = "rbn_alert=; Max-Age=-99999999; path=/;";
         }

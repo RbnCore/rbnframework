@@ -14,7 +14,7 @@ use ReflectionClass;
 /**
  * ModuleDataDriver - Structural Metadata & Attribute Resolution Engine 🏺🏙️⚓
  * 
- * RBN 3.5 Masterpiece: Responsible for resolving and merging 
+ * RBN Framework: Responsible for resolving and merging
  * module structural metadata from physical ModuleData manifests and Attributes.
  * Encapsulated purely inside Core/System/Discovery/Engine/Drivers cluster.
  */
@@ -43,7 +43,7 @@ class ModuleDataDriver
 
     /**
      * Resolve module identity (Name & Source) from a Class Name 🕵️‍♂️🛰️⚓
-     * RBN 3.5: Converts a ModuleData class into a standard Identity Pack.
+     * RBN Framework: Converts a ModuleData class into a standard Identity Pack.
      */
     public function resolveFromClass(string $bundleClass): array
     {
@@ -53,7 +53,7 @@ class ModuleDataDriver
 
         $reflect = $this->getReflection($bundleClass);
 
-        // 🎼 RBN 3.5: [SOVEREIGN DISCOVERY] - Read from #[Bundle] Attribute 🧬⚓
+        // 🎼 RBN Framework: [RBN Framework DISCOVERY] - Read from #[Bundle] Attribute 🧬⚓
         $attributes = $reflect->getAttributes(\Rbn\Framework\Core\Base\Attributes\Bundle::class);
         if (!empty($attributes)) {
             $attr = $attributes[0]->newInstance();
@@ -89,13 +89,13 @@ class ModuleDataDriver
 
         $info = $this->getBaseDefaults($module);
 
-        // ⚓ RBN 3.5 [SOVEREIGN REDIRECT] 🏛️🛰️⚓
+        // ⚓ RBN Framework [RBN Framework REDIRECT] 🏛️🛰️⚓
         if (strtolower($module) === 'dashboard') {
             $module = 'rbnadmin';
             $moduleSource = 'Suite';
         }
 
-        // 🎼 RBN 3.5: [SOVEREIGN DISCOVERY] 🎯🛰️⚓
+        // 🎼 RBN Framework: [RBN Framework DISCOVERY] 🎯🛰️⚓
         $activeController = $this->rbn?->activeController();
         $targetReflection = null;
 
@@ -136,7 +136,7 @@ class ModuleDataDriver
             }
         }
 
-        // 🎻 [DATA SYNC] - SOVEREIGN FALLBACK 🛡️✨
+        // 🎻 [DATA SYNC] - RBN Framework FALLBACK 🛡️✨
         if (empty($info['data'])) {
             $context = Paths::module($module, $moduleSource);
             $baseNamespace = $context->namespaces()->getBase();

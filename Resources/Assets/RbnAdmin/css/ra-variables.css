@@ -54,7 +54,7 @@
     --rbn-alert-btn-danger-bg: var(--rbn-craft-rose, #be123c);   /* Gül Kurusu Kırmızı (Terracotta Rose) */
     --rbn-alert-btn-confirm-bg: var(--rbn-craft-russet, #c56a3c);/* Sıcak Terracotta Onay Butonu */
 
-    /* 🏛️ Sovereign Modal Craft Tokens */
+    /* 🏛️ RBN Framework Modal Craft Tokens */
     --rbn-modal-bg: var(--rbn-admin-surface, #fbf9f5);
     --rbn-modal-header-bg: rgba(197, 106, 60, 0.05);
     --rbn-modal-footer-bg: var(--rbn-admin-canvas, #f3e9d8);

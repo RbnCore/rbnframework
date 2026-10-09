@@ -9,7 +9,7 @@ use Rbn\Framework\Bundles\Internal\Syshub\Controllers\SyshubController;
 
 /**
  * RateLimitsController - IP Tabanlı Hız Sınırlama Yönetimi 🛡️⚡
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 #[SubModule(
     entity: 'security/ratelimits', // 🎼 Removed hyphen to match the new route
@@ -23,7 +23,7 @@ class RateLimitsController extends SyshubController
      */
     public function index(): void
     {
-        // 🎼 Masterpiece: Veriyi otonom provider üzerinden (GeoIP zenginleştirilmiş olarak) çekiyoruz
+        // 🎼 RBN Framework: Veriyi otonom provider üzerinden (GeoIP zenginleştirilmiş olarak) çekiyoruz
         $limits = $this->service->rateLimit()->getRecords();
 
         $paginator = $this->paginate($limits, 10);
@@ -69,7 +69,7 @@ class RateLimitsController extends SyshubController
     {
         $result = $this->service->rateLimit()->clearAll();
 
-        // 🎼 Masterpiece: Explicit redirect to maintain security context 🛰️⚓
+        // 🎼 RBN Framework: Explicit redirect to maintain security context 🛰️⚓
         $this->handleResult($result, 'Tüm kayıtlar', 'security/ratelimits');
     }
 }

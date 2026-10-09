@@ -1,6 +1,6 @@
 <?php
 /**
- * RbnAdmin Sovereign Component - Autonomous Unified Page Banner & Header 🏛️💎
+ * RbnAdmin RBN Framework Component - Autonomous Unified Page Banner & Header 🏛️💎
  * Hallmark · component: ra-hero-banner · genre: terracotta-editorial
  */
 

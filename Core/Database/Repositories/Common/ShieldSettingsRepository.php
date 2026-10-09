@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Data\BaseRepository;
 /**
  * ShieldSettingsRepository - The DB-Backed Security Configuration Repository 🛡️🏛️⚓
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Centralizes retrieval and management of security and system-wide flags from rbncore_common.
  * 
  * @property \Rbn\Framework\Core\Database\Models\Common\CmSysSettingsShieldModel $shieldSettingModel

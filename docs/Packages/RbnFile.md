@@ -1,6 +1,6 @@
 # Packages/RbnFile — dosya yükleme, doğrulama, görsel işleme, dışa/içe aktarma
 
-> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Packages/RbnFile/` — **8 `*.php`** (6 `Handlers/` + 2 `Services/`).
 > **Envanter:** 8 dosyanın **8'i** aşağıda anlatıldı.
 

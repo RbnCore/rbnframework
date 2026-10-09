@@ -1,10 +1,10 @@
 /* ==========================================================================
-   RBN FRAMEWORK: SOVEREIGN TERMINAL DESIGN ENGINE (rbn-terminal.css) 🖥️⚡
+   RBN Framework: TERMINAL DESIGN ENGINE (rbn-terminal.css) 🖥️⚡
    100% Token-Driven, Pure JetBrains Mono & Strict .rbn-terminal-* Standard
    ========================================================================== */
 
 :root {
-    /* 🖥️ Terminal Sovereign Root Tokens */
+    /* 🖥️ Terminal RBN Framework Root Tokens */
     --rbn-term-bg: #0d1117;
     --rbn-term-header: #161b22;
     --rbn-term-text: #e6edf3;

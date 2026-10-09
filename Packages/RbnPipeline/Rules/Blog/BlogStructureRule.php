@@ -10,7 +10,7 @@ use Rbn\Framework\Packages\RbnPipeline\Contracts\PromptRuleInterface;
 /**
  * BlogStructureRule - Enforces standard HTML structure, length, quotes, and FAQs for blog articles 📝🏗️
  * Location: RbnPipeline/Rules/Blog/BlogStructureRule.php
- * RBN 3.5 Sovereign Framework Standards.
+ * RBN Framework Framework Standards.
  */
 class BlogStructureRule extends BaseComponent implements PromptRuleInterface
 {

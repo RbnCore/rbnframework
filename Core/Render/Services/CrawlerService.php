@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Services\BaseService;
 /**
  * CrawlerService - Unified Search Engine Indexing & Discovery Orchestrator 🎼🛰️🤖🗺️⚓
  * 
- * RBN 3.5 Masterpiece: Centralized service for management of Robots directives and Sitemaps.
+ * RBN Framework: Centralized service for management of Robots directives and Sitemaps.
  * Coordinates between Context Handlers and the Crawler Provider Hub.
  */
 class CrawlerService extends BaseService

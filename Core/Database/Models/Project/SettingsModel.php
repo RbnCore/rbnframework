@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Data\BaseModel;
 /**
  * SettingsModel - Framework Central Settings Hub ⚙️🧬
  * 
- * RBN 3.5: Modular service component for project-level configurations.
+ * RBN Framework: Modular service component for project-level configurations.
  * 
  * @property int    $id             [PRIMARY]
  * @property int    $group_id       [MECBUR - FOREIGN]

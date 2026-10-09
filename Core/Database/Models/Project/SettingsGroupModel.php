@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Data\BaseModel;
 /**
  * SettingsGroupModel - Framework Central Setting Groups 📂🧬
  * 
- * RBN 3.5: Modular service component for organizing project settings.
+ * RBN Framework: Modular service component for organizing project settings.
  * 
  * @property int    $id
  * @property string $group_key

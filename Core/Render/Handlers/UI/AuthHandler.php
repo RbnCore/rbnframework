@@ -7,16 +7,16 @@ use Rbn\Framework\Bundles\RbnSuite\RbnAuth\Models\AuthIdentity;
 use Rbn\Framework\Core\Support\Definitions\System\FrameworkIdentity;
 
 /**
- * AuthHandler - Sovereign Data Preparation for Identity Suites 🛰️🔐⚓
+ * AuthHandler - RBN Framework Data Preparation for Identity Suites 🛰️🔐⚓
  * 
- * RBN 3.5 "Masterpiece" Architecture.
+ * RBN Framework Architecture.
  * Orchestrates branding, SEO and layout assets autonomously via ModuleData.
  * Lives in the Render Layer to maintain layer cohesion.
  */
 class AuthHandler extends BaseRender
 {
     /**
-     * Prepares the view data using sovereign metadata from the active module.
+     * Prepares the view data using RBN Framework metadata from the active module.
      */
     public function prepare(string $type, ?string $view, array $options = []): array
     {
@@ -24,7 +24,7 @@ class AuthHandler extends BaseRender
         $data['appContext'] = (string) ($this->context ?? 'auth');
         $data['view']       = $view;
 
-        // 🎼 1. Sovereign Discovery (The Soul) 🧠🛰️⚓
+        // 🎼 1. RBN Framework Discovery (The Soul) 🧠🛰️⚓
         // Verileri doğrudan AuthIdentity sabitlerinden çekiyoruz (Hata payı sıfır).
         $identity = AuthIdentity::AUTH_IDENTITY;
         $configs  = AuthIdentity::VIEW_MAP;
@@ -39,7 +39,7 @@ class AuthHandler extends BaseRender
         $defaultInfos = $this->moduleData ? $this->moduleData->get('configs.default_info') : $defaults;
         $info = (array) ($defaultInfos[$viewKey] ?? ($defaults[$viewKey] ?? []));
         
-        // 🎼 4. Standard Branding Mapping (Sovereign Injection) ⚖️⚓
+        // 🎼 4. Standard Branding Mapping (RBN Framework Injection) ⚖️⚓
         $seoResolver = $this->resolver('seo');
         
         // Slogan ve Marka verilerini mühürlüyoruz
@@ -53,7 +53,7 @@ class AuthHandler extends BaseRender
         $projectKey = function_exists('active_project_key') ? active_project_key() : 'default';
         $data['siteLogo'] = !empty($site['company-logo']) ? $seoResolver->resolveAsset("logo-{$projectKey}.svg") : null;
 
-        // 5. Sovereign Modular SEO Integration 🏺🗺️⚓
+        // 5. RBN Framework Modular SEO Integration 🏺🗺️⚓
         $actionTitle = (string) ($info['title'] ?? 'Erişim');
         $pageTitle   = (string) ($data['pageTitle'] ?? $identity['seo']['title'] ?? ($actionTitle . ' | ' . $data['siteName']));
         $pageDesc    = (string) ($data['pageDesc'] ?? $identity['seo']['description'] ?? '');

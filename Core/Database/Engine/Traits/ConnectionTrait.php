@@ -1,6 +1,6 @@
 <?php
 /**
- * RBN Framework 3.0: High-Performance Database Engine 🎻⚓
+ * High-Performance Database Engine 🎻⚓
  */
 namespace Rbn\Framework\Core\Database\Engine\Traits;
 
@@ -176,7 +176,7 @@ trait ConnectionTrait
             return $this->connections[$name];
         }
 
-        // [RBN 3.5] RECURSION GUARD 🛡️⚓⚖️
+        // [RBN Framework] RECURSION GUARD 🛡️⚓⚖️
         if (isset($this->resolving[$name])) {
             // NOT: metin interpolasyonu (`"{$name}"`) KULLANILMAZ — kabul
             // testlerinin govde cikarici (`kabul_fonksiyonGovdesi`) su parcalar-

@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\Base\Services\Traits\Provider\Engine;
 /**
  * ReadProviderTrait - Strategic Data Discovery for Providers 🔎🛰️
  * 
- * RBN 3.5: Proxies Model Read traits with added relationship management.
+ * RBN Framework: Proxies Model Read traits with added relationship management.
  */
 trait ReadProviderTrait
 {

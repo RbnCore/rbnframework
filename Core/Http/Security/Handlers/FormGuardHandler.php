@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Support\Bridges\Helpers\Library\LogThrottle;
 /**
  * FormGuardHandler - The Master Form Security Orchestrator 🛡️⚖️
  * 
- * RBN 3.5 "Masterpiece": Atomic actor responsible for running
+ * RBN Framework: Atomic actor responsible for running
  * multi-layered security protocols on form submissions.
  */
 class FormGuardHandler extends BaseComponent
@@ -27,7 +27,7 @@ class FormGuardHandler extends BaseComponent
     private const KADEMELI_CEZA_DAKIKA = [15, 60, 1440, 1440];
 
     /* ==========================================================================
-       [F-10 / F-14 · 2026-10-04 · zeki-6eb7f5] LOG-ONLY SAYAÇLAR (GÖZLEM)
+       [F-10 / F-14 · 2026-10-04 · team member] LOG-ONLY SAYAÇLAR (GÖZLEM)
        ==========================================================================
        AMAÇ: "ölçmeden aç/kapat" kuralını mümkün kılmak. Bu sayaçlar **hiçbir
        kararı değiştirmez**: reddetmez, geçirmez, hız sınırı uygulamaz, ban
@@ -147,7 +147,7 @@ class FormGuardHandler extends BaseComponent
     public function audit(array $data, array $options = []): array
     {
         // 0. High-Level Admin & Developer Bypass (Centralized Shield Rules 👮‍♂️)
-        // [FW-F08 · 2026-10-03 · zeki-6eb7f5] Bu muafiyet ARTIK CSRF'i KAPSAMAZ.
+        // [FW-F08 · 2026-10-03 · team member] Bu muafiyet ARTIK CSRF'i KAPSAMAZ.
         // Onceki halde erken `return ['success' => true]` 6. adimdaki CSRF kontrolune
         // hic ugramiyordu; yani `developer`/`admin`/`superadmin`/master-developer
         // oturumlari CSRF dogrulamasini tamamen atliyordu (F-08).
@@ -192,7 +192,7 @@ class FormGuardHandler extends BaseComponent
             return ['success' => true];
         }
 
-        // [F-10 · 2026-10-04 · zeki-6eb7f5] LOG-ONLY GÖZLEM: hız sınırı
+        // [F-10 · 2026-10-04 · team member] LOG-ONLY GÖZLEM: hız sınırı
         // uygulanmayan form gönderimi. KARAR DEĞİŞMİYOR — yalnız sayılır.
         // Ölçmeden varsayılan hız sınırı açılamaz; bu sayaç o ölçümün kaynağı.
         if (!($options['rateLimitEnabled'] ?? false) && ($options['logOnlySayac'] ?? true)) {
@@ -270,7 +270,7 @@ class FormGuardHandler extends BaseComponent
 
         // 5. Rate Limit Check (Through IpGuardService)
         //
-        // [F-04 · 2026-10-03 · zeki-6eb7f5] BURADA YALNIZCA "zaten bloklu mu?"
+        // [F-04 · 2026-10-03 · team member] BURADA YALNIZCA "zaten bloklu mu?"
         // kontrolu kalir; sayaci ARTIRAN `recordHit()` 6b'ye (CSRF SONRASI) tasindi.
         // Onceki halde token'i olmayan capraz-site POST'lar da sayaci tuketiyor,
         // saldirgan kurbanin IP'sinden girisini kilitleyebiliyordu (DOS). Sayacin
@@ -283,7 +283,14 @@ class FormGuardHandler extends BaseComponent
             /** @var \Rbn\Framework\Core\Services\Gatekeepers\IpGuardService $ipGuard */
             $ipGuard = $this->service('ipGuard');
 
-            if ($ipGuard && $ipGuard->isLimitReached($ip, $rateLimitAction)) {
+            // Hız sınırı istenen formda servis çözülemezse istek REDDEDİLİR
+            // (fail-closed); sınır sessizce atlanmaz.
+            if (!$ipGuard) {
+                $this->logRateLimitUnavailable($rateLimitAction);
+                return ['success' => false, 'message' => 'İşlem şu anda gerçekleştirilemiyor. Lütfen biraz sonra tekrar deneyin.'];
+            }
+
+            if ($ipGuard->isLimitReached($ip, $rateLimitAction)) {
                 $remTime = $ipGuard->remainingTime($ip, $rateLimitAction);
                 return ['success' => false, 'message' => "Çok fazla başarısız deneme yaptınız. Lütfen {$remTime} dakika sonra tekrar deneyin."];
             }
@@ -301,7 +308,11 @@ class FormGuardHandler extends BaseComponent
         if ($rateLimitAction !== null) {
             /** @var \Rbn\Framework\Core\Services\Gatekeepers\IpGuardService $ipGuard */
             $ipGuard = $this->service('ipGuard');
-            $ipGuard?->recordHit($ip, $rateLimitAction);
+            if (!$ipGuard) {
+                $this->logRateLimitUnavailable($rateLimitAction);
+                return ['success' => false, 'message' => 'İşlem şu anda gerçekleştirilemiyor. Lütfen biraz sonra tekrar deneyin.'];
+            }
+            $ipGuard->recordHit($ip, $rateLimitAction);
         }
 
         // 7. Injection (XSS) Check
@@ -325,6 +336,21 @@ class FormGuardHandler extends BaseComponent
         }
 
         return ['success' => true, 'data' => $data];
+    }
+
+    /**
+     * Hız sınırı servisi çözülemedi: `security` kanalına yazılır (istek reddedildi).
+     */
+    private function logRateLimitUnavailable(string $action): void
+    {
+        try {
+            $this->logs()->channel('security')->error('RATE_LIMIT_SERVICE_UNAVAILABLE', [
+                'action' => $action,
+                'ip'     => $this->request->ip(),
+            ]);
+        } catch (\Throwable) {
+            error_log('RBN Guvenlik: ipGuard cozulemedi, form reddedildi (' . $action . ')');
+        }
     }
 
     /**
@@ -399,7 +425,7 @@ class FormGuardHandler extends BaseComponent
      */
     private function applyGlobalBlock(string $ip, string $reason, ?int $durationMinutes = null): int
     {
-        // [FW-IPKATMAN-ON · 2026-10-03 · zeki-6eb7f5] LOOPBACK MUAFIYETI.
+        // [FW-IPKATMAN-ON · 2026-10-03 · team member] LOOPBACK MUAFIYETI.
         //
         // KOK NEDEN (FW-KIMLIK-B A-19'da olculdu): bu metod `curl/...` gibi
         // gercekci olmayan User-Agent'larla gelen **yerel** POST'larda calisiyordu
@@ -431,7 +457,7 @@ class FormGuardHandler extends BaseComponent
         $countryCode = $this->service('ipGuard')->countryCode($ip);
         $dakika = $durationMinutes ?? $this->kademeliCezaDakika($ip);
 
-        // [FW-IP-ENFORCE-HAZIRLIK · Ö-3 · 2026-10-03 · zeki-6eb7f5] CEZA KAPSAMI.
+        // [FW-IP-ENFORCE-HAZIRLIK · Ö-3 · 2026-10-03 · team member] CEZA KAPSAMI.
         //
         // KOK NEDEN (B-2): ceza `project_id = 0` (GLOBAL) yaziliyordu.
         // `IpGuardHandler` ban sorgusu `project_id = 0 VEYA = <aktif proje>`

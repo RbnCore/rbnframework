@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\Services\BaseService;
 /**
  * FileService - The Master File Orchestrator (Chef) 🛸🛰️👨‍🍳
  * 
- * RBN 3.5 "Masterpiece": Unified Gateway for all file operations.
+ * RBN Framework: Unified Gateway for all file operations.
  * This service orchestrates specialized handlers (Workers).
  * 
  * @property \Rbn\Framework\Packages\RbnFile\Handlers\FileUploadHandler $fileUpload
@@ -39,7 +39,7 @@ class FileService extends BaseService
     public function image(string $inputName, string $folder, string $disk = 'secure', ?array $options = []): array
     {
         try {
-            // 🎼 RBN 3.5: [DIRECT FILE SUPPORT] 🛰️⚓
+            // 🎼 RBN Framework: [DIRECT FILE SUPPORT] 🛰️⚓
             // Eğer dosya doğrudan bir yol (path) olarak gelirse (AI üretimi vb.), request'i pas geç.
             if ($options['is_direct'] ?? false) {
                 $file = new \Rbn\Framework\Core\Http\Engine\UploadedFile([

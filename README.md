@@ -2,7 +2,7 @@
 
 # RBN Core Framework
 
-**Sürüm:** `0.9.5` · **Lisans:** MIT · **PHP:** 8.3+
+**Lisans:** MIT · **PHP:** 8.3+ · Sürüm ve değişiklikler: [CHANGELOG](.github/CHANGELOG.md)
 
 RBN Core Framework, tek bir çekirdeğin altında **birden çok bağımsız PHP projesini** barındıran,
 çok kiracılı (multi-tenant) mimariye sahip, hafif bir uygulama çatısıdır. Yönlendirme, şablon
@@ -38,7 +38,6 @@ kendi içinde gelir; dışarıdan yalnız üç Composer paketi kullanır.
 
 Composer bağımlılıkları (`composer.json`):
 
-- `vlucas/phpdotenv` — `.env` okuma
 - `phpmailer/phpmailer` — e-posta gönderimi
 - `iyzico/iyzipay-php` — ödeme
 
@@ -47,7 +46,7 @@ Composer bağımlılıkları (`composer.json`):
 ## Kurulum
 
 ```bash
-git clone https://github.com/RbnCore/rbnframework.git
+git clone https://github.com/example/rbnframework.git
 cd rbnframework
 composer install
 ```
@@ -176,7 +175,7 @@ Bu proje **MIT** lisansıyla dağıtılmaktadır. Tam metin: [LICENSE](LICENSE).
 Kısaca: kullanabilir, değiştirebilir, dağıtabilirsiniz. Tek koşul — **telif ve lisans bildirimini
 korumaktır** (kopyaladığınız her nüshada `LICENSE` metni kalsın).
 
-Bu çalışma üzerine kendi işinizi kurarsanız, RbnBilisim / RbnCore'den bahsetmeniz memnuniyetle
+Bu çalışma üzerine kendi işinizi kurarsanız, example / example'den bahsetmeniz memnuniyetle
 karşılanır; bu isteğe bağlıdır, zorunlu değildir.
 
 ---

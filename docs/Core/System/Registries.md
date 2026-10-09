@@ -1,6 +1,6 @@
 # Core/System/Registries — Sistem kayıt defteri (ad → sınıf haritası)
 
-> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/System/Registries/` — 8 `*.php` (kök 3, `RegistryMap/` 5).
 > **Envanter:** 8 dosyanın 8'i aşağıda anlatıldı.
 
@@ -37,7 +37,7 @@ Harita beş **özellik (trait)** dosyasına bölünmüştür; `SystemRegistry::r
 
 ### 3.2 Ad bulma (`locate`, `DiscoveryConfigTrait.php:30-52,97-148`)
 
-`locateRegistry($ad,$tür)` dört "kapıyı" sırayla dener: `System` (`SystemRegistry`), `Project` (`AppProjectRegistry`), `Sovereign` (`sovereignBundles()` sınıfları), `Module` (yine `SystemRegistry`); her kapıda `registerMap()[<tür çoğulu>]` içinde `searchDeep()` ile anahtar (büyük/küçük harf duyarsız) ya da, dizin anahtarı sayısalsa sınıf dosya adı eşleşmesi aranır. Hiçbiri bulamazsa `DiscoveryEngine::namespace()->find()` (klasör taraması) çağrılır. `$isLocating` özyineleme koruması etkinse doğrudan taramaya gidilir.
+`locateRegistry($ad,$tür)` dört "kapıyı" sırayla dener: `System` (`SystemRegistry`), `Project` (`AppProjectRegistry`), `RBN Framework` (`sovereignBundles()` sınıfları), `Module` (yine `SystemRegistry`); her kapıda `registerMap()[<tür çoğulu>]` içinde `searchDeep()` ile anahtar (büyük/küçük harf duyarsız) ya da, dizin anahtarı sayısalsa sınıf dosya adı eşleşmesi aranır. Hiçbiri bulamazsa `DiscoveryEngine::namespace()->find()` (klasör taraması) çağrılır. `$isLocating` özyineleme koruması etkinse doğrudan taramaya gidilir.
 
 ### 3.3 Takma adlar (`ComponentRegistry` aşaması)
 
@@ -77,7 +77,7 @@ Sonuçları: `handler('storage'|'localization'|'seo')` bugün `locate()`'ten sı
 
 Diğer kurallar:
 
-1. **Çözüm sırası "kapı" sırasıdır:** `System` → `Project` → `Sovereign` → `Module`; aynı ad birden çok haritada varsa ilk bulunan kazanır. `array_merge_recursive` aynı **dize** anahtarı iki kez görürse değerleri **diziye çevirir** (`[a, b]`); `checkRegistry()` bu durumda **son** elemanı alır (`end($found)`, `DiscoveryConfigTrait.php:111`) — sessiz "son kayıt kazanır" davranışı.
+1. **Çözüm sırası "kapı" sırasıdır:** `System` → `Project` → `RBN Framework` → `Module`; aynı ad birden çok haritada varsa ilk bulunan kazanır. `array_merge_recursive` aynı **dize** anahtarı iki kez görürse değerleri **diziye çevirir** (`[a, b]`); `checkRegistry()` bu durumda **son** elemanı alır (`end($found)`, `DiscoveryConfigTrait.php:111`) — sessiz "son kayıt kazanır" davranışı.
 2. **Harita proje başına önbelleklenir** (`$mergedMapCache`); yeni modül eklenince `SystemRegistry::clearCache()` gerekir (yoksa istek boyunca eski harita kalır).
 3. **`models`/`repositories` anahtarları noktalıdır** (`master.projects`, `common.ipBlock`, `project.user`, `app.rss.source`); `searchDeep` anahtarı küçük harfe indirerek eşler, ama noktalı adı bölmez.
 4. **Birden çok ad aynı sınıfı gösterebilir** (örn. `ipBlock` ve `master.ipBlock` → `MasterIpBlocksModel`; `shieldSetting` ve `common.shieldSetting` → `CmSysSettingsShieldModel`).

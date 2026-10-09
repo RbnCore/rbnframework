@@ -1,9 +1,7 @@
 /**
  * rbnAlert.js — Unified Alert & Confirmation Engine
  * 
- * RBN Framework 3.1 "Masterpiece" Edition.
  * Consolidates Toast, Modal, and Auth alerts into a single smart API.
- * version 3.1.0 (Native Pure)
  */
 
 /**
@@ -48,7 +46,7 @@ window.RbnAlert = window.RbnAlert || {
     show: function (type, title, message = '', options = {}) {
         if (!title) return;
 
-        // [RBN 3.5] Double-Toast Prevention: JS ile bir alert gösterildiği an çerezi temizle (SSoT) 🛡️
+        // [RBN Framework] Double-Toast Prevention: JS ile bir alert gösterildiği an çerezi temizle (SSoT) 🛡️
         this._deleteCookie('rbn_alert');
 
         const display = options.display || 'toast';
@@ -70,7 +68,7 @@ window.RbnAlert = window.RbnAlert || {
      * Detects if it should perform a network request or just return a choice.
      */
     /**
-     * [RBN 3.1] Global Onay Şablonları (Template Engine)
+     * Global Onay Şablonları (Template Engine)
      */
     _getTemplate: function (type, url = '', confirmClass = '') {
         const templates = {
@@ -108,7 +106,7 @@ window.RbnAlert = window.RbnAlert || {
             }
         };
 
-        // [RBN 3.1] Zeki Teşhis: Tip veya renk üzerinden şablonu belirle
+        // Zeki Teşhis: Tip veya renk üzerinden şablonu belirle
         const urlStr = String(url).toLowerCase();
         const isDelete = /(delete|sil|clear)/i.test(urlStr) || confirmClass === 'is-danger' || type === 'danger' || type === 'delete';
         const isReset = /(reset|sifirla)/i.test(urlStr) || confirmClass === 'is-warning' || type === 'warning';
@@ -131,7 +129,7 @@ window.RbnAlert = window.RbnAlert || {
             const confirmClassFromOptions = options.confirmClass || '';
             const template = this._getTemplate(options.type, url, confirmClassFromOptions);
 
-            // [RBN 3.1] Başlık Önceliği: Gelen başlık jenerikse şablonun kaliteli başlığını kullan
+            // Başlık Önceliği: Gelen başlık jenerikse şablonun kaliteli başlığını kullan
             const standardTitles = ['Emin misiniz?', 'Sorgu', 'Emin Misiniz?'];
             const finalTitle = (title && !standardTitles.includes(title)) ? title : (options.title || template.title);
             const finalMessage = message || options.text || template.message;
@@ -230,7 +228,7 @@ window.RbnAlert = window.RbnAlert || {
                         this[toastMethod](title, res.message, true); // true = isToast
                     }
 
-                    // [RBN 3.5] Double-Toast Prevention 🛡️
+                    // [RBN Framework] Double-Toast Prevention 🛡️
                     document.cookie = "rbn_alert=; Max-Age=-99999999; path=/;";
 
                     // Hata modalı açılmışsa kullanıcı okumadan sayfayı hemen yenileme!

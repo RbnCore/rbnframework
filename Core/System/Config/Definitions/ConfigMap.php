@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\Data\BaseConfig;
 /**
  * ConfigMap - High-Level Configuration Definitions 🛰️⚙️
  * 
- * RBN 3.5: Decentralized discovery hub for global app configurations.
+ * RBN Framework: Decentralized discovery hub for global app configurations.
  */
 class ConfigMap extends BaseConfig
 {
@@ -34,11 +34,15 @@ class ConfigMap extends BaseConfig
     }
 
     /**
-     * Environment Detection DNA 🌍
+     * Calisma ortami (`production` | `development`).
+     *
+     * [FW-096-D8 / TK-03] Ikinci karar yolu YOKTUR: TEK karar noktasi
+     * `PreBoot::isProductionDeclared()` (`secrets.php` `app.environment`;
+     * yoksa production). Eski `app.env` ayar anahtari okunmaz.
      */
     public static function getAppEnv(): string
     {
-        return defined('RBN_DEV') && RBN_DEV ? 'development' : (self::get('app.env') ?? 'production');
+        return \Rbn\Framework\Core\System\Kernel\Base\PreBoot::isProductionDeclared() ? 'production' : 'development';
     }
 
 
@@ -52,7 +56,7 @@ class ConfigMap extends BaseConfig
 
     /**
      * SECURITY: Unified Session Timeout Fallback (Minutes) 🛡️🛰️⚓
-     * RBN 3.5: Single source of truth for framework-level session protection.
+     * RBN Framework: Single source of truth for framework-level session protection.
      * Prioritizes RBN_SESSION_TIMEOUT constant, fallbacks to 30 minutes.
      */
     public static function getAppSessionTimeout(): int

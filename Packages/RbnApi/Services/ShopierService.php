@@ -7,9 +7,9 @@ namespace Rbn\Framework\Packages\RbnApi\Services;
 use Rbn\Framework\Core\Base\Services\BaseService;
 
 /**
- * ShopierService - Sovereign Shopier REST API Connector 💳🛰️⚓
+ * ShopierService - RBN Framework Shopier REST API Connector 💳🛰️⚓
  * 
- * RBN 3.5 Masterpiece: High-level shared package for Shopier integrations.
+ * RBN Framework: High-level shared package for Shopier integrations.
  * @property \Rbn\Framework\Packages\RbnApi\Providers\ShopierProvider $shopier
  */
 class ShopierService extends BaseService
@@ -66,7 +66,7 @@ class ShopierService extends BaseService
             ]
         ];
 
-        // 🪐 RBN 3.5: Masterpiece Provider Delegation 🛰️
+        // 🪐 RBN Framework: Provider Delegation 🛰️
         $response = $this->provider('apiShopier')->call('products', $postData, 'POST', $projectKey);
         
         if ($response['status'] === 'success' && isset($response['data']['url'])) {
@@ -128,7 +128,7 @@ class ShopierService extends BaseService
             ];
         }
 
-        // 🪐 RBN 3.5: Masterpiece Provider Delegation 🛰️
+        // 🪐 RBN Framework: Provider Delegation 🛰️
         $response = $this->provider('apiShopier')->call('orders', ['productId' => $productId], 'GET', $projectKey);
 
         if ($response['status'] === 'success' && is_array($response['data']) && !empty($response['data'])) {

@@ -1,30 +1,31 @@
 # 02 — YAPILANDIRMA
 
 > **Bu belge hangi commit'e göre yazıldı:** `d4af18d` (dal `feat/fw-license-master`)
-> **Son doğrulama tarihi:** 2026-10-05
-> **Yayın tabanı:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
-> **Kapsam:** Hangi ayar hangi dosyada, kim okuyor, öncelik sırası, ortam değişkenleri
+> **Son doğrulama tarihi:** 2026-10-09 (FW-096-D8: ortam değişkeni katmanı kaldırıldı)
+> **Yayın tabanı:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Kapsam:** Hangi ayar hangi dosyada, kim okuyor, öncelik sırası, ortam bayrağı (`app` bölümü)
 
 ---
 
 ## 1. Tek kapı kuralı (framework'in kendi kuralı)
 
-`Core/System/Config/README.md:6-12` üç kapıyı tanımlar:
+`Core/System/Config/README.md` ("Tek cümle kural") üç kapıyı tanımlar:
 
 | Ne? | Nerede? | Tek okuyucu |
 |---|---|---|
 | **Gizli değer** (parola, `app_key`, jeton, API anahtarı) | `Secrets/secrets.php` + `Secrets.php` | `Secrets` |
-| **Ortam değişkeni / bayrak / kill-switch** | `Env` + `EnvKeys` | `Env` |
+| **Ortam bayrağı / kill-switch / çalışma ayarı** | `secrets.php` → `app` bölümü | `Secrets::app()` |
 | **Kod tanımlı yapılandırma** (sabitler, ayar tabloları) | `Config.php`, `Engine/Config/ConfigResolver.php`, `Engine/Config/ConfigFileLoader.php` | `ConfigResolver` / `ConfigFileLoader` |
 
-`$_ENV` / `$_SERVER` / `getenv` **elle** okumak yasaktır; bu üç kaynak yalnız `Env`
-içinde okunur (`Core/System/Config/README.md:30`, kaynak sırası
-`$_ENV` → `$_SERVER` → `getenv`, `Core/System/Config/README.md:38`).
+Framework işletim sistemi ortam değişkeni **okumaz** (ADR: `Core/System/Config/README.md`
+→ "Ortam değişkeni YOKTUR"). `getenv()` / `$_ENV` / dotenv dosyası / web sunucusu ortam
+yönergesi bu framework'ün mekanizması değildir; ortam bayrağı dahil bütün anahtarlar
+TEK dosyada: `Core/System/Config/Secrets/secrets.php`.
 
 > **Kural:** Yeni bir sır okuyucusu yazarken `ConfigFileLoader`/`ConfigFileGuard`
 > trait'lerini kullan, doğrulamayı `ConfigFileLoader::validate()`'a bırak,
 > bölüm kurallarını `SecretsSchema::SECTION_RULES`'e koy
-> (`Core/System/Config/README.md:121`).
+> (`Core/System/Config/README.md`, "`Secrets.php` neden bu kadar kısa?").
 
 ---
 
@@ -205,6 +206,9 @@ bir proje klasöründe 3 anahtar, 3 blok).
 | `proxy_allowed_hosts` | `AssetController.php:275` | §3.4 |
 | `favicon`, `og-image` / `og_image` | **toler edilir ama önceliksizdir** (`.github/UPGRADING.md:100-103`) | Kural `AssetConvention` ile gelir |
 | `bundles`, `api_google`, `api_gemini`, `content`, `user_dash_controller`, `cookie`, `admin_panel_disabled` | proje/modül kodu | `admin_panel_disabled` ayrıca `ProjectDataMapper.php:215, 354-359` |
+| `auth_registration` | `AuthPolicy::registrationEnabled()` (`Core/Http/Security/AuthPolicy.php`) → `Core/Routes/Mappings/auth.php`, `RouteManager::checkProjectQueryGuard()` | Anahtar yoksa açık. Açan değerler yalnız `true`, `1`, `on`, `yes`, `evet`, `acik`, `açık` (`AuthPolicy::REGISTRATION_OPEN_VALUES`); başka her değer (`false`, `kapalı`, `disabled`, yazım hatası) ve okunamayan ayar **kapalı** → `register`, `kayit`, `POST auth/register` rotaları kaydedilmez (404). Okuma hatası `security` günlüğüne `AUTH_REGISTRATION_SETTING_UNREADABLE` |
+| `auth_user_home` | `AuthPolicy::userHomePath()` → `AuthService::login()` | Yönetici olmayan girişin dönüş yolu (302 ve JSON `redirect`); varsayılan `/user`. Yalnız `/` ile başlayan yerel yol kabul edilir |
+| `session_absolute_timeout` | `AuthPolicy::sessionAbsoluteMinutes()` → `AuthMiddleware` | `/user/*` için sunucu tarafı mutlak süre (dakika), varsayılan 720. Boşta süresi bu dosyada değil: panel "Oturum Süresi" (`security.session_timeout`, DB) → `AuthPolicy::sessionIdleMinutes()`; ayar yoksa 30 (`ConfigMap::getAppSessionTimeout()`). |
 
 ### 4.2 ⚠️ En sık yapılan hata: **boş dizi yazmayı unutmak**
 
@@ -278,64 +282,58 @@ olmadan** okunur (`Config.php:89-90` → boş anahtar → blok atlanır).
 
 ---
 
-## 6. Ortam değişkenleri (`EnvKeys`)
+## 6. Ortam bayrağı ve çalışma ayarları (`secrets.php` → `app`)
 
-`Core/System/Config/Definitions/EnvKeys.php` — **metot yok, yalnız sabitler**
-(`EnvKeys.php:12`).
+Ortam değişkeni katmanı (`Env.php` + `EnvKeys.php`, 16 ad) FW-096-D8 ile **kaldırıldı**.
+Şema: `Core/System/Config/Definitions/SecretsSchema.php` (`APP_DEFAULTS`, `APP_ALLOWED`);
+okuyucu: `Secrets::app()` → `Engine/Secrets/SecretsSections::app()`.
 
-### 6.1 API
+### 6.1 Alanlar
 
-```php
-Env::string('APP_ENV');                    // ?string  (tanımsız/boş -> null)
-Env::string('APP_ENV', 'production');     // ?string  (varsayılanlı)
-Env::flag('RBN_GUARD_FAILCLOSED', true);  // bool     (kill-switch: varsayılan true)
-Env::int('TG_SEND_DELAY_MS', 0);          // ?int
-```
+| Alan | Tip · güvenli varsayılan | Okuyan | Eski ortam değişkeni |
+|---|---|---|---|
+| `environment` | `'production'` \| `'development'` · **production** | `PreBoot::isProductionDeclared()` | `APP_ENV`, `RBN_ENV` |
+| `debug`, `dev` | `bool` · `false` | `PreBoot::detectEnvironment()` | `RBN_DEBUG`, `RBN_DEV` |
+| `guard_failclosed` | `bool` · `true` | `SystemGuardHandler::resolveFailClosed()` | `RBN_GUARD_FAILCLOSED` |
+| `log_throttle` | `bool` · `true` | `LogThrottle::enabled()` | `RBN_LOG_THROTTLE` |
+| `db_profile` | `''` \| `'local'` \| `'production'` · `''` | `ProjectDbProfileResolver::activeProfile()` | `RBN_DB_PROFILE` |
+| `tg_send_delay_ms` | `int` · `0` (yalnız test) | sroweb Telegram test router'ı | `TG_SEND_DELAY_MS` |
+| `allow_legacy_salt` | `bool` · `false` | `CryptoHelper::legacySaltApproval()` | `RBN_ALLOW_LEGACY_SALT` |
 
-* **Tembel:** değer ilk okunduğunda bir kez çözülür; `Env::reset()` **yalnız test**
-  (`Core/System/Config/README.md:51`).
-* **Kayıtsız ad = hata:** `EnvKeys::ALL_KEYS` dışındaki ad `RuntimeException` ile
-  reddedilir (`Core/System/Config/README.md:52`).
-* **Gizli ad:** hata mesajı yalnız **adı** taşır, **değeri** değil
-  (`Core/System/Config/README.md:53`); liste `EnvKeys::SECRET_KEYS` (`EnvKeys.php:159`).
-* **Bayrak yorumu TEK merkezden:** `0 | false | off | no | hayir` = **kapalı**,
-  diğer her şey **açık** (fail-closed) (`EnvKeys.php:152` `OFF_VALUES`).
+Sır niteliğindekiler `app` bölümünde **değildir**: `app_key` (eski `APP_KEY`/`ENCRYPTION_KEY`),
+`legacy_salt` (eski `RBN_LEGACY_SALT`) üst düzey; ortak DB kimliği `master_db`
+(eski `COMMON_DB_*`); proje DB kimliği `project-settings.php`, yedek `db_user`/`db_pass`
+(eski `DB_*`).
 
-### 6.2 Kayıtlı adlar (koddan)
+* Bölümün **tamamı opsiyoneldir**; yazılmayan alan varsayılanı alır.
+* Değer tipi PHP tipidir; tipi tutmayan ya da izinli olmayan değer varsayılana düşer ve
+  loglanır. Metin yorumlayan "kapalı listesi" **yoktur** (`'banal'` debug açmaz).
+* Hata/uyarı metni değer yazmaz, yalnız alan adını yazar.
 
-`EnvKeys.php:49-138`:
+### 6.2 Ortam ve hata ayıklama kapısı
 
-`APP_KEY`, `ENCRYPTION_KEY`, `RBN_LEGACY_SALT`, `RBN_ALLOW_LEGACY_SALT`,
-`COMMON_DB_USER`, `COMMON_DB_PASS`, `DB_USER`, `DB_PASS`, `RBN_DB_PROFILE`,
-`RBN_GUARD_FAILCLOSED`, `RBN_DEBUG`, `RBN_DEV`, `APP_ENV`, `RBN_LOG_THROTTLE`,
-`TG_SEND_DELAY_MS`.
+| `app.environment` | Hata ayıklama (`RBN_DEBUG` sabiti) |
+|---|---|
+| `'production'` | **İstekten açılmaz** (Host/IP bakılmaz; ters vekil `Host: localhost` iletse de kapalı). Yalnız `app.debug`/`app.dev` = `true` açar |
+| yazılmamış / geçersiz / dosya okunamadı | **production** kabul edilir; `error_log`'a süreç başına bir kez uyarı |
+| `'development'` | Yalnız güvenilir yerel ortam (`localhost`/`.test` + yerel IP) açar; gerçek alan adında kapalı |
 
-### 6.3 `EnvKeys` ≠ `ConfigMap`
+Canlıda `secrets.php`: `'app' => ['environment' => 'production']`. Yerel makinede
+`'app' => ['environment' => 'development']`.
 
-| | `Definitions/EnvKeys.php` | `Definitions/ConfigMap.php` |
-|---|---|---|
-| Konusu | Ortam değişkeni olarak **okunan** adlar | Framework'ün **global tanımladığı** ayar anahtarları |
-| Örnek | `APP_ENV`, `TG_SEND_DELAY_MS` | `app.debug`, `app.logging`, `app.env`, `app.is_cli`, `app.session_timeout` |
-| Okuyan | `Env` | `ConfigMap::getAppDebug()` vb. |
-
-İkisi de **kalır**, birleştirilmez (`Core/System/Config/README.md:93-102`).
+### 6.3 `ConfigMap` ayrımı
 
 `ConfigMap` her değeri **sabit öncelikli** okur:
-`getAppDebug()` → `defined('RBN_DEBUG') ? RBN_DEBUG : (get('app.debug') ?? false)`
-(`ConfigMap.php:23-25`); `getAppEnv()` → `RBN_DEV` (`ConfigMap.php:41`);
-`getAppIsCli()` → `defined('RBN_CLI')` (`ConfigMap.php:50`);
+`getAppDebug()` → `defined('RBN_DEBUG') ? RBN_DEBUG : (get('app.debug') ?? false)`;
+`getAppEnv()` → `RBN_DEV`; `getAppIsCli()` → `defined('RBN_CLI')`;
 `getAppSessionTimeout()` → `RBN_SESSION_TIMEOUT`, varsayılan `30` **dakika**
-(`ConfigMap.php:56-60`).
+(`ConfigMap.php`). `RBN_CLI`, `RBN_SESSION_TIMEOUT`, `RBN_PANIC_ACTIVE` **PHP sabitidir**
+(`define()`), ortam değişkeni değildir.
 
-`RBN_CLI`, `RBN_SESSION_TIMEOUT`, `RBN_PANIC_ACTIVE` **PHP sabitidir**
-(`define()`), ortam değişkeni **değildir**; bu yüzden `EnvKeys`'e yazılamaz
-(`Core/System/Config/README.md:83-87`).
+### 6.4 Yeni çalışma anahtarı
 
-### 6.4 Kayıt kanıtı şartı
-
-`EnvKeys`'e eklenen her ad için kodda **gerçekten** `Env::string()/flag()/int()` ile
-okunduğu kanıtlanmalıdır; okunmayan ya da `define()` sabiti olan ad kaydedilmez
-(`Core/System/Config/README.md:39`).
+`SecretsSchema::APP_DEFAULTS`'a bir satır (+ metinse `APP_ALLOWED`) ve
+`secrets.example.php` `app` bölümüne örnek. Başka dosya açılmaz.
 
 ---
 
@@ -366,8 +364,8 @@ Yani master `settings` **doğrudan `Config::get()` okumaz**; önbellekten gelen
 | Ayar | Kaynak | Okuyan | Öncelik notu |
 |---|---|---|---|
 | Master DB host/port/ad/kullanıcı/parola | `secrets.php` → `master_db` | `DbProfileResolver::host/port/databaseName/user/password` (`Engine/Database/DbProfileResolver.php:66-168`) | Ortam değişkeni yolu **yok** (`Core/System/Config/README.md:80-82`) |
-| Ortak DB kullanıcı/parola | `secrets.php` (`master_db`) + `COMMON_DB_USER`/`COMMON_DB_PASS` | `DbProfileResolver.php:124-131, 150-154` | Ortam değişkeni **yedek** |
-| Proje DB bağlantısı | `project-settings.php` → `DB_PROFILES` veya düz `DB_*` | `ProjectDbProfileResolver::resolve()` → `DatabaseConfig` | Ortam `DB_USER`/`DB_PASS` **yedek** (`DbProfileResolver.php:129-131, 155-156`) |
+| Ortak DB kullanıcı/parola | `secrets.php` → `master_db` (master ile aynı hesap) | `DbProfileResolver::user/password` | Ortam değişkeni yolu **yok** (FW-096-D8) |
+| Proje DB bağlantısı | `project-settings.php` → `DB_PROFILES` veya düz `DB_*` | `ProjectDbProfileResolver::resolve()` → `DatabaseConfig` | Kimlik yedeği `secrets.php` `db_user`/`db_pass` (`Secrets::optional`); parola yoksa `RuntimeException`; ortam değişkeni yolu **yok** |
 | SMTP | `secrets.php` → `smtp` | `Engine/Database/SmtpProfileResolver.php` (`Core/System/Config/README.md:131`) | `enabled` string `'1'/'0'` |
 | cPanel | `secrets.php` → `cpanel` | `Secrets::cpanel*` (`Secrets.php:210-222`) | — |
 | Uygulama anahtarı | `secrets.php` → `app_key` **önce**, `APP_KEY`/`ENCRYPTION_KEY` sıradan | `CryptoHelper::resolveKey()` (`Core/System/Config/README.md:61-62`) | — |
@@ -376,15 +374,14 @@ Yani master `settings` **doğrudan `Config::get()` okumaz**; önbellekten gelen
 | Panel ön eki (bakım modu muafiyeti) | routemap → BootCache → `project_data` → sabit | `SystemGuardHandler.php:50-53` | `project-settings` **okunmuyor** |
 | API anahtarları | `secrets.php` → `api` (`Secrets::api($sağlayıcı)`) veya proje `options` tablosu | `ProjectDataMapper.php:246-274` | `bot_activity` **ve** `use_master_api` açıksa master API yedeği devreye girer |
 | Proje sürümü | master DB `projects.version` → önbellek → `project_data('version')` | `ProjectVersionResolver` → `app_version()` / `APP_VERSION` | [04-surumleme-ve-yayin.md](04-surumleme-ve-yayin.md) |
-| `app.debug`, `app.env`, `app.is_cli`, oturum süresi | `ConfigMap` (sabit öncelikli) | `ConfigMap.php:23-60` | §6.3 |
+| `app.debug`, `app.is_cli`, oturum süresi (`ConfigMap` getter'ları) | `ConfigMap` (sabit öncelikli) | `ConfigMap.php` | §6.3 |
 | Karma (sahte) `Options`'dan gelen anahtarlar | `options` tablosu (`group_key` = `api`/`bot`) | `ProjectDataMapper.php:246-254` | `bot_activity` açık değilse **okunmaz** |
 
 ---
 
 ## 9. Sır, ortam değişkeni ve ayar dosyası **değil** olanlar
 
-Salt-okunur tanımlar ortam değişkeni **değildir**, `EnvKeys`'e yazılmaz
-(`Core/System/Config/README.md:91`): `HOST`, `CHARSET`, `ENV_FILE`, `APP_NAME`,
+Salt-okunur tanımlar ortam değişkeni **değildir**: `HOST`, `CHARSET`, `ENV_FILE`, `APP_NAME`,
 `APP_VERSION`, `APP_URL`, `DEFAULT_LANGUAGE`, `AssetDefinition` içindeki
 `RBN_*_CSS` / `RBN_*_JS` varlık sabitleri, `ApiKeysRegistry` içindeki isim eşlemeleri.
 

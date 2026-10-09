@@ -6,7 +6,7 @@ namespace Rbn\Framework\Core\System\Config\Definitions\DbProfiles;
 /**
  * CommonDbData - Ortak operasyonel veritabanı kimlik profili (yalniz SABIT) 🏛️📐
  *
- * RBN 3.5: Centralizes shared operational requirements for the rbncore_common
+ * RBN Framework: Centralizes shared operational requirements for the rbncore_common
  * database. [FW-DBPROFILES-TASIMA-95] Core/Services/Gatekeepers/Models ->
  * Core/System/Config/Definitions/DbProfiles. Kimlik/yapılandırma verisi;
  * koruma mantığı değildir (ters bağımlılık giderildi).
@@ -34,19 +34,6 @@ final class CommonDbData
 
     /** Bağlantı karakter kümesi (şema kimliği, sır DEĞİLDİR). */
     public const CHARSET = 'utf8mb4';
-
-    /** Bu profilin ayar dosyası adı (anahtar keşfi `ENV_FILE` anahtarını sınıftan okur; `.env` varsayılanı). */
-    public const ENV_FILE = '.env';
-
-    /**
-     * Ortam degiskeni ADLARI (kayit: `Definitions/EnvKeys.php`).
-     *
-     * [FW-ENV-KAYIT-160] Ad once burada AÇIKÇA yazılır; `static::PREFIX . '_USER'`
-     * ile birleştirmek okuma noktasını görünmez yapıyordu. Sabit, ortam
-     * değişkeni adının kodda **tek ve yazılı** yerini gösterir.
-     */
-    public const USER_ENV = 'COMMON_DB_USER';
-    public const PASS_ENV = 'COMMON_DB_PASS';
 
     /** Ortak veritabani adi - sema kimligi (SIR DEGILDIR, kodda kalir). */
     public const DB_NAME = 'rbncore_common';

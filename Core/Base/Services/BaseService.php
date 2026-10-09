@@ -11,7 +11,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 /**
  * BaseService - Foundation for all Framework Services 🏛️⚓
  * 
- * RBN 3.5: Master Orchestrator.
+ * RBN Framework: Master Orchestrator.
  * Artık BaseComponent hiyerarşisine tam uyumludur ve Root DNA (bootBaseContext) sistemini kullanır.
  */
 abstract class BaseService extends BaseComponent implements BaseServiceInterface
@@ -27,7 +27,7 @@ abstract class BaseService extends BaseComponent implements BaseServiceInterface
         // Service is ready.
     }
 
-    /** --- Core Vitals (Masterpiece Singleton Hub) 🧬🏛️ --- */
+    /** --- Core Vitals (RBN Framework Singleton Hub) 🧬🏛️ --- */
     protected static ?self $instance = null;
 
     /**
@@ -69,7 +69,7 @@ abstract class BaseService extends BaseComponent implements BaseServiceInterface
     public static function get(): self
     {
         if (self::$instance === null) {
-            // RBN 3.5: Anonymous Hub Awakening 🎻🏛️⚓
+            // RBN Framework: Anonymous Hub Awakening 🎻🏛️⚓
             self::$instance = new #[\AllowDynamicProperties] class extends BaseService {
                 public function boot(): void
                 {
@@ -80,9 +80,9 @@ abstract class BaseService extends BaseComponent implements BaseServiceInterface
     }
 
     /**
-     * Sovereign Delegation Engine (Masterpiece Proxy) 🛰️🎻⚓
+     * RBN Framework Delegation Engine (RBN Framework Proxy) 🛰️🎻⚓
      * 
-     * RBN 3.5: [ATOMIC DELEGATION]
+     * RBN Framework: [ATOMIC DELEGATION]
      * Serviste bulunmayan metodları otonom olarak bağlı olduğu Provider'a iletir.
      * Bu sayede servisler 'Zero-Code Proxy' olarak davranabilir.
      */
@@ -95,7 +95,7 @@ abstract class BaseService extends BaseComponent implements BaseServiceInterface
      *
      * DAVRANIS ETKISI: cagrilmadigi surece singleton AYNEN calisir.
      * Ornekleri `static::class` ile tip bazli anahtarlamak DAVRANIS
-     * DEGISTIRICI bir karardir ve bilincli olarak YAPILMADI (karar: Lena).
+     * DEGISTIRICI bir karardir ve bilincli olarak YAPILMADI (karar: team member).
      */
     public static function forgetInstance(): void
     {
@@ -113,11 +113,11 @@ abstract class BaseService extends BaseComponent implements BaseServiceInterface
         // Provider zorunlu olmadığı için diagnostic fırlatılmadan sessizce çözümlenir
         $provider = $this->component('provider', $providerKey, false);
 
-        // 3. Delegasyon (Sovereign Proxying) 🚀
+        // 3. Delegasyon (RBN Framework Proxying) 🚀
         if ($provider && method_exists($provider, $method)) {
             return call_user_func_array([$provider, $method], $args);
         }
 
-        throw new \Exception("Sovereign Service Error: [{$method}] metodu ne [" . static::class . "] servisinde ne de bağlı [" . ($provider ? get_class($provider) : 'N/A') . "] provider'ında bulunamadı! ❌");
+        throw new \Exception("Service Error: [{$method}] metodu ne [" . static::class . "] servisinde ne de bağlı [" . ($provider ? get_class($provider) : 'N/A') . "] provider'ında bulunamadı! ❌");
     }
 }

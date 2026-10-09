@@ -12,7 +12,7 @@ use Rbn\Framework\Core\Support\Definitions\System\FrameworkIdentity;
 class EmailConstant
 {
     public const NAME = 'RbnEmail';
-    public const VERSION = '1.5'; // Upgraded to Masterpiece Standard
+    public const VERSION = '1.5'; // Upgraded to RBN Framework Standard
     public const SLOGAN = 'Professional Email Delivery Service';
 
     // PHPMailer Basics

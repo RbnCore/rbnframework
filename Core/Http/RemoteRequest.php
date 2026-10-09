@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 /**
  * RemoteRequest - The Universal Outbound HTTP Engine 🪐🛰️⚓
  * 
- * RBN 3.5 Masterpiece: Centralized requester for all external API communications.
+ * RBN Framework: Centralized requester for all external API communications.
  * Handles headers, methods, and cURL orchestration with peak performance.
  */
 class RemoteRequest extends BaseComponent
@@ -19,7 +19,7 @@ class RemoteRequest extends BaseComponent
      */
     public function request(string $method, string $url, array $params = [], array $headers = [], bool $isJson = true, array $options = []): array
     {
-        // 🎼 RBN 3.5: Masterpiece Execution Safety 🛡️
+        // 🎼 RBN Framework: Execution Safety 🛡️
         if (isset($options['php_timeout'])) {
             set_time_limit((int) $options['php_timeout']);
         }

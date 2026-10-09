@@ -5,7 +5,7 @@ namespace Rbn\Framework\Core\Http\Engine;
 /**
  * UploadedFile - Intelligence for $_FILES 📎🛡️⚓
  * 
- * RBN 3.0: High-Performance file wrapper with validation and management helpers.
+ * High-Performance file wrapper with validation and management helpers.
  */
 class UploadedFile
 {
@@ -14,7 +14,7 @@ class UploadedFile
     protected string $tmpName;
     protected int $size;
     protected int $error;
-    protected bool $isLocal = false; // 🎼 RBN 3.5: Support for server-side generated files (AI etc.)
+    protected bool $isLocal = false; // 🎼 RBN Framework: Support for server-side generated files (AI etc.)
 
     /**
      * DNA Capture 🧬
@@ -44,7 +44,7 @@ class UploadedFile
     {
         if ($this->error !== UPLOAD_ERR_OK) return false;
         
-        // 🎼 RBN 3.5: Local files skip the is_uploaded_file check.
+        // 🎼 RBN Framework: Local files skip the is_uploaded_file check.
         return $this->isLocal || is_uploaded_file($this->tmpName);
     }
 
@@ -115,7 +115,7 @@ class UploadedFile
             mkdir($path, 0755, true);
         }
 
-        // 🎼 RBN 3.5: [ATOMIC MOVE]
+        // 🎼 RBN Framework: [ATOMIC MOVE]
         // Yerel dosyalar için copy, yüklenen dosyalar için move_uploaded_file kullan.
         if ($this->isLocal) {
             return copy($this->tmpName, $target);

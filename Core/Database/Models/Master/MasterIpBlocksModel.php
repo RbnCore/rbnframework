@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseModelInterface;
 /**
  * MasterIpBlocksModel - Blacklist Orchestration Hub 🚧🛡️
  * 
- * RBN 3.5: Lean data layer for managing blocked IP addresses in the Sovereign Master DB.
+ * RBN Framework: Lean data layer for managing blocked IP addresses in the RBN Framework Master DB.
  * Powered by ActionModelTrait for advanced querying.
  * 
  * @property int    $id

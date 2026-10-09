@@ -31,7 +31,7 @@ class Routing extends BaseStage
             error_log('[RBN-KERNEL] Routing: modul servisi cozulemedi — paket/proje rotalari yuklenmedi.');
         }
         if ($moduleService) {
-            // 🎼 [SOVEREIGN ROUTES] - Framework Core Bundles (RbnAdmin etc.)
+            // 🎼 [RBN Framework ROUTES] - Framework Core Bundles (RbnAdmin etc.)
             $moduleService->registerBundles('routes', SystemRegistry::sovereignBundles());
 
             // 🎼 [PROJECT ROUTES] - Modules in the current project

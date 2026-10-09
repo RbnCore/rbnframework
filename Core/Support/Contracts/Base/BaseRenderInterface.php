@@ -5,7 +5,7 @@ namespace Rbn\Framework\Core\Support\Contracts\Base;
 /**
  * BaseRenderInterface - Unified Rendering Contract 🏹
  * 
- * Part of the RBN 3.0 Modern Hub.
+ * Part of the RBN Modern Hub.
  * Defines a flexible entry point for all rendering operations (HTML, XML, Metadata).
  */
 interface BaseRenderInterface

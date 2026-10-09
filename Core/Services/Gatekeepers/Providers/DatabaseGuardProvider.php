@@ -15,7 +15,7 @@ use PDOException;
 /**
  * DatabaseGuardProvider - The Physical Bridge for DB Integrity 🏗️🛰️🔗
  * 
- * RBN 3.5: Masterpiece Standard.
+ * RBN Framework: Standard.
  * Handles low-level IO, parsing, and physical DB probing.
  */
 class DatabaseGuardProvider extends BaseProvider implements BaseProviderInterface
@@ -25,7 +25,7 @@ class DatabaseGuardProvider extends BaseProvider implements BaseProviderInterfac
      */
     public function loadCredentials(string $category, string $path): array
     {
-        // 🛡️ RBN 3.5: [MASTER & COMMON IDENTITY BYPASS] 🏛️⚓
+        // 🛡️ RBN Framework: [MASTER & COMMON IDENTITY BYPASS] 🏛️⚓
         if ($category === 'database_master') {
             return \Rbn\Framework\Core\System\Config\Engine\Database\DbProfileResolver::credentials(
                 \Rbn\Framework\Core\System\Config\Definitions\DbProfiles\MasterDbData::class
@@ -41,7 +41,7 @@ class DatabaseGuardProvider extends BaseProvider implements BaseProviderInterfac
         $map = Definition::get($category, 'KEYS_MAP') ?? [];
         $requiredKeys = array_values($map);
 
-        // 🎼 RBN 3.5: [PURE PHP ONLY] - Project database must use .php config (Env parsing removed)
+        // 🎼 RBN Framework: [PURE PHP ONLY] - Project database must use .php config (Env parsing removed)
         if (!file_exists($path)) {
             throw new PreflightException("Proje yapılandırma dosyası eksik!", "Yol: [{$path}]");
         }
@@ -108,7 +108,7 @@ class DatabaseGuardProvider extends BaseProvider implements BaseProviderInterfac
     /**
      * `fetchProjectData()`nın okuduğu GERÇEK kolon listesi. 🎯
      *
-     * [G-17 · 2026-10-03 · zeki-6eb7f5] `SELECT *` yerine AÇIK liste.
+     * [G-17 · 2026-10-03 · team member] `SELECT *` yerine AÇIK liste.
      * Ölçüm (birim testi `fw_gateguard_orta_dusuk.php` (G17-c/d), master DB):
      * `projects` tablosunda **13 kolon** var ve **12'si framework tarafından
      * GERÇEKTEN tüketiliyor**:

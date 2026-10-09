@@ -8,9 +8,9 @@ use Rbn\Framework\Core\Base\Web\BaseRender;
 use Rbn\Framework\Core\Support\Contracts\Base\BaseRenderInterface;
 
 /**
- * AjaxProvider - Sovereign Fragment Renderer ✂️🛰️⚓
+ * AjaxProvider - RBN Framework Fragment Renderer ✂️🛰️⚓
  * 
- * RBN 3.5 "Masterpiece" Architecture.
+ * RBN Framework Architecture.
  * Specialized provider for layout-free rendering.
  * Used for Modals, Tooltips, and AJAX partial updates.
  */
@@ -18,7 +18,7 @@ class AjaxProvider extends BaseRender implements BaseRenderInterface
 {
     /**
      * Renders a raw view fragment without any layout wrappers.
-     * 🎹 Sovereign Execution: Just the content, no noise.
+     * 🎹 RBN Framework Execution: Just the content, no noise.
      */
     public function render(?string $view, array $data = []): string
     {
@@ -40,7 +40,7 @@ class AjaxProvider extends BaseRender implements BaseRenderInterface
         ob_start();
         $this->viewEngine()->render($viewPath, $data);
 
-        // 🧬 [RBN 3.5] MASTERPIECE AUTONOMOUS IMPORTS ✂️🛰️⚓
+        // 🧬 [RBN Framework] RBN Framework AUTONOMOUS IMPORTS ✂️🛰️⚓
         // Ensure that imported fragments are also included in the AJAX response.
         if (isset($data['__imports']) && !empty($data['__imports'])) {
             $partialProvider = $this->service('render')->provider('partial');

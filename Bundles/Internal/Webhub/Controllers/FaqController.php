@@ -9,8 +9,8 @@ use Rbn\Framework\Core\Base\Attributes\SubModule;
 /**
  * FaqController - SSS Yönetim Merkezi 🎻🛰️⚓
  * 
- * RBN 3.5 "Masterpiece" Architecture.
- * Sovereignty is defined via the SubModule attribute.
+ * RBN Framework Architecture.
+ * Ownership is defined via the SubModule attribute.
  */
 #[SubModule(
     entity: 'faq',
@@ -24,7 +24,7 @@ class FaqController extends WebhubController
      */
     public function index()
     {
-        // 🎼 RBN 3.5: Masterpiece Veri Akışı 🎻🛰️⚓
+        // 🎼 RBN Framework: Veri Akışı 🎻🛰️⚓
         $faqs = $this->service->all();
         
         $paginator = $this->paginate($faqs)->to('faqs');

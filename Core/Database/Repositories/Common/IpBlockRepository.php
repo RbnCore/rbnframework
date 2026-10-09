@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Data\BaseRepository;
 /**
  * IpBlockRepository - Shared IP Blocking Data Access & Query Repository 🚫🏛️⚓
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Enterprise Repository Pattern for managing blacklisted and blocked IP addresses.
  * Located strictly under Core\Database\Repositories\Common for clean architecture.
  * 

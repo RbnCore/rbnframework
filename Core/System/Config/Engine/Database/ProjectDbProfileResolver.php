@@ -9,7 +9,7 @@ use Rbn\Framework\Core\System\Config\Definitions\DbProfiles\ProjectDbData;
 /**
  * ProjectDbProfileResolver - Proje veritabanı profil SEÇİCİSİ 🎚️🗃️
  *
- * [FW-DB-PROFIL · zeki-6eb7f5] `project-settings.php` dosyasında proje DB
+ * [FW-DB-PROFIL · team member] `project-settings.php` dosyasında proje DB
  * bilgisi TEK dosyada iki profille durabilir:
  *
  *     'DB_PROFILES' => [
@@ -83,10 +83,11 @@ final class ProjectDbProfileResolver
      * 8 dosyada hata üretti — bu bir test ölçümüdür, canlı bir hatadır.
      *
      * SIRA (ilk sinyal kazanır):
-     *   1) Ortam değişkeni `RBN_DB_PROFILE` = 'local' | 'production'
-     *      (sunucu cron'ı için AÇIK operatör kararı; `EnvKeys::RBN_DB_PROFILE`).
-     *      Tanımsız/boş/bilinmeyen değer -> karar YOK sayılır, sıradakine geçilir
-     *      (fail-closed: yazım hatası profili çalıştırmaz).
+     *   1) `secrets.php` `app.db_profile` = 'local' | 'production'
+     *      (sunucu cron'ı için AÇIK operatör kararı; TEK okuyucu `Secrets::app()`).
+     *      Boş/tanımsız -> karar YOK sayılır, sıradakine geçilir; bilinmeyen
+     *      değeri şema zaten varsayılana (`''`) düşürür (yazım hatası profili
+     *      çalıştırmaz).
      *   2) **Framework KÖKÜNDE** tam `localhost` yol segmenti -> `local`.
      *      Bu SUNUCU kimliğidir: HTTP'de de CLI'de de aynıdır, istekten
      *      bağımsızdır, erken boot'ta da okunabilir (`Paths` gerekmez).
@@ -98,9 +99,9 @@ final class ProjectDbProfileResolver
      */
     public static function activeProfile(): string
     {
-        $env = self::fromEnvironment();
-        if ($env !== null) {
-            return $env;
+        $declared = self::declaredProfile();
+        if ($declared !== null) {
+            return $declared;
         }
 
         return self::frameworkRootIsLocal() ? self::PROFILE_LOCAL : self::PROFILE_PRODUCTION;
@@ -171,22 +172,14 @@ final class ProjectDbProfileResolver
     }
 
     /**
-     * Ortam değişkeninden AÇIK profil kararı (varsa).
+     * `secrets.php` `app.db_profile` ile AÇIK profil kararı (varsa).
      *
-     * `Env` fail-closed davranışı gereği kayıtsız adı reddeder; bu yüzden
-     * burada `Env::string()` KULLANILMAZ, kayıtlı sabit adı doğrudan okunur
-     * (aynı desen: `PreBoot::envOverrideRequested()`).
+     * TEK okuyucu `Secrets::app()`; izinli değer listesi şemadadır
+     * (`SecretsSchema::APP_ALLOWED`), burada ikinci bir liste yazılmaz.
      */
-    private static function fromEnvironment(): ?string
+    private static function declaredProfile(): ?string
     {
-        $ad = \Rbn\Framework\Core\System\Config\Definitions\EnvKeys::RBN_DB_PROFILE;
-        $v = $_ENV[$ad] ?? $_SERVER[$ad] ?? getenv($ad);
-
-        if (!is_string($v)) {
-            return null;
-        }
-
-        $v = strtolower(trim($v));
+        $v = \Rbn\Framework\Core\System\Config\Secrets::app()['db_profile'];
 
         return match ($v) {
             self::PROFILE_LOCAL => self::PROFILE_LOCAL,

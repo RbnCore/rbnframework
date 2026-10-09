@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\Support\Definitions\System;
 /**
  * ComponentTypes - Single Source of Truth for Framework Component Mapping 🧬🏛️⚓
  * 
- * RBN 3.5 Masterpiece: Centralized authority for component type suffixes,
+ * RBN Framework: Centralized authority for component type suffixes,
  * pluralization mappings, and alias resolution.
  * Replaces redundant type maps across Discovery Engine and Registries.
  */

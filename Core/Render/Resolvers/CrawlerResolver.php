@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Web\BaseRender;
 /**
  * CrawlerResolver - Search Engine Intelligence & Discovery Hub Orchestrator 🧬🤖⚓
  * 
- * RBN 3.5 Sovereign Framework Standards.
+ * RBN Framework Framework Standards.
  * Orchestrates dedicated sub-resolvers for Robots, Sitemaps, Feeds and LLMs.
  */
 class CrawlerResolver extends BaseRender

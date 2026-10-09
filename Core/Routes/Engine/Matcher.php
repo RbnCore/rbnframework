@@ -113,7 +113,7 @@ class Matcher
 
         $rawUri = '/' . trim($uri, '/');
 
-        // 🎼 RBN 3.5: [SOVEREIGN MATCHING ENGINE] 🛰️🪐⚓
+        // 🎼 RBN Framework: [RBN Framework MATCHING ENGINE] 🛰️🪐⚓
         // Support for optional parameters {param?} and custom regex {param:regex}
 
         // [R-08] `match()` gelen URI'yi `'/'.trim($uri,'/')` ile normalize eder,
@@ -187,7 +187,7 @@ class Matcher
 
         $out .= self::escapeLiteral($literal);
 
-        // 🎼 RBN 3.5: [MASTERPIECE DELIMITER]
+        // 🎼 RBN Framework: [RBN Framework DELIMITER]
         // Using ~ as delimiter to avoid escaping slashes (/)
         $pattern = "~^" . $out . "$~";
 

@@ -7,11 +7,11 @@ namespace Rbn\Framework\Packages\RbnPipeline\Concerns;
 use Rbn\Framework\Core\Support\Exceptions\CronTaskException;
 
 /**
- * AutoTaskTrait - Shared Sovereign Pipeline Logic for All Automated Tasks (Blog, News, Product, etc.) 🤖🛰️⚓
+ * AutoTaskTrait - Shared RBN Framework Pipeline Logic for All Automated Tasks (Blog, News, Product, etc.) 🤖🛰️⚓
  * 
  * Provides unified lifecycle checks, time matching, image generation retry loops,
  * and publishing handlers for all automated task services.
- * Masterpiece Refactoring: Modularized with PipelineResolverTrait & PipelineSanitizerTrait.
+ * RBN Framework Refactoring: Modularized with PipelineResolverTrait & PipelineSanitizerTrait.
  */
 trait AutoTaskTrait
 {
@@ -19,7 +19,7 @@ trait AutoTaskTrait
     use PipelineSanitizerTrait;
 
     /**
-     * Projenin aktif anahtarını (project_key) çözümleyen SOVEREIGN tekil metod 🔑🛡️
+     * Projenin aktif anahtarını (project_key) çözümleyen RBN Framework tekil metod 🔑🛡️
      */
     public function getProjectKey(?string $key = null, bool $throwOnEmpty = false): string
     {

@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\Support\Contracts\Base;
 use Rbn\Framework\Core\Support\Contracts\Discovery\DiscoveryInterface;
 
 /**
- * BaseModelInterface - The Contract for RBN 3.5 Models 🎻⚖️
+ * BaseModelInterface - The Contract for RBN Framework Models 🎻⚖️
  * 
  * Defines the standard API for data orchestration and query building.
  */

@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\Attributes\SubModule;
 
 /**
  * ContactController - Relocated to Logic Hub 📩🏛️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 #[SubModule(
     entity: 'contact',
@@ -18,7 +18,7 @@ class ContactController extends RbnAdminController
 {
 
     /**
-     * Mesajları Listele (Sovereign Index) 📑📩⚓
+     * Mesajları Listele (RBN Framework Index) 📑📩⚓
      */
     public function index(?string $type = null): void
     {

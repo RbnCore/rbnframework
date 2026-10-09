@@ -1,6 +1,6 @@
 # Bundles/Internal/Backstage — Panel çekirdeği: sidebar, e-posta ve ayar mimarisi
 
-> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Bundles/Internal/Backstage/` — 24 `*.php` + 12 `*.rbn.php` görünüm.
 > **Envanter:** 24 php dosyasının 24'ü bu belgede anlatıldı.
 > **Belge tek dosyadır** çünkü hiçbir alt dal 20 `*.php` eşiğini geçmez

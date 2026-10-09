@@ -1,6 +1,6 @@
 /**
- * RBN Framework 3.5 - AJAX Debug Bridge 🧬🛰️🔘
- * [Sarsılmaz Köprü] - Masterpiece Standard.
+ * AJAX Debug Bridge 🧬🛰️🔘
+ * [Sarsılmaz Köprü] - RBN Framework Standard.
  * 
  * Automatically detects RBN diagnostic JSON responses in AJAX/Fetch 
  * and shows a rescue button to open a high-fidelity diagnostic popup.
@@ -35,7 +35,8 @@
         
         const popup = window.open('', '_blank', 'width=1000,height=800,resizable=yes');
         const data = lastError.data || {};
-        const shield = lastError.shield || 'RBN Framework 3.5';
+        // Surum elle yazilmaz: sunucu `shield` gonderir; yoksa sayfanin generator etiketi (FrameworkIdentity'den uretilir).
+        const shield = lastError.shield || (document.querySelector('meta[name="generator"]') || {}).content || 'RBN Framework';
         const now = lastError.timestamp || '';
         const snippet = data.snippet || null;
         const errLine = data.line || 0;

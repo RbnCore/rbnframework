@@ -10,10 +10,10 @@ use Rbn\Framework\Core\Support\Exceptions\CronTaskException;
 use Rbn\Framework\Packages\RbnPipeline\Concerns\PipelineResolverTrait;
 
 /**
- * ExternalFetchManager - Sovereign Centralized Manager for External & Internal Candidate Fetching 🛰️🧠🚀
+ * ExternalFetchManager - RBN Framework Centralized Manager for External & Internal Candidate Fetching 🛰️🧠🚀
  * 
  * Location: RbnPipeline/Services/ExternalFetchManager.php
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Manages Google Trends, RSS feeds, Draft candidates, Blacklisting, and Duplicate Post Prevention across all projects.
  */
 #[Component(alias: 'externalFetch', type: 'manager')]

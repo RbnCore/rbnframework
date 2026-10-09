@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\Services\BaseService;
 
 /**
  * RecoveryService - The Identity Lifecycle Orchestrator 🧶📧⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * Orchestrates account creation, password recovery, and verification.
  * 
@@ -31,6 +31,21 @@ class RecoveryService extends BaseService
     private const PASSWORD_RECOVERY_HOURS = 1;
 
     /**
+     * Kayıt yanıtı: yeni adres ile kayıtlı adres aynı metni ve aynı yanıt
+     * gövdesini alır (kullanıcı numaralandırması yok).
+     */
+    private const REGISTER_NEUTRAL_MESSAGE = 'Kayıt isteğiniz alındı. Adres uygunsa doğrulama bağlantısı e-posta adresinize gönderildi (24 saat geçerli).';
+
+    /**
+     * Kayıt yanıtının en kısa süresi (ms). Kayıtlı adres dalı (hash kuklası)
+     * ile yeni adres dalı (hash + insert + token + SMTP) bu tabana kadar
+     * bekletilir; süre farkı üzerinden hesap varlığı öğrenilemez. SMTP bu
+     * süreyi aşarsa fark yeniden açılır: taban SMTP'nin olağan süresinden
+     * büyük tutulmalıdır.
+     */
+    private const REGISTER_MIN_RESPONSE_MS = 1500;
+
+    /**
      * Kullanıcı numaralandırmasını (enumeration) engelleyen TEK mesaj.
      * Hem "hesap yok" hem "hesap var" dalı **bu satırı** döndürür (A-26).
      */
@@ -41,10 +56,19 @@ class RecoveryService extends BaseService
      */
     public function register(array $data): array
     {
+        $startedAt = hrtime(true);
         $lifecycle = $this->lifecycleHandler ?? $this->handler('lifecycle');
 
         // 🎼 Step 1: Execute Creation (Worker Logic) 🏹🧬
         $attempt = $lifecycle ? $lifecycle->createIdentity($data) : ['success' => false, 'error' => 'lifecycle_error', 'message' => 'Servise ulaşılamadı.'];
+
+        // Kayıtlı e-posta, yeni kayıtla AYNI yanıtı ve AYNI süreyi alır
+        // (kullanıcı numaralandırması yok; hash kuklası LifecycleHandler'da).
+        if (!$attempt['success'] && ($attempt['error'] ?? '') === 'email_exists') {
+            $this->waitUntilFloor($startedAt);
+
+            return $this->sendSuccess(self::REGISTER_NEUTRAL_MESSAGE);
+        }
 
         if (!$attempt['success']) {
             return $this->sendError($attempt['message'] ?? 'Kayıt oluşturulamadı.', ['reason' => $attempt['error'] ?? '']);
@@ -72,14 +96,28 @@ class RecoveryService extends BaseService
         // 🎼 Step 3: Bağlantıyı e-postayla gönder (şablon yoksa "gönderildi" denmez)
         $delivered = $this->deliverLink($user['email'], 'E-posta Doğrulama', 'email_verification', $user['username'] ?? 'User', $token, (int) $user['id']);
 
+        // Teslim hatası kullanıcıya NÖTR metinle döner (kayıtlı adres dalıyla
+        // aynı); ayrıntı yalnız günlüğe yazılır. Hesap `is_active=2` kalır;
+        // operatör `REGISTER_EMAIL_NOT_DELIVERED` satırından izler.
         if (!$delivered) {
-            return $this->sendError(
-                'Kaydınız oluşturuldu ancak doğrulama e-postası gönderilemedi. Lütfen destek ile iletişime geçin.',
-                ['reason' => 'email_not_delivered', 'user_id' => $user['id']]
-            );
+            $this->logs()?->channel('auth')->warning('REGISTER_EMAIL_NOT_DELIVERED', ['user_id' => (int) $user['id']]);
         }
 
-        return $this->sendSuccess('Kayıt başarılı. Doğrulama bağlantısı e-posta adresinize gönderildi (24 saat geçerli).', ['user_id' => $user['id']]);
+        $this->waitUntilFloor($startedAt);
+
+        return $this->sendSuccess(self::REGISTER_NEUTRAL_MESSAGE);
+    }
+
+    /**
+     * Kayıt yanıtını REGISTER_MIN_RESPONSE_MS tabanına kadar bekletir.
+     */
+    private function waitUntilFloor(int $startedAt): void
+    {
+        $elapsedUs = intdiv(hrtime(true) - $startedAt, 1000);
+        $remainingUs = self::REGISTER_MIN_RESPONSE_MS * 1000 - $elapsedUs;
+        if ($remainingUs > 0) {
+            usleep($remainingUs);
+        }
     }
 
     /**

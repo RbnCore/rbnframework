@@ -7,9 +7,9 @@ namespace Rbn\Framework\Core\Services\Console\Jobs;
 use Rbn\Framework\Core\Base\BaseComponent;
 
 /**
- * CleanupJob - Master Sovereign System Cleanup Orchestrator 🧼🛰️⚡
+ * CleanupJob - Master RBN Framework System Cleanup Orchestrator 🧼🛰️⚡
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Server (Workspace) ve Projects (Tenant) katmanlarını akıllı saklama süreleri (retention) ile orkestre eder.
  */
 class CleanupJob extends BaseComponent
@@ -21,7 +21,7 @@ class CleanupJob extends BaseComponent
     {
         $taskLog = $this->service('base.taskLog');
 
-        // 🛡️ SİBER GÜVENLİK: Sadece ana rbncore yetkili projesi üzerinden çalışabilir
+        // 🛡️ SİBER GÜVENLİK: Sadece ana project yetkili projesi üzerinden çalışabilir
         $currentProjectKey = (string) ($params['project_key'] ?? $this->projectKey ?? 'rbncore');
         if ($currentProjectKey !== 'rbncore') {
             $msg = "SİBER GÜVENLİK: Global temizlik yetkisi bulunmayan proje bağlamında engellendi: [{$currentProjectKey}]";

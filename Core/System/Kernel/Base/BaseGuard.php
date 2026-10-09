@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Support\Exceptions\PreflightException;
 /**
  * BaseGuard - The Foundation of all Survival Guards 🏛️🛡️⚓
  * 
- * RBN 3.5 "Masterpiece": Centralizes exception handling
+ * RBN Framework "RBN Framework": Centralizes exception handling
  * for the absolute core diagnostics layer.
  */
 abstract class BaseGuard implements GuardInterface

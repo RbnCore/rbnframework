@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseModelInterface;
 /**
  * MasterIpWhitelistModel - Whitelist Orchestration Hub 🛡️🕊️
  * 
- * RBN 3.5: Lean data layer for managing trusted IP addresses.
+ * RBN Framework: Lean data layer for managing trusted IP addresses.
  * Powered by ActionModelTrait for advanced querying.
  * 
  * @property int    $id

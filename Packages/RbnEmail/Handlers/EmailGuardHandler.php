@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Support\Blueprints\Validations\EmailValidations;
 /**
  * EmailGuardHandler - The Outbound Sentry 🛡️🎻⚓
  * 
- * RBN 3.5 "Masterpiece": Specialized Security Handler for email dispatching.
+ * RBN Framework: Specialized Security Handler for email dispatching.
  * Protects SMTP reputation by validating formats, DNS, and blacklists.
  */
 class EmailGuardHandler extends BaseComponent

@@ -13,7 +13,7 @@ use Rbn\Framework\Core\Support\Contracts\Routes\RouteInterface;
 /**
  * RouteManager - Framework URL ve Rotalama Orkestrasyonu 🛡️🛣️⚓
  * 
- * RBN 3.0: Engine bileşenlerini yöneten merkezi sistem.
+ * Engine bileşenlerini yöneten merkezi sistem.
  * RouteInterface kontratını uygulayarak mimari simetri sağlar.
  */
 class RouteManager implements RouteInterface
@@ -93,7 +93,7 @@ class RouteManager implements RouteInterface
 
         $route = $this->match($method, $uri);
         if ($route) {
-            // 🎼 RBN 3.5 Dynamic Context Preservation 🛰️⚓
+            // 🎼 RBN Framework Dynamic Context Preservation 🛰️⚓
             $panel = null;
             $module = null;
             $basePrefix = $this->getBasePrefix();
@@ -195,7 +195,7 @@ class RouteManager implements RouteInterface
                 if ($storedPrefix !== null) {
                     $currentUri = (string) ($_SERVER['REQUEST_URI'] ?? '');
 
-                    // [R-04 · 2026-10-03 · baran-6eb7f5] Hedef uretimi ve guvenli-hedef
+                    // [R-04 · 2026-10-03 · team member] Hedef uretimi ve guvenli-hedef
                     // kontrolu ayri bir saf metoda tasindi (`resolvePrefixGuardRedirect`).
                     // TABAN: `$newUri` dogrudan `header("Location: {$newUri}")` ile
                     // basiliyordu; CRLF ve acik-yonlendirme (//evil.example) icin
@@ -328,6 +328,13 @@ class RouteManager implements RouteInterface
 
         $isLogoutRoute = $currentPath === 'logout' || $currentPath === 'cikis' || $currentPath === 'auth/logout';
         $isPostAuthSubmit = ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && str_starts_with($currentPath, 'auth/');
+
+        // Kayıt kapalıysa kayıt yolları burada `/`a yönlenmez: rota hiç
+        // kaydedilmediği için dağıtıcı 404 verir (yolun varlığı sızmaz).
+        if (!\Rbn\Framework\Core\Http\Security\AuthPolicy::registrationEnabled()
+            && \Rbn\Framework\Core\Http\Security\AuthPolicy::isRegisterPath($currentPath)) {
+            return;
+        }
 
         // 🛑 Admin Panel Disabled Guard: Block all admin prefix and auth view GET URLs when panel is disabled (except logout)
         if ($adminPanelDisabled && !$isLogoutRoute && !$isPostAuthSubmit && ($hasDashboardPrefix || $isBlockedAuthRoute)) {

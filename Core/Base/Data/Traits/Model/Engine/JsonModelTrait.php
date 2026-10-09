@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\Base\Data\Traits\Model\Engine;
 /**
  * JsonModelTrait - Autonomous JSON Casting Engine 🎭🧬⚓
  * 
- * RBN 3.5 Masterpiece: Modellerde JSON sütunlarını otomatik olarak 
+ * RBN Framework: Modellerde JSON sütunlarını otomatik olarak
  * Array <-> JSON dönüşümü yapan motor parçası.
  */
 trait JsonModelTrait

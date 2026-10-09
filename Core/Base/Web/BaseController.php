@@ -12,7 +12,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 /**
  * BaseController - The Central Command for RBN Applications 🎮🛰️⚓
  * 
- * RBN 3.5: Ultimate Masterpiece.
+ * RBN Framework: Ultimate RBN Framework.
  * Artık mülkler (service, model vb.) hiyerarşik olarak ServicesContextTrait'ten gelir.
  */
 abstract class BaseController extends BaseComponent implements BaseControllerInterface
@@ -36,8 +36,8 @@ abstract class BaseController extends BaseComponent implements BaseControllerInt
     }
 
     /**
-     * Orchestrate the smart injection and sovereign identity 🎻🛰️⚓
-     * RBN 3.5: Simplified. Base DNA now handles attribute discovery.
+     * Orchestrate the smart injection and RBN Framework identity 🎻🛰️⚓
+     * RBN Framework: Simplified. Base DNA now handles attribute discovery.
      */
     protected function bootControllerSymphony(): void
     {

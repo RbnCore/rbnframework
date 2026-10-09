@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Services\BaseService;
 /**
  * EmailService - The Orchestra Chef 👨‍🍳🎻📧
  * 
- * RBN 3.5: Masterpiece Standard (Orchestra Pattern).
+ * RBN Framework: Standard (Orchestra Pattern).
  * Primary entry point for all email operations.
  */
 class EmailService extends BaseService

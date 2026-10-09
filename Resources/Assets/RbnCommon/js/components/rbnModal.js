@@ -14,6 +14,32 @@
         activeModal: null,
         activeBackdrop: null,
         lastTrigger: null,
+        _releaseTrap: null,
+        _returnFocus: null,
+
+        /**
+         * Odak tuzagi (tek yardimci): Tab/Shift+Tab kapsayici icinde doner, ilk odaklanabilire odaklanir.
+         * Donus: serbest birakma fonksiyonu (odagi onceki ogeye GERI VERMEZ; close() verir).
+         */
+        trapFocus: function (container) {
+            const sel = 'a[href],button:not([disabled]),input:not([disabled]):not([type="hidden"]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+            const items = () => Array.from(container.querySelectorAll(sel)).filter(el => el.offsetParent !== null || el === document.activeElement);
+            const onKey = (e) => {
+                if (e.key !== 'Tab') return;
+                const list = items();
+                if (!list.length) { e.preventDefault(); container.focus(); return; }
+                const first = list[0], last = list[list.length - 1];
+                if (e.shiftKey && (document.activeElement === first || !container.contains(document.activeElement))) { e.preventDefault(); last.focus(); }
+                else if (!e.shiftKey && (document.activeElement === last || !container.contains(document.activeElement))) { e.preventDefault(); first.focus(); }
+            };
+            document.addEventListener('keydown', onKey, true);
+            if (!container.hasAttribute('tabindex')) container.setAttribute('tabindex', '-1');
+            const start = items().find(el => !el.matches('.btn-close,[data-rbn-dismiss]')) || items()[0] || container;
+            // visibility geçişi (hidden→visible) ilk karede hâlâ "hidden" ölçüldüğünden odak bir kare sonra verilir
+            const give = () => { if (!container.contains(document.activeElement)) start.focus({ preventScroll: true }); };
+            requestAnimationFrame(() => { give(); setTimeout(give, 60); });
+            return () => document.removeEventListener('keydown', onKey, true);
+        },
 
         /**
          * Initialize event listeners for data-attributes (Universal Event Delegation)
@@ -41,7 +67,7 @@
                 }
 
                 // Modal Dışına (Backdrop / Karartmaya) Tıklanınca Kapatma
-                if (e.target.classList.contains('modal') && !e.target.hasAttribute('data-bs-backdrop-static')) {
+                if ((e.target.classList.contains('modal') || e.target.classList.contains('rbn-modal')) && !e.target.hasAttribute('data-bs-backdrop-static')) {
                     self.close(e.target);
                 }
             });
@@ -163,7 +189,7 @@
             const modalBody = modalEl.querySelector('.modal-body, .rbn-modal-body');
 
             if (typeof config === 'object') {
-                if (modalDialog && config.size) {
+                if (modalDialog && config.size && !modalDialog.classList.contains('rbn-modal-dialog')) {
                     modalDialog.className = `modal-dialog modal-dialog-centered modal-${config.size}`;
                 }
                 if (modalTitle && config.title) {
@@ -172,12 +198,15 @@
             }
 
             const showModalDirectly = () => {
-                this.showBackdrop();
+                if (!modalEl.classList.contains('rbn-modal')) this.showBackdrop();
+                this._returnFocus = document.activeElement;
                 modalEl.classList.add('show');
                 modalEl.removeAttribute('aria-hidden');
                 modalEl.setAttribute('aria-modal', 'true');
                 document.body.classList.add('modal-open');
                 this.activeModal = modalEl;
+                if (this._releaseTrap) this._releaseTrap();
+                this._releaseTrap = this.trapFocus(modalEl.querySelector('.rbn-modal-dialog') || modalEl);
                 document.dispatchEvent(new CustomEvent('rbnModalOpened', { detail: { modal: modalEl, config: config } }));
             };
 
@@ -238,6 +267,10 @@
             this.hideBackdrop();
             document.body.classList.remove('modal-open');
             this.activeModal = null;
+            if (this._releaseTrap) { this._releaseTrap(); this._releaseTrap = null; }
+            const back = this._returnFocus || this.lastTrigger;
+            this._returnFocus = null;
+            if (back && back.focus && document.contains(back)) back.focus({ preventScroll: true });
 
             document.dispatchEvent(new CustomEvent('rbnModalClosed', { detail: { modal: modalEl } }));
         },

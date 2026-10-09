@@ -7,8 +7,8 @@ namespace Rbn\Framework\Core\Support\Exceptions;
 /**
  * RuntimeException - Operational Framework Failure 🌪️🩹
  * 
- * RBN 3.5: Strategic Exception Layer.
- * Part of the RBN "Masterpiece" Error Management system.
+ * RBN Framework: Strategic Exception Layer.
+ * Part of the RBN "RBN Framework" Error Management system.
  * Used for errors that occur during the actual execution of the framework logic.
  */
 class RuntimeException extends DiagnosticException

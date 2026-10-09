@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Rbn\Framework\Core\Base\Data\Traits\Model\Engine;
 
 /**
- * BulkModelTrait - High-Performance Batch Operations for RBN 3.5 🚀⚡
+ * BulkModelTrait - High-Performance Batch Operations for RBN Framework 🚀⚡
  */
 trait BulkModelTrait
 {

@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 
 /**
  * CoreScannerHandler - Network & Core Files Analysis (Max 30 Points)
- * RBN 3.5 Handler Pipeline
+ * RBN Framework Handler Pipeline
  */
 class CoreScannerHandler extends BaseSeoHandler
 {

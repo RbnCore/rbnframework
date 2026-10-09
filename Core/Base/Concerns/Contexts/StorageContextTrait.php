@@ -9,8 +9,8 @@ use Rbn\Framework\Core\Base\Concerns\BaseContextTrait;
 /**
  * StorageContextTrait - Shared Core Vitals 🧩🎻⚓
  * 
- * RBN 3.5: Accesses core properties via BaseContextTrait hierarchy.
- * Masterpiece Refactoring: Optimized Lazy Loading and DNA guarantees.
+ * RBN Framework: Accesses core properties via BaseContextTrait hierarchy.
+ * RBN Framework Refactoring: Optimized Lazy Loading and DNA guarantees.
  */
 trait StorageContextTrait
 {
@@ -36,7 +36,7 @@ trait StorageContextTrait
     /**
      * Resolve Storage Engine from Hub 🧩
      * 
-     * RBN 3.5: DNA garantili, akışkan ve tekil (Lazy Load) çözümleme.
+     * RBN Framework: DNA garantili, akışkan ve tekil (Lazy Load) çözümleme.
      */
     protected function resolveStorage(): ?object
     {
@@ -60,7 +60,7 @@ trait StorageContextTrait
      *
      * DAVRANIS ETKISI: cagrilmadigi surece mevcut paylasimli motor AYNEN
      * kullanilmaya devam eder. Proje baglami hash'i ile bolme gibi
-     * DAVRANIS DEGISTIREN kismin bilincli olarak YAPILMADI (karar: Lena).
+     * DAVRANIS DEGISTIREN kismin bilincli olarak YAPILMADI (karar: team member).
      */
     public static function forgetStorage(): void
     {

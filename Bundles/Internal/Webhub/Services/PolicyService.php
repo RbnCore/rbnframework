@@ -6,7 +6,7 @@ use Rbn\Framework\Core\Base\Services\BaseService;
 
 /**
  * PolicyService - Mastering Polymorphic Logic 🎻⚖️⚓
- * RBN 3.5 Standard: Pure Service Intelligence with zero model changes.
+ * RBN Framework Standard: Pure Service Intelligence with zero model changes.
  */
 class PolicyService extends BaseService
 {

@@ -8,13 +8,13 @@ use Rbn\Framework\Core\Database\Models\Master\MasterDevelopersModel;
 use Rbn\Framework\Core\Database\Models\Master\MasterIpWhitelistModel;
 use Rbn\Framework\Core\Database\Repositories\Common\ShieldSettingsRepository;
 use Rbn\Framework\Core\Render\Configs\AssetConfig;
-use Rbn\Framework\Core\System\Config\Env;
+use Rbn\Framework\Core\System\Config\Secrets;
 use Rbn\Framework\Core\Support\Definitions\Route\RouteBlueprint;
 
 /**
  * SystemGuardHandler - The Master Access Evaluator 🛡️⚖️
  * 
- * RBN 3.5: Masterpiece Logic - Prioritized Maintenance and VIP validation.
+ * RBN Framework: Logic - Prioritized Maintenance and VIP validation.
  */
 class SystemGuardHandler extends BaseComponent
 {
@@ -216,9 +216,8 @@ class SystemGuardHandler extends BaseComponent
      */
     protected function resolveFailClosed(): bool
     {
-        // [FW-ENV-KAYIT-160] Okuma TEK kapidan: `Env`; tanimsiz/bos ise
-        // fail-closed `true` doner. [B-10] Ikinci "kapali listesi" YAZILMAZ:
-        return Env::flag('RBN_GUARD_FAILCLOSED', true);
+        // [FW-096-D8] `secrets.php` `app.guard_failclosed` (bool; yok/okunamaz -> true).
+        try { return Secrets::app()['guard_failclosed']; } catch (\Throwable) { return true; }
     }
 
     /**

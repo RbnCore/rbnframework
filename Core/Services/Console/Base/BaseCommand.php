@@ -10,16 +10,16 @@ use Rbn\Framework\Core\Base\Concerns\Contexts\StorageContextTrait;
 use Rbn\Framework\Core\Base\Concerns\Data\InteractsWithProjectContextTrait;
 
 /**
- * BaseCommand - The Sovereign Foundation for CLI Commands 🏹⚖️⚓
+ * BaseCommand - The RBN Framework Foundation for CLI Commands 🏹⚖️⚓
  * 
- * RBN 3.5 Masterpiece: Centralized authority for console I/O and universal discovery.
+ * RBN Framework: Centralized authority for console I/O and universal discovery.
  * Constitutionally aligned with the Laws of Reusability and Structural DNA.
  */
 abstract class BaseCommand implements CommandInterface
 {
     /**
      * Unified Discovery Hub 🧬🎡⚓
-     * RBN 3.5 Law: Mandatory use of base traits for non-redundant architecture.
+     * RBN Framework Law: Mandatory use of base traits for non-redundant architecture.
      */
     use ServicesContextTrait;
     use StorageContextTrait;
@@ -32,7 +32,7 @@ abstract class BaseCommand implements CommandInterface
     {
         $this->io = $io;
 
-        // 🎼 RBN 3.5: DNA Kökünü (rbn & discover) ayağa kaldır 🚀🔋
+        // 🎼 RBN Framework: DNA Kökünü (rbn & discover) ayağa kaldır 🚀🔋
         // Law of Reusability: Using the standard boot sequence of the framework.
         $this->bootBaseContext();
     }

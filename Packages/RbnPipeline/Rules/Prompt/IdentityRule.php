@@ -9,7 +9,7 @@ use Rbn\Framework\Packages\RbnPipeline\Contracts\PromptRuleInterface;
 
 /**
  * IdentityRule - Dynamically builds and enforces the project identity and custom persona rules 🗣️
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 class IdentityRule extends BaseComponent implements PromptRuleInterface
 {

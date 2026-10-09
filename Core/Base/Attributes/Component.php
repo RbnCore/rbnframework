@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\BaseAttribute;
 
 /**
  * Component Attribute - Unified Discovery Engine 🏛️🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * Used to declare any project-level component (Model, Service, Handler, Provider, etc.)
  * and its system identity (alias) for autonomous registration.

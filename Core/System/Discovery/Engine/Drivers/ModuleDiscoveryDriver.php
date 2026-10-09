@@ -22,7 +22,7 @@ use Rbn\Framework\Core\System\Discovery\Clusters\Structure\Folder\FolderContext;
 /**
  * ModuleDiscoveryDriver - Centralized Physical Discovery Engine 🕵️‍♂️🛰️⚓
  * 
- * RBN 3.5 Masterpiece: Core driver for scanning disk bundles and components via Attributes.
+ * RBN Framework: Core driver for scanning disk bundles and components via Attributes.
  * Encapsulated purely inside the Core/System/Discovery cluster.
  */
 class ModuleDiscoveryDriver
@@ -61,7 +61,7 @@ class ModuleDiscoveryDriver
      *      `Route::module(…)->load()`
      * 1. yol bayrağa dokunmadığı için 2. yükleme engellenemiyordu.
      *
-     * ÖLÇÜM (17/17 proje, `docs/agent-results/FW-CRAWLER-COKLU-OLCUM-pelin-6eb7f5.md`):
+     * ÖLÇÜM (17/17 proje, `docs/agent-results/FW-CRAWLER-COKLU-OLCUM-team member-6eb7f5.md`):
      * statik GET rotaları iki kez kayıtlıydı — toplam 95 çift kayıt; sitemap'e
      * 63 fazladan `<loc>`, `llms.txt`'e 62 fazladan satır yazılıyordu.
      * Tek koşul: aktif modülün `ModuleData::registerRoutes()`'ında ≥1 statik
@@ -97,7 +97,7 @@ class ModuleDiscoveryDriver
     }
 
     /**
-     * Registers and maps all active bundles (Sovereign & Project) 🏛️🛰️⚓
+     * Registers and maps all active bundles (RBN Framework & Project) 🏛️🛰️⚓
      */
     public function registerBundles(string $type = 'map', ?array $bundles = null): mixed
     {
@@ -210,7 +210,7 @@ class ModuleDiscoveryDriver
             }
         }
 
-        // 🎼 Framework Bundles Scan (RbnSuite, Internal, Sovereign) 🏛️⚓
+        // 🎼 Framework Bundles Scan (RbnSuite, Internal, RBN Framework) 🏛️⚓
         $frameworkBundles = SystemRegistry::sovereignBundles();
         foreach ($frameworkBundles as $bundleClass) {
             if (!class_exists($bundleClass)) {

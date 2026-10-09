@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\Data\BaseConfig;
 /**
  * NamespaceMap - The Centralized Namespace Blueprint 🧬🗺️
  * 
- * RBN 3.5: Provides high-performance categorical namespace mapping.
+ * RBN Framework: Provides high-performance categorical namespace mapping.
  * Centralizing this here allows the framework to resolve 
  * components across Core, Bundles, and Project modules without duplication.
  */
@@ -60,7 +60,7 @@ class NamespaceMap extends BaseConfig
         'RbnAuth' => 'Rbn\\Framework\\Bundles\\RbnSuite\\RbnAuth\\',
         'RbnStudio' => 'Rbn\\Framework\\Bundles\\RbnSuite\\RbnStudio\\',
 
-        // Framework Packages (Sovereign Service Hub) 📦
+        // Framework Packages (RBN Framework Service Hub) 📦
         'Packages' => 'Rbn\\Framework\\Packages\\',
 
         // Project Layer (Modules & Application) 🚀

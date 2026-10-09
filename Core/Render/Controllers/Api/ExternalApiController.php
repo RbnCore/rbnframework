@@ -29,7 +29,7 @@ class ExternalApiController extends BaseController
 
         // 4.b KAPSAM DENETIMI — `actions` kontrolunden ONCE 🔒
         //
-        // [FW-APIGUARD · TASARIM GOREV 2 · 2026-10-03 · zeki-6eb7f5]
+        // [FW-APIGUARD · TASARIM GOREV 2 · 2026-10-03 · team member]
         // `ApiGuard` middleware'i kapsami zaten denetler; burada ikinci kez
         // dener (derinlikte savunma: middleware'i atlayan bir yol olursa
         // kapsam yine uygulanir). Anahtar `scopes` listesi BOS ise denetim
@@ -88,7 +88,7 @@ class ExternalApiController extends BaseController
             $limit = (int) ($schema['limit'] ?? 10);
             $query->limit($limit);
 
-            $data = $query->get() ?: [];
+            $data = $query->get(); // Collection (nesne, `?: []` hiç devreye girmez); satırlar aşağıda dizileştirilir
 
             // 6. Veri Formatlama / Mutator Desteği
             $formattedData = [];

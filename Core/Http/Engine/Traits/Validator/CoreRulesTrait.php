@@ -1,6 +1,6 @@
 <?php
 /**
- * RBN Framework 3.0: High-Performance Http Engine 🎻🛡️
+ * High-Performance Http Engine 🎻🛡️
  */
 namespace Rbn\Framework\Core\Http\Engine\Traits\Validator;
 
@@ -86,7 +86,7 @@ trait CoreRulesTrait
         }
     }
 
-    /* == [F-06] 2026-10-03 · baran-6eb7f5 ==================================
+    /* == [F-06] 2026-10-03 · team member ==================================
      *
      * Asagidaki kurallar framework+projects+domains taramasinda
      * KULLANILIYORDU ama framework'te karsiligi YOKTI -> `applyRule()`

@@ -12,7 +12,7 @@ use Rbn\Framework\Core\System\Registries\RbnSystemInfo;
 /**
  * SystemAccessMapTrait - The Entry Gates of the Framework 🏹🏷️⚓
  * 
- * RBN 3.5 Masterpiece: Centralized authority for Aliases and CLI Commands.
+ * RBN Framework: Centralized authority for Aliases and CLI Commands.
  */
 trait SystemAccessMapTrait
 {

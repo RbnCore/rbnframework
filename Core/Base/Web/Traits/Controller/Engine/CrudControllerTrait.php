@@ -7,9 +7,9 @@ namespace Rbn\Framework\Core\Base\Web\Traits\Controller\Engine;
 use Exception;
 
 /**
- * CrudControllerTrait - Standard CRUD actions for RBN 3.5 Controllers 💎🎡
+ * CrudControllerTrait - Standard CRUD actions for RBN Framework Controllers 💎🎡
  * 
- * RBN 3.5: Renamed to ControllerTrait to maintain layer-specific standards.
+ * RBN Framework: Renamed to ControllerTrait to maintain layer-specific standards.
  * 
  * @property string|null $module
  * @property string|null $sub_module
@@ -30,7 +30,7 @@ trait CrudControllerTrait
         $data = $this->crudInput($this->request->rawAll());
         $result = $this->activeService->create($data);
 
-        // 🎼 RBN 3.5: [EXPLICIT DISPATCH] 🆕🛰️⚓
+        // 🎼 RBN Framework: [EXPLICIT DISPATCH] 🆕🛰️⚓
         $this->handleResult($result, null, null, 'create');
     }
 
@@ -43,7 +43,7 @@ trait CrudControllerTrait
         $data = $this->crudInput($this->request->rawAll());
         $result = $this->activeService->update($data);
 
-        // 🎼 RBN 3.5: [EXPLICIT DISPATCH] 📝🛰️⚓
+        // 🎼 RBN Framework: [EXPLICIT DISPATCH] 📝🛰️⚓
         $this->handleResult($result, null, null, 'update');
     }
 
@@ -164,7 +164,7 @@ trait CrudControllerTrait
             throw new Exception("Service for CrudControllerTrait must implement destroy() method.");
         }
 
-        // 🎼 RBN 3.5: [EXPLICIT DISPATCH] 🗑️🛰️⚓
+        // 🎼 RBN Framework: [EXPLICIT DISPATCH] 🗑️🛰️⚓
         $this->handleResult($result, null, null, 'delete');
     }
 
@@ -194,7 +194,7 @@ trait CrudControllerTrait
             throw new Exception("Service for CrudControllerTrait must implement setStatus()/toggleStatus() or update() method.");
         }
 
-        // 🎼 RBN 3.5: [EXPLICIT DISPATCH] 🚥🛰️⚓
+        // 🎼 RBN Framework: [EXPLICIT DISPATCH] 🚥🛰️⚓
         $this->handleResult($result, null, false, 'status');
     }
 }

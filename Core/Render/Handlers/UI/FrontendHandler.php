@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Web\BaseRender;
 /**
  * FrontendHandler - Data Preparation for Website Views 🛰️🌐⚓
  * 
- * RBN 3.5 "Masterpiece" Architecture.
+ * RBN Framework Architecture.
  * Leverages autonomous DNA for site-wide context and orchestrates the SEO engine.
  */
 class FrontendHandler extends BaseRender
@@ -24,7 +24,7 @@ class FrontendHandler extends BaseRender
         $data['appContext'] = 'frontend';
         $data['view'] = $view;
 
-        // 🛰️ 2. Sovereign SEO Orchestration
+        // 🛰️ 2. RBN Framework SEO Orchestration
         // Handlers only provide overrides; the engine handles the DB/Config hierarchy.
         $builder = $this->handler('seoBuilder');
         if ($builder) {
@@ -40,7 +40,7 @@ class FrontendHandler extends BaseRender
         $data['footerAssets'] = $this->assetService()->renderFooter();
         $data['appConfigHtml'] = '';
 
-        // 🎼 RBN 3.5: Centralized Head State & Ready Queue Hub (Frontend Context) 🛰️⚓
+        // 🎼 RBN Framework: Centralized Head State & Ready Queue Hub (Frontend Context) 🛰️⚓
         $renderedHeadState = $this->provider('partial')->render('RbnCommon/head_state', ['context' => 'frontend']);
         $data['headStateHtml'] = "\n    <!-- [FRAMEWORK HEAD STATE ENGINE] -->\n" . $renderedHeadState . "\n";
 

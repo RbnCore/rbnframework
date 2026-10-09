@@ -10,7 +10,7 @@ use Rbn\Framework\Core\System\Paths\Paths;
 /**
  * FolderContext - The Single Source of Truth for Directory Names 📂🧬🏛️⚓
  * 
- * RBN 3.5 Masterpiece: Autonomous folder context.
+ * RBN Framework: Autonomous folder context.
  * Performs physical path resolution and directory tree discovery.
  * Inherits full DNA (Shield, Cache, Normalize) from BaseDiscoveryContext.
  */
@@ -27,7 +27,7 @@ class FolderContext extends BaseDiscoveryContext
         return self::$instance ??= new self();
     }
     /**
-     * RBN 3.5: Masterpiece Architectural Layer & Manifesto Constants 📂🎻🏛️⚓
+     * RBN Framework: Architectural Layer & Manifesto Constants 📂🎻🏛️⚓
      */
     public const DATA        = 'Data';
     public const MODELS      = 'Models';
@@ -66,7 +66,7 @@ class FolderContext extends BaseDiscoveryContext
      */
     public function resolveName(string $key, bool $returnFull = false)
     {
-        // [RBN 3.5] DIRECT MATRIX ACCESS 🏛️⚔️🛡️⚓
+        // [RBN Framework] DIRECT MATRIX ACCESS 🏛️⚔️🛡️⚓
         // We use FolderMatrix constants directly to avoid DiscoveryEngine recursion.
         // This ensures paths can be resolved even BEFORE the engine is fully booted.
         $all = [
@@ -149,7 +149,7 @@ class FolderContext extends BaseDiscoveryContext
      */
     public function resolvePath(string $key, ?string $sub = null): string
     {
-        // [RBN 3.5] BOOTSTRAP BYPASS 🏛️⚔️🛡️⚓
+        // [RBN Framework] BOOTSTRAP BYPASS 🏛️⚔️🛡️⚓
         // We MUST bypass cacheDiscovery() for basic framework/project paths.
         // This prevents the "Paths not initialized" LogicException during boot/survival.
 
@@ -157,7 +157,7 @@ class FolderContext extends BaseDiscoveryContext
         $parts = explode('.', $key);
         $rootKey = array_shift($parts); // FRAMEWORK or PROJECT
 
-        // [RBN 3.5] DIRECT MATRIX ACCESS 🏛️⚔️🛡️⚓ (No Engine, No Recursion)
+        // [RBN Framework] DIRECT MATRIX ACCESS 🏛️⚔️🛡️⚓ (No Engine, No Recursion)
         $tree = match (strtoupper($rootKey)) {
             'FRAMEWORK' => \Rbn\Framework\Core\Support\Definitions\System\FolderMatrix::FRAMEWORK,
             'PROJECT' => \Rbn\Framework\Core\Support\Definitions\System\FolderMatrix::PROJECT,
@@ -192,7 +192,7 @@ class FolderContext extends BaseDiscoveryContext
     /**
      * Check if a specialized sub-folder exists for a given namespace. 🕵️
      * 
-     * RBN 3.0: Dynamically detects if 'Services' or 'Models' subdirectory exists.
+     * Dynamically detects if 'Services' or 'Models' subdirectory exists.
      */
     public static function hasSpecializedFolder(string $namespace, string $subFolder): bool
     {
@@ -211,7 +211,7 @@ class FolderContext extends BaseDiscoveryContext
         }
         $resolved = trim($resolved, '\\');
 
-        // [RBN 3.5] Autonomous Definition Access 🏛️⚔️🛡️⚓
+        // [RBN Framework] Autonomous Definition Access 🏛️⚔️🛡️⚓
         $fwPrefix = \Rbn\Framework\Core\System\Discovery\Clusters\Logic\Definition\Definition::get('namespace', 'FRAMEWORK_PREFIX');
         $prPrefix = \Rbn\Framework\Core\System\Discovery\Clusters\Logic\Definition\Definition::get('namespace', 'PROJECT_PREFIX');
 
@@ -228,7 +228,7 @@ class FolderContext extends BaseDiscoveryContext
 
         $relativePath = trim($relativePath, '\\');
 
-        // [RBN 3.5] Use Centralized Path Hub 🛰️
+        // [RBN Framework] Use Centralized Path Hub 🛰️
         $rootPath = $isFramework
             ? Paths::frameworkRoot()
             : Paths::project()->root();

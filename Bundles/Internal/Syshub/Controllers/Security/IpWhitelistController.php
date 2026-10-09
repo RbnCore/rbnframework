@@ -9,7 +9,7 @@ use Rbn\Framework\Bundles\Internal\Syshub\Controllers\SyshubController;
 
 /**
  * WhitelistController - Güvenilir IP Listesi Yönetimi 🕊️🛡️
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 #[SubModule(
     entity: 'security/ipwhitelist',
@@ -24,10 +24,10 @@ class IpWhitelistController extends SyshubController
      */
     public function index(): void
     {
-        // 🎼 Masterpiece: Veriyi otonom provider üzerinden çekiyoruz
+        // 🎼 RBN Framework: Veriyi otonom provider üzerinden çekiyoruz
         $whitelists = $this->service->whitelist()->getList();
 
-        // 🎼 Masterpiece MVC: Veri zenginleştirme mantığı Handler katmanına taşındı 🛰️⚓
+        // 🎼 RBN Framework MVC: Veri zenginleştirme mantığı Handler katmanına taşındı 🛰️⚓
         $whitelists = $this->service->security()->enrich($whitelists);
 
         $paginator = $this->paginate($whitelists, 10);

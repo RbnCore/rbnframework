@@ -7,7 +7,7 @@ use Rbn\Framework\Core\Base\Attributes\SubModule;
 /**
  * EmailController - Email Configuration Management 🛡️🛰️⚓
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 #[SubModule(entity: 'email', service: 'backstage', provider: 'backstage', model: 'Settings')]
 class EmailController extends BackstageController
@@ -34,7 +34,7 @@ class EmailController extends BackstageController
 
     /**
      * Otonom Modal Veri Kaynağı 🏹🛰️⚓
-     * RBN 3.5: Veri enjeksiyonu ve dinamik view keşfini burada yönetir.
+     * RBN Framework: Veri enjeksiyonu ve dinamik view keşfini burada yönetir.
      */
     protected function getModalData($id)
     {
@@ -58,7 +58,7 @@ class EmailController extends BackstageController
 
     /**
      * Test E-Postası Gönder 📧🛰️
-     * RBN 3.5 Custom logic preservation.
+     * RBN Framework Custom logic preservation.
      */
     public function testMail()
     {
@@ -86,7 +86,7 @@ class EmailController extends BackstageController
 
     /**
      * E-Posta Ayarlarını Güncelle 💾🛰️⚓
-     * RBN 3.5: Toplu (Index) ve Tekli (Modal) güncellemeleri tek metotla yönetir.
+     * RBN Framework: Toplu (Index) ve Tekli (Modal) güncellemeleri tek metotla yönetir.
      */
     public function updateMailSettings()
     {

@@ -8,8 +8,8 @@ use Rbn\Framework\Core\Base\Web\BaseController;
 use Rbn\Framework\Core\Base\Attributes\Module;
 use Rbn\Framework\Bundles\RbnSuite\RbnStudio\Models\ModuleData;
 /**
- * RbnStudioController - The Sovereign Root for RbnStudio 🎨🚀🏛️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RbnStudioController - The RBN Framework Root for RbnStudio 🎨🚀🏛️⚓
+ * RBN Framework Standard.
  */
 #[Module(
     name: 'studio',

@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 /**
  * FileImportHandler - Uzak Dosya ve URL İçe Aktarım İşleyicisi (Worker) 📥🛰️
  * 
- * RBN 3.5: Masterpiece Standard (BaseComponent Actor).
+ * RBN Framework: Standard (BaseComponent Actor).
  * Location: Packages\RbnFile\Handlers\
  */
 class FileImportHandler extends BaseComponent
@@ -23,7 +23,7 @@ class FileImportHandler extends BaseComponent
     public function fromUrl(string $url): string|bool
     {
         try {
-            // 1. Birinci Tercih: RBN 3.5 RemoteRequest (SSL bypass ile)
+            // 1. Birinci Tercih: RBN Framework RemoteRequest (SSL bypass ile)
             $result = $this->remote->get($url, [], [
                 'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) RBN-File-Import/1.0'
             ], [

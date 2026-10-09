@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseRenderInterface;
 
 /**
  * BreadcrumbProvider - Navigation Path HTML Generator 🛰️🥖⚓
- * Part of RBN 3.5 Masterpiece.
+ * Part of RBN Framework.
  */
 class BreadcrumbProvider extends BaseRender implements BaseRenderInterface
 {
@@ -82,7 +82,7 @@ class BreadcrumbProvider extends BaseRender implements BaseRenderInterface
             $text = (string) ($item['title'] ?? '');
             $icon = (string) ($item['icon'] ?? '');
 
-            // 🎼 Sovereign Icon Render
+            // 🎼 RBN Framework Icon Render
             if (!empty($icon)) {
                 $html .= '<i class="' . htmlspecialchars($icon) . ' me-1 opacity-75"></i>';
             }

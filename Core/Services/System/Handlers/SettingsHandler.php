@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 /**
  * SettingsHandler - Artisan Presentation & Decoration Logic 🎭🎨
  * 
- * RBN 3.5: Handles visual transformations for settings (Badges, Select options).
+ * RBN Framework: Handles visual transformations for settings (Badges, Select options).
  * Relocated to Core\Services\System\Handlers for centralized orchestration.
  * Decoupled from the Service to ensure Single Responsibility.
  */

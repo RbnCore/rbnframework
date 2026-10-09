@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\Data\BaseConfig;
 /**
  * FolderMatrix - The DNA of RBN Framework Directory Structure 🏺✨
  * 
- * RBN 3.5: Structural metadata as a centralized system definition.
+ * RBN Framework: Structural metadata as a centralized system definition.
  * 
  * NOTE: Sadece ana iskelet ve spesifik (sabit) klasörler buraya eklenmelidir. 
  * Dinamik paketler ve her alt klasörün buraya eklenmesine gerek yoktur; 

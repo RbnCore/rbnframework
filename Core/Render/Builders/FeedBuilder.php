@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 
 /**
  * FeedBuilder - Stateful accumulator and RSS XML generator 📡📰⚓
- * Part of RBN 3.5 Masterpiece.
+ * Part of RBN Framework.
  */
 class FeedBuilder extends BaseComponent
 {

@@ -18,7 +18,7 @@ class MaintenanceGuard extends BaseGuard
     {
         $guard = self::getGuardService()->service('systemGuard');
 
-        // 🎼 RBN 3.5: Masterpiece Delegation 🏛️⚖️🛡️
+        // 🎼 RBN Framework: Delegation 🏛️⚖️🛡️
         // The guard no longer has its own logic. It simply asks the Sentinel.
         $guard->check();
     }

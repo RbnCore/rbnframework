@@ -7,9 +7,9 @@ namespace Rbn\Framework\Core\Base;
 use Rbn\Framework\Core\Base\Services\BaseService;
 
 /**
- * BaseAttribute - The Sovereign Attribute DNA 🧬🛰️⚓
+ * BaseAttribute - The RBN Framework Attribute DNA 🧬🛰️⚓
  * 
- * RBN 3.5 Masterpiece Architecture.
+ * RBN Framework Architecture.
  * Provides attributes with framework awareness via BaseService proxy, 
  * avoiding the heavy BaseComponent boot loop.
  */
@@ -26,7 +26,7 @@ abstract class BaseAttribute
 
     /**
      * Constructor for DNA injection 🧪
-     * RBN 3.5: Autonomously hydrates the metadata vault and syncs identity.
+     * RBN Framework: Autonomously hydrates the metadata vault and syncs identity.
      */
     public function __construct(array $metadata = [])
     {
@@ -47,7 +47,7 @@ abstract class BaseAttribute
 
     /**
      * Magic Accessor: Transparently retrieve metadata or framework services. 🪄✨
-     * RBN 3.5: Direct proxy to BaseService to avoid inheritance loops.
+     * RBN Framework: Direct proxy to BaseService to avoid inheritance loops.
      */
     public function __get(string $name)
     {

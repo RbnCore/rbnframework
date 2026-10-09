@@ -12,7 +12,7 @@ use Rbn\Framework\Core\Support\Definitions\Route\RouteBlueprint;
 /**
  * TrafficProvider - Pulse Korumalı Aylık Konsolide & Tekil IP Trafik Kayıt Birimi 🧬
  * 
- * RBN 3.5 Sovereign Standard.
+ * RBN Framework Standard.
  * Her ay için TEK BİR 'pulse_' ön ekli JSON dosyası tutar (pulse_YYYY-MM_projectKey.json).
  * 'pulse_' ön eki sayesinde sistemdeki geçici temizlik görevleri bu dosyalara dokunmaz.
  * Günlük bazda aynı IP'yi sadece 1 defa kaydeder (Tekil Ziyaretçi / Unique IP).

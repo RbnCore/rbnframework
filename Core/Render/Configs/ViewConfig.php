@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\Data\BaseConfig;
 /**
  * ViewConfig - Unified View Engine Configuration Registry 🎨
  * 
- * Part of the RBN 3.0 Render Hub.
+ * Part of the RBN Render Hub.
  * Centralizes template directives and engine-specific settings.
  */
 class ViewConfig extends BaseConfig

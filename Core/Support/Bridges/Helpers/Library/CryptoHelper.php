@@ -52,6 +52,57 @@ class CryptoHelper
     }
 
     /**
+     * Doğrulamalı şifreleme (AES-256-GCM). Bozulan/başka kayda taşınan şifreli metin
+     * çözülmez (CBC'deki bit çevirme ve dolgu kehaneti burada yoktur).
+     *
+     * Anahtar: `hash_hkdf('sha256', <uygulama anahtarı>, 32, $info)` — her kullanım
+     * (`$info`) kendi alt anahtarını alır, uygulama anahtarının tamamı (256 bit) kullanılır.
+     * `$aad` şifrelenmez ama doğrulanır (ör. kaydın kimliği): farklı AAD ile çözme başarısız.
+     *
+     * Biçim: base64( nonce[12] || tag[16] || şifreli metin ).
+     *
+     * @throws \RuntimeException Anahtar hiçbir kaynaktan bulunamazsa (fail-closed).
+     */
+    public static function encryptAead(string $data, string $info, string $aad = '', ?string $key = null): string
+    {
+        $nonce = random_bytes(12);
+        $tag = '';
+        $cipher = openssl_encrypt($data, 'aes-256-gcm', self::deriveKey($info, $key), OPENSSL_RAW_DATA, $nonce, $tag, $aad, 16);
+        if ($cipher === false) {
+            throw new \RuntimeException('RBN Guvenlik: AES-256-GCM sifreleme basarisiz.');
+        }
+
+        return base64_encode($nonce . $tag . $cipher);
+    }
+
+    /**
+     * `encryptAead()` çözücüsü. Etiket/AAD tutmazsa ya da biçim bozuksa `null`.
+     *
+     * @throws \RuntimeException Anahtar hiçbir kaynaktan bulunamazsa (fail-closed).
+     */
+    public static function decryptAead(string $data, string $info, string $aad = '', ?string $key = null): ?string
+    {
+        $raw = base64_decode($data, true);
+        if ($raw === false || strlen($raw) < 28) {
+            return null;
+        }
+
+        $plain = openssl_decrypt(substr($raw, 28), 'aes-256-gcm', self::deriveKey($info, $key), OPENSSL_RAW_DATA, substr($raw, 0, 12), substr($raw, 12, 16), $aad);
+
+        return $plain === false ? null : $plain;
+    }
+
+    /**
+     * Uygulama anahtarından kullanım başına 32 baytlık alt anahtar (HKDF-SHA256).
+     *
+     * @throws \RuntimeException Anahtar hiçbir kaynaktan bulunamazsa (fail-closed).
+     */
+    private static function deriveKey(string $info, ?string $key = null): string
+    {
+        return hash_hkdf('sha256', self::keyMaterial($key), 32, $info);
+    }
+
+    /**
      * Şifre özetler (One-way Hashing)
      * Kullanıcı şifreleri için bunu kullanın.
      */
@@ -104,11 +155,8 @@ class CryptoHelper
      *
      * ÖNCELİK (ilk bulan kazanır):
      *   1. Çağırana açıkça verilen `$key`.
-     *   2. Ortam değişkeni: `APP_KEY`, sonra `ENCRYPTION_KEY`
-     *      (`Env::string()` — kaynak sırası `$_ENV` → `$_SERVER` → `getenv`;
-     *      CGI/FastCGI'de
-     *      `$_ENV` doldurulmaz).
-     *   3. Sır dosyası: `Secrets::optional('app_key')` (`Secrets/secrets.php`).
+     *   2. Sır dosyası: `Secrets::optional('app_key')` (`Secrets/secrets.php`).
+     *      [FW-096-D8] Ortam değişkeni (`APP_KEY`/`ENCRYPTION_KEY`) yolu YOKTUR.
      *
      * HİBİRİ YOKSA **HATA FIRLATILIR** — şifreleme/çözme sessizce
      * "bütün kurulumlarda bilinen" bir anahtarla devam ETMEZ. Anahtarı
@@ -118,8 +166,9 @@ class CryptoHelper
      *
      * GERİYE UYUMLULUK (kill-switch — operatör kararı):
      *   Daha önce gömülü tuzla şifrelenmiş veri varsa, tuzun kendisi depoda
-     *   BULUNMAZ; operatör eski tuzu kendi kayıtlarından `RBN_LEGACY_SALT`
-     *   olarak verir ve `RBN_ALLOW_LEGACY_SALT=1` ile açıkça onaylar.
+     *   BULUNMAZ; operatör eski tuzu kendi kayıtlarından `secrets.php`
+     *   üst düzey `legacy_salt` olarak verir ve `app.allow_legacy_salt = true`
+     *   ile açıkça onaylar.
      *   Anahtar değişmeden üretilir → eski şifreli veri okunur.
      *   Onay verilmezse FAIL-CLOSED (veri okunamaz, ama sessizce yanlış
      *   anahtarla çözülmez).
@@ -128,56 +177,40 @@ class CryptoHelper
      */
     private static function resolveKey(?string $key = null): string
     {
-        if ($key !== null && $key !== '') {
-            return substr(hash('sha256', $key), 0, 32);
-        }
+        // v1 (CBC) türetmesi: SHA-256 özetinin ilk 32 HEX karakteri. Mevcut şifreli
+        // veriyi okumak için DEĞİŞTİRİLMEZ; yeni veri `encryptAead()` (HKDF) kullanır.
+        return substr(hash('sha256', self::keyMaterial($key)), 0, 32);
+    }
 
-        foreach (['APP_KEY', 'ENCRYPTION_KEY'] as $ad) {
-            $v = self::readEnvironment($ad);
-            if ($v !== null && $v !== '') {
-                return substr(hash('sha256', $v), 0, 32);
-            }
+    /**
+     * Anahtar kaynağı (ham değer); öncelik sırası `resolveKey()` belgesindeki gibidir.
+     *
+     * @throws \RuntimeException Anahtar hiçbir kaynaktan bulunamazsa.
+     */
+    private static function keyMaterial(?string $key = null): string
+    {
+        if ($key !== null && $key !== '') {
+            return $key;
         }
 
         $sirDosyasi = self::sirDosyasindanAnahtar();
         if ($sirDosyasi !== null && $sirDosyasi !== '') {
-            return substr(hash('sha256', $sirDosyasi), 0, 32);
+            return $sirDosyasi;
         }
 
         $legacy = self::legacySaltApproval();
         if ($legacy !== null) {
-            return substr(hash('sha256', $legacy), 0, 32);
+            return $legacy;
         }
 
         throw new \RuntimeException(
-            'RBN Guvenlik: sifreleme anahtari bulunamadi (APP_KEY / ENCRYPTION_KEY ortam '
-            . 'degiskeni ve Secrets/secrets.php icindeki `app_key` anahtari tanimli degil). '
-            . 'Sifreleme icin gomulu/sabit bir tuz KULLANILMAZ. Cozum: (a) `APP_KEY` ortam '
-            . 'degiskenini tanimlayin, ya da (b) Core/System/Config/Secrets/secrets.php '
-            . 'dosyasina `app_key` anahtarini ekleyin. ESKI GOMULU TUZLA sifrelenmis veriniz varsa '
-            . 'gecici olarak RBN_ALLOW_LEGACY_SALT=1 ve RBN_LEGACY_SALT=<eski tuz> tanimlayin; '
-            . 'veriyi sifreledikten sonra bu iki degiskeni kaldirip yeniden sifreleyin.'
+            'RBN Guvenlik: sifreleme anahtari bulunamadi (Secrets/secrets.php icindeki '
+            . '`app_key` anahtari tanimli degil). Sifreleme icin gomulu/sabit bir tuz KULLANILMAZ. '
+            . 'Cozum: Core/System/Config/Secrets/secrets.php dosyasina `app_key` anahtarini ekleyin. '
+            . 'ESKI GOMULU TUZLA sifrelenmis veriniz varsa ayni dosyada gecici olarak '
+            . '`app.allow_legacy_salt = true` ve ust duzey `legacy_salt` tanimlayin; veriyi '
+            . 'yeniden sifreledikten sonra bu iki alani kaldirin.'
         );
-    }
-
-    /**
-     * Ortam değişkeni okuma — TEK kapı: `Env::string()`.
-     *
-     * [FW-ENV-KAYIT-160] Kaynak sırası (`$_ENV` → `$_SERVER` → `getenv`) ve
-     * "kayıtlı değilse hata" davranışı `Env`'in KENDİ kuralıdır; burada ikinci
-     * bir okuyucu YAZILMAZ. `Env` boş/metin olmayan değerleri geçtiği için
-     * eski `trim() === ''` kontrolünün de karşılığı vardır.
-     *
-     * @param string $name Kayıtlı ortam değişkeni adı.
-     */
-    private static function readEnvironment(string $name): ?string
-    {
-        $env = 'Rbn\\Framework\\Core\\System\\Config\\Env';
-        if (!class_exists($env)) {
-            require_once __DIR__ . '/../../../../System/Config/Env.php';
-        }
-
-        return $env::string($name);
     }
 
     /**
@@ -211,18 +244,19 @@ class CryptoHelper
      * Kill-switch: eski gömülü tuzla şifrelenmiş veriyi okumak için
      * operatörün AÇIKÇA onayı + tuzun kendisi (depo dışından).
      *
-     * Onay (kill-switch) YOKSA `null` döner → çağıran fail-closed hatasını fırlatır.
-     * Onay VARSA eski tuz `RBN_LEGACY_SALT` ile verilmiş olmalıdır; o da yoksa
-     * yine `null` (yani: parola tahmin edilmeye çalışılmaz).
+     * [FW-096-D8] TEK kaynak `secrets.php`: onay `app.allow_legacy_salt`
+     * (PHP `true` olmalı; metin kabul edilmez), tuz üst düzey `legacy_salt`.
+     * Onay YOKSA `null` döner → çağıran fail-closed hatasını fırlatır.
+     * Onay VARSA tuz da tanımlı olmalıdır; o da yoksa yine `null`.
      */
     private static function legacySaltApproval(): ?string
     {
-        $onay = self::readEnvironment('RBN_ALLOW_LEGACY_SALT');
-        if ($onay === null || !in_array(strtolower($onay), ['1', 'true', 'on', 'yes'], true)) {
+        $secrets = 'Rbn\\Framework\\Core\\System\\Config\\Secrets';
+        if (!class_exists($secrets) || $secrets::app()['allow_legacy_salt'] !== true) {
             return null;
         }
 
-        $tuz = self::readEnvironment('RBN_LEGACY_SALT');
+        $tuz = $secrets::legacySalt();
         if ($tuz === null || $tuz === '') {
             return null;
         }
@@ -260,8 +294,8 @@ class CryptoHelper
         $uyarildi = true;
 
         $mesaj = 'RBN Guvenlik: CryptoHelper GOMULU TUZ (legacy) modunda calisiyor '
-            . '(RBN_ALLOW_LEGACY_SALT). Bu mod gecicidir; eski veriyi sifreleyip '
-            . 'RBN_ALLOW_LEGACY_SALT / RBN_LEGACY_SALT tanimlarini kaldirin.';
+            . '(secrets.php app.allow_legacy_salt). Bu mod gecicidir; eski veriyi sifreleyip '
+            . 'app.allow_legacy_salt / legacy_salt alanlarini kaldirin.';
 
         if (function_exists('error_log')) {
             @error_log($mesaj);

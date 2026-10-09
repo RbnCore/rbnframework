@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 
 /**
  * SitemapBuilder - Stateful accumulator and XML generator for Sitemaps 🗺️🛰️⚓
- * Part of RBN 3.5 Masterpiece.
+ * Part of RBN Framework.
  */
 class SitemapBuilder extends BaseComponent
 {

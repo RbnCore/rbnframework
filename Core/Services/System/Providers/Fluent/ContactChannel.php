@@ -6,7 +6,7 @@ use Rbn\Framework\Core\Base\Patterns\BaseChannel;
 
 /**
  * ContactChannel - Fluent Contact Message API 📩🕊️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * Bu sınıf iletişim mesajlarına akıcı bir erişim arayüzü sağlar.
  * Veri kaynağı olarak ContactProvider'ı kullanır (SSOT).

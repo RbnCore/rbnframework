@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Render\Configs\AssetConfig;
 /**
  * AssetProxy - Fluent Asset Resolver 🎭⚓
  * 
- * RBN 3.5: Part of the decoupled Proxy Hub.
+ * RBN Framework: Part of the decoupled Proxy Hub.
  * Specialized for scoped asset URL generation based on the centralized DNA.
  */
 class AssetProxy extends BaseProxy
@@ -26,7 +26,7 @@ class AssetProxy extends BaseProxy
      */
     public function __construct(string $type, string $scope = 'project')
     {
-        // 🎼 RBN 3.5: Symmetric initialization - Artık $rbn dışarıdan paslanmaz.
+        // 🎼 RBN Framework: Symmetric initialization - Artık $rbn dışarıdan paslanmaz.
         parent::__construct($type);
         $this->scope = $scope;
     }

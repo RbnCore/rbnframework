@@ -9,7 +9,7 @@ use Throwable;
 /**
  * ModalController - The Traffic Cop for Universal Modals 👮‍♂️🛰️⚓
  * 
- * RBN 3.5: Masterpiece dispatcher for legacy and shared modal components.
+ * RBN Framework: dispatcher for legacy and shared modal components.
  */
 class ModalController extends BaseController
 {
@@ -27,9 +27,9 @@ class ModalController extends BaseController
         $view = $this->request->input('view'); // Direct view name (e.g. add, edit, detail)
         $id = (int) $this->request->input('id', 0);
 
-        // 🎻 RBN 3.5: [SOVEREIGN DISPATCHER] 🛰️🏹⚓
+        // 🎻 RBN Framework: [RBN Framework DISPATCHER] 🛰️🏹⚓
         try {
-            // Phase 1: Direct Autonomous Resolution (The Sovereign Way)
+            // Phase 1: Direct Autonomous Resolution (The RBN Framework Way)
             $controllerClass = $this->discover()->controller($type);
 
             // Phase 2: Heuristic Fallback & Segment Analysis 🛰️🎯
@@ -42,16 +42,16 @@ class ModalController extends BaseController
 
             // 🚀 Phase 3: Delegation Execution
             if ($controllerClass) {
-                // 🎼 RBN 3.5: [POLYMORPHIC DELEGATION] 🎻🛰️⚓
+                // 🎼 RBN Framework: [POLYMORPHIC DELEGATION] 🎻🛰️⚓
                 $controller = is_object($controllerClass) ? $controllerClass : (class_exists($controllerClass) ? new $controllerClass() : null);
 
                 if ($controller && is_object($controller)) {
-                    // 🎼 RBN 3.5: [SOVEREIGN MODULE ALIGNMENT] 💉🛰️⚓
+                    // 🎼 RBN Framework: [RBN Framework MODULE ALIGNMENT] 💉🛰️⚓
                     // Controller identity is autonomously handled by SubModule attributes during construction.
                     if (method_exists($controller, 'modal')) {
                         $controller->modal($id, $view);
 
-                        // 🎻 RBN 3.5: [ACTIVE VIEW CAPTURE] 🛰️⚓
+                        // 🎻 RBN Framework: [ACTIVE VIEW CAPTURE] 🛰️⚓
                         // If the controller didn't explicitly echo, catch the buffered view.
                         if (method_exists($controller, 'getActiveView')) {
                             $activeView = $controller->getActiveView();
@@ -81,7 +81,7 @@ class ModalController extends BaseController
     }
 
     /**
-     * Renders a professional, RBN 3.5 styled error message 🎨🛡️⚓
+     * Renders a professional, RBN Framework styled error message 🎨🛡️⚓
      */
     private function renderErrorMessage(string $title, string $message, ?string $subText = null): void
     {

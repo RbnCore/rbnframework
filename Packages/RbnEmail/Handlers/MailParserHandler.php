@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Rbn\Framework\Packages\RbnEmail\Handlers;
 
 use Rbn\Framework\Core\Base\BaseComponent;
+use Rbn\Framework\Packages\RbnEmail\Support\ImapEnvelope;
 
 /**
  * MailParserHandler - MIME Multipart, HTML Body and Attachment Parser 📜📎
  * 
- * RBN 3.5 Sovereign Framework Standards.
+ * RBN Framework Framework Standards.
  */
 class MailParserHandler extends BaseComponent
 {
@@ -43,7 +44,7 @@ class MailParserHandler extends BaseComponent
                 $encoding = strtolower(trim($m[1]));
             }
 
-            $decoded = $this->decodeContent($bodyRaw, $encoding);
+            $decoded = ImapEnvelope::toUtf8($this->decodeContent($bodyRaw, $encoding), $this->charsetOf($headersRaw));
             if ($isHtml) {
                 $bodyHtml = $decoded;
                 $bodyText = strip_tags($decoded);
@@ -104,9 +105,13 @@ class MailParserHandler extends BaseComponent
 
             $decoded = $this->decodeContent($subBody, $encoding);
 
+            if (!$filename) {
+                $decoded = ImapEnvelope::toUtf8($decoded, $this->charsetOf($subHeaders));
+            }
+
             if ($filename) {
                 $attachments[] = [
-                    'filename' => $filename,
+                    'filename' => ImapEnvelope::decodeHeader($filename),
                     'size' => strlen($decoded),
                     'content_type' => preg_match('/Content-Type:\s*([^;\r\n]+)/i', $subHeaders, $cm) ? trim($cm[1]) : 'application/octet-stream'
                 ];
@@ -128,6 +133,12 @@ class MailParserHandler extends BaseComponent
             'text' => $text,
             'attachments' => $attachments
         ];
+    }
+
+    /** Başlık bloğundaki `charset=` değeri (yoksa null). */
+    private function charsetOf(string $headers): ?string
+    {
+        return preg_match('/charset\s*=\s*"?([A-Za-z0-9._:-]+)"?/i', $headers, $m) ? $m[1] : null;
     }
 
     private function decodeContent(string $data, string $encoding): string

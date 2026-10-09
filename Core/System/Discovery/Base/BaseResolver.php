@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Support\Contracts\Discovery\DiscoveryInterface;
 /**
  * BaseResolver - Abstract Hierarchical Search Engine 🏛️🛰️⚓
  * 
- * RBN 3.5: Direct Lookup Engine. 
+ * RBN Framework: Direct Lookup Engine.
  * Provides the absolute contract for resource discovery.
  */
 abstract class BaseResolver extends BaseDiscoveryContext implements DiscoveryInterface

@@ -1,6 +1,6 @@
 # Core/System/Kernel — Açılış zinciri (PreBoot → aşamalar → rota)
 
-> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/System/Kernel/` — 19 `*.php` (kök 2, `Base/` 5, `Guards/` 5, `Stages/` 7).
 > **Envanter:** 19 dosyanın 19'u aşağıda anlatıldı.
 
@@ -70,7 +70,7 @@ Her HTTP isteğinin açılış omurgasıdır. Giriş dosyası (`index.php`) `Boo
 
 1. `PhpVersionGate::enforce()`; ikinci çağrıda (`$initialized`) hemen döner.
 2. `date_default_timezone_set('Europe/Istanbul')`, `setlocale(LC_ALL, 'tr_TR.UTF-8', …)`.
-3. `detectEnvironment()`: `RBN_DEV` zaten tanımlıysa çıkar; `isLocal = envOverrideRequested() || isTrustedLocalEnvironment(HTTP_HOST, REMOTE_ADDR)`. Sabitler: `RBN_DEV`, `RBN_DEBUG` (başlangıçta `isLocal`), `DEFAULT_LANGUAGE='tr'`, `APP_NAME='RBN CORE'`, `APP_URL` (yerelde `http://<host>`, aksi `https://<host>`) (`:340-363`).
+3. `detectEnvironment()`: `RBN_DEV` zaten tanımlıysa çıkar; `isLocal = operatorDebugRequested() || (!isProductionDeclared() && isTrustedLocalEnvironment(HTTP_HOST, REMOTE_ADDR))` (ikisi de `secrets.php` `app` bölümünü `Secrets::app()` ile okur: `debug`/`dev`, `environment`; yoksa production). Sabitler: `RBN_DEV`, `RBN_DEBUG` (başlangıçta `isLocal`), `DEFAULT_LANGUAGE='tr'`, `APP_NAME='RBN CORE'`, `APP_URL` (yerelde `http://<host>`, aksi `https://<host>`) (`:340-363`).
 4. `ProjectDiscovery::getProjectData($publicPath, $config['project_key'] ?? null)`; doluysa `Bootstrap::setAppContext('project_data'|'project_key')` ve `$config['project_key']` güncellenir.
 5. `initPaths()` → `Paths::init()`.
 6. `defineAppVersion()`: `APP_VERSION` tek kaynağı master `projects.version`; yoksa/geçersizse `0.1.1`.
@@ -101,8 +101,8 @@ CLI'da hiçbir şey yapmaz. `Paths::project()->sessions()` dizini var ve yazıla
 
 ## 5. Tuzaklar ve kurallar
 
-1. **Yerel ortam kararı istemciye bağlıdır:** `RBN_DEV` = ortam bayrağı **veya** (geçerli host `localhost`/`127.0.0.1`/`[::1]`/`*.test` **ve** `REMOTE_ADDR` özel/loopback adres). İkisi birden gerekir; `*.test` adlı bir host'a **dışarıdan** gelen istek `RBN_DEV=false` olur (`isTrustedLocalEnvironment`, `PreBoot.php:317-334`). Bunun, DB profili seçimiyle (`ProjectDbProfileResolver` — sunucu kimliği) **bilerek ayrıldığı** [Config](Config.md) belgesinde.
-2. **`RBN_DEV` ve `RBN_DEBUG` bir kez `define()` edilir** (`PreBoot.php:352-353`); sonradan değişmez. `RBN_DEBUG` ortam değişkeniyle de açılabildiği için üretimde ortamda `RBN_DEBUG=1` bırakılması ekranda ayrıntı açar.
+1. **Yerel ortam kararı istemciye bağlıdır:** `RBN_DEV` = operatör bayrağı (`secrets.php` `app.debug`/`app.dev`, `PreBoot::operatorDebugRequested()`) **veya** (`app.environment` = `development` **ve** geçerli host `localhost`/`127.0.0.1`/`[::1]`/`*.test` **ve** `REMOTE_ADDR` özel/loopback adres). İkisi birden gerekir; `*.test` adlı bir host'a **dışarıdan** gelen istek `RBN_DEV=false` olur (`isTrustedLocalEnvironment`, `PreBoot.php:317-334`). Bunun, DB profili seçimiyle (`ProjectDbProfileResolver` — sunucu kimliği) **bilerek ayrıldığı** [Config](Config.md) belgesinde.
+2. **`RBN_DEV` ve `RBN_DEBUG` bir kez `define()` edilir** (`PreBoot.php:352-353`); sonradan değişmez. Operatör bayrağı (`app.debug`/`app.dev`) üretimde de ayrıntıyı açtığı için canlı `secrets.php`'de ikisi `false` kalmalıdır. Ortam değişkeni okunmaz (FW-096-D8); `app.environment` yoksa üretim kabul edilir.
 3. **`ShieldSentinel` `$kernel->get('projectKey')` okur ama hiçbir yerde `Kernel::set('projectKey', …)` yapılmaz** (tüm `Core/System` taramasında tek geçiş `ShieldSentinel.php:24`); bu yüzden `SystemDoctor::setExpectedKey()` her zaman `null` alır ve `SystemDoctor::check()` içinde de `expectedKey` okunmaz. Proje anahtarı `Bootstrap::appContext('project_key')` içindedir.
 4. **`SystemDoctor` Apache'de `.htaccess` ister:** `SERVER_SOFTWARE` içinde `Apache` geçiyorsa ve `Paths::project()->public('.htaccess')` yoksa açılış durur (`SystemDoctor.php:58-67`). nginx'te bu kontrol çalışmaz (bilerek atlanır).
 5. **`PermissionDoctor` Apache 2.2 sözdizimi yazar:** `Storage` klasörüne `.htaccess` içeriği `Order Deny,Allow` / `Deny from all` yazılır (`PermissionDoctor.php:205-207`). Apache 2.4'te bu `mod_access_compat` gerektirir; nginx `.htaccess`'i hiç okumaz (dizin koruması için sunucu yapılandırması gerekir). Hangi sunucuda çalışıldığı koddan belli değildir.

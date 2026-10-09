@@ -7,9 +7,9 @@
 
 | Sınıf | Sabitler | `definitionCategory` |
 |---|---|---|
-| `MasterDbData.php` | `PREFIX`, `CHARSET`, `ENV_FILE`, `REQUIRED_TABLES`, `KEYS_MAP` | `database_master` |
-| `CommonDbData.php` | `PREFIX`, `CHARSET`, `ENV_FILE`, `USER_ENV`, `PASS_ENV`, `DB_NAME`, `REQUIRED_TABLES`, `CLEANUP_ALLOWED_TABLES`, `KEYS_MAP` | `database_common` |
-| `ProjectDbData.php` | `PREFIX`, `ENV_FILE`, `HOST`, `CHARSET`, `DEFAULT_DB_USER`, `USER_ENV`, `PASS_ENV`, `DB_USER_KEY`, `DB_PASS_KEY`, `REQUIRED_TABLES`, `CLEANUP_ALLOWED_TABLES`, `KEYS_MAP` | `database_project` |
+| `MasterDbData.php` | `PREFIX`, `CHARSET`, `REQUIRED_TABLES`, `KEYS_MAP` | `database_master` |
+| `CommonDbData.php` | `PREFIX`, `CHARSET`, `DB_NAME`, `REQUIRED_TABLES`, `CLEANUP_ALLOWED_TABLES`, `KEYS_MAP` | `database_common` |
+| `ProjectDbData.php` | `PREFIX`, `ENV_FILE`, `HOST`, `CHARSET`, `DEFAULT_DB_USER`, `DB_USER_KEY`, `DB_PASS_KEY`, `REQUIRED_TABLES`, `CLEANUP_ALLOWED_TABLES`, `KEYS_MAP` | `database_project` |
 
 Namespace: `Rbn\Framework\Core\System\Config\Definitions\DbProfiles`.
 
@@ -58,8 +58,8 @@ Bu sınıflar kimlik/yapılandırma verisidir; koruma mantığı değil. `Core/S
 | Ortak DB | `DbProfileResolver` → `Secrets::masterDb()` (master ile aynı sunucu/hesap) |
 | Proje DB | **bu klasörde değil** — `projects/<proje>/Core/Config/project-settings.php` |
 
-- Ortam değişkeni yolları: `MASTER_DB_USER`/`MASTER_DB_PASS` **yoktur** (tek yol var).
-  `COMMON_DB_*` ve `DB_*` **yedek** okuma yoludur (`EnvKeys`'te kayıtlı).
+- Ortam değişkeni yolu **yoktur** [FW-096-D8]: master/ortak yalnız `Secrets::masterDb()`,
+  proje yedeği yalnız `secrets.php` `db_user`/`db_pass`.
 - `HOST` yalnız **proje** profili için bir varsayılandır; master/common `Secrets`'ten okur.
 - Sessiz `''`/`root` fallback yoktur: alan eksikse `RuntimeException` fırlatılır ve mesaj
   yalnız **alan adını** yazar (`secrets.php: master_db.user tanimli degil`).

@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseModelInterface;
 /**
  * CmLogAiUsagesModel - Centralized AI Token Usage & Cost Analytics Hub 📊🤖⚡
  * 
- * RBN 3.5: Shared operational layer for tracking AI prompts, token counts and costs in rbncore_common.
+ * RBN Framework: Shared operational layer for tracking AI prompts, token counts and costs in rbncore_common.
  * 
  * @property int         $id
  * @property string      $project_key

@@ -7,9 +7,9 @@ namespace Rbn\Framework\Packages\RbnApi\Services;
 use Rbn\Framework\Core\Base\Services\BaseService;
 
 /**
- * TelegramService - Sovereign Telegram Bot Gateway 📨🛰️⚓
+ * TelegramService - RBN Framework Telegram Bot Gateway 📨🛰️⚓
  *
- * RBN 3.5: Projelerin kullanabileceği TEK GENEL Telegram altyapısı.
+ * RBN Framework: Projelerin kullanabileceği TEK GENEL Telegram altyapısı.
  *
  * KAPSAM (Telegram'a özgü ve proje bağımsız olan her şey):
  *  - Bot API çağrıları: sendMessage, setWebhook, getWebhookInfo, deleteWebhook, getMe

@@ -3,7 +3,7 @@
 namespace Rbn\Framework\Core\Support\Contracts\Http;
 
 /**
- * AlertServiceInterface - The Grand Contract for RBN 3.0 Notifications 🔔🛡️
+ * AlertServiceInterface - The Grand Contract for RBN Notifications 🔔🛡️
  */
 interface AlertServiceInterface
 {

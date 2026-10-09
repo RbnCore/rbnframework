@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\Services\BaseService;
 
 /**
  * SeoService - Public API Gateway for SEO Operations 🎼🛰️⚓
- * Part of RBN 3.5 Masterpiece.
+ * Part of RBN Framework.
  */
 class SeoService extends BaseService
 {

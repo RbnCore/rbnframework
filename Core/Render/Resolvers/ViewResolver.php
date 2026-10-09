@@ -10,7 +10,7 @@ use Rbn\Framework\Core\System\Paths\Paths;
 /**
  * ViewResolver - Intelligent View Path Orchestrator 👁️🛰️⚓
  * 
- * RBN 3.5 Masterpiece: Powered by Autonomous DNA.
+ * RBN Framework: Powered by Autonomous DNA.
  * Responsible for resolving logical view paths across the entire project/framework hierarchy.
  */
 class ViewResolver extends BaseRender
@@ -23,7 +23,7 @@ class ViewResolver extends BaseRender
     /**
      * Resolve a physical view path from logical input. 🛰️⚓⚖️
      * 
-     * RBN 3.5 "Masterpiece" Logic:
+     * RBN Framework Logic:
      * 1. Check Project Resources (Resources/Views)
      * 2. Check Contextual Bundle (RbnAdmin for 'panel', RbnAuth for 'auth')
      * 3. Check General Module Discovery
@@ -42,14 +42,14 @@ class ViewResolver extends BaseRender
         $viewBase = static::toCaseSafePath($viewBase);
         $extensions = ['.php', '.rbn.php'];
 
-        // 🎼 RBN 3.5: [SOVEREIGN CONTEXT DISCOVERY] - Priority: Options > Active Controller 🧠⚓
+        // 🎼 RBN Framework: [RBN Framework CONTEXT DISCOVERY] - Priority: Options > Active Controller 🧠⚓
         $context = $options['context'] ?? ($this->rbn->activeController()->context ?? 'frontend');
 
-        // 🎯 Collect Discovery Targets (Ordered by Sovereignty)
+        // 🎯 Collect Discovery Targets (Ordered by priority)
         $targets = [];
 
         // TARGET 0: Module Level (Current Module High Priority) 🎯🛰️
-        // 🎼 RBN 3.5: [SOVEREIGN DETECTION] - Priority: Options > Active Controller 🧠⚓
+        // 🎼 RBN Framework: [RBN Framework DETECTION] - Priority: Options > Active Controller 🧠⚓
         $module = $options['module'] ?? ($this->rbn->activeController()->module ?? null);
         
         if ($module) {
@@ -62,7 +62,7 @@ class ViewResolver extends BaseRender
         // TARGET 1: Project Level (Overrides everything else) 🏰
         $targets[] = Paths::project()->views();
 
-        // TARGET 2: Sovereign Bundle Level (Derived from Active Content) 📦
+        // TARGET 2: RBN Framework Bundle Level (Derived from Active Content) 📦
         $activePanel = $options['panel'] ?? ($this->rbn->activeController()->panel ?? null);
         if ($activePanel) {
             try {
@@ -80,7 +80,7 @@ class ViewResolver extends BaseRender
         $targets[] = $frameworkViews;
         $targets[] = $frameworkViews . DIRECTORY_SEPARATOR . 'RbnCommon';
 
-        // 🎼 RBN 3.5: Contextual Framework Discovery 🛰️
+        // 🎼 RBN Framework: Contextual Framework Discovery 🛰️
         if ($activePanel) {
             $targets[] = $frameworkViews . DIRECTORY_SEPARATOR . ucfirst((string) $activePanel);
         }
@@ -90,11 +90,11 @@ class ViewResolver extends BaseRender
         }
 
         // 🏁 HIERARCHICAL DISCOVERY LOOP 🛰️⚓
-        // 🎼 RBN 3.5: [SOVEREIGN PERSISTENCE] - Check Discovery Map first 💾
+        // 🎼 RBN Framework: [RBN Framework PERSISTENCE] - Check Discovery Map first 💾
         $mapper = $this->discover()->getMapper();
         $persistenceKey = "view:{$cacheKey}";
 
-        // 🎼 RBN 3.5: [SOVEREIGN FALLBACK FOR COMMON views] - Direct load if file exists in RbnCommon
+        // 🎼 RBN Framework: [RBN Framework FALLBACK FOR COMMON views] - Direct load if file exists in RbnCommon
         $filename = basename($viewBase);
         foreach ($extensions as $ext) {
             $commonPath = $frameworkViews . DIRECTORY_SEPARATOR . 'RbnCommon' . DIRECTORY_SEPARATOR . $filename . $ext;

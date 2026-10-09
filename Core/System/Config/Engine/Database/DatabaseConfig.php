@@ -11,7 +11,7 @@ use Rbn\Framework\Core\System\Config\Definitions\DbProfiles\CommonDbData;
 /**
  * DatabaseConfig - Immutable Database Configuration DTO 🛡️⚙️⚓
  * 
- * RBN 3.5: [MASTERPIECE DTO]
+ * RBN Framework: [RBN Framework DTO]
  * Encapsulates validated database credentials with self-transformation logic.
  */
 readonly class DatabaseConfig
@@ -30,7 +30,7 @@ readonly class DatabaseConfig
      */
     public static function fromFile(string $path, string $name): self
     {
-        // 🛡️ RBN 3.5: [IDENTITY SURVIVAL] 🏛️⚓
+        // 🛡️ RBN Framework: [IDENTITY SURVIVAL] 🏛️⚓
         // Direct bypass for Master & Common DBs to prevent discovery loops and ensure fixed identities.
         if (in_array($name, ['database_master', 'database_common'])) {
             return self::fromRaw([], $name);
@@ -40,7 +40,7 @@ readonly class DatabaseConfig
             return new self();
         }
 
-        // 🎼 RBN 3.5: [PURE PHP ONLY] - Environment files are no longer supported for DB.
+        // 🎼 RBN Framework: [PURE PHP ONLY] - Environment files are no longer supported for DB.
         $rawData = (array) (include $path);
 
         return self::fromRaw($rawData, $name);

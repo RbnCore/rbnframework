@@ -62,11 +62,20 @@ class SchedulerHandler extends BaseComponent
 
     /**
      * DB'deki `days` ve `hour` listesine göre BİR SONRAKİ KESİN ÇALIŞMA SAATİNİ hesaplar.
+     *
+     * `$everyMinutes` (1-59, görevin `params.every_minutes` değeri) verilirse saat
+     * içinde bu aralıkla koşulur: sonuç, izinli gün/saatteki ilk `:00, :15, :30…`
+     * dilimidir (şu andan KESİNLİKLE ileride). `frequency` sütunu bunun için
+     * kullanılmaz; o yalnız hata sonrası erteleme aralığıdır.
      */
-    public function calculateNextRunTime(array $allowedDays, array $targetHours): string
+    public function calculateNextRunTime(array $allowedDays, array $targetHours, int $everyMinutes = 0): string
     {
         $targetHours = array_map('intval', $targetHours);
         sort($targetHours); // [7, 11, 15, 19, 23]
+
+        if ($everyMinutes > 0 && $everyMinutes < 60) {
+            return $this->nextIntervalSlot($allowedDays, $targetHours, $everyMinutes);
+        }
 
         $now = new \DateTime();
         $currentHour = (int) $now->format('G');
@@ -89,6 +98,29 @@ class SchedulerHandler extends BaseComponent
                     return $checkDate->format('Y-m-d H:i:00');
                 }
             }
+        }
+
+        return date('Y-m-d 07:00:00', strtotime('+1 day'));
+    }
+
+    /**
+     * Saat-altı aralık: şu andan sonraki ilk `$everyMinutes` dilimi; dilim izinli gün/saatte
+     * değilse bir sonraki saatin başına (`:00`, her aralığın katı) atlanır.
+     */
+    private function nextIntervalSlot(array $allowedDays, array $targetHours, int $everyMinutes): string
+    {
+        $slot = new \DateTime();
+        $minute = (int) $slot->format('i');
+        $slot->setTime((int) $slot->format('G'), intdiv($minute, $everyMinutes) * $everyMinutes, 0);
+        $slot->modify("+{$everyMinutes} minutes");
+
+        // En çok 8 gün ileriye bakılır (gün listesi haftalık).
+        $limit = (clone $slot)->modify('+8 days');
+        while ($slot < $limit) {
+            if (in_array((int) $slot->format('N'), $allowedDays, true) && in_array((int) $slot->format('G'), $targetHours, true)) {
+                return $slot->format('Y-m-d H:i:00');
+            }
+            $slot->setTime((int) $slot->format('G'), 0, 0)->modify('+1 hour');
         }
 
         return date('Y-m-d 07:00:00', strtotime('+1 day'));

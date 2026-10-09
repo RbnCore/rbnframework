@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 /**
  * CsrfHandler - The Anti-Forgery Actor 🛡️🔑
  * 
- * RBN 3.5: Atomic actor for CSRF token lifecycle management.
+ * RBN Framework: Atomic actor for CSRF token lifecycle management.
  */
 class CsrfHandler extends BaseComponent
 {
@@ -64,7 +64,7 @@ class CsrfHandler extends BaseComponent
     /**
      * High-level verification against the session token.
      *
-     * [FW-F08 · 2026-10-03 · zeki-6eb7f5] ONCEDEN BURADA bir "DEVELOPER BYPASS"
+     * [FW-F08 · 2026-10-03 · team member] ONCEDEN BURADA bir "DEVELOPER BYPASS"
      * blogu vardi: `user_role === 'developer'` veya `is_master_developer === true`
      * ise `verify()` token'a BAKMADAN `success = true` donuyordu; yani bu iki
      * oturum tipi tarayici tabanli CSRF saldirisina tamamen acikti (F-08).

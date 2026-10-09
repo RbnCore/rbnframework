@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yönlendiriliyorsunuz...</title>
     <link rel="stylesheet" href="<?= url('framework-assets/rbncommon/css/rbn-master.css') ?>">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="<?= \Rbn\Framework\Core\Support\Definitions\Render\AssetDefinition::REMIX_ICON ?>" integrity="<?= \Rbn\Framework\Core\Support\Definitions\Render\AssetDefinition::REMIX_ICON_ATTRS['integrity'] ?>" crossorigin="anonymous">
     <style>
         body, html {
             margin: 0;
@@ -46,7 +46,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars((string) ($message ?? 'Yönlendiriliyorsunuz...')) ?></title>
     <link rel="stylesheet" href="<?= url('framework-assets/rbncommon/css/rbn-master.css') ?>">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="<?= \Rbn\Framework\Core\Support\Definitions\Render\AssetDefinition::REMIX_ICON ?>" integrity="<?= \Rbn\Framework\Core\Support\Definitions\Render\AssetDefinition::REMIX_ICON_ATTRS['integrity'] ?>" crossorigin="anonymous">
     <style>
         body, html {
             margin: 0;

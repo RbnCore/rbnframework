@@ -11,7 +11,7 @@ use Throwable;
 /**
  * DevelopmentProvider - Diagnostic UI Engine 🚀🧬
  * 
- * RBN 3.5: [LAYER 3] Masterpiece Standard.
+ * RBN Framework: [LAYER 3] RBN Framework Standard.
  * Extends BaseExceptionProvider for symmetric service access.
  * Generates deep diagnostic views for internal development (Debug Mode).
  */
@@ -22,18 +22,18 @@ class DevelopmentProvider extends BaseExceptionProvider
      */
     public function render(array $analysis, Throwable $exception): bool
     {
-        // 🔍 RBN 3.5: Code Snippet Extraction for high-fidelity diagnostic
+        // 🔍 RBN Framework: Code Snippet Extraction for high-fidelity diagnostic
         $analysis['snippet'] = $this->getCodeSnippet($analysis['file'], $analysis['line']);
         $analysis['branding'] = $this->getBranding();
         $analysis['now'] = $this->getNow();
 
-        // 🎯 RBN 3.5: Masterpiece AJAX Diagnostic Support 🧬🛰️
+        // 🎯 RBN Framework: AJAX Diagnostic Support 🧬🛰️
         if ($this->isAjax()) {
             $this->renderJson($analysis, 500);
             return true;
         }
 
-        // 🎯 RBN 3.5: Use Centralized Masterpiece Autonomous Renderer 🛡️🚀
+        // 🎯 RBN Framework: Use Centralized RBN Framework Autonomous Renderer 🛡️🚀
         $analysis['exception'] = $exception;
         $analysis['isPreFlight'] = false;
 
@@ -78,7 +78,7 @@ class DevelopmentProvider extends BaseExceptionProvider
             'isPreFlight' => false
         ];
 
-        // 🎯 RBN 3.5: Use Centralized Masterpiece Autonomous Renderer 🏛️🛡️
+        // 🎯 RBN Framework: Use Centralized RBN Framework Autonomous Renderer 🏛️🛡️
         self::renderAutonomous('pre_flight', $data, $httpCode);
     }
 

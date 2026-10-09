@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\Base\Data\Traits\Repository;
 /**
  * ContentCacheTrait - Single-File Isolated Project Cache Engine 📦⚡
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Manages 1 isolated `content_data.cache` file inside each project's own directory.
  */
 trait ContentCacheTrait

@@ -11,7 +11,7 @@ use Rbn\Framework\Core\Http\Security\MachineApiRegistry;
 /**
  * IpGuardHandler - The Gatekeeper Actor 🛡️🏮
  *
- * RBN 3.5: Atomic actor for validating IP blacklist and whitelist status.
+ * RBN Framework: Atomic actor for validating IP blacklist and whitelist status.
  *
  * [A0-1 — LOG-ONLY MOD] 🎚️
  * Bu katman **ölüydü**: `provider('shieldDbSettings')` kayıtlı olmadığı için
@@ -143,7 +143,7 @@ class IpGuardHandler extends BaseComponent
 
             // 0.4. Whitelist Check (Highest Priority) — kayitli alias 🕊️
             //
-            // [FW-IP-ENFORCE-HAZIRLIK · Ö-4 · 2026-10-03 · zeki-6eb7f5] SIRA
+            // [FW-IP-ENFORCE-HAZIRLIK · Ö-4 · 2026-10-03 · team member] SIRA
             // DUZELTMESI: bu kontrol `bot_user_agent` kuralindan SONRA
             // calisiyordu. Sonuc: beyaz listedeki IP `sitebot` UA ile
             // geldiğinde bot kurali onu `would-block` (enforce'te 403 + ban)
@@ -188,7 +188,7 @@ class IpGuardHandler extends BaseComponent
 
             // 0.6. AJAN UCU MUAFIYETI 🤖🔓
             //
-            // [FW-IP-ENFORCE-HAZIRLIK · Ö-2 · 2026-10-03 · zeki-6eb7f5]
+            // [FW-IP-ENFORCE-HAZIRLIK · Ö-2 · 2026-10-03 · team member]
             // `/api/agent/*` ve `/api/telegram/webhook` uclari kendi kimlik
             // dogrulamasi ve kendi hiz siniriyla geliyor; IP katmani ban/WAF
             // uyguladiginda ajan SUSUR (B-1 form-encoded govde, B-4 ban
@@ -199,7 +199,7 @@ class IpGuardHandler extends BaseComponent
             // BOT KURALI (0.5) DOKUNULMADI: `BLOCKED_BOTS` listesinde Go UA
             // yok, ajan yolunda anlamsiz.
             //
-            // [FW-APIGUARD · TASARIM GOREV 1 · 2026-10-03 · zeki-6eb7f5]
+            // [FW-APIGUARD · TASARIM GOREV 1 · 2026-10-03 · team member]
             // MUAFIYET ARTIK BEYANDAN BESLENIR: once `MachineApiRegistry`
             // (beyan tablosu, `machine-api`), sonra ESKI EMNIYET olarak sabit
             // `isAgentEndpoint()` listesi. Sabit liste SILINMEDI: yeni ajan
@@ -253,7 +253,7 @@ class IpGuardHandler extends BaseComponent
                     return $decisions;
                 }
 
-                // [G-07 · 2026-10-03 · zeki-6eb7f5] CEZA ARTIK KADEMELI VE
+                // [G-07 · 2026-10-03 · team member] CEZA ARTIK KADEMELI VE
                 // PROJE KAPSAMLI. Onceki hali:
                 //     blockIpAddress($ip, "WAF ...", 10080, 0)
                 // yani **7 GUN + GLOBAL** ban. Iki ayri sorun birden:
@@ -395,7 +395,7 @@ class IpGuardHandler extends BaseComponent
      */
     private function wouldBlock(string $rule, string $ip, int $projectId, string $mode, string $detail): array
     {
-        // [FW-IPKATMAN-ON · 2026-10-03 · zeki-6eb7f5] LOOPBACK MUAFIYETI.
+        // [FW-IPKATMAN-ON · 2026-10-03 · team member] LOOPBACK MUAFIYETI.
         // 48 saatlik olcumun amaci GERCEK ziyaretci yanlis-pozitif oranini
         // cikarmaktir; yerel dongu trafigi (duman testi / curl / ayni sunucudan
         // gelen saglik-cron) o orani kendi verisiyle bozuyordu (bir dosyada 724

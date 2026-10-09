@@ -6,7 +6,7 @@ use Rbn\Framework\Core\Base\Services\BaseService;
 
 /**
  * FrontendMenuService - Public Website Menu Orchestrator 🌐🏛️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * @property \Rbn\Framework\Bundles\Internal\Webhub\Providers\FrontendMenuProvider $FrontendMenuProvider
  */

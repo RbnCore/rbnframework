@@ -11,7 +11,7 @@ use Throwable;
 /**
  * LogHandler - Exception Persistence Layer 📓🛡️
  * 
- * RBN 3.5: [THE BLACK-BOX RECORDER] Masterpiece Standard.
+ * RBN Framework: [THE BLACK-BOX RECORDER] RBN Framework Standard.
  * Responsible for persisting exception details to logs in all conditions.
  * Features a static 'failsafeLog' for catastrophic kernel failures.
  */
@@ -26,7 +26,7 @@ class LogHandler extends BaseComponent
      */
     public function log(array $analysis): void
     {
-        // [RBN 3.5] RECURSION GUARD 🛡️⚓
+        // [RBN Framework] RECURSION GUARD 🛡️⚓
         if (self::$isLogging) {
             return;
         }
@@ -34,7 +34,7 @@ class LogHandler extends BaseComponent
         self::$isLogging = true;
 
         try {
-            // 🛡️ RBN 3.5: [BOOT AWARENESS] 🚀
+            // 🛡️ RBN Framework: [BOOT AWARENESS] 🚀
             // If the failure is a Pre-flight (initialization) error, we bypass the Service Hub
             // to avoid discovery loops while the database is still being guarded.
             $isPreflight = ($analysis['type'] ?? '') === 'PreflightException' || !Paths::isInitialized();
@@ -48,7 +48,7 @@ class LogHandler extends BaseComponent
             $channel = $analysis['level'] ?? 'error';
 
             // 2. Access the Centralized Logging Provider ⚓💎
-            // 🛡️ RBN 3.5: [RECURSION-SAFE RESOLUTION] 🧪⚓
+            // 🛡️ RBN Framework: [RECURSION-SAFE RESOLUTION] 🧪⚓
             try {
                 $logger = $this->service('log');
                 if ($logger) {
@@ -74,7 +74,7 @@ class LogHandler extends BaseComponent
 
     /**
      * Failsafe Logging Engine (Absolute Terminal Defense) 🛡️🆘📓
-     * RBN 3.5: Masterpiece Survival Mode.
+     * RBN Framework: Survival Mode.
      * Writes directly to <project>/Storage/logs/panic/ (proje kökü çalışma zamanında çözülür)
      * Does NOT require Service Hub or any framework components.
      */

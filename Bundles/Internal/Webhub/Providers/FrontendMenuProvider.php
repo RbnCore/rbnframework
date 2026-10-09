@@ -6,7 +6,7 @@ use Rbn\Framework\Core\Base\Services\BaseProvider;
 
 /**
  * FrontendMenuProvider - Public Website Menu Query Expert 🌐🏛️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * @property \Rbn\Framework\Core\Database\Models\Project\FrontendMenusModel $FrontendMenusModel
  */
@@ -30,7 +30,7 @@ class FrontendMenuProvider extends BaseProvider
         }
 
         if ($onlyParents) {
-            // RBN 3.5: Use explicit zero or actual null check if needed
+            // RBN Framework: Use explicit zero or actual null check if needed
             $query->where('parent_id', 0);
         }
 
@@ -39,7 +39,7 @@ class FrontendMenuProvider extends BaseProvider
 
     /**
      * Builds hierarchical tree for management or frontend views 🌳🛰️⚓
-     * RBN 3.5: Hybrid mode supporting both flat indents and nested children.
+     * RBN Framework: Hybrid mode supporting both flat indents and nested children.
      */
     public function getTree(int $parentId = 0, int $depth = 0, ?array $elements = null, bool $nested = false): array
     {
@@ -53,7 +53,7 @@ class FrontendMenuProvider extends BaseProvider
         foreach ($elements as $element) {
             if ((int) $element['parent_id'] === $parentId) {
                 if ($nested) {
-                    // 🎼 RBN 3.5: Nested Mode (Masterpiece UI) 🧬
+                    // 🎼 RBN Framework: Nested Mode (RBN Framework UI) 🧬
                     $children = $this->getTree((int) $element['id'], $depth + 1, $elements, true);
                     if ($children) {
                         $element['children'] = $children;
@@ -111,7 +111,7 @@ class FrontendMenuProvider extends BaseProvider
 
     /**
      * Retrieves hierarchical parents for dropdown selection 🌳🛰️⚓
-     * RBN 3.5: Prevents circular hierarchy by excluding the branch of $excludeId.
+     * RBN Framework: Prevents circular hierarchy by excluding the branch of $excludeId.
      */
     public function getParents($excludeId = null): array
     {

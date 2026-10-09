@@ -60,7 +60,7 @@ class PermissionDoctor extends BaseGuard
         $relativeDirectories = FolderContext::discoverDirectories($projectTree, '');
 
         foreach ($relativeDirectories as $relDir) {
-            // 🎼 RBN 3.5 [SOVEREIGN RESOLUTION]: Decide the target root (Project vs Public) 🏺🪐⚓
+            // 🎼 RBN Framework [RBN Framework RESOLUTION]: Decide the target root (Project vs Public) 🏺🪐⚓
             // If it starts with 'public', we redirect the check to the REAL web root.
             $isPublicAlias = str_starts_with($relDir, 'public');
             

@@ -23,7 +23,7 @@ class LogProvider extends BaseStorageProvider
     protected ?int $targetOldDays = null;
 
     /**
-     * RBN 3.0: Fluent Channel Tracking 🛰️
+     * Fluent Channel Tracking 🛰️
      */
     protected string $currentChannel = 'app';
 
@@ -94,7 +94,7 @@ class LogProvider extends BaseStorageProvider
     }
 
     /* ==========================================================================
-       [ CORE ACTIONS ] - RBN 3.0 Logic 🧠
+       [CORE ACTIONS] - RBN Logic 🧠
        ========================================================================== */
 
     protected function getStorageDir(): string

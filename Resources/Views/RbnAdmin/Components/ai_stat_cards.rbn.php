@@ -1,6 +1,6 @@
 <?php
 /**
- * RbnAdmin Sovereign Component - AI Telemetry Summary Stat Cards 📊🤖⚡
+ * RbnAdmin RBN Framework Component - AI Telemetry Summary Stat Cards 📊🤖⚡
  * 
  * Shared component for AI Telemetry dashboard and main RbnAdmin dashboard.
  * Rendered with $summary, $totalCostTry, $textCostTry, $imageCostTry, $containerId

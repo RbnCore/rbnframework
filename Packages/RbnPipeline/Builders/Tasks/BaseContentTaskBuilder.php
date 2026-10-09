@@ -11,7 +11,7 @@ use Rbn\Framework\Core\Support\Exceptions\CronTaskException;
  * BaseContentTaskBuilder - Standardized Content Autopilot Task Builder Base 🤖📰📈
  * 
  * Location: RbnPipeline/Builders/Tasks/BaseContentTaskBuilder.php
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Dedicated base class for all text/content publishing task builders (Blog, News, Trends, etc.).
  * Encapsulates standard 6-step content pipeline execution to keep concrete builders lightweight and clean.
  */

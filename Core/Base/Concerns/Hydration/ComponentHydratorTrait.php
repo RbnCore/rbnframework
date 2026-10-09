@@ -11,7 +11,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseControllerInterface;
 /**
  * ComponentHydratorTrait - The "Awakening" Motor 🧬💉⚓
  * 
- * RBN 3.5: Materializes physical satellites (Services, Providers, Models) from attribute names.
+ * RBN Framework: Materializes physical satellites (Services, Providers, Models) from attribute names.
  * Ensures the DNA is fully hydrated with live objects.
  */
 trait ComponentHydratorTrait
@@ -19,15 +19,14 @@ trait ComponentHydratorTrait
     /**
      * Materializes all defined satellites into physical properties. 💉
      * 
-     * RBN 3.5: Orchestrates Service, Provider, and Model Awakening.
-     * Version: [3.5.RC2-STABLE] 🧬⚓
+     * RBN Framework: Orchestrates Service, Provider, and Model Awakening.
      */
     protected function hydrateComponents(): void
     {
         if ($this->rbn && $activeController = $this->rbn->activeController()) {
             $reflection = new \ReflectionClass($activeController);
 
-            // 🎼 RBN 3.5: [HIERARCHICAL DISCOVERY] 🏛️🛰️⚓
+            // 🎼 RBN Framework: [HIERARCHICAL DISCOVERY] 🏛️🛰️⚓
             // Search class hierarchy for SubModule and Module attributes.
             $subModuleAttr = null;
             $moduleAttr = null;
@@ -51,14 +50,14 @@ trait ComponentHydratorTrait
                 $current = $current->getParentClass();
             }
 
-            // 🎻 RBN 3.5: [SOVEREIGN RESOLUTION STRATEGY] ⚖️🚀⚓
+            // 🎻 RBN Framework: [RBN Framework RESOLUTION STRATEGY] ⚖️🚀⚓
             // Explicit attribute names are Mandatory, Derived names are Optional.
             $serviceType = ($subModuleAttr?->manager ?? $moduleAttr?->manager) ? 'manager' : 'service';
             $explicitService = $subModuleAttr?->service ?? $moduleAttr?->service ?? $subModuleAttr?->manager ?? $moduleAttr?->manager;
             $serviceName = $explicitService ?? $this->sub_module ?? $this->module ?? null;
 
             if ($serviceName) {
-                // RBN 3.5: Resiliency Guard 🛡️⚓
+                // RBN Framework: Resiliency Guard 🛡️⚓
                 // Derived names are optional to prevent Discovery Engine crashes on entry modules.
                 $mandatory = (bool) $explicitService;
                 $resolved = $this->discover()->resolve($this, $serviceType, $serviceName, $mandatory);
@@ -85,7 +84,7 @@ trait ComponentHydratorTrait
 
             $this->handler = $subModuleAttr?->handler ? $this->discover()->resolve($this, 'handler', $subModuleAttr->handler, true) : null;
             
-            // 🎼 RBN 3.5: [MODAL DNA] - Synchronize modal view if defined
+            // 🎼 RBN Framework: [MODAL DNA] - Synchronize modal view if defined
             if ($subModuleAttr?->modal && property_exists($this, 'modalView')) {
                 $this->modalView = $subModuleAttr->modal;
             }
@@ -94,7 +93,7 @@ trait ComponentHydratorTrait
             if ($activeUnit && ($this instanceof BaseControllerInterface)) {
                 $this->activeService = $activeUnit;
                 
-                // 🎼 RBN 3.5: [DNA BRIDGE] Synchronize satellites with the active unit
+                // 🎼 RBN Framework: [DNA BRIDGE] Synchronize satellites with the active unit
                 if ($this->provider && property_exists($activeUnit, 'provider')) {
                     $activeUnit->provider = $this->provider;
                 }

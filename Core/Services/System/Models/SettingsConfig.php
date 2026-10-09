@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Data\BaseConfig;
 /**
  * SettingsConfig - Template Registry for System Settings ⚙️🏛️
  * 
- * RBN 3.5: Centralizes all default setting keys, types, groups, and default values.
+ * RBN Framework: Centralizes all default setting keys, types, groups, and default values.
  * Acts as the Single Source of Truth (SSoT) template for multi-project replication.
  */
 class SettingsConfig extends BaseConfig

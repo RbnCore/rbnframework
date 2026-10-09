@@ -7,7 +7,6 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseModelInterface;
 
 /**
  * UserActivitiesModel - Kullanıcı aktivite loglarını yönetir.
- * Purified for RBN Framework v5.0 Masterpiece
  * 
  * @property int    $id
  * @property int    $user_id

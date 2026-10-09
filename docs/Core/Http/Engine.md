@@ -1,6 +1,6 @@
 # Core/Http/Engine — istek/yanıt parçaları, doğrulama zinciri ve kural motoru
 
-> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Http/Engine/` — **17 `*.php`**.
 > **Envanter:** 17 dosyanın **17'si** aşağıda anlatıldı (3 kök + `Traits/Request/` 5 + `Traits/Response/` 3 + `Traits/Validator/` 4 + `Traits/Alert/` 2 = 17).
 

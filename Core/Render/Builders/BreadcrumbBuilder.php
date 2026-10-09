@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Render\Configs\BreadcrumbConfig;
 
 /**
  * BreadcrumbBuilder - Navigational trail construction orchestrator 🗺️🎨⚓
- * Part of RBN 3.5 Masterpiece.
+ * Part of RBN Framework.
  */
 class BreadcrumbBuilder extends BaseComponent
 {
@@ -48,7 +48,7 @@ class BreadcrumbBuilder extends BaseComponent
         $this->reset();
         $currentPathSegments = [];
 
-        // 🎻 1. Dashboard Root (Sovereign Anchor)
+        // 🎻 1. Dashboard Root (RBN Framework Anchor)
         $dashboardData = $this->service('module')->resolve('dashboard');
         $dashboardIcon = $dashboardData['module_icon'] ?? 'ri-dashboard-line';
         $this->add('Yönetim Paneli', (string) $this->service('route')->to('dashboard', 'admin'), $dashboardIcon);

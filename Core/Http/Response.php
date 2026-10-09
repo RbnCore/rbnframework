@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Http\Engine\Traits\Response\RedirectTrait;
 /**
  * Response - The HTTP Output Motor ⚓🛡️
  * 
- * RBN 3.0: High-Performance, modular, and instance-based response engine.
+ * High-Performance, modular, and instance-based response engine.
  */
 class Response implements ResponseInterface
 {

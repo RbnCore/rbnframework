@@ -14,7 +14,7 @@ use Throwable;
 /**
  * ErrorAnalysisHandler - The Master Diagnostic Engine 🧠🩺🛰️
  * 
- * RBN 3.5: Masterpiece Standard.
+ * RBN Framework: Standard.
  * This "Brain" organ uses the ShieldMetadata map to classify exceptions 
  * and hydrates the ExceptionData DTO for the orchestrator.
  */

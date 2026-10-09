@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 
 /**
  * AdviceHandler - Generates AI SEO advice based on the total score and report.
- * RBN 3.5 Handler Pipeline
+ * RBN Framework Handler Pipeline
  */
 class AdviceHandler extends BaseComponent
 {

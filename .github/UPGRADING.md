@@ -1,5 +1,88 @@
 ## [Unreleased]
 
+Henüz kayıt yok.
+
+## 0.9.6 (yayın hazırlığı — 2026-10-09)
+
+### Bu sürümde ne yapmalısınız (kısa liste)
+
+1. Framework dosyalarının **tamamını** güncelleyin (`Core/Render` dahil). Kısmi yükleme yapmayın: giriş kapısı, oturum ve posta değişiklikleri birden çok dizine yayılır.
+2. **Ortam bayrağını `secrets.php` dosyasına taşıyın.** Framework artık işletim sistemi ortam değişkeni okumaz (`APP_ENV`, `RBN_ENV`, `RBN_DEBUG`, `.env` dosyası, `.htaccess` `SetEnv`). Canlıda `secrets.php` içine `'app' => ['environment' => 'production']` yazın; yerel geliştirme makinesinde `'development'`. Alan yoksa `production` kabul edilir (güvenli) ve `error_log`'a bir kez uyarı düşer. Ayrıntı: aşağıda "Ortam değişkeni katmanı kaldırıldı".
+3. Kayıt istemeyen sitelerde site bloğuna `'auth_registration' => false` yazın; bunun için sunucuya eklenmiş `.htaccess` 404 ara kurallarını **kaldırın**.
+4. Posta modülünü kullanan projede parolaları `enc:v2`'ye taşıyın: önce kuru koşu, sonra `--apply` (geri alma: `--down --apply`). Komut yazmadan önce her değeri geri açıp eşitliğini denetler.
+5. Yüklemeden sonra `rbn cache:clear` çalıştırın (keşif ve bileşen haritaları da silinir); ardından **önce** her siteye bir web isteği gönderin, cron'u ondan sonra koşturun.
+6. Sık koşan cron görevlerinde `params` alanına `"every_minutes": <1-59>` ve gerekiyorsa `"notify_on": "failure"` yazın.
+7. Sistem e-postası gönderen sunucunun SMTP sertifikasını doğrulayın (`openssl s_client -connect <smtp>:465 -servername <smtp>`); doğrulanamayan sertifikayla bildirim gitmez.
+8. **Silinen dosyaları sunucudan da silin.** `Core/System/Config/Env.php` ve `Core/System/Config/Definitions/EnvKeys.php` kaldırıldı. `composer install` (ya da güncel `vendor/` yüklemesi) ile `vlucas/phpdotenv`, `phpoption/phpoption`, `graham-campbell/result-type`, `symfony/polyfill-ctype`, `symfony/polyfill-mbstring`, `symfony/polyfill-php80` paketleri `vendor/` altından çıkar; `vendor/composer/` otomatik yükleme dosyaları birlikte yenilenmelidir.
+9. **Belge sitesi kullanan projede** proje içindeki belge kopyalarını (`Resources/Docs`, `Resources/Changelog`) silin; site framework `docs/` dizinini ve `.github/CHANGELOG.md` dosyasını doğrudan okur. Bu iki yolun sunucuda framework ile birlikte yüklü olması gerekir. `docs:sync` ve `changelog:sync` komutları kaldırıldı.
+10. **Oturum süresini panelden ayarlayın.** `/user/*` boşta kalma süresi panelin "Oturum Süresi" ayarından okunur; `project-settings.php` içindeki `session_idle_timeout` anahtarı artık okunmaz, silebilirsiniz.
+
+### Cron bildirim politikası
+
+- **Görev bazlı bildirim.** Bildirim kararı sırasıyla `cron_jobs.params.notify_on` > görev sınıfındaki `NOTIFY_ON` sabiti > `always`. Değerler: `always` (başarı ve hata), `failure` (yalnız hata), `never`. `skipped` koşu bildirim üretmez. Alan ya da sabit yoksa davranış değişmez (`always`).
+
+### Sitemap / noindex
+
+- Bu sürümde `sitemap.xml`, `llms.txt` ve `noindex` kararlarının davranışı **değişmedi** (0.9.4 kuralları geçerli). Yeni olan yalnız `llms_limit` site ayarıdır (aşağıda). Kayıt kapalı sitede kayıt rotaları kaydedilmediği için bu yollar 404 döner.
+
+### Giriş kapısı ve kullanıcı oturumu (davranış değişiklikleri)
+
+- **Kayıt proje bazlı kapatılabilir.** Sitenin `project-routemap.php` bloğuna `'auth_registration' => false` yazılırsa `register`, `kayit` ve `POST auth/register` rotaları kaydedilmez (404). Anahtar yoksa kayıt eskisi gibi açıktır. Kaydı yalnız `true`, `1`, `on`, `yes`, `evet`, `acik`, `açık` açar; tanınmayan değer (`kapalı`, `disabled`, yazım hatası) ve okunamayan ayar kaydı **kapatır**. Sunucu düzeyinde yazılmış ara çözüm kuralları (`.htaccess` 404) artık gereksizdir.
+- **Kayıt yanıtı nötr.** Kayıtlı bir e-posta ile kayıt denemesi, yeni kayıtla aynı başarı metnini alır ("Kayıt isteğiniz alındı…"); yanıt gövdesinde `user_id` dönmez. Kayıt yanıtı en az 1,5 sn sürer (`RecoveryService::REGISTER_MIN_RESPONSE_MS`; kayıtlı adres dalı da parola özeti hesaplar), süre farkı hesap varlığını sızdırmaz. Doğrulama e-postası gönderilemezse kullanıcı aynı nötr metni alır; ayrıntı `auth` günlüğüne `REGISTER_EMAIL_NOT_DELIVERED`.
+- **Hesap bazlı giriş kilidi.** IP sınırına ek olarak aynı giriş kimliğiyle son 1 saatte 5 başarısız deneme → 15 dakika, 10 → 1 saat kilit (`RateLimitValidations::ACCOUNT_LOCK_STEPS`). Kilitliyken doğru parola da reddedilir. Olaylar `security` günlüğüne `ACCOUNT_LOCKED` / `ACCOUNT_LOCKED_ATTEMPT` olarak yazılır. `rate_limit` site ayarı kapalıysa bu kilit de kapalıdır.
+- **Hız sınırı servisi çözülemezse form reddedilir** (önceden sınır sessizce atlanıyordu); `security` günlüğüne `RATE_LIMIT_SERVICE_UNAVAILABLE`.
+- **Üretimde hata ayıklama kapısı.** `secrets.php` `app.environment` `development` değilse (alan yoksa ya da geçersizse de) ortam üretim sayılır ve hata ayıklama modu istekten (Host/IP) açılmaz; yalnız `app.debug` / `app.dev` açar. Yerel makinede hata ayıklama için `environment` alanına `development` yazın. Hata sayfası maskesi `pass`, `pw`, `otp`, `private`, `session` içeren alanları da gizler.
+- **`/user` rotası `auth` ara katmanından geçer.** Rota önceden yalnız rol denetimiyle tanımlıydı; boşta/mutlak süre, parmak izi ve kilit ekranı `/user` altında çalışmıyordu. Artık `Route::middleware('auth')->role('user')`.
+- **`/user/*` oturum süreleri sunucuda.** Boşta kalma süresi panelin "Oturum Süresi" ayarından okunur (`security.session_timeout`; ayar yoksa 30 dakika). Panel geri sayımı ile sunucu aynı değeri kullanır; `project-settings.php` içindeki `session_idle_timeout` anahtarı kaldırıldı, artık okunmuyor. Girişten itibaren en çok 12 saat (`session_absolute_timeout`); süre dolunca oturum kapanır ve `/`a yönlenir. Oturum kimliği yalnız sunucuda dosyası varsa kabul edilir (`session.use_strict_mode` artık etkili).
+- **Giriş dönüş yolu.** Yönetim paneli kapalı sitede başarısız giriş `/`a döner (panel giriş yolu gösterilmez); yönetici olmayan girişin hedefi `auth_user_home` ile ayarlanır (varsayılan `/user`).
+- **Oturumsuz JSON isteğe 401.** `auth` ara katmanı, `Accept: application/json` ya da `X-Requested-With: XMLHttpRequest` taşıyan oturumsuz isteğe `/`a 302 yerine `401` + `{"data":{"code":"UNAUTHENTICATED"}}` döner. Tarayıcı gezintisi eskisi gibi yönlenir.
+
+### Ortam değişkeni katmanı kaldırıldı (kırıcı)
+
+- Framework `getenv()`, `$_ENV`, `$_SERVER` ortam anahtarı ya da `.env` okumaz. `Env` ve `EnvKeys` sınıfları ile `vlucas/phpdotenv` bağımlılığı kaldırıldı. Kendi kodunuzda `Env::get()` çağırıyorsanız `Secrets::app()` ya da ilgili `Secrets::*()` okuyucusuna geçin.
+- Çalışma ayarlarının tek kaynağı `secrets.php` `app` bölümüdür (şablon: `Core/System/Config/Secrets/secrets.example.php`). Bölümün tamamı isteğe bağlıdır; yazılmayan alan güvenli varsayılana düşer:
+
+| Alan | Varsayılan | Ne yapar |
+|---|---|---|
+| `environment` | `production` | `production` ya da `development`. Yoksa/geçersizse `production` ve bir kez günlük satırı. |
+| `debug`, `dev` | `false` | Operatörün açık hata ayıklama kapısı. |
+| `guard_failclosed` | `true` | Koruma katmanı hata verirse istek engellenir. |
+| `log_throttle` | `true` | Tanılama günlüklerinin saatlik kısıtı. |
+| `db_profile` | `''` (otomatik) | `local` / `production`; sunucu cron'u için açık karar. |
+| `allow_legacy_salt` | `false` | Eski gömülü tuzla şifrelenmiş veriyi okumak için geçici onay; `true` ise üst düzey `legacy_salt` da tanımlı olmalıdır. |
+
+- Şifreleme anahtarı (`APP_KEY`) ve veritabanı bağlantı bilgisi yalnız `secrets.php`'den okunur; ortam değişkeni yedeği yoktur.
+- Sunucudaki `SetEnv APP_ENV …` / `SetEnv RBN_ENV …` satırları ve `.env` dosyaları artık etkisizdir; zararsızdır ama karışıklık olmasın diye kaldırın.
+- Tipi tutmayan alan varsayılana düşer ve günlüğe yalnız alan adı yazılır (değer yazılmaz). Dosya var ama okunamıyor ya da bozuksa istek hata verir (sessizce "ayar yok" sayılmaz).
+
+### Sürüm ve belgeler
+
+- **Tek komutla sürüm yükseltme.** `rbn version:framework` framework sürümünü ve bütün kopyalarını birlikte yazar: `FrameworkIdentity::FRAMEWORK_VERSION`, `CITATION.cff` (`version`, `date-released`), `composer.json` `version`, `composer.lock` `content-hash`, CHANGELOG "Son sürüm" satırı ve `## [A.B.C]` başlığı, `docs/` "Yayın" damgaları. Varsayılan kuru koşudur; `--apply` yazar; `--to=A.B.C` yalnız ileriye gider. `rbn version:check` aynı listeyi salt-okunur denetler ve sapmada çıkış kodu verir. Sürümü elle yazmayın.
+- **Belgeler tek kaynak.** Belge sitesi framework `docs/` dizinini ve `.github/CHANGELOG.md` dosyasını doğrudan okur. Proje içindeki kopyalar, `.sync.json`, `docs:sync` / `changelog:sync` komutları kaldırıldı. Arama indeksi ve ağaç ilk istekte `Storage/cache/docs/<sürüm>-<parmak izi>/` altında üretilir; eski önbellek klasörü kendiliğinden silinir. Site haritasında `lastmod` kaynak dosyanın değişim zamanıdır.
+
+### RbnEmail, cron ve altyapı
+
+- **`updateBatch()` düzeltmesi.** Emüle edilmeyen hazırlanmış ifadelerde (`PDO::ATTR_EMULATE_PREPARES = false`) aynı adlı yer tutucu `HY093` veriyordu; panelin ayar kaydetme yolu hiç yazamıyordu. Kod değişikliği gerekmez.
+
+- **Kırıcı — posta parolası biçimi `enc:v2`.** `emailCredential` işleyicisinde `seal($password, $binding)` ve `open($sealed, $binding)` artık hesap bağlaması alır: `['account_id' => int, 'imap_host' => string, 'smtp_host' => string]`. Yeni yazımlar AES-256-GCM (anahtar `hash_hkdf(APP_KEY, 'rbn-mail-credential')`, AAD = hesap + sunucular). `enc:v1:` değerler okunmaya devam eder; `needsUpgrade()` true döner ve çağıran yeniden mühürler. Hesap kimliği kayıttan önce bilinmediği için yeni hesap önce parolasız açılıp sonra mühürlenir. Şifreleme anahtarı yoksa `MailTransportException::cryptoKeyMissing()` (`CRYPTO_KEY_MISSING`) kullanın; parola hatası (`AUTH_FAILED`) gibi gösterilmez. Merkez: `CryptoHelper::encryptAead()` / `decryptAead()`.
+- **Sistem e-postası TLS doğrulaması açık.** `EmailTransportHandler::send()` (sistem/cron bildirimi) sertifikayı ve ana makine adını doğrular (`ImapConnection::tlsOptions`). Kendinden imzalı ya da adı tutmayan SMTP sertifikasıyla gönderim artık başarısız olur; yayından önce `openssl s_client -connect <smtp>:465 -servername <smtp>` ile doğrulayın. `EmailConstant::DEBUG` açıkken yalnız sunucu satırları loglanır (AUTH satırları yazılmaz).
+- **IMAP değerinde CR/LF/NUL reddedilir** (`PROTOCOL_ERROR`): klasör adı/kimlik yoluyla komut bölünemez.
+- **`rbn cache:clear` keşif haritalarını da siler** (`Storage/framework/components_map_*.json`, `discovery_map_*.php`; `--project=<p>` ile yalnız o proje). Bileşen haritası yalnız tarama kökü projenin kendi kökü olduğunda okunur/yazılır: CLI ana kipinde (cron) proje anahtarı ile tarama kökü ayrışırsa boş tarama sonucu projenin haritasına yazılmaz.
+- **Saat-altı cron aralığı.** Görevin `params` alanına `"every_minutes": 15` (1-59) yazılırsa izinli gün/saatlerde `:00, :15, :30, :45` dilimlerinde koşar. Alan yoksa davranış eskisi gibi (sonraki tam saat). `frequency` sütunu yalnız hata sonrası erteleme aralığıdır.
+- **`QueryBuilder::rows(): array`** düz satır dizisi döndürür. `get()` `Collection` döndürür (öğeler model olabilir); `array` dönüş tipli yöntemde `return ...->get();` TypeError verir, `->get() ?: []` hiç devreye girmez.
+- **`RawHtmlGate::sanitizeContent()`** — veritabanından gelen sayfa metni için: `sanitize()`'a ek olarak `<script>`, `<style>`, `<iframe>`, `<object>`/`<embed>`, `<base>`, `<meta>`, `<link>` kaldırılır. Görünümde `{!! !!}` ile basılan DB içeriğini bundan geçirin.
+- **Remix Icon SRI.** Paket `remix_icon` `integrity` + `crossorigin` ile basılır (`AssetDefinition::REMIX_ICON_ATTRS`); `addStyle()` üçüncü parametre olarak öznitelik alır. Sürümü değiştirirseniz özeti de güncelleyin.
+- **`llms_limit` site ayarı.** `project-routemap.php` site bloğunda `'llms_limit' => <n>` (1-1000, varsayılan 50) llms.txt'de kaynak başına giriş sayısını belirler; kaynak tanımındaki `llms_limit` önce gelir. Değiştirdikten sonra `<site>_llms_txt*` önbelleğini silin.
+- **Hata sayfasında proje dikişi.** Kullanıcıya dönük hata sayfası önce `Resources/Views/Errors/<site>/<kod>.php`, sonra `Resources/Views/Errors/<kod>.php` dosyasını arar; dosya tam sayfadır (`$code`, `$title`, `$message`, `$desc`, `$hint`). Görünüm istisna atarsa Shield sayfasına düşülür.
+- **Posta paneli şeması.** Posta modülünü kullanan projede `rbn_mail_accounts` (sahip `user_kind` + `user_id`, senkron durumu) ve `rbn_mail_messages` (IMAP klasör rolü, UID/UIDVALIDITY, alıcılar; `folder_id` ve gövde sütunları kaldırıldı) genişledi, `rbn_mail_send_log` eklendi, `rbn_mail_folders` kaldırıldı. Uygulanmış migration dosyaları projede tutulmaz: canlıda ve yerelde uygulandıktan sonra `database/migrations/` boşaltılır; nihai sütun ve anahtarlar modelin belge bloğundadır (`@property` + `Anahtarlar:`). `rbn migrate` klasör yoksa boş liste döner.
+- **Küçük harf 301'i yüzde kodunu çözer.** `/%C3%9Cr…` artık `/%C3%BCr…` olur (eskiden yalnız onaltılık harfler küçülüyor, yüzde kodunu büyük harfe normalleştiren istemci/CDN ile sonsuz 301 doğuyordu). Değişmeyen kodlu dizi aynen kalır.
+
+### 0.9.7'ye kalanlar
+
+- İki aşamalı doğrulama (TOTP) bu sürümde **yok**.
+- `enc:v1` değerler AAD bağlaması olmadan okunmaya devam eder; tümüyle `enc:v2`'ye taşınması geçiş komutuyla elle yapılır.
+- `RawHtmlGate::sanitizeContent()` yalnız tek bir sayfa denetleyicisinde kullanılıyor; DB içeriğini `{!! !!}` ile basan diğer görünümler kendi taramanızla geçirilmelidir.
+
 ## 0.9.5 (yayın hazırlığı — 2026-10-06)
 
 ### Bu sürümde ne yapmalısınız
@@ -139,7 +222,7 @@ paneli bileşenleri, SEO puan etiketleri ve servislenen CSS/JS dosya başlıklar
 anlamsız sıfatlar nötr karşılıklarla değiştirildi.
 
 **Değişmeyenler (bilinçli):** PHP yorumlarındaki geçiş etiketleri ve tanımlayıcı adları
-(`SovereignIdentity`, `sovereignBundles()`, `searchInGate('Sovereign', …)`) **korundu** —
+(`SovereignIdentity`, `sovereignBundles()`, `searchInGate('RBN Framework', …)`) **korundu** —
 yeniden adlandırma geriye uyumluluk kaybı doğurur, ayrı iş kalemidir. Proje içerikleri
 (marka metinleri) **dokunulmadı**. Yönetici arayüzü, meta etiketleri ve işlevsel davranış
 **değişmedi**.
@@ -159,26 +242,26 @@ yeniden adlandırma geriye uyumluluk kaybı doğurur, ayrı iş kalemidir. Proje
 
 ### Düzeltildi: apex alan adı alt yolları yanlış yönlendiriliyordu
 
-**Belirti:** `rbncore.tr` apex alan adı altındaki hiçbir alt adres çalışmıyordu; hepsi
+**Belirti:** `example.tr` apex alan adı altındaki hiçbir alt adres çalışmıyordu; hepsi
 `/` adresine **301** ile atılıyordu. Etkilenen adresler arasında `robots.txt`,
 `sitemap.xml` ve oturum açma sayfası da vardı.
 
 **Kök neden:** kanonik alan adı denetimi, apex alan adını da "kanonik dışı (staging)"
-listesinde sayıyordu. Oysa yalnız **alt alan adları** (`*.rbncore.tr`) staging'tir.
+listesinde sayıyordu. Oysa yalnız **alt alan adları** (`*.example.tr`) staging'tir.
 
 **Çözüm:** apex alan adı kanonik kabul edildi; yalnız alt alan adları için yönlendirme
 dalı korunuyor.
 
 | Adres | 0.9.2 kuralı | 0.9.3 kuralı |
 |---|---|---|
-| `https://rbncore.tr/` | kanonik | kanonik (değişmedi) |
-| `https://rbncore.tr/robots.txt` | 301 → `/` | **kendi adresinde kalır** |
-| `https://rbncore.tr/sitemap.xml` | 301 → `/` | **kendi adresinde kalır** |
-| `https://rbncore.tr/giris` | 301 → `/` | **kendi adresinde kalır** |
-| `https://<alt>.rbncore.tr/...` | staging → kanonik | **değişmedi** |
+| `https://example.tr/` | kanonik | kanonik (değişmedi) |
+| `https://example.tr/robots.txt` | 301 → `/` | **kendi adresinde kalır** |
+| `https://example.tr/sitemap.xml` | 301 → `/` | **kendi adresinde kalır** |
+| `https://example.tr/giris` | 301 → `/` | **kendi adresinde kalır** |
+| `https://<alt>.example.tr/...` | staging → kanonik | **değişmedi** |
 
 > **Bu tablo kuralı anlatır, ölçüm değildir.** Yerel ortamda apex adresi
-> (`Host: rbncore.tr`) tekrarlanamıyor — yerel kurulum `*.test` alan adlarıyla çalışıyor;
+> (`Host: example.tr`) tekrarlanamıyor — yerel kurulum `*.test` alan adlarıyla çalışıyor;
 > canlı sunucuya bu sürüm hazırlığı sırasında **hiçbir yazma yapılmadı**. Canlı
 > doğrulama yayın sırasında yapılacaktır.
 
@@ -242,7 +325,7 @@ framework değeri olmaktan çıktı; artık **projenin sürümüdür** ve master
 | `{{APP_VERSION}}` (sablon) | `3.5.0` | projenin `projects.version` değeri |
 | `module-version` (`<meta name="module-version">`) | `1.0` | aynı değer |
 | `siteVersion` (giriş ekranı) / panel `app_version` | `1.0` / `1.0` | aynı değer |
-| `domains/rbnbilisim/email.rbncore.tr` | `1.17.0` (giriş noktasında sabit) | aynı değer |
+| `domains/example/email.example.tr` | `1.17.0` (giriş noktasında sabit) | aynı değer |
 | RbnShield / RBN Admin Pro / RbnAuth / CLI sürümü | `v2.1` / `1.2` / `2.2` / `2.3` | `2.1.0` / `1.2.0` / `2.2.0` / `2.3.0` |
 
 **Geriye uyum:** Sabit **her zaman** geçerli bir `A.B.C` sürümü üretir. Kayıt
@@ -254,7 +337,7 @@ giriş noktasında önceden tanımlanmışsa ezilmez.
 
 1. **Giriş noktalarınızda `define('APP_VERSION', ...)` yazmayın.** Sürüm artık
    veritabanından gelir; sabit yazmak kural ihlalidir (canlıdaki tek örnek
-   `domains/rbnbilisim/email.rbncore.tr/index.php` idi ve kaldırıldı).
+   `domains/example/email.example.tr/index.php` idi ve kaldırıldı).
 2. **Sürümü elle yazmayın.** Master hub → proje kaydındaki `version` alanını
    güncellemek yerine `rbn version:next <project_key> --apply` kullanın
    (varsayılan kuru koşudur). Denetim için: `rbn version:check`
@@ -514,7 +597,7 @@ ve bir modelin `query()` cagrisi tum kiracilarin satirini donuyordu.
 | `RssSourceModel` | `app_rss_sources` | framework |
 | `RssBlacklistModel` | `app_rss_blacklist` | framework |
 | `AAProductModel` | `aa_products` | ornek-proje-5 |
-| `IcerikModel` | `z_app_icerikler` | rbncore |
+| `IcerikModel` | `z_app_icerikler` | example |
 
 `BaseModel::$scoped` **false olarak kaldı**; diger 68 somut model kapsam
 disidir ve davranislari degismedi.
@@ -994,7 +1077,7 @@ Sürümlendirme: [SemVer](https://semver.org/lang/tr/). Değişiklik kaydı: [CH
 
 ## Bu sürüm
 
-- **Son sürüm:** `0.9.5` (2026-10-06) — sağlayıcı/exception service yanlış-pozitif günlük kayıtları kaldırıldı, render bağlam eşlemeleri sınıf alias kayıtlarından ayrıldı. Kırıcı değişiklik **yoktur** (0.9.5 bölümüne bakın).
+- **Son sürüm:** `0.9.6` (2026-10-09) — giriş kapısı ve oturum sertleştirmesi, posta parolalarında `enc:v2`, sistem e-postasında TLS doğrulaması, keşif haritası ve cron düzeltmeleri. Kırıcı değişiklik: posta parolası `seal()`/`open()` hesap bağlaması alır (0.9.6 bölümüne bakın).
 - Bu dosyaya yazılan her sürüm, o sürümün canlıya çıktığı andan itibaren geçerlidir.
 
 ---
@@ -1248,7 +1331,7 @@ $query->orderBy('created_at', in_array($yon, ['ASC', 'DESC'], true) ? $yon : 'AS
 3. **Keşif haritalarını sil ve yeniden üret.** Haritalar `Storage/framework/` altında üretilir; sürüm takibinde **değildir** (üretilmiş çıktıdır). Eski harita kırık/eksik kalırsa site 500 verir.
 4. **Doğrula:** her projede ana sayfa 200, master bağlantısı kuran komut (`php rbn project:list`) beklenen çıktıyı veriyor, çoklu alan adılı projelerde alan adı geçişleri çalışıyor.
 
-**ÖNEMLİ — harita önbelleği tuzağı (Hasan 75 ve bu görevde yeniden ölçüldü):** Harita üretimi **yalnız web bağlamında** çalışır; CLI-only ve web dışı katmanlar haritaya yazılmaz. Yerelde 36 harita dosyası silinip 18 site ile yeniden üretildiğinde toplam kayıt **2833 → 1263** düştü (**133 kayıp tek bir projede**, yeni kayıt 0). Sayfa 200 verdiği için **gerileme görünmez**. Bu görevde ölçüldü: `DbData` referansı haritalarda **zaten 0** (ÖNCE ve SONRA), yani taşıma haritayı etkilemiyor. Bu yüzden haritalar **yedekten geri yüklendi** ve 36/36 SHA eşleşti. Canlıda da aynı ölçüm yapılmalı: kayıt sayısı düşerse **geri yükle**, haritayı yeni haliyle bırakma.
+**ÖNEMLİ — harita önbelleği tuzağı (team member 75 ve bu görevde yeniden ölçüldü):** Harita üretimi **yalnız web bağlamında** çalışır; CLI-only ve web dışı katmanlar haritaya yazılmaz. Yerelde 36 harita dosyası silinip 18 site ile yeniden üretildiğinde toplam kayıt **2833 → 1263** düştü (**133 kayıp tek bir projede**, yeni kayıt 0). Sayfa 200 verdiği için **gerileme görünmez**. Bu görevde ölçüldü: `DbData` referansı haritalarda **zaten 0** (ÖNCE ve SONRA), yani taşıma haritayı etkilemiyor. Bu yüzden haritalar **yedekten geri yüklendi** ve 36/36 SHA eşleşti. Canlıda da aynı ölçüm yapılmalı: kayıt sayısı düşerse **geri yükle**, haritayı yeni haliyle bırakma.
 
 **Geri alma:** Kod commit'i geri alınır (`git revert`), eski 4 dosya **geri yüklenir**, keşif haritaları yedekten geri yüklenir. **Geri alma zorluğu: orta** — haritalar üretilmiş dosya olduğu için, kod geri alınsa bile haritaları geri almak gerekir.
 
@@ -1345,7 +1428,7 @@ Bu adım yalnız IP katmanını okunur hale getirir; hiçbir isteği engellemez.
 **Yayın sırası — SQL ÖNCE:**
 
 1. **1. adım (koddan önce):** `111-z_user_tokens.sql` dosyasını **her proje veritabanına** ayrı ayrı uygula. Tablo yoksa token üretimi çalışmaz ve e-posta doğrulama / parola sıfırlama akışı hata verir.
-   - **Dosya depoda:** `rbnframework/Core/Database/Migrations/111-z_user_tokens.sql` (FW-KARAR-UYGULA-A / kira-2-6eb7f5 ile eklendi; `CREATE TABLE IF NOT EXISTS` olduğu için tekrar çalıştırmak güvenlidir ve mevcut tabloyu değiştirmez). phpMyAdmin'de içe aktarılabilir; `mysql -u <kullanıcı> -p <db> < 111-z_user_tokens.sql` ile de uygulanabilir.
+   - **Dosya depoda:** `rbnframework/Core/Database/Migrations/111-z_user_tokens.sql` (FW-KARAR-UYGULA-A / team member ile eklendi; `CREATE TABLE IF NOT EXISTS` olduğu için tekrar çalıştırmak güvenlidir ve mevcut tabloyu değiştirmez). phpMyAdmin'de içe aktarılabilir; `mysql -u <kullanıcı> -p <db> < 111-z_user_tokens.sql` ile de uygulanabilir.
    - Kapsam: yalnız proje/master şemaları (`z_` ön ekli kullanıcı tablolarını içeren veritabanları). `asw_*` tablolarına ve master `developers` tablosuna dokunulmaz.
    - Doğrulama: `SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'z_user_tokens';` → 1 satır.
 2. **2. adım (SQL'den sonra):** kod dosyalarını dağıt.
@@ -1459,7 +1542,7 @@ return [
 
 **Kurallar:** `CHANGE_ME` hiçbir bölümde kabul edilmez (fail-closed). `master_db.pass` ve `smtp.pass` **boş olabilir** (yerelde gerçekten boş); `cpanel` ve `api` değerleri **boş olamaz**.
 
-**Dikkat — geçiş tuzağı:** `secrets.php`'ye geçerken **`cpanel` bölümünü de doldurun.** Yeni dosya tek başına yetmez; `cpanel-secrets.php`'i silerseniz ve `cpanel` bölümünü yazmamışsanız cPanel akışları (rbncore paneli: e-posta, alan adı, dosya yöneticisi, phpMyAdmin, webmail, cPanel SSO) fail-closed hata verir. Doldurursanız eski `cpanel-secrets.php`'i silebilirsiniz.
+**Dikkat — geçiş tuzağı:** `secrets.php`'ye geçerken **`cpanel` bölümünü de doldurun.** Yeni dosya tek başına yetmez; `cpanel-secrets.php`'i silerseniz ve `cpanel` bölümünü yazmamışsanız cPanel akışları (example paneli: e-posta, alan adı, dosya yöneticisi, phpMyAdmin, webmail, cPanel SSO) fail-closed hata verir. Doldurursanız eski `cpanel-secrets.php`'i silebilirsiniz.
 
 **API değişikliği (geriye uyumlu):** yeni çıkışlar `Secrets::masterDb()`, `::smtp()`, `::cpanel()`, `::api($ad)`, `::section($ad)`, `::appKey()`. Eski metot adları **korundu**: `all()`, `get()`, `masterDbPass()`, `masterSmtpPass()`, `optional()`, `cpanel()`, `cpanelHost()`, `cpanelUser()`, `cpanelToken()`. Çağıran kod kırılmaz. Tek istisna: **`Secrets::cpanel()` dizisinin anahtarları `cpanel_host/cpanel_user/cpanel_token` olarak KORUNDU** (kabul testi ve mevcut proje kodu bunu sabitler); kanonik bölüm biçimi `Secrets::section('cpanel')` üzerinden okunur.
 

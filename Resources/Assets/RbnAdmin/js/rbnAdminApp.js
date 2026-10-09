@@ -1,6 +1,6 @@
 /**
  * rbnAdminApp.js — Master Admin Panel Application Suite 💻🛰️⚓
- * Part of the RBN 3.5 "Masterpiece" Architecture.
+ * Part of the RBN Framework Architecture.
  * 
  * Consolidates Admin Core Logic: Layout & Sidebar, Panel Counters & Modals, Theme Switcher, and Session Timeout Monitor.
  */
@@ -8,7 +8,7 @@
     'use strict';
 
     // ==========================================================================
-    // 1. LAYOUT & SIDEBAR CONTROLLER (Sovereign .rbn-dash-* Architecture)
+    // 1. LAYOUT & SIDEBAR CONTROLLER (RBN Framework .rbn-dash-* Architecture)
     const SIDEBAR_STORAGE_KEY = 'rbn_admin_sidebar_collapsed';
     const CATEGORY_STORAGE_KEY = 'rbn_admin_sidebar_categories';
 
@@ -228,7 +228,7 @@
         });
     }
 
-    // Expose global layout functions (Namespaced & Sovereign)
+    // Expose global layout functions (Namespaced & RBN Framework)
     window.rbnAdminToggleSidebar = toggleSidebar;
     window.rbnAdminToggleDropdown = toggleDropdown;
     window.rbnAdminToggleCategory = toggleCategory;

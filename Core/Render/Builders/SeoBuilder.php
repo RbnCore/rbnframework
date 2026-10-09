@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 
 /**
  * SeoBuilder - State accumulator and structural builder for SEO metadata 🛰️⚓
- * Part of RBN 3.5 Masterpiece.
+ * Part of RBN Framework.
  */
 class SeoBuilder extends BaseComponent
 {
@@ -147,6 +147,8 @@ class SeoBuilder extends BaseComponent
             elseif ($key === 'og_image') $this->setImage($value);
             elseif ($key === 'favicon') $this->overrides['favicon'] = $value;
             elseif ($key === 'virtual_favicon') $this->overrides['virtual_favicon'] = $value;
+            elseif ($key === 'apple_touch_icon') $this->overrides['apple_touch_icon'] = $value;
+            elseif ($key === 'manifest') $this->overrides['manifest'] = $value;
         }
 
         $resolver = $this->resolver('seo');

@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Attributes\Component;
 
 /**
  * ContentCategoryRepository - Evrensel İçerik Kategori Veri Deposu 🏛️📦⚡
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 class ContentCategoryRepository extends BaseRepository
 {

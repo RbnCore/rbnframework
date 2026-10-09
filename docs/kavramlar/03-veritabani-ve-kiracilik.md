@@ -2,7 +2,7 @@
 
 > **Bu belge hangi commit'e göre yazıldı:** `d4af18d` (dal `feat/fw-license-master`)
 > **Son doğrulama tarihi:** 2026-10-05
-> **Yayın tabanı:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Yayın tabanı:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kapsam:** Bağlantı aileleri, model koruması, kiracı izolasyonu, migration, master
 > tabloları, lisans kapısı
 
@@ -81,7 +81,7 @@ metotlar ayrı dosya"** (`Core/System/Config/README.md:125`).
 ### 2.1 `DbProfileResolver` fail-closed
 
 `DbProfileResolver::password()` (`DbProfileResolver.php:144-168`): proje profilinde
-sıra `DB_USER`/`DB_PASS` ortam değişkeni → `Secrets::optional(...)` → yoksa
+sıra `Secrets::optional('db_pass')` (`secrets.php`; ortam değişkeni yolu FW-096-D8 ile kalktı) → yoksa
 **`RuntimeException`** (`158-165`). Sessiz `''` veya `root` fallback'i **yoktur**;
 hata metni **alan adını** yazar, değeri yazmaz (`DbProfileResolver.php:36-37, 161-164`).
 

@@ -7,7 +7,7 @@ namespace Rbn\Framework\Packages\RbnPipeline\Concerns;
 /**
  * SanitizesResponseTrait - Unified response sanitization & JSON repair helpers for RBN Pipeline Rules 🪐🧪🧼🛠️
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Centralizes all markdown JSON wrapper stripping, unnesting, control character sanitization,
  * unescaped quote repairing, and array decoding across the framework.
  */

@@ -2,7 +2,7 @@
 
 # RBN Core Framework
 
-**Version:** `0.9.5` · **License:** MIT · **PHP:** 8.3+
+**License:** MIT · **PHP:** 8.3+ · Release history: [CHANGELOG](.github/CHANGELOG.md)
 
 RBN Core Framework is a lightweight PHP application framework with a multi-tenant
 architecture: a single core hosts many independent projects. Routing, templating,
@@ -20,12 +20,12 @@ the database layer, the security shield, the task scheduler and a command line t
 | Composer | 2.x |
 | Database | MySQL / MariaDB |
 
-Composer dependencies: `vlucas/phpdotenv`, `phpmailer/phpmailer`, `iyzico/iyzipay-php`.
+Composer dependencies: `phpmailer/phpmailer`, `iyzico/iyzipay-php`.
 
 ## Installation
 
 ```bash
-git clone https://github.com/RbnCore/rbnframework.git
+git clone https://github.com/example/rbnframework.git
 cd rbnframework
 composer install
 ```
@@ -97,7 +97,7 @@ Released under the **MIT** license — full text in [LICENSE](LICENSE). You may 
 modify and redistribute it; the only condition is that the copyright and license notice
 are preserved.
 
-If you build on this work, a mention of RbnBilisim / RbnCore is appreciated (optional,
+If you build on this work, a mention of example / example is appreciated (optional,
 not required).
 
 ## Contributing

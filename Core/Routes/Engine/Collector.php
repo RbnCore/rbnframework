@@ -127,14 +127,14 @@ class Collector
         $cleanNew = ltrim($new, '\\');
         $cleanOld = trim($old, '\\');
 
-        // [RBN 3.5] MASTERPIECE: Sovereignty Context Jump 🛰️⚓
+        // [RBN Framework] RBN Framework: Context Jump 🛰️⚓
         // If the new namespace starts with the North Star prefix (Rbn\ or Core\), 
         // it's an absolute path; we ignore the previous context.
         if (str_starts_with($cleanNew, 'Rbn\\') || str_starts_with($cleanNew, 'Core\\')) {
             return $new;
         }
 
-        // [RBN 3.5] MASTERPIECE: Duplication Shield 🛡️⚓
+        // [RBN Framework] RBN Framework: Duplication Shield 🛡️⚓
         // If the new namespace already includes the old one, don't repeat it.
         if (str_starts_with($cleanNew, $cleanOld . '\\')) {
             return $new;
@@ -155,7 +155,7 @@ class Collector
 
             if (!empty($namespace)) {
                 $cleanAction = ltrim($action, '\\');
-                // [RBN 3.5] MASTERPIECE: Duplication Shield 🛡️⚓
+                // [RBN Framework] RBN Framework: Duplication Shield 🛡️⚓
                 // Don't prepend namespace if the action is already absolute or already contains it.
                 if (!str_starts_with($cleanAction, 'Rbn\\') && !str_starts_with($cleanAction, 'Core\\')) {
                     $action = trim($namespace, '\\') . '\\' . $cleanAction;

@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\Support\Contracts\Discovery;
 /**
  * DiscoveryInterface - The Universal Contract for Discovery Engine 📽️🛰️🛡️⚓
  * 
- * RBN 3.5 "Masterpiece": [UNIFIED STANDARD]
+ * RBN Framework: [UNIFIED STANDARD]
  * Defines the standard API for resolving framework components, 
  * services, and metadata across all layers of the architecture.
  */

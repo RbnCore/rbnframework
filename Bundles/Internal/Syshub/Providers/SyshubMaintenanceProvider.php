@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Database\Repositories\Common\ShieldSettingsRepository;
 
 /**
  * SyshubMaintenanceProvider - Bakım Modu ve IP Yönetimi Veri Sağlayıcısı 🚧🛡️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 class SyshubMaintenanceProvider extends BaseComponent
 {

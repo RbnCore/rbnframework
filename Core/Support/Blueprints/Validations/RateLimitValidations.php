@@ -5,7 +5,7 @@ namespace Rbn\Framework\Core\Support\Blueprints\Validations;
 /**
  * RateLimitValidations - The Frequency Anayasa 🛡️⚡⚖️
  * 
- * RBN 3.5: Master repository for universal rate limiting thresholds.
+ * RBN Framework: Master repository for universal rate limiting thresholds.
  * Centralizes security numbers to ensure consistent protection across all modules.
  */
 class RateLimitValidations
@@ -80,6 +80,47 @@ class RateLimitValidations
        atar (kabul testi A0-3 bu sözleşmeyi ölçer); yalnız ÇALIŞMA ZAMANI
        yolu (`isBlocked`) istisna yerine güvenli tavan uygular.
        ======================================================================== */
+
+    /**
+     * Hesap (giriş kimliği) bazlı başarısız giriş sayacının eylem adı.
+     * IP kovasından (`frontend_login`) ayrıdır: dağıtık (çok IP'li) parola
+     * denemesi de aynı hesapta birikir.
+     */
+    public const ACCOUNT_LOGIN_ACTION = 'account_login';
+
+    /** Hesap sayacının sayım penceresi (saniye): son 1 saat. */
+    public const ACCOUNT_LOCK_WINDOW = 3600;
+
+    /**
+     * Artan hesap kilidi (TEK YER): eşik => kilit süresi (saniye). Büyükten küçüğe.
+     *   5. başarısız deneme  -> 15 dakika
+     *   10. başarısız deneme -> 1 saat
+     * Kilit, eşiği DOLDURAN denemenin zamanından başlar. Kilit bitince bir
+     * sonraki eşiğe kadar deneme serbesttir (5 -> 15 dk, sonra 5 deneme
+     * daha -> 1 sa); her ek deneme kilidi yeniden başlatmaz.
+     *
+     * @var array<int,int>
+     */
+    public const ACCOUNT_LOCK_STEPS = [
+        10 => 3600,
+        5  => 900,
+    ];
+
+    /**
+     * Pencere içindeki başarısız deneme sayısına göre geçerli kademe.
+     *
+     * @return array{threshold:int,seconds:int}|null kademe yoksa null
+     */
+    public static function accountLockStep(int $failures): ?array
+    {
+        foreach (self::ACCOUNT_LOCK_STEPS as $threshold => $seconds) {
+            if ($failures >= $threshold) {
+                return ['threshold' => $threshold, 'seconds' => $seconds];
+            }
+        }
+
+        return null;
+    }
 
     /**
      * Tanımsız eylem için güvenli varsayılan tavan (fail-closed, fail-crash DEĞİL).

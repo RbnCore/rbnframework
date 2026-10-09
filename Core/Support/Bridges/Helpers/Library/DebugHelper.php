@@ -2,7 +2,7 @@
 
 namespace Rbn\Framework\Core\Support\Bridges\Helpers\Library;
 
-use Rbn\Framework\Core\System\Config\Env;
+use Rbn\Framework\Core\System\Kernel\Base\PreBoot;
 
 
 /**
@@ -22,9 +22,9 @@ class DebugHelper
     public function prePrint($data, bool $die = false, string $title = ''): void
     {
         // Production'da çalışmasın
-        // [FW-ENV-KAYIT-160] TEK okuyucu: `Env`. `isset($_ENV[...])` ve
-        // `getenv` sırası artık burada değil, `Env`'in kuralıdır.
-        if (Env::string('APP_ENV') === 'production') {
+        // [FW-096-D8] TEK okuyucu: `PreBoot::isProductionDeclared()`
+        // (`secrets.php` `app.environment`; yoksa production).
+        if (PreBoot::isProductionDeclared()) {
             return;
         }
 

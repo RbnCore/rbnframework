@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\Base\Services\Traits\Service\Blogcontent;
 /**
  * ContentServiceTrait - Autonomous Content & Media Orchestration Engine 🖋️📸⚡
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Standardizes savePost, destroyPost, media uploads, SEO slug, and metadata enrichment across all projects.
  */
 trait ContentServiceTrait

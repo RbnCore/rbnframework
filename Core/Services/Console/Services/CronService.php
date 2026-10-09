@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Services\BaseService;
 /**
  * CronService - Master Orchestration Entry Gate 👨‍🍳🛰️⚡
  * 
- * RBN 3.5 "Masterpiece": Pure, Thin Service Gatekeeper.
+ * RBN Framework: Pure, Thin Service Gatekeeper.
  */
 class CronService extends BaseService
 {

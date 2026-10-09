@@ -125,7 +125,7 @@ class CacheProvider extends BaseStorageProvider
             }
         }
 
-        // 🎼 RBN 3.5: [DYNAMIC PREFIX DISCOVERY] 🛰️⚓
+        // 🎼 RBN Framework: [DYNAMIC PREFIX DISCOVERY] 🛰️⚓
         foreach (CacheConstants::READABLE_PREFIXES as $prefix) {
             if (str_starts_with($key, $prefix)) {
                 return true;
@@ -148,7 +148,7 @@ class CacheProvider extends BaseStorageProvider
                 $this->delete($cacheKey);
         }
 
-        // 🎼 RBN 3.5: [DYNAMIC GROUP PURGE] - Automatically clears configured prefixes
+        // 🎼 RBN Framework: [DYNAMIC GROUP PURGE] - Automatically clears configured prefixes
         foreach (CacheConstants::READABLE_PREFIXES as $prefix) {
             $category = rtrim($prefix, '_');
             if ($type === $category || str_contains($type, $category)) {
@@ -156,7 +156,7 @@ class CacheProvider extends BaseStorageProvider
             }
         }
 
-        // 🎯 RBN 3.5: Master Discovery Cache Flush
+        // 🎯 RBN Framework: Master Discovery Cache Flush
         if ($type === 'discovery' || $type === 'all') {
             BaseService::get()->discovery->clear();
         }
@@ -188,7 +188,7 @@ class CacheProvider extends BaseStorageProvider
         $projectKey = $this->projectKey ?: project_key() ?: 'default';
         $isolatedKey = $projectKey . '_' . $key;
 
-        // 🎼 RBN 3.5: [READABLE PERSISTENCE] - MD5 bypass for configured prefixes
+        // 🎼 RBN Framework: [READABLE PERSISTENCE] - MD5 bypass for configured prefixes
         foreach (CacheConstants::READABLE_PREFIXES as $prefix) {
             if (str_starts_with($key, $prefix)) {
                 return $isolatedKey . $this->extension;

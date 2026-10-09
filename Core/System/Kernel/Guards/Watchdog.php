@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * RBN Masterpiece Diagnostic Watchdog 🛡️⚔️⚓
+ * RBN RBN Framework Diagnostic Watchdog 🛡️⚔️⚓
  */
 namespace Rbn\Framework\Core\System\Kernel\Guards {
 
@@ -18,7 +18,7 @@ namespace Rbn\Framework\Core\System\Kernel\Guards {
     }
 }
 
-// 🚩 RBN 3.5: [GLOBAL PANIC GATEWAY] 🌍🛡️
+// 🚩 RBN Framework: [GLOBAL PANIC GATEWAY] 🌍🛡️
 namespace {
     if (!function_exists('rbn_panic')) {
         /**
@@ -26,7 +26,7 @@ namespace {
          */
         function rbn_panic(string $message, ?string $type = 'Critical Failure', ?array $stack = null): void
         {
-            // 🚩 RBN 3.5: [RECURSION LOCK] Atomic Brake using global constant ⚡
+            // 🚩 RBN Framework: [RECURSION LOCK] Atomic Brake using global constant ⚡
             if (defined('RBN_PANIC_ACTIVE')) {
                 return;
             }

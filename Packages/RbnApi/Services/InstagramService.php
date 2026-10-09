@@ -7,9 +7,9 @@ namespace Rbn\Framework\Packages\RbnApi\Services;
 use Rbn\Framework\Core\Base\Services\BaseService;
 
 /**
- * InstagramService - Sovereign Instagram Orchestrator 📸🛰️⚓
+ * InstagramService - RBN Framework Instagram Orchestrator 📸🛰️⚓
  * 
- * RBN 3.5 Masterpiece: High-level interface for Meta Graph API operations.
+ * RBN Framework: High-level interface for Meta Graph API operations.
  * @property \Rbn\Framework\Packages\RbnApi\Providers\InstagramProvider $instagram
  */
 class InstagramService extends BaseService

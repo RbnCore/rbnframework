@@ -39,7 +39,7 @@
 <div class="sidebar-overlay d-md-none" onclick="rbnAdminToggleSidebar()"></div>
 
 <script>
-    // RBN Sovereign Security Bridge 🛰️⚓
+    // RBN Framework Security Bridge 🛰️⚓
     window.RBN_SECURITY = <?= json_encode($rbnSecurity ?? []) ?>;
 </script>
 

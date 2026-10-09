@@ -31,6 +31,7 @@ class CacheConstants
         'llms_txt',
         'cron_',
         'content_',
+        'mail_', // RbnEmail: kısa ömürlü ileti gövdesi önbelleği
     ];
 
     // Keşif (Discovery) Önekleri 📜

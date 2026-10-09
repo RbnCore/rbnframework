@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\Web\BaseRender;
 
 /**
  * LlmsResolver - Dedicated LLMs.txt Payload & AI Map Resolver 🤖📄⚓
- * Part of RBN 3.5 Sovereign Framework Standards.
+ * Part of RBN Framework Framework Standards.
  */
 class LlmsResolver extends BaseRender
 {
@@ -35,13 +35,16 @@ class LlmsResolver extends BaseRender
             $sections['Ana Sayfalar & Rehberler'] = $pagesList;
         }
 
-        $limit = $context['llms_limit'] ?? 50;
+        $projectLimit = self::llmsLimit($this->projectSetting('llms_limit'));
         $sources = $this->provider('crawler')->getProject('source');
         foreach ($sources as $type => $sourceConfig) {
             // 🛡️ Yalnızca CrawlerMap üzerinde llms => true (veya tanımlı) olan kaynakları işle
             if (isset($sourceConfig['llms']) && !$sourceConfig['llms']) {
                 continue;
             }
+
+            // Kaynak başına giriş sınırı: kaynak `llms_limit` > site `project-settings.llms_limit` > 50.
+            $limit = self::llmsLimit($sourceConfig['llms_limit'] ?? null, $projectLimit);
 
             $typeTitle = $sourceConfig['title'] ?? ucwords(str_replace(['_', '-'], ' ', $type));
             $entries = (array) $this->resolver('crawler')->callServiceMethod($sourceConfig, 'entries_method', 'getEntries', 1);
@@ -125,5 +128,27 @@ class LlmsResolver extends BaseRender
             'site_url' => $siteUrl,
             'sections' => $sections
         ];
+    }
+
+    /** Varsayılan ve üst sınır: llms.txt makine okuyucusu için kısa kalmalı. */
+    public const DEFAULT_LIMIT = 50;
+    public const MAX_LIMIT = 1000;
+
+    /** Geçerli sınır (1..MAX_LIMIT); sayı değilse ya da < 1 ise `$fallback`. */
+    public static function llmsLimit(mixed $value, int $fallback = self::DEFAULT_LIMIT): int
+    {
+        $limit = is_numeric($value) ? (int) $value : 0;
+
+        return $limit >= 1 ? min($limit, self::MAX_LIMIT) : $fallback;
+    }
+
+    /** Site ayarı (`project-routemap` `view_mapping[<site>]` → `project-settings`). */
+    private function projectSetting(string $key): mixed
+    {
+        try {
+            return \Rbn\Framework\Core\System\Config\Config::get('project-settings.' . $key);
+        } catch (\Throwable) {
+            return null;
+        }
     }
 }

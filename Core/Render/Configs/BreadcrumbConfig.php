@@ -36,7 +36,7 @@ class BreadcrumbConfig extends BaseConfig
     ];
 
     /**
-     * [SOVEREIGN ACTION MAP] 🛡️🛰️⚓
+     * [RBN Framework ACTION MAP] 🛡️🛰️⚓
      * Centralized dictionary for common URL segments to provide autonomous icons and labels.
      */
     public const ACTION_ICON_MAP = [

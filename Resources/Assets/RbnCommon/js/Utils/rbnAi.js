@@ -1,6 +1,6 @@
 /**
- * rbnAi.js — Sovereign AI UI Assistant 🧠🎨🛰️
- * Part of the RBN 3.5 "Masterpiece" Architecture.
+ * rbnAi.js — RBN Framework AI UI Assistant 🧠🎨🛰️
+ * Part of the RBN Framework Architecture.
  */
 (function () {
     'use strict';

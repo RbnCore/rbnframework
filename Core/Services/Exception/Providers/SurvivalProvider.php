@@ -11,7 +11,7 @@ use Rbn\Framework\Core\Services\Exception\Data\ShieldMetadata;
 /**
  * SurvivalProvider - The Final Bastion UI 🛡️💀
  * 
- * RBN 3.5: [LAYER 0 / 2] Masterpiece Standard.
+ * RBN Framework: [LAYER 0 / 2] RBN Framework Standard.
  * Standardized Unified Rendering for Critical Failures.
  */
 class SurvivalProvider extends BaseExceptionProvider
@@ -59,7 +59,7 @@ class SurvivalProvider extends BaseExceptionProvider
             'copyText' => $copyText
         ];
 
-        // 🎯 RBN 3.5: Use Centralized Masterpiece Autonomous Renderer 🏛️🛡️
+        // 🎯 RBN Framework: Use Centralized RBN Framework Autonomous Renderer 🏛️🛡️
         self::renderAutonomous('survival', $data, $code);
     }
 

@@ -7,9 +7,9 @@ namespace Rbn\Framework\Packages\RbnApi\Services;
 use Rbn\Framework\Core\Base\Services\BaseService;
 
 /**
- * YoutubeService - Sovereign YouTube Orchestrator 📽️🛰️⚓
+ * YoutubeService - RBN Framework YouTube Orchestrator 📽️🛰️⚓
  * 
- * RBN 3.5 Masterpiece: High-level interface for YouTube Data API operations.
+ * RBN Framework: High-level interface for YouTube Data API operations.
  * @property \Rbn\Framework\Packages\RbnApi\Providers\YoutubeProvider $youtube
  */
 class YoutubeService extends BaseService

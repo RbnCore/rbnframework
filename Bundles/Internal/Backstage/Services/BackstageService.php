@@ -7,8 +7,8 @@ use Rbn\Framework\Core\Base\Services\BaseService;
 /**
  * BackstageService - Core Service for Developer Hub 🛡️🛰️⚓
  * 
- * RBN 3.5 Masterpiece Standard.
- * 🎼 Sovereign Service: Model and Provider resources are resolved dynamically.
+ * RBN Framework Standard.
+ * 🎼 RBN Framework Service: Model and Provider resources are resolved dynamically.
  */
 class BackstageService extends BaseService
 {

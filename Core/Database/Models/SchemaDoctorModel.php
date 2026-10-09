@@ -146,7 +146,7 @@ class SchemaDoctorModel extends BaseModel
      */
     public function getRows(string $table, int $limit = 100): array
     {
-        return $this->db->table($table)->limit($limit)->get();
+        return $this->db->table($table)->limit($limit)->rows();
     }
 
     /**
@@ -169,7 +169,7 @@ class SchemaDoctorModel extends BaseModel
         if ($ids) {
             $query->whereIn($this->getTablePrimaryKey($table), $ids);
         }
-        return $query->get();
+        return $query->rows();
     }
 
     /**

@@ -9,7 +9,7 @@ use Rbn\Framework\Core\System\Discovery\Clusters\Logic\Definition\Definition;
 
 /**
  * SyshubDbConsoleHandler - Database Action Orchestrator ⚙️🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 class SyshubDbConsoleHandler extends BaseComponent
 {

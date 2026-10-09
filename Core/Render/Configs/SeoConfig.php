@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Support\Definitions\System\FrameworkIdentity;
 /**
  * SeoConfig - Centralized SEO and Metadata Configuration 📈⚙️⚓
  * 
- * RBN 3.5 Masterpiece: Core defaults for the SEO Engine.
+ * RBN Framework: Core defaults for the SEO Engine.
  * Leverages FrameworkIdentity for branding synchronization.
  */
 class SeoConfig extends BaseConfig

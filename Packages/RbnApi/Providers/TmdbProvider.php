@@ -23,7 +23,7 @@ class TmdbProvider extends BaseComponent
         if (empty($apiKey)) {
             return [
                 'status' => 'error',
-                'message' => 'RBN 3.5: TMDB API yetkisi veya anahtarı bulunamadı! 🛡️⚓'
+                'message' => 'TMDB API yetkisi veya anahtarı bulunamadı! 🛡️⚓'
             ];
         }
 

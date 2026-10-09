@@ -7,7 +7,7 @@ use Rbn\Framework\Bundles\RbnSuite\RbnAdmin\Traits\TrafficAnalysisTrait;
 
 /**
  * TrafficStatsChannel - Fluent Web Traffic Analytics API 🛫🕊️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * @property \Rbn\Framework\Bundles\RbnSuite\RbnAdmin\Providers\AnalyticsProvider $analyticsProvider
  */

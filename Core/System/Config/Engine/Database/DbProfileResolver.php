@@ -7,7 +7,6 @@ namespace Rbn\Framework\Core\System\Config\Engine\Database;
 use Rbn\Framework\Core\System\Config\Definitions\DbProfiles\CommonDbData;
 use Rbn\Framework\Core\System\Config\Definitions\DbProfiles\MasterDbData;
 use Rbn\Framework\Core\System\Config\Definitions\DbProfiles\ProjectDbData;
-use Rbn\Framework\Core\System\Config\Env;
 use Rbn\Framework\Core\System\Config\Secrets;
 
 /**
@@ -20,16 +19,15 @@ use Rbn\Framework\Core\System\Config\Secrets;
  *
  * SORUMLULUK (tek): bir profil sınıfı için `host`/`port`/veritabanı adı/
  * kullanıcı/parola/anahtar haritası/bağlantı dizisini ÜRETMEK. Değer
- * kaynağı her zaman `Secrets` (TEK sır dosyası) + `Env` (TEK ortam okuyucu).
+ * kaynağı her zaman `Secrets` (TEK sır dosyası). Ortam değişkeni yolu YOKTUR
+ * [FW-096-D8].
  *
  * KAYNAK HARİTASI (davranış birebir korundu):
  *   - `MasterDbData`  → tamamen `Secrets::masterDb()` (host, port, name,
  *                       user, pass). Ortam değişkeni yolu YOKTUR.
- *   - `CommonDbData`  → `Secrets::masterDb()` ile AYNI sunucu/hesap;
- *                       `COMMON_DB_USER`/`COMMON_DB_PASS` ortam değişkeni
- *                       yedek yoldur.
- *   - proje profili   → `DB_USER`/`DB_PASS` ortam değişkeni →
- *                       `Secrets::optional()` → yoksa fail-closed.
+ *   - `CommonDbData`  → `Secrets::masterDb()` ile AYNI sunucu/hesap.
+ *   - proje profili   → `Secrets::optional()` (`db_user`/`db_pass`) →
+ *                       yoksa fail-closed.
  *                       (Asıl kaynak her projenin kendi
  *                       `project-settings.php` dosyasıdır; bu yol YEDEKTİR.)
  *
@@ -122,20 +120,18 @@ final class DbProfileResolver
         }
 
         if (self::isCommon($profile)) {
-            return self::fromEnvironment(CommonDbData::USER_ENV)
-                ?? Secrets::masterDb()['user'];
+            return Secrets::masterDb()['user'];
         }
 
-        return self::fromEnvironment(ProjectDbData::USER_ENV)
-            ?? Secrets::optional(ProjectDbData::DB_USER_KEY)
+        return Secrets::optional(ProjectDbData::DB_USER_KEY)
             ?? $profile::DEFAULT_DB_USER;
     }
 
     /**
      * DB parolası - tek çıkış (A0-8, fail-closed).
      *
-     * Boş parola YALNIZ sır dosyasında/ortamda gerçekten boş tanımlıysa
-     * geçer. Ortam değişkeni ve sır dosyası hiç yoksa sessiz `''` dönülmez.
+     * Boş parola YALNIZ sır dosyasında gerçekten boş tanımlıysa geçer.
+     * Sır dosyasında yoksa sessiz `''` dönülmez.
      *
      * @param class-string $profile
      *
@@ -148,18 +144,16 @@ final class DbProfileResolver
         }
 
         if (self::isCommon($profile)) {
-            return self::fromEnvironment(CommonDbData::PASS_ENV)
-                ?? Secrets::masterDb()['pass'];
+            return Secrets::masterDb()['pass'];
         }
 
-        $p = self::fromEnvironment(ProjectDbData::PASS_ENV)
-            ?? Secrets::optional(ProjectDbData::DB_PASS_KEY);
+        $p = Secrets::optional(ProjectDbData::DB_PASS_KEY);
 
         if ($p === null) {
             throw new \RuntimeException(
                 'RBN Guvenlik: ' . $profile . ' veritabani parolasi cozulemedi. '
-                . ProjectDbData::PASS_ENV . ' ortam degiskenini ya da Core/System/Config/Secrets/secrets.php '
-                . 'dosyasındaki `' . ProjectDbData::DB_PASS_KEY . '` bölümünü tanımlayın. '
+                . 'Core/System/Config/Secrets/secrets.php dosyasındaki `'
+                . ProjectDbData::DB_PASS_KEY . '` anahtarını tanımlayın. '
                 . 'Sessiz bos fallback YOKTUR.'
             );
         }
@@ -201,19 +195,5 @@ final class DbProfileResolver
     private static function isProject(string $profile): bool
     {
         return is_a($profile, ProjectDbData::class, true);
-    }
-
-    /**
-     * Ortam değişkeninden boş olmayan değer okur — TEK kapı: `Env::string()`.
-     *
-     * [FW-ENV-KAYIT-160] Kaynak sırası (`$_ENV` → `$_SERVER` → `getenv`) ve
-     * boş değer atlama davranışı `Env`'in kuralıdır; burada tekrar yazılmaz.
-     * Yer tutucu `CHANGE_ME` de "tanımsız" sayılır.
-     */
-    private static function fromEnvironment(string $name): ?string
-    {
-        $v = Env::string($name);
-
-        return ($v === null || $v === 'CHANGE_ME') ? null : $v;
     }
 }

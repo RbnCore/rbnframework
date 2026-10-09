@@ -1,6 +1,6 @@
 <?php
 /**
- * RBN Masterpiece - Project Discovery Guard 🛰️🏛️⚓
+ * RBN RBN Framework - Project Discovery Guard 🛰️🏛️⚓
  */
 namespace Rbn\Framework\Core\System\Kernel\Stages;
 
@@ -69,7 +69,7 @@ class ProjectDiscovery
             // Duzeltme: yalnizca SONDaki `.test` / `.local` eki atilir.
             // Once `PreBoot::normalizeHost()` ile port atilir, kucuk harfe
             // indirilir ve gecersiz host fail-closed olarak bos stringe duser
-            // (TEK normalizasyon merkezi; Okan'in S-02 yamasıyla aynı kaynak).
+            // (TEK normalizasyon merkezi; team member'in S-02 yamasıyla aynı kaynak).
             $host = \Rbn\Framework\Core\System\Kernel\Base\PreBoot::normalizeHost((string) $host);
             if ($host === '') {
                 return [];

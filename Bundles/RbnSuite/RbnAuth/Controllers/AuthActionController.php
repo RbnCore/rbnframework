@@ -50,7 +50,7 @@ class AuthActionController extends AuthController
             return;
         }
 
-        // 🎼 RBN 3.5: Verification logic via Chef 🧶✅ (token zorunlu)
+        // 🎼 RBN Framework: Verification logic via Chef 🧶✅ (token zorunlu)
         $result = $this->recoveryService->verify($token, $uid);
 
         $this->Route->handleResult($result, [
@@ -91,7 +91,7 @@ class AuthActionController extends AuthController
             return;
         }
 
-        // 🎼 RBN 3.5: Delegated to the Identity Lifecycle orchestrator 🧬🎻
+        // 🎼 RBN Framework: Delegated to the Identity Lifecycle orchestrator 🧬🎻
         $result = $this->recoveryService->register($data);
 
         $this->Route->handleResult($result, [
@@ -106,7 +106,7 @@ class AuthActionController extends AuthController
      *
      * [A0-6] `action` değeri `password_reset` olarak düzeltildi. Eski değer `recovery`
      * idi ve `RateLimitValidations::LIMITS` içinde **yoktu** → hız sınırı hiç
-     * tetiklenmiyordu (A-06 / Okan http.md #61-62). Kalan eylem adları eşlemesi
+     * tetiklenmiyordu (A-06 / team member http.md #61-62). Kalan eylem adları eşlemesi
      * (login → frontend_login) A0-3 kalemiyle Baran'ın sahipliğindedir, dokunulmadı.
      */
     public function forgotPasswordSubmit(): void
@@ -119,7 +119,7 @@ class AuthActionController extends AuthController
             'action' => 'password_reset'
         ]);
 
-        // 🎼 RBN 3.5 Masterpiece: Autonomous Recovery 🗝️🛡️
+        // 🎼 RBN Framework: Autonomous Recovery 🗝️🛡️
         $result = $this->recoveryService->initiateRecovery($data['email']);
 
         $this->Route->handleResult($result, [
@@ -137,7 +137,7 @@ class AuthActionController extends AuthController
      *     (`reset_user_id` oturum değişkeni kaldırıldı — A-02 ölü yol).
      *  2. `options` dizisi eklendi: `csrf` + `rateLimitEnabled` + **geçerli**
      *     `action` (`password_reset`). Önceki sürüm `options` vermiyordu →
-     *     CSRF ve hız sınırı yoktu (YA-2 / Okan http.md #74).
+     *     CSRF ve hız sınırı yoktu (YA-2 / team member http.md #74).
      *  3. Boş/geçersiz token → **500 değil**, kullanıcı hatası (kabul ölçütü).
      */
     public function resetPasswordSubmit(): void
@@ -174,7 +174,7 @@ class AuthActionController extends AuthController
             return;
         }
 
-        // 🎼 RBN 3.5: Atomic reset via Recovery Orchestrator ✅ (token zorunlu)
+        // 🎼 RBN Framework: Atomic reset via Recovery Orchestrator ✅ (token zorunlu)
         $result = $this->recoveryService->reset((string) $data['token'], (string) $data['password']);
 
         $this->Route->handleResult($result, [

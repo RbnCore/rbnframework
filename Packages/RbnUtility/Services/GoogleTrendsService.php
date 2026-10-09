@@ -7,9 +7,9 @@ namespace Rbn\Framework\Packages\RbnUtility\Services;
 use Rbn\Framework\Core\Base\Services\BaseService;
 
 /**
- * GoogleTrendsService - Sovereign Google Trends & Social Seed Generator 📈🪐🛰️⚓
+ * GoogleTrendsService - RBN Framework Google Trends & Social Seed Generator 📈🪐🛰️⚓
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Autonomous Google Trends Parser, Niche Relevancy Filter & AI Seed Generator.
  */
 class GoogleTrendsService extends BaseService

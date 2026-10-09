@@ -1,7 +1,7 @@
 /**
  * ==========================================================================
  * RBN ADMIN MASTER JAVASCRIPT SUITE (rbnAdmin.js) 💻🛰️⚓
- * The Sovereign Master Script Index for RBN Admin Dashboard.
+ * The RBN Framework Master Script Index for RBN Admin Dashboard.
  * Dynamically boots admin controllers, debugging bridges and AI services.
  * ==========================================================================
  */
@@ -13,7 +13,7 @@
         ? currentScript.src.substring(0, currentScript.src.lastIndexOf('/')) 
         : '/framework-assets/rbnadmin/js';
 
-    // RBN Admin Sovereign Modules
+    // RBN Admin RBN Framework Modules
     let commonPath = '/framework-assets/rbncommon/js';
     let adminPath = '/framework-assets/rbnadmin/js';
 

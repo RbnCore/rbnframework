@@ -8,9 +8,9 @@ use Rbn\Framework\Core\Base\Services\BaseManager;
 use Rbn\Framework\Core\Support\Exceptions\CronTaskException;
 
 /**
- * TaskManager - Sovereign Master Task Executor & Telemetry Pipeline 🚀⚡⚓
+ * TaskManager - RBN Framework Master Task Executor & Telemetry Pipeline 🚀⚡⚓
  * 
- * RBN 3.5 Sovereign Framework Standards.
+ * RBN Framework Framework Standards.
  * @var \Rbn\Framework\Core\Services\Console\Base\AbstractCronTask|object|null $task
  */
 class TaskManager extends BaseManager
@@ -23,7 +23,7 @@ class TaskManager extends BaseManager
         $projectKey = (string) ($params['project_key'] ?? ($options['project'] ?? ($options['project_key'] ?? '')));
         $taskName = basename(str_replace('\\', '/', $taskClass));
 
-        // 🎼 RBN 3.5 MASTER PIPELINE: Görev Yürütme Motoru (5-Adım Mimarisi) 🚀🛰️⚓
+        // 🎼 RBN Framework MASTER PIPELINE: Görev Yürütme Motoru (5-Adım Mimarisi) 🚀🛰️⚓
         return $this->runInProjectContext($projectKey, function () use ($taskClass, $taskName, $params, $options, $projectKey) {
             $startedAt = date('Y-m-d H:i:s');
             $startTime = microtime(true);

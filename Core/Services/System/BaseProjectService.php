@@ -7,9 +7,9 @@ namespace Rbn\Framework\Core\Services\System;
 use Rbn\Framework\Core\Base\Services\BaseService;
 
 /**
- * BaseProjectService - The Sovereign base for Project-level business logic 📡🏛️⚓
+ * BaseProjectService - The RBN Framework base for Project-level business logic 📡🏛️⚓
  * 
- * RBN 3.5 Masterpiece: Centralized authority for common features across all projects,
+ * RBN Framework: Centralized authority for common features across all projects,
  * including social media platforms, static pages, settings mapping, and SSS (FAQs).
  */
 class BaseProjectService extends BaseService

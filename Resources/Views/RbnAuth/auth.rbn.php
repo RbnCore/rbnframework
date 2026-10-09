@@ -8,7 +8,7 @@
         <?php endif; ?>
     </div>
     <span class="fw-bold fs-sm text-white"><?= $siteName ?></span>
-    <span class="rbn-auth-brand-badge">v<?= $siteVersion ?? '1.0' ?></span>
+    <?php if (($siteVersion ?? '') !== ''): ?><span class="rbn-auth-brand-badge">v<?= htmlspecialchars((string) $siteVersion) ?></span><?php endif; ?>
 </a>
 
 <!-- Elevated Studio Stage Card -->
@@ -240,10 +240,12 @@
     // =========================================================================
     default: ?>
         <!-- Segmented Navigation -->
+        <?php if (\Rbn\Framework\Core\Http\Security\AuthPolicy::registrationEnabled()): ?>
         <div class="d-grid rbn-auth-nav-pill" style="grid-template-columns: 1fr 1fr; gap: 4px;">
             <a href="<?= $Route->url('login') ?>" class="text-center rbn-auth-nav-link active">Giriş Yap</a>
             <a href="<?= $Route->url('register') ?>" class="text-center rbn-auth-nav-link">Kayıt Ol</a>
         </div>
+        <?php endif; ?>
 
         <div class="text-center mb-4">
             <h1 class="fs-2 rbn-auth-title">Hoş Geldiniz</h1>

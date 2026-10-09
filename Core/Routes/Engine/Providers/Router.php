@@ -7,7 +7,7 @@ use Rbn\Framework\Core\Base\Services\BaseService;
 /**
  * Router - Modern Fluent Routing Engine Bridge
  * 
- * RBN 3.0: Bridge to the Engine components managed by RouteService.
+ * Bridge to the Engine components managed by RouteService.
  */
 class Router
 {

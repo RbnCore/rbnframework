@@ -1,6 +1,6 @@
 # Core/System/Storage — Dosya tabanlı depolama (önbellek, oturum, günlük, trafik…)
 
-> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/System/Storage/` — 16 `*.php` (`StorageManager` 1, `Base/` 1, `Constants/` 3, `Drivers/` 1, `Providers/` 10).
 > **Envanter:** 16 dosyanın 16'sı aşağıda anlatıldı.
 
@@ -106,7 +106,7 @@ Atlanan istekler: ilk yol bölümü panel öneki (`Definition::get('route','DASH
 9. **Hatalar sessizdir:** `write` her `Throwable`'da `false`, `read` `null` döner; üst katman yazmanın başarısını mutlaka denetlemelidir.
 10. **`SessionProvider::get/set` `$_SESSION` üzerindedir**, sağlayıcının dosya anahtar-değer deposu değildir; `ensureStarted()` başlık gönderilmişse oturum başlatmaz.
 11. **Konfigürasyon yolu tutarsızlığı:** `TrafficProvider::getStorageDir()` `custom_path` verisi varsa `<workspace>/projects/<custom_path>/Storage/logs/traffic` kullanır, aksi halde `Paths::project()->logs('traffic')`; `LogProvider` benzer biçimde `resolveProjectPath()` kullanır. İkisi de aktif olmayan bir projenin dizinine yazabilir (proje anahtarı verildiğinde).
-12. **`LogThrottle` Storage'da değildir:** `EnvKeys` docblock'ı `Core/System/Storage/LogThrottle.php` der; gerçek konum `Core/Support/Bridges/Helpers/Library/LogThrottle.php`'dir.
+12. **`LogThrottle` Storage'da değildir:** gerçek konum `Core/Support/Bridges/Helpers/Library/LogThrottle.php`'dir (kısıt kapısı `secrets.php` `app.log_throttle`).
 
 ## 6. Örnek (gerçek koddan)
 

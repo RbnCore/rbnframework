@@ -7,7 +7,7 @@ use Rbn\Framework\Bundles\RbnSuite\RbnAuth\Models\AuthRole;
 
 /**
  * AccessHandler - The Consolidated Entry/Exit & Authorization Specialist 🏹🛡️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * Orchestrates authentication, termination, and access level authorization (ACL).
  * 
@@ -35,7 +35,7 @@ class AccessHandler extends BaseComponent
     /**
      * Executes the primitive authentication check 🚀
      * Master Authentication Logic 🔑🛰️⚓
-     * RBN 3.5 Masterpiece: Now with integrated Rate-Limit and Audit layers.
+     * RBN Framework: Now with integrated Rate-Limit and Audit layers.
      */
     public function authenticate(string $identity, string $password): array
     {

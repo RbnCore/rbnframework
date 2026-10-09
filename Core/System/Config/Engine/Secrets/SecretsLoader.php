@@ -44,7 +44,7 @@ final class SecretsLoader
      *
      * Sabit `/Secrets/...` ile başladığı için bu dizin `Config/` olmalıdır
      * (`Config` + `/Secrets/secrets.php` = doğru yol). Testte geçici bir
-     * dizine bağlanabilir.  [CONFIG-E-PELIN] Bu sinif `Config/Engine/Secrets/` altinda durur; kok `Config/` iki seviye yukaridadir (`dirname(__DIR__, 2)`).
+     * dizine bağlanabilir.  [CONFIG-E-team member] Bu sinif `Config/Engine/Secrets/` altinda durur; kok `Config/` iki seviye yukaridadir (`dirname(__DIR__, 2)`).
      */
     public static function rootDirectory(): string
     {

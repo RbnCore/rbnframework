@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Base\Attributes\Component;
 /**
  * ProjectCleanupJob - Proje / Tenant Seviyesi Otonom Temizlik Görevi 🏢🧼
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Multi-tenant projelerin Storage (logs, sessions, cache) dosyalarını ve DB log tablolarını temizler.
  */
 #[Component(alias: 'cleanup.project', type: 'job')]

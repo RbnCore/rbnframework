@@ -8,7 +8,7 @@ use Rbn\Framework\Bundles\RbnSuite\RbnAuth\Middleware\AuthMiddleware;
 /**
  * RouteBlueprint - Centralized Routing Blueprint ⚖️🏛️🗺️
  * 
- * RBN 3.5: Master blueprint for routing rules, middleware groups, 
+ * RBN Framework: Master blueprint for routing rules, middleware groups,
  * and core engine patterns. Elevates these definitions to the Support layer.
  */
 class RouteBlueprint extends BaseConfig
@@ -24,7 +24,7 @@ class RouteBlueprint extends BaseConfig
     /**
      * Middleware Aliases & Groups 🛡️
      *
-     * [FW-APIGUARD · TASARIM GOREV 1 · 2026-10-03 · zeki-6eb7f5]
+     * [FW-APIGUARD · TASARIM GOREV 1 · 2026-10-03 · team member]
      * `machine-api` alias'i eklendi. Yazim: `Route::middleware('machine-api')`
      * (PARAMETRESIZ). Neden parametre yok:
      * `Dispatcher::resolveMiddleware()` (`Core/Routes/Engine/Dispatcher.php:113`)

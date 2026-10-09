@@ -21,11 +21,11 @@ class SecurityController extends SyshubController
      */
     public function index(): void
     {
-        // 🎼 Masterpiece: Zayıf Kontrolör (Thin Controller), Kalın Servis (Fat Service).
+        // 🎼 RBN Framework: Zayıf Kontrolör (Thin Controller), Kalın Servis (Fat Service).
         // Tüm veri derleme ve GeoIP haritalama işleri otonom Security Handler'a devredildi.
         $dashboardData = $this->service->security()->getSecurityDashboardData();
 
-        // RBN 3.5 Masterpiece Render Standardı
+        // RBN Framework Render Standardı
         $this->render('Security/index', $dashboardData);
     }
 }

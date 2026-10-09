@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 
 /**
  * SchemaProvider - SEO JSON-LD Schema Rendering Engine 🛰️🎨⚓
- * Part of the RBN 3.5 "Masterpiece" Architecture.
+ * Part of the RBN Framework Architecture.
  */
 class SchemaProvider extends BaseComponent
 {

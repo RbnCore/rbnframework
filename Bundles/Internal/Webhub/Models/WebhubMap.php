@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\Data\BaseConfig;
 
 /**
  * WebhubMap - Frontend Architecture Map 🌐🏛️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 class WebhubMap extends BaseConfig
 {

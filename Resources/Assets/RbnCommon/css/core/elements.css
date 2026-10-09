@@ -731,3 +731,60 @@
     transform: scaleX(0);
     transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* ==========================================================================
+   Bos durum (.rbn-empty-state) + goruntu basligi (.rbn-display-title) — FW-096-C2/C3
+   ========================================================================== */
+.rbn-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--rbn-space-3, 12px);
+    padding: var(--rbn-space-12, 48px) var(--rbn-space-6, 24px);
+    text-align: center;
+    color: var(--rbn-text-secondary);
+}
+.rbn-empty-state-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    font-size: 1.6rem;
+    color: var(--rbn-primary);
+    background: var(--rbn-primary-subtle);
+    border-radius: var(--rbn-radius-pill, 9999px);
+}
+.rbn-empty-state-title {
+    margin: 0;
+    font-family: var(--rbn-font-display, inherit);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--rbn-text-display);
+}
+.rbn-empty-state-text {
+    margin: 0;
+    max-width: 38ch;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+.rbn-empty-state-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--rbn-space-2, 8px);
+    margin-top: var(--rbn-space-2, 8px);
+}
+.rbn-empty-state-sm { padding: var(--rbn-space-6, 24px) var(--rbn-space-4, 16px); }
+
+.rbn-display-title {
+    margin: 0;
+    font-family: var(--rbn-font-display, inherit);
+    font-size: clamp(1.7rem, 1.1rem + 2.6vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--rbn-text-display);
+    text-wrap: balance;
+}

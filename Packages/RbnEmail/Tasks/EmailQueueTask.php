@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Services\Console\Base\AbstractCronTask;
 /**
  * EmailQueueTask - Background Email Dispatcher 📨⚙️🎻
  * 
- * RBN 3.5 "Masterpiece": Now an otonomous task worker.
+ * RBN Framework: Now an otonomous task worker.
  */
 class EmailQueueTask extends AbstractCronTask
 {

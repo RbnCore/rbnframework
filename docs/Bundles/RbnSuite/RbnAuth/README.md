@@ -1,6 +1,6 @@
 # RbnAuth — Kimlik doğrulama, oturum, rol ve parola kurtarma
 
-> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Bundles/RbnSuite/RbnAuth/` — **15 `*.php`**
 > (Controllers 3 · Handlers 5 · Services 2 · Models 3 · Middleware 1 · Support 1)
 > **Envanter:** 15 php dosyasının **15'i** aşağıdaki tabloda anlatıldı.

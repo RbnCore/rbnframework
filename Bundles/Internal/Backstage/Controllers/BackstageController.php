@@ -9,7 +9,7 @@ use Rbn\Framework\Bundles\Internal\Backstage\Models\ModuleData;
 /**
  * BackstageController - Main Dashboard for App Config Hub 🚀🛰️⚓
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * This class serves as the root identity for the Backstage module ecosystem.
  */
 #[Module(
@@ -22,7 +22,7 @@ class BackstageController extends BaseController
 {
     public function index()
     {
-        // 🎼 Sovereign Render: Context automagically detected via Module Attribute!
+        // 🎼 RBN Framework Render: Context automagically detected via Module Attribute!
         return $this->render('backstage_dash');
     }
 }

@@ -19,8 +19,8 @@ use Rbn\Framework\Core\Support\Exceptions\ViewNotFoundException;
 /**
  * BaseRender - Core Base Class for Unified Hub Components 🛡️⚓
  * 
- * RBN 3.5: Powered by BaseComponent DNA.
- * Masterpiece: Integrated Discovery Septet/Decet gateway for Rendering.
+ * RBN Framework: Powered by BaseComponent DNA.
+ * RBN Framework: Integrated Discovery Septet/Decet gateway for Rendering.
  */
 abstract class BaseRender extends BaseComponent
 {
@@ -35,7 +35,7 @@ abstract class BaseRender extends BaseComponent
      */
     public function __construct(?BaseService $rbn = null)
     {
-        // 🎼 RBN 3.5: Minimalist constructor to prevent circular dependencies during boot.
+        // 🎼 RBN Framework: Minimalist constructor to prevent circular dependencies during boot.
         // We no longer fetch settings or site data here. 🧬🧼
         parent::__construct($rbn);
     }
@@ -43,7 +43,7 @@ abstract class BaseRender extends BaseComponent
     /**
      * Harmony: Return the full context with local data for rendering 🎼✨
      * 
-     * RBN 3.5 Masterpiece: This acts as the "Lazy Loader" for the render context.
+     * RBN Framework: This acts as the "Lazy Loader" for the render context.
      * It ensures settings are only fetched when a view is actually being prepared.
      */
     public function bootHarmony(): array
@@ -52,7 +52,7 @@ abstract class BaseRender extends BaseComponent
             return $this->baseHarmony;
         }
 
-        // 🎯 RBN 3.5 [RECURSION BRAKE] 🏹
+        // 🎯 RBN Framework [RECURSION BRAKE] 🏹
         // Avoid database interaction if the framework is in panic mode or terminal failure.
         if (defined('RBN_PANIC_ACTIVE')) {
             // 🛡️ B-52: sonuç `baseHarmony`'ye de yazılır; döndürülen DEĞER
@@ -63,13 +63,13 @@ abstract class BaseRender extends BaseComponent
             return $this->baseHarmony = [];
         }
 
-        // 🎯 RBN 3.5: [AUTONOMOUS SERVICE DISCOVERY] 🚀
+        // 🎯 RBN Framework: [AUTONOMOUS SERVICE DISCOVERY] 🚀
         // If the service property is null, attempt to resolve it via the current module context.
         if ($this->service === null && $this->module !== null) {
             $this->service = $this->service($this->module);
         }
 
-        // 🎯 RBN 3.5: [UNBREAKABLE SERVICE SHIELD] 🛡️
+        // 🎯 RBN Framework: [UNBREAKABLE SERVICE SHIELD] 🛡️
         // Ensure $service is NEVER null in the view context. 
         $viewService = $this->service ?? $this->rbn;
 
@@ -102,7 +102,7 @@ abstract class BaseRender extends BaseComponent
             'discover' => $this->discover,
             'rbn' => $this->rbn,
 
-            // 🎼 The Sovereign Service object for views (Safe Access Proxy)
+            // 🎼 The RBN Framework Service object for views (Safe Access Proxy)
             'sovereign' => $viewService,
 
             // 🏛️ Layout Resolution (Exposed for direct page usage)
@@ -167,7 +167,7 @@ abstract class BaseRender extends BaseComponent
     }
 
     /**
-     * Unified access to the Sovereign Asset Service orchestrator. 🎼🛰️⚓
+     * Unified access to the RBN Framework Asset Service orchestrator. 🎼🛰️⚓
      */
     protected function assetService(): AssetService
     {
@@ -183,7 +183,7 @@ abstract class BaseRender extends BaseComponent
     }
 
     /**
-     * Unified access to the Sovereign SEO Resolver cluster. 🕵️‍♂️🛰️⚓
+     * Unified access to the RBN Framework SEO Resolver cluster. 🕵️‍♂️🛰️⚓
      */
     protected function seoResolver(): SeoResolver
     {
@@ -191,7 +191,7 @@ abstract class BaseRender extends BaseComponent
     }
 
     /**
-     * Unified access to the Sovereign Breadcrumb Resolver cluster. 🗺️🛰️⚓
+     * Unified access to the RBN Framework Breadcrumb Resolver cluster. 🗺️🛰️⚓
      */
     protected function breadcrumbResolver(): BreadcrumbResolver
     {
@@ -199,7 +199,7 @@ abstract class BaseRender extends BaseComponent
     }
 
     /**
-     * RBN 3.5: Masterpiece Fragment Guard 🛡️🛰️⚓
+     * RBN Framework: Fragment Guard 🛡️🛰️⚓
      * Check if the data contains a fragment request and handle it.
      * 
      * @param string $viewPath Physical path for the view

@@ -10,7 +10,7 @@ use Rbn\Framework\Packages\RbnEmail\Models\EmailConstant;
 /**
  * EmailRenderHandler - The Designer (Worker) 🎨🎻📧
  * 
- * RBN 3.5: Masterpiece Standard (BaseComponent Actor).
+ * RBN Framework: Standard (BaseComponent Actor).
  * Handles template resolution and premium HTML wrapping.
  */
 class EmailRenderHandler extends BaseComponent
@@ -48,7 +48,7 @@ class EmailRenderHandler extends BaseComponent
             'logo_html' => (!empty($config['site_logo']) && $config['site_logo'] !== EmailConstant::DEFAULT_LOGO_SVG) ? '<img src="' . htmlspecialchars((string) $config['site_logo']) . '" alt="' . htmlspecialchars((string) $config['site_name']) . '" style="max-height: 50px; width: auto; margin-bottom: 12px;">' : ''
         ]);
 
-        // 3. Fetch Skeleton (Masterpiece Layout)
+        // 3. Fetch Skeleton (RBN Framework Layout)
         if (!file_exists($this->layoutPath)) {
             return "<html><body><h1>{$subject}</h1><div>{$templateData['email_content']}</div></body></html>";
         }

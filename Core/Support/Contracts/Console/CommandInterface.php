@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Rbn\Framework\Core\Support\Contracts\Console;
 
 /**
- * CommandInterface - The Sovereign Contract for CLI Actions 🏹⚖️⚓
+ * CommandInterface - The RBN Framework Contract for CLI Actions 🏹⚖️⚓
  * 
- * RBN 3.5 "Masterpiece": Ensures all CLI commands follow the same
+ * RBN Framework: Ensures all CLI commands follow the same
  * anatomical structure for discovery and programmatic execution.
  */
 interface CommandInterface

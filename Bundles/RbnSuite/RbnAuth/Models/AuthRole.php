@@ -6,7 +6,7 @@ use Rbn\Framework\Core\Base\Data\BaseConfig;
 
 /**
  * AuthRole - RbnAuth Rol ve Yetki Tablosu ⚖️🎭🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * Bu sınıf paketin tüm hiyerarşik rollerini ve yönetici yetkilerini
  * "Authority Map" olarak merkezi HUB üzerinden yönetir.

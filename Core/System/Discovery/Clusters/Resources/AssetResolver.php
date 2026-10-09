@@ -11,7 +11,7 @@ use Rbn\Framework\Core\Render\Configs\AssetConfig;
 /**
  * AssetResolver - Physical Asset Discovery Hub (Zemin Katmanı) 🪐🛰️⚓
  * 
- * RBN 3.5 Masterpiece: Sadece dosyanın fiziksel varlığıyla ilgilenir. 
+ * RBN Framework: Sadece dosyanın fiziksel varlığıyla ilgilenir.
  */
 class AssetResolver extends BaseResolver
 {

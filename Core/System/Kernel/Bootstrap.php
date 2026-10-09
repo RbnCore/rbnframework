@@ -7,7 +7,7 @@ use Rbn\Framework\Core\Routes\Route;
 use Rbn\Framework\Core\Services\Gatekeepers\BootSentinel;
 
 /**
- * Bootstrap - The thin orchestrator for RBN Framework 3.5. 🤵‍♂️✨🛡️
+ * Bootstrap - The thin orchestrator for RBN Framework. 🤵‍♂️✨🛡️
  */
 class Bootstrap
 {
@@ -27,7 +27,7 @@ class Bootstrap
         Base\PhpVersionGate::enforce();
 
         try {
-            // 🛑 RBN 3.5: K-02 — Hata ayrıntısı görünürlüğü ORTAMA BAĞLI.
+            // 🛑 RBN Framework: K-02 — Hata ayrıntısı görünürlüğü ORTAMA BAĞLI.
             // İlk çağrı ortam tespitinden ÖNCE gelir: RBN_DEV henüz yok, guvenli
             // varsayilan KAPALI. İkinci çağrı PreBoot'dan SONRA gelir.
             self::configureErrorVisibility();
@@ -47,7 +47,7 @@ class Bootstrap
             // 3. Final Dispatch 🛣️
             Route::run();
 
-            // 🏁 RBN 3.5: Masterpiece Graceful Termination
+            // 🏁 RBN Framework: Graceful Termination
             $kernel->terminate();
 
         } catch (\Throwable $e) {
@@ -79,7 +79,7 @@ class Bootstrap
         ));
 
         if (defined('RBN_DEV') && RBN_DEV === true) {
-            die('RBN Masterpiece Terminal Failure: '
+            die('RBN Terminal Failure: '
                 . htmlspecialchars($e->getMessage(), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'));
         }
 

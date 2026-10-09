@@ -6,7 +6,7 @@ namespace Rbn\Framework\Core\Support\Exceptions;
 /**
  * ValidationException - Unified Validation Response 🧬⚖️
  * 
- * RBN 3.5: Masterpiece Standard (Modernized).
+ * RBN Framework: Standard (Modernized).
  * Centralized exception for carrying validation error arrays and redirect URLs.
  * 
  * Part of the Layer 4 (Functional) and Layer 2 (Development) shield.

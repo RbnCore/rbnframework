@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Attributes\Component;
 
 /**
  * GoogleService - Core API Bridge for Google Cloud Ecosystem 🛰️🏛️⚓
- * RBN 3.5 Framework Standard.
+ * RBN Framework Framework Standard.
  */
 #[Component(alias: 'google', type: 'service')]
 class GoogleService extends BaseService

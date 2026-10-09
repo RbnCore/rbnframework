@@ -66,19 +66,19 @@ trait QueryModelTrait
         /** @var \Rbn\Framework\Core\Database\Engine\Providers\QueryBuilder $builder */
         $builder = new $provider($db, $this->table);
 
-        // 🎼 RBN 3.5: [CONNECTION SYMMETRY] 🏛️⚙️⚓
+        // 🎼 RBN Framework: [CONNECTION SYMMETRY] 🏛️⚙️⚓
         // Ensure the builder knows which authoritative connection it belongs to.
         if ($this->connection !== 'default' && method_exists($builder, 'connection')) {
             $builder->connection($this->connection);
         }
 
-        // 🎼 RBN 3.5: [SOVEREIGN INJECTION] 🏺⚓
+        // 🎼 RBN Framework: [RBN Framework INJECTION] 🏺⚓
         // Tell the builder who its parent model is for automatic hydration.
         if (method_exists($builder, 'setModelClass')) {
             $builder->setModelClass(static::class);
         }
 
-        // 🛡️ RBN 3.5: [MULTI-TENANT QUERY SCOPE] 🔍🔑
+        // 🛡️ RBN Framework: [MULTI-TENANT QUERY SCOPE] 🔍🔑
         //
         // [FW-ALTYAPI-3 / H · G4] İSTİSNA KURALA TAŞINDI.
         // Önceden burada `cm_sys_ip_blocks` **tablo adı** sabiti vardı ve o tablo

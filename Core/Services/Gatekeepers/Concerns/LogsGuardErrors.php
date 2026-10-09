@@ -6,7 +6,7 @@ namespace Rbn\Framework\Core\Services\Gatekeepers\Concerns;
 /**
  * Gatekeeper katmanlarının teknik hata kaydı için ortak yardımcı. 📜
  *
- * [G-18 · 2026-10-03 · zeki-6eb7f5] NEDEN AYRI DOSYA:
+ * [G-18 · 2026-10-03 · team member] NEDEN AYRI DOSYA:
  * `DatabaseGuardHandler` kabul testi `fw_licence_kapi.php` K6 tarafından
  * **250 satır** sınırında tutuluyor (`satir <= 250`). G-18'in log yardımcısı
  * handler'ın içine yazılsaydı o sınır aşılırdı; testi GEVŞETMEK yerine

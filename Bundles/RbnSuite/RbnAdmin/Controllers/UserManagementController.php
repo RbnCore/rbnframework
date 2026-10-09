@@ -9,7 +9,7 @@ use Rbn\Framework\Bundles\RbnSuite\RbnAuth\Models\AuthRole;
 
 /**
  * UserManagementController - The Unified Identity & Activities Hub 🛡️🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 #[SubModule(
     entity: 'user',
@@ -30,7 +30,7 @@ class UserManagementController extends RbnAdminController
         $currentStatus = (string) $this->request->query('status', '');
         $currentRole = (string) $this->request->query('role', '');
 
-        // 🪐 Sovereign Fetch via Autonomous Service
+        // 🪐 RBN Framework Fetch via Autonomous Service
         $channel = $this->manager->allUsers([
             'search' => $search,
             'status' => $currentStatus,
@@ -51,14 +51,14 @@ class UserManagementController extends RbnAdminController
 
     /**
      * [STRATEGIC HOOK] Modal Data & Context Resolution 🎭🛰️⚓
-     * RBN 3.5: Returns record and dynamically sets view context for the Trait.
+     * RBN Framework: Returns record and dynamically sets view context for the Trait.
      */
     public function getModalData($id): array
     {
         $id = ($id && is_numeric($id)) ? (int) $id : null;
         $type = $this->request->input('type', $id ? 'edit' : 'add');
 
-        // 🎻 [SOVEREIGN VIEW INJECTION]
+        // 🎻 [RBN Framework VIEW INJECTION]
         // Setting $this->modalView before Trait resolves it.
         $this->modalView = ($type === 'role') ? 'User/Partials/modal_role' : 'User/Partials/modal_user';
 
@@ -133,7 +133,7 @@ class UserManagementController extends RbnAdminController
     {
         $targetId = (int) $this->session()->get('user_id');
 
-        // 🎻 Sovereign Fetch via Explicit Service Discovery 
+        // 🎻 RBN Framework Fetch via Explicit Service Discovery
         $user = $this->manager->getProfileData($targetId);
 
         $this->render('User/profile', [
@@ -198,7 +198,7 @@ class UserManagementController extends RbnAdminController
         $type = (string) $this->request->query('type', 'all');
         $order = (string) $this->request->query('order', 'desc');
 
-        // 🪐 Sovereign Fetch via Autonomous Service
+        // 🪐 RBN Framework Fetch via Autonomous Service
         $channel = $this->manager->getActivities([
             'search' => $search,
             'type' => $type,

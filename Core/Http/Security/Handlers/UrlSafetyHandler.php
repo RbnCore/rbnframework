@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Support\Facades\Validation;
 /**
  * UrlSafetyHandler - URL Güvenlik Analiz Motoru 🧬🛰️
  * 
- * RBN 3.5: Masterpiece Core Component for content filtration.
+ * RBN Framework: Core Component for content filtration.
  * Analyzes URLs and titles for prohibited keywords, domains, and BTK blocks.
  */
 class UrlSafetyHandler extends BaseComponent

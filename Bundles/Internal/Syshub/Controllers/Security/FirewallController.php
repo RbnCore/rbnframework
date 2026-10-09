@@ -9,7 +9,7 @@ use Rbn\Framework\Bundles\Internal\Syshub\Controllers\SyshubController;
 
 /**
  * FirewallController - RBN Shield Güvenlik Duvarı Ayarları 🛡️🛰️
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 #[SubModule(
     entity: 'firewall',
@@ -23,7 +23,7 @@ class FirewallController extends SyshubController
      */
     public function index(): void
     {
-        // 🎼 Masterpiece: Veriyi otonom provider üzerinden çekiyoruz
+        // 🎼 RBN Framework: Veriyi otonom provider üzerinden çekiyoruz
         $config = $this->service->firewall()->getSettings();
 
         $this->render('Security/firewall', [

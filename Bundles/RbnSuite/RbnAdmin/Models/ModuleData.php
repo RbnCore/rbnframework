@@ -13,7 +13,7 @@ use Rbn\Framework\Core\Base\Attributes\Bundle;
 
 /**
  * ModuleData - RbnAdmin Paket Kimliği ve Mimari Veri Merkezi 🛡️🛰️🏛️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * Bu sınıf paketin tüm kayıtlarını (Service, Handler, Provider) yönetirken;
  * Veriyi PanelIdentity (Soul) ve PanelMap (Skeleton) üzerinden orkestre eder.
@@ -28,7 +28,7 @@ class ModuleData extends BaseConfig
 
     /**
      * CENTRALIZED REGISTRATION MAP 🏛️⚓🛰️
-     * RBN 3.5 Masterpiece: Single source of truth for all bundle components.
+     * RBN Framework: Single source of truth for all bundle components.
      */
     public function registerMap(): array
     {
@@ -46,12 +46,12 @@ class ModuleData extends BaseConfig
     }
 
     /**
-     * SOVEREIGN CUSTOM ROUTES 🎯
+     * RBN Framework CUSTOM ROUTES 🎯
      * Modül altındaki tüm alt birimlerin özel rotalarını buraya taşıyoruz.
      */
     public function registerRoutes(): void
     {
-        // 🎼 Dashboard & Appearance Sovereign Routes
+        // 🎼 Dashboard & Appearance RBN Framework Routes
         Route::controller('RbnAdminController')->group(function () {
             Route::get('/', 'adminIndex');
             Route::get('dashboard', 'adminIndex');
@@ -59,7 +59,7 @@ class ModuleData extends BaseConfig
             Route::post('theme/save', 'saveTheme');
         });
 
-        // 🎼 WebTraffic & Analytics Sovereign Routes
+        // 🎼 WebTraffic & Analytics RBN Framework Routes
         Route::prefix('webtraffic')->controller('WebtrafficController')->group(function () {
             Route::get('/', 'index');
             Route::get('logs', 'logs');
@@ -68,7 +68,7 @@ class ModuleData extends BaseConfig
             Route::get('google-analytics/map', 'googleAnalyticsMap');
         });
 
-        // 📧 HostMailHub - Sovereign Email Management Routes
+        // 📧 HostMailHub - RBN Framework Email Management Routes
         Route::prefix('hostmailhub')->controller('HostmailhubController')->group(function () {
             Route::get('/', 'index');
             Route::get('modal/{id?}', 'modal');
@@ -78,7 +78,7 @@ class ModuleData extends BaseConfig
             Route::get('eternalLink', 'eternalLink');
         });
 
-        // 🔍 SEO Intelligence Sovereign Routes
+        // 🔍 SEO Intelligence RBN Framework Routes
         Route::prefix('seo-report')->controller('SeoReportController')->group(function () {
             Route::get('/', 'index');
         });
@@ -123,7 +123,7 @@ class ModuleData extends BaseConfig
             Route::post('ai-usage/clear', 'clearAiUsage')->name('admin.bot-settings.ai-usage-clear');
         });
 
-        // ⏱️ Cron & CronLogs Sovereign Routes
+        // ⏱️ Cron & CronLogs RBN Framework Routes
         Route::prefix('cron')->controller('CronLogsController')->group(function () {
             Route::get('/', 'cron')->name('admin.cron.index');
             Route::post('save', 'saveCron')->name('admin.cron.save');

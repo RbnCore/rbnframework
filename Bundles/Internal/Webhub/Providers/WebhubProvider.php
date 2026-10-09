@@ -7,9 +7,9 @@ namespace Rbn\Framework\Bundles\Internal\Webhub\Providers;
 use Rbn\Framework\Core\Base\Services\BaseProvider;
 
 /**
- * WebhubProvider - Sovereign Data Bridge for Webhub Bundle 🛰️⚓
+ * WebhubProvider - RBN Framework Data Bridge for Webhub Bundle 🛰️⚓
  * 
- * RBN 3.5: Specialized provider for handling settings and metadata
+ * RBN Framework: Specialized provider for handling settings and metadata
  * specifically optimized for the Webhub context.
  * 
  * @property \Rbn\Framework\Core\Database\Models\Project\SettingsModel $SettingsModel
@@ -18,7 +18,7 @@ use Rbn\Framework\Core\Base\Services\BaseProvider;
 class WebhubProvider extends BaseProvider
 {
     /**
-     * Settings Model Name (RBN 3.5 Standard) 🎯
+     * Settings Model Name (RBN Framework Standard) 🎯
      */
     protected $targetModel = 'settings';
 
@@ -31,7 +31,7 @@ class WebhubProvider extends BaseProvider
     {
         $payload = [];
 
-        // 🎼 RBN 3.5: [AUTONOMOUS KEY GENERATION] 🛰️⚓
+        // 🎼 RBN Framework: [AUTONOMOUS KEY GENERATION] 🛰️⚓
         if (empty($data['setting_key'])) {
             $source = $data['label_en'] ?? ($data['label_tr'] ?? ($data['setting_name'] ?? null));
             if ($source) {
@@ -41,14 +41,14 @@ class WebhubProvider extends BaseProvider
 
         $key = $data['setting_key'] ?? null;
 
-        // 🎯 RBN 3.5: [SOVEREIGN MAPPING]
+        // 🎯 RBN Framework: [RBN Framework MAPPING]
         if (isset($data['value'])) {
             $payload['setting_value'] = $data['value'];
         } else {
             $payload = $data;
         }
 
-        // 🛡️ [SOVEREIGN JSON GUARD] ⚓
+        // 🛡️ [RBN Framework JSON GUARD] ⚓
         if (isset($payload['field_options']) && (empty($payload['field_options']) || $payload['field_options'] === '')) {
             $payload['field_options'] = '[]';
         } elseif (!isset($payload['field_options'])) {
@@ -61,7 +61,7 @@ class WebhubProvider extends BaseProvider
         // kapsam modelin beyanı, `project_key` sunucu bağlamından yazılır.
         $result = false;
 
-        // 🎯 RBN 3.5: [SOVEREIGN PERSISTENCE]
+        // 🎯 RBN Framework: [RBN Framework PERSISTENCE]
         if ($key) {
             // 1. Check if a project-specific record already exists
             $exists = $this->SettingsModel->query()
@@ -107,7 +107,7 @@ class WebhubProvider extends BaseProvider
      */
     public function actionScan(string $name, array $payload): mixed
     {
-        // 🎼 RBN 3.5: [SOVEREIGN SEO PERSISTENCE]
+        // 🎼 RBN Framework: [RBN Framework SEO PERSISTENCE]
         if ($name === 'save_seo_scan') {
             $this->save(['setting_key' => 'seo-score', 'value' => $payload['score']]);
             $this->save(['setting_key' => 'seo-report', 'value' => json_encode($payload['report'], JSON_UNESCAPED_UNICODE)]);

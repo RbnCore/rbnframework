@@ -1,6 +1,6 @@
 # Bundles/Internal/Syshub — Sistem, güvenlik, veri temizliği ve veritabanı konsolu
 
-> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Bundles/Internal/Syshub/` — 47 `*.php` + 20 `*.rbn.php` görünüm.
 > **Envanter:** 47 php dosyasının 47'si bu belgelerde anlatıldı (aşağıdaki alt dal tabloları).
 

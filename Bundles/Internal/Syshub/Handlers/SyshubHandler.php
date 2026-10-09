@@ -11,7 +11,7 @@ use DirectoryIterator;
 
 /**
  * SyshubHandler - Complex Analysis & Statistics Orchestrator 🎻🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * Handles system stats, folder analysis, and multi-service aggregation.
  * @property \Rbn\Framework\Core\Database\Repositories\Common\ShieldSettingsRepository $shieldSettingRepository
@@ -36,7 +36,7 @@ class SyshubHandler extends BaseComponent
         $logStats = $this->getFolderStats($logPath);
         $sessionStats = $this->getFolderStats($sessionPath);
 
-        // 🎼 RBN 3.5: Masterpiece Logic - Pre-calculating clearable size 🛰️⚓
+        // 🎼 RBN Framework: Logic - Pre-calculating clearable size 🛰️⚓
         $totalClearableRaw = ($cacheStats['raw_size'] ?? 0) + ($logStats['raw_size'] ?? 0) + ($sessionStats['raw_size'] ?? 0);
 
         // 🛡️ Security Stats

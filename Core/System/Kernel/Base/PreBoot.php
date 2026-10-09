@@ -12,7 +12,7 @@ use Rbn\Framework\Core\Support\Bridges\Helpers\Library\ProjectVersionResolver;
 /**
  * PreBoot - Initial Environment & Autoload Orchestrator 🛰️🧬⚓
  * 
- * RBN 3.5: Masterpiece Survival Stage.
+ * RBN Framework: Survival Stage.
  * Ensures Paths, Autoloader, and Sentinels are ready before the Kernel is born.
  */
 class PreBoot
@@ -23,12 +23,12 @@ class PreBoot
      * FW-A0-K1-DEBUG-KAPISI-99: Guvenilir ortam tespiti (TEK MERKEZ).
      *
      * Guvenli varsayilan: URETIM. Gelistirme modu YALNIZ su iki kaynaktan acilir:
-     *  1) Operator karari: RBN_DEBUG / RBN_DEV ortam degiskeni acikca '1' ise.
+     *  1) Operator karari: `secrets.php` `app.debug` / `app.dev` = `true`.
      *  2) Yerel istek: Host TAM eslesme (beyaz liste) VEYA `*.test` TAM son-ek
      *     eslesmesi (`str_ends_with('.test')`) **VE** istemci IP'si loopback/ozel ag.
      *
      * ALT DIZGE (`stripos`/`str_contains`) KULLANILMAZ: `www.tester-attacker.com`,
-     * `evil.localhost.attacker.com`, `shop.localdomain.co`, `rbncore.tr.test.evil.com`
+     * `evil.localhost.attacker.com`, `shop.localdomain.co`, `project.tr.test.evil.com`
      * gibi basliklar uzaktan hata ayiklama modunu ACAMAZ.
      */
     public const LOCAL_HOST_ALLOWLIST = [
@@ -42,6 +42,9 @@ class PreBoot
         'password', 'passwd', 'parola', 'sifre', 'token', 'secret',
         'apikey', 'api_key', 'authorization', 'csrf', 'cookie',
         'kart', 'cvv', 'cvc', 'iban', 'kimlik', 'card', 'credential',
+        // `smtp_pass`, `imap_pass`, `user_pw`, `otp_code`, `private_key`,
+        // `session_id` gibi adlar (fazla maskeleme guvenli taraftir).
+        'pass', 'pw', 'otp', 'private', 'session',
     ];
 
     /** Yalnizca TAM eslesme ile maskelenen kisa anahtarlar (`tc` -> `match` yakalamasin). */
@@ -77,34 +80,64 @@ class PreBoot
     public const MASK = '***';
 
     /**
-     * Ortam degiskeni ile acik operator karari (RBN_DEBUG / RBN_DEV).
+     * [FW-096-D8] `secrets.php` `app` bolumu (TEK okuyucu: `Secrets::app()`).
      *
-     * [FW-ENV-KAYIT-160] Okuma TEK kapidan gelir: `Env::string()`.
-     * Buradaki ACIK kabul listesi **bilerek korunur** ve `normalizeSwitch` ile
-     * DEGISTIRILMEZ: bu kapinin varsayilani KAPALI (fail-closed)'dir; belirsiz
-     * bir degerde (`RBN_DEV=banal`) hata ayiklama modu ACILMAMALIDIR.
-     * `Env::flag()` kullanmak bu kapiyi tersine cevirirdi.
+     * Framework OS ortam degiskeni OKUMAZ: `getenv` / `.htaccess SetEnv` /
+     * `.env` bu framework'un mekanizmasi DEGILDIR. Ortam bayragi ve operator
+     * kapilari `Core/System/Config/Secrets/secrets.php` icindeki `app`
+     * bolumundedir.
      *
-     * `Env` autoloader'dan ONCE kullanilir (PreBoot en erken asamadir), bu
-     * yuzden dosya elle yuklenir - PSR-4 burada henuz yoktur.
+     * PreBoot en erken asamadir (autoloader yok): `Secrets.php` komsu
+     * dosyalarini kendisi `require_once` eder, elle yuklemek yeterlidir.
+     * Ikinci/paralel bir ayar dosyasi YOKTUR.
+     *
+     * Dosya VAR ama okunamaz/bozuk ise burada uretim tarafina dusulur ve
+     * neden loglanir; asil fail-closed hata, sirlarin ilk gercek okunusunda
+     * (master DB) yine yukari cikar.
+     *
+     * @return array<string,bool|int|string>|null `null` = okunamadi (uretim kabul edilir).
      */
-    private static function envOverrideRequested(): bool
+    private static function appSettings(): ?array
     {
-        require_once __DIR__ . '/../../Config/Env.php';
-        $env = 'Rbn\\Framework\\Core\\System\\Config\\Env';
+        require_once __DIR__ . '/../../Config/Secrets.php';
 
-        foreach (['RBN_DEBUG', 'RBN_DEV'] as $name) {
-            $value = $env::string($name);
-            if ($value === null) {
-                continue;
-            }
-            $normalized = strtolower(trim($value));
-            if (in_array($normalized, ['1', 'true', 'on', 'yes', 'development'], true)) {
-                return true;
-            }
+        try {
+            return \Rbn\Framework\Core\System\Config\Secrets::app();
+        } catch (\Throwable $e) {
+            error_log('RBN Uyari: secrets.php app bolumu okunamadi; production kabul edildi. Neden: ' . $e->getMessage());
+
+            return null;
         }
+    }
 
-        return false;
+    /**
+     * Acik operator karari: `app.debug` / `app.dev` = `true`.
+     *
+     * Varsayilan KAPALI (fail-closed). Deger PHP `bool` olmak zorundadir;
+     * `'banal'` gibi metin hata ayiklama modunu ACMAZ (sema tipi tutmayan
+     * degeri varsayilana dusurur).
+     */
+    private static function operatorDebugRequested(): bool
+    {
+        $app = self::appSettings();
+
+        return $app !== null && ($app['debug'] === true || $app['dev'] === true);
+    }
+
+    /**
+     * Uretim ilan edilmis mi? (`app.environment`, TEK okuyucu `Secrets`.)
+     *
+     * Yalniz `app.environment = 'development'` gelistirme sayilir. Anahtar
+     * yoksa / gecersizse / dosya okunamazsa URETIM kabul edilir ve loglanir
+     * (guvenli taraf). Uretimde hata ayiklama karari istegin Host/IP
+     * bilgisinden VERILMEZ: ters vekil arkasinda `REMOTE_ADDR` yerel gorunse
+     * bile kapi kapali kalir.
+     */
+    public static function isProductionDeclared(): bool
+    {
+        $app = self::appSettings();
+
+        return $app === null || $app['environment'] !== 'development';
     }
 
     /**
@@ -223,7 +256,7 @@ class PreBoot
     }
 
     /**
-     * [FW-IPKATMAN-ON · 2026-10-03 · zeki-6eb7f5] Adres **KESIN olarak** yerel
+     * [FW-IPKATMAN-ON · 2026-10-03 · team member] Adres **KESIN olarak** yerel
      * dongu (loopback) adresi mi? YALNIZ `127.0.0.0/8`, `::1` ve bunlarin
      * IPv4-ESLEMELI karsiliklari (`::ffff:127.0.0.1`, `0:0:0:0:0:ffff:...`)
      * ile parantezli IPv6 literal'leri.
@@ -329,7 +362,7 @@ class PreBoot
             return true;
         }
 
-        // `*.test` TAM son-ek eslesmesi: `rbncore.tr.test.evil.com` GEÇMEZ
+        // `*.test` TAM son-ek eslesmesi: `project.tr.test.evil.com` GEÇMEZ
         return str_ends_with($host, '.test');
     }
 
@@ -347,11 +380,14 @@ class PreBoot
         $addr = isset($_SERVER['REMOTE_ADDR']) ? (string) $_SERVER['REMOTE_ADDR'] : '';
 
         $host = self::normalizeHost($rawHost);
-        $isLocal = self::envOverrideRequested() || self::isTrustedLocalEnvironment($rawHost, $addr);
+        // Uretim (`app.environment` != development) ise kapi istege (Host/IP)
+        // HIC bakmaz; yalniz acik operator karari (`app.debug`/`app.dev`) acar.
+        $isLocal = self::operatorDebugRequested()
+            || (!self::isProductionDeclared() && self::isTrustedLocalEnvironment($rawHost, $addr));
 
         define('RBN_DEV', $isLocal);
         define('RBN_DEBUG', $isLocal); // Default debug to local status, allows later override
-        define('DEFAULT_LANGUAGE', 'tr'); // 🌍 RBN 3.5: [MASTERPIECE] Default language sync
+        define('DEFAULT_LANGUAGE', 'tr'); // 🌍 RBN Framework: [RBN Framework] Default language sync
         define('APP_NAME', 'RBN CORE'); // 🎼 App Identity
         // [FW-SURUMLEME-2] `APP_VERSION` BURADA TANIMLANMAZ.
         // Gerekce (koddan okunarak): `detectEnvironment()` `orchestrate()` icinde
@@ -415,7 +451,7 @@ class PreBoot
         if (self::$initialized)
             return;
 
-        // 🌍 RBN 3.5: Set Timezone & Locale globally for all Web and CLI/Cron requests ⏰
+        // 🌍 RBN Framework: Set Timezone & Locale globally for all Web and CLI/Cron requests ⏰
         date_default_timezone_set('Europe/Istanbul');
         setlocale(LC_ALL, 'tr_TR.UTF-8', 'tr_TR', 'tr', 'turkish');
 
@@ -439,8 +475,8 @@ class PreBoot
 
         // 1.5 [FW-SURUMLEME-2] `APP_VERSION` = PROJE surumu.
         // Buraya kadar projeler onbellegi doldu (0.5) ve `Paths` hazir (1), yani
-        // `Projects.version` OKUNABILIR durumda. Once `3.5.0` gibi bir sabit
-        // yaziliyordu; o kalinti kaldirildi (bkz. `defineAppVersion()`).
+        // `Projects.version` OKUNABILIR durumda. Elle yazilmis sabit surum
+        // YOKTUR (bkz. `defineAppVersion()`).
         self::defineAppVersion();
 
         // 2. Register the Final Sentinel (En erken aşamada zırhı giyiyoruz) 🛡️🚨

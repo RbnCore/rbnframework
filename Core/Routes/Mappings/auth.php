@@ -1,11 +1,12 @@
 <?php
 
+use Rbn\Framework\Core\Http\Security\AuthPolicy;
 use Rbn\Framework\Core\Routes\Route;
 use Rbn\Framework\Core\Support\Definitions\Route\RouteBlueprint;
 
 /**
  * Auth Namespace - Core Modules\UserManagement
- * RBN 3.0: Smart Module Injection (Zero-Code) 🚀
+ * Smart Module Injection (Zero-Code) 🚀
  */
 Route::module('Suite', 'RbnAuth')->prefix('')->group(function () {
 
@@ -13,16 +14,21 @@ Route::module('Suite', 'RbnAuth')->prefix('')->group(function () {
     Route::get(RouteBlueprint::LOGIN_PATH, 'AuthViewController@showLogin')->name('login');
     Route::get('lockscreen', 'AuthViewController@showLockscreen')->name('lockscreen');
 
-    // Kayıt sayfaları
-    Route::get('register', 'AuthViewController@showRegister')->name('register');
-    Route::get('kayit', 'AuthViewController@showRegister');
+    // Kayıt sayfaları: proje `auth_registration` kapalıysa HİÇ kaydedilmez (404).
+    $registrationEnabled = AuthPolicy::registrationEnabled();
+    if ($registrationEnabled) {
+        Route::get('register', 'AuthViewController@showRegister')->name('register');
+        Route::get('kayit', 'AuthViewController@showRegister');
+    }
 
     // Giriş işlemleri
     Route::post('auth/login', 'AuthController@loginSubmit')->name('auth.login');
     Route::post('auth/authenticate', 'AuthController@authenticate');
 
     // Kayıt işlemleri
-    Route::post('auth/register', 'AuthActionController@registerSubmit')->name('auth.register');
+    if ($registrationEnabled) {
+        Route::post('auth/register', 'AuthActionController@registerSubmit')->name('auth.register');
+    }
 
     // Çıkış işlemleri
     // [R-16] ASIL çıkış yolu: POST + CSRF (csrf_token ZORUNLU, fail-closed).
@@ -47,8 +53,10 @@ Route::module('Suite', 'RbnAuth')->prefix('')->group(function () {
     Route::get('verify-email', 'AuthActionController@verifyEmail')->name('auth.verify.email');
     Route::get('auth/verify-email', 'AuthActionController@verifyEmail');
 
-    // Sovereign User Dashboard (/user) - RbnAuth Otomatik Koruma 🛡️
-    Route::role('user')->prefix('user')->group(function () {
+    // RBN Framework User Dashboard (/user) - RbnAuth Otomatik Koruma 🛡️
+    // `auth` (AuthMiddleware) şart: oturum süreleri, parmak izi ve kilit ekranı
+    // orada denetlenir. Yalnız `role:` kısa yolu bunları atlıyordu.
+    Route::middleware('auth')->role('user')->prefix('user')->group(function () {
         Route::get('/', 'AuthViewController@showUserDashboard')->name('user.dashboard');
     });
 });

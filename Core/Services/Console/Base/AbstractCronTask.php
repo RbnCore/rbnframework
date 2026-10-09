@@ -10,11 +10,17 @@ use Rbn\Framework\Core\Support\Exceptions\CronTaskException;
 /**
  * AbstractCronTask - Base class for all otonom tasks in the system. 🛰️🏛️🎻
  * 
- * RBN 3.5 "Masterpiece": Now a BaseComponent actor.
+ * RBN Framework: Now a BaseComponent actor.
  * Every task can now autonomously discover services and models.
  */
 abstract class AbstractCronTask extends BaseComponent
 {
+    /**
+     * Cron e-posta bildirim politikası: 'always' (success+failed), 'failure' (yalnız failed), 'never'.
+     * Sık koşan görevler alt sınıfta 'failure' yapar; cron_jobs.params `notify_on` bunu ezer.
+     */
+    public const NOTIFY_ON = 'always';
+
     /**
      * @var string Output status of the task execution ('success', 'failed', 'skipped').
      */

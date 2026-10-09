@@ -11,7 +11,7 @@ use Rbn\Framework\Core\Base\Services\BaseService;
 /**
  * InteractsWithProjectContextTrait - Autonomous Project Context Swapper 🛰️🔄⚓
  * 
- * RBN 3.5: Central authority for switching active application context
+ * RBN Framework: Central authority for switching active application context
  * across Web (Admin Panel/Multi-tenant) and CLI (Cron/Queue) environments.
  */
 trait InteractsWithProjectContextTrait

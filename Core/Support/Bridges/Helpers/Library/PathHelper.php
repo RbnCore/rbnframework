@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\Support\Bridges\Helpers\Library;
 /**
  * PathHelper - Universal Path Morphology & Symmetry Hub (Zero Hardcoded) 🪐✨🏛️
  * 
- * RBN 3.5: "Masterpiece Architecture" - Dynamic Discovery & Branding.
+ * RBN Framework: "RBN Framework Architecture" - Dynamic Discovery & Branding.
  * Centralizes regex logic for all Discovery clusters and Asset TAGGING.
  * 
  * NO HARDCODED TOKENS: Fetches @fw/, @project/ e.t.c from FrameworkIdentity.

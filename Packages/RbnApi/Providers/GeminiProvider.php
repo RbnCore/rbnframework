@@ -9,8 +9,8 @@ use Rbn\Framework\Core\Base\BaseComponent;
 /**
  * GeminiProvider - Google AI Connectivity Hub 🧠🛰️⚓
  * 
- * RBN 3.5 Masterpiece: Autonomous Google Gemini AI orchestrator.
- * Powered by the centralized Sovereign Remote Engine.
+ * RBN Framework: Autonomous Google Gemini AI orchestrator.
+ * Powered by the centralized RBN Framework Remote Engine.
  */
 class GeminiProvider extends BaseComponent
 {
@@ -30,10 +30,10 @@ class GeminiProvider extends BaseComponent
         if (empty($apiKey)) {
             return [
                 'status' => 'error',
-                'message' => 'RBN 3.5: Yapay Zeka (Gemini API) kullanım yetkisi bulunmamaktadır veya API anahtarı yapılandırılmamıştır! 🛡️⚓'
+                'message' => 'Yapay Zeka (Gemini API) kullanım yetkisi bulunmamaktadır veya API anahtarı yapılandırılmamıştır! 🛡️⚓'
             ];
         }
-        // 🎼 RBN 3.5: Masterpiece Dispatcher - Gemini-Native (Nano Banana) models use generateContent
+        // 🎼 RBN Framework: Dispatcher - Gemini-Native (Nano Banana) models use generateContent
         $method = (str_contains($model, 'gemini')) ? ":generateContent" : ":predict";
         $endpoint = $this->baseUrl . "models/" . $model . $method . "?key=" . $apiKey;
 
@@ -42,7 +42,7 @@ class GeminiProvider extends BaseComponent
         $result = null;
 
         while ($retryCount < $maxRetries) {
-            // 🪐 Use the Sovereign Remote Engine!
+            // 🪐 Use the RBN Framework Remote Engine!
             $result = $this->remote->post($endpoint, $payload, [], true, [
                 'timeout' => 60,
                 'connect_timeout' => 10,

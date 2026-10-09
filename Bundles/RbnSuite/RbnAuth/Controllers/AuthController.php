@@ -9,7 +9,7 @@ use Rbn\Framework\Bundles\RbnSuite\RbnAuth\Models\ModuleData;
 
 /**
  * AuthController
- * RBN 3.5 Sovereign Gateway Controller. 🏹🛡️⚓
+ * RBN Framework Gateway Controller. 🏹🛡️⚓
  * 
  * Orchestrates the entry and exit points of the system.
  * Delegated to AuthService for logic and security.
@@ -43,13 +43,13 @@ class AuthController extends BaseController
 
             $remember = $this->request->input('remember_me') == '1';
 
-            // 🎼 RBN 3.5 Masterpiece: Orchestrated via AuthService 🎻🏹
+            // 🎼 RBN Framework: Orchestrated via AuthService 🎻🏹
             $result = $this->authService->login($data['email'], $data['password'], $remember);
 
             $this->Route->handleResult($result, [
                 'success_message' => $result['message'],
                 'success_path' => $result['redirect'] ?? '/',
-                'error_path' => 'login'
+                'error_path' => $this->loginErrorPath()
             ]);
         } catch (\Throwable $e) {
             // [YA-8 · DÜZELTME] İstisna mesajı KULLANICIYA GÖNDERİLMEZ.
@@ -66,14 +66,25 @@ class AuthController extends BaseController
                 get_class($e),
                 $e->getMessage()
             ));
-            $this->Route->alert('error', 'Giriş şu anda gerçekleştirilemiyor. Lütfen tekrar deneyin.', 'login');
+            $this->Route->alert('error', 'Giriş şu anda gerçekleştirilemiyor. Lütfen tekrar deneyin.', $this->loginErrorPath());
         }
+    }
+
+    /**
+     * Başarısız girişin dönüş yolu (HTML yönlendirme ve JSON `redirect`).
+     *
+     * Yönetim paneli kapalı sitede panel giriş yolu (`login` adlı rota)
+     * gösterilmez: hata ana sayfaya (giriş formunun bulunduğu yer) döner.
+     */
+    private function loginErrorPath(): string
+    {
+        return (bool) $this->resolveProjectData('admin_panel_disabled') ? '/' : 'login';
     }
 
     /**
      * POST: Çıkış Yapma (CSRF korumalı, ÖNERİLEN yol) 🔐🚪
      *
-     * [R-16 · 2026-10-04 · zeki-6eb7f5] GET `/logout` bir CSRF yüzeyiydi:
+     * [R-16 · 2026-10-04 · team member] GET `/logout` bir CSRF yüzeyiydi:
      * saldırgan `<img src="https://site/logout">` ile kurbanın oturumunu
      * kapatabiliyordu. ASIL çıkış yolu artık **POST + CSRF token**'dır
      * (`POST /auth/logout`).
@@ -102,7 +113,7 @@ class AuthController extends BaseController
     /**
      * Çıkış Yapma İşlemi 🛡️🚪
      *
-     * [R-16 · 2026-10-04 · zeki-6eb7f5] GERİYE UYUMLU GET YOLU.
+     * [R-16 · 2026-10-04 · team member] GERİYE UYUMLU GET YOLU.
      *
      * - GET `/logout` ve `/cikis` **KALDIRILMAZ** (18 sitenin meşru çıkış
      *   bağlantıları ve duman testi bu yolu kullanıyor).

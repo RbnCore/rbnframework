@@ -8,9 +8,9 @@ use Rbn\Framework\Core\Base\Attributes\SubModule;
 use Rbn\Framework\Core\Base\Attributes\Module;
 
 /**
- * IdentityExtractorTrait - The Sovereign Attribute Decoder 🕵️‍♂️⚓
+ * IdentityExtractorTrait - The RBN Framework Attribute Decoder 🕵️‍♂️⚓
  * 
- * RBN 3.5: Orchestrates the extraction of Module and SubModule attribute metadata.
+ * RBN Framework: Orchestrates the extraction of Module and SubModule attribute metadata.
  * Bridges the gap between raw attributes and SovereignIdentity.
  */
 trait IdentityExtractorTrait
@@ -18,12 +18,12 @@ trait IdentityExtractorTrait
     /**
      * Extracts identity information from current context or active controller. 🕵️‍♂️
      * 
-     * RBN 3.5: Synchronizes module and sub-module attributes directly to DNA.
+     * RBN Framework: Synchronizes module and sub-module attributes directly to DNA.
      * Supports Hierarchical (Recursive) discovery from the current component ($this).
      */
     protected function extractIdentity(): void
     {
-        // 🎼 RBN 3.5: [SOVEREIGN HIERARCHY DISCOVERY] 🏛️🛰️⚓
+        // 🎼 RBN Framework: [RBN Framework HIERARCHY DISCOVERY] 🏛️🛰️⚓
         // Priority: Current instance attributes > Active controller delegation
         $target = ($this instanceof \Rbn\Framework\Core\Base\Web\BaseController) ? $this : ($this->rbn?->activeController() ?? $this);
         $reflection = new \ReflectionClass($target);
@@ -50,7 +50,7 @@ trait IdentityExtractorTrait
             $current = $current->getParentClass();
         }
 
-        // 🎻 RBN 3.5: [DNA SYNCHRONIZATION] 🎻🛰️⚓
+        // 🎻 RBN Framework: [DNA SYNCHRONIZATION] 🎻🛰️⚓
         if ($moduleAttr) {
             $this->module ??= static::toPascalCase((string) $moduleAttr->name);
             $this->panel ??= $moduleAttr->panel;
@@ -74,13 +74,13 @@ trait IdentityExtractorTrait
             $subId = $subModuleAttr->entity ?? $subModuleAttr->name ?? null;
             $this->sub_module ??= $subId ? static::toPascalCase((string) $subId) : null;
 
-            // 🎼 RBN 3.5: [AUTONOMOUS PROPERTY INJECTION] 💉🛰️⚓
+            // 🎼 RBN Framework: [AUTONOMOUS PROPERTY INJECTION] 💉🛰️⚓
             $this->entityName ??= $subModuleAttr->entityName ?? $subModuleAttr->entity ?? null;
             $this->bulkInputKey ??= $subModuleAttr->bulkInputKey ?? null;
             $this->modalView ??= $subModuleAttr->modal ?? null;
         }
 
-        // Final Metadata Resolution (Masterpiece Standard)
+        // Final Metadata Resolution (RBN Framework Standard)
         $data = $this->moduleData ?? $subModuleAttr?->data ?? $moduleAttr?->data ?? (method_exists($target, 'getModuleData') ? $target->getModuleData() : ($target->moduleData ?? null));
 
         if (is_string($data) && class_exists($data) && !($this instanceof $data)) {

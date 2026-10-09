@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Data\BaseRepository;
 /**
  * NotificationRepository - Shared Notifications Data Access & Query Repository 🔔🏛️⚓
  * 
- * RBN 3.5 Masterpiece: Enterprise Repository Pattern for Shared Notifications.
+ * RBN Framework: Enterprise Repository Pattern for Shared Notifications.
  * Located strictly under Core\Database\Repositories\Common for clean architecture.
  * 
  * @property \Rbn\Framework\Core\Database\Models\Common\CmLogNotificationsModel $notificationsModel

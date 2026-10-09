@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\Services\BaseManager;
 
 /**
  * UserManager - Global System Identity Orchestrator 🏛️🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * @property \Rbn\Framework\Core\Database\Repositories\Project\UserRepository $projectUserRepository
  * @property \Rbn\Framework\Core\Database\Repositories\Project\UserActivityRepository $projectUserActivityRepository

@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Attributes\Component;
 
 /**
  * TaskLogService - Otonom Görevler için Aşamalı ve Yapılandırılmış Günlükleme (Logging) Servisi 🛰️📝⚓
- * Part of RBN 3.5 Framework.
+ * Part of RBN Framework Framework.
  */
 #[Component(alias: 'base.taskLog', type: 'service')]
 class TaskLogService extends BaseService

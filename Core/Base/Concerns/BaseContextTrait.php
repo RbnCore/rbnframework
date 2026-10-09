@@ -14,12 +14,12 @@ use Rbn\Framework\Core\Base\Concerns\Data\ResolvesProjectConfigTrait;
 /**
  * BaseContextTrait - The Root DNA of all Contexts 🧬⚓
  * 
- * RBN 3.5: Centralized property holder and bootstrapper for all context traits.
+ * RBN Framework: Centralized property holder and bootstrapper for all context traits.
  * Now provides the Universal map() Orchestrator for all Components.
  */
 trait BaseContextTrait
 {
-    /** RBN 3.5 Masterpiece: Sovereign Specialized DNA 🏗️🧬⚓ */
+    /** RBN Framework: Specialized DNA 🏗️🧬⚓ */
     use SovereignIdentity, IdentityExtractorTrait, ComponentHydratorTrait, ResolvesProjectConfigTrait;
 
     /**
@@ -52,21 +52,21 @@ trait BaseContextTrait
      */
     protected function bootBaseContext(): void
     {
-        // 🎼 RBN 3.5: [ATOMIC DNA AWAKENING] 🧬🏙️⚓
+        // 🎼 RBN Framework: [ATOMIC DNA AWAKENING] 🧬🏙️⚓
         $this->rbn = BaseService::get();
 
-        // 🎼 RBN 3.5: [SOVEREIGN REGISTRATION] 🏙️🛰️⚓
+        // 🎼 RBN Framework: [RBN Framework REGISTRATION] 🏙️🛰️⚓
         if ($this instanceof \Rbn\Framework\Core\Support\Contracts\Base\BaseControllerInterface) {
             $this->rbn?->setActiveController($this);
         }
 
-        // 🎼 RBN 3.5: [SOVEREIGN INHERITANCE] - Sync DNA with the Active Controller 🧠🛰️⚓
+        // 🎼 RBN Framework: [RBN Framework INHERITANCE] - Sync DNA with the Active Controller 🧠🛰️⚓
         if ($this->rbn && $activeController = $this->rbn->activeController()) {
 
-            // 🎻 RBN 3.5: [SOVEREIGN IDENTITY EXTRACTION] ⚖️🛰️⚓
+            // 🎻 RBN Framework: [RBN Framework IDENTITY EXTRACTION] ⚖️🛰️⚓
             $this->extractIdentity();
 
-            // 🎼 RBN 3.5: [SATELLITE MATERIALIZATION / HYDRATION] 🛰️⚓靶
+            // 🎼 RBN Framework: [SATELLITE MATERIALIZATION / HYDRATION] 🛰️⚓靶
             if ($this === $activeController) {
                 $this->hydrateComponents();
             }
@@ -78,7 +78,7 @@ trait BaseContextTrait
             $this->hub ??= $activeController->hub ?? null;
         }
 
-        // 🎼 RBN 3.5: Eager DNA Initialization 🎻🛰️
+        // 🎼 RBN Framework: Eager DNA Initialization 🎻🛰️
         $this->discover = $this->discover();
 
         if ($this->rbn) {
@@ -87,7 +87,7 @@ trait BaseContextTrait
             $this->hub ??= $this->rbn->hub ?? null;
         }
 
-        // 🎼 RBN 3.5: [PROJECT IDENTITY AWAKENING] - Global SSoT Injection 🚀🛰️⚓
+        // 🎼 RBN Framework: [PROJECT IDENTITY AWAKENING] - Global SSoT Injection 🚀🛰️⚓
         $projectData = \Rbn\Framework\Core\System\Kernel\Bootstrap::getAppContext('project_data');
 
         // 1. Veritabanı Verilerini Atla (Ana Kimlik) 🏛️
@@ -95,7 +95,7 @@ trait BaseContextTrait
             $this->appName = (string) ($projectData['project_name'] ?? '');
             $this->projectKey = (string) ($projectData['project_key'] ?? '');
             $this->projectGroup = (string) ($projectData['project_group'] ?? $projectData['project_key'] ?? '');
-            $this->appVersion = (string) ($projectData['version'] ?? '1.0');
+            $this->appVersion = (string) ($projectData['version'] ?? ''); // surum tek kaynak: projects.version; uydurma geri donus yok
         }
 
         // 🎨 If this is a Web Controller, share it with the View engine automatically.
@@ -114,13 +114,13 @@ trait BaseContextTrait
     /**
      * UNIVERSAL MAP ORCHESTRATOR 🏛️🎻🛰️
      * 
-     * RBN 3.5 Masterpiece: Single entry point for Registry Population.
+     * RBN Framework: Single entry point for Registry Population.
      * Consolidates manual mappings with autonomous module and project discovery.
      * Physically defined here to provide inheritance for ALL RBN Components.
      */
     public function map(string $type, array $manual = []): array
     {
-        // 🎼 RBN 3.5: Masterpiece Unification - Using the centralized Discovery Engine accessor
+        // 🎼 RBN Framework: Unification - Using the centralized Discovery Engine accessor
         $folders = $this->discover()->folders();
         $auto = [];
 

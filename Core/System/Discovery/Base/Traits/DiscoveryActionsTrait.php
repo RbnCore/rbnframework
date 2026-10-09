@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\System\Discovery\Base\Traits;
 /**
  * DiscoveryActionsTrait - The Genetic Code of RBN Discovery 🧬🛰️🎡
  * 
- * RBN 3.5 "Masterpiece": [CENTRALIZED SOVEREIGNTY]
+ * RBN Framework [CENTRALIZED]
  * Encapsulates the core discovery septet and delegates the final 
  * resolution to a context-specific bridge.
  */
@@ -141,7 +141,7 @@ trait DiscoveryActionsTrait
     /**
      * Discover and get a Core Cluster (Engine/Architectural Motor) instance. 🪐⚓
      * 
-     * RBN 3.5 "Masterpiece": [DECENTRALIZED ENGINES]
+     * RBN Framework: [DECENTRALIZED ENGINES]
      */
     public function cluster(string $name)
     {

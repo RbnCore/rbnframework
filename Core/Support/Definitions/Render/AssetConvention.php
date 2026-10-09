@@ -14,6 +14,8 @@ use Rbn\Framework\Core\System\Paths\Paths;
  *
  *   - favicon : `favicon-<project_key>.{svg,png,ico}`      -> `images/` altinda
  *   - og image: `og-image-<project_key>.{png,jpg,webp}`    -> `images/` altinda
+ *   - apple-touch-icon: `apple-touch-icon-<project_key>.png` -> `images/` altinda (180x180, zeminli)
+ *   - web manifest   : `manifest-<project_key>.webmanifest`  -> `images/` altinda
  *
  * MOTOR GENELDIR (Anayusa §9): burada proje/müşteri/ürün adi YAZILMAZ.
  * `<project_key` çalışma anında `SeoResolver::$projectKey` /
@@ -44,6 +46,12 @@ class AssetConvention
 
     /** OpenGraph gorsel kural uzantilari (oncelik sirasiyla) */
     public const OG_IMAGE_EXTENSIONS = ['png', 'jpg', 'webp'];
+
+    /** apple-touch-icon kural uzantisi (iOS yalniz PNG kabul eder) */
+    public const APPLE_TOUCH_EXTENSIONS = ['png'];
+
+    /** Web manifest kural uzantilari (oncelik sirasiyla) */
+    public const MANIFEST_EXTENSIONS = ['webmanifest', 'json'];
 
     /**
      * Sanal og gorsel adinin KABUL edilen sekli:
@@ -104,6 +112,68 @@ class AssetConvention
         }
 
         return array_values(array_unique($aday));
+    }
+
+    /**
+     * apple-touch-icon aday adlari: once KURAL, sonra anahtarsiz genel ad.
+     *
+     * @return string[] proje public kokune gore goreli yollar
+     */
+    public static function appleTouchIconCandidates(?string $projectKey): array
+    {
+        $aday = [];
+
+        $key = self::normalizeKey($projectKey);
+        if ($key !== null) {
+            foreach (self::APPLE_TOUCH_EXTENSIONS as $ext) {
+                $aday[] = "images/apple-touch-icon-{$key}.{$ext}";
+            }
+        }
+
+        foreach (self::APPLE_TOUCH_EXTENSIONS as $ext) {
+            $aday[] = "images/apple-touch-icon.{$ext}";
+        }
+
+        return array_values(array_unique($aday));
+    }
+
+    /**
+     * Web manifest aday adlari: once KURAL, sonra anahtarsiz genel ad.
+     *
+     * @return string[] proje public kokune gore goreli yollar
+     */
+    public static function manifestCandidates(?string $projectKey): array
+    {
+        $aday = [];
+
+        $key = self::normalizeKey($projectKey);
+        if ($key !== null) {
+            foreach (self::MANIFEST_EXTENSIONS as $ext) {
+                $aday[] = "images/manifest-{$key}.{$ext}";
+            }
+        }
+
+        foreach (self::MANIFEST_EXTENSIONS as $ext) {
+            $aday[] = "images/manifest.{$ext}";
+        }
+
+        return array_values(array_unique($aday));
+    }
+
+    /**
+     * Projenin fiziksel apple-touch-icon dosyasini cozer; yoksa `null` (etiket uretilmez).
+     */
+    public static function findAppleTouchIcon(?string $projectKey): ?string
+    {
+        return self::firstExisting(self::appleTouchIconCandidates($projectKey));
+    }
+
+    /**
+     * Projenin fiziksel web manifest dosyasini cozer; yoksa `null` (etiket uretilmez).
+     */
+    public static function findManifest(?string $projectKey): ?string
+    {
+        return self::firstExisting(self::manifestCandidates($projectKey));
     }
 
     /**

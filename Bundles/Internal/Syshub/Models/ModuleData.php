@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Base\Attributes\Bundle;
 
 /**
  * ModuleData - SysHub Orchestrator & Discovery Engine 🧩🛡️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 #[Bundle(
     name: 'syshub',
@@ -49,7 +49,7 @@ class ModuleData extends BaseConfig
     }
 
     /**
-     * SOVEREIGN CUSTOM ROUTES 🎯
+     * RBN Framework CUSTOM ROUTES 🎯
      * Modül altındaki tüm alt birimlerin özel rotalarını buraya topluyoruz.
      */
     public function registerRoutes(): void

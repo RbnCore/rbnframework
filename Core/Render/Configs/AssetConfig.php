@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\Render\Configs;
 use Rbn\Framework\Core\Base\Data\BaseConfig;
 
 /**
- * AssetConfig - Core Asset Engine Logic (Masterpiece 3.5) ⚙️🛰️⚓
+ * AssetConfig - Core Asset Engine Logic ⚙️🛰️⚓
  * 
  * This file handles SYSTEM LOGIC (Paths, Extensions, Proxies).
  * For user-facing contents (Bundles, UI Maps), refer to AssetDefinition.
@@ -18,8 +18,8 @@ class AssetConfig extends BaseConfig
     public const VERSION = '1.0';
 
     /**
-     * PROXY_SETUP - The Sovereign Source Registry 🛡️🏅⚓
-     * RBN 3.5: Grouped by source (Project/Framework) for maximum atoms.
+     * PROXY_SETUP - The RBN Framework Source Registry 🛡️🏅⚓
+     * RBN Framework: Grouped by source (Project/Framework) for maximum atoms.
      */
     public const PROXY_SETUP = [
         'version' => self::VERSION,

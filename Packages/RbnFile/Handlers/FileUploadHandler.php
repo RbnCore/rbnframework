@@ -11,7 +11,7 @@ use Rbn\Framework\Core\System\Paths\Paths;
 /**
  * FileUploadHandler - The Storage Guard (Worker) 🚚🏢
  * 
- * RBN 3.5: Masterpiece Standard (BaseComponent Actor).
+ * RBN Framework: Standard (BaseComponent Actor).
  * Location: Bundles\RbnSuite\RbnFile\Handlers\
  */
 class FileUploadHandler extends BaseComponent
@@ -38,7 +38,7 @@ class FileUploadHandler extends BaseComponent
     public function execute(UploadedFile $file, string $folder, string $disk = 'secure', ?array $options = []): array
     {
         try {
-            // 🎼 RBN 3.5: [SOVEREIGN DISK ORCHESTRATION WITH CDN OVERRIDES] 🏛️🛰️⚓
+            // 🎼 RBN Framework: [RBN Framework DISK ORCHESTRATION WITH CDN OVERRIDES] 🏛️🛰️⚓
             if ($disk === 'cdn' || !empty($options['cdn_path'])) {
                 $cdnPath = rtrim(str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $options['cdn_path']), DIRECTORY_SEPARATOR);
                 $cdnUrl = rtrim($options['cdn_url'] ?? '', '/');
@@ -67,7 +67,7 @@ class FileUploadHandler extends BaseComponent
             $extension = $file->extension();
             $fileName = $options['filename'] ?? $this->generateUniqueName(null, $extension);
 
-            // 2. Dosyayı taşı (RBN 3.5 DNA)
+            // 2. Dosyayı taşı (RBN Framework DNA)
             if ($file->move($targetDir, $fileName)) {
                 $fullRelativePath = $relativePath . $fileName;
 
@@ -92,7 +92,7 @@ class FileUploadHandler extends BaseComponent
     public function delete(string $imagePath, ?array $options = []): array
     {
         try {
-            // 🎼 RBN 3.5: [DYNAMIC PATH RESOLUTION] 🏹🛰️⚓
+            // 🎼 RBN Framework: [DYNAMIC PATH RESOLUTION] 🏹🛰️⚓
             $imagePath = ltrim($imagePath, '/');
             
             // CDN / Özel dizin silme kontrolü

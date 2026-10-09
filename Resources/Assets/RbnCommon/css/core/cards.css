@@ -59,7 +59,7 @@
     transform: translateY(-3px);
 }
 
-/* 4. Sovereign Stat & Metric Cards (Strict .rbn-stat-* Engine) */
+/* 4. RBN Framework Stat & Metric Cards (Strict .rbn-stat-* Engine) */
 .rbn-stat-card {
     background: var(--rbn-bg-surface, #ffffff);
     border: 1px solid var(--rbn-border, #e2e8f0);
@@ -246,7 +246,7 @@
     border: 1px solid var(--rbn-stone-300, #E2E2DC);
 }
 
-/* 6. Sovereign Action Cards (.rbn-action-card) */
+/* 6. RBN Framework Action Cards (.rbn-action-card) */
 .rbn-action-card {
     display: flex;
     align-items: center;
@@ -365,3 +365,33 @@
 .object-fill    { object-fit: fill; }
 .object-none    { object-fit: none; }
 .object-scale-down { object-fit: scale-down; }
+
+/* Kenardan kenara kart: icerik/tablo karta yaslanir, <=480px dolgu zorlamasindan muaf — FW-096-C2 */
+.rbn-card.rbn-card-flush,
+.rbn-card-flush {
+    padding: 0 !important;
+    overflow: hidden;
+}
+
+/* Ozellik matrisi: 3 -> 2 -> 1 sutun, hucreler arasi ince cizgi — FW-096-C2 */
+.rbn-feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    background: var(--rbn-border);
+    border: 1px solid var(--rbn-border);
+    border-radius: var(--rbn-radius-md, 10px);
+    overflow: hidden;
+}
+.rbn-feature-grid-cell {
+    background: var(--rbn-bg-surface);
+    padding: var(--rbn-space-6, 24px);
+    min-width: 0;
+}
+@media (max-width: 991.98px) {
+    .rbn-feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 575.98px) {
+    .rbn-feature-grid { grid-template-columns: minmax(0, 1fr); }
+    .rbn-feature-grid-cell { padding: var(--rbn-space-4, 16px); }
+}

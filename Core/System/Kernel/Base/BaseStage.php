@@ -10,7 +10,7 @@ use Rbn\Framework\Core\System\Kernel\Kernel;
 /**
  * BaseStage - The Foundation for all Kernel Boot Stages 🏛️🎭⚓
  * 
- * RBN 3.5: Provides common utilities for all orchestrators in the boot pipeline.
+ * RBN Framework: Provides common utilities for all orchestrators in the boot pipeline.
  */
 abstract class BaseStage implements StageInterface
 {

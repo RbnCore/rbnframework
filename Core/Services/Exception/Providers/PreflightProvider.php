@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Services\Exception\Providers\Base\BaseExceptionProvider;
 /**
  * PreflightProvider - System Initialization & Diagnostic Organ 🛰️⚓
  * 
- * RBN 3.5: [LAYER 1] Masterpiece Standard.
+ * RBN Framework: [LAYER 1] RBN Framework Standard.
  * Extends BaseExceptionProvider for symmetric service access.
  * Handles specialized Doctor-Diagnostics UI for early-boot failures.
  */
@@ -20,7 +20,7 @@ class PreflightProvider extends BaseExceptionProvider
      */
     public function render(string $view, array $data = []): void
     {
-        // 🎯 RBN 3.5: Masterpiece AJAX Diagnostic Support
+        // 🎯 RBN Framework: AJAX Diagnostic Support
         if ($this->isAjax()) {
             // FW-KARAR-2 / Z-1: uretimde ham mesaj/dosya/satir gizlenir
             // (HTML yolu `renderFatal()` icinde zaten gizliyordu).
@@ -61,7 +61,7 @@ class PreflightProvider extends BaseExceptionProvider
             'isPreFlight' => true
         ];
 
-        // 🎯 RBN 3.5: Use Centralized Masterpiece Autonomous Renderer 🏛️🛡️
+        // 🎯 RBN Framework: Use Centralized RBN Framework Autonomous Renderer 🏛️🛡️
         self::renderAutonomous('pre_flight', $data, $httpCode);
     }
 }

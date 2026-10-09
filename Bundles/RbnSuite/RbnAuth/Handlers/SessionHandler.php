@@ -7,7 +7,7 @@ use Rbn\Framework\Bundles\RbnSuite\RbnAuth\Support\RememberTokenService;
 
 /**
  * SessionHandler - The Session Mutation Worker 🛡️🗝️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * Specialized execution unit for session storage mutation
  * and remember-me token lifecycle management.
@@ -16,6 +16,12 @@ use Rbn\Framework\Bundles\RbnSuite\RbnAuth\Support\RememberTokenService;
  */
 class SessionHandler extends BaseComponent
 {
+    /** Girişin zamanı (mutlak oturum süresi; `AuthMiddleware`). */
+    public const STARTED_AT_KEY = 'auth_started_at';
+
+    /** Son kimlikli isteğin zamanı (boşta süresi; `AuthMiddleware`). */
+    public const LAST_ACTIVITY_KEY = 'auth_last_activity';
+
     /**
      * Starts a secure authentication session 🚀
      */
@@ -55,7 +61,7 @@ class SessionHandler extends BaseComponent
             $userEmail = $user['email'] ?? '';
         }
 
-        // 🛡️ RBN 3.5 Sovereign Fingerprint: IP & User-Agent Binding (Anti-Session Hijacking)
+        // 🛡️ RBN Framework Fingerprint: IP & User-Agent Binding (Anti-Session Hijacking)
         $ip = $this->request->ip() ?? ($_SERVER['REMOTE_ADDR'] ?? '0.0.0.0');
         $ua = $this->request->userAgent() ?? ($_SERVER['HTTP_USER_AGENT'] ?? 'Unknown');
         $fingerprint = hash('sha256', $ip . '|' . $ua);
@@ -71,6 +77,8 @@ class SessionHandler extends BaseComponent
         $session->set('is_master_developer', $isMaster);
         $session->set('is_locked', false);
         $session->set('auth_fingerprint', $fingerprint);
+        $session->set(self::STARTED_AT_KEY, time());
+        $session->set(self::LAST_ACTIVITY_KEY, time());
 
         if ($remember) {
             $this->createRememberMe((int)$user['id'], $isMaster);

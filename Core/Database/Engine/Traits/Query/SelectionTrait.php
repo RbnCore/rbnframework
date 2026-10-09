@@ -5,7 +5,7 @@ namespace Rbn\Framework\Core\Database\Engine\Traits\Query;
 /**
  * SelectionTrait - The Query Configuration Engine 🏹🛰️⚓
  * 
- * RBN 3.0: Powers selection, ordering, grouping and limit clauses.
+ * Powers selection, ordering, grouping and limit clauses.
  */
 trait SelectionTrait
 {

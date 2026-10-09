@@ -37,7 +37,7 @@ class Autoload extends BaseStage
         /** @var \Composer\Autoload\ClassLoader $loader */
         $loader = require $vendorPath . '/autoload.php';
 
-        // [RBN 3.0] Project Root Autoloader (Derived from North Star Prefix)
+        // Project Root Autoloader (Derived from North Star Prefix)
         $projectPrefix = Definition::get('namespace', 'PROJECT_PREFIX') ?: 'Rbn\Project\\';
         if ($project && $project->root() && is_dir($project->root())) {
             $loader->addPsr4($projectPrefix, $project->root() . '/');
@@ -46,7 +46,7 @@ class Autoload extends BaseStage
             $loader->addPsr4($projectPrefix . 'Modules\\', $project->root() . '/Modules/');
         }
 
-        // [RBN 3.0] Framework Root Security (v5.0 Micro-Kernel)
+        // Framework Root Security (Micro-Kernel)
         $frameworkPrefix = Definition::get('namespace', 'FRAMEWORK_PREFIX') ?: 'Rbn\Framework\\';
         if ($frameworkPrefix) {
             $loader->addPsr4($frameworkPrefix, $frameworkRoot . '/');

@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 
 /**
  * GoogleMapsProvider - Official Google Places API Data Fetcher 🛰️📍⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 class GoogleMapsProvider extends BaseComponent
 {
@@ -30,13 +30,13 @@ class GoogleMapsProvider extends BaseComponent
         if (empty($apiKey)) {
             return [
                 'status' => 'error',
-                'message' => 'RBN 3.5: Google API yetkisi veya anahtarı bulunamadı! 🛡️⚓'
+                'message' => 'Google API yetkisi veya anahtarı bulunamadı! 🛡️⚓'
             ];
         }
 
         $endpoint = $this->baseUrl . $placeId . "?fields=id,rating,userRatingCount,currentOpeningHours,formattedAddress,nationalPhoneNumber,location&languageCode=tr";
 
-        // 🪐 RBN Sovereign Remote Engine!
+        // 🪐 RBN Framework Remote Engine!
         $result = $this->remote->get($endpoint, [], [
             'X-Goog-Api-Key' => $apiKey,
             'X-Goog-FieldMask' => 'id,rating,userRatingCount,currentOpeningHours,formattedAddress,nationalPhoneNumber,location',

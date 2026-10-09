@@ -14,7 +14,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 /**
  * BaseModel - RBN Framework Modern Engine 🎻⚙️⚓
  * 
- * RBN 3.5: Masterpiece Simplicity.
+ * RBN Framework: Simplicity.
  * Artık BaseComponent'tan türeyerek tüm keşif ve bağlam yeteneklerine "doğuştan" sahiptir.
  * 
  * @method self when(mixed $condition, callable $callback, callable $default = null)
@@ -54,7 +54,7 @@ abstract class BaseModel extends BaseComponent implements BaseModelInterface, \A
     protected $primaryKey = 'id';
     protected string $connection = 'database_project';
     protected string $queryProvider = QueryBuilder::class;
-    protected bool $scoped = false; // 🛡️ RBN 3.5: Multi-Tenant Scoping Switch
+    protected bool $scoped = false; // 🛡️ RBN Framework: Multi-Tenant Scoping Switch
 
     /**
      * [FW-ALTYAPI-3 / H · G4] Bağlam ÇÖZÜLEMEDİĞİ durumun sentineli 🚩

@@ -12,7 +12,7 @@ use Rbn\Framework\Core\Http\Engine\Traits\Request\FileTrait;
 /**
  * Request - HTTP Request Engine & Security Kalkanı 🛡️⚓
  * 
- * RBN 3.0: High-Performance "Pro" architecture with autonomous input handling.
+ * High-Performance "Pro" architecture with autonomous input handling.
  */
 class Request implements RequestInterface
 {

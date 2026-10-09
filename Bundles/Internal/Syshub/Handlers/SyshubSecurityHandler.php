@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 
 /**
  * SyshubSecurityHandler - Güvenlik Verisi Orkestratörü 🛡️🛰️
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * Ana güvenlik istatistiklerini, IP listelerini ve son aktiviteleri 
  * derleyip kontrolöre "hazır" olarak sunar.

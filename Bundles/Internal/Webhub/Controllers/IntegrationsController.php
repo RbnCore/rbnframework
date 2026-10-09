@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\Attributes\SubModule;
 
 /**
  * IntegrationsController - Webhub Integration & Scripts Orchestrator 🎯🛰️
- * Standard: RBN 3.5 Masterpiece - MIRROR OF IDENTITY
+ * Standard: RBN Framework - MIRROR OF IDENTITY
  */
 #[SubModule(
     entity: 'integrations',

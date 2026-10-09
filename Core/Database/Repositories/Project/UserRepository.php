@@ -7,9 +7,9 @@ namespace Rbn\Framework\Core\Database\Repositories\Project;
 use Rbn\Framework\Core\Base\Data\BaseRepository;
 
 /**
- * UserRepository - The Sovereign Identity & User Data Repository 🧬🛡️⚓
+ * UserRepository - The RBN Framework Identity & User Data Repository 🧬🛡️⚓
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Specialized repository for identification, authentication status,
  * and high-priority authority synchronization (Master Developers).
  * 
@@ -35,7 +35,7 @@ class UserRepository extends BaseRepository
 
     /**
      * Finds a developer in the central rbn_master authority 🛰️🛸
-     * RBN 3.5: Dual-Hub Discovery strategy.
+     * RBN Framework: Dual-Hub Discovery strategy.
      */
     public function findMasterDeveloper(string $identity): mixed
     {

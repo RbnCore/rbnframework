@@ -7,10 +7,10 @@ namespace Rbn\Framework\Packages\RbnPipeline\Builders\Tasks;
 use Rbn\Framework\Core\Base\Attributes\Component;
 
 /**
- * ContentTaskBuilder - Sovereign Universal Content Autopilot Task Builder 🚀🤖📰📈
+ * ContentTaskBuilder - RBN Framework Universal Content Autopilot Task Builder 🚀🤖📰📈
  * 
  * Location: RbnPipeline/Builders/Tasks/ContentTaskBuilder.php
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Universal master task builder for all content publishing workflows (Blog, News, Trends, etc.) across all projects.
  */
 #[Component(alias: 'task.content', type: 'builder')]

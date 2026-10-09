@@ -1,6 +1,6 @@
 # RbnAdmin/Models — kayıt merkezi, panel haritası ve kimlik
 
-> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Bundles/RbnSuite/RbnAdmin/Models/` — **3 `*.php`**
 > **Envanter:** 3 dosyanın 3'ü anlatıldı.
 > Üst belge: [README.md](README.md)

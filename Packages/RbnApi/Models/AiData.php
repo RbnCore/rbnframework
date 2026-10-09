@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Rbn\Framework\Packages\RbnApi\Models;
 
 /**
- * AiData - Sovereign AI Models & Pricing Knowledge Hub 🤖⚡
+ * AiData - RBN Framework AI Models & Pricing Knowledge Hub 🤖⚡
  * Central dictionary for Gemini models, pricing, capabilities and specs.
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 class AiData
 {

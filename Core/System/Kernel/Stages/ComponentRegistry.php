@@ -12,7 +12,7 @@ use Rbn\Framework\Core\Support\Bridges\Helpers\Library\LogThrottle;
 /**
  * ComponentRegistry - Exception handlers, Aliases, Helpers, and Storage 🏛️🎭⚓
  * 
- * RBN 3.5 Stage: Hierarchically resolves framework components via Triple Gates.
+ * RBN Framework Stage: Hierarchically resolves framework components via Triple Gates.
  * Now purely leverages the Universal map() Orchestrator for total autonomy.
  */
 class ComponentRegistry extends BaseStage
@@ -61,7 +61,7 @@ class ComponentRegistry extends BaseStage
      */
     private function registerAliases(): void
     {
-        // 🥇 RBN 3.5: Use the Universal Map Orchestrator from SystemRegistry
+        // 🥇 RBN Framework: Use the Universal Map Orchestrator from SystemRegistry
         // (This already consolidates System VIP + Modular Aliases via inheritance) 🧬🏛️
         $aliases = (new SystemRegistry())->registerMap()['aliases'] ?? [];
 

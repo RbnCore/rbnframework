@@ -112,8 +112,25 @@ class SystemHandlers extends BaseCommand
             }
         }
 
+        // Keşif haritaları (`components_map_<site>.json`, `discovery_map_<site>.php`) da silinir:
+        // dosya varken disk taranmaz, yeni `#[Component]` sınıfı görünmez. Bir proje klasörü
+        // birden çok siteye hizmet ettiği için klasördeki TÜM site haritaları gider; ilk istek
+        // (web ya da proje bağlamına geçmiş CLI) yeniden üretir.
+        $mapCount = 0;
+        $projectsRoot = \Rbn\Framework\Core\System\Paths\Paths::workspace() . DIRECTORY_SEPARATOR . 'projects';
+        $mapDirs = $projectKey
+            ? [\Rbn\Framework\Core\System\Paths\Paths::project()->root() . DIRECTORY_SEPARATOR . 'Storage' . DIRECTORY_SEPARATOR . 'framework']
+            : (glob($projectsRoot . DIRECTORY_SEPARATOR . '*' . DIRECTORY_SEPARATOR . 'Storage' . DIRECTORY_SEPARATOR . 'framework', GLOB_ONLYDIR) ?: []);
+        foreach ($mapDirs as $mapDir) {
+            foreach (array_merge(glob($mapDir . DIRECTORY_SEPARATOR . 'components_map_*.json') ?: [], glob($mapDir . DIRECTORY_SEPARATOR . 'discovery_map_*.php') ?: []) as $file) {
+                if (is_file($file) && unlink($file)) {
+                    $mapCount++;
+                }
+            }
+        }
+
         $targetText = $projectKey ? "[{$projectKey}] projesinin" : "Tüm sistem ve projelerin";
-        $this->success("{$targetText} önbelleği temizlendi! Toplam {$count} cache dosyası silindi.");
+        $this->success("{$targetText} önbelleği temizlendi! Toplam {$count} cache dosyası ve {$mapCount} keşif haritası silindi.");
         
         // Opsiyonel olarak tmp klasörünü de süpür
         if (!empty($options['with-tmp']) || !empty($options['all'])) {

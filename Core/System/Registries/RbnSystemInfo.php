@@ -10,7 +10,7 @@ use Rbn\Framework\Core\System\Registries\SystemRegistry;
 /**
  * RbnSystemInfo - Central Metadata and Aggregator 🛡️🏙️⚓
  * 
- * RBN 3.5 "Masterpiece": Hierarchically resolves framework-wide constants 
+ * RBN Framework: Hierarchically resolves framework-wide constants
  * by leveraging the Universal map() Orchestrator via SystemRegistry.
  * Isolated as a static utility to avoid naming collisions with BaseConfig.
  */
@@ -30,7 +30,7 @@ class RbnSystemInfo
             return self::$cache[$key];
         }
 
-        // 1. Core Framework Identity Discovery (Sovereign Source of Truth) 🧬🏛️⚓
+        // 1. Core Framework Identity Discovery (RBN Framework Source of Truth) 🧬🏛️⚓
         $identityClass = \Rbn\Framework\Core\Support\Definitions\System\FrameworkIdentity::class;
         if (defined("$identityClass::$key")) {
             return self::$cache[$key] = constant("$identityClass::$key");
@@ -43,7 +43,7 @@ class RbnSystemInfo
             if (str_starts_with($key, $prefix)) {
                 $targetKey = substr($key, strlen($prefix)); // ADMIN_NAME -> NAME
                 
-                // 🎼 RBN 3.5: Masterpiece Hybrid Discovery 🧬🛰️⚓
+                // 🎼 RBN Framework: Hybrid Discovery 🧬🛰️⚓
                 // Try original and normalized namespace candidates
                 $candidates = [
                     $class,
@@ -58,7 +58,7 @@ class RbnSystemInfo
                 }
 
                 if (class_exists($class)) {
-                    // 🎼 RBN 3.5: Sovereign Data Orchestration 🧬🛰️⚓
+                    // 🎼 RBN Framework: Data Orchestration 🧬🛰️⚓
                     // We rely on the generic data() bridge to resolve NAME, VERSION, etc.
                     if (is_subclass_of($class, BaseConfig::class)) {
                         $data = $class::data($targetKey);

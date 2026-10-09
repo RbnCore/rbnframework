@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Services\BaseService;
 /**
  * MasterSettingsService - The Global Configuration Authority 🏛️🛰️⚓
  * 
- * RBN 3.5 Masterpiece: Centralized service for managing framework-wide 
+ * RBN Framework: Centralized service for managing framework-wide
  * configurations and API keys stored in the rbn_master database.
  * 
  * @property \Rbn\Framework\Core\Database\Repositories\Master\MasterSettingsRepository $masterSettingsRepository

@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 /**
  * SanitizationHandler - The Data Cleaner Actor 🛡️🧹
  * 
- * RBN 3.5: Atomic actor for trimming, filtering and cleaning form data.
+ * RBN Framework: Atomic actor for trimming, filtering and cleaning form data.
  */
 class SanitizationHandler extends BaseComponent
 {

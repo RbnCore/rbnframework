@@ -5,7 +5,7 @@
 (function (window, document) {
     'use strict';
 
-    /* 0. Otonom Sovereign Select Dönüştürücü (Modal & Form Select Enhancer) 🪄✨ */
+    /* 0. Otonom RBN Framework Select Dönüştürücü (Modal & Form Select Enhancer) 🪄✨ */
     function rbnEnhanceSelects(container) {
         const root = container || document;
         const selects = root.querySelectorAll('.modal select.form-select, select[data-rbn-select]');

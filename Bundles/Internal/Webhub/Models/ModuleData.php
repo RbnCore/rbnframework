@@ -11,7 +11,7 @@ use Rbn\Framework\Core\Base\Attributes\Bundle;
 
 /**
  * ModuleData - Webhub Orchestrator & Discovery Engine 🧩🛡️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 #[Bundle(
     name: 'webhub',
@@ -50,7 +50,7 @@ class ModuleData extends BaseConfig
     }
 
     /**
-     * SOVEREIGN CUSTOM ROUTES 🎯
+     * RBN Framework CUSTOM ROUTES 🎯
      * Modül altındaki tüm alt birimlerin özel rotalarını buraya topluyoruz.
      */
     public function registerRoutes(): void
@@ -78,7 +78,7 @@ class ModuleData extends BaseConfig
             Route::get('/', 'index');
             Route::get('manage', 'manage');
 
-            // 🚀 RBN 3.5: SEO Score Analyzer Routes
+            // 🚀 RBN Framework: SEO Score Analyzer Routes
             Route::get('score', 'score');
             Route::get('report', 'report');
             Route::post('scan', 'scan');

@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 
 /**
  * DomScannerHandler - Live DOM & Performance Analysis (Max 45 Points)
- * RBN 3.5 Handler Pipeline
+ * RBN Framework Handler Pipeline
  */
 class DomScannerHandler extends BaseSeoHandler
 {

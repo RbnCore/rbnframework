@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\Data\BaseConfig;
 
 /**
  * StudioMap - RbnStudio Structural Map 🗺️🎨🚀⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 class StudioMap extends BaseConfig
 {

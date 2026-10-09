@@ -24,7 +24,7 @@ interface QueryProviderInterface
     public function limit(int $limit): static;
 
     /**
-     * Execute the query and return a result set (Collection in RBN 3.0) 🚀
+     * Execute the query and return a result set (Collection in RBN) 🚀
      */
     public function get(): mixed;
 

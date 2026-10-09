@@ -11,7 +11,7 @@ use Rbn\Framework\Core\System\Storage\Drivers\UniversalFileDriver;
 /**
  * ComponentMapper - Autonomous Component Cache & Persistence Manager 🧩⚡🛰️
  * 
- * RBN 3.5: Centralized storage engine for discovered components map (JSON format).
+ * RBN Framework: Centralized storage engine for discovered components map (JSON format).
  * Ensures ultra-fast disk persistence and in-memory caching for Attribute-discovered components.
  */
 class ComponentMapper
@@ -135,10 +135,34 @@ class ComponentMapper
         }
 
         $projectPath = $this->resolveProjectPath($projectKey);
-        if (!empty($projectPath) && is_dir($projectPath)) {
+        if (!empty($projectPath) && is_dir($projectPath) && self::scansProjectRoot($projectPath)) {
             return $projectPath . '/Storage/framework/components_map_' . $projectKey . '.json';
         }
 
         return null;
+    }
+
+    /**
+     * Tarama kökü (`Paths::project()`) bu projenin kökü mü?
+     *
+     * CLI ana kipinde (cron) proje anahtarı (`project_key()`) bir projeyi gösterirken
+     * `Paths::project()` henüz `tmp/` ya da `projects/default` olabilir; o bağlamdaki
+     * BOŞ tarama sonucu projenin harita dosyasına yazılırsa web isteği de boş haritayı
+     * okur (`model('alias')` → null → 500). Kökler eşleşmiyorsa harita okunmaz/yazılmaz,
+     * sonuç yalnız bellekte kalır.
+     */
+    public static function scansProjectRoot(string $projectPath): bool
+    {
+        $scanned = realpath(Paths::project()->root());
+        $expected = realpath($projectPath);
+
+        if ($scanned === false || $expected === false) {
+            return false;
+        }
+
+        // Windows dosya sistemi büyük/küçük harf duyarsız; Linux/macOS'ta tam eşitlik.
+        return DIRECTORY_SEPARATOR === '\\'
+            ? strcasecmp($scanned, $expected) === 0
+            : $scanned === $expected;
     }
 }

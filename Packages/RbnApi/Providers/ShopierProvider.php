@@ -29,7 +29,7 @@ class ShopierProvider extends BaseComponent
             'Accept: application/json'
         ];
 
-        // 🪐 RBN 3.5: Sovereign RemoteRequest Engine
+        // 🪐 RBN Framework: RemoteRequest Engine
         if (strtoupper($httpMethod) === 'POST') {
             return $this->remote->post($url, $params, $headers);
         }

@@ -1,6 +1,6 @@
 # Core/Render/Handlers — veri hazırlayıcılar ve üç güvenlik kapısı
 
-> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Render/Handlers/` — **6 `*.php`** = 3 kök + `UI/` altında 3.
 > **Envanter:** 6 dosyanın **6'sı** anlatıldı.
 > **Doğrulama platformu:** Windows + PHP 8.3, `TemplateExpressionGuard` ve `RawHtmlGate` gerçekten çalıştırılarak.

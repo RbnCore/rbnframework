@@ -1,6 +1,6 @@
 # Core/Services/Console — CLI komutları, cron kervanı, migration ve temizlik (29 dosya)
 
-> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `c23b431f` · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Services/Console/` — **29 `*.php`** = 1 kök + `Base/` 4 + `Handlers/` 8
 > (+ `Handlers/Resolvers/` 2) + `Jobs/` 1 (+ `Jobs/Cleanup/` 3) + `Managers/` 3 +
 > `Services/` 6 + `Tasks/` 1.
@@ -217,7 +217,13 @@ CleanupJob::execute($params)                  Jobs/CleanupJob.php:20
 > `execute()/run()/migrate()/delete()` imzası için bu gece görevi kuralı
 > geçerlidir.
 
-## 8. Akış — `version:check` / `version:next` (VersionHandlers.php)
+## 8. Akış — `version:check` / `version:next` / `version:framework` (VersionHandlers.php)
+
+> **Güncel (2026-10-09, FW-096-D7):** üçüncü komut `version:framework [--to=A.B.C] [--apply]`
+> framework sürümünü ve bütün kopyalarını tek komutta yazar; `version:check` aynı kopya
+> listesini (`frameworkKopyalari()`) denetler. Aşağıdaki satır numaraları ve ölçüm tablosu
+> 2026-10-05 koduna aittir; güncel davranış ve ölçüm:
+> [kavramlar/04-surumleme-ve-yayin.md](../../../kavramlar/04-surumleme-ve-yayin.md) §4.
 
 ```
 version:check  (tamamen SALT-OKUNUR, exit($sapma === 0 ? 0 : 1))    :43-102
@@ -260,6 +266,8 @@ satırlarıyla ilgilidir. **`acik-sorular.md` §2.4 ve §2.5 bu ölçümle kapat
 | Seyrek log temizliği | `rand(1,50)===1`, 7 gün (`TaskManager.php:92-94`) |
 | `--master` bayrağı | `RbnCli.php:78-79` |
 | `AbstractCronTask` durumları | `success`, `skipped`, `failed` (`TaskManager.php:61`) |
+| Bildirim politikası | `cron_jobs.params.notify_on` > görev sınıfı `NOTIFY_ON` > `always`; değerler `always`/`failure`/`never`, geçersiz değer bir alt kaynağa düşer, `skipped` hiç bildirmez (`CronNotificationHandler::resolveNotifyPolicy()`, `shouldNotify()`; `AbstractCronTask::NOTIFY_ON = 'always'`). Yeni görev bu kararla gelir. |
+| Saat-altı aralık | `params.every_minutes` 1-59 → `:00, :N, :2N…` dilimleri; yoksa sonraki tam saat (`CronResolver.php:80-86`, `SchedulerHandler`). `frequency` yalnız hata sonrası erteleme. |
 | `MasterMigrationService::MIGRATIONS` | 2 kayıt: `CreateLicenceAndApplicationTables`, `NormalizeProjectVersions` (`MasterMigrationService.php:36-43`) |
 | `MasterMigrationService::RECORD_TABLE` | `'master_migrations'` (`:33`) |
 | Tenant hedef tablo listesi | `ProjectDbData::TENANT_TABLES` (`TenantHandlers.php:58`) |

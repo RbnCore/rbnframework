@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 /**
  * TelegramProvider - Telegram Bot API Connectivity Hub 📨🛰️⚓
  *
- * RBN 3.5: Sadece Telegram'a OZGUL, PROJEYDEN BAGIMSIZ (generic) cerceve.
+ * RBN Framework: Sadece Telegram'a OZGUL, PROJEYDEN BAGIMSIZ (generic) cerceve.
  *
  * BU SINIFIN SORUMLULUGU:
  *  - Bot API cagrilari (sendMessage, setWebhook, getWebhookInfo, deleteWebhook, getMe)

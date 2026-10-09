@@ -2,7 +2,7 @@
 
 > **Bu belge hangi commit'e göre yazıldı:** `d49b4413` (dal `feat/fw-license-master`)
 > **Son doğrulama tarihi:** 2026-10-05
-> **Yayın tabanı:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Yayın tabanı:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kapsam:** `rbnframework/` deposunun tamamı (okuma yönü: framework'ü hiç bilmeyen biri)
 
 Bu dizi, framework'ün **kendi kodunu okuyarak** yazılmış rehberidir. Her iddia
@@ -114,7 +114,7 @@ Belge–konu eşlemesi:
 | Kod değişikliği | Güncellenmesi gereken belge |
 |---|---|
 | Giriş noktası, `PreBoot`, `KernelFactory`, bir `Stage`, `Route::run()`, `RedirectManager`, `Paths`, `is_local()` / `ProjectDbProfileResolver` | `kavramlar/01-mimari-harita.md` |
-| Yeni ayar anahtarı, `Config` önceliği, `project-routemap.php` / `project-settings.php` şeması, `EnvKeys` | `kavramlar/02-yapilandirma.md` |
+| Yeni ayar anahtarı, `Config` önceliği, `project-routemap.php` / `project-settings.php` şeması, `secrets.php` `app` bölümü | `kavramlar/02-yapilandirma.md` |
 | Bağlantı ailesi, `BaseModel` kapsam, `$fillable`, migration, master tablosu, lisans kapısı | `kavramlar/03-veritabani-ve-kiracilik.md` + `Core/Database/` altındaki belge |
 | `Version`, `FrameworkIdentity`, `APP_VERSION`, CLI sürüm komutları, CHANGELOG/UPGRADING biçimi | `kavramlar/04-surumleme-ve-yayin.md` |
 | `BaseComponent`/`BaseService`/`BaseModel` tabanları, `Concerns/*`, `Patterns/*` | `Core/Base/README.md` + ilgili alt dal |
@@ -146,7 +146,7 @@ Ek kurallar:
 
 * Her belgenin başındaki **"Doğrulanan kod tabanı"** satırı, belgeyi yazan kişi
   tarafından **güncellenir**; "son doğrulama tarihi" de aynı anda yazılır.
-* **"Yayın tabanı"** satırı sürümü anlatır: `0.9.5 = bu commit + sonrası`, yani belge
+* **"Yayın tabanı"** satırı sürümü anlatır: `A.B.C = bu commit + sonrası`, yani belge
   yalnız **doğrulama anındaki** kodu anlatır. Belgeyi yazan kişi o commit'ten sonra
   değişen bir şeyi anlatıyorsa commit'i **kendisi** günceller — başkası güncellemez.
 * Bir iddia artık kodda doğrulanamıyorsa **silinmez**,

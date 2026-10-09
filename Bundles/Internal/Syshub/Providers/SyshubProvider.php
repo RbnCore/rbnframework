@@ -8,8 +8,8 @@ use Rbn\Framework\Core\Base\Services\BaseProvider;
 use Rbn\Framework\Core\System\Paths\Paths;
 
 /**
- * SyshubProvider - Sovereign Data Processing Layer 🛡️🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * SyshubProvider - RBN Framework Data Processing Layer 🛡️🛰️⚓
+ * RBN Framework Standard.
  * 
  * Handles direct data manipulation, model operations, and system writes.
  */

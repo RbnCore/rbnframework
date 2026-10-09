@@ -6,7 +6,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 
 /**
  * AuditHandler - Specialized motor for Security Auditing 🛡️🖊️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * Orchestrates multi-channel logging (File, DB, Shield).
  */
@@ -100,7 +100,7 @@ class AuditHandler extends BaseComponent
     }
 
     /**
-     * [A-20 · 2026-10-04 · zeki-6eb7f5] BAŞARILI GİRİŞ SONRASI TEMİZLİK —
+     * [A-20 · 2026-10-04 · team member] BAŞARILI GİRİŞ SONRASI TEMİZLİK —
      * YALNIZ GİRİŞ HATA SAYACI. 🛡️
      *
      * ÖNCEKİ HALİ (`logSuccess` içinde inline, iki işlem):
@@ -183,6 +183,21 @@ class AuditHandler extends BaseComponent
 
         // 🎼 Step 2: DB Logging via Repository 📊
         $this->repository('project.userActivity')->logFailedActivity('login', $identity, $reason, $accountType, $countryCode);
+    }
+
+    /**
+     * Hesap kilidi olayı `security` kanalına yazılır (kimlik MASKELİ).
+     *
+     * @param string $event `ACCOUNT_LOCKED` (eşik aşıldı) | `ACCOUNT_LOCKED_ATTEMPT` (kilitliyken deneme)
+     */
+    public function logAccountLock(string $event, string $identity, int $failures, int $remainingSeconds): void
+    {
+        $this->storage->logs()->channel('security')->warning($event, [
+            'identity'          => self::maskIdentity($identity),
+            'ip'                => $this->request->ip(),
+            'failures'          => $failures,
+            'remaining_minutes' => (int) ceil($remainingSeconds / 60),
+        ]);
     }
 
     /**

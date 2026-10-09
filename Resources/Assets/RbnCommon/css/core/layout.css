@@ -111,13 +111,9 @@
 .text-center { text-align: center !important; }
 .text-start  { text-align: left !important; }
 .text-end    { text-align: right !important; }
-.text-muted  { color: var(--rbn-text-muted) !important; }
-.text-white  { color: #ffffff !important; }
+/* .text-primary/-secondary/-warning/-muted/-white: colors.css'te tek tanim (token'li; FW-096-C1) */
 .text-white-50 { color: rgba(255, 255, 255, 0.5) !important; }
 .text-white-70 { color: rgba(255, 255, 255, 0.7) !important; }
-.text-primary { color: var(--primary-color, var(--rbn-primary)) !important; }
-.text-secondary { color: var(--secondary-color, var(--rbn-secondary)) !important; }
-.text-warning { color: #fbbf24 !important; }
 .text-uppercase { text-transform: uppercase !important; }
 
 .fw-normal    { font-weight: 400 !important; }
@@ -232,7 +228,7 @@
 
 /* 3. Containers */
 .rbn-container, .app-container, .container {
-    max-width: 1200px;
+    max-width: var(--rbn-container-max, 1200px);
     width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -241,10 +237,10 @@
 }
 
 .rbn-container-sm, .container-sm { max-width: 800px; width: 100%; margin: 0 auto; padding: 0 var(--rbn-space-6); }
-.rbn-container-lg, .container-lg { max-width: 1360px; width: 100%; margin: 0 auto; padding: 0 var(--rbn-space-6); }
+.rbn-container-lg, .container-lg { max-width: var(--rbn-container-max-lg, 1360px); width: 100%; margin: 0 auto; padding: 0 var(--rbn-space-6); }
 .rbn-container-fluid, .container-fluid { max-width: 100%; width: 100%; padding: 0 var(--rbn-space-6); }
 
-/* 4. Sovereign 12-Column Flexbox Grid (.row & .col-*) */
+/* 4. RBN Framework 12-Column Flexbox Grid (.row & .col-*) */
 .row {
     display: flex;
     flex-wrap: wrap;
@@ -349,7 +345,7 @@
 .rbn-grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--rbn-space-6); }
 .rbn-grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--rbn-space-5); }
 
-/* 6. Sovereign Page Canvas & Content Body */
+/* 6. RBN Framework Page Canvas & Content Body */
 .rbn-content-body {
     flex: 1 0 auto;
     padding: var(--rbn-space-12, 48px) 0 var(--rbn-space-16, 64px);

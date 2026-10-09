@@ -10,7 +10,7 @@ use Rbn\Framework\Core\System\Paths\Paths;
 
 /**
  * RobotsResolver - Dedicated Search Engine Rules Resolver 🤖🛡️⚓
- * Part of RBN 3.5 Sovereign Framework Standards.
+ * Part of RBN Framework Framework Standards.
  */
 class RobotsResolver extends BaseRender
 {

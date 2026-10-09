@@ -1,7 +1,7 @@
 <?php
 /**
  * Create Email Account Modal View 📨
- * Terracotta Craft Sovereign Standard.
+ * Terracotta Craft RBN Framework Standard.
  */
 ?>
 

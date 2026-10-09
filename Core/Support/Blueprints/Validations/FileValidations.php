@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\Support\Blueprints\Validations;
 /**
  * FileValidations - Unified DNA for File Operations 📂🛡️💎
  * 
- * RBN 3.5: Consolidates both error messages and technical rule presets.
+ * RBN Framework: Consolidates both error messages and technical rule presets.
  * Centralized Source of Truth for all RbnFile components.
  */
 class FileValidations

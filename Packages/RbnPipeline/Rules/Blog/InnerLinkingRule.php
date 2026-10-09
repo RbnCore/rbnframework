@@ -11,7 +11,7 @@ use Rbn\Framework\Packages\RbnPipeline\Concerns\SanitizesResponseTrait;
 /**
  * InnerLinkingRule - Standard SEO requirement for dynamic inner-linking with strict limits 🔗🏷️
  * Location: RbnPipeline/Rules/Blog/InnerLinkingRule.php
- * RBN 3.5 Sovereign Framework Standards.
+ * RBN Framework Framework Standards.
  */
 class InnerLinkingRule extends BaseComponent implements PromptRuleInterface
 {

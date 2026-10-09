@@ -10,7 +10,7 @@ use Rbn\Framework\Core\System\Paths\Paths;
 /**
  * FolderResolver - Specialized Physical Path Discovery 📂🛰️⚓
  * 
- * RBN 3.5: Converts folder aliases and layer keys into absolute directory paths.
+ * RBN Framework: Converts folder aliases and layer keys into absolute directory paths.
  * Decouples physical disk resolution from namespace logic.
  */
 class FolderResolver extends BaseDiscoveryContext
@@ -44,11 +44,11 @@ class FolderResolver extends BaseDiscoveryContext
     {
         $baseNamespace = trim($baseNamespace, '\\');
 
-        // 🧬 RBN 3.5 Symmetry: Unified Definition Engine access (Otonom Kalkan)
+        // 🧬 RBN Framework Symmetry: Unified Definition Engine access (Otonom Kalkan)
         $frameworkPrefix = trim(\Rbn\Framework\Core\System\Discovery\Clusters\Logic\Definition\Definition::get('namespace', 'FRAMEWORK_PREFIX') ?? '', '\\');
         $projectPrefix = trim(\Rbn\Framework\Core\System\Discovery\Clusters\Logic\Definition\Definition::get('namespace', 'PROJECT_PREFIX') ?? '', '\\');
 
-        // 🎯 RBN 3.5 Symmetry: Path mapping via definition prefixes
+        // 🎯 RBN Framework Symmetry: Path mapping via definition prefixes
         // 1. Framework Layer Alignment
         if (strpos($baseNamespace, $frameworkPrefix) === 0) {
             $relativeNamespace = trim(substr($baseNamespace, strlen($frameworkPrefix)), '\\');

@@ -11,7 +11,7 @@ use Rbn\Framework\Core\Support\Exceptions\CronTaskException;
  * ContentRewriteTaskBuilder - Universal Content Rewriter / Humanizer Task Builder 🤖📝🛡️
  * 
  * Location: RbnPipeline/Builders/Tasks/ContentRewriteTaskBuilder.php
- * RBN 3.5 Sovereign Framework Standards.
+ * RBN Framework Framework Standards.
  * Universal task builder for rewriting existing published articles with humanized AI prompts,
  * preserving existing images, IDs, and slugs.
  */

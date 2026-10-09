@@ -50,7 +50,7 @@
    3. SOLID BUTTON RENK VARYANTLARI (rbn-colors.css Entegresi)
    ========================================================================== */
 
-/* 👑 Dynamic Theme & Primary Sovereign Button */
+/* 👑 Dynamic Theme & Primary RBN Framework Button */
 .rbn-btn-primary,
 .rbn-btn-theme {
     background: var(--rbn-primary, var(--rbn-theme-500, #f59e0b));
@@ -135,19 +135,45 @@
 }
 
 /* 🔴 Red / Rose / Danger */
-.rbn-btn-danger,
 .rbn-btn-red {
     background: var(--rbn-red-500, #ef4444);
     color: #ffffff;
     border-color: var(--rbn-red-500, #ef4444);
 }
-.rbn-btn-danger:hover,
 .rbn-btn-red:hover {
     background: var(--rbn-red-600, #dc2626);
     border-color: var(--rbn-red-600, #dc2626);
     color: #ffffff;
     transform: translateY(-1px);
     box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3);
+}
+
+/* Tehlike: tema token'li, beyaz yazi ile AA (>=4.5:1) — FW-096-C2 */
+.rbn-btn-danger {
+    background: var(--rbn-danger-solid, #dc2626);
+    color: #ffffff;
+    border-color: var(--rbn-danger-solid, #dc2626);
+}
+.rbn-btn-danger:hover {
+    background: var(--rbn-danger-solid-hover, #b91c1c);
+    border-color: var(--rbn-danger-solid-hover, #b91c1c);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px color-mix(in srgb, var(--rbn-danger-solid, #dc2626) 30%, transparent);
+}
+
+/* Vurgu (accent): tema --rbn-accent token'ina baglidir; koyu yazi ile AA — FW-096-C2 */
+.rbn-btn-accent {
+    background: var(--rbn-accent);
+    color: var(--rbn-text-on-accent, #1c1917);
+    border-color: var(--rbn-accent);
+}
+.rbn-btn-accent:hover {
+    background: color-mix(in srgb, var(--rbn-accent) 88%, #000);
+    border-color: color-mix(in srgb, var(--rbn-accent) 88%, #000);
+    color: var(--rbn-text-on-accent, #1c1917);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px color-mix(in srgb, var(--rbn-accent) 30%, transparent);
 }
 
 /* 🍷 Crimson / Tok Kiremit */
@@ -496,7 +522,7 @@
     color: var(--rbn-text-secondary, #64748b);
 }
 .rbn-btn-ghost:hover {
-    background: var(--rbn-slate-100, #f1f5f9);
+    background: var(--rbn-bg-ghost-hover, var(--rbn-slate-100, #f1f5f9));
     color: var(--rbn-text-primary, #0f172a);
 }
 
@@ -528,3 +554,30 @@
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
+
+/* 9. Tema duğmesi (.rbn-theme-toggle) — davranışı rbnDom.js bağlar; ikon [data-rbn-theme-icon] — FW-096-C3 */
+:where(.rbn-theme-toggle:not(.rbn-btn)) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    font-size: 1.15rem;
+    line-height: 1;
+    color: var(--rbn-text-secondary);
+    background: transparent;
+    border: 1px solid var(--rbn-border);
+    border-radius: var(--rbn-radius-pill, 9999px);
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+:where(.rbn-theme-toggle:not(.rbn-btn)):hover {
+    background: var(--rbn-bg-ghost-hover);
+    color: var(--rbn-text-primary);
+}
+:where(.rbn-theme-toggle:not(.rbn-btn)):focus-visible {
+    outline: 2px solid var(--rbn-primary);
+    outline-offset: 2px;
+}
+.rbn-theme-toggle [data-rbn-theme-icon] { pointer-events: none; }

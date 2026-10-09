@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\Data\BaseConfig;
 /**
  * FrameworkIdentity - The System Core Identity Blueprint 🧬🏛️
  * 
- * RBN 3.5: Centralizes all hardcoded metadata about the framework.
+ * RBN Framework: Centralizes all hardcoded metadata about the framework.
  * This is the Single Source of Truth (SSoT) for versioning, 
  * authorship, and core service mappings.
  */
@@ -23,7 +23,7 @@ class FrameworkIdentity extends BaseConfig
     // Core Identity
     // -------------------------------------------------------------
     public const FRAMEWORK_NAME = 'RBN Core - Framework';
-    public const FRAMEWORK_VERSION = '0.9.5';
+    public const FRAMEWORK_VERSION = '0.9.6';
     public const FRAMEWORK_SLOGAN = 'Modüler ve çok kiracılı PHP uygulama çatısı';
     public const FRAMEWORK_DESCRIPTION = 'RBN Framework, çok kiracılı (multi-tenant) modüler bir PHP uygulama çatısıdır: yönetim paneli, kimlik doğrulama, SEO, güvenlik ve içerik modüllerini aynı çatı altında sunar.';
     public const FRAMEWORK_URL = 'https://rbncore.tr';

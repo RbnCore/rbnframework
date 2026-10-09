@@ -11,7 +11,7 @@ use Rbn\Framework\Core\Base\Attributes\Component;
 /**
  * ContentDraftModel - Evrensel İçerik Taslak ve Fikir Modeli 📝🏛️⚓
  * Tüm projelerin içerik taslaklarını tek merkezden yönetir.
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * @property int    $id
  * @property string $project_key

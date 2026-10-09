@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 
 /**
  * LifecycleHandler - Unified User Identity Lifecycle Worker 🧬🏹✅
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * Sorumluluk: Kullanıcı kaydı (Registration), e-posta doğrulama (Verification)
  * ve şifre sıfırlama (Recovery) gibi tüm yaşam döngüsü işlerini tek merkezde yürütür.
@@ -88,7 +88,11 @@ class LifecycleHandler extends BaseComponent
         $userModel = $this->model('project.user');
 
         // 🎼 Step 3: Pre-flight uniqueness check
+        // Kayıtlı adres dalı da yeni kayıttaki parola özetini hesaplar (sabit
+        // maliyet); süre farkı hesap varlığını sızdırmaz. Taban: RecoveryService.
         if ($userRepo && $userRepo->findByIdentity($data['email'] ?? '')) {
+            $this->helper('crypto')->hash($data['password'] ?? '');
+
             return ['success' => false, 'error' => 'email_exists', 'message' => 'Bu e-posta adresi zaten kullanılıyor.'];
         }
 

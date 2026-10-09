@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 /**
  * ApiGuard - Security Guard Middleware for Harici API 🛡️🔑
  *
- * [FW-APIGUARD · TASARIM GOREV 2-3 · 2026-10-03 · zeki-6eb7f5]
+ * [FW-APIGUARD · TASARIM GOREV 2-3 · 2026-10-03 · team member]
  *
  * TABAN: 52 satirlik, `!==` karsilastirmali, `?token=` kabul eden, hata
  * mesajinda IP yansitan bir katmandi. Asagidaki maddeler KAPANDI:

@@ -13,7 +13,7 @@ use Rbn\Framework\Core\Services\Exception\Providers\UserErrorProvider;
 /**
  * Shield Hub - The Central Error & Defense Orchestrator 🏛️🛡️
  * 
- * RBN 3.5: Masterpiece Standard (Fluent API).
+ * RBN Framework: Standard (Fluent API).
  * Provides a unified, semantic API for throwing framework-level exceptions.
  * Recommended Usage: shield()->notFound($path)
  * 
@@ -71,7 +71,7 @@ class Shield
 
     /**
      * Standard Forbidden Abort (Layer 4 - User) 🔐🛡️⚓
-     * RBN 3.5: Directly renders the 403 page to bypass technical diagnostic screens.
+     * RBN Framework: Directly renders the 403 page to bypass technical diagnostic screens.
      */
     public function forbidden(string $message = ''): void
     {

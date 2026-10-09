@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Data\BaseRepository;
 /**
  * SettingsRepository - Project Settings Data Access & Query Repository 🏛️⚙️⚓
  * 
- * RBN 3.5 Masterpiece: Enterprise Repository Pattern for Project Settings.
+ * RBN Framework: Enterprise Repository Pattern for Project Settings.
  * Located strictly under Core\Database\Repositories\Project for clean architecture.
  * 
  * @property \Rbn\Framework\Core\Database\Models\Project\SettingsModel $settingsModel

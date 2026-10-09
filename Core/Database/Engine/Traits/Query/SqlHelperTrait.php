@@ -5,7 +5,7 @@ namespace Rbn\Framework\Core\Database\Engine\Traits\Query;
 /**
  * SqlHelperTrait - The SQL Construction Toolbox 🧰🛰️⚓
  * 
- * RBN 3.0: Provides helper methods for formatting and wrapping SQL identifiers.
+ * Provides helper methods for formatting and wrapping SQL identifiers.
  * This is the "Swiss Army Knife" for advanced SQL construction. 🎻✨
  */
 trait SqlHelperTrait

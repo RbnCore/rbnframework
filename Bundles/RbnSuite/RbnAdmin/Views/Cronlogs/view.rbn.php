@@ -1,4 +1,4 @@
-<!-- RBN MASTERPIECE LOG DETAIL TERMINAL VIEWER -->
+<!-- RBN Framework LOG DETAIL TERMINAL VIEWER -->
 <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
     <a href="{{ $Route->url('admin.cronlogs.index') }}" class="rbn-btn rbn-btn-outline rbn-btn-sm px-3 py-1.5 fw-semibold d-flex align-items-center gap-1.5">
         <i class="ri-arrow-left-line text-warning"></i> Log Listesine Dön

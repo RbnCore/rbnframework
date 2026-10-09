@@ -11,7 +11,7 @@ use Rbn\Framework\Core\Support\Definitions\System\FrameworkIdentity;
 /**
  * AssetProvider - HTML Asset Painter 🎨🛰️⚓
  * 
- * RBN 3.5 Masterpiece: Sunumsal sorumluluk katmanı.
+ * RBN Framework: Sunumsal sorumluluk katmanı.
  * Varlık listelerini HTML etiketlerine dönüştürür.
  */
 class AssetProvider extends BaseRender implements BaseRenderInterface
@@ -80,7 +80,12 @@ class AssetProvider extends BaseRender implements BaseRenderInterface
             return '';
         }
 
-        return '    <link href="' . htmlspecialchars($path) . '" rel="stylesheet" type="text/css" />' . PHP_EOL;
+        $attrString = '';
+        foreach ($style['attributes'] ?? [] as $k => $v) {
+            $attrString .= ' ' . htmlspecialchars((string) $k) . '="' . htmlspecialchars((string) $v) . '"';
+        }
+
+        return '    <link href="' . htmlspecialchars($path) . '" rel="stylesheet" type="text/css"' . $attrString . ' />' . PHP_EOL;
     }
 
     /**
@@ -118,7 +123,7 @@ class AssetProvider extends BaseRender implements BaseRenderInterface
             $fileName = basename($physicalPath);
 
             $banner = "/**\n";
-            $banner .= " * 🔱 {$fwName} [v{$fwVersion} \"RbnCore\"]\n";
+            $banner .= " * 🔱 {$fwName} [v{$fwVersion}]\n";
             $banner .= " * 🏛️ ARCHITECTURE  : RBN Asset Engine\n";
             $banner .= " * ---------------------------------------\n";
             $banner .= " * 🛰️ COMPONENT     : {$kitName} v{$kitVersion}\n";

@@ -1,7 +1,7 @@
 <?php
 /**
  * Change Email Password Modal View 🔐
- * Terracotta Craft Sovereign Standard.
+ * Terracotta Craft RBN Framework Standard.
  */
 ?>
 

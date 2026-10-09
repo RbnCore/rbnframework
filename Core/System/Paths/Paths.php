@@ -14,7 +14,7 @@ use Rbn\Framework\Core\System\Discovery\Engine\Drivers\ModuleDiscoveryDriver;
 /**
  * Paths - Centralized Directory Management Hub 🎻🛰️⚓⚖️✨
  * 
- * RBN 3.5: Master Hub for the Paths Cluster Cluster.
+ * RBN Framework: Master Hub for the Paths Cluster Cluster.
  * Orchestrates specialized Contexts and Data Registries.
  */
 class Paths
@@ -46,7 +46,7 @@ class Paths
 
         self::$frameworkContext = new FrameworkContext();
 
-        // [RBN 3.5] Load Core Support Helpers AFTER contexts are ready 🏹
+        // [RBN Framework] Load Core Support Helpers AFTER contexts are ready 🏹
         require_once self::frameworkRoot() . DIRECTORY_SEPARATOR . 'Core' . DIRECTORY_SEPARATOR . 'Support' . DIRECTORY_SEPARATOR . 'Bridges' . DIRECTORY_SEPARATOR . 'Helpers' . DIRECTORY_SEPARATOR . 'rbn_helpers.php';
 
         self::$initialized = true;
@@ -146,7 +146,7 @@ class Paths
     public static function framework(): FrameworkContext
     {
         if (self::$frameworkContext === null) {
-            // 🎯 RBN 3.5 [SELF-HEALING] 🩹
+            // 🎯 RBN Framework [SELF-HEALING] 🩹
             // Framework context is independent of project init. 
             // We can self-initialize it to avoid circular dependency loops during early boot.
             self::$frameworkContext = new FrameworkContext();

@@ -7,8 +7,8 @@ namespace Rbn\Framework\Bundles\RbnSuite\RbnStudio\Controllers;
 use Rbn\Framework\Core\Base\Attributes\SubModule;
 
 /**
- * DraftsController - Sovereign AI & Content Drafts Management 📝🎨🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * DraftsController - RBN Framework AI & Content Drafts Management 📝🎨🛰️⚓
+ * RBN Framework Standard.
  */
 #[SubModule(module: 'studio', entity: 'drafts', model: 'app.contentDraft', repository: 'app.contentDraft')]
 class DraftsController extends RbnStudioController

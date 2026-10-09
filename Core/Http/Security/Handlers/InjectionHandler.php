@@ -8,12 +8,12 @@ use Rbn\Framework\Core\Base\BaseComponent;
 /**
  * InjectionHandler - The Input Guard Actor 🛡️🏮
  * 
- * RBN 3.5: Atomic actor for XSS detection and injection filtering.
+ * RBN Framework: Atomic actor for XSS detection and injection filtering.
  */
 class InjectionHandler extends BaseComponent
 {
     /**
-     * [F-05 · 2026-10-03 · baran-6eb7f5] XSS kalıp kümesi.
+     * [F-05 · 2026-10-03 · team member] XSS kalıp kümesi.
      *
      * TABAN: yalnız 2 regex vardı — `/<\s*script/i` ve `/(\bon\w+\s*=)/i`.
      * Ölçümde 10 saldırı vektörünün 7'si bu ağdan GEÇİYORDU

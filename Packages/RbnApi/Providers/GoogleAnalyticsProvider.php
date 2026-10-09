@@ -9,7 +9,7 @@ use Rbn\Framework\Core\System\Paths\Paths;
 
 /**
  * GoogleAnalyticsProvider - Google Analytics 4 (GA4) API Data Engine 📊🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 class GoogleAnalyticsProvider extends BaseComponent
 {

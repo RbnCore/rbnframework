@@ -3,7 +3,7 @@
 namespace Rbn\Framework\Core\Base\Services\Traits\Service\Engine;
 
 /**
- * BulkServiceTrait - Service-side bulk operations for RBN 3.0
+ * BulkServiceTrait - Service-side bulk operations for RBN
  */
 trait BulkServiceTrait
 {
@@ -17,7 +17,7 @@ trait BulkServiceTrait
             return $this;
         }
 
-        // 🎯 RBN 3.5: High-Performance Strategic Delegation
+        // 🎯 RBN Framework: High-Performance Strategic Delegation
         if (isset($this->provider)) {
             $this->lastResult = (bool) $this->provider->destroyBulk($ids);
         } else {
@@ -42,7 +42,7 @@ trait BulkServiceTrait
             return $this;
         }
 
-        // 🎯 RBN 3.5: High-Performance Strategic Delegation
+        // 🎯 RBN Framework: High-Performance Strategic Delegation
         if (isset($this->provider)) {
             $this->lastResult = (bool) $this->provider->toggleStatusBulk($ids, $status, $field);
         } else {
@@ -65,7 +65,7 @@ trait BulkServiceTrait
         $this->lastResult = true;
         $model = $this->component('model');
         foreach ($order as $index => $id) {
-            // RBN 3.0 Standard: Order starts from 1
+            // Order starts from 1
             if (!$model->update($id, [$field => $index + 1])) {
                 $this->lastResult = false;
             }
@@ -81,7 +81,7 @@ trait BulkServiceTrait
     /**
      * Toplu Değer Güncelleme (Bulk Value Update) 💾 
      * Associative array [key => value] veya [id => array] yapısını destekler.
-     * RBN 3.0: High-performance batch value persistence.
+     * High-performance batch value persistence.
      */
     public function bulkValueUpdate(array $data): self
     {

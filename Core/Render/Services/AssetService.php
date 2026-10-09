@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Services\BaseService;
 /**
  * AssetService - Unified Asset Orchestrator 🎼🛰️⚓
  * 
- * RBN 3.5 Masterpiece: Kuyruk yönetimi ve orkestrasyon.
+ * RBN Framework: Kuyruk yönetimi ve orkestrasyon.
  */
 class AssetService extends BaseService
 {

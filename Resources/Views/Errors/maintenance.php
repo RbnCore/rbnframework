@@ -17,7 +17,7 @@
         <div class="d-flex align-items-center justify-content-center gap-2 text-muted small">
             <span class="fw-bold"><?= htmlspecialchars((string) ($shieldName ?? 'RbnShield')) ?></span>
             <span
-                class="badge bg-soft-secondary text-secondary rounded-pill px-2">v<?= htmlspecialchars((string) ($shieldVersion ?? 'v2.1')) ?></span>
+                class="badge bg-soft-secondary text-secondary rounded-pill px-2">v<?= htmlspecialchars((string) ($shieldVersion ?? '')) ?></span>
             <span class="mx-2 text-silver opacity-25">|</span>
             <span>Created by <a href="<?= htmlspecialchars((string) ($seoMeta['author-url'] ?? '#')) ?>" target="_blank"
                     class="text-secondary text-decoration-none fw-bold"><?= htmlspecialchars((string) ($seoMeta['author'] ?? 'RbnBilisim')) ?></a></span>

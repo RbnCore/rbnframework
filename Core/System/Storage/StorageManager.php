@@ -6,7 +6,7 @@ use Rbn\Framework\Core\Base\Services\BaseService;
 use Rbn\Framework\Core\System\Storage\Drivers\UniversalFileDriver;
 
 /**
- * StorageManager - RBN 3.0 Merkezi Depolama Orkestra Şefi (Hub) 🎻
+ * StorageManager - RBN Merkezi Depolama Orkestra Şefi (Hub) 🎻
  * 
  * Tüm depolama alt sistemlerini (Cache, Log, Session, Traffic vb.) 
  * otomatik olarak keşfeder ve yönetir.

@@ -10,8 +10,8 @@ use Rbn\Framework\Core\Support\Bridges\Traits\NormalizationTrait;
 use Rbn\Framework\Core\Support\Definitions\System\FrameworkIdentity;
 
 /**
- * FrontendBaseController - Core Sovereign Master Base Controller for Frontend Requests 🏛️🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * FrontendBaseController - Core RBN Framework Master Base Controller for Frontend Requests 🏛️🛰️⚓
+ * RBN Framework Standard.
  * 
  * Pre-packages site identity, company, social, and contact settings into controller state
  * with ZERO redundant database queries.
@@ -30,7 +30,7 @@ abstract class FrontendBaseController extends BaseController
     protected array $localBusinessData = [];
 
     /**
-     * Sovereign After Boot Lifecycle Hook 🚀
+     * RBN Framework After Boot Lifecycle Hook 🚀
      */
     protected function afterBoot(): void
     {
@@ -65,6 +65,7 @@ abstract class FrontendBaseController extends BaseController
             'siteRoot' => $this->request ? $this->request->root() : '',
             'rbn_url' => FrameworkIdentity::FRAMEWORK_URL,
             'rbn_name' => FrameworkIdentity::FRAMEWORK_NAME,
+            'rbn_version' => FrameworkIdentity::FRAMEWORK_VERSION,
             'developer_url' => FrameworkIdentity::DEVELOPER_URL,
             'developer_name' => FrameworkIdentity::DEVELOPER_NAME,
         ]);
@@ -74,7 +75,7 @@ abstract class FrontendBaseController extends BaseController
     }
 
     /**
-     * Unified Sovereign Hook Methods for Group Base & Concrete Module Controllers 🚀
+     * Unified RBN Framework Hook Methods for Group Base & Concrete Module Controllers 🚀
      */
     protected function onGroupBoot(): void
     {
@@ -210,7 +211,7 @@ abstract class FrontendBaseController extends BaseController
     }
 
     /**
-     * RBN 3.5: [SOVEREIGN VIEW RESOLUTION] 🛰️⚓ (Masterpiece Render Engine)
+     * RBN Framework: [RBN Framework VIEW RESOLUTION] 🛰️⚓ (RBN Framework Render Engine)
      */
     public function render(string $view, $data = [], $mergeData = []): \Rbn\Framework\Core\Render\View
     {

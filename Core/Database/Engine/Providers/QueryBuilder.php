@@ -15,9 +15,9 @@ use Rbn\Framework\Core\Database\Engine\Traits\Query\ExecutionTrait;
 /**
  * QueryBuilder - High-Performance SQL Constructor 🎻⚙️
  * 
- * RBN 3.0: The "Zen" state of the Query Engine. 🏛️
+ * The "Zen" state of the Query Engine. 🏛️
  * Extreme modularity via Traits. All specialized logic moved to muscle traits.
- * Fully compliant with the elite "Masterpiece" architectural standards.
+ * Fully compliant with the elite "RBN Framework" architectural standards.
  */
 class QueryBuilder implements QueryProviderInterface
 {
@@ -61,7 +61,7 @@ class QueryBuilder implements QueryProviderInterface
     {
         $this->db = $db ?? Database::getInstance();
 
-        // RBN 3.0: Support property-based connection discovery 🛰️
+        // Support property-based connection discovery 🛰️
         //
         // [FW-ALTYAPI-1 / B-02] ESKIDEN `$this->db = $this->db->connection(...)` vardi.
         // OLÇÜMSEL KANIT: `connection()` `self` dondurunce **ayni nesne** geri

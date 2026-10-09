@@ -8,15 +8,15 @@
 | Ne? | Nereye? | Okuyan |
 |---|---|---|
 | **Gizli değer** (parola, `app_key`, jeton, API anahtarı) | `Secrets/` klasörü + `Secrets.php` | `Secrets` (TEK okuyucu) |
-| **Ortam değişkeni / bayrak / kill-switch / yol** | `Env` + `EnvKeys` | `Env` (TEK okuyucu) |
+| **Ortam bayrağı / kill-switch / çalışma ayarı** | `secrets.php` → `app` bölümü | `Secrets::app()` (TEK okuyucu) |
 | **Kod tanımlı yapılandırma** (sabitler, ayar tabloları) | `Config.php`, `Engine/Config/ConfigResolver.php`, `Engine/Config/ConfigFileLoader.php` | `ConfigResolver` / `ConfigFileLoader` (ortak dosya tekniği) |
 
 ### Klasör yapısı (PSR-4: dizin = ad alanı)
 
 | Yol | Ad alanı |
 |---|---|
-| `Config.php`, `Env.php`, `Secrets.php` | `Rbn\Framework\Core\System\Config` |
-| `Definitions/` (`EnvKeys`, `ConfigMap`, `SecretsSchema`) | `…\System\Config\Definitions` |
+| `Config.php`, `Secrets.php` | `Rbn\Framework\Core\System\Config` |
+| `Definitions/` (`ConfigMap`, `SecretsSchema`) | `…\System\Config\Definitions` |
 | `Definitions/DbProfiles/` (`CommonDbData`, `MasterDbData`, `ProjectDbData` — **yalnız sabit**, hiçbir sınıftan türemez) | `…\System\Config\Definitions\DbProfiles` |
 | `Engine/Config/` (`ConfigResolver`, `ConfigFileLoader`, `ConfigFileGuard`) | `…\System\Config\Engine\Config` |
 | `Engine/Database/` (`DatabaseConfig`, `DbProfileResolver`, `ProjectDbProfileResolver`, `SmtpProfileResolver`) | `…\System\Config\Engine\Database` |
@@ -28,72 +28,57 @@ Bir sınıf taşındığında **ad alanı klasörüne birebir uymak zorundadır*
 `Class "…" not found` ile HTTP 500 verir. Klasörü `Definitions` yazmak da bir ayrı
 `not found` sebebidir — yazım hatası düzeltilmiştir.
 
-`$_ENV` / `$_SERVER` / `getenv` **elle** okumak yasaktır — `Env` dışında hiçbir yerde bulunmaz (birim testi `E:\tmp\_araclar\fw-regresyon\birim\fw_env_kayit.php` kalıntı taramasıyla doğrular).
+## Ortam değişkeni YOKTUR (ADR · FW-096-D8 · 09.10.2026)
 
-## Yeni anahtar eklemek = `EnvKeys`'e **bir satır**
+**Karar:** Framework işletim sistemi ortam değişkeni **okumaz**. `getenv()`, `$_ENV`,
+`$_SERVER['APP_*'|'RBN_*'|…]`, dotenv dosyası ve web sunucusu ortam yönergeleri bu framework'ün
+mekanizması **değildir**. Ortam bayrağı dahil tüm anahtarların TEK kaynağı
+`Secrets/secrets.php` (bölümlü şema `Definitions/SecretsSchema.php`), TEK okuyucusu `Secrets`.
 
-Kodda `RBN_*` / `APP_*` adlı yeni bir ortam değişkeni okumak istiyorsan:
+**Bağlam:** FW-ENV-KAYIT-160 ile `Env.php` + `EnvKeys.php` (16 ad) paralel bir katman olarak
+büyümüştü; canlıda hiçbiri tanımlı değildi (cPanel PHP ortam ayarı kapalı, dotenv dosyası yok),
+yani bu yol fiilen hiç çalışmıyordu. Patron: "Bizde env yok; bütün anahtarları TEK dosyadan
+merkezi yazıyoruz."
 
-1. **`EnvKeys.php`'e bir `public const <AD> = '<ENV_ADI>';` satırı ekle** ve aynı adı `EnvKeys::ALL_KEYS` listesine de yaz. Okuma `Env` içinden yapılır; kayıtsız ad `RuntimeException` ile **fail-closed** reddedilir (sessizce "tanımsız" sayılmaz).
-2. Değeri **gizliyse** (parola, `app_key`, jeton) adı ayrıca `EnvKeys::SECRET_KEYS` listesine de ekle: `Env` bu listeden anlar, **değeri** hiçbir mesajda yazılmaz.
-3. **Sıra sabitini `getenv(` ile tutma.** Bu klasörde tek okuyucu `Env`; kaynak sırası `$_ENV` → `$_SERVER` → `getenv`.
-4. **Kanıt şartı:** kaydedilen her ad için kodda **gerçekten** `Env::string()/flag()/int()` ile okunduğunu `rg -n "Env::" rbnframework projects` ile doğrula. Okunmayan (ya da `define()` sabiti olan) ad kaydedilmez.
-5. `Env` içinde **ikinci bir ayrıştırıcı yazma.** `Env::flag()` bayrak yorumunu zaten TEK merkezden (`ShieldSettingsRepository::normalizeSwitch()`) alır: `0 \| false \| off \| no \| hayir` **kapalı**, diğer her şey **açık** (fail-closed).
+**Sonuç:** `Env.php` ve `EnvKeys.php` silindi. Sır niteliğindekiler zaten sır bölümlerindeydi
+(`app_key`, `master_db`), OS-env yedek yolları kaldırıldı. Sır olmayan çalışma anahtarları yeni,
+**tamamen opsiyonel** `app` bölümüne taşındı:
 
-## `Env` API'si
+| Eski ortam değişkeni | Yeni yer | Tip · güvenli varsayılan | Okuyan |
+|---|---|---|---|
+| `APP_ENV`, `RBN_ENV` (takma ad) | `app.environment` | `'production'` \| `'development'` · **production** (+ bir kez log) | `PreBoot::isProductionDeclared()` |
+| `RBN_DEBUG`, `RBN_DEV` | `app.debug`, `app.dev` | `bool` · `false` | `PreBoot::detectEnvironment()` |
+| `RBN_GUARD_FAILCLOSED` | `app.guard_failclosed` | `bool` · `true` | `SystemGuardHandler::resolveFailClosed()` |
+| `RBN_LOG_THROTTLE` | `app.log_throttle` | `bool` · `true` | `LogThrottle::enabled()` |
+| `RBN_DB_PROFILE` | `app.db_profile` | `''` \| `'local'` \| `'production'` · `''` (otomatik) | `ProjectDbProfileResolver::activeProfile()` |
+| `TG_SEND_DELAY_MS` | `app.tg_send_delay_ms` | `int` · `0` (yalnız test) | sroweb Telegram test router'ı |
+| `RBN_ALLOW_LEGACY_SALT` | `app.allow_legacy_salt` | `bool` · `false` | `CryptoHelper::legacySaltApproval()` |
+| `RBN_LEGACY_SALT` | üst düzey `legacy_salt` (sır) | metin · yok | `Secrets::legacySalt()` |
+| `APP_KEY`, `ENCRYPTION_KEY` | üst düzey `app_key` (zaten vardı) | — | `CryptoHelper` → `Secrets::optional('app_key')` |
+| `COMMON_DB_USER/PASS` | `master_db` (zaten vardı) | — | `DbProfileResolver` → `Secrets::masterDb()` |
+| `DB_USER/PASS` | proje `project-settings.php`; yedek `db_user`/`db_pass` | — | `DbProfileResolver` → `Secrets::optional()` |
 
-```php
-Env::string('APP_ENV');                    // ?string  (tanımsız/boş -> null)
-Env::string('APP_ENV', 'production');     // ?string  (varsayılanlı)
-Env::flag('RBN_GUARD_FAILCLOSED', true);  // bool     (kill-switch: varsayılan true = fail-closed)
-Env::int('TG_SEND_DELAY_MS', 0);          // ?int     (sayı olmayan metin -> varsayılan)
-```
+**Kurallar:**
 
-* **Tembel (lazy):** değer ilk okunduğunda bir kez çözülür. `Env::reset()` yalnız test içindir.
-* **Kayıtsız ad = hata:** `EnvKeys::ALL_KEYS` içinde olmayan ad okunursa `RuntimeException`. Yazım hatası "ortam değişkeni yok" gibi görünmez.
-* **Gizli ad:** hata mesajı yalnız **adı** ve nedeni taşır; **değeri** taşımaz. `Env::isSecretKey($ad)` listeyi sorgular.
+* Değer tipi PHP tipidir (`true`/`false`, tam sayı, metin). Tipi tutmayan ya da izinli listede
+  olmayan değer **güvenli varsayılana** düşer ve loglanır — metin yorumlayan ikinci bir
+  "kapalı listesi" yazılmaz (`'banal'` hata ayıklamayı açmaz, `'staging'` üretimi gevşetmez).
+* `app.environment` yoksa **production** kabul edilir ve süreç başına bir kez
+  `RBN Uyari: secrets.php: app.environment tanimli degil; production kabul edildi.` loglanır.
+* PreBoot en erken aşamadır; `Secrets.php` komşularını kendisi `require_once` ettiği için
+  autoloader'sız okunur. Paralel ikinci ayar dosyası **yoktur**. Dosya var ama okunamazsa
+  PreBoot üretim tarafına düşer ve nedeni loglar.
+* **Tek bootstrap istisnası yoktur:** framework ağacında ortam değişkeni okuyan satır kalmadı.
+  (Test/koşucu araçları — `E:\AgentSpace\.agentspaceraclarw-regresyon` — framework değildir.)
+* Yeni çalışma anahtarı = `SecretsSchema::APP_DEFAULTS`'a bir satır (+ gerekiyorsa
+  `APP_ALLOWED`) + `secrets.example.php`'ye örnek. Başka dosya açılmaz.
 
-## Kayıtlı adlar (kısa tablo)
+### `ConfigMap` ayrımı
 
-Tam liste ve tek satırlık açıklamaları için `EnvKeys.php` (sabit dosyasıdır; **içinde metot yoktur**).
-
-| Ad | Tur | Gizli | Kullanan |
-|---|---|:--:|---|
-| `APP_KEY` | string | evet | `CryptoHelper::resolveKey()` (sır dosyasındaki `app_key` **önce**) |
-| `ENCRYPTION_KEY` | string | evet | `CryptoHelper::resolveKey()` (2. sıra) |
-| `RBN_LEGACY_SALT` | string | evet | `CryptoHelper::legacySaltApproval()` |
-| `RBN_ALLOW_LEGACY_SALT` | flag | hayır | `CryptoHelper::legacySaltApproval()` (eski `1\|true\|on\|yes` listesi, bilerek korunur) |
-| `COMMON_DB_USER` / `DB_USER` | string | hayır | `DbProfileResolver::user()` (ortak / proje profili) |
-| `COMMON_DB_PASS` / `DB_PASS` | string | **evet** | `DbProfileResolver::password()` (ortak / proje profili, fail-closed) |
-| `RBN_GUARD_FAILCLOSED` | flag | hayır | `SystemGuardHandler::resolveFailClosed()` |
-| `RBN_DEBUG` / `RBN_DEV` | flag | hayır | `PreBoot::envOverrideRequested()` (kapalı listesi `normalizeSwitch` DEĞİL, bilerek korunur) |
-| `APP_ENV` | string | hayır | `AiUsageManager`, `DebugHelper`, `rbn` (CLI) |
-| `TG_SEND_DELAY_MS` | int | hayır | Telegram test router'ı (yalnız test) |
-
-### Neden bu listede *olmayan*lar?
-
-* **`MASTER_DB_USER` / `MASTER_DB_PASS`** — FW-TEK-SECRETS-DOSYASI-161 sonrası
-  master profilinin kullanıcı/parola çözümü **tamamen** `Secrets::masterDb()` okur;
-  ortam değişkeni yolu kodda KALDIRILDI, kanıt yoktur.
-* **`RBN_CLI`, `RBN_PANIC_ACTIVE`, `RBN_SESSION_TIMEOUT`** —
-  bunlar PHP **sabitidir** (`define()` / `defined()`), ortam değişkeni DEĞİLDİR;
-  `rbn`, `Watchdog`, `BootSentinel`, `SessionSandboxStage`,
-  `ConfigMap` tarafından okunur. Ortam değişkeni kaydı **olamaz**.
-  Bu kalemler `Definitions/ConfigMap.php` tarafındaki tanımlardır (bkz. aşağıdaki ayrım).
-
-## Sır DEĞİL, kayma riski olan kalemler
-
-Bu klasördeki **salt-okunur tanımlar** (varlık sabitleri, sınıf sabitleri, şablon adresleri) ortam değişkeni **değildir** ve `EnvKeys`'e yazılmaz: `HOST`, `CHARSET`, `ENV_FILE`, `APP_NAME`, `APP_VERSION`, `APP_URL`, `DEFAULT_LANGUAGE`, `AssetDefinition` içindeki `RBN_*_CSS` / `RBN_*_JS` varlık sabitleri, `ApiKeysRegistry` içindeki isim eşlemeleri.
-
-### `EnvKeys` ≠ `ConfigMap` (patron kararı)
-
-İkisi **farklı şeydir, ikisi de kalır, birleştirilmez ve silinmez**:
-
-| | `Definitions/EnvKeys.php` | `Definitions/ConfigMap.php` |
-|---|---|---|
-| Konusu | Ortam değişkeni olarak **okunan** adların sabitleri | Framework'ün **global olarak tanımladığı** ayar anahtarları + PHP `define()` sabitleri |
-| Örnek | `APP_ENV`, `TG_SEND_DELAY_MS` | `app.debug`, `app.logging`, `app.env`, `RBN_CLI`, `RBN_SESSION_TIMEOUT` (`getApp*` kalıbı) |
-| Okuyan | `Env` (TEK kapı) | `ConfigMap::getAppDebug()` vb. |
+`Definitions/ConfigMap.php` framework'ün PHP `define()` sabitlerinden türeyen getter'larıdır
+(`getAppDebug()` → `RBN_DEBUG` sabiti, `getAppIsCli()` → `RBN_CLI` sabiti). Bu sabitler ortam
+değişkeni **değildir**; `RBN_DEBUG`/`RBN_DEV` sabitlerini `PreBoot::detectEnvironment()`
+yukarıdaki `app` ayarlarından türeterek tanımlar.
 
 ## `Secrets.php` neden bu kadar kısa? (ince cephe)
 
@@ -104,7 +89,7 @@ Bu klasördeki **salt-okunur tanımlar** (varlık sabitleri, sınıf sabitleri, 
 | Sır şeması | `Definitions/SecretsSchema.php` | **Yalnız `public const`** — alan adları, izin tavanı, `CHANGE_ME`. Metot YOK. |
 | Yol çözümü + okuma | `Engine/Secrets/SecretsLoader.php` | `secrets.php`'yi bulur, izin/biçim denetiminden geçirir, **HAM** diziyi döndürür. TEK okuma kapısı. |
 | Doğrulama | `Engine/Secrets/SecretsValidator.php` | Bölüm adı biçimi + "var ama okunamıyor" ayrımı. |
-| Bölüm kurgusu | `Engine/Secrets/SecretsSections.php` | `master_db`/`smtp`/`cpanel`/`api` okuma + doğrulama, düz anahtar haritaları. |
+| Bölüm kurgusu | `Engine/Secrets/SecretsSections.php` | `master_db`/`smtp`/`cpanel`/`api`/`app` okuma + doğrulama, düz anahtar haritaları. |
 | Düz anahtar yüzeyi | `Engine/Secrets/SecretsFlatApi.php` | Eski `all()/get()/optional()/masterDbPass()/masterSmtpPass()`. `Secrets` üzerinde `use` edildiği için **imzalar korunur**. |
 | Ortak dosya tekniği | `Engine/Config/ConfigFileLoader.php` | bul → `require` → dizi/anahtar doğrula → tembel önbellek. |
 | Güvenlik koruması | `Engine/Config/ConfigFileGuard.php` | 0600 izin tavanı + `<?php`/`return` sızıntı kontrolü + operatör yol/ipucu. |

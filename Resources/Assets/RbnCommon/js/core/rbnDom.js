@@ -274,7 +274,7 @@
         });
     }
 
-    /* 5. Tooltip Engine (Auto-Converts title attribute to Sovereign Pure-CSS [data-tooltip]) 💬 */
+    /* 5. Tooltip Engine (Auto-Converts title attribute to RBN Framework Pure-CSS [data-tooltip]) 💬 */
     function rbnInitTooltips() {
         document.querySelectorAll('[title]:not([data-tooltip])').forEach(el => {
             // Icon font barındıran (i, svg vb.) etiketlerde ::before pseudo-elementini ezmemek için koruma 🛡️
@@ -290,7 +290,44 @@
         });
     }
 
-    /* 6. Sovereign Input Protection (Autocomplete Guard) */
+    /* 5.b Tooltip Konumlayıcı: balon viewport dışına taşıyorsa yön çevirir / kaydırır 🧭
+       Saf CSS balonun ekran kenarını bilemez; üst kenardaki öğede balon yukarı çıkıp kaybolur,
+       sağ/sol kenardaki öğede yatayda kırpılır. Hover/odakta öğenin konumu ölçülür:
+       - üstte yer yoksa data-tooltip-pos="bottom" (yazar kendisi vermediyse),
+       - yatayda taşıyorsa --rbn-tip-shift ile balon içeri kaydırılır (ok işaretçi öğede kalır). */
+    function rbnInitTooltipPlacement() {
+        if (window.__rbnTipPlacement) return;
+        window.__rbnTipPlacement = true;
+        var measure = document.createElement('canvas').getContext('2d');
+        function place(ev) {
+            var el = ev.target && ev.target.closest ? ev.target.closest('[data-tooltip]') : null;
+            if (!el) return;
+            var text = el.getAttribute('data-tooltip') || '';
+            var r = el.getBoundingClientRect();
+            var vw = document.documentElement.clientWidth, vh = window.innerHeight, gap = 8;
+            measure.font = '500 11.5px -apple-system, "Segoe UI", Roboto, sans-serif';
+            var w = Math.ceil(measure.measureText(text).width) + 22;
+            var h = 34;
+            var userPos = el.hasAttribute('data-tooltip-pos') && !el.hasAttribute('data-tooltip-auto');
+            if (!userPos) {
+                if (r.top < h + gap && r.bottom + h + gap < vh) {
+                    el.setAttribute('data-tooltip-pos', 'bottom');
+                    el.setAttribute('data-tooltip-auto', '');
+                } else if (el.hasAttribute('data-tooltip-auto')) {
+                    el.removeAttribute('data-tooltip-pos');
+                    el.removeAttribute('data-tooltip-auto');
+                }
+            }
+            var cx = r.left + r.width / 2, shift = 0;
+            if (cx - w / 2 < gap) shift = gap - (cx - w / 2);
+            else if (cx + w / 2 > vw - gap) shift = (vw - gap) - (cx + w / 2);
+            el.style.setProperty('--rbn-tip-shift', Math.round(shift) + 'px');
+        }
+        document.addEventListener('mouseover', place, true);
+        document.addEventListener('focusin', place, true);
+    }
+
+    /* 6. RBN Framework Input Protection (Autocomplete Guard) */
     function enforceAutocompleteOff() {
         document.querySelectorAll('form, input').forEach(el => {
             if (!el.hasAttribute('autocomplete')) {
@@ -400,6 +437,7 @@
         rbnInitPasswordGenerators();
         rbnInitCopySystem();
         rbnInitTooltips();
+        rbnInitTooltipPlacement();
     }
 
     // Attach listeners immediately

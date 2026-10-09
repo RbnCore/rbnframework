@@ -9,8 +9,8 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseRenderInterface;
 use Rbn\Framework\Core\Support\Definitions\System\FrameworkIdentity;
 
 /**
- * SeoProvider - The Sovereign HTML Metadata Renderer Hub & Single Entry Point 🎨🛰️⚓
- * Part of RBN 3.5 Masterpiece.
+ * SeoProvider - The RBN Framework HTML Metadata Renderer Hub & Single Entry Point 🎨🛰️⚓
+ * Part of RBN Framework.
  */
 class SeoProvider extends BaseRender implements BaseRenderInterface
 {
@@ -41,7 +41,7 @@ class SeoProvider extends BaseRender implements BaseRenderInterface
 
         $label = $finalData['label'] ?? ($finalData['module_name'] ?? $context);
         $contextLabel = strtoupper((string) $label);
-        $output = "\n    <!-- 🔱 RBN SOVEREIGN SEO ENGINE [v" . FrameworkIdentity::FRAMEWORK_VERSION . "] -->\n";
+        $output = "\n    <!-- 🔱 RBN FRAMEWORK SEO ENGINE [v" . FrameworkIdentity::FRAMEWORK_VERSION . "] -->\n";
 
         if (!empty($techHtml)) {
             $output .= $techHtml . "\n";
@@ -58,7 +58,7 @@ class SeoProvider extends BaseRender implements BaseRenderInterface
         if (!empty($linkHtml)) {
             $output .= "\n    <!-- [ RESOURCE LINKS ] -->\n" . implode("\n", $linkHtml) . "\n";
         }
-        $output .= "\n    <!-- ⚓ SOVEREIGN SEO ENGINE - END -->\n";
+        $output .= "\n    <!-- ⚓ RBN FRAMEWORK SEO ENGINE - END -->\n";
 
         return $output;
     }
@@ -229,6 +229,14 @@ class SeoProvider extends BaseRender implements BaseRenderInterface
                 $type = 'image/svg+xml';
             }
             $html[] = '    <link rel="icon" href="' . htmlspecialchars($favicon) . '" type="' . $type . '">';
+        }
+
+        // 📱 [FW-096-C7] iOS ana ekran simgesi + PWA manifest (dosya varsa; kural AssetConvention)
+        if (!empty($meta['apple-touch-icon'])) {
+            $html[] = '    <link rel="apple-touch-icon" href="' . htmlspecialchars((string) $meta['apple-touch-icon']) . '">';
+        }
+        if (!empty($meta['manifest'])) {
+            $html[] = '    <link rel="manifest" href="' . htmlspecialchars((string) $meta['manifest']) . '">';
         }
 
         return $html;

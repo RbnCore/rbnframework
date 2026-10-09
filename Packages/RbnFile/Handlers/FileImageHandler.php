@@ -10,7 +10,7 @@ use Rbn\Framework\Core\System\Paths\Paths;
 /**
  * FileImageHandler - GD Resim İşleme ve Manipülasyon İşleyicisi (Worker) 🎨🖼️
  * 
- * RBN 3.5: Masterpiece Standard (BaseComponent Actor).
+ * RBN Framework: Standard (BaseComponent Actor).
  * Location: Packages\RbnFile\Handlers\
  */
 class FileImageHandler extends BaseComponent

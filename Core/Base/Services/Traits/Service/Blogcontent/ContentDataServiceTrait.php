@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\Base\Services\Traits\Service\Blogcontent;
 /**
  * ContentDataServiceTrait - High-Performance Frontend Content Data Orchestrator 🖋️📊⚡
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Autonomous data preparation, mapping, pagination, share links, and detail packaging across all projects.
  */
 trait ContentDataServiceTrait

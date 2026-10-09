@@ -8,8 +8,8 @@ use Attribute;
 use Rbn\Framework\Core\Base\BaseAttribute;
 
 /**
- * Bundle Attribute - Sovereign Module Identity & Discovery 🏛️🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * Bundle Attribute - RBN Framework Module Identity & Discovery 🏛️🛰️⚓
+ * RBN Framework Standard.
  * 
  * Replaces static CONFIG arrays with modern PHP 8.1 Attributes.
  */

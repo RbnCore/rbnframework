@@ -22,13 +22,13 @@ use Rbn\Framework\Core\Support\Contracts\Discovery\DiscoveryInterface;
 /**
  * DiscoveryEngine - The Pure Discovery Motor 🛰️⚙️
  * 
- * RBN 3.5: [CENTRALIZED SOVEREIGNTY]
+ * RBN Framework: [CENTRALIZED]
  * Manages discovery via a unified action trait and specialized drivers.
  */
 class DiscoveryEngine extends BaseDiscoveryContext implements DiscoveryInterface
 {
     /**
-     * RBN 3.5: Masterpiece Discovery Actions 🧬🛰️🎡
+     * RBN Framework: Discovery Actions 🧬🛰️🎡
      * Centralized via DiscoveryActionsTrait.
      */
     use DiscoveryActionsTrait;
@@ -43,7 +43,7 @@ class DiscoveryEngine extends BaseDiscoveryContext implements DiscoveryInterface
     {
         $key = "{$type}:{$name}";
 
-        // 🛡️ RBN 3.5: [COMBINED RECURSION GUARD] 🏛️⚓
+        // 🛡️ RBN Framework: [COMBINED RECURSION GUARD] 🏛️⚓
         // Allows same-named components of different types (e.g., provider:module vs cluster:module) 
         // to resolve nestedly without deadlocking.
         if (isset(self::$resolvingKeys[$key])) {
@@ -77,7 +77,7 @@ class DiscoveryEngine extends BaseDiscoveryContext implements DiscoveryInterface
      */
     public function __construct(?object $rbn = null)
     {
-        // 🎼 RBN 3.5: Masterpiece Singleton Seal 🏛️⚔️🛡️⚓
+        // 🎼 RBN Framework: Singleton Seal 🏛️⚔️🛡️⚓
         if (self::$instance === null) {
             self::$instance = $this;
         }
@@ -96,7 +96,7 @@ class DiscoveryEngine extends BaseDiscoveryContext implements DiscoveryInterface
         if (self::$instance === null) {
             self::$instance = new self($rbn);
         } elseif (self::$instance->rbn === null && $rbn !== null) {
-            // 🎼 RBN 3.5: [DNA HOT REFILL] 💉🧬
+            // 🎼 RBN Framework: [DNA HOT REFILL] 💉🧬
             // Eğer motor rbn objesi olmadan ayağa kalkmışsa, 
             // gelen ilk geçerli objeyle motorun çekirdeğini doldur.
             self::$instance->rbn = $rbn;
@@ -107,7 +107,7 @@ class DiscoveryEngine extends BaseDiscoveryContext implements DiscoveryInterface
     }
 
     /* ==========================================================================
-       [ SOVEREIGN RESOLUTION ] - Unified Entry Point 🏹🛰️⚓
+       [ RBN Framework RESOLUTION ] - Unified Entry Point 🏹🛰️⚓
        ========================================================================== */
 
     /**
@@ -173,7 +173,7 @@ class DiscoveryEngine extends BaseDiscoveryContext implements DiscoveryInterface
             /* --- Logic-Oriented Resolvers --- */
             'validation' => new ValidationResolver($this->rbn),
 
-            /* --- Sovereign Component Resolvers (Autonomous Fallback) --- */
+            /* --- RBN Framework Component Resolvers (Autonomous Fallback) --- */
             default => new NamespaceResolver($this->rbn)
         };
     }

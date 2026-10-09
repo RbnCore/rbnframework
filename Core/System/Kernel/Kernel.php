@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Support\Contracts\Kernel\StageInterface;
 /**
  * Kernel - Orchestrates the framework boot stages and lifecycle events. 🏰🚀⚓
  * 
- * RBN 3.5: Masterpiece Legacy Upgrade. 
+ * RBN Framework: Legacy Upgrade.
  * Supports performance profiling, strategic hooks, and graceful termination.
  */
 class Kernel
@@ -75,7 +75,7 @@ class Kernel
                 $this->triggerHook('kernel.boot.stage.after', $stage);
             }
         } catch (\Rbn\Framework\Core\Support\Exceptions\PreflightException $e) {
-            // [RBN 3.5] DIAGNOSTIC DISPATCHER 🛡️⚓
+            // [RBN Framework] DIAGNOSTIC DISPATCHER 🛡️⚓
             // Catch known boot failures and render through the specialized provider.
             \Rbn\Framework\Core\Services\Exception\Providers\PreflightProvider::renderFatal(
                 $e->getType(),

@@ -12,7 +12,7 @@ use Rbn\Framework\Core\System\Discovery\Clusters\Structure\Folder\FolderContext;
 /**
  * Route - Static Proxy Facade
  * 
- * RBN 3.0: Thin facade that proxies static calls to the central RouteService Engine.
+ * Thin facade that proxies static calls to the central RouteService Engine.
  * Keep this at root for developer accessibility.
  */
 class Route
@@ -76,7 +76,7 @@ class Route
 
     public static function module(string $moduleOrSource, ?string $moduleName = null): self
     {
-        // 🎼 RBN 3.5: [FLEXIBLE SIGNATURE] Hem Route::module('sd') hem de Route::module('suite', 'RbnAdmin') / Route::module('RbnAdmin', 'suite') destekler
+        // 🎼 RBN Framework: [FLEXIBLE SIGNATURE] Hem Route::module('sd') hem de Route::module('suite', 'RbnAdmin') / Route::module('RbnAdmin', 'suite') destekler
         if ($moduleName === null) {
             $name = $moduleOrSource;
             $source = 'auto';
@@ -94,7 +94,7 @@ class Route
 
         $moduleContext = Paths::module($name, $source);
 
-        // 🎼 RBN 3.5: [STRUCTURAL SOVEREIGN ORCHESTRATION] 🛰️🪐⚓
+        // 🎼 RBN Framework: [STRUCTURAL RBN Framework ORCHESTRATION] 🛰️🪐⚓
         // Modülün nerede yaşadığına bak: Bundles (Framework) mi yoksa Module (Project) mi?
         $modulePath = realpath($moduleContext->root()) ?: $moduleContext->root();
         $frameworkBundles = realpath(Paths::framework()->bundles()) ?: Paths::framework()->bundles();
@@ -108,7 +108,7 @@ class Route
             $currentPrefix = self::$attributes['prefix'] ?? '';
             $modulePrefix = strtolower($name);
 
-            // 🎼 RBN 3.5: [SOVEREIGN PREFIX MERGE] 🛰️🪐⚓
+            // 🎼 RBN Framework: [RBN Framework PREFIX MERGE] 🛰️🪐⚓
             self::$attributes['prefix'] = $currentPrefix
                 ? rtrim($currentPrefix, '/') . '/' . ltrim($modulePrefix, '/')
                 : $modulePrefix;
@@ -122,7 +122,7 @@ class Route
     }
 
     /**
-     * [RBN 3.5] SOVEREIGN ROUTE LOADER 🛰️⚓
+     * [RBN Framework] RBN Framework ROUTE LOADER 🛰️⚓
      * 
      * Modül içerisindeki ModuleData::registerRoutes() metodunu tetikleyerek
      * özel rotaları otonom ancak kontrollü bir şekilde yükler.
@@ -145,7 +145,7 @@ class Route
             $moduleDataClass = class_exists($dataClass) ? $dataClass : $modelClass;
 
             if (class_exists($moduleDataClass) && method_exists($moduleDataClass, 'registerRoutes')) {
-                // 🎼 [RBN 3.5] Namespace, Prefix & Controller SSoT: Modülün rotalarını Router stack'ine enjekte et 🛡️
+                // 🎼 [RBN Framework] Namespace, Prefix & Controller SSoT: Modülün rotalarını Router stack'ine enjekte et 🛡️
                 $groupAttributes['namespace'] = $baseNamespace . '\\Controllers';
                 unset($groupAttributes['active_module'], $groupAttributes['active_source']);
 
@@ -252,7 +252,7 @@ class Route
 
     public static function run()
     {
-        // 🎼 RBN 3.5: Run Extensible Redirect Manager 🌐🔄⚓
+        // 🎼 RBN Framework: Run Extensible Redirect Manager 🌐🔄⚓
         $redirect = BaseService::get()->manager('redirect');
         if ($redirect) {
             $redirect->process();

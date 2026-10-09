@@ -5,7 +5,7 @@ namespace Rbn\Framework\Core\Support\Blueprints\Validations;
 /**
  * ThreatValidations - The Forbidden Library 🛡️🐉🚫
  * 
- * RBN 3.5: Master list of dangerous extensions and attack patterns.
+ * RBN Framework: Master list of dangerous extensions and attack patterns.
  * Provides a Single Source of Truth for Security blocking rules.
  */
 class ThreatValidations

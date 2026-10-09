@@ -11,7 +11,7 @@ use Rbn\Framework\Packages\RbnPipeline\Concerns\SanitizesResponseTrait;
 /**
  * SeoMetaRule - Standard SEO meta requirements, keyword phrases, and autonomous fallback 🏷️📈
  * Location: RbnPipeline/Rules/Prompt/SeoMetaRule.php
- * RBN 3.5 Sovereign Framework Standards.
+ * RBN Framework Framework Standards.
  */
 class SeoMetaRule extends BaseComponent implements PromptRuleInterface
 {

@@ -6,7 +6,7 @@ namespace Rbn\Framework\Core\Support\Exceptions;
 /**
  * ViewNotFoundException - Hub Rendering Engine Exception 🛡️ 🔍
  * 
- * RBN 3.5: Masterpiece Standard (Diagnostic Integrated).
+ * RBN Framework: Standard (Diagnostic Integrated).
  * Thrown when the resolver fails to locate a requested template path.
  * 
  * Part of the Layer 1 (Diagnostic) shield for framework-level troubleshooting.

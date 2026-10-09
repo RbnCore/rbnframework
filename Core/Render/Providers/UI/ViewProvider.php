@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseRenderInterface;
 /**
  * ViewProvider - Core UI Component Runner 🛰️👁️⚓
  * 
- * RBN 3.5 "Masterpiece" Architecture.
+ * RBN Framework Architecture.
  * Responsible for rendering and including physical view files.
  * Enhanced with Harmony DNA Injection: Automatically provides core context to views.
  */
@@ -30,7 +30,7 @@ class ViewProvider extends BaseRender implements BaseRenderInterface
         $this->include($view, $data, 'auto', $appContext);
         $output = ob_get_clean();
 
-        // 🧬 [RBN 3.5] MASTERPIECE AUTONOMOUS IMPORTS 🛰️⚓
+        // 🧬 [RBN Framework] RBN Framework AUTONOMOUS IMPORTS 🛰️⚓
         if (isset($data['__imports']) && !empty($data['__imports'])) {
             $partialProvider = $this->rbn->service('render')->provider('partial');
             $output .= $partialProvider->renderImports($data['__imports'], $data);
@@ -52,7 +52,7 @@ class ViewProvider extends BaseRender implements BaseRenderInterface
 
         if ($fullPath && file_exists($fullPath)) {
             
-            // 🎼 RBN 3.5: [HARMONY HUB INJECTION] 🎻🪐⚓
+            // 🎼 RBN Framework: [HARMONY HUB INJECTION] 🎻🪐⚓
             // Lazy-booting the harmony DNA to avoid constructor loops.
             $harmonyData = array_merge($this->bootHarmony(), $data);
 

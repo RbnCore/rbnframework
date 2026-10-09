@@ -8,11 +8,11 @@ use Rbn\Framework\Core\Base\Services\BaseManager;
 use Rbn\Framework\Core\Base\Attributes\Component;
 use Rbn\Framework\Packages\RbnApi\Models\AiData;
 use Rbn\Framework\Core\System\Storage\Providers\BootCacheProvider;
-use Rbn\Framework\Core\System\Config\Env;
+use Rbn\Framework\Core\System\Kernel\Base\PreBoot;
 
 /**
  * AiUsageManager - Central AI Usage Telemetry & Cost Manager 📊🤖⚡
- * RBN 3.5 Sovereign Framework Standards.
+ * RBN Framework Framework Standards.
  */
 #[Component(alias: 'aiUsage', type: 'manager')]
 class AiUsageManager extends BaseManager
@@ -45,8 +45,8 @@ class AiUsageManager extends BaseManager
             $costUsd = $this->calculateCost($model, $promptTokens, $outputTokens);
 
             // 🛡️ Key Type Tespiti (Lokal ortamda 'free' test anahtarı kullanılır, canlıda 'paid')
-            // [FW-ENV-KAYIT-160] TEK okuyucu: `Env::string('APP_ENV')`.
-            $isLocal = (function_exists('is_local') && is_local()) || (Env::string('APP_ENV') === 'development');
+            // [FW-096-D8] TEK okuyucu: `PreBoot::isProductionDeclared()` (`secrets.php` `app.environment`).
+            $isLocal = (function_exists('is_local') && is_local()) || !PreBoot::isProductionDeclared();
             $keyType = $isLocal ? 'free' : 'paid';
 
             // Common DB (cm_log_ai_usages) tablosuna doğrudan hızlı insert 🗄️⚡

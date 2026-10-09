@@ -11,7 +11,7 @@ use Rbn\Framework\Bundles\RbnSuite\RbnAuth\Models\AuthRole;
 
 /**
  * ModuleData - RbnAuth Paket Kimliği ve Mimari Veri Merkezi 🛡️🛰️🏛️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * Beşinci Satellite: Brain (The Chef).
  * Bu sınıf paketin tüm kayıtlarını (Service, Handler, Provider) yönetirken;
@@ -21,7 +21,7 @@ class ModuleData extends BaseConfig
 {
     /**
      * Master Orchestration Hub ⚙️🛰️⚓
-     * RBN 3.5: Reference-based configuration for maximum modularity.
+     * RBN Framework: Reference-based configuration for maximum modularity.
      */
     public const CONFIG = [
         // 🏛️ Soul: External Identity & Branding
@@ -47,7 +47,7 @@ class ModuleData extends BaseConfig
 
     /**
      * CENTRALIZED REGISTRATION MAP 🏛️⚓🛰️
-     * RBN 3.5 Masterpiece: Single source of truth for all bundle components.
+     * RBN Framework: Single source of truth for all bundle components.
      * Manifest style registration for maximum visibility and controlled discovery.
      */
     public function registerMap(): array

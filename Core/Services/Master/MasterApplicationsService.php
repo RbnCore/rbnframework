@@ -11,7 +11,7 @@ use Rbn\Framework\Core\Support\Bridges\Helpers\Library\Version;
 
 /**
  * MasterApplicationsService - Uygulama Kayıt Servisi 📦🏛️
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  *
  * Proje ile aynı merkezi lisans sistemini paylaşır; yalnızca uygulama satırlarını
  * (applications tablosu) yönetir. Veritabanına DOĞRUDAN erişim YOKTUR.

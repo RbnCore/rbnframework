@@ -1,6 +1,6 @@
 # Core/System — Çatının çekirdeği (açılış, yapılandırma, keşif, yol, kayıt, depolama)
 
-> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d508f5e1` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/System/` — 93 `*.php` (+ `Config/` içinde 3 `README.md`). Kökte `*.php` yoktur; her dosya altı alt dalın birindedir.
 > **Envanter:** 93 php dosyasının 93'ü alt belgelerde anlatıldı (aşağıdaki tablo).
 
@@ -14,7 +14,7 @@ Bağımlılık iki yönlüdür (ölçüm: `Framework\Core\(Base|Database|Http|Re
 
 | Klasör | `*.php` | Belge | Kısa görev |
 |---|---:|---|---|
-| `Config/` | 22 | [Config.md](Config.md) | `Config` (dosya ayarı), `Env` (ortam), `Secrets` (sır dosyası), DB profil çözücüleri |
+| `Config/` | 22 | [Config.md](Config.md) | `Config` (dosya ayarı), `Secrets` (sır dosyası + `app` ortam bayrağı), DB profil çözücüleri |
 | `Discovery/` | 24 | [Discovery.md](Discovery.md) | Ad → sınıf/yol çözümü, modül keşfi, keşif önbellekleri, proje verisi toplama |
 | `Kernel/` | 19 | [Kernel.md](Kernel.md) | `Bootstrap`, `PreBoot`, 6 aşamalı `Kernel`, bekçiler |
 | `Paths/` | 4 | [Paths.md](Paths.md) | Çatı/proje/modül yol kayıt defteri |
@@ -40,7 +40,7 @@ Her ok için dosya:satır kanıtı ilgili alt belgededir ([Kernel §3](Kernel.md
 
 | Kimden → Kime | Nasıl |
 |---|---|
-| `Kernel` → `Config`, `Paths`, `Discovery`, `Storage` | `PreBoot` `Env`'i erken yükler; `Paths::init`; `ProjectDataMapper`/`BootCacheProvider`; `SessionSandboxStage` → `StorageManager::sessions()` |
+| `Kernel` → `Config`, `Paths`, `Discovery`, `Storage` | `PreBoot` `Secrets`'i erken yükler (`app.environment`); `Paths::init`; `ProjectDataMapper`/`BootCacheProvider`; `SessionSandboxStage` → `StorageManager::sessions()` |
 | `Discovery` → `Registries`, `Paths`, `Config` | `NamespaceResolver` → `SystemRegistry::locate()`; `Definition::get('database_*')` → `Config/Definitions/DbProfiles`; `ProjectDataMapper` → `DbProfileResolver` |
 | `Config` → `Discovery` | `ConfigResolver::resolveContextSurvival` → `Definition::get(..., 'ENV_FILE')`; `DatabaseConfig` → `Definition::get(..., 'KEYS_MAP')` |
 | `Paths` → `Discovery` | `FrameworkContext`/`ProjectContext` `FolderContext`'ten türer; `Paths::module()` → `ModuleDiscoveryDriver` |

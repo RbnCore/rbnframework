@@ -3,7 +3,7 @@
 namespace Rbn\Framework\Core\Base\Services\Traits\Service\Engine;
 
 /**
- * CrudServiceTrait - RBN 3.0 Standard Content Mutation ✍️
+ * CrudServiceTrait - Content Mutation ✍️
  */
 trait CrudServiceTrait
 {
@@ -227,7 +227,7 @@ trait CrudServiceTrait
                 throw new \Exception("Smart Service Destroy failed: ID not provided.");
             }
 
-            // 🎯 RBN 3.5: Strategic Delegation (Avoid triggering magic __get provider)
+            // 🎯 RBN Framework: Strategic Delegation (Avoid triggering magic __get provider)
             $model = $this->component('model');
             if ($model) {
                 $this->lastResult = (bool) $model->destroy($id);
@@ -272,7 +272,7 @@ trait CrudServiceTrait
                 throw new \Exception("Smart Service Toggle failed: ID not provided.");
             }
 
-            // 🎯 RBN 3.5: Strategic Delegation
+            // 🎯 RBN Framework: Strategic Delegation
             $model = $this->component('model');
             if ($model) {
                 // 🛡️ FW-GECE-BASE B-55: birincil anahtar varsa o kullanilir
@@ -363,7 +363,8 @@ trait CrudServiceTrait
             // Ölçüm katmanı kararı bozamaz.
         }
 
-        error_log('[RBN] B-06: ' . static::class . '::' . $metot . '() kullanildi; '
+        // Anonim sinif adi NUL bayt tasir; error_log() orada keser.
+        error_log('[RBN] B-06: ' . explode("\0", static::class, 2)[0] . '::' . $metot . '() kullanildi; '
             . 'belirsiz addir (2. parametre katmanlar arasinda hem DEĞER hem ALAN ADI). '
             . 'Yeni kod setStatus($id, $status, $field) kullanmali.');
     }
@@ -395,7 +396,7 @@ trait CrudServiceTrait
         $id = $id !== null ? (int) $id : null;
 
         try {
-            // 🎯 RBN 3.5: Strategic Delegation
+            // 🎯 RBN Framework: Strategic Delegation
             $model = $this->component('model');
             if ($model) {
                 if ($id) {
@@ -435,7 +436,7 @@ trait CrudServiceTrait
 
     /**
      * Tabloyu Sıfırla (Truncate) 🧹 
-     * RBN 3.0: High-performance data reset engine.
+     * High-performance data reset engine.
      */
     public function truncate(?string $modelName = null): self
     {

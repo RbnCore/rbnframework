@@ -10,7 +10,7 @@ use Rbn\Framework\Core\System\Paths\Paths;
 /**
  * FileExportHandler - The Format Worker 📤🛰️
  * 
- * RBN 3.5: Masterpiece Standard (BaseComponent Actor).
+ * RBN Framework: Standard (BaseComponent Actor).
  * Location: Bundles\RbnSuite\RbnFile\Handlers\
  */
 class FileExportHandler extends BaseComponent

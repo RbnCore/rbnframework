@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseServiceInterface;
 /**
  * UrlSafetyService - URL Güvenlik Sunum Katmanı 🛡️🎨
  * 
- * RBN 3.5: Masterpiece Presentation layer for content filtration.
+ * RBN Framework: Presentation layer for content filtration.
  * Decoupled and Core-integrated for system-wide security audits.
  */
 class UrlSafetyService extends BaseService implements BaseServiceInterface

@@ -9,7 +9,7 @@ use Rbn\Framework\Bundles\RbnSuite\RbnAuth\Models\AuthRole;
 
 /**
  * AuthViewController - Visual Presentation Controller for RbnAuth 🎨🏰⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * @property \Rbn\Framework\Bundles\RbnSuite\RbnAuth\Services\AuthService $authService
  * @property \Rbn\Framework\Bundles\RbnSuite\RbnAuth\Services\RecoveryService $recoveryService
@@ -75,7 +75,7 @@ class AuthViewController extends BaseController
     {
         $session = $this->session();
 
-        // 🎼 RBN 3.5: Masterpiece Security Guard 🛡️
+        // 🎼 RBN Framework: Security Guard 🛡️
         if ($session->get('is_logged_in') && !$session->get('is_locked')) {
             $action = $this->request->query('action');
 
@@ -89,7 +89,7 @@ class AuthViewController extends BaseController
             }
         }
 
-        // 🎼 RBN 3.5: Identity Persistence Check
+        // 🎼 RBN Framework: Identity Persistence Check
         $auth = $this->authService ?? $this->service('auth');
         $user = $auth ? $auth->user() : null;
 

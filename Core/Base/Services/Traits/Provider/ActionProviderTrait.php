@@ -12,7 +12,7 @@ use Rbn\Framework\Core\Base\Services\Traits\Provider\Engine\ReadProviderTrait;
 /**
  * ActionProviderTrait - The Unified Provider Action Hub 🪐🏎️
  * 
- * RBN 3.5: Strategic Hub that composes only the provider's mutation and retrieval engines.
+ * RBN Framework: Strategic Hub that composes only the provider's mutation and retrieval engines.
  * Keeps the core context logic (HTTP, Service, Storage) separate.
  */
 trait ActionProviderTrait

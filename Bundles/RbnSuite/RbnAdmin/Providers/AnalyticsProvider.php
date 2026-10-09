@@ -7,7 +7,7 @@ use Rbn\Framework\Bundles\RbnSuite\RbnAdmin\Traits\TrafficAnalysisTrait;
 
 /**
  * StatsProvider - Admin Analytics & User Statistics Specialist 📈🏛️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * Veri madenciliği ve istatistiksel raporlama işlerini merkezi olarak yürütür.
  * 

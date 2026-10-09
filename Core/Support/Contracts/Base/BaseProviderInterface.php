@@ -11,6 +11,6 @@ namespace Rbn\Framework\Core\Support\Contracts\Base;
  */
 interface BaseProviderInterface
 {
-    // RBN 3.5: All redundant contracts removed. 🚿
+    // RBN Framework: All redundant contracts removed. 🚿
     // Providers are now 100% autonomous satellites. 🛰️⚓🚀
 }

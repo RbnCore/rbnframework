@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\Services\BaseManager;
 
 /**
  * SessionManager - Global Session Lifecycle & State Orchestrator 🔑🏛️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * Sorumluluk: Oturum verisi, kullanıcı kimliği, flash mesajları ve oturum sonlandırmayı
  * Storage katmanından bağımsız olarak tek bir merkezden (SSoT) yönetir.
@@ -118,7 +118,15 @@ class SessionManager extends BaseManager
 
         // Session cookie'sini de düşür
         if (isset($_COOKIE[session_name()])) {
-            setcookie(session_name(), '', time() - 3600, '/');
+            // Silme çerezi, oturum çereziyle AYNI bayraklarla gider
+            // (`SessionSandboxStage`: Secure yalnız HTTPS'te, HttpOnly, SameSite=Lax).
+            setcookie(session_name(), '', [
+                'expires'  => time() - 3600,
+                'path'     => '/',
+                'secure'   => \Rbn\Framework\Core\Http\Engine\RequestEnvironment::isHttpsRequest(),
+                'httponly' => true,
+                'samesite' => 'Lax',
+            ]);
             unset($_COOKIE[session_name()]);
         }
 

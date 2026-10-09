@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\Support\Bridges\Traits;
 /**
  * NormalizationTrait - Shared Case Normalization Logic 🐪🏔️
  * 
- * RBN 3.5: Centralized string normalization for all configuration and discovery components.
+ * RBN Framework: Centralized string normalization for all configuration and discovery components.
  * Integrated into the Core DNA (BaseContextTrait).
  */
 trait NormalizationTrait
@@ -32,7 +32,7 @@ trait NormalizationTrait
 
     /**
      * Path Normalization: toPascalPath (Linux-Safe Discovery) 📂🛰️⚓
-     * RBN 3.5: Splits path by slashes and PascalCases every segment.
+     * RBN Framework: Splits path by slashes and PascalCases every segment.
      */
     public static function toPascalPath(string $path): string
     {
@@ -44,7 +44,7 @@ trait NormalizationTrait
 
     /**
      * Case-Safe Path: toCaseSafePath (Optimal View Discovery) 👁️🛰️⚓
-     * RBN 3.5: PascalCases directories but keeps the final filename lowercase.
+     * RBN Framework: PascalCases directories but keeps the final filename lowercase.
      */
     public static function toCaseSafePath(string $path): string
     {

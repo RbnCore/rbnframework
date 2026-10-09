@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 
 /**
  * SyshubDbConsoleProvider - Database Data Discovery 🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 class SyshubDbConsoleProvider extends BaseComponent
 {

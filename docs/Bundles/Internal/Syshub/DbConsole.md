@@ -1,6 +1,6 @@
 # Bundles/Internal/Syshub/DbConsole — Veritabanı konsolu, SQL terminali, tablo gezgini
 
-> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Bundles/Internal/Syshub/Controllers/DbConsole/` (3 `*.php`) +
 > `Handlers/SyshubDbConsoleHandler.php` + `Providers/SyshubDbConsoleProvider.php` +
 > `Services/SyshubDbConsoleService.php` + 4 görünüm.

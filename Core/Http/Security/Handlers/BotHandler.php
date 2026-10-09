@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\BaseComponent;
 /**
  * BotHandler - The Bot-Trap Actor 🛡️🏮
  * 
- * RBN 3.5: Atomic actor for Honeypot validation and User-Agent screening.
+ * RBN Framework: Atomic actor for Honeypot validation and User-Agent screening.
  */
 class BotHandler extends BaseComponent
 {

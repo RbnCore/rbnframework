@@ -9,7 +9,7 @@ use Rbn\Framework\Bundles\Internal\Webhub\Models\SeoConfig;
 
 /**
  * SeoController - Search Engine Orchestrator 🔍🛰️
- * Standard: RBN 3.5 Masterpiece - MIRROR OF IDENTITY
+ * Standard: RBN Framework - MIRROR OF IDENTITY
  */
 #[SubModule(
     entity: 'seo',
@@ -50,7 +50,7 @@ class SeoController extends WebhubController
     }
 
     /**
-     * RBN 3.5: AI & Detailed SEO Report View 🤖
+     * RBN Framework: AI & Detailed SEO Report View 🤖
      */
     public function report(): void
     {

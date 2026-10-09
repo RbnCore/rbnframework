@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Data\BaseConfig;
 /**
  * BackstageMap - Backstage Architecture & Navigation Map 🗺️🛰️⚓
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 class BackstageMap extends BaseConfig
 {

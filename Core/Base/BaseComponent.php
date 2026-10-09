@@ -12,8 +12,8 @@ use Rbn\Framework\Core\Support\Bridges\Helpers\Library\LogThrottle;
 /**
  * BaseComponent - The Absolute Root DNA 🧬⚓
  * 
- * RBN 3.5: Centralized orchestrator for discovery, context and properties.
- * Masterpiece Refactoring: Now 100% trait-driven and non-redundant.
+ * RBN Framework: Centralized orchestrator for discovery, context and properties.
+ * RBN Framework Refactoring: Now 100% trait-driven and non-redundant.
  * 
  * @method array|mixed getRouteConfig(?string $projectKey = null, ?string $key = null)
  * @method string targetProjectUrl(string $projectKey, string $path = '')
@@ -108,18 +108,18 @@ abstract class BaseComponent implements \ArrayAccess
                 . ' "BaseService::get()" singleton kullanılmalı.');
         }
 
-        // 🎼 RBN 3.5: [SOVEREIGN BEFORE BOOT] 🛫
+        // 🎼 RBN Framework: [RBN Framework BEFORE BOOT] 🛫
         $this->beforeBoot();
 
-        // 🎼 RBN 3.5: DNA Kökünü (Concerns) ayağa kaldır 🚀🔋
+        // 🎼 RBN Framework: DNA Kökünü (Concerns) ayağa kaldır 🚀🔋
         $this->bootConcernsContext();
 
-        // 🎼 RBN 3.5: [SOVEREIGN AFTER BOOT] 🚀
+        // 🎼 RBN Framework: [RBN Framework AFTER BOOT] 🚀
         $this->afterBoot();
     }
 
     /**
-     * Masterpiece Lifecycle Hook: Pre-initialization 🛫
+     * RBN Framework Lifecycle Hook: Pre-initialization 🛫
      */
     protected function beforeBoot(): void
     {
@@ -127,7 +127,7 @@ abstract class BaseComponent implements \ArrayAccess
     }
 
     /**
-     * Masterpiece Lifecycle Hook: Post-initialization 🚀
+     * RBN Framework Lifecycle Hook: Post-initialization 🚀
      */
     protected function afterBoot(): void
     {
@@ -135,9 +135,9 @@ abstract class BaseComponent implements \ArrayAccess
     }
 
     /**
-     * Sovereign Debug Hub 🕵️‍♂️🔬⚓
+     * RBN Framework Debug Hub 🕵️‍♂️🔬⚓
      * 
-     * RBN 3.5: Prevents massive recursive exhausting dumps during development.
+     * RBN Framework: Prevents massive recursive exhausting dumps during development.
      * Unsets the global singletons (rbn, discover) from the dump list.
      */
     public function __debugInfo(): array
@@ -147,7 +147,7 @@ abstract class BaseComponent implements \ArrayAccess
         // 🎼 Mastperiece: Hide heavy engines from dumps to ensure DX sükunet 🛡️
         unset($info['rbn'], $info['discover']);
 
-        $info['DNA_Active'] = ($this->module ? "[{$this->module}]" : "[Core]") . " Sovereign Identity";
+        $info['DNA_Active'] = ($this->module ? "[{$this->module}]" : "[Core]") . " Identity";
 
         return $info;
     }
@@ -155,11 +155,11 @@ abstract class BaseComponent implements \ArrayAccess
     /**
      * Universal Component Resolver 🛰️🏙️⚓
      * 
-     * RBN 3.5: Strategic Proxy to the ComponentResolver Discovery cluster.
+     * RBN Framework: Strategic Proxy to the ComponentResolver Discovery cluster.
      */
     protected function component(string $type, ?string $target = null, bool $mandatory = true): ?object
     {
-        // 🛡️ RBN 3.5: [GLOBAL SHOCK SENSOR] - Instant Loop Terminal 🏛️🚀⚓
+        // 🛡️ RBN Framework: [GLOBAL SHOCK SENSOR] - Instant Loop Terminal 🏛️🚀⚓
         self::$callDepth++;
 
         if (self::$callDepth > 20) {
@@ -202,7 +202,7 @@ abstract class BaseComponent implements \ArrayAccess
             return $value;
         }
 
-        // 🎼 RBN 3.5: Masterpiece Suffix Discovery (Delegated to ComponentTypes Single Source of Truth) 🎭
+        // 🎼 RBN Framework: Suffix Discovery (Delegated to ComponentTypes Single Source of Truth) 🎭
         $typeMap = \Rbn\Framework\Core\Support\Definitions\System\ComponentTypes::typeMap();
 
         foreach ($typeMap as $suffix => $type) {

@@ -10,8 +10,8 @@ use Rbn\Framework\Core\Database\Engine\Traits\QueryBridgeTrait;
 /**
  * Database - High-Performance Connection Orchestrator
  * 
- * RBN 3.0: Manages multiple database connections using a Trait-Driven Architecture.
- * Part of the "Masterpiece" framework pillars.
+ * Manages multiple database connections using a Trait-Driven Architecture.
+ * Part of the "RBN Framework" framework pillars.
  */
 class Database
 {

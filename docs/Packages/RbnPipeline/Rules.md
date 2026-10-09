@@ -1,6 +1,6 @@
 # Packages/RbnPipeline/Rules — prompt kuralları (11 kural sınıfı)
 
-> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Packages/RbnPipeline/Rules/` — **11 `*.php`**
 > (`Blog/` 3 + `Prompt/` 7 + `Youtube/` 1).
 > **Envanter:** 11 dosyanın **11'i** aşağıda anlatıldı.

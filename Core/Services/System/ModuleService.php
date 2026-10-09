@@ -11,7 +11,7 @@ use Rbn\Framework\Core\System\Discovery\Engine\Drivers\ModuleDataDriver;
 /**
  * ModuleService - The Central Framework Orchestrator 🏛️🚀⚓
  * 
- * RBN 3.5 Masterpiece: Core service for discovering and registering 
+ * RBN Framework: Core service for discovering and registering
  * framework-wide modules and their route hierarchies.
  */
 class ModuleService extends BaseService

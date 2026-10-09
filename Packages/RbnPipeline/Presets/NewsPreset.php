@@ -9,7 +9,7 @@ use Rbn\Framework\Packages\RbnPipeline\Builders\AbstractPresetBuilder;
 
 /**
  * NewsPreset - Standard configuration preset for News / RSS feeds 📰🚀
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 class NewsPreset extends AbstractPresetBuilder
 {

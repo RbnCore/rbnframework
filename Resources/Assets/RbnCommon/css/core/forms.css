@@ -23,6 +23,17 @@
     user-select: none;
 }
 
+/* Düz etiket: büyük harf/mono dayatması olmadan (FW-096-C4) */
+.rbn-form-label.rbn-form-label-plain,
+.rbn-form-label-plain {
+    font-family: var(--rbn-font-sans, inherit);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--rbn-text-primary);
+}
+
 .rbn-form-hint {
     font-size: 0.75rem;
     color: var(--rbn-text-muted);
@@ -34,7 +45,7 @@
     width: 100%;
     height: var(--rbn-input-height, 42px);
     padding: 0 var(--rbn-space-3, 12px);
-    font-family: var(--rbn-font-mono, inherit);
+    font-family: var(--rbn-input-font, var(--rbn-font-mono, inherit));
     font-size: var(--rbn-input-font-size, 0.88rem);
     color: var(--rbn-input-text, var(--rbn-text-primary, #14110c));
     background-color: var(--rbn-input-bg, var(--rbn-bg-input, #ffffff));
@@ -156,7 +167,7 @@ textarea.rbn-form-input, textarea.form-control {
     border-bottom-right-radius: var(--rbn-radius-sm);
 }
 
-/* 4. Sovereign Form Checks & iOS-Style Switches (.rbn-form-check, .rbn-form-switch, .rbn-form-check-input) 🎚️ */
+/* 4. RBN Framework Form Checks & iOS-Style Switches (.rbn-form-check, .rbn-form-switch, .rbn-form-check-input) 🎚️ */
 .rbn-form-check,
 .form-check {
     display: block;
@@ -213,6 +224,14 @@ textarea.rbn-form-input, textarea.form-control {
     background-color: var(--rbn-primary, #3b82f6);
     border-color: var(--rbn-primary, #3b82f6);
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+}
+
+/* Kısmi seçim ("tümünü seç" arada kalınca): çizgi işareti (FW-096-C5) */
+.rbn-form-check-input[type="checkbox"]:indeterminate,
+.form-check-input[type="checkbox"]:indeterminate {
+    background-color: var(--rbn-primary, #3b82f6);
+    border-color: var(--rbn-primary, #3b82f6);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e");
 }
 
 .rbn-form-check-input[type="radio"],

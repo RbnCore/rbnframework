@@ -14,7 +14,7 @@ use Rbn\Framework\Core\Support\Bridges\Helpers\Library\LogThrottle;
 /**
  * BaseProxy - Unified entry gate for dynamic gateways 🪐🦾⚓
  * 
- * RBN 3.5: [MASTERPIECE EVOLUTION]
+ * RBN Framework: [RBN Framework EVOLUTION]
  * Artık bir BaseComponent mirasçısıdır. Tüm DNA yeteneklerine sahip,
  * ancak performans için "Lightweight" önyükleme kullanan zeki bir geçittir.
  */
@@ -53,7 +53,7 @@ class BaseProxy extends BaseComponent implements BaseProxyInterface
     /**
      * Create a new proxy gate ⚓🧬
      * 
-     * RBN 3.5: Optimized Component Initialization.
+     * RBN Framework: Optimized Component Initialization.
      * BaseComponent'in ağır boot sürecinden kaçınmak için constructor override edilir.
      * DNA (rbn, discover) lazy-load olarak BaseContextTrait üzerinden çözülür.
      * 

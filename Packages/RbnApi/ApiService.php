@@ -11,7 +11,7 @@ use Rbn\Framework\Packages\RbnPipeline\Concerns\SanitizesResponseTrait;
 /**
  * ApiService - The Unified RBN API Gateway Hub 📡🛰️⚓
  * 
- * RBN 3.5 Masterpiece: Type-safe, explicit single-point gateway for all API integrations.
+ * RBN Framework: Type-safe, explicit single-point gateway for all API integrations.
  */
 class ApiService extends BaseService
 {

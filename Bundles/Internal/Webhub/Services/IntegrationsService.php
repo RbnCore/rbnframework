@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Services\System\SettingsService;
 use Rbn\Framework\Core\Services\System\Models\SettingsConfig;
 
 /**
- * IntegrationsService - Sovereign Orchestrator for Webhub Integrations Submodule 🛰️⚓
+ * IntegrationsService - RBN Framework Orchestrator for Webhub Integrations Submodule 🛰️⚓
  */
 class IntegrationsService extends SettingsService
 {

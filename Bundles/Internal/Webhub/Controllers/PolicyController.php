@@ -7,8 +7,8 @@ namespace Rbn\Framework\Bundles\Internal\Webhub\Controllers;
 use Rbn\Framework\Core\Base\Attributes\SubModule;
 
 /**
- * PolicyController - Thin Sovereign Orchestrator 🛡️🏛️⚓
- * RBN 3.5 Masterpiece Standard.
+ * PolicyController - Thin RBN Framework Orchestrator 🛡️🏛️⚓
+ * RBN Framework Standard.
  */
 #[SubModule(
     entity: 'policy',

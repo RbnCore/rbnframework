@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Support\Definitions\Render\AssetBundles;
 
 /**
  * AssetBuilder - State accumulator, dependency resolver, and assembly builder for Assets 🦾🛰️⚓
- * Part of RBN 3.5 Masterpiece.
+ * Part of RBN Framework.
  */
 class AssetBuilder extends BaseComponent
 {
@@ -34,12 +34,12 @@ class AssetBuilder extends BaseComponent
     }
 
     /**
-     * Set/Add Stylesheet to queue.
+     * Set/Add Stylesheet to queue. `$attrs` `<link>`'e eklenir (ör. SRI `integrity` + `crossorigin`).
      */
-    public function addStyle(string $path, int $priority = 10): self
+    public function addStyle(string $path, int $priority = 10, array $attrs = []): self
     {
         if (!isset($this->styles[$path])) {
-            $this->styles[$path] = ['path' => $path, 'priority' => $priority];
+            $this->styles[$path] = ['path' => $path, 'priority' => $priority, 'attributes' => $attrs];
         }
         return $this;
     }
@@ -116,7 +116,7 @@ class AssetBuilder extends BaseComponent
         foreach ($payload['styles'] as $item) {
             $compiled = $this->compile($item, $appContext);
             if ($compiled) {
-                $this->addStyle($compiled['path'], $compiled['priority'] ?? 10);
+                $this->addStyle($compiled['path'], $compiled['priority'] ?? 10, $compiled['attributes']);
             }
         }
 
@@ -141,7 +141,7 @@ class AssetBuilder extends BaseComponent
      */
     public function build(): array
     {
-        // 🔤 Sovereign Graceful Font Fallback: Sadece Frontend'de ve hiç font istenmediyse varsayılan 'Inter' ekle
+        // 🔤 RBN Framework Graceful Font Fallback: Sadece Frontend'de ve hiç font istenmediyse varsayılan 'Inter' ekle
         $hasAnyFont = false;
         foreach ($this->styles as $styleData) {
             $path = $styleData['path'] ?? '';
@@ -273,7 +273,7 @@ class AssetBuilder extends BaseComponent
             }
         }
 
-        // 🛡️ [RBN 3.5 MASTERPIECE] 'auth', 'panel' ve 'rbn' motorunda common.css ve rbnAlert.css zaten rbn-master.css içindedir; mükerrerliği önle
+        // 🛡️ [RBN Framework] 'auth', 'panel' ve 'rbn' motorunda common.css ve rbnAlert.css zaten rbn-master.css içindedir; mükerrerliği önle
         if (($isAuthContext || $isPanelContext || $isRbnEngine) && isset($payload['styles'])) {
             $payload['styles'] = array_values(array_filter($payload['styles'], function ($style) {
                 $path = is_array($style) ? ($style['path'] ?? '') : $style;
@@ -300,7 +300,10 @@ class AssetBuilder extends BaseComponent
 
         $version = AssetConfig::VERSION;
         if ($detected && file_exists($detected->path)) {
-            $version = (string) filemtime($detected->path);
+            // [FW-H51] CSS ise import zincirinin en yeni mtime'ı: alt dosya değişince URL değişir.
+            $version = (string) (str_ends_with(strtolower($detected->path), '.css')
+                ? \Rbn\Framework\Core\Render\Handlers\CssImportVersioner::chainMtime($detected->path)
+                : filemtime($detected->path));
         }
 
         $webUrl = $this->generateWebUrl($cleanPath, $sourceHint, $version);

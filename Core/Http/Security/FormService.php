@@ -12,7 +12,7 @@ use Rbn\Framework\Core\Http\Security\Handlers\BotHandler;
 /**
  * FormService - Gelişmiş Form Güvenlik ve Doğrulama Servisi 🛡️📝
  * 
- * RBN 3.5 "Masterpiece": Slim Gateway for form security orchestration.
+ * RBN Framework: Slim Gateway for form security orchestration.
  * Delegates the heavy lifting to FormGuardHandler (Atomic Actor).
  */
 class FormService extends BaseService implements BaseServiceInterface

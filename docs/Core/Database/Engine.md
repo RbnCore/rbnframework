@@ -1,6 +1,6 @@
 # Core/Database/Engine — bağlantı yönetimi, sorgu üretimi, şema ve koleksiyon
 
-> **Doğrulanan kod tabanı:** `1d89c431` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `1d89c431` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Database/Database.php` + `Core/Database/Engine/` — 16 `*.php`.
 > **Envanter:** 16 dosyanın 16'sı aşağıda anlatıldı.
 
@@ -31,7 +31,7 @@ repository'ler (`$this->db->raw(...)`), `DatabaseService`, CLI handler'ları.
 | `Engine/Traits/Query/JoinTrait.php` | `JOIN` çeşitleri. | `join(string $table,string $first,string $operator,string $second,string $type='INNER'): static`, `leftJoin/rightJoin/innerJoin(string,string,string,string): static` |
 | `Engine/Traits/Query/AggregateTrait.php` | `count/sum/avg/exists`. | `count(): int`, `sum(string $column): float`, `avg(string $column): float`, `exists(): bool`, `aggregateQuery(string $selectSql): mixed`, `wrapAggregateColumn(string): string` |
 | `Engine/Traits/Query/CrudTrait.php` | `INSERT/UPDATE/DELETE` (batch dâhil) ve sayaç artırma. | `insert(array $data): int`, `insertBatch(array $data): bool`, `updateBatch(array $data,string $index='id'): bool`, `update(array $data): bool`, `updateAffected(array $data): int`, `delete(): int`, `increment/decrement(string $column,int $amount=1): bool`, `truncate(): bool` |
-| `Engine/Traits/Query/ExecutionTrait.php` | Sorguyu koşturur, hidrasyon ve `Collection` sarmalaması yapar. | `get(): mixed`, `first(): mixed`, `toSql(): string` |
+| `Engine/Traits/Query/ExecutionTrait.php` | Sorguyu koşturur, hidrasyon ve `Collection` sarmalaması yapar. | `get(): mixed`, `rows(): array`, `first(): mixed`, `toSql(): string` |
 | `Engine/Traits/Query/SqlHelperTrait.php` | Kimlik sarma, alias ayrıştırma, `IN` parametreleme. | `wrapColumn(string): string`, `wrapTable(string): string`, `isAliased(string): bool`, `extractAlias(string): ?string`, `parameterize(array $values): string` |
 
 **Kapsama:** 16/16.
@@ -84,16 +84,21 @@ $builder->where('x',1)->get()                     Query\ExecutionTrait.php:17
    aktif bağlantıyı düşürür ve 2006/2013 kalıcı hale gelebilir
    (`:74-80`).
 3. **`first()` `LIMIT 1` kalıcı yazmaz.** Builder kopyalanır; kullanıcının
-   kendi `limit()`'i varsa korunur (`Query/ExecutionTrait.php:60-72`).
+   kendi `limit()`'i varsa korunur (`Query/ExecutionTrait.php:80-92`).
 4. **Panik freni asimetrisiz olmamalıdır.** `Database::query()` `false`
    dönerse `get()` boş koleksiyon döner, `fetchAll()` hatası üretmez
    (`Query/ExecutionTrait.php:25-32`).
-5. **İç içe transaction dış yüzeyi kullanmaz** (`Database.php:57-60`).
-6. **`connectionScoped` istisnayı yutmaz**, `finally` ile bağlantıyı geri alır
+5. **`get()` dizi DEĞİLDİR.** `Collection` döner, model atanmışsa öğeleri model
+   nesnesidir. `array` dönüş tipli yöntemde `return ...->get();` TypeError verir;
+   `->get() ?: []` hiç devreye girmez (nesne her zaman doğrudur) ve
+   `Collection::toArray()` model nesnelerini dizileştirmez. Satır dizisi gereken
+   yerde `rows(): array` kullanılır (`Query/ExecutionTrait.php:66-75`).
+6. **İç içe transaction dış yüzeyi kullanmaz** (`Database.php:57-60`).
+7. **`connectionScoped` istisnayı yutmaz**, `finally` ile bağlantıyı geri alır
    (`ConnectionTrait.php:123-133`).
-7. **Ayrıştırıcı boş döner.** `RBN_PANIC_ACTIVE` tanımlıysa `query()`
+8. **Ayrıştırıcı boş döner.** `RBN_PANIC_ACTIVE` tanımlıysa `query()`
    `false` döner; çağıran taraf bunu denetlemek zorundadır.
-8. **`SchemaBuilder` tanımlayıcıları sarar** (`ident()`, `:29`); tablo adı
+9. **`SchemaBuilder` tanımlayıcıları sarar** (`ident()`, `:29`); tablo adı
    güvenlik açısından buradan geçer.
 
 ## 6. Örnek (gerçek koddan)

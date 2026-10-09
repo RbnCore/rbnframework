@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseModelInterface;
 /**
  * CmSysSettingsShieldModel - Centralized Security & Firewall Configuration Hub 🛡️⚙️
  * 
- * RBN 3.5: Shared operational layer for managing firewall and shield settings in rbncore_common.
+ * RBN Framework: Shared operational layer for managing firewall and shield settings in rbncore_common.
  * 
  * @property int         $id
  * @property string      $project_key

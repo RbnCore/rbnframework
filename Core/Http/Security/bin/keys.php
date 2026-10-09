@@ -5,7 +5,7 @@ declare(strict_types=1);
 /**
  * keys.php — `external-api` anahtar yönetimi CLI 🔑🗂️
  *
- * [FW-APIGUARD · TASARIM GOREV 2 · 2026-10-03 · zeki-6eb7f5]
+ * [FW-APIGUARD · TASARIM GOREV 2 · 2026-10-03 · team member]
  *
  * PATRON KARARI 5: yönetim ÖNCE CLI, panel YOK.
  * PATRON KARARI 2: anahtar `sha256:<hex>` olarak saklanır.
@@ -34,11 +34,10 @@ if (PHP_SAPI !== 'cli') {
 
 // Autoload yolu: `bin/` -> `Security/` -> `Http/` -> `Core/` -> framework kok.
 //
-// [ANAYASA / FW-ENV-KAYIT-160] Bu dosya `getenv()` / `$_ENV` / `$_SERVER` ile
-// ORTAM DEGISKENI OKUMAZ. Ortam okumanin TEK kapisi `Core/System/Config/Env.php`
-// + `EnvKeys` kayit tablosudur; kayit disi bir `RBN_*` adi okumak fail-closed
-// hatasi verir ve agac taramasi bunu KALINTI olarak raporlar. Konumlar bu
-// yuzden dosya YOLUNDAN turetilir (deterministik, ek ortam degiskeni gerektirmez).
+// [ANAYASA / FW-096-D8] Bu dosya ORTAM DEGISKENI OKUMAZ: framework'te ortam
+// degiskeni mekanizmasi yoktur; ayar ve sirlarin TEK kaynagi
+// `Core/System/Config/Secrets/secrets.php` (okuyucu `Secrets`). Konumlar bu
+// yuzden dosya YOLUNDAN turetilir (deterministik).
 $frameworkKok = dirname(__DIR__, 4);
 $vendorAdaylari = [
     $frameworkKok . '/vendor/autoload.php',

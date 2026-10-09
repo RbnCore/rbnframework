@@ -6,7 +6,7 @@ namespace Rbn\Framework\Core\Support\Exceptions;
 /**
  * DiagnosticException - The Doctor's Diagnosis 🩺🏛️
  * 
- * Part of the RBN 3.5 Survival Layer.
+ * Part of the RBN Framework Survival Layer.
  * A specialized exception used by Guards (Doctors) to pass 
  * diagnostic metadata to the Global Exception Service (Nurse).
  */

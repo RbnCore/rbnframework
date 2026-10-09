@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseModelInterface;
 /**
  * RssSourceModel - Evrensel Proje RSS Kaynak Modeli 🛰️
  * Tüm projelerin RSS besleme kaynaklarını (URL, isim, aktiflik) yönetir.
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * @property int         $id
  * @property string      $project_key

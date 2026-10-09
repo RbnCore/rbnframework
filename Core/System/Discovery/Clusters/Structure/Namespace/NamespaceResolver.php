@@ -12,13 +12,13 @@ use Rbn\Framework\Core\System\Registries\SystemRegistry;
 /**
  * NamespaceResolver - Specialized Identity Discovery 🧬🛰️⚓
  * 
- * RBN 3.5 "Masterpiece": Converts component names and types into Full Qualified Class Names (FQCN).
+ * RBN Framework: Converts component names and types into Full Qualified Class Names (FQCN).
  * Now uses Namespace-Driven Dynamic Expansion for Clean String resolution.
  */
 class NamespaceResolver extends BaseDiscoveryContext
 {
     /**
-     * RBN 3.5: Masterpiece Expansion DNA 🧬🛰️⚓
+     * RBN Framework: Expansion DNA 🧬🛰️⚓
      */
     use \Rbn\Framework\Core\System\Discovery\Base\Traits\NamespaceExpansionTrait;
 
@@ -50,7 +50,7 @@ class NamespaceResolver extends BaseDiscoveryContext
                 $registryResult = SystemRegistry::locate($name, $type);
 
                 if ($registryResult) {
-                    // RBN 3.5 Masterpiece: Dynamic Namespace Expansion 🌉✨
+                    // RBN Framework: Dynamic Namespace Expansion 🌉✨
                     return static::expandRegistryResult($registryResult);
                 }
 
@@ -98,7 +98,7 @@ class NamespaceResolver extends BaseDiscoveryContext
         $flatName = end($nameParts);
         $flatNameNormalized = ucfirst($flatName);
 
-        // 🎼 RBN 3.5: [SOVEREIGN] Purged Scanned Discovery 🛰️⚓
+        // 🎼 RBN Framework: [RBN Framework] Purged Scanned Discovery 🛰️⚓
         // We no longer scan folders or use ModuleResolver. Everything goes through Core Layer mapping.
         return $this->resolveCoreLayer($normalizedName, $type);
     }
@@ -126,7 +126,7 @@ class NamespaceResolver extends BaseDiscoveryContext
                 return $fqcn;
             }
 
-            // Strategy B: Module Deep Layer (RBN 3.5 Sovereign: Bundles\Module\Controllers\NameController) 🧬🛰️🎯
+            // Strategy B: Module Deep Layer (RBN Framework: Bundles\Module\Controllers\NameController) 🧬🛰️🎯
             // We treat the $name as a potential module folder.
             $moduleName = ucfirst($nameParts[0] ?? $name);
             $moduleAttempt = $baseNamespace . "{$moduleName}\\{$typePlural}\\{$className}";
@@ -134,7 +134,7 @@ class NamespaceResolver extends BaseDiscoveryContext
                 return $moduleAttempt;
             }
 
-            // Strategy C: Segmented Module Layer (RBN 3.5 Symmetry: syshub/security/ipBlock -> Syshub\Controllers\Security\IpBlockController)
+            // Strategy C: Segmented Module Layer (RBN Framework Symmetry: syshub/security/ipBlock -> Syshub\Controllers\Security\IpBlockController)
             if (count($nameParts) > 1) {
                 $tempParts = $nameParts;
                 $compModule = ucfirst(array_shift($tempParts));
@@ -146,7 +146,7 @@ class NamespaceResolver extends BaseDiscoveryContext
                     return $segmentedFqcn;
                 }
 
-                // 🎼 RBN 3.5: [DEEP FOLDER DISCOVERY] - Symmetry: Controllers/Cron/CronController 🏙️🛰️⚓
+                // 🎼 RBN Framework: [DEEP FOLDER DISCOVERY] - Symmetry: Controllers/Cron/CronController 🏙️🛰️⚓
                 if (empty($subPath)) {
                     $folderName = str_replace($typeSuffix, '', $targetClass);
                     $deepFqcn = $baseNamespace . "{$compModule}\\{$typePlural}\\{$folderName}\\{$targetClass}";

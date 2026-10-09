@@ -3,7 +3,7 @@
 /**
  * RBN Framework - Global Helper Hub 🎻🛰️⚓⚖️✨
  * 
- * RBN 3.5: This file orchestrates specialized helper modules from the Global cluster.
+ * RBN Framework: This file orchestrates specialized helper modules from the Global cluster.
  * It ensures architectural scalpability and a non-bloated helper registry.
  */
 

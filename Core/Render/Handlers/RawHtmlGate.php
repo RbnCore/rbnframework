@@ -94,6 +94,36 @@ class RawHtmlGate
         return $html === null ? $once : $html;
     }
 
+    /** İçerik kipinde (sayfa metni) tamamen kaldırılan etiketler: betik/gömme/belge başı. */
+    private const CONTENT_BLOCK_TAGS = 'script|style|iframe|object|embed|applet|frame|frameset|noscript|template';
+    private const CONTENT_VOID_TAGS = 'base|meta|link';
+
+    /**
+     * Veritabanından gelen SAYFA İÇERİĞİ (yasal metin, CMS gövdesi) için kapı.
+     *
+     * `sanitize()`'dan farkı: entegrasyon kodu değil düz içerik olduğu için `<script>`,
+     * `<style>`, `<iframe>`, `<object>`/`<embed>` blokları ve `<base>`/`<meta>`/`<link>`
+     * da KALDIRILIR (içerik metni bunlara ihtiyaç duymaz; yönetici hesabı ele geçirilse
+     * de ziyaretçide betik çalışmaz). Başlık, paragraf, liste, tablo, bağlantı, görsel korunur.
+     */
+    public function sanitizeContent(string $html): string
+    {
+        if (trim($html) === '') {
+            return '';
+        }
+
+        $html = $this->dongusuzUygula(
+            $html,
+            static function (string $s): string {
+                $s = (string) preg_replace('#<(' . self::CONTENT_BLOCK_TAGS . ')\b[^>]*>.*?</\1\s*>#is', '', $s);
+                // Kapanmamış blok/boş etiket artıkları (kapanışsız `<script ...>` dahil).
+                return (string) preg_replace('#</?(?:' . self::CONTENT_BLOCK_TAGS . '|' . self::CONTENT_VOID_TAGS . ')\b[^>]*>?#i', '', $s);
+            }
+        );
+
+        return $this->sanitize($html);
+    }
+
     /**
      * Temizlenmis HTML'de hala tehlikeli bir kalip var mi? (dogrulama/test)
      */

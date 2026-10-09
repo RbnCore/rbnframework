@@ -11,7 +11,7 @@ use Rbn\Framework\Core\System\Config\Engine\Database\SmtpProfileResolver;
 /**
  * EmailConfigHandler - The Settings Resolver (Worker) ⚙️🎻📧
  * 
- * RBN 3.5: Masterpiece Standard (BaseComponent Actor).
+ * RBN Framework: Standard (BaseComponent Actor).
  * Orchestrates SMTP credentials and application identity metadata.
  * Now Project-Aware: Resolves branding from project-settings.php DNA.
  */
@@ -28,12 +28,12 @@ class EmailConfigHandler extends BaseComponent
             return $this->resolvedConfig;
         }
 
-        // 🎼 RBN 3.5: Masterpiece Project DNA Resolution 🧬
+        // 🎼 RBN Framework: Project DNA Resolution 🧬
         $projectKey = (string) ($this->resolveProjectData('project_key') ?: (function_exists('active_project_key') ? active_project_key() : (function_exists('project_key') ? project_key() : '')));
         $projectName = (string) ($this->resolveProjectData('project_name') ?: '');
         $projectDomain = (string) ($this->resolveProjectData('domain') ?: '');
 
-        // 🎼 RBN 3.5: Autonomous Settings Discovery from DB & Routemap SSoT
+        // 🎼 RBN Framework: Autonomous Settings Discovery from DB & Routemap SSoT
         // Master/Sistem maillerinde (useMaster = true) gereksiz proje ayar okumaları ve cache tetiklenmez 🛡️
         $smtp = [];
         $smtpCritical = [];

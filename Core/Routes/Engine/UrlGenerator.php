@@ -46,7 +46,7 @@ class UrlGenerator
         if ($uri !== null) {
             $generated = $this->buildNamedUrl($uri, $params);
 
-            // RBN 3.5: Append extra parameters not used in route definition as query string
+            // RBN Framework: Append extra parameters not used in route definition as query string
             $unusedParams = [];
             foreach ($params as $key => $value) {
                 if (strpos($uri, '{' . $key . '}') === false && strpos($uri, '{' . $key . '?}') === false && strpos($uri, '{' . $key . ':') === false) {
@@ -164,7 +164,7 @@ class UrlGenerator
             $projectKey = function_exists('active_project_key') ? (string) active_project_key() : (function_exists('project_key') ? (string) project_key() : '');
             $currentProject = function_exists('project_key') ? project_key() : '';
 
-            // 🎼 RBN 3.5: Active project URLs stay relative to current host 🌐
+            // 🎼 RBN Framework: Active project URLs stay relative to current host 🌐
             if (empty($projectKey) || $projectKey === $currentProject) {
                 return '/';
             }

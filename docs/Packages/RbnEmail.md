@@ -1,6 +1,6 @@
 # Packages/RbnEmail — SMTP gönderimi, şablon sarmalama ve IMAP okuma
 
-> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Packages/RbnEmail/` — **10 `*.php`**
 > (6 `Handlers/` + 1 `Models/` + 1 `Services/` + 1 `Tasks/` + 1 `Views/`).
 > **Envanter:** 10 dosyanın **10'u** aşağıda anlatıldı.
@@ -87,6 +87,18 @@ ImapClientHandler::connect(host, port, user, pass, 'ssl')   ImapClientHandler.ph
 | Log kanalları | `EmailConstant.php:27-28` | `email` ve `email_debug` |
 
 ## 5. Tuzaklar ve kurallar
+
+> **0.9.6 notu (2026-10-09):** bu belge 10 dosyalık 2026-10-05 envanterini anlatır; paket
+> sonradan `MailCredentialHandler`, `ImapClientHandler`, `MailHtmlSanitizerHandler`,
+> `MailParserHandler`, `SendQuotaHandler`, `MailboxService` ve `Support/` sınıflarıyla büyüdü
+> (envanter yenilemesi açık iş). Bugün geçerli kurallar:
+> * Posta parolası `enc:v2:` (AES-256-GCM, anahtar `hash_hkdf(APP_KEY, 'rbn-mail-credential')`,
+>   AAD = hesap kimliği + IMAP/SMTP sunucusu): `MailCredentialHandler::seal($password, $binding)` /
+>   `open($sealed, $binding)`. `enc:v1:` okunur, `needsUpgrade()` true döner, çağıran yeniden mühürler.
+> * Sistem e-postası TLS sertifikasını ve ana makine adını doğrular; kendinden imzalı sertifikayla
+>   bildirim gitmez.
+> * IMAP komut değerinde CR/LF/NUL reddedilir (`PROTOCOL_ERROR`).
+> * Ayrıntı ve yükseltme adımları: `.github/UPGRADING.md` 0.9.6 "RbnEmail, cron ve altyapı".
 
 1. **DNS sorgusu bilinçli olarak kaldırılmıştır (A-07).**
    `EmailGuardHandler` artık `checkdnsrr($domain,'MX')` **çağırmaz**: PHP bu

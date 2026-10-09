@@ -6,7 +6,7 @@ namespace Rbn\Framework\Core\Services\Master\Data;
 
 /**
  * MasterSettingsConfig - Master Ayar Sabitleri 🏛️⚙️
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 class MasterSettingsConfig
 {

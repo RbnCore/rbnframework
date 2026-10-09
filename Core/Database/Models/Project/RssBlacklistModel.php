@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseModelInterface;
 /**
  * RssBlacklistModel - Evrensel Proje RSS Blacklist Modeli 🚫
  * Mükerrer haber çekimini önlemek için işlenmiş GUID ve başlık hash kayıtlarını tutar.
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * @property int         $id
  * @property string      $project_key

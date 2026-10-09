@@ -14,7 +14,7 @@ use ErrorException;
 /**
  * BootSentinel - The Strategic System Gatekeeper 🛡️🚨⚓
  * 
- * RBN 3.5: Unified Sentinel for early-boot security and failure rendering.
+ * RBN Framework: Unified Sentinel for early-boot security and failure rendering.
  * Groups all system integrity guards under the Gatekeepers service.
  * Zero-Dependency: No inheritance to ensure it works even if core services fail.
  */
@@ -55,7 +55,7 @@ class BootSentinel
      */
     public function dispatch(Throwable $e): void
     {
-        // 🔬 RBN 3.5: Black-box Recording (Panic Level) 📓📼
+        // 🔬 RBN Framework: Black-box Recording (Panic Level) 📓📼
         try {
             if (class_exists(LogHandler::class)) {
                 $level = 'development';
@@ -101,7 +101,7 @@ class BootSentinel
             }
         }
 
-        // 3. Panic Path: Masterpiece BootGuard (Zero Dependency Render) 🏛️⚔️🛡️⚓
+        // 3. Panic Path: RBN Framework BootGuard (Zero Dependency Render) 🏛️⚔️🛡️⚓
         self::render($e);
     }
 
@@ -110,7 +110,7 @@ class BootSentinel
      */
     public static function render(Throwable $e): void
     {
-        // 🚩 RBN 3.5: [PANIC LOCK] Atomic Brake using global constant ⚡
+        // 🚩 RBN Framework: [PANIC LOCK] Atomic Brake using global constant ⚡
         if (!defined('RBN_PANIC_ACTIVE')) {
             define('RBN_PANIC_ACTIVE', true);
         }
@@ -119,12 +119,12 @@ class BootSentinel
             \Rbn\Framework\Core\System\Kernel\Guards\Watchdog::$inPanic = true;
         }
 
-        // 🎼 RBN 3.5: Clean ALL Buffers (Prevent trapped output)
+        // 🎼 RBN Framework: Clean ALL Buffers (Prevent trapped output)
         while (ob_get_level() > 0) {
             ob_end_clean();
         }
 
-        // 🥇 RBN 3.5: Absolute Headers
+        // 🥇 RBN Framework: Absolute Headers
         if (!headers_sent()) {
             @header('HTTP/1.1 500 Internal Server Error');
             @header('Content-Type: text/html; charset=utf-8');
@@ -136,7 +136,7 @@ class BootSentinel
         $trace = $e->getTraceAsString();
 
         try {
-            // 🎯 RBN 3.5: Strategic View Loading (Hardcoded Absolute Path Fallback) 🏺⚓
+            // 🎯 RBN Framework: Strategic View Loading (Hardcoded Absolute Path Fallback) 🏺⚓
             $viewPath = Paths::frameworkRoot() . DIRECTORY_SEPARATOR . 'Resources' . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . 'Errors' . DIRECTORY_SEPARATOR . 'panic.view.php';
 
             if (file_exists($viewPath)) {

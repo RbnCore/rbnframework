@@ -10,7 +10,7 @@ use Rbn\Framework\Core\Base\Data\Traits\Config\ActionConfigTrait;
 /**
  * BaseConfig - The Foundation for all Configuration Gateways 🏛️⚓
  * 
- * RBN 3.5: Masterpiece Refactoring.
+ * RBN Framework: Refactoring.
  * Fully autonomous and trait-driven DNA management.
  * Purely inherits Universal map() Orchestrator from the BaseComponent root.
  */
@@ -45,7 +45,7 @@ class BaseConfig extends BaseComponent implements \ArrayAccess
     }
     /**
      * CENTRALIZED REGISTRATION MAP (SSOT) 🏛️⚓
-     * RBN 3.5 Unified Standard: Single source of truth for all components.
+     * RBN Framework Unified Standard: Single source of truth for all components.
      * To be overridden by registries and modules.
      */
     public function registerMap(): array
@@ -54,14 +54,14 @@ class BaseConfig extends BaseComponent implements \ArrayAccess
     }
 
     /**
-     * Masterpiece Proxy: Static gateway to project settings 🌉🛰️⚓
+     * RBN Framework Proxy: Static gateway to project settings 🌉🛰️⚓
      * 
-     * RBN 3.5: Bridges Definition category classes to the central Config hub.
+     * RBN Framework: Bridges Definition category classes to the central Config hub.
      * Includes a recursion guard to prevent 'God Loops' during infrastructure resolution.
      */
     public static function get(string $key, mixed $default = null): mixed
     {
-        // 🛡️ RBN 3.5: [RECURSION GUARD] - Eğer zaten bir çözümleme içindeysek döngüyü kır!
+        // 🛡️ RBN Framework: [RECURSION GUARD] - Eğer zaten bir çözümleme içindeysek döngüyü kır!
         //
         // 🛡️ B-32: Koruma KORUNDU (false -> $default), ama DÜŞEN ANAHTAR
         // GÖRÜNMEZDI: `self::$isResolving` global olduğu için bir çözümleme
@@ -100,7 +100,7 @@ class BaseConfig extends BaseComponent implements \ArrayAccess
     }
 
     /* ==========================================================================
-       [ ARRAYACCESS COMPATIBILITY ] - RBN 3.5 Bridge 🌉
+       [ ARRAYACCESS COMPATIBILITY ] - RBN Framework Bridge 🌉
        ========================================================================== */
 
     public function offsetExists($offset): bool { return $this->has((string)$offset); }

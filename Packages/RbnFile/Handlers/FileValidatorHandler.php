@@ -13,7 +13,7 @@ use Rbn\Framework\Core\Support\Blueprints\Validations\FileValidations;
 /**
  * FileValidatorHandler - The Security Guard (Worker) 🧪🛡️
  * 
- * RBN 3.5: Masterpiece Standard (BaseComponent Actor).
+ * RBN Framework: Standard (BaseComponent Actor).
  * Unified with FileValidations DNA.
  */
 class FileValidatorHandler extends BaseComponent
@@ -24,7 +24,7 @@ class FileValidatorHandler extends BaseComponent
     public function validate(UploadedFile $file, array $options = []): array
     {
         try {
-            // 🎼 RBN 3.5: Preset Lookup (DNA Integration)
+            // 🎼 RBN Framework: Preset Lookup (DNA Integration)
             if (isset($options['preset'])) {
                 $presetRules = FileValidations::getPreset($options['preset']);
                 if ($presetRules) {
@@ -106,7 +106,7 @@ class FileValidatorHandler extends BaseComponent
         $extension = $file->extension();
 
         if (!MimeValidations::isValidMime($extension, $detectedMimeType)) {
-            // 🛡️ RBN 3.5: Resim dosyaları için esneklik (Farklı resim türleri arası geçişe izin ver)
+            // 🛡️ RBN Framework: Resim dosyaları için esneklik (Farklı resim türleri arası geçişe izin ver)
             $isImageExt = $this->isImage($extension);
             $isImageMime = str_starts_with($detectedMimeType, 'image/');
 

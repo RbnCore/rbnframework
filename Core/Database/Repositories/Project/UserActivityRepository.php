@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Base\Data\BaseRepository;
 /**
  * UserActivityRepository - Specialized Data Repository for Audit Trails & User Activities 🕵️‍♂️📜📊
  * 
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * Handles activity logging, historical analysis, and log maintenance.
  * 
  * @property \Rbn\Framework\Core\Database\Models\Project\UserActivitiesModel $userActivitiesModel

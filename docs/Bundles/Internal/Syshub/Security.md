@@ -1,6 +1,6 @@
 # Bundles/Internal/Syshub/Security — Güvenlik merkezi (firewall, IP blok, whitelist, rate limit)
 
-> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Bundles/Internal/Syshub/Controllers/Security/` (5 `*.php`) +
 > ilgili 3 provider + 1 handler + 5 görünüm.
 > **Envanter:** 5 controller dosyasının 5'i anlatıldı.

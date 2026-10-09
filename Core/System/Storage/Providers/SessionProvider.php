@@ -7,14 +7,15 @@ namespace Rbn\Framework\Core\System\Storage\Providers;
 use Rbn\Framework\Core\System\Storage\Base\BaseStorageProvider;
 use Rbn\Framework\Core\System\Paths\Paths;
 use SessionHandlerInterface;
+use SessionUpdateTimestampHandlerInterface;
 
 /**
  * SessionProvider - Framework Oturum Birimi 🔑
  * 
  * PHP session dosyalarını (sess_*) güvenli ve şifreli bir şekilde yönetir.
- * RBN 3.5: Çift şapkalı mimari (Native SessionHandlerInterface + Yüksek Seviye Key-Value API).
+ * RBN Framework: Çift şapkalı mimari (Native SessionHandlerInterface + Yüksek Seviye Key-Value API).
  */
-class SessionProvider extends BaseStorageProvider implements SessionHandlerInterface
+class SessionProvider extends BaseStorageProvider implements SessionHandlerInterface, SessionUpdateTimestampHandlerInterface
 {
     protected string $storageName = 'sessions';
     protected bool $encrypted = false;
@@ -27,7 +28,7 @@ class SessionProvider extends BaseStorageProvider implements SessionHandlerInter
     }
 
     /**
-     * RBN 3.5: [SOVEREIGN SESSION IDENTITY] 🏙️🛰️⚓
+     * RBN Framework: [RBN Framework SESSION IDENTITY] 🏙️🛰️⚓
      * Projenin otonom kimliğini baz alarak benzersiz bir session cookie ismi üretir.
      */
     public function getName(): string
@@ -97,6 +98,36 @@ class SessionProvider extends BaseStorageProvider implements SessionHandlerInter
         // PHP yine de uyarı üretmeye devam eder; fail-closed tarafta
         // oturum düşürme kararı çağırana bırakılır.
         return !is_file($path);
+    }
+
+    /**
+     * `session.use_strict_mode` icin kimlik denetimi: istemcinin gonderdigi ID
+     * YALNIZ sunucuda bu ID ile bir oturum dosyasi varsa kabul edilir. Yoksa
+     * PHP yeni bir ID uretir (istemcinin sectigi ID kullanilmaz).
+     *
+     * Bu arayuz uygulanmadan ozel save handler'da strict mode etkisizdi.
+     */
+    public function validateId(string $id): bool
+    {
+        if (preg_match('/^[a-zA-Z0-9,\-]{22,256}$/', $id) !== 1) {
+            return false;
+        }
+
+        return is_file($this->resolvePath($this->prefix . $id));
+    }
+
+    /**
+     * Veri degismediginde (`session.lazy_write`) dosya zamani tazelenir; GC
+     * etkin oturumu silmez.
+     */
+    public function updateTimestamp(string $id, string $data): bool
+    {
+        $path = $this->resolvePath($this->prefix . $id);
+        if (is_file($path)) {
+            return @touch($path);
+        }
+
+        return $this->write($id, $data);
     }
 
     public function gc(int $max_lifetime): int|false

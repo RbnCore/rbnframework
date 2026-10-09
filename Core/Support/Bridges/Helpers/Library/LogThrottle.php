@@ -43,13 +43,11 @@ use Rbn\Framework\Core\System\Paths\Paths;
  * ANAHTAR İÇERİĞİ: yalnız kalem etiketi + sınıf/öğe adı. Değer, PII, proje
  * anahtarı veya istek verisi ASLA anahtara girmez (Anayasa §9).
  *
- * ORTAM KAPISI: `RBN_LOG_THROTTLE=0|false|off|no|hayir` → kapi AÇILIR, her
- * çağrı `true` döner (yalnız TEST/ölçüm için). Varsayılan: kapı AÇIK.
- * Değişken `EnvKeys::RBN_LOG_THROTTLE` olarak kayıtlıdır ve **tek kapıdan**
- * (`Env::flag()`) okunur (FW-ENV-KAYIT kuralı).
+ * AYAR KAPISI [FW-096-D8]: `secrets.php` `app.log_throttle = false` → kısıt
+ * uygulanmaz, her çağrı `true` döner (yalnız TEST/ölçüm için). Varsayılan:
+ * kısıt AÇIK. TEK okuyucu `Secrets::app()`; ortam değişkeni okunmaz.
  *
- * @see \Rbn\Framework\Core\System\Config\Env
- * @see \Rbn\Framework\Core\System\Config\Definitions\EnvKeys
+ * @see \Rbn\Framework\Core\System\Config\Secrets
  */
 final class LogThrottle
 {
@@ -326,19 +324,23 @@ final class LogThrottle
     }
 
     /**
-     * Kapi açık mı? (yalnız `Env` okur; `RBN_LOG_THROTTLE=0` kapatır)
+     * Kısıt açık mı? (`secrets.php` `app.log_throttle`; `false` kapatır)
      *
-     * Ad `EnvKeys::RBN_LOG_THROTTLE` sabitinde kayıtlıdır; diğer okuyucularla
-     * aynı desenle (`Env::flag('AD', ...)`) okunur.
+     * PreBoot bu sınıfı autoloader'dan önce yükler; o noktada `Secrets`
+     * ortam kararı için zaten yüklenmiştir. Yüklü değilse kısıt AÇIK kalır.
      */
     private static function enabled(): bool
     {
         try {
-            return \Rbn\Framework\Core\System\Config\Env::flag('RBN_LOG_THROTTLE', true);
+            $secrets = 'Rbn\\Framework\\Core\\System\\Config\\Secrets';
+            if (!class_exists($secrets)) {
+                return true;
+            }
+
+            return $secrets::app()['log_throttle'];
         } catch (\Throwable) {
-            // `Env` kayıt dışı adı fail-closed reddedebilir; bu durumda
-            // throttle AÇIK kalır (gürültü öncelikli değil, görünürlük önemli:
-            // en kötü halde eski davranış).
+            // Sır dosyası okunamazsa throttle AÇIK kalır (en kötü halde eski
+            // davranış; ölçüm katmanı istisna fırlatmaz).
             return true;
         }
     }

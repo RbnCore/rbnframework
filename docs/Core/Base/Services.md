@@ -1,6 +1,6 @@
 # Core/Base/Services — servis, sağlayıcı ve yönetici tabanları
 
-> **Doğrulanan kod tabanı:** `1d89c431` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `1d89c431` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Core/Base/Services/` — 18 `*.php`.
 > **Envanter:** 18 dosyanın 18'i aşağıda anlatıldı.
 
@@ -62,7 +62,7 @@ $service->create($data)                 → CrudServiceTrait (varsa)
  │    ├─ kısa ad: 'UserService' → 'User' → provider anahtarı 'UserProvider'  :108-110
  │    ├─ component('provider', 'UserProvider', false)  :114 (zorunlu DEĞİL)
  │    └─ varsa call_user_func_array  :117-119
- │         yoksa Exception "Sovereign Service Error"  :121
+ │         yoksa Exception "RBN Framework Service Error"  :121
  └─ provider->create() → CrudProviderTrait
 ```
 

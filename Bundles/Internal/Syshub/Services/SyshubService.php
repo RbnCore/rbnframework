@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\Services\BaseService;
 
 /**
  * SyshubService - Modular Hub Orchestrator 🛡️🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * @property-read \Rbn\Framework\Bundles\Internal\Syshub\Handlers\DataPurgeHandler $purge
  * @property-read \Rbn\Framework\Bundles\Internal\Syshub\Handlers\SyshubHandler $syshubHandler

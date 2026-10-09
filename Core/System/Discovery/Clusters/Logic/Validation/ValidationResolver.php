@@ -10,7 +10,7 @@ use Rbn\Framework\Core\System\Paths\Paths;
 /**
  * ValidationResolver - Specialized DNA Motor for Validation Rules 💎⚙️⚓
  * 
- * RBN 3.5: Targeted Hub for validation blueprints.
+ * RBN Framework: Targeted Hub for validation blueprints.
  * Scans Core/Support/Blueprints/Validations for constants and dynamic rules.
  */
 class ValidationResolver extends BaseResolver
@@ -34,7 +34,7 @@ class ValidationResolver extends BaseResolver
             if ($value !== null) return $value;
         }
 
-        // 2. RBN 3.5 [DEEP SCAN] 🛰️🎡
+        // 2. RBN Framework [DEEP SCAN] 🛰️🎡
         // Eğer kategori 'validation' ise veya belirtilen kategoride anahtar bulunamadıysa,
         // tüm tescilli doğrulama sınıflarını tara.
         if ($category === 'validation' || $category === 'validations' || $class === null) {
@@ -78,7 +78,7 @@ class ValidationResolver extends BaseResolver
     {
         $this->ensureDiscovery();
         
-        // RBN 3.5: Standardize category names for discovery balance
+        // RBN Framework: Standardize category names for discovery balance
         $tag = strtolower($category);
         return $this->categories[$tag] ?? null;
     }
@@ -120,7 +120,7 @@ class ValidationResolver extends BaseResolver
 
             if (!class_exists($className, false)) continue;
 
-            // RBN 3.5 Auto-Tagging: Standardizes 'EmailValidations' to 'email'
+            // RBN Framework Auto-Tagging: Standardizes 'EmailValidations' to 'email'
             $categoryKey = strtolower(str_replace(['Map', 'Definitions', 'Blueprint', 'Validations'], '', $file->getBasename('.php')));
 
             $this->categories[$categoryKey] = $className;

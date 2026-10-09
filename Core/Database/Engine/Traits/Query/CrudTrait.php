@@ -5,7 +5,7 @@ namespace Rbn\Framework\Core\Database\Engine\Traits\Query;
 /**
  * CrudTrait - The Data Modification Engine 🌋🛰️⚓
  * 
- * RBN 3.0: Powers all insert, update, and delete operations.
+ * Powers all insert, update, and delete operations.
  */
 trait CrudTrait
 {
@@ -126,9 +126,12 @@ trait CrudTrait
                 );
             }
 
+            // CASE ve WHERE IN ayrı ad alır: yerel hazırlıkta (EMULATE_PREPARES=false)
+            // aynı adlandırılmış yer tutucu iki kez kullanılamaz (SQLSTATE HY093).
             $idParamKey = "bid_{$i}";
-            $idPlaceholders[] = ":{$idParamKey}";
             $params[$idParamKey] = $id;
+            $idPlaceholders[] = ":wid_{$i}";
+            $params["wid_{$i}"] = $id;
 
             foreach ($row as $key => $val) {
                 if ($key === $index) continue;

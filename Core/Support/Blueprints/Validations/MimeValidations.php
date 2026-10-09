@@ -5,7 +5,7 @@ namespace Rbn\Framework\Core\Support\Blueprints\Validations;
 /**
  * MimeValidations - Centralized MIME Type Repository 🛡️📦⚓
  * 
- * RBN 3.5: Multi-Category MIME mapping and validation standards.
+ * RBN Framework: Multi-Category MIME mapping and validation standards.
  * Provides a Single Source of Truth for File Security and Validation.
  */
 class MimeValidations

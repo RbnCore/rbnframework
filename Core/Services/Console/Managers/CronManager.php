@@ -6,9 +6,10 @@ namespace Rbn\Framework\Core\Services\Console\Managers;
 
 use Rbn\Framework\Core\Base\Services\BaseManager;
 use Rbn\Framework\Core\Services\Console\Base\ConsoleStyle;
+use Rbn\Framework\Core\Services\Console\Handlers\CronNotificationHandler;
 
 /**
- * CronManager - Sovereign Master Pipeline Orchestrator (Şef) 👨‍🍳🛰️⚡
+ * CronManager - RBN Framework Master Pipeline Orchestrator (Şef) 👨‍🍳🛰️⚡
  * 
  * Konum: E:\localhost\rbnframework\Core\Services\Console\Managers\CronManager.php
  * 
@@ -77,6 +78,7 @@ class CronManager extends BaseManager
         $scheduleParams = $this->resolver('cron')->resolveScheduleParams($job);
         $allowedDays = $scheduleParams['days'];
         $targetHours = $scheduleParams['hours'];
+        $everyMinutes = (int) ($scheduleParams['every_minutes'] ?? 0);
         $rawParams = $scheduleParams['params'];
 
         // =========================================================================
@@ -98,7 +100,7 @@ class CronManager extends BaseManager
             $dueCheck = $this->handler('cronScheduler')->isRunDue($allowedDays, $targetHours, $todayPublishedCount);
 
             if (!$dueCheck['is_due']) {
-                $nextRunAt = $this->handler('cronScheduler')->calculateNextRunTime($allowedDays, $targetHours);
+                $nextRunAt = $this->handler('cronScheduler')->calculateNextRunTime($allowedDays, $targetHours, $everyMinutes);
                 $this->repository('master.cronJob')->updateJobSchedule($jobId, [
                     'next_run_at' => $nextRunAt
                 ]);
@@ -153,7 +155,7 @@ class CronManager extends BaseManager
                 unset($rawParams['consecutive_failures']);
             }
             // DB'deki days ve hour parametrelerine göre bir sonraki KESİN hedef zamanı hesapla
-            $calculatedNext = $this->handler('cronScheduler')->calculateNextRunTime($allowedDays, $targetHours);
+            $calculatedNext = $this->handler('cronScheduler')->calculateNextRunTime($allowedDays, $targetHours, $everyMinutes);
             
             // Güvenlik Kilidi: Hesaplanan tarih ŞU ANDAN KESİNLİKLE İLERİDE OLMALIDIR 🛡️
             if (strtotime($calculatedNext) <= time()) {
@@ -194,9 +196,10 @@ class CronManager extends BaseManager
         $this->logWorkspace('cron')->withProject($projectKey)->info("[CronManager] [Adım 4] Zamanlayıcı (Scheduler) DB'yi Güncelledi.");
 
         // =========================================================================
-        // ADIM 5: NOTIFIER - Bildirim Gönderimi (Local ve Skipped Durumunda ATLANIR)
+        // ADIM 5: NOTIFIER - Bildirim Gönderimi (Local, Skipped ve görev politikası 'failure'/'never' ise ATLANIR)
         // =========================================================================
-        if (!is_local() && $status !== 'skipped') {
+        $notifyPolicy = CronNotificationHandler::resolveNotifyPolicy($rawParams, $taskClass);
+        if (!is_local() && CronNotificationHandler::shouldNotify($status, $notifyPolicy)) {
             try {
                 $this->handler('cronNotification')->sendNotification($job, $status, $message, null, $startedAt, $startTime);
                 $this->logWorkspace('cron')->withProject($projectKey)->info("[CronManager] [Adım 5] E-Posta bildirimi başarıyla iletildi.");
@@ -204,7 +207,7 @@ class CronManager extends BaseManager
                 $this->logWorkspace('cron')->withProject($projectKey)->error("[CronManager] [Adım 5] E-Posta bildirimi gönderilemedi: " . $notifErr->getMessage());
             }
         } else {
-            $this->logWorkspace('cron')->withProject($projectKey)->info("[CronManager] [Adım 5] E-Posta bildirimi atlandı (Local ortam veya Status: {$status}).");
+            $this->logWorkspace('cron')->withProject($projectKey)->info("[CronManager] [Adım 5] E-Posta bildirimi atlandı (Local ortam, Status: {$status}, Politika: {$notifyPolicy}).");
         }
 
         $this->logWorkspace('cron')->withProject($projectKey)->info("=== [CronManager Pipeline] Job ID {$jobId} Başarıyla Tamamlandı ===");

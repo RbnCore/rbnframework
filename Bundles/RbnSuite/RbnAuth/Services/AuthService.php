@@ -6,10 +6,11 @@ namespace Rbn\Framework\Bundles\RbnSuite\RbnAuth\Services;
 
 use Rbn\Framework\Core\Base\Services\BaseService;
 use Rbn\Framework\Bundles\RbnSuite\RbnAuth\Models\AuthRole;
+use Rbn\Framework\Core\Http\Security\AuthPolicy;
 
 /**
- * AuthService - The Sovereign Entryway & Identity Authority 🎻🏹⚓
- * RBN 3.5 Masterpiece Standard.
+ * AuthService - The RBN Framework Entryway & Identity Authority 🎻🏹⚓
+ * RBN Framework Standard.
  * 
  * The primary Chef for the RbnAuth Gateway.
  * Orchestrates login, logout, identity checks, and authentication state (SSoT).
@@ -20,6 +21,8 @@ use Rbn\Framework\Bundles\RbnSuite\RbnAuth\Models\AuthRole;
  */
 class AuthService extends BaseService
 {
+    private const UNAVAILABLE_MESSAGE = 'Giriş şu anda gerçekleştirilemiyor. Lütfen tekrar deneyin.';
+
     /**
      * Kullanıcının oturumu açık mı kontrol eder 🔐
      */
@@ -30,9 +33,61 @@ class AuthService extends BaseService
 
     /**
      * Attempts to securely open the gateway 🔑🛰️⚓
-     * RBN 3.5 Universal Security: Supports Local and Master Developer access.
+     * RBN Framework Universal Security: Supports Local and Master Developer access.
      */
     public function login(string $identity, string $password, bool $remember = false): array
+    {
+        // Hesap kilidi servisi yoksa giriş REDDEDİLİR (fail-closed).
+        $ipGuard = $this->service('ipGuard');
+        if (!$ipGuard) {
+            error_log('RBN Guvenlik: giris reddedildi, ipGuard servisi cozulemedi (hesap kilidi denetlenemiyor)');
+            return ['success' => false, 'message' => self::UNAVAILABLE_MESSAGE];
+        }
+
+        $lock = $ipGuard->accountLockStatus($identity);
+        if ($lock['remaining'] > 0) {
+            $this->handler('audit')->logAccountLock('ACCOUNT_LOCKED_ATTEMPT', $identity, $lock['failures'], $lock['remaining']);
+            return self::lockedResult($lock['remaining']);
+        }
+
+        $result = $this->attemptLogin($identity, $password, $remember);
+
+        if ($result['success']) {
+            $ipGuard->clearAccountFailures($identity);
+            return $result;
+        }
+
+        if (!empty($result['credential_failure'])) {
+            unset($result['credential_failure']);
+            $lock = $ipGuard->recordAccountFailure($identity);
+            if ($lock['remaining'] > 0) {
+                $this->handler('audit')->logAccountLock('ACCOUNT_LOCKED', $identity, $lock['failures'], $lock['remaining']);
+                return self::lockedResult($lock['remaining']);
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * Kilit yanıtı: var olan ve olmayan hesap için AYNI metin.
+     */
+    private static function lockedResult(int $remainingSeconds): array
+    {
+        $minutes = max(1, (int) ceil($remainingSeconds / 60));
+
+        return [
+            'success' => false,
+            'message' => "Bu hesap için çok fazla başarısız deneme yapıldı. Lütfen {$minutes} dakika sonra tekrar deneyin.",
+        ];
+    }
+
+    /**
+     * Kimlik doğrulama adımları (kilit denetimi `login()` içindedir).
+     * Parola/kimlik hatası `credential_failure` ile işaretlenir; hesap sayacına
+     * yalnız bu dal yazılır.
+     */
+    private function attemptLogin(string $identity, string $password, bool $remember): array
     {
         $userRepo = $this->repository('project.user');
 
@@ -40,7 +95,7 @@ class AuthService extends BaseService
         $master = $userRepo ? $userRepo->findMasterDeveloper($identity) : null;
 
         if ($master) {
-            // 🎼 RBN 3.5: Master Developer Password Verification 🔐🛰️
+            // 🎼 RBN Framework: Master Developer Password Verification 🔐🛰️
             $passwordHash = $master['password'] ?? null;
             $crypto = $this->helper('crypto');
 
@@ -58,7 +113,7 @@ class AuthService extends BaseService
                     return [
                         'success' => true,
                         'message' => "👋 Hoş geldin, {$displayName}!",
-                        'redirect' => '/user'
+                        'redirect' => AuthPolicy::userHomePath()
                     ];
                 }
 
@@ -75,7 +130,7 @@ class AuthService extends BaseService
         $result = $accessHandler ? $accessHandler->authenticate($identity, $password) : ['success' => false, 'message' => 'Erişim servisine ulaşılamadı.'];
 
         if (!$result['success']) {
-            return $result;
+            return $result + ['credential_failure' => (bool) $accessHandler];
         }
 
         // 🎼 Step 3: Persistence layer initialization 💎
@@ -120,7 +175,7 @@ class AuthService extends BaseService
             return [
                 'success' => true,
                 'message' => "👋 Hoş geldin, {$displayName}!",
-                'redirect' => '/user'
+                'redirect' => AuthPolicy::userHomePath()
             ];
         }
 
@@ -141,7 +196,7 @@ class AuthService extends BaseService
         return [
             'success' => true,
             'message' => "👋 Hoş geldin, {$displayName}!",
-            'redirect' => '/user'
+            'redirect' => AuthPolicy::userHomePath()
         ];
     }
 

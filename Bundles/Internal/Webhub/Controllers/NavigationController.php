@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\Attributes\SubModule;
 
 /**
  * NavigationController - Frontend Menu Orchestrator 🌐🏛️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 #[SubModule(
     entity: 'navigation',
@@ -21,7 +21,7 @@ class NavigationController extends WebhubController
      */
     public function index(): void
     {
-        // 🎼 RBN 3.5: [SOVEREIGN HIERARCHY DISCOVERY] 🏹🛰️⚓
+        // 🎼 RBN Framework: [RBN Framework HIERARCHY DISCOVERY] 🏹🛰️⚓
         $menus = $this->service->getList();
 
         $this->render('Navigation/index', [

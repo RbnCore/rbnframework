@@ -30,8 +30,10 @@
    ========================================================================== */
 @media (max-width: 768px) {
     /* 🏛️ Container & Padding */
-    .rbn-container, 
-    .app-container, 
+    .rbn-container,
+    .rbn-container-sm,
+    .rbn-container-lg,
+    .app-container,
     .container {
         padding-left: var(--rbn-space-4) !important;
         padding-right: var(--rbn-space-4) !important;
@@ -119,13 +121,8 @@
         font-size: 0.82rem;
     }
 
-    /* 🪟 Modals on Mobile (Bottom Sheet / Full Width) */
-    .rbn-modal {
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: var(--rbn-space-3);
-        border-radius: var(--rbn-radius-lg);
-    }
+    /* 🪟 Mobil modal (alt sayfa / tam ekran): .rbn-modal bileseninde (components/rbnModal.css, FW-096-C3);
+       eski buradaki .rbn-modal kurali kapsayiciya kenar boslugu verip yerlesimi bozuyordu, kaldirildi. */
 }
 
 /* ==========================================================================
@@ -201,13 +198,28 @@
     left: auto;
 }
 
-/* D3: .rbn-drawer-right 992px (lg) altinda gizlenir; icerik overlay
-   drawer'a tasinir. Tetikleyici AYNI .rbn-btn + data-rbn-drawer
-   (D4: yeni toggle sinifi YAZILMAZ). */
-@media (max-width: 991.98px) {
-    .rbn-drawer.rbn-drawer-right {
-        display: none;
+/* FW-096-C3: acik hali ("-right" kurali .show'dan sonra geldigi icin .show tek basina yetmiyordu) */
+.rbn-drawer.rbn-drawer-right.show {
+    right: 0;
+}
+
+/* FW-096-C3: .rbn-drawer-right artik <=991px'te GIZLENMEZ; ekran disi (off-canvas)
+   durur ve .show ile acilir (mobil menu / hesap cekmecesi). Masaustunde kenar cubuga
+   donusturmek icin .rbn-drawer-aside ekle (>=992px: sabit, sayfa akisinda). */
+@media (min-width: 992px) {
+    .rbn-drawer.rbn-drawer-right.rbn-drawer-aside {
+        position: sticky;
+        top: 0;
+        right: auto;
+        height: 100vh;
+        max-width: none;
+        box-shadow: none;
+        border-left: 1px solid var(--rbn-border);
+        flex-shrink: 0;
     }
+}
+@supports (height: 100dvh) {
+    .rbn-drawer { height: 100dvh; }
 }
 
 /* 📏 Size Modifiers (Genişlik Varyantları) */
@@ -332,7 +344,7 @@
         font-size: 1.35rem !important;
     }
 
-    .rbn-card {
+    .rbn-card:not(.rbn-card-flush) {
         padding: var(--rbn-space-4) !important;
     }
 

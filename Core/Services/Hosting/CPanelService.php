@@ -7,9 +7,9 @@ namespace Rbn\Framework\Core\Services\Hosting;
 use Rbn\Framework\Core\Base\Services\BaseService;
 
 /**
- * CPanelService - The Sovereign Orchestrator for cPanel Integration 🏰🛰️⚓
+ * CPanelService - The RBN Framework Orchestrator for cPanel Integration 🏰🛰️⚓
  * 
- * RBN 3.5 "Masterpiece" Standard.
+ * RBN Framework Standard.
  * @property Handlers\CPanelMailHandler $CPanelMailHandler
  * @property Handlers\CPanelDomainsHandler $CPanelDomainsHandler
  * @property Providers\CPanelProvider $CPanelProvider
@@ -18,7 +18,7 @@ class CPanelService extends BaseService
 {
     /**
      * Bridge Gateway 🌉
-     * RBN 3.5: Access via the autonomous CPanel Provider.
+     * RBN Framework: Access via the autonomous CPanel Provider.
      */
     public function bridge()
     {

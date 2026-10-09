@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Http\Engine\Traits\Alert\StorageTrait;
 /**
  * AlertService - Standardized Notification Engine 🔔🛡️⚓
  * 
- * RBN 3.0: High-Performance, modular alerting with hybrid session/cookie storage.
+ * High-Performance, modular alerting with hybrid session/cookie storage.
  * Synchronized with the official HTTP Request & Response engines.
  */
 class AlertService implements AlertServiceInterface
@@ -37,7 +37,7 @@ class AlertService implements AlertServiceInterface
      */
     public function send(string $type, string $message, ?string $redirectUrl = null, ?string $message2 = null, array $data = []): void
     {
-        // 🛡️ RBN 3.5: Masterpiece Lock Mechanism
+        // 🛡️ RBN Framework: Lock Mechanism
         // Eğer bu işlem döngüsünde zaten bir mesaj gönderildiyse (örneğin manuel alert() kullanımı),
         // handleResult gibi ikincil tetikleyicilerin mesajlarını yoksay.
         if ($this->alertSent) {

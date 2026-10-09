@@ -13,7 +13,7 @@ use Rbn\Framework\Core\Support\Bridges\Helpers\Library\ProjectVersionResolver;
 /**
  * SeoResolver - The Semantic Intelligence Layer (Framework Cluster) 🧬🗺️⚓
  * 
- * RBN 3.5 "Masterpiece" - Layer 2: The Refiner.
+ * RBN Framework - Layer 2: The Refiner.
  * Standardizes raw database entries into clean metadata sets for rendering.
  */
 class SeoResolver extends BaseRender
@@ -84,7 +84,7 @@ class SeoResolver extends BaseRender
         $robots = ($overrides['robots'] ?? null)
             ?: $this->siteRobotsDirective($seoDb, $defaults);
 
-        // 🎼 RBN 3.5: [SOVEREIGN IDENTITY DISCOVERY] 🏛️⚖️⚓
+        // 🎼 RBN Framework: [RBN Framework IDENTITY DISCOVERY] 🏛️⚖️⚓
         // Logic: Overrides > appName > DB (company-name) > Config (app_name)
         $moduleName = !empty($overrides['module-name'])
             ? $overrides['module-name']
@@ -104,7 +104,7 @@ class SeoResolver extends BaseRender
             $config['app_version'] ?? project_data('version')
         );
 
-        // 🎼 RBN 3.5: Centralized Favicon Resolution 🏺🛰️⚓
+        // 🎼 RBN Framework: Centralized Favicon Resolution 🏺🛰️⚓
         $faviconRaw = $this->resolveFaviconRaw($hub, $overrides);
 
         // 🎼 2. Assembly (Metadata Package)
@@ -123,6 +123,17 @@ class SeoResolver extends BaseRender
             'canonical-url' => $overrides['canonical'] ?? $this->request->url(),
             'favicon' => $this->resolveAsset($faviconRaw, $defaultVirtualFavicon)
         ];
+
+        // 📱 [FW-096-C7] apple-touch-icon + web manifest: dosya GERCEKTEN varsa (kural: AssetConvention)
+        // dogrudan `/images/...` adresiyle; yoksa anahtar hic eklenmez -> etiket uretilmez.
+        $appleTouch = $overrides['apple_touch_icon'] ?? AssetConvention::findAppleTouchIcon($this->projectKey ?? null);
+        if (!empty($appleTouch)) {
+            $meta['apple-touch-icon'] = str_starts_with((string) $appleTouch, 'http') ? (string) $appleTouch : url('/' . ltrim((string) $appleTouch, '/'));
+        }
+        $manifest = $overrides['manifest'] ?? AssetConvention::findManifest($this->projectKey ?? null);
+        if (!empty($manifest)) {
+            $meta['manifest'] = str_starts_with((string) $manifest, 'http') ? (string) $manifest : url('/' . ltrim((string) $manifest, '/'));
+        }
 
         // 🤳 3. Social Intelligence (OG & Twitter)
         $og = $this->resolveSocial($meta, $hub, $overrides, $faviconRaw);
@@ -292,7 +303,7 @@ class SeoResolver extends BaseRender
             return $path;
         }
 
-        // 🎼 RBN 3.5: [VIRTUAL ASSET DETECTION] 🏺🛰️⚓
+        // 🎼 RBN Framework: [VIRTUAL ASSET DETECTION] 🏺🛰️⚓
         // If the path is raw SVG code or a data URI representing an SVG,
         // we transform it into a clean, cachable project-asset URL.
         $trimmed = trim($path);
@@ -313,7 +324,7 @@ class SeoResolver extends BaseRender
             ? url($compiled['path'])
             : url('/' . ltrim($path, '/'));
 
-        // 🌐 RBN 3.5: Masterpiece URL Encoding (Ensures social crawlers can fetch files with spaces)
+        // 🌐 RBN Framework: URL Encoding (Ensures social crawlers can fetch files with spaces)
         return str_replace(' ', '%20', $finalPath);
     }
 

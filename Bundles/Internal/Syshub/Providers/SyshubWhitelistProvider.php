@@ -8,7 +8,7 @@ use Rbn\Framework\Core\Base\Services\BaseProvider;
 
 /**
  * SyshubWhitelistProvider - Otonom Güvenli Liste Veri Katmanı ✅🛡️
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  * 
  * Bu provider Master tablodan OKUMA yapar ve Shield Ayarlarındaki IP'leri harmanlar.
  * @property \Rbn\Framework\Core\Database\Models\Master\MasterIpWhitelistModel $masterIpWhitelistModel

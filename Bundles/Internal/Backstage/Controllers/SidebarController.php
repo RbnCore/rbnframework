@@ -8,7 +8,7 @@ use Rbn\Framework\Bundles\RbnSuite\RbnAuth\Models\AuthRole;
 
 /**
  * SidebarController - Advanced Sidebar Manager 🗺️🛰️⚓
- * RBN 3.5 Masterpiece Standard.
+ * RBN Framework Standard.
  */
 #[SubModule(entity: 'sidebar', service: 'sidebar', provider: 'sidebar')]
 class SidebarController extends BackstageController

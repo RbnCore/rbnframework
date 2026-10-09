@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\Support\Exceptions;
 /**
  * PageNotFoundException - RBN standard HTTP 404 Exception 🏹 🌊
  * 
- * RBN 3.5: Masterpiece Standard.
+ * RBN Framework: Standard.
  * Representing a clean "User-Level" routing failure.
  * Distinct from ViewNotFoundException which represents a technical/dev failure.
  */

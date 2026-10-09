@@ -1,6 +1,6 @@
 # Packages/RbnUtility — RSS/Atom ayrıştırıcı ve Google Trends okuyucu
 
-> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.5 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
+> **Doğrulanan kod tabanı:** `d49b4413` (dal `feat/fw-license-master`) · **Tarih:** 2026-10-05 · **Yayın:** 0.9.6 = bu commit + sonrası; belge yalnız doğrulama anındaki kodu anlatır
 > **Kaynak klasör:** `Packages/RbnUtility/` — **2 `*.php`** (ikisi de `Services/`).
 > **Envanter:** 2 dosyanın **2'si** aşağıda anlatıldı.
 

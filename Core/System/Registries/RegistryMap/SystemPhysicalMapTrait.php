@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\System\Registries\RegistryMap;
 /**
  * SystemPhysicalMapTrait - The Physical Inventory of the Framework 🏺🏗️⚓
  * 
- * RBN 3.5 Masterpiece: Centralized authority for Models and Data Providers.
+ * RBN Framework: Centralized authority for Models and Data Providers.
  */
 trait SystemPhysicalMapTrait
 {
@@ -20,7 +20,7 @@ trait SystemPhysicalMapTrait
         return [
             /* --- Core Data Models 🏺 --- */
             'models' => [
-                // --- Sovereign Master Layer 🌍 ---
+                // --- RBN Framework Master Layer 🌍 ---
                 'master.projects' => 'Core\Database\Models\Master\MasterProjectsModel',
                 'master.settings' => 'Core\Database\Models\Master\MasterSettingsModel',
                 // [FW-LICENCE] Merkezi lisans + uygulama kaydi (TEK 3 tablo kurali).
@@ -91,7 +91,7 @@ trait SystemPhysicalMapTrait
 
             /* --- Core Component Repositories 📦 --- */
             'repositories' => [
-                // --- Sovereign Master Layer 🌍 ---
+                // --- RBN Framework Master Layer 🌍 ---
                 'master.projects' => 'Core\Database\Repositories\Master\MasterProjectsRepository',
                 // [FW-BASE-3 / BULGU-1] Noktasız TAKMA AD (alias). Suffix keşfi
                 // (`$this->masterProjectsRepository` -> hedef "masterProjects")
