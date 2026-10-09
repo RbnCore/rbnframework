@@ -25,7 +25,7 @@ class GoogleService extends BaseService
      * Tek kaynak davranışı: başarılı yanıt 7 gün (place id + projectKey bazlı) önbellekte; başarısız
      * yanıt ASLA veri olarak önbelleğe yazılmaz, 15 dk retry işareti konur ve `false` döner;
      * gömülü/uydurma yedek değer YOK. Başarıda dönüş `rating_is_live => true` taşır.
-     * Aynı projectKey + place id veren siteler (ör. Uniqa/Antalya Arıtma) aynı kaydı paylaşır.
+     * Aynı projectKey + place id veren siteler aynı kaydı paylaşır.
      *
      * @return array|bool veri ya da false (alınamadı; çağıran puanı GİZLER)
      */
