@@ -42,7 +42,7 @@ class ShopierService extends BaseService
         // Aksi takdirde Shopier API "invalid media url" hatasıyla (HTTP 400) ödemeyi keser.
         $host = parse_url($mediaUrl, PHP_URL_HOST);
         if (empty($host) || $host === 'localhost' || $host === '127.0.0.1' || str_contains($host, '.test') || !str_contains($host, '.')) {
-            $mediaUrl = 'https://placehold.co/600x600/0ea5e9/ffffff/png';
+            $mediaUrl = 'https://placehold.co/600x600/0ea5e9/ffffff.png';
         }
 
         // Shopier API standartlarına göre veri paketi hazırlanır
