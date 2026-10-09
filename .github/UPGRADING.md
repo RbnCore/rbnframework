@@ -1,6 +1,9 @@
 ## [Unreleased]
 
-Henüz kayıt yok.
+### Shopier (kırıcı)
+
+- `ShopierService::generatePaymentUrl()` ve `verifyOrderOnline()` kaldırıldı. Bunları çağıran proje ilanı bir kez `createListing()` ile açmalı, dönen `id` ve `url` değerlerini kendi veritabanında saklamalı ve sonraki isteklerde aynı linki kullanmalı. Fiyat değişince `updateListingPrice()` çağrılmalı.
+- Shopier bazı PAT jetonlarında `GET`/`PUT /products` için 403 döner (POST ve DELETE çalışır). `updateListingPrice()` başarısız olursa proje mevcut ilanı kullanmaya devam etmeli ve farkı loglamalı; fiyat Shopier panelinden elle düzeltilir.
 
 ## 0.9.6 (yayın hazırlığı — 2026-10-09)
 

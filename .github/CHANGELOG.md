@@ -12,6 +12,16 @@ Güvenlik girdileri tarafsız yazılır: ne değişti ve etkisi ne, sömürme ad
 
 ---
 
+## [Unreleased]
+
+### Değişti
+
+* **RbnApi / Shopier: ödeme linki üreten akış kaldırıldı, yerine ilan açma ve fiyat güncelleme geldi.** Shopier REST API'de ödeme linki yok, satış mağaza ilanı üzerinden yapılıyor. `ShopierService::createListing()` ilanı açar (`POST /products`). `updateListingPrice()` fiyatı günceller (`PUT /products/{id}`); ilanın kimliği ve linki değişmez. İlanı ürüne kalıcı olarak bağlamak projenin işi; servis her istekte ilan açmaz. `ShopierProvider::call()` artık PUT ve DELETE isteklerini de JSON gövdeyle gönderiyor.
+
+### Kaldırıldı
+
+* **`ShopierService::generatePaymentUrl()` ve `verifyOrderOnline()`.** Her ödeme isteğinde stoku 1 olan yeni bir herkese açık ilan açıyorlardı ve mağazayı ilanla dolduruyorlardı.
+
 ## [0.9.6] - 2026-10-09
 
 **Kısa özet — giriş kapısı ve kullanıcı oturumu sertleştirildi; posta modülü doğrulamalı IMAP/SMTP ve `enc:v2` parola biçimine geçti; keşif haritası, cron ve yönlendirme hataları düzeltildi; CSS/JS motoruna tema token'lı bileşenler eklendi; ortam değişkeni katmanı kaldırıldı, çalışma ayarları `secrets.php` `app` bölümünden okunur.**
