@@ -14,8 +14,34 @@ use Rbn\Framework\Core\Services\Console\Base\AbstractCronTask;
  */
 class SystemTask extends AbstractCronTask
 {
+    /**
+     * İçerik Fabrikası yayın denetimi (task_key=factory_publish_audit): tüm projeler tek çalışmada.
+     */
+    protected function runFactoryPublishAuditTask(array $params): bool
+    {
+        $jobInstance = $this->job('factoryPublish');
+        if (!$jobInstance) {
+            $this->setMessage('Hata: Fabrika denetim işi [factoryPublish] çözümlenemedi.');
+            return false;
+        }
+
+        $jobResult = $jobInstance->execute($params);
+        $this->setMessage((string) ($jobResult['message'] ?? ''));
+        $this->setTrace((array) ($jobResult['trace'] ?? []));
+        if (($jobResult['status'] ?? '') === 'skipped') {
+            $this->skipped((string) ($jobResult['message'] ?? ''));
+        }
+
+        return (bool) ($jobResult['success'] ?? false);
+    }
+
     public function run(array $params = []): bool
     {
+        // Fabrika denetimi görev anahtarıyla gelir; diğer her anahtar varsayılan temizliğe gider
+        if (($params['task_key'] ?? '') === 'factory_publish_audit') {
+            return parent::run($params);
+        }
+
         $params = array_merge([
             'project_key' => 'rbncore',
             'task_type' => 'global_cleanup',

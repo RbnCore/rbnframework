@@ -35,6 +35,25 @@ class PackageData extends BaseConfig
                 'telegram' => \Rbn\Framework\Packages\RbnApi\Services\TelegramService::class,
                 'rssParser' => \Rbn\Framework\Packages\RbnUtility\Services\RssParserService::class,
                 'googleTrends' => \Rbn\Framework\Packages\RbnUtility\Services\GoogleTrendsService::class,
+                'factory' => \Rbn\Framework\Packages\RbnFactory\Services\FactoryService::class,
+                'factoryAudit' => \Rbn\Framework\Packages\RbnFactory\Services\FactoryAuditService::class,
+                'factoryNotify' => \Rbn\Framework\Packages\RbnFactory\Services\FactoryNotifyService::class,
+            ],
+
+            // --- [ MODELS ] ---
+            'models' => [
+                'factory.job' => \Rbn\Framework\Packages\RbnFactory\Models\FactoryJobModel::class,
+                'factory.notice' => \Rbn\Framework\Packages\RbnFactory\Models\FactoryNoticeModel::class,
+                'factory.draft' => \Rbn\Framework\Packages\RbnFactory\Models\FactoryDraftModel::class,
+                'factory.post' => \Rbn\Framework\Packages\RbnFactory\Models\FactoryPostModel::class,
+            ],
+
+            // --- [ REPOSITORIES ] ---
+            'repositories' => [
+                'factory.job' => \Rbn\Framework\Packages\RbnFactory\Repositories\FactoryJobRepository::class,
+                'factory.notice' => \Rbn\Framework\Packages\RbnFactory\Repositories\FactoryNoticeRepository::class,
+                'factory.draft' => \Rbn\Framework\Packages\RbnFactory\Repositories\FactoryDraftRepository::class,
+                'factory.post' => \Rbn\Framework\Packages\RbnFactory\Repositories\FactoryPostRepository::class,
             ],
 
 
@@ -65,6 +84,14 @@ class PackageData extends BaseConfig
                 'emailSanitizer' => \Rbn\Framework\Packages\RbnEmail\Handlers\MailHtmlSanitizerHandler::class,
                 'emailCredential' => \Rbn\Framework\Packages\RbnEmail\Handlers\MailCredentialHandler::class,
                 'emailQuota' => \Rbn\Framework\Packages\RbnEmail\Handlers\SendQuotaHandler::class,
+
+                // --- [ FACTORY HANDLERS ] ---
+                'factoryConfig' => \Rbn\Framework\Packages\RbnFactory\Handlers\FactoryConfigHandler::class,
+                'factorySignature' => \Rbn\Framework\Packages\RbnFactory\Handlers\FactorySignatureHandler::class,
+                'factoryPostUrl' => \Rbn\Framework\Packages\RbnFactory\Handlers\FactoryPostUrlHandler::class,
+                'factoryInternalLink' => \Rbn\Framework\Packages\RbnFactory\Handlers\FactoryInternalLinkHandler::class,
+                'factorySchema' => \Rbn\Framework\Packages\RbnFactory\Handlers\FactorySchemaHandler::class,
+                'factoryLock' => \Rbn\Framework\Packages\RbnFactory\Handlers\FactoryLockHandler::class,
             ],
 
             // --- [ RULES ] ---

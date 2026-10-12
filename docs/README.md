@@ -60,6 +60,7 @@ Tek tablo: kaynak klasörü, dosya sayısı ve o klasörü anlatan belge.
 | `Packages/RbnApi/` | 27 | [Packages/RbnApi.md](Packages/RbnApi.md) | ✅ |
 | `Packages/RbnEmail/` | 10 | [Packages/RbnEmail.md](Packages/RbnEmail.md) | ✅ |
 | `Packages/RbnFile/` | 8 | [Packages/RbnFile.md](Packages/RbnFile.md) | ✅ |
+| `Packages/RbnFactory/` (yalnız ayar ve VPS sözleşmesi) | - | [Packages/RbnFactory.md](Packages/RbnFactory.md) | kısmi |
 | `Packages/RbnPipeline/` | 31 | [Packages/RbnPipeline.md](Packages/RbnPipeline.md) + [RbnPipeline/Rules.md](Packages/RbnPipeline/Rules.md) (11) | ✅ |
 | `Packages/RbnUtility/` | 2 | [Packages/RbnUtility.md](Packages/RbnUtility.md) | ✅ |
 | `Packages/PackageData.php` | 1 | [Packages/PackageData.md](Packages/PackageData.md) | ✅ |

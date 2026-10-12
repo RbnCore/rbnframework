@@ -17,6 +17,15 @@ Route::middleware(\Rbn\Framework\Core\Http\Security\ApiGuard::class)->group(func
     Route::any('/api/v1/external', 'Rbn\Framework\Core\Render\Controllers\Api\ExternalApiController@index');
 });
 
+// 0b. İçerik Fabrikası (Packages/RbnFactory): TEK koşullu kanca 🏭
+// Sitenin Factory ayar dosyası ya da z_settings_api FACTORY_SIGNING_KEY kaydı (etkin) yoksa hiçbir rota eklenmez (diğer siteler 404 verir).
+// Uçlar panel/ApiGuard middleware'ine takılmaz; HMAC imzası paketin içinde doğrulanır.
+if (BaseService::get()->handler('factoryConfig')->exists()) {
+    Route::prefix('api/factory')->controller(\Rbn\Framework\Packages\RbnFactory\Controllers\FactoryController::class)->group(function () {
+        Route::get('jobs', 'jobs');
+        Route::post('result', 'result');
+    });
+}
 // 1. Frontend & Public Discovery (Key-Based RBN Framework Dispatch) 🌍
 $projectData = \Rbn\Framework\Core\System\Kernel\Bootstrap::getAppContext('project_data');
 $projectKey = $projectData['project_key'] ?? project_key();

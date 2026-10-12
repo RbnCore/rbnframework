@@ -127,6 +127,7 @@ trait SystemLogicMapTrait
                 'cleanup' => 'Core\Services\Console\Jobs\CleanupJob',
                 'cleanup.server' => 'Core\Services\Console\Jobs\Cleanup\ServerCleanupJob',
                 'cleanup.project' => 'Core\Services\Console\Jobs\Cleanup\ProjectCleanupJob',
+                'factoryPublish' => 'Core\Services\Console\Jobs\FactoryPublishJob',
             ],
         ];
     }
