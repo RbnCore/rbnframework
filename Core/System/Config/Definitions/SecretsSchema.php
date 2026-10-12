@@ -7,7 +7,7 @@ namespace Rbn\Framework\Core\System\Config\Definitions;
 /**
  * SecretsSchema - `secrets.php` dosyasının **TEK şema tanımı** (yalnız sabit).
  *
- * PATRON KURALI: "sabitler ayrı dosyada, metotlar ayrı dosyada." Bu dosyada
+ * PROJE SAHİBİ KURALI: "sabitler ayrı dosyada, metotlar ayrı dosyada." Bu dosyada
  * **metot yoktur**; burada yalnız `public const` bulunur. Davranış (okuma,
  * doğrulama, hata mesajı) `Engine/Secrets/SecretsLoader` + `Engine/Secrets/SecretsValidator`
  * + `Engine/Secrets/SecretsSections` sınıflarındadır.

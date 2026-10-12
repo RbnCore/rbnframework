@@ -17,7 +17,7 @@ namespace Rbn\Framework\Core\System\Config\Definitions\DbProfiles;
  * YOKTUR - tek dosya, tek kaynak). Ortam değişkenleri (`COMMON_DB_USER`/
  * `COMMON_DB_PASS`) yedek yoldur; `DB_NAME` bir ŞEMA kimliğidir, sır değildir.
  *
- * [CONFIG-D-BARAN] PATRON KURALI: bu bir SABİT dosyasıdır — **içinde `function`
+ * [CONFIG-D] PROJE SAHİBİ KURALI: bu bir SABİT dosyasıdır — **içinde `function`
  * YOKTUR.** Bağlantı değerlerini okuyan metotlar
  * `Engine/Database/DbProfileResolver` sınıfındadır.
  *

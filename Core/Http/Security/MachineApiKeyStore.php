@@ -19,22 +19,22 @@ namespace Rbn\Framework\Core\Http\Security;
  *   - eslesen anahtarin KIMLIGINI dondurur (`key_id`, kapsam, iptal, sure),
  *   - `key_id` uretimi/iptali icin CLI'ye veri saglar.
  *
- * DEPOLAMA (PATRON KARARI 2): `sha256:<hex>`.
+ * DEPOLAMA (PROJE SAHİBİ KARARI 2): `sha256:<hex>`.
  *   - `hash_alan` dolu anahtar: `hash_equals($stored, hash('sha256', $given))`,
  *   - duz metin anahtar (geri uyum): `hash_equals($plain, $given)`.
  *   Kisa devre YOK: iki dal da calisirsa `hash_equals` SAYISI sabittir, boylece
  *   "bu anahtar hangi daldan geldi" bilgisi zamanlamadan sizmaz.
  *
- * GERI UYUM KURALI (PATRON KARARI 3): duz metin `api_key` dalı KALDIRILMAZ.
+ * GERI UYUM KURALI (PROJE SAHİBİ KARARI 3): duz metin `api_key` dalı KALDIRILMAZ.
  * `keys` bolumu hic yoksa eski davranis bit-bit ayni kalir.
  *
- * [PATRON KARARI 6] Bu sinif HICBIR karari zorlamaz (enforce yoktur): yalniz
+ * [PROJE SAHİBİ KARARI 6] Bu sinif HICBIR karari zorlamaz (enforce yoktur): yalniz
  * kimlik KIMDIR ve denetlenebilir.
  */
 final class MachineApiKeyStore
 {
     /**
-     * Hash oneki: `sha256:<hex>`. (PATRON KARARI 2)
+     * Hash oneki: `sha256:<hex>`. (PROJE SAHİBİ KARARI 2)
      */
     public const HASH_PREFIX = 'sha256:';
 

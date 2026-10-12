@@ -220,7 +220,7 @@ class CryptoHelper
      * dolayısıyla anahtar tanımlı değilken bu dal mevcut fail-closed hatasına
      * düşer (sessiz varsayılan yok).
      *
-     * [FW-BANU-B4-BARAN] BURADA `try/catch` **KALDIRILDI**: Sır dosyası
+     * [FW-DENETIM-B4] BURADA `try/catch` **KALDIRILDI**: Sır dosyası
      * bozuk/okunamaz/izin fazla geniş olduğunda `optional()` artık
      * fail-closed `RuntimeException` fırlatır ve o **ASIL NEDEN** yukarı
      * çıkmalıdır. Önceden buradaki `catch` onu yutup "şifreleme anahtarı

@@ -8,7 +8,7 @@ use Rbn\Framework\Core\System\Kernel\Bootstrap;
 /**
  * ProjectVersionResolver - PROJE SURUMUNUN TEK COZUCUSU 🧬
  *
- * TEK KAYNAK (patron karari 2026-10-05): proje surumu **master veritabani**
+ * TEK KAYNAK (proje sahibi karari 2026-10-05): proje surumu **master veritabani**
  * `projects.version` kolonudur. Deger acilista proje veri onbellegine yazilir
  * (`ProjectDataMapper` -> `project_data('version')`) ve HER YER buradan okur:
  *   - `app_version()`            (global yardimci)

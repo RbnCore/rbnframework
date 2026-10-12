@@ -121,7 +121,7 @@ Her anahtar `{port, path, title, message, sub_message}` taşır.
    gönderilmesi anlamına gelir. Kodda gerekçe yorumu **yoktur**.
    *(Bu çalışmada düzeltilmedi — belge salt okunurdur. Öneri: en az
    `CURLOPT_SSL_VERIFYPEER => true` + CA doğrulaması; üretim öncesi
-   karar patronundur.)*
+   karar proje sahibinindir.)*
 4. **`CPanelService::call()` imzası `CPanelProvider::call()` ile aynı** ama
    `bridge()` üzerinden delegasyon yapar — yani **iki katman** vardır ve
    parametreler birebir aynıdır.

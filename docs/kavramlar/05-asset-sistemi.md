@@ -213,7 +213,7 @@ Kütüphanede slug'ı olmayan bir istek de aynı şekilde 500'e düşer.
 > Ölçüm: `/framework-assets/rbncommon/yok.css` → **500**; normal bir sayfa 404'ü `/yok-boyle-bir-sayfa-xyz`
 > → **404**. Yani **asset 404'leri şu an 500 olarak çıkıyor.** §13-B3.
 
-### 2.5 "Bu CDN'ler neden duruyor?" — Patron kararı (2026-10-05)
+### 2.5 "Bu CDN'ler neden duruyor?" — Proje sahibi kararı (2026-10-05)
 
 `AssetDefinition`'daki CDN sabitleri **bilinçli çok yönlü** tasarımdır; framework geneldir ve tek
 bir CSS/JS ailesi dayatmaz (Anayasa §9). Ölçülen gerçek kullanım:
@@ -373,7 +373,7 @@ altında aranır.
 | belirtilmemiş (⇒ bootstrap) | **8** | `<grup-w>` (`<proje-b>`,`<proje-b2>`), `<grup-x>` (`<proje-c>`,`<proje-g>`,`<proje-h>`), `<grup-y>` (`<proje-e>`,`<proje-f>`) |
 | **Toplam `view_mapping` girişi** | **21** | |
 
-> Önceki analiz (`Patron-Rapor/Analiz/rbncommon-rapor/css-dahil-etme-sistemi.md:54`) "6 alt proje `rbn`,
+> Önceki analiz (`css-dahil-etme-sistemi.md:54`) "6 alt proje `rbn`,
 > 5 varsayılan" diyordu. **Bu sayım bayattır**; 2026-10-05'te ölçülen gerçek sayı 13 / 8.
 > (O analiz 2026-10-02 tarihliydi; sonraki gece işçileri `css_engine` eklemiş.)
 

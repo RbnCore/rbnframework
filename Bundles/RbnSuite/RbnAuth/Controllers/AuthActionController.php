@@ -107,7 +107,7 @@ class AuthActionController extends AuthController
      * [A0-6] `action` değeri `password_reset` olarak düzeltildi. Eski değer `recovery`
      * idi ve `RateLimitValidations::LIMITS` içinde **yoktu** → hız sınırı hiç
      * tetiklenmiyordu (A-06 / team member http.md #61-62). Kalan eylem adları eşlemesi
-     * (login → frontend_login) A0-3 kalemiyle Baran'ın sahipliğindedir, dokunulmadı.
+     * (login → frontend_login) A0-3 kaleminin sahipliğindedir, dokunulmadı.
      */
     public function forgotPasswordSubmit(): void
     {

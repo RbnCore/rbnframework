@@ -9,7 +9,7 @@ use Rbn\Framework\Core\System\Config\Secrets;
 /**
  * SmtpProfileResolver - SMTP ve gönderen e-posta kimliğinin ÇÖZÜCÜSÜ ✉️📮
  *
- * [CONFIG-D-BARAN] PATRON KURALI: "sabitlerin olduğu dosyalarda METOT olmaz;
+ * [CONFIG-D] PROJE SAHİBİ KURALI: "sabitlerin olduğu dosyalarda METOT olmaz;
  * sabitler ayrı dosya, metotlar ayrı dosya." Bu metotlar
  * `Definitions/DbProfiles/MasterDbData.php` dosyasından BURAYA taşındı;
  * profil dosyası artık yalnız sabit içerir.

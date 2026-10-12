@@ -68,7 +68,7 @@ $db->connectionScoped('database_master', function () { /* … */ });
 
 ## 2. Profil katmanı (şema sabitleri ↔ bağlantı çözümü)
 
-Patron kuralı: **"sabitlerin olduğu dosyalarda METOT olmaz; sabitler ayrı dosya,
+Proje sahibi kuralı: **"sabitlerin olduğu dosyalarda METOT olmaz; sabitler ayrı dosya,
 metotlar ayrı dosya"** (`Core/System/Config/README.md:125`).
 
 | Sorumluluk | Dosya | Satır |

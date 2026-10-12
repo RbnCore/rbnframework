@@ -1,6 +1,6 @@
 # Core/System/Config — TEK KAPI Kuralı
 
-> **Bu dosya neden var:** "Global anahtarlar **TEK** dosyada toplansın; herkes her yerde ayrı okuyup tanımlamasın." (Patron isteği, 2026-10-02)
+> **Bu dosya neden var:** "Global anahtarlar **TEK** dosyada toplansın; herkes her yerde ayrı okuyup tanımlamasın." (Proje sahibi isteği, 2026-10-02)
 > Bu klasördeki **her ayrı okuyucu** bir daha eklenmemek üzere burada sayılıyor.
 
 ## Tek cümle kural
@@ -37,7 +37,7 @@ mekanizması **değildir**. Ortam bayrağı dahil tüm anahtarların TEK kaynağ
 
 **Bağlam:** FW-ENV-KAYIT-160 ile `Env.php` + `EnvKeys.php` (16 ad) paralel bir katman olarak
 büyümüştü; canlıda hiçbiri tanımlı değildi (cPanel PHP ortam ayarı kapalı, dotenv dosyası yok),
-yani bu yol fiilen hiç çalışmıyordu. Patron: "Bizde env yok; bütün anahtarları TEK dosyadan
+yani bu yol fiilen hiç çalışmıyordu. Proje sahibi: "Bizde env yok; bütün anahtarları TEK dosyadan
 merkezi yazıyoruz."
 
 **Sonuç:** `Env.php` ve `EnvKeys.php` silindi. Sır niteliğindekiler zaten sır bölümlerindeydi
@@ -102,7 +102,7 @@ yukarıdaki `app` ayarlarından türeterek tanımlar.
 
 ## `Definitions/DbProfiles/` neden metotsuz? (kim ne yapar)
 
-Patron kuralı: **"sabitlerin olduğu dosyalarda METOT olmaz; sabitler ayrı dosya, metotlar ayrı dosya."**
+Proje sahibi kuralı: **"sabitlerin olduğu dosyalarda METOT olmaz; sabitler ayrı dosya, metotlar ayrı dosya."**
 
 | Sorumluluk | Nerede? | Ne yapar? |
 |---|---|---|

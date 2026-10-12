@@ -54,7 +54,7 @@ final class MachineApiRegistry
     /**
      * Varsayilan zorlama bayragi: yeni korumalar LOG-ONLY baslar. 🛡️
      *
-     * [PATRON KARARI 6] Yeni korumalar `enforce=false`/log-only ile baslar
+     * [PROJE SAHİBİ KARARI 6] Yeni korumalar `enforce=false`/log-only ile baslar
      * (fail-open). Mevcani ajan/entegrasyon davranisi bit-bit AYNI kalmalidir.
      */
     public const ENFORCE_DEFAULT = false;

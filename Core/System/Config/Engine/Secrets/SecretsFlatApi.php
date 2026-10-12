@@ -86,7 +86,7 @@ trait SecretsFlatApi
     /**
      * OPSİYONEL bir değer - **yalnız "TANIMLI DEĞİL" yutar** (`null` döner).
      *
-     * [FW-BANU-B4-BARAN] HATA YUTULMAZ: dosya bozuk/okunamaz/geçersiz
+     * [FW-DENETIM-B4] HATA YUTULMAZ: dosya bozuk/okunamaz/geçersiz
      * biçimli/izni fazla geniş ise `RuntimeException` fırlatılır (mesajda sır
      * değeri YOKTUR). Yalnız "bu anahtar tanımlı değil" durumu `null` olur.
      *

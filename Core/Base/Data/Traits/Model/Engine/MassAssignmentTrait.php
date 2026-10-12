@@ -52,9 +52,9 @@ trait MassAssignmentTrait
     /**
      * GLOBAL korumalı alan listesi — YALNIZ `warning` logu için (T2).
      *
-     * [PATRON KARARI 2] `status` ve `is_active` bilinçli olarak YOKTUR: altı
+     * [PROJE SAHİBİ KARARI 2] `status` ve `is_active` bilinçli olarak YOKTUR: altı
      * meşru çağıran onları yazıyor, listeye almak kırılma üretir.
-     * [PATRON KARARI 1] Bu liste `$fillable`/`$guarded` TANIMLAMAYAN modellere
+     * [PROJE SAHİBİ KARARI 1] Bu liste `$fillable`/`$guarded` TANIMLAMAYAN modellere
      * ZORLAMA olarak UYGULANMAZ; yalnız ölçüm/log katmanında görünür.
      *
      * @var string[]

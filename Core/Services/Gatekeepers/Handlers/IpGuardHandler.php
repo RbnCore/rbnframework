@@ -48,7 +48,7 @@ use Rbn\Framework\Core\Http\Security\MachineApiRegistry;
  * `catch` kendi alanının hatasını **loglar** (sessiz yutma yok) ama
  * yeniden fırlatmaz — A0-1'in amacı 18 siteyi 500'e düşürmemektir.
  *
- * [B-10 / FW-BANU-BULGULAR-2] Ayar okuma HATASI artık fail-OPEN DEĞİL.
+ * [B-10 / FW-DENETIM-BULGULAR-2] Ayar okuma HATASI artık fail-OPEN DEĞİL.
  * `check()` içindeki ayar okuma kendi `try/catch`'ine alındı: okunamazsa
  * mod = `log_only` (A0-1) + kill-switch = AÇIK varsayılır, `settings_unreadable`
  * kararı kaydedilir ve katman ÇALIŞMAYA DEVAM EDER. Ölçüm: `olc_b10.php`.
@@ -84,7 +84,7 @@ class IpGuardHandler extends BaseComponent
                 // TEK merkezde: ShieldSettingsRepository::normalizeIpGuardMode() /
                 // ::normalizeSwitch() (fail-closed).
                 //
-                // [B-10 / FW-BANU-BULGULAR-2] AYARIN OKUNAMASI FAIL-OPEN OLMAZ.
+                // [B-10 / FW-DENETIM-BULGULAR-2] AYARIN OKUNAMASI FAIL-OPEN OLMAZ.
                 // Ölçüldü (`olc_b10.php`, gerçek `check()` çalıştırıldı): `repository()`
                 // DB'ye ulaşamayınca (Connection refused) istisna `catch (\Throwable)`
                 // düşüyor ve katman `['ip_guard_error']` ile SESSİZCE hiçbir koruma

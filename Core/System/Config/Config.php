@@ -77,7 +77,7 @@ class Config
                 self::$items[$filename] = (file_exists($path)) ? (array) (include $path) : [];
 
                 // RBN Framework Dynamic Multi-Tenant Settings Override 🧬🛰️⚓
-                // [FW-ROUTEMAP-SSOT-2 · PATRON KARARI 05.10.2026] KAPI KALDIRILDI.
+                // [FW-ROUTEMAP-SSOT-2 · PROJE SAHİBİ KARARI 05.10.2026] KAPI KALDIRILDI.
                 // Önceden `project-settings.php` içindeki `has_route_map` bayrağı bu
                 // birleştirmeyi şart koşuyordu; anahtar olmayınca `view_mapping`
                 // HİÇ UYGULANMIYORDU (canlıda `has_route_map` yazılmayan projelerde

@@ -51,7 +51,7 @@
 (modeli `z_sys_heartbeats`'e çevirmek / modeli ve kaydı silmek) kod kararıdır.
 Belgelenen davranış: [Core/Database/Models.md](Core/Database/Models.md).
 **Nasıl çözülür:** `rbn db:tables --master` çıktısıyla gerçek tablo adı doğrulanır,
-ardından karar verilir. Karar patronundur.
+ardından karar verilir. Karar proje sahibinindir.
 
 ### 1.3 Layout sarmalama: `$content` mı, bölüm mü?
 
@@ -84,7 +84,7 @@ değişkeni olarak enjekte edildiğini yazıyor. **Kodda** bu doğru **değil**:
   `Handlers/UI/*` + `Resolvers/SeoResolver` + `Providers/SeoProvider` üçlüsünde
   yapılıyor; ayrı bir `SeoHandler` **gerekmiyor**.
 * **Nasıl çözülür / karar:** kayıt **silinmesi** önerilir (salt okunur belge;
-  kod değiştirilmedi). Karar patronundur.
+  kod değiştirilmedi). Karar proje sahibinindir.
 * **Belgelenen davranış:** [Core/Render/README.md §4](Core/Render/README.md),
   [Core/Services/README.md §4](Core/Services/README.md),
   [Core/System/Registries.md §5](Core/System/Registries.md).
@@ -127,7 +127,7 @@ değişkeni olarak enjekte edildiğini yazıyor. **Kodda** bu doğru **değil**:
 * **Nasıl çözülür:** `build()` içindeki font kontrolü iki biçimi de kabul etmeli:
   `str_contains($path,'/fonts/') || str_starts_with($path,'@font/')`.
   Ya da `addFont()` derlenmiş yolu doğrudan kuyruğa yazmalı.
-  Karar patronundur (bu görev salt okunur).
+  Karar proje sahibinindir (bu görev salt okunur).
 * **Belgelenen davranış:** [Core/Render/Builders.md §5.1–5.2](Core/Render/Builders.md).
 
 ### 1.9 `RawHtmlGate` `<script>` gövdesini temizlemiyor
@@ -163,7 +163,7 @@ değişkeni olarak enjekte edildiğini yazıyor. **Kodda** bu doğru **değil**:
 * **Nasıl çözülür:** `google_analytics_code`/`head_scripts` alanlarının yalnız
   izinli domainlere giden `<script src>` biçiminde olması kuralı
   veritabanı yazım katmanında uygulanmalı, ya da gate'e `<script src>` için
-  host beyaz listesi eklenmeli. Karar patronundur.
+  host beyaz listesi eklenmeli. Karar proje sahibinindir.
 * **Belgelenen davranış:** [Core/Render/Handlers.md §4](Core/Render/Handlers.md).
 
 ### 1.10 `ViewResolver` mantıksal view adını fiziksel yola bağlayan kural yok
@@ -197,7 +197,7 @@ değişkeni olarak enjekte edildiğini yazıyor. **Kodda** bu doğru **değil**:
   bulunamazsa karar iki seçenekten biri:
   (a) `ViewResolver`'a bir **ad eşleme tablosu** (alias) eklenir,
   (b) `FrontendProvider` bu adları gerçek dosya yollarıyla değiştirir.
-  Karar patronundur.
+  Karar proje sahibinindir.
 * **Belgelenen davranış:** [Core/Render/Resolvers.md §3](Core/Render/Resolvers.md),
   [Core/Render/Controllers.md §5](Core/Render/Controllers.md).
 
@@ -231,7 +231,7 @@ değişkeni olarak enjekte edildiğini yazıyor. **Kodda** bu doğru **değil**:
   ya da `SystemRenderMapTrait.php:100`'de `'ajax' => 'ajax'` yapılıp
   `providers['ajax']` kaydı eklenir. `ViewProvider` için `providers['view']`
   satırı `SystemRenderMapTrait.php:47-61` içine eklenmelidir.
-  Karar patronundur.
+  Karar proje sahibinindir.
 * **Belgelenen davranış:** [Core/Render/Providers.md §4](Core/Render/Providers.md).
 
 ### 1.12 `RobotsConfig::cms_version` ile `SeoConfig::VERSION` çakışıyor
@@ -265,7 +265,7 @@ değişkeni olarak enjekte edildiğini yazıyor. **Kodda** bu doğru **değil**:
   `robots.txt`'ye yansıdığı ayrıca ölçülmedi (`RobotsResolver::resolvePayload()`
   çalıştırılmadı; çıktı beklenmedik bir hata döndü).
 * **Nasıl çözülür:** ya `cms_version` `SeoConfig::VERSION`'a bağlanır, ya da
-  ayrı sürümleme politikasının gerekçesi yazılır. Karar patronundur.
+  ayrı sürümleme politikasının gerekçesi yazılır. Karar proje sahibinindir.
 * **İlgili not (ayrı tutarsızlık):** kayıt haritasında `AssetConfig` ve
   `SeoConfig` için `Core\Render\Config\` (**tekil**) yazılmış
   (`SystemResourceMapTrait`, [System/Registries.md §5](Core/System/Registries.md));
@@ -312,7 +312,7 @@ değişkeni olarak enjekte edildiğini yazıyor. **Kodda** bu doğru **değil**:
   Hangisi olduğu koddan ayırt edilemiyor.
 * **Nasıl çözülür:** üretimde `openssl s_client -connect <cpanel-host>:2083`
   ile sertifika zinciri incelenir; zincir güvenilirse `CURLOPT_CAINFO`
-  verilerek `SSL_VERIFYPEER` açılır. Güvenlik kararıdır; patronundur.
+  verilerek `SSL_VERIFYPEER` açılır. Güvenlik kararıdır; proje sahibinindir.
 * **Belgelenen davranış:** [Core/Services/Hosting.md §6.3](Core/Services/Hosting.md).
 
 ---

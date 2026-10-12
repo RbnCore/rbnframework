@@ -23,9 +23,9 @@ use Rbn\Framework\Core\Base\BaseComponent;
  *   - A-10 anahtar basina kimlik/kapsam/iptal/sure
  *   - A-13 hata sozlesmesine `code` alani EKLENDI (`message` metinleri AYNI)
  *
- * [PATRON KARARI 4] `?token=` KAPATILMAZ: yalniz LOG-ONLY uyari + proje
+ * [PROJE SAHİBİ KARARI 4] `?token=` KAPATILMAZ: yalniz LOG-ONLY uyari + proje
  * ayari `allow_query_token` (varsayilan `true`). REDDETME YAPILMAZ.
- * [PATRON KARARI 6] Yeni korumalar `enforce=false`/log-only; fail-open.
+ * [PROJE SAHİBİ KARARI 6] Yeni korumalar `enforce=false`/log-only; fail-open.
  * Mevcani ajan/entegrasyon davranisi bit-bit AYNI kalmalidir.
  *
  * [ADLANDIRMA NOTU] Hata cikisi ucu `reddet()` olarak adlandirildi: `fail()`
@@ -81,7 +81,7 @@ class ApiGuard extends BaseComponent
      * [A-5 · BELGELENDİ · DAVRANIŞ DEĞİŞMEDİ] `allowed_origins` BOŞ (veya `*`)
      * ise kontrol YAPILMAZ — yani sınırsız erişim. Bu, mevcut tek gerçek ayar
      * dosyasındaki (boş liste) davranışı ve `external-api.php` içindeki yorumu
-     * birebir karşılar. PATRON KARARI: geri uyum için BOŞ LİSTENİN DAVRANIŞI
+     * birebir karşılar. PROJE SAHİBİ KARARI: geri uyum için BOŞ LİSTENİN DAVRANIŞI
      * DEĞİŞTİRİLMEZ (sıkılaştırma kırıcı olurdu).
      *
      * [A-6 · KAPANDI] Hata metninden istemci IP'si ÇIKARILDI: iç ağ topolojisini
@@ -123,7 +123,7 @@ class ApiGuard extends BaseComponent
 
         $allowQueryToken = (bool) ($config['allow_query_token'] ?? true);
         if ($sorgudanGeldi && !$allowQueryToken) {
-            // PATRON KARARI 4: varsayılan `true`. Proje bunu `false` yaptıysa
+            // PROJE SAHİBİ KARARI 4: varsayılan `true`. Proje bunu `false` yaptıysa
             // parametre REDDEDİLİR (Faz 1). Varsayılanda bu dal HİÇ KISLANMAZ.
             $this->reddet('Yetkisiz erişim! Geçersiz API Anahtarı.', 401, 'UNAUTHORIZED');
         }
@@ -164,7 +164,7 @@ class ApiGuard extends BaseComponent
             }
         }
 
-        // [PATRON KARARI 3] Geri uyum düz metin `api_key` dalı AÇIK KALIR.
+        // [PROJE SAHİBİ KARARI 3] Geri uyum düz metin `api_key` dalı AÇIK KALIR.
         // Karşılaştırma `hash_equals` ile yapılır (A-1 kapandı); `!==` KALDIRILDI.
         $plain = (string) ($config['api_key'] ?? '');
         if ($plain === '' || $given === '' || !hash_equals($plain, $given)) {
@@ -217,7 +217,7 @@ class ApiGuard extends BaseComponent
     /**
      * Gövde boyutu sınırı (beyan edilen `CONTENT_LENGTH` ölçülür; gövde OKUNMAZ).
      *
-     * [PATRON KARARI 6] LOG-ONLY: sınır aşılırsa istek DÜŞÜRÜLMEZ, yalnız
+     * [PROJE SAHİBİ KARARI 6] LOG-ONLY: sınır aşılırsa istek DÜŞÜRÜLMEZ, yalnız
      * denetim kaydı + uyarı. `body_max` tanımlı değilse hiçbir şey olmaz
      * (mevcut davranış bit-bit aynı).
      *

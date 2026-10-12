@@ -114,7 +114,7 @@ class SchemaResolver extends BaseComponent
      * ve sabit ad hiçbir projede yoktu.
      *
      *geriye uyum: routemap'te `og_image` / `og-image` anahtarı varsa TOLERE
-     * edilir (patron bu anahtarları routemap'ten silmek istiyor; bu görevde
+     * edilir (proje sahibi bu anahtarları routemap'ten silmek istiyor; bu görevde
      * routemap dosyalarına DOKUNULMADI — CHANGELOG'da kaldırma notu yazılı).
      * Ancak KURAL ÖNCELİKLİ: dosya gerçekten varsa kullanılır.
      *

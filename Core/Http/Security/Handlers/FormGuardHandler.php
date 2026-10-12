@@ -364,7 +364,7 @@ class FormGuardHandler extends BaseComponent
      *
      * [GUVENLIK YAMASI 2026-10-01 · gorev 94] `blocked_until` filtresi eklendi.
      * Onceki hali `where('ip_address','=',$ip)->count()` idi: SURESI DOLMUS kayitlari
-     * da sayiyordu, bu yuzden saya hic DUSMUYORDU — kanitli deney (Banu-71 #4):
+     * da sayiyordu, bu yuzden saya hic DUSMUYORDU — kanitli deney (Denetim-71 #4):
      * 4 kayit, hepsi suresi dolmus, AKTIF yasak 0 (kullanici 25 saattir serbest)
      * idi; yeni ihlal sayaci 4 gordu -> 1440 dk, yani "kademeli ceza" duz bir
      * kalici ban demekti.
@@ -377,7 +377,7 @@ class FormGuardHandler extends BaseComponent
      * DB okunamazsa EN YUMUSAK kademe (15 dk) secilir; boylece hata durumunda
      * kullanici 7 gun kilitlenmez ("mesru kullaniciyi kilitlememek").
      *
-     * [DOGRULANDI · FW-B71-4-GEOIP-BARAN] Bu filtre metin taramasiyla degil,
+     * [DOGRULANDI · FW-B71-4-GEOIP] Bu filtre metin taramasiyla degil,
      * METOT CALISTIRILARAK olculdu (5 senaryo, master DB, RFC5737 IP'leri,
      * gecici kayitlar `finally` ile silindi): 4 dolmus + 0 aktif -> 15 dk
      * (eski hâli 1440 dk verirdi), +1 aktif -> 60 dk, +2 aktif -> 1440 dk,

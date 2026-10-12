@@ -13,7 +13,7 @@
 
 Namespace: `Rbn\Framework\Core\System\Config\Definitions\DbProfiles`.
 
-## Kim ne yapar (PATRON KURALI)
+## Kim ne yapar (PROJE SAHİBİ KURALI)
 
 > "Sabitlerin olduğu dosyalarda METOT olmaz; sabitler ayrı dosya, metotlar ayrı dosya."
 
@@ -80,7 +80,7 @@ Bu sınıflar kimlik/yapılandırma verisidir; koruma mantığı değil. `Core/S
 **dahiL paket ile birlikte** sunucudan silinmelidir (MANIFEST `SİL:` satırı).
 Eski namespace için `class_alias`/shim **yoktur**.
 
-**[CONFIG-D-BARAN]** Profil sınıflarındaki `host()/dbName()/user()/pass()/
+**[CONFIG-D]** Profil sınıflarındaki `host()/dbName()/user()/pass()/
 getCredentials()/getKeysMap()/smtp*()/emailFrom*()` metotları **KALDIRILDI**;
 yerlerine `Engine/Database/DbProfileResolver` + `Engine/Database/SmtpProfileResolver`
 çözücüleri geldi. Bağlantı şeması (anahtar adları ve sırası) ve tüm değer kaynakları

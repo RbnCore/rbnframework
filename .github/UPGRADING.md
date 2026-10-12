@@ -360,7 +360,7 @@ giriş noktasında önceden tanımlanmışsa ezilmez.
 4. **Şema değişmedi.** `projects.version` kolonu `varchar(20) DEFAULT '1.0'`
    olarak **aynen durur**; yalnız satır değerleri değişmiştir. Yeni proje kaydı
    yazan yol artık `Version::initial()` (`0.1.1`) yazar. Kolon `DEFAULT`'unu da
-   `0.1.1` yapmak isterseniz bu **ayrı** bir şema kararıdır (patron onayı gerekir).
+   `0.1.1` yapmak isterseniz bu **ayrı** bir şema kararıdır (proje sahibi onayı gerekir).
 
 **Ölçüm (yerel master DB, `rbncore_master`):** 19 proje, hepsi `1.0` (geçersiz)
 → migration sonrası 19 satır `0.1.1`; yedekte 19 satır `1.0`. `applications`
@@ -397,7 +397,7 @@ taşımak zorunda değilsiniz; taşırsanız daha temiz olur. Taşıma **isteğe
 4. `project-routemap.php` içindeki `favicon` ve `og-image` / `og_image` anahtarları
    hâlâ **toler edilir**, ancak **öncelikli değildir** (kural önce gelir).
    **Bu anahtarlar kaldırılabilir**; kaldırıldığında motor davranışı DEĞİŞMEZ çünkü
-   kural zaten önceliklidir. Kaldırma kararı patronundur (bu sürümde dosyalara dokunulmadı).
+   kural zaten önceliklidir. Kaldırma kararı proje sahibinindir (bu sürümde dosyalara dokunulmadı).
 
 ### Panel ön eki (`dashboard_prefix`) ve `has_route_map`: tek kaynak `project-routemap.php`
 
@@ -1302,7 +1302,7 @@ $query->orderBy('created_at', in_array($yon, ['ASC', 'DESC'], true) ? $yon : 'AS
 
 ### 0.9.0 - Adım 3 (yapıldı, **henüz yayınlanmadı**): Ortam değişkenleri TEK kapıdan (`Env` + `EnvKeys`)
 
-**Özet:** "Global anahtarlar TEK dosyada toplansın; herkes her yerde ayrı okuyup tanımlamasın." (Patron isteği, 2026-10-02) `getenv(` / `$_ENV` / `$_SERVER` ile okuma yapan 11 nokta tek kapıya (`Core/System/Config/Env.php`) taşındı; tüm adların listesi tek kayıt dosyasına (`EnvKeys.php`) girdi.
+**Özet:** "Global anahtarlar TEK dosyada toplansın; herkes her yerde ayrı okuyup tanımlamasın." (Proje sahibi isteği, 2026-10-02) `getenv(` / `$_ENV` / `$_SERVER` ile okuma yapan 11 nokta tek kapıya (`Core/System/Config/Env.php`) taşındı; tüm adların listesi tek kayıt dosyasına (`EnvKeys.php`) girdi.
 
 **Zorunlu adım YOK.** Bu bir saf yeniden düzenlemedir: hiçbir ortam değişkeninin adı, varsayılanı, öncelik sırası veya fail-closed kararı değişmedi. Yayın sırası önemsiz.
 

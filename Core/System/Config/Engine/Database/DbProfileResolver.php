@@ -12,7 +12,7 @@ use Rbn\Framework\Core\System\Config\Secrets;
 /**
  * DbProfileResolver - Veritabani kimlik profillerinin BAĞLANTI ÇÖZÜCÜSÜ 🔌🗃️
  *
- * [CONFIG-D-BARAN] PATRON KURALI: "sabitlerin olduğu dosyalarda METOT olmaz;
+ * [CONFIG-D] PROJE SAHİBİ KURALI: "sabitlerin olduğu dosyalarda METOT olmaz;
  * sabitler ayrı dosya, metotlar ayrı dosya." `Definitions/DbProfiles/*`
  * yalnız `public const` taşıyan SABİT dosyalarıdır; bağlantı değerlerini
  * üreten metotlar BURAYA taşındı.

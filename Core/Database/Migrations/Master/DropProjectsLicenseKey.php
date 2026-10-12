@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Services\Console\Base\BaseMigration;
 /**
  * DropProjectsLicenseKey - `projects.license_key` sutununu kaldirir 🔑
  *
- * PATRON KARARI (2026-10-10, FW-LISANS-3): lisansin TEK kaynagi `licences`
+ * PROJE SAHİBİ KARARI (2026-10-10, FW-LISANS-3): lisansin TEK kaynagi `licences`
  * tablosudur; eski kopya sutun kaldirilir.
  *
  * GUVENLIK: sutun dusmeden once, `licences` tablosunda karsiligi olmayan

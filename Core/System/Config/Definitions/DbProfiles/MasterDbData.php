@@ -18,7 +18,7 @@ namespace Rbn\Framework\Core\System\Config\Definitions\DbProfiles;
  * dosyasından okunur. Okuyan metotlar `Engine/Config/` altındaki
  * `DbProfileResolver` / `SmtpProfileResolver` sınıflarındadır.
  *
- * [CONFIG-D-BARAN] PATRON KURALI: bu bir SABİT dosyasıdır — **içinde `function`
+ * [CONFIG-D] PROJE SAHİBİ KURALI: bu bir SABİT dosyasıdır — **içinde `function`
  * YOKTUR.** `KEYS_MAP` artık metot değil, LİTERAL `public const`; böylece
  * `Definition::get('database_master','KEYS_MAP')` mekanizması (sabit → metot
  * sırasıyla yoklar) çalışmaya devam eder ve bir profil eklendiğinde metot

@@ -295,7 +295,7 @@ trait QueryModelTrait
     /**
      * Raw insert path 📥
      *
-     * [FW-BASE-1 T3 / PATRON KARARI 4] Bu yol `CrudModelTrait::create()`'den
+     * [FW-BASE-1 T3 / PROJE SAHİBİ KARARI 4] Bu yol `CrudModelTrait::create()`'den
      * GECMEZ; **kapsam (project_key) enjekteyonu burada YAPILMAZ** — bu bir
      * kiraci izolasyonu kararıdır ve ayrı bir iş gerektirir.
      *

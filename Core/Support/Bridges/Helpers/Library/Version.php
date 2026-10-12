@@ -6,7 +6,7 @@ namespace Rbn\Framework\Core\Support\Bridges\Helpers\Library;
 /**
  * Version - Standart sürüm biçimi ve sayaç kuralı (A.B.C).
  *
- * Kural: `.agents/rules/versioning.md` (patron kararı 2026-10-05)
+ * Kural: `.agents/rules/versioning.md` (proje sahibi kararı 2026-10-05)
  *   - Biçim: `A.B.C` (üç sayı, noktayla ayrılmış). Başka biçim GEÇERSİZ.
  *   - A: `0` … sınırsız (`9`'dan sonra `10`, `11`…)
  *   - B ve C: `0` … `9` (asla `10` olmaz)

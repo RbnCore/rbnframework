@@ -728,7 +728,7 @@ class RedirectManager extends BaseManager
     }
 
     /**
-     * [B-5 / FW-BANU-BULGULAR-2] Guvenilir kok COZULEMEDIGINDE 301 YAZMA.
+     * [B-5 / FW-DENETIM-BULGULAR-2] Guvenilir kok COZULEMEDIGINDE 301 YAZMA.
      *
      * OLCUM (E:\tmp\_gecici, `olc_b5.php`; kural dizisi gercekten calistirildi):
      * `project_data('domain')` ve `group_projects()` cozulemediginde beyaz liste

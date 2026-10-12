@@ -102,7 +102,7 @@ Mappings/web.php: ApiGuard middleware
 
 ## 5. Tuzaklar ve kurallar
 
-1. **`?token=` kapatılmaz** (patron kararı): yalnız LOG-ONLY uyarı ve
+1. **`?token=` kapatılmaz** (proje sahibi kararı): yalnız LOG-ONLY uyarı ve
    `allow_query_token` ayarı (`ApiGuard.php:26-28, 124-136`).
 2. **Gövde ve hız sınırı LOG-ONLY'dur** (`enforce=false`); sayaç dosyası
    yazılamazsa **fail-open** (`ApiGuard.php:262-333`).

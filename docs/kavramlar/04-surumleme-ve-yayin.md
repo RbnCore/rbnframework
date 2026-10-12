@@ -34,7 +34,7 @@ Kaynak: `.agents/rules/versioning.md`.
 Kod karşılığı: `Version::next(string $version): string` (`Version.php:68`).
 
 > **"major/minor/patch" yorumu YOKTUR.** Her yayın sıradaki sürümü alır.
-> Bilinçli atlama (`A+1.0.0`) ancak **patron kararıyla** ve CHANGELOG'da
+> Bilinçli atlama (`A+1.0.0`) ancak **proje sahibi kararıyla** ve CHANGELOG'da
 > gerekçeyle yapılır (`versioning.md:20`).
 
 Yardımcılar (`Core/Support/Bridges/Helpers/Global/support_helpers.php`):
@@ -146,7 +146,7 @@ php rbn master:migrate --rollback   # GERİ ALMA: yedekteki değerler geri yazı
   (`.github/UPGRADING.md:62`; `db:tables --master` ile doğrulandı).
 * **Şema değişmedi:** `projects.version` `varchar(20) DEFAULT '1.0'` olarak durur
   (ölçüldü); yalnız satır değerleri değişmiştir. Kolon `DEFAULT`'unu `0.1.1` yapmak
-  **ayrı bir şema kararıdır** (patron onayı gerekir) (`.github/UPGRADING.md:63-66`).
+  **ayrı bir şema kararıdır** (proje sahibi onayı gerekir) (`.github/UPGRADING.md:63-66`).
 * Migration sınıfı: `Core/Database/Migrations/Master/NormalizeProjectVersions.php`.
 
 ---

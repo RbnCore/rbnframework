@@ -126,7 +126,7 @@ class MasterProjectsService extends BaseService
     /**
      * Projenin lisans kaydı yoksa `licences` tablosuna yazar (varsa dokunmaz) 🔑
      *
-     * Kademe: LIFETIME / active / suresiz (patron karari 2026-10-02).
+     * Kademe: LIFETIME / active / suresiz (proje sahibi karari 2026-10-02).
      */
     private function issueProjectLicence(int $projectId, ?string $group): bool
     {

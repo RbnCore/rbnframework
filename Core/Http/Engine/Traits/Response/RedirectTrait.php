@@ -29,15 +29,15 @@ trait RedirectTrait
      * [GUVENLIK YAMASI 2026-10-01 / gorev 94] Sifa (a) + backslash (F-01):
      *  - `$_SERVER['HTTP_HOST']` artik DOGRUDAN beyaz listeye GIRMEZ. Saldirgan
      *    `Host: evil.example` gonderip `Referer: https://evil.example/x` ile
-     *    korumayi gecmisti (Banu-71 #1, YUKSEK). Artik istek host'u once
+     *    korumayi gecmisti (Denetim-71 #1, YUKSEK). Artik istek host'u once
      *    guvenilir koke gore DOGRULANIR (bkz. hostKokeUyuyorMu()).
      *  - Ters bolu `\` -> `/` olarak NORMALIZE edilir. Tarayici da WHATWG URL
      *    Standard'i geregi `/\evil.example` ve `//evil.example\@site` girdilerinde
      *    `\`'i `/` sayar ve hedefi SALDIRGANIN HOSTUNA gonderir (güvenlik incelemesi F-01,
-     *    Banu-71 #3, YUKSEK). Normalize etmezsek koruma "kendi segmentimiz"
+     *    Denetim-71 #3, YUKSEK). Normalize etmezsek koruma "kendi segmentimiz"
      *    deyip gecirdi.
      *  - Port kurali sertlestirildi: beyaz listede port ACIK yazili degilse
-     *    hedefte acik yazili port REDDEDILIR (Banu-71 #7; ayni sunucudaki baska
+     *    hedefte acik yazili port REDDEDILIR (Denetim-71 #7; ayni sunucudaki baska
      *    servise, or. redis paneli, yonlendirme engellenir).
      */
     public function redirect(string $url, int $code = 302): void
@@ -221,7 +221,7 @@ trait RedirectTrait
      *   - `Paths::project()->baseUrl()` host'u
      *   - `$_SERVER['HTTP_HOST']` (istek host'u)
      *
-     * [gorev 94 / Banu-71 #1] NEDEN bu ayrim? `baseUrl()` kesfi verisi bos
+     * [gorev 94 / Denetim-71 #1] NEDEN bu ayrim? `baseUrl()` kesfi verisi bos
      * oldugunda `$_SERVER['HTTP_HOST']`'a GERI DUSER (ProjectContext.php:116-117).
      * Yani baseUrl'i dogrudan koke saymak, atlatmayi yine acik birakardi.
      * Artik koker yalnizca config'den cikariliyor; HTTP_HOST ise kok bos

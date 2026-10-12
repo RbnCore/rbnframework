@@ -9,7 +9,7 @@ use Rbn\Framework\Core\System\Paths\Paths;
 /**
  * AssetConvention - The Single Naming Authority for Project Favicon & OG Image 🏺🗺️⚓
  *
- * PATRON KURALI (2026-10-05): her projede marka varliklari TEK ada
+ * PROJE SAHİBİ KURALI (2026-10-05): her projede marka varliklari TEK ada
  * kalibiyla adlandirilir ve TUM istekler bu kalpla cozulur:
  *
  *   - favicon : `favicon-<project_key>.{svg,png,ico}`      -> `images/` altinda

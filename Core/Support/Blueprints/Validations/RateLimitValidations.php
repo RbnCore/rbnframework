@@ -62,7 +62,7 @@ class RateLimitValidations
     ];
 
     /* ========================================================================
-       [ FW-BANU-B2-B3-Y4 / B-2 · Y-5 ]  BİLİNMEYEN EYLEM = 500 DEĞİL,
+       [ FW-DENETIM-B2-B3-Y4 / B-2 · Y-5 ]  BİLİNMEYEN EYLEM = 500 DEĞİL,
        LİMİTSİZ DE DEĞİL
        ========================================================================
        SORUN: `RateLimitHandler::isBlocked()` bilinmeyen eylemde **istisna**

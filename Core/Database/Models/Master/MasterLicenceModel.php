@@ -12,7 +12,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseModelInterface;
  *
  * TEK lisans tablosu: hem proje hem uygulama lisansini tutar.
  * `subject_type` ('project' | 'application') + `subject_id` ile sahip ayrilir;
- * ayri bir `application_licenses` tablosu YOKTUR (patron karari).
+ * ayri bir `application_licenses` tablosu YOKTUR (proje sahibi karari).
  *
  * Yazim kurali: `Licence` (Ingiliz yazimi) HER YERDE — tablo `licences`,
  * sutun `licence_key`, sinif `MasterLicenceRepository`.

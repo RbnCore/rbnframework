@@ -22,7 +22,7 @@ namespace Rbn\Framework\Core\System\Config\Definitions\DbProfiles;
  * kendi dosyasındadır. Hiçbiri yoksa sessiz `''` dönülmez — fail-closed
  * (`DbProfileResolver::pass()`).
  *
- * [CONFIG-D-BARAN] PATRON KURALI: bu bir SABİT dosyasıdır — **içinde `function`
+ * [CONFIG-D] PROJE SAHİBİ KURALI: bu bir SABİT dosyasıdır — **içinde `function`
  * YOKTUR.** `DB_NAME` sabiti de burada YOKTUR (eski `defined('static::DB_NAME')`
  * koruması gereksizleşti): proje veritabanı adı her zaman kendi dosyasından
  * (`project-settings.php`) gelir.

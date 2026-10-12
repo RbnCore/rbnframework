@@ -27,7 +27,7 @@ require_once __DIR__ . '/Engine/Secrets/SecretsFlatApi.php';
 /**
  * Secrets - TÜM Bağlantı DEĞERLERİNİN ve SIRLARIN TEK OKUYUCUSU (fail-closed)
  *
- * [FW-TEK-SECRETS-DOSYASI-161] Patronun isteği (2026-10-02):
+ * [FW-TEK-SECRETS-DOSYASI-161] Proje sahibinin isteği (2026-10-02):
  * "TEK 1 ANA dosya olacak, şifreleri HEPSİNİ oraya yazacağım."
  *
  * TEK ÇIKIŞ:

@@ -44,7 +44,7 @@ class SettingsApiModel extends BaseModel implements BaseModelInterface
      * satırı olan 3 veritabanı var (sırasıyla 2, 1 ve 4 satır) —
      * yani bu bir soyut risk değil, ÖLÇÜLMÜŞ bir risktir.
      *
-     * KARAR: `shared` görünürlüğü **patron kararı** (rapor §Açık Sorular).
+     * KARAR: `shared` görünürlüğü **proje sahibi kararı** (rapor §Açık Sorular).
      * Bugünkü GÖRÜNÜRLÜK davranışı (yalnız proje özel satırlar) korunur.
      */
     protected array $projectScopeIncludes = [];

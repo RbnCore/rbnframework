@@ -7,9 +7,9 @@ declare(strict_types=1);
  *
  * [FW-APIGUARD · TASARIM GOREV 2 · 2026-10-03 · team member]
  *
- * PATRON KARARI 5: yönetim ÖNCE CLI, panel YOK.
- * PATRON KARARI 2: anahtar `sha256:<hex>` olarak saklanır.
- * PATRON KARARI 3: düz metin `api_key` dalı geri uyum için AÇIK kalır —
+ * PROJE SAHİBİ KARARI 5: yönetim ÖNCE CLI, panel YOK.
+ * PROJE SAHİBİ KARARI 2: anahtar `sha256:<hex>` olarak saklanır.
+ * PROJE SAHİBİ KARARI 3: düz metin `api_key` dalı geri uyum için AÇIK kalır —
  *   bu komut onu SILMEZ, yalnız `keys` bölümünü yönetir.
  *
  * KULLANIM:

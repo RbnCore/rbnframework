@@ -69,7 +69,7 @@ class BotHandler extends BaseComponent
      *
      * KAPSAM BİLİNCİ SEÇİM: genel HTTP/SDK imzaları (`Java`, `axios`, `okhttp`,
      * `node-fetch`, `python-urllib` vb.) **eklenmedi** — bunlar meşru API/servis
-     * trafiğinde de görünür ve IP katmanı kararı (Zeki, `enforce`) olmadan
+     * trafiğinde de görünür ve IP katmanı kararı (`enforce`) olmadan
      * reddetmek hizmet kesintisi riski taşır. Buradaki liste yalnız **açıkça
      * saldırı/veri-tarama aracı** imzalarını kapsar.
      */

@@ -27,7 +27,7 @@ class SettingsApiRepository extends BaseRepository
      *
      * ÇÖZÜM: elle süzgeç KALDIRILDI. Kapsam artık TEK yerden (model) gelir:
      *   - kapsam verilmediyse → aktif kiracı (bugünkü görünürlük davranışı
-     *     BİREBİR korunur; `shared` görünürlüğü patron kararına bırakıldı,
+     *     BİREBİR korunur; `shared` görünürlüğü proje sahibi kararına bırakıldı,
      *     gerekçesi `SettingsApiModel::$projectScopeIncludes` yorumunda).
      *   - kapsam AÇIKÇA verildiyse → `withProjectScope($key)` yalnızca O anahtar.
      *     ÖNCE bu yol sessizce BOŞ dönüyordu (iki koşul birbirini yok ediyordu);

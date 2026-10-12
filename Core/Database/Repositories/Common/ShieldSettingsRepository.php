@@ -63,7 +63,7 @@ class ShieldSettingsRepository extends BaseRepository
      * (`'1'|'true'` dışındaki her şeyi kapat) bu yüzden bir yazım hatasıyla
      * 18 sitenin hız sınırını sessizce düşürüyordu.
      *
-     * [B-10 / FW-BANU-BULGULAR-2] `no` ve `hayir` de AÇIKÇA kapatma
+     * [B-10 / FW-DENETIM-BULGULAR-2] `no` ve `hayir` de AÇIKÇA kapatma
      * değeridir. A0-2'nin `SystemGuardHandler::FAILCLOSED_OFF_VALUES` listesi
      * zaten bu ikisini içeriyordu; iki farklı "kapalı" listesi aynı değeri
      * iki yerde farklı yorumluyordu (bir shield ayarında `AÇIK`, ortam

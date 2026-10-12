@@ -25,7 +25,7 @@ class GeoIPHandler extends BaseComponent
     /**
      * [G-08 KAPANDI — FW-GEOIP-IPWHO-146] GeoIP saglayicisi ve SEKI.
      *
-     * KARAR VERİLDİ: ipwho.is (team member 144, otopilot; patron sabah onayı:
+     * KARAR VERİLDİ: ipwho.is (team member 144, otopilot; proje sahibi sabah onayı:
      * değişiklik tek satır)
      *
      * `{ip}` yerine sorgulanacak IP yazilir. Sorgu artik **TLS'li** calisir

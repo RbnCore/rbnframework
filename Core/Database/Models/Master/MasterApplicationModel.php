@@ -11,7 +11,7 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseModelInterface;
  * MasterApplicationModel - Dagitilabilir Uygulama Kaydi Modeli 📦🏛️⚓
  *
  * URUN surumu buradadir (`current_version`); LISANS surumu burada degildir —
- * lisans tablosunda surum kolonu YOKTUR (patron karari).
+ * lisans tablosunda surum kolonu YOKTUR (proje sahibi karari).
  *
  * @property int    $id
  * @property string $app_key

@@ -9,7 +9,7 @@ use Rbn\Framework\Core\Services\Console\Base\BaseMigration;
 /**
  * CreateLicenceAndApplicationTables - Merkezi Lisans + Uygulama tablolari 🔑📦🏛️
  *
- * PATRON KARARI (kesin):
+ * PROJE SAHİBİ KARARI (kesin):
  *   - TAM 3 TABLO: `projects` (var) + `applications` (yeni) + `licences` (yeni).
  *     `applications` ve `licences` TEK tabloda hem proje hem uygulama icin.
  *   - EK TABLO YOK: `application_releases`, `application_installations`,
@@ -20,7 +20,7 @@ use Rbn\Framework\Core\Services\Console\Base\BaseMigration;
  * Bu migration `projects.license_key` degerlerini `licences` tablosuna KOPYALAR
  * (tasima degil kopyala: mevcut kod `projects.license_key` okumaya devam eder).
  *
- * Kopyalama KURALI (PATRON KARARI 2026-10-02 — "hepsi LIFETIME olacak"):
+ * Kopyalama KURALI (PROJE SAHİBİ KARARI 2026-10-02 — "hepsi LIFETIME olacak"):
  *   tier   : HER mevcut proje -> 'LIFETIME' (anahtar ONEKI TAHMINI YOK;
  *            'RBN-LIFETIME-' / 'RBN-FREE-' / 'FREE-OSS' ayrimi ve ELSE->PRO KALDIRILDI)
  *   status : 'active' (bakim modu 'maintenance' ve 'suspended' da lisans durumu DEGILDIR;
@@ -60,7 +60,7 @@ class CreateLicenceAndApplicationTables extends BaseMigration
     /**
      * Mevcut proje lisanslarini merkezi tabloya kopyalar.
      *
-     * KURAL (patron karari 2026-10-02): anahtar ONEKINDEN kademe TAHMINI YAPILMAZ.
+     * KURAL (proje sahibi karari 2026-10-02): anahtar ONEKINDEN kademe TAHMINI YAPILMAZ.
      * Satir sayisi degismez (mevcut projelerin sayisi kadar satir yazilir), yalniz
      * her satir LIFETIME + active + suresiz olur. Bos/NULL anahtar atlanir.
      */

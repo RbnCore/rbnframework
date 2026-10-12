@@ -11,7 +11,7 @@ use Rbn\Framework\Core\Support\Bridges\Helpers\Library\Version;
 /**
  * NormalizeProjectVersions - `projects.version` degerlerini A.B.C kuralina cevirir.
  *
- * PATRON KARARI (2026-10-05):
+ * PROJE SAHİBİ KARARI (2026-10-05):
  *   - Proje surumunun TEK KAYNAGI master DB `projects.version` kolonudur.
  *   - Mevcut degerlerin TUMU yeni sistemin baslangic surumu `0.1.1`'e cekilir
  *     (deger gecersiz olsa da olmasa da: `1.0` iki parcadir ve kurala uymaz).
