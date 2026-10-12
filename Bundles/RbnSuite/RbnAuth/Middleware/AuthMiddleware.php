@@ -39,6 +39,9 @@ class AuthMiddleware extends BaseComponent
             $this->rejectUnauthenticated();
         }
 
+        // Oturum bu projeye mi ait, `required_login_role` hâlâ sağlanıyor mu?
+        $this->enforceProjectSession($auth);
+
         // Kullanıcı paneli (`/user/*`) oturum süreleri: sunucu tarafı boşta + mutlak.
         if (self::isUserPanelPath((string) $this->request->path())) {
             $this->enforceUserSessionLifetime($auth);
@@ -55,6 +58,46 @@ class AuthMiddleware extends BaseComponent
             $access = $this->handler('access');
             if (!$access || !$access->can($requiredRole)) {
                 shield()->forbidden("Bu sayfayı görüntülemek için yetkiniz bulunmamaktadır.");
+            }
+        }
+    }
+
+    /**
+     * Oturum-proje bağı ve `required_login_role` (her istek).
+     *
+     * - Oturum başka projede açıldıysa (anahtar farklı) bu istek için GEÇERSİZdir. Oturum
+     *   o projenin olduğu için yok edilmez (`logout()` yanlış projenin kullanıcı kaydını
+     *   değiştirir ve diğer projenin oturum dosyasını siler); yalnız istek reddedilir.
+     * - Proje anahtarı olmayan eski oturum: `required_login_role` olan projede geçersiz;
+     *   diğer projelerde davranış aynı kalır (anahtar o an damgalanır).
+     * - `required_login_role` doluysa girişteki GERÇEK rol, giriş anıyla aynı fonksiyonla
+     *   (`AuthService::meetsRequiredLoginRole`) yeniden denetlenir; yetersizse oturum kapanır.
+     */
+    private function enforceProjectSession(mixed $auth): void
+    {
+        $session = $this->session();
+        $current = function_exists('project_key') ? (string) project_key() : '';
+        $bound = (string) $session->get(SessionHandler::PROJECT_KEY_KEY, '');
+        $roleRequired = $auth->hasRequiredLoginRole();
+
+        if ($bound !== '' && $current !== '' && $bound !== $current) {
+            $this->rejectUnauthenticated();
+        }
+
+        if ($bound === '') {
+            if ($roleRequired) {
+                $this->rejectUnauthenticated();
+            }
+            if ($current !== '') {
+                $session->set(SessionHandler::PROJECT_KEY_KEY, $current);
+            }
+        }
+
+        if ($roleRequired) {
+            $role = (string) ($session->get(SessionHandler::LOGIN_ROLE_KEY) ?? $session->get('user_role', 'user'));
+            if (!$auth->meetsRequiredLoginRole($role)) {
+                $auth->logout();
+                $this->rejectUnauthenticated();
             }
         }
     }

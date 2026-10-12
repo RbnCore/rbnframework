@@ -6,6 +6,7 @@ namespace Rbn\Framework\Core\Services\Console\Services;
 
 use Rbn\Framework\Core\Database\Database;
 use Rbn\Framework\Core\Database\Migrations\Master\CreateLicenceAndApplicationTables;
+use Rbn\Framework\Core\Database\Migrations\Master\DropProjectsLicenseKey;
 use Rbn\Framework\Core\Database\Migrations\Master\NormalizeProjectVersions;
 
 /**
@@ -38,6 +39,8 @@ class MasterMigrationService
         // [FW-SURUMLEME-2] `projects.version` degerlerini A.B.C kuralina cevirir
         // (yedek tablo + geri alma). SEMA DEGISTIRILMEZ.
         NormalizeProjectVersions::NAME => NormalizeProjectVersions::class,
+        // [FW-LISANS-3] `projects.license_key` kaldirilir; lisans yalniz `licences`.
+        DropProjectsLicenseKey::NAME => DropProjectsLicenseKey::class,
     ];
 
     protected Database $db;
@@ -137,12 +140,26 @@ class MasterMigrationService
                     "SELECT COUNT(*) AS adet FROM `licences` WHERE subject_type = 'project'"
                 )['adet'] ?? 0)
                 : 0;
-            $bosAnahtar = (int) ($this->db->rawFirst(
-                "SELECT COUNT(*) AS adet FROM `projects` WHERE `license_key` IS NULL OR TRIM(`license_key`) = ''"
-            )['adet'] ?? 0);
+            // `projects.license_key` kaldirildiysa (FW-LISANS-3) bos anahtar kavrami yok.
+            $bosAnahtar = $this->columnExists('projects', 'license_key')
+                ? (int) ($this->db->rawFirst(
+                    "SELECT COUNT(*) AS adet FROM `projects` WHERE `license_key` IS NULL OR TRIM(`license_key`) = ''"
+                )['adet'] ?? 0)
+                : 0;
 
             return ['projects' => $projects, 'copied' => $copied, 'empty_key' => $bosAnahtar];
         });
+    }
+
+    /** Master DB'de sutun var mi? */
+    protected function columnExists(string $table, string $column): bool
+    {
+        $row = $this->db->rawFirst(
+            'SELECT COUNT(*) AS adet FROM information_schema.columns
+             WHERE table_schema = DATABASE() AND table_name = ? AND column_name = ?',
+            [$table, $column]
+        );
+        return ((int) ($row['adet'] ?? 0)) > 0;
     }
 
     /** Master DB'de tablo var mi? (yoksa sorgu patlamasin diye). */

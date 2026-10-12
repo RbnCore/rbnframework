@@ -21,7 +21,6 @@ use Rbn\Framework\Core\Support\Contracts\Base\BaseModelInterface;
  * @property string $status (active, maintenance, suspended)
  * @property string $custom_path
  * @property string $version
- * @property string $license_key
  * @property string $created_at
  * @property string $updated_at
  */
@@ -48,10 +47,10 @@ class MasterProjectsModel extends BaseModel implements BaseModelInterface
     /**
      * FW-BASE-2 (T4) — korumalı alan kara listesi 🛡️
      *
-     * `license_key` yalnız sunucuda üretilir (`generateUniqueLicenseKey()`),
-     * `status` ise servis kararıdır; ikisi de ham veriden yazılamaz. Proje
+     * Lisans `licences` tablosundadır (projects.license_key kaldırıldı);
+     * `status` servis kararıdır; ham veriden yazılamaz. Proje
      * kaydı/güncellemesi `MasterProjectsRepository::createProjectIdentity()` /
      * `updateProjectIdentity()` yetkili yollarından geçer.
      */
-    protected array $guarded = ['license_key', 'status'];
+    protected array $guarded = ['status'];
 }

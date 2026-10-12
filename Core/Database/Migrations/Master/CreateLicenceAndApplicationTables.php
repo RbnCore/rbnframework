@@ -14,7 +14,8 @@ use Rbn\Framework\Core\Services\Console\Base\BaseMigration;
  *     `applications` ve `licences` TEK tabloda hem proje hem uygulama icin.
  *   - EK TABLO YOK: `application_releases`, `application_installations`,
  *     `application_audit_log`, `application_licenses` YASAK.
- *   - `projects` tablosundan HICBIR sutun KALDIRILMAZ (`version`, `license_key` durur).
+ *   - Bu migration `projects`ten sutun KALDIRMAZ (`license_key`i sonradan FW-LISANS-3 ile
+ *     `DropProjectsLicenseKey` migration'i kaldirdi).
  *
  * Bu migration `projects.license_key` degerlerini `licences` tablosuna KOPYALAR
  * (tasima degil kopyala: mevcut kod `projects.license_key` okumaya devam eder).

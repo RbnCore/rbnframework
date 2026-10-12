@@ -54,6 +54,21 @@ final class LicenceAccessRule
     }
 
     /**
+     * GEÇERLİ lisans kaydı var mı? (FW-LISANS-1) Kademeden bağımsız: kayıt
+     * tanınabilir, `status` active ve süresi dolmamış olmalı. Kayıt yoksa,
+     * okunamadıysa ya da bozuksa HAYIR (fail-closed). Proje kapısı bunu
+     * `projects.status` değerinden ÖNCE sorar.
+     *
+     * @param array<int,mixed>|null $record
+     */
+    public static function isValid(?array $record): bool
+    {
+        return self::isRecordUsable($record)
+            && (string) $record['status'] === MasterLicenceConfig::STATUS_ACTIVE
+            && !self::isExpired($record['expires_at'] ?? null);
+    }
+
+    /**
      * Kısıtlama RUTİN mi, ANORMAL mi? (günlük gürültüsü kararı — B-04)
      *
      * RUTİN  = kayıt okundu, alanları tanınabilir, tarih çözülebiliyor; yalnız

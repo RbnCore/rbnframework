@@ -22,6 +22,12 @@ class SessionHandler extends BaseComponent
     /** Son kimlikli isteğin zamanı (boşta süresi; `AuthMiddleware`). */
     public const LAST_ACTIVITY_KEY = 'auth_last_activity';
 
+    /** Oturumun açıldığı proje anahtarı (başka projede geçerli sayılmaz; `AuthMiddleware`). */
+    public const PROJECT_KEY_KEY = 'auth_project_key';
+
+    /** Girişteki GERÇEK rol (`user_role` sonradan 'user'a çekilebilir; `required_login_role` bunu okur). */
+    public const LOGIN_ROLE_KEY = 'auth_login_role';
+
     /**
      * Starts a secure authentication session 🚀
      */
@@ -79,6 +85,8 @@ class SessionHandler extends BaseComponent
         $session->set('auth_fingerprint', $fingerprint);
         $session->set(self::STARTED_AT_KEY, time());
         $session->set(self::LAST_ACTIVITY_KEY, time());
+        $session->set(self::PROJECT_KEY_KEY, function_exists('project_key') ? (string) project_key() : '');
+        $session->set(self::LOGIN_ROLE_KEY, $userRole);
 
         if ($remember) {
             $this->createRememberMe((int)$user['id'], $isMaster);

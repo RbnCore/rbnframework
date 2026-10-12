@@ -142,7 +142,6 @@ class AuthService extends BaseService
 
         // 🎼 Step 4: Trait-Only Dynamic Project Guard (Zero DB/Provider Overhead) 🎻🎭
         $projectKey = function_exists('project_key') ? project_key() : '';
-        $requiredRole = (string) ($this->resolveProjectData('required_login_role', $projectKey) ?? '');
 
         $role = $user['role'] ?? 'user';
         $roleInfo = AuthRole::ROLES[$role] ?? [];
@@ -150,19 +149,14 @@ class AuthService extends BaseService
         $roleName = $roleInfo['name'] ?? 'Kullanıcı';
 
         // 🛑 CONDITION 0: Minimum Required Role Guard (e.g. required_login_role = 'developer')
-        if (!empty($requiredRole)) {
-            $roles = AuthRole::ROLES;
-            $userLevel = $roles[$role]['level'] ?? 0;
-            $requiredLevel = $roles[$requiredRole]['level'] ?? 0;
+        // Aynı kontrol her istekte `AuthMiddleware` tarafından da çalışır (tek fonksiyon).
+        if (!$this->meetsRequiredLoginRole((string) $role)) {
+            $this->logout();
 
-            if ($userLevel < $requiredLevel) {
-                $this->logout();
-
-                return [
-                    'success' => false,
-                    'message' => 'Bu yönetim paneline erişim yetkiniz bulunmamaktadır.',
-                ];
-            }
+            return [
+                'success' => false,
+                'message' => 'Bu yönetim paneline erişim yetkiniz bulunmamaktadır.',
+            ];
         }
 
         $adminPanelDisabled = (bool) $this->resolveProjectData('admin_panel_disabled', $projectKey);
@@ -198,6 +192,33 @@ class AuthService extends BaseService
             'message' => "👋 Hoş geldin, {$displayName}!",
             'redirect' => AuthPolicy::userHomePath()
         ];
+    }
+
+    /**
+     * Mevcut projenin `required_login_role` ayarı (shield, DB) karşısında rol yeterli mi?
+     * Ayar boşsa her rol geçer. Giriş anı ve her istek (`AuthMiddleware`) bunu paylaşır.
+     */
+    public function meetsRequiredLoginRole(string $role): bool
+    {
+        $projectKey = function_exists('project_key') ? project_key() : '';
+        $requiredRole = (string) ($this->resolveProjectData('required_login_role', $projectKey) ?? '');
+        if ($requiredRole === '') {
+            return true;
+        }
+
+        $roles = AuthRole::ROLES;
+
+        return ($roles[$role]['level'] ?? 0) >= ($roles[$requiredRole]['level'] ?? 0);
+    }
+
+    /**
+     * Mevcut projede `required_login_role` ayarı dolu mu?
+     */
+    public function hasRequiredLoginRole(): bool
+    {
+        $projectKey = function_exists('project_key') ? project_key() : '';
+
+        return (string) ($this->resolveProjectData('required_login_role', $projectKey) ?? '') !== '';
     }
 
     /**

@@ -43,6 +43,15 @@ class ShieldMetadata
             'label' => 'Veritabanı Çöküşü'
         ],
 
+        // 🔑 Proje kapısı (lisans yok / askıda): son kullanıcıya AİT mesaj; mevcut `standard.php`
+        // (403 eşlemesi) ile, geliştirmede de üretimde de aynı sayfa. DiagnosticException'dan ÖNCE durmalı.
+        \Rbn\Framework\Core\Support\Exceptions\ProjectSuspendedException::class => [
+            'level' => 'user',
+            'design' => 'user',
+            'view' => 'standard',
+            'label' => 'Erişim Engellendi'
+        ],
+
         // 🧪 Layer 3: Teşhis Edilebilir Sistem Hatası (Development)
         \Rbn\Framework\Core\Support\Exceptions\DiagnosticException::class => [
             'level' => 'development',

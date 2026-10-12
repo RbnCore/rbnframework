@@ -12,6 +12,7 @@ use Rbn\Framework\Core\Support\Bridges\Helpers\Library\Version;
  * RBN Framework Standard.
  * 
  * @property \Rbn\Framework\Core\Database\Repositories\Master\MasterProjectsRepository $masterProjectsRepository
+ * @property \Rbn\Framework\Core\Database\Repositories\Master\MasterLicenceRepository $masterLicenceRepository
  */
 class MasterProjectsService extends BaseService
 {
@@ -37,16 +38,14 @@ class MasterProjectsService extends BaseService
             ];
         }
 
-        // 3. Lisans Anahtarını otomatik oluştur
-        $group = $data['project_group'] ?? $data['project_key'] ?? null;
-        $data['license_key'] = $this->generateUniqueLicenseKey($group);
-
         // 4. Özel Dosya Yolunu (custom_path) formatla
         $data['custom_path'] = $this->formatCustomPath($data['custom_path'] ?? null, $projectKey);
 
-        // FW-BASE-2 (T4): `license_key` ve `status` korumali alan; yazma
-        // yetkili yoldan (`createProjectIdentity`) gecer.
-        $res = $this->masterProjectsRepository->createProjectIdentity([
+        $group = $data['project_group'] ?? $data['project_key'] ?? null;
+
+        // FW-BASE-2 (T4): `status` korumali alan; yazma yetkili yoldan
+        // (`createProjectIdentity`) gecer. Lisans `licences` tablosuna yazilir.
+        $projectId = $this->masterProjectsRepository->createProjectIdentity([
             'project_key' => $data['project_key'],
             'project_name' => $data['project_name'],
             'domain' => $data['domain'] ?: null,
@@ -57,11 +56,11 @@ class MasterProjectsService extends BaseService
             // parcali `1.0` gibi bir varsayilan YAZILMAZ — standart baslangic
             // surumu kullanilir (versioning.md §1).
             'version' => $data['version'] ?: Version::initial(),
-            'license_key' => $data['license_key'],
         ]);
 
+        $res = $projectId > 0 && $this->issueProjectLicence($projectId, $group);
+
         if ($res) {
-            $group = $data['project_group'] ?? $data['project_key'] ?? null;
             $this->clearDiscoveryCache($data['project_key'], $data['domain'] ?? null, $group);
         }
 
@@ -96,13 +95,7 @@ class MasterProjectsService extends BaseService
             ];
         }
 
-        // 3. Lisans Anahtarını koru (yoksa oluştur)
-        $licenseKey = $existing['license_key'] ?? '';
-        if (empty($licenseKey)) {
-            $group = $existing['project_group'] ?? $data['project_group'] ?? $existing['project_key'] ?? null;
-            $licenseKey = $this->generateUniqueLicenseKey($group);
-        }
-        $data['license_key'] = $licenseKey;
+        // 3. Lisans kaydı `licences` tablosunda tutulur (yoksa oluşturulur; mevcut korunur)
 
         // 4. Özel Dosya Yolunu (custom_path) formatla
         $data['custom_path'] = $this->formatCustomPath($data['custom_path'] ?? null, $projectKey);
@@ -115,8 +108,9 @@ class MasterProjectsService extends BaseService
             'status' => $data['status'] ?: 'active',
             'custom_path' => $data['custom_path'],
             'version' => $data['version'] ?: Version::initial(),
-            'license_key' => $data['license_key'],
         ]);
+
+        $res = $res && $this->issueProjectLicence($id, $existing['project_group'] ?? $data['project_group'] ?? $existing['project_key'] ?? null);
 
         if ($res) {
             $group = $existing['project_group'] ?? $data['project_group'] ?? $existing['project_key'] ?? null;
@@ -127,6 +121,29 @@ class MasterProjectsService extends BaseService
             'success' => $res,
             'errors' => $res ? [] : ['Güncelleme başarısız oldu.']
         ];
+    }
+
+    /**
+     * Projenin lisans kaydı yoksa `licences` tablosuna yazar (varsa dokunmaz) 🔑
+     *
+     * Kademe: LIFETIME / active / suresiz (patron karari 2026-10-02).
+     */
+    private function issueProjectLicence(int $projectId, ?string $group): bool
+    {
+        if ($this->masterLicenceRepository->findForSubject('project', $projectId) !== null) {
+            return true;
+        }
+
+        return $this->masterLicenceRepository->create([
+            'licence_key' => $this->generateUniqueLicenseKey($group),
+            'subject_type' => 'project',
+            'subject_id' => $projectId,
+            'tier' => 'LIFETIME',
+            'status' => 'active',
+            'expires_at' => null,
+            'max_activations' => 1,
+            'notes' => 'project:auto-issued',
+        ]) > 0;
     }
 
     /**
@@ -141,7 +158,7 @@ class MasterProjectsService extends BaseService
         do {
             $hash = strtoupper(substr(md5(uniqid((string)mt_rand(), true)), 0, 6));
             $key = "RBN-{$tier}-{$groupPrefix}-{$hash}-{$year}";
-        } while (!$this->masterProjectsRepository->isLicenseKeyUnique($key));
+        } while (!$this->masterLicenceRepository->isKeyUnique($key));
 
         return $key;
     }

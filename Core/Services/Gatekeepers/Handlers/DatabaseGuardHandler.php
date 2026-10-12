@@ -167,13 +167,21 @@ class DatabaseGuardHandler extends BaseComponent
 
         $projectKey = $projectData['project_key'] ?? 'unknown';
 
-        // 🛡️ [LISANS KAPISI / FW-LICENCE-G] — karar DOĞRUDAN `licences` tablosundan.
-        // Önceki metin kontrolü (`projects.license_key` metninde 'FREE' arama ve
-        // beyaz liste sınıfı) kaldırıldı: 'FREEZE' / 'notfree' gibi kalıplar
-        // yanlışlıkla ücretsiz sayılıyordu.
-        $kisitSiz = $this->isUnrestricted($projectData);
+        // 🛡️ [LISANS KAPISI / FW-LICENCE-G · FW-LISANS-1] — karar DOĞRUDAN `licences`
+        // tablosundan, kural `LicenceAccessRule`'da. (1) Geçerli (aktif, süresi
+        // dolmamış) lisans kaydı YOKSA proje durumu ne olursa olsun erişim kapanır.
+        // (2) Geçerli lisans olsa da kısıtsız (FREE) değilse `status` active olmalı.
+        $kayit = $this->licenceRecord($projectData);
 
-        if (!$kisitSiz && ($projectData['status'] ?? 'passive') !== 'active') {
+        if (!LicenceAccessRule::isValid($kayit)) {
+            throw new \Rbn\Framework\Core\Support\Exceptions\ProjectSuspendedException(
+                "Bu projenin geçerli bir lisansı bulunmuyor.",
+                "Lisans tanımlanması veya yenilenmesi için sistem yöneticinizle iletişime geçin. (Key: {$projectKey})",
+                "Lisans Gerekli"
+            );
+        }
+
+        if (!LicenceAccessRule::isUnrestricted($kayit) && ($projectData['status'] ?? 'passive') !== 'active') {
             throw new \Rbn\Framework\Core\Support\Exceptions\ProjectSuspendedException(
                 "Bu proje şuan için dondurulmuş veya pasif durumdadır.",
                 "Hizmet almak için sistem yöneticinizle iletişime geçin. (Key: {$projectKey})",
@@ -187,39 +195,34 @@ class DatabaseGuardHandler extends BaseComponent
     }
 
     /**
-     * Lisans kapısı: proje `licences` kaydı kısıtsız mı? 🔑
+     * Projenin `licences` kaydını okur (yok/okunamadı → null = kısıtlı) 🔑
      *
-     * Yalnız merkezi lisans SERVİSİ üzerinden okur. KURALIN KENDİSİ BURADA
-     * DEĞİLDİR: tek tanım `LicenceAccessRule` sınıfındadır. Burada yalnız kayıt
-     * okunur, okuma hatası "kısıtlı" yönüne indirgenir ve ANORMAL durum
-     * günlüğe yazılır. Anahtar DEĞERİ hiçbir yere yazılmaz.
+     * KURAL BURADA DEĞİL: tek tanım `LicenceAccessRule`. Burada yalnız kayıt
+     * okunur, okuma hatası null'a indirgenir ve ANORMAL durum günlüğe yazılır.
+     * Anahtar DEĞERİ hiçbir yere yazılmaz.
      */
-    private function isUnrestricted(array $projectData): bool
+    private function licenceRecord(array $projectData): ?array
     {
         $projectId = (int) ($projectData['id'] ?? 0);
         $kayit = null;
 
-        // Servis "kayıt yok" ile "okuma hatası"nda da null döner; istisna da
-        // null'a indirgenir — okuma katmanı HATA ASLA yukarı çıkarmaz.
         if ($projectId > 0) {
             try {
                 $kayit = $this->service('masterLicences')
                     ->forSubject(MasterLicenceConfig::SUBJECT_PROJECT, $projectId);
             } catch (\Throwable $e) {
                 $this->licenceWarn('Lisans servisi okunamadı: ' . $e->getMessage());
-                $kayit = null;
             }
         }
 
         $satir = is_array($kayit) ? $kayit : null;
 
-        // Rutin kısıtlama SESSİZDİR (günlük gürültüsü, B-04); anormal durum
-        // (kayıt yok/bozuk, NULL alan, çözülemeyen tarih) bir kez yazılır.
+        // Rutin kısıtlama SESSİZDİR (B-04); anormal durum (kayıt yok/bozuk) bir kez yazılır.
         if (LicenceAccessRule::isAnomalous($satir)) {
             $this->licenceWarnOnce('Lisans kaydı okunamadı veya bozuk, kısıtlı sayıldı (project id=' . $projectId . ').');
         }
 
-        return LicenceAccessRule::isUnrestricted($satir);
+        return $satir;
     }
 
     /** @var bool Aynı süreçte anormal durum günlüğü yazıldı mı? (B-04) */

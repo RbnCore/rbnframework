@@ -35,17 +35,22 @@ class MasterProjectsRepository extends BaseRepository
     }
 
     /**
-     * Lisans anahtarının benzersiz olup olmadığını kontrol eder 🔍
+     * Aktif projelerin anahtarlarını döner (projeler arası görevlerin tek kaynağı) 🔑
+     *
+     * @return string[]
      */
-    public function isLicenseKeyUnique(string $licenseKey, ?int $excludeId = null): bool
+    public function getActiveProjectKeys(): array
     {
-        $query = $this->model('master.projects')->where('license_key', $licenseKey);
-        
-        if ($excludeId !== null) {
-            $query->where('id', '!=', $excludeId);
+        $rows = $this->model('master.projects')->where('status', 'active')->get()->all();
+        $keys = [];
+        foreach ($rows as $row) {
+            $item = is_array($row) ? $row : $row->toArray();
+            $key = (string) ($item['project_key'] ?? '');
+            if ($key !== '') {
+                $keys[] = $key;
+            }
         }
-        
-        return $query->first() === null;
+        return $keys;
     }
 
     /**
@@ -63,27 +68,27 @@ class MasterProjectsRepository extends BaseRepository
     /* ==========================================================================
        [ YETKİLİ PROJE KİMLİĞİ YAZICI ] 🔐🏛️  (FW-BASE-2 T4)
        --------------------------------------------------------------------------
-       `MasterProjectsModel::$guarded = ['license_key', 'status']` olduğu için
-       genel `create()`/`update()` bu iki alanı düşürür. Proje kaydı ve
-       güncellemesi meşru olarak bu alanları YAZMALI; bu yüzden açık, loglanan
+       `MasterProjectsModel::$guarded = ['status']` olduğu için
+       genel `create()`/`update()` bu alanı düşürür. Proje kaydı ve
+       güncellemesi meşru olarak bu alanı YAZMALI; bu yüzden açık, loglanan
        ve ismi ne yaptığını söyleyen iki metot var.
        ========================================================================== */
 
     /**
-     * Yeni proje kimliği yazar (lisans anahtarı + durum yetkili). 🔐
+     * Yeni proje kimliği yazar (durum yetkili; lisans `licences` tablosundadır). 🔐
      *
-     * `license_key` sunucuda üretilmiş olmalıdır; `status` beyaz listeden
+     * `status` beyaz listeden
      * geçer. Ham kullanıcı girdisi bu metoda GİRMEZ — çağıran kararı verir.
      */
     public function createProjectIdentity(array $data): int
     {
         return (int) $this->model('master.projects')
-            ->authorizeFields(['license_key', 'status'])
+            ->authorizeFields(['status'])
             ->create($data);
     }
 
     /**
-     * Proje kimliğini günceller (lisans anahtarı + durum yetkili). 🔐
+     * Proje kimliğini günceller (durum yetkili; lisans `licences` tablosundadır). 🔐
      */
     public function updateProjectIdentity(int $id, array $data): bool
     {
@@ -92,7 +97,7 @@ class MasterProjectsRepository extends BaseRepository
         }
 
         return (bool) $this->model('master.projects')
-            ->authorizeFields(['license_key', 'status'])
+            ->authorizeFields(['status'])
             ->update($id, $data);
     }
 
@@ -101,8 +106,7 @@ class MasterProjectsRepository extends BaseRepository
        --------------------------------------------------------------------------
        `projects.version` proje surumunun TEK kaynagidir (versioning.md §4).
        Elle sayi yazilmaz; `rbn version:next` bu yoldan `Version::next()`
-       sonucunu yazar. Sema degistirilmez, korumali alan (`license_key`,
-       `status`) bu yoldan ETKILENMEZ.
+       sonucunu yazar. Sema degistirilmez, korumali alan (`status`) bu yoldan ETKILENMEZ.
        ========================================================================== */
 
     /** Proje anahtarıyla kayıt arar (bulunamazsa null). */
