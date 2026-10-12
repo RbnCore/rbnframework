@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+### İçerik Fabrikası (isteğe bağlı ayar)
+
+- Fabrika ayar dosyasına `direction.site_domain` ekleyin (sitenin kendi alan adı, ör. `site.com`; şemasız, `www` öneksiz). Değer `jobs` yanıtında `site_alan_adi` olarak VPS'e gider; VPS başka alan adı içeren yazıyı reddeder. Alan yoksa ya da boşsa davranış değişmez. VPS ikilisi de güncellenmelidir (eski ikili alanı yok sayar). Ayrıntı: `docs/Packages/RbnFactory.md`.
+
 ### Shopier (kırıcı)
 
 - `ShopierService::generatePaymentUrl()` ve `verifyOrderOnline()` kaldırıldı. Bunları çağıran proje ilanı bir kez `createListing()` ile açmalı, dönen `id` ve `url` değerlerini kendi veritabanında saklamalı ve sonraki isteklerde aynı linki kullanmalı. Fiyat değişince `updateListingPrice()` çağrılmalı.
