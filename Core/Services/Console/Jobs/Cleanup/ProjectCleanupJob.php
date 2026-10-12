@@ -112,12 +112,8 @@ class ProjectCleanupJob extends BaseCleanupHandler
         $totalDeletedRows = 0;
 
         try {
-            // [FW-DB-PROFIL] Veritabanı adı artık düz `DB_NAME` yerine
-            // `DB_PROFILES[local|production].DB_NAME` içinde olabilir; profil
-            // seçimi TEK çözücüde yapılır (eski düz biçim de çalışır).
-            $settings = $this->resolveProjectConfig('project-settings', $projectKey);
-            $dbName = \Rbn\Framework\Core\System\Config\Engine\Database\ProjectDbProfileResolver::resolve($settings)['DB_NAME'] ?? '';
-            if (empty($dbName)) {
+            $dbName = $this->resolveProjectDbName($projectKey);
+            if ($dbName === '') {
                 return 0;
             }
 
@@ -126,20 +122,7 @@ class ProjectCleanupJob extends BaseCleanupHandler
             foreach (self::CLEANUP_TABLES as $tableName => $dateColumn) {
                 try {
                     $days = (int) ($tableRetention[$tableName] ?? 7);
-                    $dateLimit = date('Y-m-d H:i:s', strtotime("-{$days} days"));
-
-                    $tableCheck = $db->raw("SHOW TABLES FROM `{$dbName}` LIKE '{$tableName}'");
-                    if (empty($tableCheck)) {
-                        continue;
-                    }
-
-                    $countRows = $db->raw("SELECT COUNT(*) as cnt FROM `{$dbName}`.`{$tableName}` WHERE `{$dateColumn}` < ?", [$dateLimit]);
-                    $countBefore = (int) ($countRows[0]['cnt'] ?? 0);
-
-                    if ($countBefore > 0) {
-                        $db->raw("DELETE FROM `{$dbName}`.`{$tableName}` WHERE `{$dateColumn}` < ?", [$dateLimit]);
-                        $totalDeletedRows += $countBefore;
-                    }
+                    $totalDeletedRows += $this->deleteOlderRows($db, $dbName, $tableName, $dateColumn, $days);
                 } catch (\Throwable $e) {
                     // Tablo temizlik hatasını yut ve sonraki tabloya geç
                 }
@@ -149,5 +132,113 @@ class ProjectCleanupJob extends BaseCleanupHandler
         }
 
         return $totalDeletedRows;
+    }
+
+    /**
+     * Hedefli tablo temizliği: yalnız `$targets` içinde yazılan proje ve tablolara gider, başka proje taranmaz.
+     * Biçim: `{ "<project_key>": { "<tablo>": { "days": N, "column": "<tarih_sütunu>" } } }`.
+     * Ad doğrulaması başarısız ya da projede olmayan tablo/sütun atlanır ve satıra yazılır.
+     *
+     * @param array<string, mixed> $targets
+     * @return array{deleted: int, rows: array<int, array{project: string, table: string, deleted: int, skipped: ?string}>}
+     */
+    public function cleanTargets(array $targets, ?callable $onTableCleaned = null): array
+    {
+        $total = 0;
+        $rows = [];
+
+        foreach ($targets as $projectKey => $tables) {
+            $projectKey = (string) $projectKey;
+            $dbName = '';
+            $db = null;
+            $projectSkip = null;
+
+            if (!$this->isSafeIdentifier($projectKey) || !is_array($tables)) {
+                $projectSkip = 'geçersiz proje anahtarı ya da tablo listesi';
+            } else {
+                try {
+                    $dbName = $this->resolveProjectDbName($projectKey);
+                    $db = $this->model('masterProjects')->getDb();
+                } catch (\Throwable $e) {
+                    $dbName = '';
+                }
+                if (!$this->isSafeIdentifier($dbName)) {
+                    $projectSkip = 'proje veritabanı çözülemedi';
+                }
+            }
+
+            foreach ((is_array($tables) ? $tables : []) as $tableName => $rule) {
+                $tableName = (string) $tableName;
+                $deleted = 0;
+                $skipped = $projectSkip;
+
+                if ($skipped === null) {
+                    $days = is_array($rule) ? (int) ($rule['days'] ?? 0) : 0;
+                    $column = is_array($rule) ? (string) ($rule['column'] ?? '') : '';
+
+                    if (!$this->isSafeIdentifier($tableName) || !$this->isSafeIdentifier($column) || $days < 1) {
+                        $skipped = 'geçersiz tablo/sütun adı ya da gün sayısı';
+                    } else {
+                        try {
+                            $deleted = $this->deleteOlderRows($db, $dbName, $tableName, $column, $days, true);
+                        } catch (\Throwable $e) {
+                            $skipped = $e->getMessage();
+                        }
+                    }
+                }
+
+                $total += $deleted;
+                $rows[] = ['project' => $projectKey, 'table' => $tableName, 'deleted' => $deleted, 'skipped' => $skipped];
+                if ($onTableCleaned !== null) {
+                    $onTableCleaned($projectKey, $tableName, $deleted, $skipped);
+                }
+            }
+        }
+
+        return ['deleted' => $total, 'rows' => $rows];
+    }
+
+    /** Proje DB adını çözer; [FW-DB-PROFIL] profil seçimi TEK çözücüde yapılır. Çözülemezse boş döner. */
+    private function resolveProjectDbName(string $projectKey): string
+    {
+        $settings = $this->resolveProjectConfig('project-settings', $projectKey);
+        return (string) (\Rbn\Framework\Core\System\Config\Engine\Database\ProjectDbProfileResolver::resolve($settings)['DB_NAME'] ?? '');
+    }
+
+    /** Tablo/sütun/proje adı yalnız [a-z0-9_] olabilir (SQL'e backtick içinde gömülür). */
+    private function isSafeIdentifier(string $name): bool
+    {
+        return $name !== '' && preg_match('/^[a-z0-9_]+$/', $name) === 1;
+    }
+
+    /**
+     * `{$dbName}.{$table}` içinde `{$column} < şimdi-{$days} gün` satırlarını siler; silinen sayıyı döner.
+     * Tablo yoksa 0 döner; `$strict` iken tablo ya da sütun yokluğu hata fırlatır (hedefli yol bunu günlüğe yazar).
+     */
+    private function deleteOlderRows(object $db, string $dbName, string $table, string $column, int $days, bool $strict = false): int
+    {
+        $exists = $db->raw('SELECT COUNT(*) AS cnt FROM information_schema.TABLES WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?', [$dbName, $table]);
+        if ((int) ($exists[0]['cnt'] ?? 0) === 0) {
+            if ($strict) {
+                throw new \RuntimeException('tablo projede yok');
+            }
+            return 0;
+        }
+        if ($strict) {
+            $col = $db->raw('SELECT COUNT(*) AS cnt FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?', [$dbName, $table, $column]);
+            if ((int) ($col[0]['cnt'] ?? 0) === 0) {
+                throw new \RuntimeException('sütun tabloda yok');
+            }
+        }
+
+        $dateLimit = date('Y-m-d H:i:s', strtotime("-{$days} days"));
+        $countRows = $db->raw("SELECT COUNT(*) as cnt FROM `{$dbName}`.`{$table}` WHERE `{$column}` < ?", [$dateLimit]);
+        $count = (int) ($countRows[0]['cnt'] ?? 0);
+
+        if ($count > 0) {
+            $db->raw("DELETE FROM `{$dbName}`.`{$table}` WHERE `{$column}` < ?", [$dateLimit]);
+        }
+
+        return $count;
     }
 }

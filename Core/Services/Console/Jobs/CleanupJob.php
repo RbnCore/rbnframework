@@ -31,12 +31,13 @@ class CleanupJob extends BaseComponent
             return ['success' => false, 'message' => $msg];
         }
 
-        $target = (string) ($params['target'] ?? 'all'); // 'all', 'server', 'projects'
+        $target = (string) ($params['target'] ?? 'all'); // 'all', 'server', 'projects', 'targets' (yalnız hedefli tablo temizliği)
         $retentionOverrides = $params['retention'] ?? [];
 
         try {
             $serverResult = ['deleted_logs' => 0, 'deleted_tmp' => 0];
             $projectResult = ['deleted_files' => 0, 'deleted_db_logs' => 0, 'details' => []];
+            $targetedResult = ['deleted' => 0, 'rows' => []];
 
             // 1. ADIM: Server (Workspace) Seviyesi Temizlik 🌐
             if ($target === 'all' || $target === 'server') {
@@ -67,11 +68,23 @@ class CleanupJob extends BaseComponent
                 }
             }
 
+            // 3. ADIM: Hedefli tablo temizliği — params.targets'ta yazılan proje·tablolar; başka proje taranmaz 🎯
+            if (in_array($target, ['all', 'projects', 'targets'], true) && !empty($params['targets']) && is_array($params['targets'])) {
+                $projectJob = $this->job('cleanup.project');
+                if ($projectJob) {
+                    $targetedResult = $projectJob->cleanTargets($params['targets'], function ($projKey, $table, $deleted, $skipped) use ($taskLog) {
+                        if ($taskLog) {
+                            $taskLog->step('Hedefli Temizlik', $skipped === null ? "[{$projKey}] {$table} -> {$deleted} satır silindi." : "[{$projKey}] {$table} atlandı: {$skipped}");
+                        }
+                    });
+                }
+            }
+
             $totalDeletedFiles = ($serverResult['deleted_tmp'] ?? 0) + ($serverResult['deleted_lscache'] ?? 0) + ($serverResult['deleted_trash'] ?? 0) + $projectResult['deleted_files'];
             $totalDeletedLogs = $serverResult['deleted_logs'] ?? 0;
             $totalDeletedDbLogs = $projectResult['deleted_db_logs'];
 
-            $summaryMsg = "Akıllı temizlik tamamlandı. Toplam {$projectResult['deleted_files']} proje dosyası, {$totalDeletedLogs} server log, " . ($serverResult['deleted_tmp'] ?? 0) . " tmp, " . ($serverResult['deleted_lscache'] ?? 0) . " lscache, " . ($serverResult['deleted_trash'] ?? 0) . " trash ve {$totalDeletedDbLogs} DB log satırı silindi.";
+            $summaryMsg = "Akıllı temizlik tamamlandı. Toplam {$projectResult['deleted_files']} proje dosyası, {$totalDeletedLogs} server log, " . ($serverResult['deleted_tmp'] ?? 0) . " tmp, " . ($serverResult['deleted_lscache'] ?? 0) . " lscache, " . ($serverResult['deleted_trash'] ?? 0) . " trash ve {$totalDeletedDbLogs} DB log satırı silindi." . $this->describeTargeted($targetedResult);
 
             if ($taskLog) {
                 $taskLog->succeeded($summaryMsg);
@@ -84,7 +97,8 @@ class CleanupJob extends BaseComponent
                 'total_logs' => $totalDeletedLogs,
                 'total_db_logs' => $totalDeletedDbLogs,
                 'server' => $serverResult,
-                'projects' => $projectResult
+                'projects' => $projectResult,
+                'targets' => $targetedResult
             ];
 
         } catch (\Throwable $e) {
@@ -94,5 +108,20 @@ class CleanupJob extends BaseComponent
             }
             return ['success' => false, 'message' => $msg];
         }
+    }
+
+    /** Hedefli temizlik sonucunu cron günlüğü için "proje·tablo=silinen" satırına çevirir. */
+    private function describeTargeted(array $result): string
+    {
+        if (empty($result['rows'])) {
+            return '';
+        }
+
+        $parts = [];
+        foreach ($result['rows'] as $row) {
+            $parts[] = "{$row['project']}·{$row['table']}=" . ($row['skipped'] === null ? $row['deleted'] : "atlandı ({$row['skipped']})");
+        }
+
+        return ' Hedefli tablo temizliği: ' . implode(', ', $parts) . '.';
     }
 }
