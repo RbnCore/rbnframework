@@ -64,6 +64,15 @@ trait ContentServiceTrait
     }
 
     /**
+     * Yazı tablosunda bu sütun var mı? (Projeye göre değişen isteğe bağlı sütunlar için.)
+     */
+    public function hasPostColumn(string $column): bool
+    {
+        $model = $this->resolveTargetModel();
+        return $model !== null && method_exists($model, 'hasColumn') && $model->hasColumn($column);
+    }
+
+    /**
      * Otonom Yazı Kaydetme / Güncelleme (SEO Slug + Görsel Yükleme + Görsel Silme) 💾⚓
      */
     public function savePost(array $data)
@@ -111,6 +120,11 @@ trait ContentServiceTrait
             unset($data['image_url']);
         }
 
+        // 3.5. Güncellemede eski adres (slug + kategori) saklanır: değişirse 301 kaydı yazılır 🧭
+        $addressBefore = (!empty($data['id']) && method_exists($this, 'snapshotContentAddress'))
+            ? $this->snapshotContentAddress((int) $data['id'])
+            : null;
+
         // 4. Kaydetme İşlemini Repository veya Modelle Tamamla
         $savedResult = false;
         $repo = $this->resolveTargetRepository();
@@ -122,6 +136,9 @@ trait ContentServiceTrait
 
         // 5. 📦 Otonom İçerik Önbelleği (content_data) Temizliği
         if ($savedResult) {
+            if ($addressBefore !== null && method_exists($this, 'recordContentAddressChange')) {
+                $this->recordContentAddressChange($addressBefore, (int) $data['id']);
+            }
             $this->flushContentCache();
         }
 
@@ -189,6 +206,10 @@ trait ContentServiceTrait
                     $cache->delete('content_data');
                 } elseif (method_exists($cache, 'forget')) {
                     $cache->forget('content_data');
+                }
+                // Yeni/değişen içerik sitemap'e (alt sitemapler dâhil) en geç bir sonraki istekte girsin
+                if (method_exists($cache, 'deleteByPrefix')) {
+                    $cache->deleteByPrefix('sitemap_xml');
                 }
             }
             return true;

@@ -67,6 +67,7 @@ trait SystemPhysicalMapTrait
                 'sidebarMenu' => 'Core\Database\Models\Project\SidebarMenusModel',
                 'app.contentCategory' => 'Core\Database\Models\Project\ContentCategoryModel',
                 'app.contentDraft' => 'Core\Database\Models\Project\ContentDraftModel',
+                'app.contentRedirect' => 'Core\Database\Models\Project\ContentRedirectModel',
                 'app.rss.source' => 'Core\Database\Models\Project\RssSourceModel',
                 'app.rss.blacklist' => 'Core\Database\Models\Project\RssBlacklistModel',
             ],
@@ -130,6 +131,7 @@ trait SystemPhysicalMapTrait
                 'project.userToken' => 'Core\Database\Repositories\Project\UserTokenRepository',
                 'app.contentCategory' => 'Core\Database\Repositories\Project\ContentCategoryRepository',
                 'app.contentDraft' => 'Core\Database\Repositories\Project\ContentDraftRepository',
+                'app.contentRedirect' => 'Core\Database\Repositories\Project\ContentRedirectRepository',
             ],
         ];
     }

@@ -208,11 +208,12 @@ class RbnStudioController extends BaseController
         if ($id > 0) {
             $service = ($type === 'news') ? $this->resolveNewsService($projectKey) : $this->resolvePostService($projectKey);
             if ($service) {
-                $service->savePost([
-                    'id' => $id,
-                    'image' => $imagePath,
-                    'image_prompt' => $result['prompt'] ?? $prompt
-                ]);
+                $data = ['id' => $id, 'image' => $imagePath];
+                // image_prompt her proje tablosunda yoktur; sütun yoksa yazılmaz (kayıt hata vermesin)
+                if (method_exists($service, 'hasPostColumn') && $service->hasPostColumn('image_prompt')) {
+                    $data['image_prompt'] = $result['prompt'] ?? $prompt;
+                }
+                $service->savePost($data);
             }
         }
 

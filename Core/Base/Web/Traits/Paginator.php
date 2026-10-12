@@ -165,6 +165,14 @@ class Paginator
             error_log('[RBN] Paginator: hub request okunamadi: ' . $e->getMessage());
         }
 
+        // Hata notu: `request` ozelligi controller'da protected; `__get` NULL doner ve hub'da da yoktur.
+        // Cerceve istek motoru tekildir (`Request::capture()`) - sayfa numarasi buradan okunur.
+        try {
+            return \Rbn\Framework\Core\Http\Request::capture();
+        } catch (\Throwable $e) {
+            error_log('[RBN] Paginator: istek motoru alinamadi: ' . $e->getMessage());
+        }
+
         return null;
     }
 

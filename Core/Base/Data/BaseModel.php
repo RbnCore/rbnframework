@@ -261,6 +261,24 @@ abstract class BaseModel extends BaseComponent implements BaseModelInterface, \A
         return $this->db;
     }
 
+    /** @var array<string,string[]> Tablo sütun listesi önbelleği (bağlantı.tablo => sütunlar) */
+    private static array $columnCache = [];
+
+    /**
+     * Modelin tablosunda bu sütun var mı? Sütun listesi istek boyunca bir kez okunur.
+     * Projeye göre değişen isteğe bağlı sütunlar (ör. `image_prompt`) yazılmadan önce buradan denetlenir.
+     */
+    public function hasColumn(string $column): bool
+    {
+        $table = $this->getTableOrNull();
+        if ($table === null) {
+            return false;
+        }
+        $key = $this->connection . '.' . $table;
+        self::$columnCache[$key] ??= $this->db->schema($table)->connection($this->connection)->getColumnListing();
+        return in_array($column, self::$columnCache[$key], true);
+    }
+
     /**
      * Bridge to any other table in the system (Static Gateway)
      */

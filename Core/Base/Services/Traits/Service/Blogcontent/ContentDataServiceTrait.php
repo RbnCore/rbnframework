@@ -252,7 +252,7 @@ trait ContentDataServiceTrait
         // 2. Yazı bulunamadıysa otonom 301 yönlendir 🧭
         if (!$post) {
             $redirectUrl = method_exists($this, 'resolveLegacyPostRedirect')
-                ? $this->resolveLegacyPostRedirect($postSlug, $projectKey, $prefix)
+                ? $this->resolveLegacyPostRedirect($postSlug, $projectKey, $prefix, $categorySlug)
                 : $prefix;
 
             $this->perform301Redirect($redirectUrl);
